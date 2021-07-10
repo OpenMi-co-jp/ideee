@@ -2,14 +2,12 @@
 
 one:
   name: MyString
-  note: MyText
   icon: MyString
   note: MyText
   view: 1
 
 two:
   name: MyString
-  note: MyText
   icon: MyString
   note: MyText
   view: 1

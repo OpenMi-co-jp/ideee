@@ -1,0 +1,22 @@
+.header {
+  width: 100%;
+  position: sticky;
+  z-index: 9999;
+  top: 0;
+  display: flex;
+  align-items: center;
+  ul {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ff8f00;
+  }
+  li {
+    list-style: none;
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}

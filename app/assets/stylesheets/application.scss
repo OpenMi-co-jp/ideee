@@ -1,7 +1,14 @@
+@import "reset";
 @import "header";
+@import "footer";
+@import "ideas";
 @import "bootstrap";
 
+.main {
+  position: relative;
+}
 /*
  *= require_tree .
  *= require_self
  */
+

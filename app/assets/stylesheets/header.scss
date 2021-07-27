@@ -1,22 +1,26 @@
-.header {
+header {
   width: 100%;
-  position: sticky;
+  min-height: 4rem;
+  // position: sticky;
   z-index: 9999;
   top: 0;
   display: flex;
   align-items: center;
   ul {
-    margin: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #ff8f00;
   }
   li {
     list-style: none;
     a {
-      color: #fff;
+      color: #353535;
       text-decoration: none;
+    }
+    .serch_column {
+      opacity: 0.5;
+      width: 200px;
     }
   }
 }

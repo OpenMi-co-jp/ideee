@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1 or /ideas/1.json
   def update
     respond_to do |format|
-      if @idea.update(idea_params)
+      if @idea.update(idea_params.merge(user_id: current_user.id))
         format.html { redirect_to @idea, notice: "Idea was successfully updated." }
         format.json { render :show, status: :ok, location: @idea }
       else
@@ -56,6 +56,11 @@ class IdeasController < ApplicationController
     end
   end
 
+  def user_show
+    @user = @idea.user
+    @posts = @user.ideas
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_idea
@@ -64,6 +69,6 @@ class IdeasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def idea_params
-      params.require(:idea).permit(:name, :icon, :note, :view)
+      params.require(:idea).permit(:name, :icon, :note, :view, :user_id)
     end
 end

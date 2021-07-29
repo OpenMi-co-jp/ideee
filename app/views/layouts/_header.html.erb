@@ -8,27 +8,32 @@
         <%# <%= "#{current_user.name}さん"%>
       </li>
     <% end %>
-  <li class='serch_column'>
-    <%= form_tag(ideas_path,:method => 'get') do %>
-      <%= text_field_tag :search, '', class: 'search_box', placeholder: 'キーワードを入力してください' %>
-    <% end %>
-  </li>
-  <li class=''>
-    <li class=''>
-      <%= link_to 'アイデアマン', root_path %>
+    <li class='serch_column'>
+      <%= form_tag(ideas_path,:method => 'get') do %>
+        <%= text_field_tag :search, '', class: 'search_box', placeholder: 'キーワードを入力してください' %>
+      <% end %>
     </li>
     <li class=''>
-      <%= link_to '製作者', root_path %>
+      <li class=''>
+        <%= link_to 'アイデアマン', root_path %>
+      </li>
+      <li class=''>
+        <%= link_to '製作者', root_path %>
+      </li>
+      <li class=''>
+        <%= link_to 'ランキング', root_path %>
+      </li>
+      <li class=''>
+        <%= link_to 'ディスカッション', root_path %>
+      </li>
     </li>
-    <li class=''>
-      <%= link_to 'ランキング', root_path %>
+    <li class='btn btn-outline-warning mx-2 nav-link'>
+      <%= link_to 'アイデア投稿', new_idea_path %>
     </li>
-    <li class=''>
-      <%= link_to 'ディスカッション', root_path %>
-    </li>
-  </li>
-  <li>
     <% if current_user %>
+      <li class='btn btn-outline-warning mx-2 nav-link'>
+        <%= link_to 'プロフィール', user_path(id: current_user.id) %>
+      </li>
       <li class='btn btn-outline-warning mx-2 nav-link'>
         <%= link_to 'ログアウト', destroy_user_session_path %>
       </li>

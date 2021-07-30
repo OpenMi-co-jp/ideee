@@ -3,27 +3,44 @@ footer {
   bottom: 0;
   width: 100%;
 
-  .footer-container {
+  .container {
     display: flex;
-    width: 100%;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    width: 100%;
+    max-width: 100% !important; // This is a fix for default setting
+    min-height: 250px;
     background-color: rgba(255, 134, 46, 1);
 
-    .footer-description {
-      display: flex;
+    .footer-body {
       width: 80%;
+      margin: 0 auto;
       justify-content: space-between;
+      align-content: space-around;
 
-      .footer-word {
-        max-width: 36px;
+      .footer-bottom {
+        margin-top: 3rem;
+      }
+      .white-text {
+        margin: 0 0.7rem;
         color: rgba(255, 255, 255, 1);
         font-size: 12px;
-        line-height: 32px;
         letter-spacing: 0%;
         text-align: left;
         font-family: Hiragino Sans, sans-serif;
+      }
+      ul {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      li {
+        list-style: none;
+        a {
+          color: #353535;
+          text-decoration: none;
+        }
       }
     }
   }

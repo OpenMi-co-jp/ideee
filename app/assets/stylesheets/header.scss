@@ -1,7 +1,7 @@
 header {
   width: 100%;
   min-height: 4rem;
-  // position: sticky;
+  position: sticky;
   z-index: 9999;
   top: 0;
   display: flex;
@@ -11,16 +11,21 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  li {
-    list-style: none;
-    a {
-      color: #353535;
-      text-decoration: none;
+
+    &.header-body {
+      padding: 0 8rem;
     }
-    .serch_column {
-      opacity: 0.5;
-      width: 200px;
+
+    li {
+      list-style: none;
+      a {
+        color: #353535;
+        text-decoration: none;
+      }
+      .serch_column {
+        opacity: 0.5;
+        width: 200px;
+      }
     }
   }
 }

@@ -1,10 +1,27 @@
 .idea-index{
-  .main-pic {
-    width: 100%;
-  }
-  .board {
-    width: 80%;
-    margin: 0 auto;
+  .full-pic {
+    position: relative;
+    min-height: 70vh;
+    background: url(idea_main.jpg)
+      center / cover;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    .new_user_button {
+      margin: 0;
+      position: absolute;
+      top: calc(60% - 0.5em);
+      margin-left: 11rem;
+      // text-align: center;
+    }
+
+    .turorial_button {
+      margin: 0;
+      position: absolute;
+      top: calc(60% - 0.5em);
+      margin-left: 20rem;
+      // text-align: center;
+    }
   }
 }
 

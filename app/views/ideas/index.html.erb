@@ -17,9 +17,10 @@
         <% @ideas.each do |idea| %>
           <tr>
             <td><%= idea.name %></td>
-            <td><%= idea.icon %></td>
+            <%= image_tag "#{@idea&.icon}" if @idea&.icon %>
             <td><%= idea.note %></td>
             <td><%= idea.view %></td>
+            <td><%= idea.user_id %></td>
             <td><%= link_to 'Show', idea %></td>
             <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
             <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>

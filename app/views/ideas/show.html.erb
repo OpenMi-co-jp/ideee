@@ -7,7 +7,7 @@
 
 <p>
   <strong>Icon:</strong>
-  <%= @idea.icon %>
+  <%= image_tag "#{@idea.icon}" if @idea&.icon %>
 </p>
 
 <p>

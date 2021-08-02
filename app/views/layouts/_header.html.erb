@@ -27,21 +27,21 @@
         <%= link_to 'ディスカッション', root_path %>
       </li>
     </li>
-    <li class='btn btn-outline-warning orange accent-2 mx-2 nav-link'>
+    <li class='waves-effect waves-orange btn orange darken-1 mx-2 nav-link'>
       <%= link_to 'アイデア投稿', new_idea_path %>
     </li>
     <% if current_user %>
-      <li class='waves-effect waves-light btn orange accent-2 mx-2 nav-link'>
+      <li class='waves-effect waves-orange btn orange darken-1 mx-2 nav-link'>
         <%= link_to 'プロフィール', user_path(id: current_user.id) %>
       </li>
-      <li class='waves-effect waves-light btn orange accent-2 nav-link'>
+      <li class='waves-effect waves-orange btn orange darken-1 nav-link'>
         <%= link_to 'ログアウト', destroy_user_session_path %>
       </li>
     <% else %>
-      <li class='waves-effect waves-light btn orange accent-2 mx-2 nav-item'>
+      <li class='waves-effect waves-orange btn orange darken-1 white-text mx-2 nav-item'>
         <%= link_to 'ログイン', new_user_session_path %>
       </li>
-      <li class='waves-effect waves-light btn orange accent-2 nav-item'>
+      <li class='waves-effect waves-orange btn orange darken-1 nav-item'>
         <%= link_to '新規登録', new_user_session_path %>
       </li>
     <% end %>

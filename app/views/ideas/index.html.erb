@@ -1,7 +1,10 @@
 <div class='idea-index'>
   <p id="notice"><%= notice %></p>
-  <%= image_tag 'idea_main.jpg', class: "main-pic" %>
   <div class='board'>
+    <div class='full-pic'>
+      <%= link_to '新規登録', new_user_session_path, class: 'waves-effect waves-orange btn orange darken-1 new_user_button' %>
+      <%= link_to 'ideeeとは', new_user_session_path, class: 'waves-effect waves-orange btn grey darken-1 turorial_button' %>
+    </div>
     <%= render 'ideas/index/latest_boad' %>
     <table>
       <thead>

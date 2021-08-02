@@ -1,3 +1,25 @@
 <div class='latest-boad'>
-  <h1>最近実現したアイデア</h1>
+  <div class='back-color-board'></div>
+  <div class='main-board'>
+    <div class='latest-title-colum'>
+      <p class='icon-mark'>🎉</p>
+      <b class='latest-title'>最近実現したアイデア</b>
+    </div>
+    <div class='latest-idea-colum'>
+      <% @latest_ideas.each do |idea| %>
+        <a href="<%= idea_path(idea.id) %>" %>
+          <div class='idea-picture-column'>
+            <div class= 'idea-img'>
+              <%= image_tag "#{idea&.icon}" if idea&.icon%>
+            </div>
+            <div class= 'time-label'>
+              <%= idea.created_time %>
+            </div>
+            <%= idea.name %>
+            <%= idea.view %>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
 </div>

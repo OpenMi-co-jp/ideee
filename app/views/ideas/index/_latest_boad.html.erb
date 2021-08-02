@@ -6,19 +6,21 @@
       <b class='latest-title'>最近実現したアイデア</b>
     </div>
     <div class='latest-idea-colum'>
-      <% @latest_ideas.each do |idea| %>
-        <a href="<%= idea_path(idea.id) %>" %>
-          <div class='idea-picture-column'>
-            <div class= 'idea-img'>
-              <%= image_tag "#{idea&.icon}" if idea&.icon%>
+      <% if @latest_ideas%>
+        <% @latest_ideas.each do |idea| %>
+          <a href="<%= idea_path(idea.id) %>" %>
+            <div class='idea-picture-column'>
+              <div class= 'idea-img'>
+                <%= image_tag "#{idea&.icon}" if idea&.icon%>
+              </div>
+              <div class= 'time-label'>
+                <%= idea.created_time %>
+              </div>
+              <%= idea.name %>
+              <%= idea.view %>
             </div>
-            <div class= 'time-label'>
-              <%= idea.created_time %>
-            </div>
-            <%= idea.name %>
-            <%= idea.view %>
-          </div>
-        </a>
+          </a>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -12,6 +12,9 @@
             <div class= 'idea-img'>
               <%= image_tag "#{idea&.icon}" if idea&.icon%>
             </div>
+            <div class= 'time-label'>
+              <%= idea.created_time %>
+            </div>
             <%= idea.name %>
             <%= idea.view %>
           </div>

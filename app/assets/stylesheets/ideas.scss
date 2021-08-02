@@ -63,9 +63,13 @@
         justify-content: space-around;
         width: 100%;
         margin-top: 2rem;
+        a {
+          color: #6B6B6B;
+        }
 
         .idea-picture-column {
           width: 400px;
+          position: relative;
 
           .idea-img {
             background-color: white;
@@ -79,6 +83,12 @@
           }
         }
 
+        .time-label {
+          position: absolute;
+          top: 2rem;
+          padding: 0 1rem;
+          background-color: rgba(191, 191, 191, 0.5);
+        }
       }
     }
   }

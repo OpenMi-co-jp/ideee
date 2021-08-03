@@ -14,7 +14,7 @@ An application for ideas and engineers
 |point|integer|
 |icon|string|
 |type|integer|
-|twitter_id||
+|twitter_id|string|
 
 |idea||
 |:-:|:-:|

@@ -35,14 +35,14 @@
         <%= link_to 'プロフィール', user_path(id: current_user.id) %>
       </li>
       <li class='waves-effect waves-orange btn orange darken-1 nav-link'>
-        <%= link_to 'ログアウト', destroy_user_session_path %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
       </li>
     <% else %>
       <li class='waves-effect waves-orange btn orange darken-1 white-text mx-2 nav-item'>
         <%= link_to 'ログイン', new_user_session_path %>
       </li>
       <li class='waves-effect waves-orange btn orange darken-1 nav-item'>
-        <%= link_to '新規登録', new_user_session_path %>
+        <%= link_to '新規登録', new_user_registration_path %>
       </li>
     <% end %>
   </ul>

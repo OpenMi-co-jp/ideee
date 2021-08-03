@@ -4,7 +4,7 @@ class IdeasController < ApplicationController
   # GET /ideas or /ideas.json
   def index
     @ideas = Idea.all
-    @latest_ideas = Idea.find(1,2,3)
+    @latest_ideas = Idea.first(3)
   end
 
   # GET /ideas/1 or /ideas/1.json

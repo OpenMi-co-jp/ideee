@@ -1,4 +1,4 @@
-const http = require('http');
+const https = require('https');
 
 const URL = 'https://www.ideee.tech/';
 const INTERVAL_MSEC = 20 * 60 * 1000; // 10分毎(30分未満ならOK)

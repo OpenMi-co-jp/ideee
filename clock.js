@@ -4,7 +4,7 @@ const URL = 'https://www.ideee.tech/';
 const INTERVAL_MSEC = 20 * 60 * 1000; // 10分毎(30分未満ならOK)
 
 setInterval(() => {
-  http
+  https
     .get(URL, res => {
       console.log(res, URL);
     })

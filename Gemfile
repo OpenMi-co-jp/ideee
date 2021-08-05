@@ -34,6 +34,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'dotenv-rails'
 
+gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 

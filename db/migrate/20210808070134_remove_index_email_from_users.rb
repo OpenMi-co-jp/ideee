@@ -4,6 +4,6 @@ class RemoveIndexEmailFromUsers < ActiveRecord::Migration[6.1]
   end
 
   def down
-    add_index :user, :email, unique: true
+    add_index :users, :email, unique: true
   end
 end

@@ -38,6 +38,6 @@ class User < ApplicationRecord
   end
 
   def email_required?
-    (self.authenticate? || !email.blank?) &&  super
+    provider == 'twitter' && !email.blank? &&  super
   end
 end

@@ -37,5 +37,5 @@ yarn-debug.log*
 
 public/uploads/
 .env
-server.crt
-server.key
+key/
+

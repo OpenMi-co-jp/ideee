@@ -18,5 +18,12 @@
   <%= @views %>
 </p>
 
+<% if current_user.id == @idea.user_id %>
+  <p>
+    <strong>平均ページ滞在時間:</strong>
+    <%= Time.at(@time_on_page.to_i).utc.strftime('%X') %>
+  </p>
+<% end %>
+
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>

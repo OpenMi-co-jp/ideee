@@ -10,7 +10,8 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1 or /ideas/1.json
   def show
-    @views = Analytics.new.report_views_count(params[:id]) || '-'
+    @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
+    @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
   end
 
   # GET /ideas/new
@@ -57,11 +58,6 @@ class IdeasController < ApplicationController
       format.html { redirect_to ideas_url, notice: "Idea was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def user_show
-    @user = @idea.user
-    @posts = @user.ideas
   end
 
   private

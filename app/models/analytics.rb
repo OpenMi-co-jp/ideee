@@ -7,9 +7,9 @@ class Analytics < ApplicationRecord
     auth
   end
 
-  def report_views_count(idea_id)
+  def report_count(demention, idea_id)
     date_range = @analytics::DateRange.new(start_date: '2021-07-01', end_date: 'today')
-    metric = @analytics::Metric.new(expression: 'ga:pageviews', alias: 'pageviews')
+    metric = @analytics::Metric.new(expression: "ga:#{demention}", alias: demention)
     dimension = @analytics::Dimension.new(name: 'ga:pagePath')
     request = @analytics::GetReportsRequest.new(
       report_requests: [@analytics::ReportRequest.new(
@@ -20,8 +20,8 @@ class Analytics < ApplicationRecord
     data = response.reports.first.data
     puts "累計View数: #{data.totals.first.values.first}"
     puts '------------------'
-    res_data = data.rows.find {|i| i.dimensions == ["/ideas/#{idea_id}"]}
-    return res_data.metrics.first.values.first
+    res_data = data&.rows.find {|i| i.dimensions == ["/ideas/#{idea_id}"]}
+    return res_data&.metrics&.first&.values&.first
   end
 
   private

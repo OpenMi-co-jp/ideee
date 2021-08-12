@@ -10,6 +10,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1 or /ideas/1.json
   def show
+    @views = Analytics.new.report_views_count(params[:id]) || '-'
   end
 
   # GET /ideas/new

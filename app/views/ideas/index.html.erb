@@ -19,7 +19,7 @@
         <% @ideas.each do |idea| %>
           <tr>
             <td><%= idea.name %></td>
-            <%= image_tag "#{@idea&.icon}" if @idea&.icon %>
+            <%= image_tag "#{@idea&.icon.to_s}" if @idea&.icon %>
             <td><%= idea.note %></td>
             <td><%= idea.view %></td>
             <td><%= idea.user_id %></td>

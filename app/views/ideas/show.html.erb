@@ -5,7 +5,7 @@
 
 <p>
   <strong>Icon:</strong>
-  <%= image_tag "#{@idea.icon}" if @idea&.icon %>
+  <%= image_tag "#{@idea.icon.to_s}" if @idea&.icon %>
 </p>
 
 <p>

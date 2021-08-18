@@ -1,3 +1,7 @@
+<%# OGP %>
+<%= content_for(:title, @idea.name) %>
+<%= content_for(:description, @views) %>
+<%= content_for(:image_url, full_url(@idea.icon.to_s)) %>
 <p>
   <strong>Name:</strong>
   <%= @idea.name %>

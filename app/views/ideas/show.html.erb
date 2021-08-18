@@ -1,6 +1,6 @@
 <%# OGP %>
 <%= content_for(:title, @idea.name) %>
-<%= content_for(:description, @views) %>
+<%= content_for(:description, @user&.name) %>
 <%= content_for(:image_url, @idea.icon.to_s) %>
 <p>
   <strong>Name:</strong>

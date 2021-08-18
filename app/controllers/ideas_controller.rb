@@ -12,6 +12,7 @@ class IdeasController < ApplicationController
   def show
     @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
     @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
+    @user = User.find_by(id: @idea.user_id)
   end
 
   # GET /ideas/new

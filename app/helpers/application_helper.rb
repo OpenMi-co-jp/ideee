@@ -16,4 +16,13 @@ module ApplicationHelper
              end
     "#{domain}#{path}"
   end
+
+  def image_url(path)
+    domain = if Rails.env.development?
+               'http://localhost:3000'
+             else
+              'https://ideee-bucket.s3.ap-northeast-1.amazonaws.com'
+             end
+    "#{domain}#{path}"
+  end
 end

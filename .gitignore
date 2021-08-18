@@ -38,4 +38,4 @@ yarn-debug.log*
 public/uploads/
 .env
 key/
-
+AWSCLIV2.pkg

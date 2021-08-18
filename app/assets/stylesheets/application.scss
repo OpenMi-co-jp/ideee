@@ -1,13 +1,11 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
 @import "reset";
 @import "header";
 @import "footer";
 @import "ideas";
 @import "actiontext";
 @import "common";
-
-
-/*
- *= require_tree .
- *= require_self
- */
-

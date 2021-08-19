@@ -29,17 +29,17 @@ module ApplicationHelper
   def default_meta_tags
     {
       site: 'ideee',
-      title: @title,
+      title: 'ideee-title',
       reverse: true,
       charset: 'utf-8',
-      description: @user.name,
-      keywords: 'アイデアと開発者のマッチング',
+      description: 'アイデアと開発者のマッチング',
+      keywords: 'アイデア',
       canonical: request.original_url,
       separator: '|',
       og: {
         site_name: 'ideee',
         title: 'タイトル!!',
-        description: @user.name,
+        description: 'アイデアと開発者のマッチング',
         type: 'website',
         url: request.original_url,
         locale: 'ja_JP'

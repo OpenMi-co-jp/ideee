@@ -43,12 +43,21 @@ module ApplicationHelper
         type: 'website',
         url: request.original_url,
         locale: 'ja_JP',
-        image: return_ogp_url('ideee')
+        image: return_ogp_url
+      },
+      twitter: {
+        card: 'summary_large_image',
+        site: '@1026NT',
       }
     }
   end
 
-  def return_ogp_url(title)
+  def return_ogp_url
+    title = if controller_name == 'ideas' && action_name == 'show'
+              @idea.name
+            else
+              'ideee'
+            end
     transformation = [
       {
         x: 0, y: 0, gravity: 'center', color: '#202124', width: '500',  overlay: {

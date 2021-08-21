@@ -26,4 +26,5 @@ class ApplicationController < ActionController::Base
   #     session['basic.auth'] = true
   #   end
   # end
+
 end

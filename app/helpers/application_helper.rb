@@ -41,7 +41,7 @@ module ApplicationHelper
     title = options[:title]
     description = options[:description]
     keywords = options[:keywords]
-    image = options[:image].presence || return_ogp_url
+    image = options[:image].presence || return_ogp_url('idea')
 
     configs = {
       separator: '|',
@@ -93,12 +93,12 @@ module ApplicationHelper
   #   }
   # end
 
-  def return_ogp_url
-    title = if controller_name == 'ideas' && action_name == 'show'
-              @idea.name
-            else
-              'ideee'
-            end
+  def return_ogp_url(title)
+    # title = if controller_name == 'ideas' && action_name == 'show'
+    #           @idea.name
+    #         else
+    #           'ideee'
+    #         end
     transformation = [
       {
         x: 0, y: 0, gravity: 'center', color: '#202124', width: '500',  overlay: {

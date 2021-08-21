@@ -36,15 +36,15 @@ module ApplicationHelper
       keywords: 'アイデア',
       canonical: request.original_url,
       separator: '|',
-      image: return_ogp_url('ideee'),
+      image: return_ogp_url('idea'),
       og: {
-        site_name: :site,
-        title: :title,
-        description: :description,
+        site_name: 'idea',
+        title: 'ideee',
+        description: 'aaaaaa',
         type: 'website',
         url: request.original_url,
         locale: 'ja_JP',
-        image: :image
+        image: return_ogp_url('ideee')
       }
     }
   end

@@ -1,5 +1,5 @@
 <%# OGP %>
-<% set_meta_tags title: @idea.name, image: return_ogp_url(@idea.name) %>
+<% set_meta_tags title: @idea.name, image: return_ogp_url('try'), og: { title: @idea.name, image: return_ogp_url(@idea.name) } %>
 <p>
   <strong>Name:</strong>
   <%= @idea.name %>

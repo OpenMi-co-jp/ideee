@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  # :confirmable, :lockable, :timeoutable
-  devise :database_authenticatable, :registerable,
+  # :lockable, :timeoutable
+  devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
@@ -34,7 +34,7 @@ class User < ApplicationRecord
         user.name = data['name'] if user.name.blank?
         user.twitter_id = data['twitter_uid'] if data['twitter_uid'] && user.twitter_uid.blank?
         # when to set up the confirmable
-        # user.skip_confirmation!
+        user.update(confirmed_at: Time.now.utc) if data['email'].present?
       end
     end
   end

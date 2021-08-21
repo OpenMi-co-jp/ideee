@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: %i[ show edit update destroy ]
-  skip_before_action :authenticate_user!, only: %i[ index ]
+  skip_before_action :authenticate_user!, only: %i[ index show ]
 
   # GET /ideas or /ideas.json
   def index
@@ -10,8 +10,10 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1 or /ideas/1.json
   def show
+    @title = @idea.name
     @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
     @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
+    @user = User.find_by(id: @idea.user_id)
   end
 
   # GET /ideas/new

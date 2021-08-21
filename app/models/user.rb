@@ -34,7 +34,7 @@ class User < ApplicationRecord
         user.name = data['name'] if user.name.blank?
         user.twitter_id = data['twitter_uid'] if data['twitter_uid'] && user.twitter_uid.blank?
         # when to set up the confirmable
-        user.update(confirmed_at: Time.now.utc) if data['email'].present?
+        user.skip_confirmation! if data['email'].present?
       end
     end
   end

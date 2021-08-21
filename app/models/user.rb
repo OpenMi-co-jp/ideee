@@ -9,6 +9,7 @@ class User < ApplicationRecord
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
+  validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

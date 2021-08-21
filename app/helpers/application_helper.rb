@@ -28,19 +28,18 @@ module ApplicationHelper
 
   def default_meta_tags
     {
-      site: 'ideee',
-      title: 'ideee-title',
+      site: 'ideee.tech',
+      title: 'ideee',
       reverse: true,
       charset: 'utf-8',
       description: 'アイデアと開発者のマッチング',
       keywords: 'アイデア',
       canonical: request.original_url,
       separator: '|',
-      image: return_ogp_url('idea'),
       og: {
-        site_name: 'idea',
-        title: 'ideee',
-        description: 'aaaaaa',
+        site_name: :site,
+        title: :title,
+        description: :description,
         type: 'website',
         url: request.original_url,
         locale: 'ja_JP',

@@ -26,31 +26,72 @@ module ApplicationHelper
     "#{domain}#{path}"
   end
 
-  def default_meta_tags
-    {
-      site: 'ideee.tech',
-      title: 'ideee',
-      reverse: true,
-      charset: 'utf-8',
-      description: 'アイデアと開発者のマッチング',
-      keywords: 'アイデア',
-      canonical: request.original_url,
+  def show_meta_tags
+    if display_meta_tags.blank?
+      assign_meta_tags
+    end
+    display_meta_tags
+  end
+
+  def assign_meta_tags(options = {})
+    defaults = t('meta_tags.defaults')
+    options.reverse_merge!(defaults)
+
+    site = options[:site]
+    title = options[:title]
+    description = options[:description]
+    keywords = options[:keywords]
+    image = options[:image].presence || return_ogp_url
+
+    configs = {
       separator: '|',
+      reverse: true,
+      site: site,
+      title: title,
+      description: description,
+      keywords: keywords,
+      canonical: request.original_url,
       og: {
-        site_name: :site,
-        title: :title,
-        description: :description,
-        type: 'website',
+        type: 'article',
+        title: title.presence || site,
+        description: description,
         url: request.original_url,
-        locale: 'ja_JP',
-        image: return_ogp_url
+        image: image,
+        site_name: site
       },
       twitter: {
-        card: 'summary_large_image',
         site: '@1026NT',
+        card: 'summary_large_image',
       }
     }
+
+    set_meta_tags(configs)
   end
+  # def assign_meta_tags(options = {})
+  #   {
+  #     site: 'ideee.tech',
+  #     title: 'ideee',
+  #     reverse: true,
+  #     charset: 'utf-8',
+  #     description: 'アイデアと開発者のマッチング',
+  #     keywords: 'アイデア,エンジニア,マッチング',
+  #     canonical: request.original_url,
+  #     separator: '|',
+  #     og: {
+  #       site_name: :site,
+  #       title: :title,
+  #       description: :description,
+  #       type: 'website',
+  #       url: request.original_url,
+  #       locale: 'ja_JP',
+  #       image: return_ogp_url
+  #     },
+  #     twitter: {
+  #       card: 'summary_large_image',
+  #       site: '@1026NT',
+  #     }
+  #   }
+  # end
 
   def return_ogp_url
     title = if controller_name == 'ideas' && action_name == 'show'

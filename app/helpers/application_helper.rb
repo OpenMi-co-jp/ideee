@@ -38,23 +38,24 @@ module ApplicationHelper
       separator: '|',
       og: {
         site_name: 'ideee',
-        title: 'タイトル!!',
+        title: 'ideee',
         description: 'アイデアと開発者のマッチング',
         type: 'website',
         url: request.original_url,
-        locale: 'ja_JP'
+        locale: 'ja_JP',
+        image: return_ogp_url('ideee')
       }
     }
   end
 
-  def return_ogp_url(idea)
+  def return_ogp_url(title)
     transformation = [
       {
         x: 0, y: 0, gravity: 'center', color: '#202124', width: '500',  overlay: {
           font_size: 30,
           font_weight: 'bold',
           text_align: 'center',
-          text: idea.name,
+          text: title,
           font_family: 'TakaoExGothic'
         }, crop: "fit"
       }

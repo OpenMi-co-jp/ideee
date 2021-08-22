@@ -192,6 +192,7 @@ GEM
       os (>= 0.9, < 2.0)
       signet (~> 0.14)
     hashie (4.1.0)
+    high_voltage (3.1.2)
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
@@ -410,6 +411,7 @@ DEPENDENCIES
   dotenv-rails
   fog-aws
   google-api-client
+  high_voltage
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)

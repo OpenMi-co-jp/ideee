@@ -11,7 +11,7 @@
           <a href="<%= idea_path(idea.id) %>" %>
             <div class='idea-picture-column'>
               <div class= 'idea-img'>
-                <%= image_tag "#{idea&.icon.to_s}" if idea&.icon%>
+                <%= image_set(idea) %>
               </div>
               <div class= 'time-label'>
                 <%= idea.created_time %>

@@ -15,10 +15,10 @@
       <ul class="footer-bottom">
         <li>
           <ul>
-            <li><a class="white-text" href="#!">利用規約</a></li>
-            <li><a class="white-text" href="#!">プライバシーポリシー</a></li>
+            <li><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
+            <li><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>
             <li><a class="white-text" href="#!">よくあるご質問</a></li>
-            <li><a class="white-text" href="#!">運営元</a></li>
+            <li><%= link_to '運営者', "https://naruhiro-portfolio.firebaseapp.com/", class: "white-text", target: :_blank %></li>
             <li><a class="white-text" href="#!">募金について</a></li>
           </ul>
         </li>
@@ -32,6 +32,6 @@
     </div>
   </div>
   <div class="copyright">
-    Copyright ©️ XXXXXXXX All Rights Reverved.
+    Copyright ©️ <%= Time.current.year %> All Rights Reverved.
   </div>
 </footer>

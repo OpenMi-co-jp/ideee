@@ -1,6 +1,6 @@
 module UsersHelper
   def user_icon(user)
-    user&.icon ? image_tag(user.icon) : tag.i('account_circle', class: 'material-icons user-icon')
+    user.icon.present? ? image_tag(user.icon.to_s) : tag.i('account_circle', class: 'material-icons user-icon')
   end
 
   def checked(data)

@@ -114,6 +114,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.10.0)
+      devise (>= 4.8.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
@@ -190,6 +192,7 @@ GEM
       os (>= 0.9, < 2.0)
       signet (~> 0.14)
     hashie (4.1.0)
+    high_voltage (3.1.2)
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
@@ -404,9 +407,11 @@ DEPENDENCIES
   carrierwave
   cloudinary
   devise
+  devise-i18n
   dotenv-rails
   fog-aws
   google-api-client
+  high_voltage
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)

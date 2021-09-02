@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       case auth.provider
       when 'google_oauth2'
         user.name = ""
@@ -21,9 +21,10 @@ class User < ApplicationRecord
         user.description = auth.info.description
         user.twitter_id = auth.info.nickname
       end
-      user.email = auth.info.email || auth.info.unverified_email
+      user.email = auth.info.email || ''
       user.password = Devise.friendly_token[0, 20]
       user.icon = auth.info.image
+      user.confirmed_at = Time.now.utc
     end
   end
 

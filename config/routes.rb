@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :ideas
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    confirmations: "users/confirmations"
   }
   resources :users, only: %i[show]
   get 'login', to: 'devise/sessions#new'

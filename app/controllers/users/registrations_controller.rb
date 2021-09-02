@@ -11,9 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super do
-      resource.update(confirmed_at: Time.now.utc)
-    end
+    redirect_to new_user_registration_path
   end
 
   # GET /resource/edit
@@ -44,7 +42,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :icon, :description, :type])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation, :remember_me])
   end
 
   def configure_account_update_params

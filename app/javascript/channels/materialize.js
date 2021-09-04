@@ -1,6 +1,6 @@
 // materialize initialization
 
 // form select
-$(document).ready(function(){
+$(document).on ('turbolinks:load', function(){
   $('select').formSelect();
 });

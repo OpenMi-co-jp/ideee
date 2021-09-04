@@ -24,8 +24,10 @@
   </div>
 
   <div class="field">
-    <%= f.label :type %><br />
-    <%= f.number_field :type %>
+    <%= f.label :definition %><br />
+    <div class="input-field">
+      <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, {}, { class: "browser-default" } %>
+    </div>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

@@ -5,3 +5,9 @@ ja:
       description: 'アイデアと開発者のマッチング'
       keywords: 'アイデア,エンジニア,マッチング'
       title: 'ideee'
+  enums:
+    user:
+      definition:
+        idea_man: アイデアマン
+        engineer: エンジニア
+        idea_engineer: アイデアマン・製作者

@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    redirect_to new_user_registration_path
+    super
   end
 
   # GET /resource/edit

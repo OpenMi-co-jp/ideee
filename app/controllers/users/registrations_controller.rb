@@ -46,7 +46,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :icon, :description, :type])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :icon, :description, :definition])
   end
 
   # The path used after sign up.
@@ -59,7 +59,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   def update_params
-    params.require(:user).permit(:name, :email, :icon, :description, :type)
+    params.require(:user).permit(:name, :email, :icon, :description, :definition)
   end
 
   def update_resource(resource, params)
@@ -71,10 +71,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # def sign_up_params
-  #   params.permit(:name, :email, :password, :password_confirmation, :icon, :description, :type)
+  #   params.permit(:name, :email, :password, :password_confirmation, :icon, :description, :definition)
   # end
 
   # def account_update_params
-  #   params.permit(:name, :email, :icon, :description, :type)
+  #   params.permit(:name, :email, :icon, :description, :definition)
   # end
 end

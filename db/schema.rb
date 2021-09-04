@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_21_134159) do
+ActiveRecord::Schema.define(version: 2021_09_04_070103) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_134159) do
     t.string "description", limit: 200
     t.integer "point"
     t.string "icon"
-    t.integer "type"
+    t.integer "definition", limit: 2
     t.string "twitter_id"
     t.string "provider"
     t.string "uid"

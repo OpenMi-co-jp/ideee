@@ -41,6 +41,10 @@ class User < ApplicationRecord
   end
 
   def email_required?
-    provider == 'twitter' && !email.blank? &&  super
+    provider == 'twitter' && !email.blank? && super
+  end
+
+  def defined?
+    !email.blank? && !name.blank? && !confirmed_at.blank? && !definition.blank?
   end
 end

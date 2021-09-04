@@ -3,10 +3,6 @@ module UsersHelper
     user.icon.present? ? image_tag(user.icon.to_s) : tag.i('account_circle', class: 'material-icons user-icon')
   end
 
-  def checked(data)
-    data if data.present?
-  end
-
   def twitter_url(id)
     return if id.nil?
     # TODO: put twitter icon here

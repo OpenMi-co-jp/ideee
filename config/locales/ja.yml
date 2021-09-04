@@ -11,3 +11,7 @@ ja:
         idea_man: アイデアマン
         engineer: エンジニア
         idea_engineer: アイデアマン・製作者
+  time:
+    formats:
+      default: "%Y/%m/%d"
+      long: "%Y/%m/%d %H:%M"

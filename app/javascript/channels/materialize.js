@@ -10,4 +10,5 @@
 $(document).ready(function(){
   $('select').formSelect();
   $('.modal').modal({startingTop: '30%', endingTop: '200px'});
+  $('.dropdown-trigger').dropdown({constrainWidth: false});
 })

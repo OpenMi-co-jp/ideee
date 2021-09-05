@@ -17,9 +17,6 @@ class UsersController < ApplicationController
       flash[:alert] = "ユーザーの名前を登録してください。" if @user.name.blank?
       flash[:alert] = "ユーザーのメールアドレスを確認が完了していません。" if @user.confirmed_at.blank?
       flash[:alert] = "ユーザーのタイプを登録してください。" if @user.definition.blank?
-      puts @user.definition.blank?
-      puts @user.definition
-      puts '----------------------------'
     end
   end
 end

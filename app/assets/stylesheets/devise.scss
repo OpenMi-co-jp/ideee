@@ -10,9 +10,16 @@
     background-color: #FCD07E;
     border-radius: 1rem;
 
+    img {
+      vertical-align: middle;
+      display: inline-block;
+    }
+
     .twitter-sign-up, .google_oauth2-sign-up {
       color: white;
-      margin: 0 auto;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: inline-block;
     }
   }
 }

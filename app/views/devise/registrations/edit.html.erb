@@ -27,7 +27,7 @@
     <div class="field">
       <%= f.label :definition %><br />
       <div class="input-field">
-        <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' }, { class: "browser-default" } %>
+        <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' } %>
       </div>
     </div>
 

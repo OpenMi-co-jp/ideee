@@ -2,7 +2,17 @@
   <div class='board'>
     <div class='full-pic'>
       <%= link_to '新規登録', new_user_session_path, class: 'waves-effect waves-orange btn orange darken-1 new_user_button' %>
-      <%= link_to 'ideeeとは', "https://naruhero.netlify.app/blog/3", class: 'waves-effect waves-orange btn grey darken-1 turorial_button', target: :_blank %>
+      <a class="waves-effect waves-white orange lighten-2 btn modal-trigger turorial_button" href="#modal_intro">ideeeとは</a>
+    </div>
+    <div id="modal_intro" class="modal">
+      <div class="modal-content">
+        <h4>アイディアとエンジニアのマッチングサイト</h4>
+        <p><b>アイディアマン：</b>身の回りで困ってることや「あったらいいな」をエンジニアに投げかけることができる</p>
+        <p><b>エンジニア：</b>需要のあるアイディアが手に入り、人助けができる</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'もっと見る', "https://naruhero.netlify.app/blog/3", class: 'waves-effect waves-orange orange lighten-2 btn', target: :_blank %>
+      </div>
     </div>
     <%= render 'ideas/index/latest_boad' %>
     <table>

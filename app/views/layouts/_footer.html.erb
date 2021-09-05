@@ -24,7 +24,12 @@
         </li>
         <li>
           <ul>
-            <li><a class="white-text" href="#!"><i class="material-icons">smartphone</i></a></li>
+            <li class="sns-share">
+              <%= link_to twitter_share('アイデアとエンジニアのマッチングサイトideee', request.url), target: '_blank' do %>
+                <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+                <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
+              <% end %>
+            </li>
             <li><a class="white-text" href="#!">Link 2</a></li>
           </ul>
         </li>

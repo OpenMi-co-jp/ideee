@@ -1,0 +1,88 @@
+
+.boad {
+  position: relative;
+  min-height: 80vh;
+
+  .back-color-board {
+    min-height: 30vh;
+    background: url(background_orange.png)
+      center / cover;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  .main-board {
+    position: absolute;
+    top: 2rem;
+    width: 100%;
+
+    .title-colum {
+      display: flex;
+
+      .icon-mark {
+        background-color: white;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 10%;
+        font-size: 24px;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .latest-title {
+        color: white;
+        font-size: 2rem;
+        margin: 0 0 10px 20px;
+      }
+    }
+
+    .user-colum-board {
+      background-color: white;
+    }
+
+    .user-column {
+      display: flex;
+      margin: 1rem 0;
+      height: 100px;
+
+      .user-column-body {
+        padding: 0 0.5rem 0.5rem 0.5rem;
+      }
+
+      .user-status {
+        display: flex;
+      }
+    }
+
+    .latest-user-colum {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-top: 2rem;
+      a {
+        color: #6B6B6B;
+      }
+
+      .time-label {
+        position: absolute;
+        top: 2rem;
+        padding: 0 1rem;
+        color: white;
+        background-color: rgba(191, 191, 191, 0.5);
+      }
+    }
+  }
+  .user-picture-column-small {
+    width: 200px;
+    position: relative;
+    border-radius: 3%;
+    background-color: white;
+
+    img {
+      object-fit: contain;
+      max-height: 100px;
+      margin: 0 auto;
+    }
+  }
+}
+

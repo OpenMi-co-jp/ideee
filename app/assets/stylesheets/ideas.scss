@@ -22,7 +22,7 @@
     }
   }
 
-  .latest-boad {
+  .boad {
     position: relative;
     min-height: 80vh;
 
@@ -38,8 +38,9 @@
       position: absolute;
       top: 2rem;
       width: 100%;
+      margin: 2rem;
 
-      .latest-title-colum {
+      .title-colum {
         display: flex;
 
         .icon-mark {
@@ -48,13 +49,28 @@
           height: 2.5rem;
           border-radius: 10%;
           font-size: 24px;
-          text-align: center
+          text-align: center;
+          vertical-align: middle;
         }
 
         .latest-title {
           color: white;
           font-size: 2rem;
           margin: 0 0 10px 20px;
+        }
+      }
+
+      .idea-column {
+        display: flex;
+        margin: 1rem 0;
+        height: 100px;
+
+        .idea-column-body {
+          padding: 0 0.5rem 0.5rem 0.5rem;
+        }
+
+        .idea-status {
+          display: flex;
         }
       }
 
@@ -67,22 +83,6 @@
           color: #6B6B6B;
         }
 
-        .idea-picture-column {
-          width: 400px;
-          position: relative;
-
-          .idea-img {
-            background-color: white;
-            border-radius: 3%;
-
-            img {
-              object-fit: scale-down;
-              max-height: 300px;
-              margin: 0 auto;
-            }
-          }
-        }
-
         .time-label {
           position: absolute;
           top: 2rem;
@@ -90,6 +90,18 @@
           color: white;
           background-color: rgba(191, 191, 191, 0.5);
         }
+      }
+    }
+    .idea-picture-column-small {
+      width: 200px;
+      position: relative;
+      border-radius: 3%;
+      background-color: white;
+
+      img {
+        object-fit: contain;
+        max-height: 100px;
+        margin: 0 auto;
       }
     }
   }

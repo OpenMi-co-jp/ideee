@@ -45,6 +45,6 @@ class User < ApplicationRecord
   end
 
   def defined?
-    !email.blank? && !name.blank? && !confirmed_at.blank? && !definition.blank?
+    name.present? && confirmed_at.present? && definition.present?
   end
 end

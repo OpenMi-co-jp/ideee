@@ -1,7 +1,13 @@
 <div class='idea-index'>
   <div class='board'>
     <div class='full-pic'>
-      <a class="waves-effect waves-white orange lighten-2 btn modal-trigger turorial-button" href="#modal_intro">ideeeとは</a>
+      <%= link_to(
+        'ideeeとは',
+        '#modal_intro',
+        data: { turbolinks: false },
+        class: 'waves-effect waves-white orange lighten-2 btn modal-trigger turorial-button',
+        id: 'modal-trigger-intro'
+      )%>
       <% unless current_user %>
         <%= link_to '新規登録', new_user_session_path, class: 'waves-effect waves-orange btn orange darken-1 new-user-button' %>
       <% end %>

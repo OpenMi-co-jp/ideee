@@ -1,14 +1,11 @@
 // materialize initialization
 
-// $(document).on ('turbolinks:load', function(){
-//   // $('.modal').modal();
-//   $('.modal').on('click', function() {
-//     $('#modal1').open();
-//     alert("クリックされました");
-//   });
-// });
-$(document).ready(function(){
+$(document).on ('turbolinks:load', function(){
   $('select').formSelect();
   $('.modal').modal({startingTop: '30%', endingTop: '200px'});
   $('.dropdown-trigger').dropdown({constrainWidth: false});
+
+  $('#modal-trigger-intro').on('click', function() {
+    $('#modal_intro').modal('open');
+  });
 })

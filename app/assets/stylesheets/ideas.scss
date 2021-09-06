@@ -60,20 +60,6 @@
         }
       }
 
-      .idea-column {
-        display: flex;
-        margin: 1rem 0;
-        height: 100px;
-
-        .idea-column-body {
-          padding: 0 0.5rem 0.5rem 0.5rem;
-        }
-
-        .idea-status {
-          display: flex;
-        }
-      }
-
       .latest-idea-colum {
         display: flex;
         justify-content: space-around;
@@ -92,6 +78,23 @@
         }
       }
     }
+  }
+}
+
+.idea-colum-board {
+  .idea-column {
+    display: flex;
+    margin: 1rem 0;
+    height: 100px;
+
+    .idea-column-body {
+      padding: 0 0.5rem 0.5rem 0.5rem;
+
+      .idea-status {
+        display: flex;
+      }
+    }
+
     .idea-picture-column-small {
       width: 200px;
       position: relative;
@@ -106,4 +109,3 @@
     }
   }
 }
-

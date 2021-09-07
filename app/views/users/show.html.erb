@@ -31,11 +31,13 @@
       <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
     <% end %>
   </div>
-  <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
-  <% if @user.ideas %>
+  <% if own_user_checked(@user) %>
+    <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
+  <% end %>
+  <% if @user.ideas.present? %>
     <h2>アイディア</h2>
+    <%= render 'ideas/common/column_board', ideas: @user.ideas %>
   <% else %>
     <h2>まだアイディアが投稿されていません</h2>
   <% end %>
-  <%= render 'ideas/common/column_board', ideas: @user.ideas %>
 </div>

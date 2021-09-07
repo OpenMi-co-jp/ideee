@@ -24,4 +24,8 @@ module UsersHelper
     end
     "#{icon} #{I18n.t("enums.user.definition.#{user.definition}")}" if user.definition
   end
+
+  def own_user_checked(user)
+    current_user&.id == user.id
+  end
 end

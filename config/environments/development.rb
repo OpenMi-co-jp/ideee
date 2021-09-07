@@ -39,10 +39,10 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-  config.action_mailer.delivery_method = :sendmail
-
-  config.action_mailer.delivery_method = :smtp
+  # check actual email
+  # config.action_mailer.delivery_method = :smtp
+  # check mail format on web
+  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.smtp_settings = {
     port:                 587,
     address:              'smtp.gmail.com',

@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
-  before_action :set_idea, only: %i[ show edit update destroy ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: %i[ index show ]
+  before_action :own_user_check, only: %i[ edit update destroy ]
 
   # GET /ideas or /ideas.json
   def index
@@ -73,5 +74,10 @@ class IdeasController < ApplicationController
     # Only allow a list of trusted parameters through.
     def idea_params
       params.require(:idea).permit(:name, :icon, :note, :view, :user_id)
+    end
+
+    def own_user_check
+      redirect_to root_path unless current_user == @idea.user_id
+      flash[:alert] = "権限がないのでリダイレクトされました"
     end
 end

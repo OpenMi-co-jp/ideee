@@ -31,9 +31,9 @@
       <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
     <% end %>
   </div>
-  <%# <% if own_user_checked(@user) %> %>
+  <% if own_user_checked(@user) %>
     <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
-  <%# <% end %> %>
+  <% end %>
   <% if @user.ideas.present? %>
     <h2>アイディア</h2>
     <%= render 'ideas/common/column_board', ideas: @user.ideas %>

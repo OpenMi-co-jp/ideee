@@ -28,7 +28,13 @@
         <%= render 'ideas/index/social_good' %>
       </div>
       <div class="col s4">
-        <%= render 'ideas/index/featured_user' %>
+        <div class='main-board grey lighten-2'>
+          <div class='title-colum'>
+            <p class='icon-mark'>🔥</p>
+            <h3 class='social-good-title'>注目ユーザー</h3>
+          </div>
+          <%= render 'ideas/common/partial_users', users: @featured_users %>
+        </div>
       </div>
     </div>
   </div>

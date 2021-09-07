@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     confirmations: "users/confirmations"
   }
-  resources :users, only: %i[show]
+  resources :users, only: %i[index show]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

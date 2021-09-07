@@ -13,5 +13,5 @@ ja:
         idea_engineer: アイディアマン・エンジニア
   time:
     formats:
-      default: "%Y/%m/%d"
-      long: "%Y/%m/%d %H:%M"
+      default: "%Y.%m.%d"
+      long: "%Y.%m.%d %H:%M"

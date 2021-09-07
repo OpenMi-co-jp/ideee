@@ -21,7 +21,6 @@ class IdeasTest < ApplicationSystemTestCase
     click_on "Create Idea"
 
     assert_text "Idea was successfully created"
-    click_on "Back"
   end
 
   test "updating a Idea" do
@@ -35,7 +34,6 @@ class IdeasTest < ApplicationSystemTestCase
     click_on "Update Idea"
 
     assert_text "Idea was successfully updated"
-    click_on "Back"
   end
 
   test "destroying a Idea" do

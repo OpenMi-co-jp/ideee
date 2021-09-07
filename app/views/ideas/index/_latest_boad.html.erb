@@ -1,15 +1,15 @@
-<div class='latest-boad'>
+<div class='boad'>
   <div class='back-color-board'></div>
   <div class='main-board'>
-    <div class='latest-title-colum'>
+    <div class='title-colum'>
       <p class='icon-mark'>🎉</p>
-      <b class='latest-title'>最近実現したアイデア</b>
+      <b class='latest-title'>最近実現したアイディア</b>
     </div>
     <div class='latest-idea-colum'>
       <% if @latest_ideas%>
         <% @latest_ideas.each do |idea| %>
           <a href="<%= idea_path(idea.id) %>" %>
-            <div class='idea-picture-column'>
+            <div class='idea-picture-column z-depth-1'>
               <div class= 'idea-img'>
                 <%= image_set(idea) %>
               </div>

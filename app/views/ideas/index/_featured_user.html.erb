@@ -1,0 +1,31 @@
+<div class='boad'>
+  <div class='main-board grey lighten-2'>
+    <div class='title-colum'>
+      <p class='icon-mark'>🔥</p>
+      <h3 class='social-good-title'>注目ユーザー</h3>
+    </div>
+    <div class='user-colum-board'>
+      <% if @featured_users %>
+        <% @featured_users.each do |user| %>
+          <div class='user-column z-depth-3'>
+            <%= link_to user_path(user.id) do %>
+              <div class='user-picture-column-small'>
+                <div class= 'user-img'>
+                  <%= user_icon(user) %>
+                </div>
+              </div>
+            <% end %>
+            <div class='user-column-body'>
+              <h5><%= user.name %></h5>
+              <div class='user-status'>
+              </div>
+              <div class='user-belong'>
+                <%= user_definiton(user) %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

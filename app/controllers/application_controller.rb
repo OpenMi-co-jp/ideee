@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   # devise settings
   def after_sign_in_path_for(resource)
     if current_user
-      flash[:alert] = "ログインに成功しました。ユーザー情報を登録してください。"
-      edit_user_registration_path(id: current_user.id)
+      flash[:alert] = "ログインに成功しました。"
+      user_path(id: current_user.id)
     else
       flash[:alert] = "新規登録完了しました。ユーザー情報を登録してください。"
       new_profile_path

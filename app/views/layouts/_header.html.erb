@@ -1,7 +1,9 @@
 <header class='position-sticky'>
   <ul class='header-body'>
     <li class='text-monospace m-3'>
-      <%= image_tag 'ideee-tech-logo.png', class: "footer-logo"%>
+      <%= link_to root_path  do %>
+        <%= image_tag 'ideee-tech-logo.png', class: "footer-logo"%>
+      <% end %>
     </li>
     <% if current_user %>
       <li class='text-monospace m-3'>
@@ -15,10 +17,10 @@
     </li>
     <li class=''>
       <li class=''>
-        <%= link_to 'アイデアマン', root_path %>
+        <%= link_to 'アイディアマン', root_path %>
       </li>
       <li class=''>
-        <%= link_to '製作者', root_path %>
+        <%= link_to 'エンジニア', root_path %>
       </li>
       <li class=''>
         <%= link_to 'ランキング', root_path %>
@@ -27,18 +29,35 @@
         <%= link_to 'ディスカッション', root_path %>
       </li>
     </li>
-    <li class='waves-effect waves-orange btn orange darken-1 mx-2 nav-link'>
-      <%= link_to 'アイデア投稿', new_idea_path %>
-    </li>
     <% if current_user %>
-      <li class='waves-effect waves-orange btn orange darken-1 mx-2 nav-link'>
-        <%= link_to 'プロフィール', user_path(id: current_user.id) %>
+      <li class='waves-effect waves-orange btn orange lighten-2 mx-2 nav-link'>
+        <%= link_to 'アイディア投稿', new_idea_path %>
       </li>
-      <li class='waves-effect waves-orange btn orange darken-1 nav-link'>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <li>
+        <%= link_to '#', data: { target: "dropdown_user" }, class:'dropdown-trigger btn-floating btn-large orange lighten-2' do %>
+          <% user_mini_icon(current_user) %>
+        <% end %>
       </li>
+      <ul id='dropdown_user' class='dropdown-content'>
+        <li>
+          <%= link_to user_path(id: current_user.id) do %>
+            <i class="material-icons">account_circle</i>マイページ
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to edit_user_registration_path(id: current_user.id)  do %>
+            <i class="material-icons">edit</i>ユーザー情報編集
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="material-icons">directions_walk</i>ログアウト
+          <% end %>
+        </li>
+      </ul>
     <% else %>
-      <li class='waves-effect waves-orange btn orange darken-1 white-text mx-2 nav-item'>
+      <li class='waves-effect waves-orange btn orange darken-1 mx-2 nav-item'>
         <%= link_to 'ログイン', new_user_session_path %>
       </li>
       <li class='waves-effect waves-orange btn orange darken-1 nav-item'>
@@ -46,4 +65,4 @@
       </li>
     <% end %>
   </ul>
-</header>
+</header>

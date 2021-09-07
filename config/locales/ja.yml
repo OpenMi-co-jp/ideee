@@ -2,6 +2,16 @@ ja:
   meta_tags:
     defaults:
       site: 'ideee.tech'
-      description: 'アイデアと開発者のマッチング'
-      keywords: 'アイデア,エンジニア,マッチング'
+      description: 'アイディアと開発者のマッチング'
+      keywords: 'アイディア,エンジニア,マッチング'
       title: 'ideee'
+  enums:
+    user:
+      definition:
+        idea_man: アイディアマン
+        engineer: エンジニア
+        idea_engineer: アイディアマン・エンジニア
+  time:
+    formats:
+      default: "%Y/%m/%d"
+      long: "%Y/%m/%d %H:%M"

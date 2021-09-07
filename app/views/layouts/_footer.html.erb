@@ -5,8 +5,8 @@
         <li><%= image_tag 'footer-logo.png', class: "footer-logo"%></li>
         <li>
           <ul>
-            <li><a class="white-text" href="#!">アイデアマン</a></li>
-            <li><a class="white-text" href="#!">製作者</a></li>
+            <li><a class="white-text" href="#!">アイディアマン</a></li>
+            <li><a class="white-text" href="#!">エンジニア</a></li>
             <li><a class="white-text" href="#!">ランキング</a></li>
             <li><a class="white-text" href="#!">ディスカッション</a></li>
           </ul>
@@ -15,6 +15,7 @@
       <ul class="footer-bottom">
         <li>
           <ul>
+            <li><%= link_to 'アイディーについて', "https://naruhero.netlify.app/blog/3", class: "white-text" %></li>
             <li><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
             <li><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>
             <li><a class="white-text" href="#!">よくあるご質問</a></li>
@@ -24,7 +25,12 @@
         </li>
         <li>
           <ul>
-            <li><a class="white-text" href="#!"><i class="material-icons">smartphone</i></a></li>
+            <li class="sns-share">
+              <%= link_to twitter_share('アイディアとエンジニアのマッチングサイトideee', request.url), target: '_blank' do %>
+                <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+                <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
+              <% end %>
+            </li>
             <li><a class="white-text" href="#!">Link 2</a></li>
           </ul>
         </li>

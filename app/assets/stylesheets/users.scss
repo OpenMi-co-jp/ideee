@@ -1,0 +1,42 @@
+.user-colum-board {
+  background-color: white;
+}
+
+.user-column {
+  display: flex;
+  margin: 1rem 0;
+  height: 100px;
+
+  .user-column-body {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+  }
+
+  .user-status {
+    display: flex;
+  }
+}
+
+.user-img {
+  max-width: 200px;
+  position: relative;
+  border-radius: 3%;
+  background-color: white;
+
+  img {
+    object-fit: contain;
+    max-height: 100px;
+    margin: 0 auto;
+  }
+}
+
+.profile-user-img {
+  max-width: 200px;
+  border-radius: 5%;
+  background-color: white;
+
+  img {
+    object-fit: contain;
+    max-height: 200px;
+    margin: 0 auto;
+  }
+}

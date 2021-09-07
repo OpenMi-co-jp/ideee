@@ -36,5 +36,12 @@
   </p>
 <% end %>
 
+<div class="sns-share">
+  <%= link_to twitter_share(@idea.name, request.url), target: '_blank' do %>
+    <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+    <%= tag.p '＼ シェア ／', class: "twitter-share" %>
+  <% end %>
+</div>
+
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>

@@ -5,7 +5,9 @@ class IdeasController < ApplicationController
   # GET /ideas or /ideas.json
   def index
     @ideas = Idea.all
-    @latest_ideas = Idea.first(3)
+    @latest_ideas = Idea.all.order(created_at: "DESC").first(3)
+    @liked_ideas = Idea.first(5)
+    @featured_users = User.first(5)
   end
 
   # GET /ideas/1 or /ideas/1.json

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
 
-  enum type: {
+  enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
@@ -41,6 +41,10 @@ class User < ApplicationRecord
   end
 
   def email_required?
-    provider == 'twitter' && !email.blank? &&  super
+    provider == 'twitter' && !email.blank? && super
+  end
+
+  def defined?
+    name.present? && confirmed_at.present? && definition.present?
   end
 end

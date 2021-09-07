@@ -9,7 +9,7 @@
       <% if @latest_ideas%>
         <% @latest_ideas.each do |idea| %>
           <a href="<%= idea_path(idea.id) %>" %>
-            <div class='idea-picture-column'>
+            <div class='idea-picture-column z-depth-1'>
               <div class= 'idea-img'>
                 <%= image_set(idea) %>
               </div>

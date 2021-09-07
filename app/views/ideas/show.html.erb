@@ -43,5 +43,6 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
-<%= link_to 'Back', ideas_path %>
+<% if idea_user_checked(@idea) %>
+  <%= link_to 'Edit', edit_idea_path(@idea) %>
+<% end %>

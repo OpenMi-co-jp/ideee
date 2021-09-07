@@ -6,4 +6,8 @@ module IdeasHelper
       image_tag(idea.icon.to_s)
     end
   end
+
+  def idea_user_checked(idea)
+    current_user&.id == idea.user_id
+  end
 end

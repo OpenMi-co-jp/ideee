@@ -72,16 +72,15 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'https://www.ideee.tech/' }
 
-  config.action_mailer.delivery_method = :sendmail
-
   config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
     port:                 587,
-    address:              'smtp.gmail.com',
-    domain:               'smtp.gmail.com',
-    user_name:            ENV["ACTION_EMAIL"],
-    password:             ENV["ACTION_EMAIL_PASS"],
-    authentication:       'login',
+    address:              "smtp.sendgrid.net",
+    domain:               "heroku.com",
+    user_name:            ENV['SENDGRID_USERNAME'],
+    password:             ENV['SENDGRID_PASSWORD'],
+    authentication:       'plain',
     enable_starttls_auto: true
   }
 

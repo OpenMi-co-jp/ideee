@@ -26,6 +26,8 @@ class User < ApplicationRecord
       user.icon = auth.info.image
       user.confirmed_at = Time.now.utc
     end
+  rescue
+    raise "メールアドレス#{auth.info.email}のアカウントは#{ signin_how(auth.info.email) }で登録されています"
   end
 
   def self.new_with_session(_, session)
@@ -46,5 +48,16 @@ class User < ApplicationRecord
 
   def defined?
     name.present? && confirmed_at.present? && definition.present?
+  end
+
+  def self.signin_how(email)
+    case find_by(email: email).provider
+    when nil
+      'メール'
+    when 'twitter'
+      'Twitter'
+    else
+      'Google'
+    end
   end
 end

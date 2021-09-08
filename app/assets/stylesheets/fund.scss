@@ -1,0 +1,27 @@
+.fund-board {
+  width: 70vw;
+  margin: 3rem auto;
+  .fund-column {
+    min-height: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .fund-link {
+      text-align: center;
+      margin: 3rem 0;
+
+      p {
+        margin: 0.5rem;
+        color: #333;
+      }
+    }
+  }
+  .modal-content {
+    .fund_links {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 2rem 0;
+    }
+  }
+}

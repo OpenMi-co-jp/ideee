@@ -1,0 +1,18 @@
+.idea-show {
+  .idea-name-column {
+    padding: 1rem;
+  }
+
+  .idea-picture-column-medium {
+    margin: 0.5rem 0;
+    max-width: 600px;
+    border-radius: 3%;
+    background-color: white;
+
+    img {
+      object-fit: contain;
+      max-height: 400px;
+      margin: 0 auto;
+    }
+  }
+}

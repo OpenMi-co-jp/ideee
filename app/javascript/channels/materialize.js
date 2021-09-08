@@ -8,4 +8,8 @@ $(document).on ('turbolinks:load', function(){
   $('#modal-trigger-intro').on('click', function() {
     $('#modal_intro').modal('open');
   });
+
+  $('#modal-trigger-fund').on('click', function() {
+    $('#modal_fund').modal('open');
+  });
 })

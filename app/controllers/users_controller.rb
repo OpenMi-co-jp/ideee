@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   prepend_before_action :page_user, only: %w[show]
   before_action :defined_check, only: %w[show]
 
+  def index
+    @users = User.all
+  end
+
   def show; end
 
   private

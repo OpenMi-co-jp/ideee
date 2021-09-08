@@ -3,7 +3,9 @@ $(document).on ('turbolinks:load', function(){
   $.each(flashes, function(_, flash){
     if ($(flash)[0].innerText.length > 0) {
       $(flash).addClass("flash-color")
-      $(flash).fadeOut(10000);
+      if (flash == '.notice') {
+        $(flash).fadeOut(10000);
+      };
     };
   })
 });

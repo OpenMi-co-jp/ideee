@@ -14,9 +14,14 @@ class IdeasController < ApplicationController
   # GET /ideas/1 or /ideas/1.json
   def show
     @title = @idea.name
-    @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
-    @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
     @user = User.find_by(id: @idea.user_id)
+    if Rails.env.production?
+      @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
+      @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
+    else
+      @views = '-'
+      @time_on_page = '-'
+    end
   end
 
   # GET /ideas/new
@@ -77,7 +82,9 @@ class IdeasController < ApplicationController
     end
 
     def own_user_check
-      redirect_to root_path unless current_user == @idea.user_id
-      flash[:alert] = "権限がないのでリダイレクトされました"
+      unless current_user.id == @idea.user_id
+        redirect_to root_path
+        flash[:alert] = "権限がないのでリダイレクトされました"
+      end
     end
 end

@@ -46,8 +46,8 @@ class User < ApplicationRecord
     provider == 'twitter' && !email.blank? && super
   end
 
-  def defined?
-    name.present? && confirmed_at.present? && definition.present?
+  def undefined?
+    name.nil? && confirmed_at.nil? && definition.nil?
   end
 
   def self.signin_how(email)

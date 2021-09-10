@@ -5,7 +5,7 @@
         <li><%= image_tag 'footer-logo.png', class: "footer-logo"%></li>
         <li>
           <ul>
-            <li><%= link_to 'アイディアマン', users_path, class: "white-text" %></li>
+            <li><%= link_to 'アイデアマン', users_path, class: "white-text" %></li>
             <li><%= link_to 'エンジニア', users_path, class: "white-text" %></li>
             <li><a class="white-text" href="#!">ランキング</a></li>
             <li><a class="white-text" href="#!">ディスカッション</a></li>
@@ -26,7 +26,7 @@
         <li>
           <ul>
             <li class="sns-share">
-              <%= link_to twitter_share('アイディアとエンジニアのマッチングサイトideee', request.url), target: '_blank' do %>
+              <%= link_to twitter_share('アイデアとエンジニアのマッチングサイトideee', request.url), target: '_blank' do %>
                 <%= image_tag "twitter_icon.png", class: "twitter-share" %>
                 <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
               <% end %>

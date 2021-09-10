@@ -32,8 +32,8 @@ module ApplicationHelper
       title: 'ideee',
       reverse: true,
       charset: 'utf-8',
-      description: 'アイディアと開発者のマッチング',
-      keywords: 'アイディア,エンジニア,マッチング',
+      description: 'アイデアと開発者のマッチング',
+      keywords: 'アイデア,エンジニア,マッチング',
       canonical: request.original_url,
       separator: '|',
       og: {

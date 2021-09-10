@@ -12,7 +12,7 @@ class IdeasTest < ApplicationSystemTestCase
 
   test "creating a Idea" do
     visit ideas_url
-    click_on "New Idea"
+    click_on "新しいアイデア"
 
     fill_in "Icon", with: @idea.icon
     fill_in "Name", with: @idea.name
@@ -21,7 +21,6 @@ class IdeasTest < ApplicationSystemTestCase
     click_on "Create Idea"
 
     assert_text "Idea was successfully created"
-    click_on "Back"
   end
 
   test "updating a Idea" do
@@ -35,7 +34,6 @@ class IdeasTest < ApplicationSystemTestCase
     click_on "Update Idea"
 
     assert_text "Idea was successfully updated"
-    click_on "Back"
   end
 
   test "destroying a Idea" do

@@ -1,0 +1,55 @@
+<%# OGP %>
+<% set_meta_tags og: {
+    title: @idea.name,
+    image: return_ogp_url(@idea.name),
+    description: strip_tags(@idea.note.to_s).gsub(/[\n]/,"").strip.truncate(120)
+  } %>
+
+<div class='idea-show'>
+  <div class='idea-name-column z-depth-1'>
+    <h3><%= @idea.name %></h3>
+    <div class='row'>
+      <div class='col s2'>
+        <%= l @idea.created_at%>
+      </div>
+      <div class='col s4'>
+        <%= "更新日：#{l @idea.updated_at}" %>
+      </div>
+    </div>
+  </div>
+  <div class='idea-picture-column-medium'>
+    <%= image_set(@idea) %>
+  </div>
+
+  <p>
+    <strong>Note:</strong>
+    <% if current_user %>
+      <%= @idea.note %>
+    <% else %>
+      <%= strip_tags(@idea.note.to_s).gsub(/[\n]/,"").strip.truncate(120) %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Views:</strong>
+    <%= @views %>
+  </p>
+
+  <% if current_user&.id == @idea.user_id %>
+    <p>
+      <strong>平均ページ滞在時間:</strong>
+      <%= Time.at(@time_on_page.to_i).utc.strftime('%X') %>
+    </p>
+  <% end %>
+
+  <div class="sns-share">
+    <%= link_to twitter_share(@idea.name, request.url), target: '_blank' do %>
+      <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+      <%= tag.p '＼ シェア ／', class: "twitter-share" %>
+    <% end %>
+  </div>
+
+  <% if idea_user_checked(@idea) %>
+    <%= link_to 'Edit', edit_idea_path(@idea) %>
+  <% end %>
+</div>

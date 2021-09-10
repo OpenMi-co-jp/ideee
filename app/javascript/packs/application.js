@@ -11,3 +11,10 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require("@rails/activestorage").start()
+require("trix")
+require("@rails/actiontext")
+require("jquery")
+require("channels/materialize")
+require("channels/common")

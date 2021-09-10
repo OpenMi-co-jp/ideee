@@ -12,11 +12,10 @@ An application for ideas and engineers
 |name|string|
 |description|text|
 |point|integer|
-|idea|bool|
-|maker|bool|
-|idea_id|string|
-|comment_id|string|
-|twitter_id||
+|icon|string|
+|type|integer|
+|site_url|string|
+|twitter_id|string|
 
 |idea||
 |:-:|:-:|

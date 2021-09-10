@@ -1,35 +1,68 @@
-<header>
-  <ul>
-    <li>
-      <ul>
-        <% if current_user %>
-          <li class='text-monospace m-3'>
-            <%# <%= "#{current_user.name}さん"%> %>
-          </li>
+<header class='position-sticky'>
+  <ul class='header-body'>
+    <li class='text-monospace m-3'>
+      <%= link_to root_path  do %>
+        <%= image_tag 'ideee-tech-logo.png', class: "footer-logo"%>
+      <% end %>
+    </li>
+    <% if current_user %>
+      <li class='text-monospace m-3'>
+        <%# <%= "#{current_user.name}さん"%>
+      </li>
+    <% end %>
+    <li class='serch_column'>
+      <%= form_tag(ideas_path,:method => 'get') do %>
+        <%= text_field_tag :search, '', class: 'search_box', placeholder: 'キーワードを入力してください' %>
+      <% end %>
+    </li>
+    <li class=''>
+      <li class=''>
+        <%= link_to 'アイデアマン', users_path %>
+      </li>
+      <li class=''>
+        <%= link_to 'エンジニア', users_path %>
+      </li>
+      <li class=''>
+        <%= link_to 'ランキング', root_path %>
+      </li>
+      <li class=''>
+        <%= link_to 'ディスカッション', root_path %>
+      </li>
+    </li>
+    <% if current_user %>
+      <li class='waves-effect waves-orange btn orange lighten-2 mx-2 nav-link'>
+        <%= link_to 'アイデア投稿', new_idea_path %>
+      </li>
+      <li>
+        <%= link_to '#', data: { target: "dropdown_user" }, class:'dropdown-trigger btn-floating btn-large orange lighten-2' do %>
+          <% user_mini_icon(current_user) %>
         <% end %>
-        <li class='btn btn-outline-warning'>
-          <%= link_to 'タスク状況', ideas_path %>
+      </li>
+      <ul id='dropdown_user' class='dropdown-content'>
+        <li>
+          <%= link_to user_path(id: current_user.id) do %>
+            <i class="material-icons">account_circle</i>マイページ
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to edit_user_registration_path(id: current_user.id)  do %>
+            <i class="material-icons">edit</i>ユーザー情報編集
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="material-icons">directions_walk</i>ログアウト
+          <% end %>
         </li>
       </ul>
-    <li class='btn btn-outline-warning btn-lg'>
-      <%= link_to 'One Task', root_path %>
-    </li>
-    <li>
-      <ul class='login_out_ul'>
-        <li class='btn btn-outline-warning'>
-          <%= link_to new_idea_path %>
-          <i class='fa fa-plus-circle fa-2x'>
-        </li>
-        <% if current_user %>
-          <li class='btn btn-outline-warning mx-2 nav-link'>
-            <%= link_to 'ログアウト', logout_path %>
-          </li>
-        <% else %>
-          <li class='btn btn-outline-warning mx-2 nav-item'>
-            <%= link_to 'ログイン', login_path %>
-          </li>
-        <% end %>
-      </ul>
-    </li>
+    <% else %>
+      <li class='waves-effect waves-orange btn orange lighten-1 mx-2 nav-item'>
+        <%= link_to 'ログイン', new_user_session_path %>
+      </li>
+      <li class='waves-effect waves-orange btn orange lighten-1 mx-2 nav-item'>
+        <%= link_to '新規登録', new_user_registration_path %>
+      </li>
+    <% end %>
   </ul>
-</header>
+</header>

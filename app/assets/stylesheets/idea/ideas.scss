@@ -1,0 +1,125 @@
+.idea-index{
+  .full-pic {
+    position: relative;
+    min-height: 50vh;
+    background: url(idea_main.jpg)
+      center / cover;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    .turorial-button {
+      margin: 0;
+      position: absolute;
+      top: calc(60% - 0.5em);
+      margin-left: 11rem;
+    }
+
+    .new-user-button {
+      margin: 0;
+      position: absolute;
+      top: calc(60% - 0.5em);
+      margin-left: 20rem;
+    }
+  }
+
+  .boad {
+    position: relative;
+    min-height: 80vh;
+
+    .back-color-board {
+      min-height: 30vh;
+      background: url(background_orange.png)
+        center / cover;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+
+    .main-board {
+      position: absolute;
+      top: 2rem;
+      width: 100%;
+      margin: 2rem;
+
+      .title-colum {
+        display: flex;
+
+        .icon-mark {
+          background-color: white;
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 10%;
+          font-size: 24px;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        .latest-title {
+          color: white;
+          font-size: 2rem;
+          margin: 0 0 10px 20px;
+        }
+      }
+
+      .latest-idea-colum {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 2rem;
+        a {
+          color: #6B6B6B;
+        }
+
+        .idea-picture-column {
+          position: relative;
+
+          .idea-img {
+            max-width: 420px;
+
+            img {
+              object-fit: contain;
+              height: 280px;
+              margin: 0 auto;
+            }
+          }
+
+          .time-label {
+            position: absolute;
+            top: 1rem;
+            padding: 0 1rem;
+            color: white;
+            background-color: rgba(191, 191, 191, 0.8);
+          }
+        }
+      }
+    }
+  }
+}
+
+.idea-colum-board {
+  .idea-column {
+    display: flex;
+    margin: 1rem 0;
+    height: 100px;
+
+    .idea-column-body {
+      padding: 0 0.5rem 0.5rem 0.5rem;
+
+      .idea-status {
+        display: flex;
+      }
+    }
+
+    .idea-picture-column-small {
+      width: 200px;
+      position: relative;
+      border-radius: 3%;
+      background-color: white;
+
+      img {
+        object-fit: contain;
+        max-height: 100px;
+        margin: 0 auto;
+      }
+    }
+  }
+}

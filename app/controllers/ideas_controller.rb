@@ -1,13 +1,27 @@
 class IdeasController < ApplicationController
-  before_action :set_idea, only: %i[ show edit update destroy ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :own_user_check, only: %i[ edit update destroy ]
 
   # GET /ideas or /ideas.json
   def index
     @ideas = Idea.all
+    @latest_ideas = Idea.all.order(created_at: "DESC").first(3)
+    @liked_ideas = Idea.first(5)
+    @featured_users = User.first(5)
   end
 
   # GET /ideas/1 or /ideas/1.json
   def show
+    @title = @idea.name
+    @user = User.find_by(id: @idea.user_id)
+    if Rails.env.production?
+      @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
+      @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
+    else
+      @views = '-'
+      @time_on_page = '-'
+    end
   end
 
   # GET /ideas/new
@@ -21,7 +35,7 @@ class IdeasController < ApplicationController
 
   # POST /ideas or /ideas.json
   def create
-    @idea = Idea.new(idea_params)
+    @idea = Idea.new(idea_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @idea.save
@@ -37,7 +51,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1 or /ideas/1.json
   def update
     respond_to do |format|
-      if @idea.update(idea_params)
+      if @idea.update(idea_params.merge(user_id: current_user.id))
         format.html { redirect_to @idea, notice: "Idea was successfully updated." }
         format.json { render :show, status: :ok, location: @idea }
       else
@@ -64,6 +78,13 @@ class IdeasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def idea_params
-      params.require(:idea).permit(:name, :icon, :note, :view)
+      params.require(:idea).permit(:name, :icon, :note, :view, :user_id)
+    end
+
+    def own_user_check
+      unless current_user.id == @idea.user_id
+        redirect_to root_path
+        flash[:alert] = "権限がないのでリダイレクトされました"
+      end
     end
 end

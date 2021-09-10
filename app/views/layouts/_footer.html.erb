@@ -1,0 +1,43 @@
+<footer>
+  <div class="container">
+    <div class="footer-body">
+      <ul class="footer-top">
+        <li><%= image_tag 'footer-logo.png', class: "footer-logo"%></li>
+        <li>
+          <ul>
+            <li><%= link_to 'アイデアマン', users_path, class: "white-text" %></li>
+            <li><%= link_to 'エンジニア', users_path, class: "white-text" %></li>
+            <li><a class="white-text" href="#!">ランキング</a></li>
+            <li><a class="white-text" href="#!">ディスカッション</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="footer-bottom">
+        <li>
+          <ul>
+            <li><%= link_to 'アイディーについて', "https://naruhero.netlify.app/blog/3", class: "white-text" %></li>
+            <li><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
+            <li><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>
+            <li><a class="white-text" href="#!">よくあるご質問</a></li>
+            <li><%= link_to '運営者', "https://naruhiro-portfolio.firebaseapp.com/", class: "white-text", target: :_blank %></li>
+            <li><a class="white-text" href="#!">募金について</a></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li class="sns-share">
+              <%= link_to twitter_share('アイデアとエンジニアのマッチングサイトideee', request.url), target: '_blank' do %>
+                <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+                <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
+              <% end %>
+            </li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="copyright">
+    Copyright ©️ <%= Time.current.year %> All Rights Reverved.
+  </div>
+</footer>

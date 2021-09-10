@@ -1,0 +1,25 @@
+.sign-form {
+  margin: 0 auto;
+  width: 70% ;
+
+  .sign-up-box {
+    text-align: center;
+    min-width: 250px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    background-color: #FCD07E;
+    border-radius: 1rem;
+
+    img {
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .twitter-sign-up, .google_oauth2-sign-up {
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: inline-block;
+    }
+  }
+}

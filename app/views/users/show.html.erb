@@ -1,0 +1,43 @@
+<div class='boad'>
+  <h2>ユーザー情報</h2>
+  <div class="row">
+    <div class="col s4 grey lighten-2 z-depth-1">
+      <div class='profile-user-img'>
+        <%= user_icon(@user) %>
+      </div>
+      <%= twitter_url(@user&.twitter_id) %>
+      <%= "作成日：#{l @user.created_at, format: :long}" %>
+    </div>
+    <div class="col s8 z-depth-1">
+      <div class="">
+        <div class="row">
+          <div class="col s10">
+            <%= @user&.name %>
+            <%= user_definiton(@user) %>
+          </div>
+          <div class="col s2">
+            <%= @user&.point %>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <%= @user&.description %>
+      </div>
+    </div>
+  </div>
+  <div class="sns-share">
+    <%= link_to twitter_share(@user&.name, request.url), target: '_blank' do %>
+      <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+      <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
+    <% end %>
+  </div>
+  <% if own_user_checked(@user) %>
+    <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
+  <% end %>
+  <% if @user.ideas.present? %>
+    <h2>アイデア</h2>
+    <%= render 'ideas/common/column_board', ideas: @user.ideas %>
+  <% else %>
+    <h2>まだアイデアが投稿されていません</h2>
+  <% end %>
+</div>

@@ -25,10 +25,35 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
+
+gem 'carrierwave'
+gem 'fog-aws'
+gem 'aws-sdk-s3', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+
+gem 'dotenv-rails'
+
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
+gem 'google-api-client'
+
+gem 'cloudinary'
+gem 'meta-tags'
+
+gem 'rails-i18n'
+gem 'devise-i18n'
+
+gem 'high_voltage'
+
+gem 'enum_help'
+
+gem 'stripe'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +69,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'letter_opener'
 end
 
 group :test do

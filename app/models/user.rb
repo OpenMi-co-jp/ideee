@@ -4,6 +4,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :like_ideas, through: :likes, source: :idea
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2

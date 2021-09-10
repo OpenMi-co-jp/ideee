@@ -13,33 +13,46 @@ class User < ApplicationRecord
   mount_uploader :icon, ImageUploader
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
-      case auth.provider
-      when 'google_oauth2'
-        user.name = ""
-      when 'twitter'
-        user.name = auth.info.name
-        user.description = auth.info.description
-        user.twitter_id = auth.info.nickname
+  class << self
+    def from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+        case auth.provider
+        when 'google_oauth2'
+          user.name = ""
+        when 'twitter'
+          user.name = auth.info.name
+          user.description = auth.info.description
+          user.twitter_id = auth.info.nickname
+        end
+        user.email = auth.info.email || ''
+        user.password = Devise.friendly_token[0, 20]
+        user.icon = auth.info.image
+        user.confirmed_at = Time.now.utc
       end
-      user.email = auth.info.email || ''
-      user.password = Devise.friendly_token[0, 20]
-      user.icon = auth.info.image
-      user.confirmed_at = Time.now.utc
+    rescue
+      raise "メールアドレス#{auth.info.email}のアカウントは#{ signin_how(auth.info.email) }で登録されています"
     end
-  rescue
-    raise "メールアドレス#{auth.info.email}のアカウントは#{ signin_how(auth.info.email) }で登録されています"
-  end
 
-  def self.new_with_session(_, session)
-    super.tap do |user|
-      if (data = session['devise.omniauth_data'])
-        user.email = data['email'] if user.email.blank?
-        user.name = data['name'] if user.name.blank?
-        user.twitter_id = data['twitter_uid'] if data['twitter_uid'] && user.twitter_uid.blank?
-        # when to set up the confirmable
-        user.skip_confirmation! if data['email'].present?
+    def new_with_session(_, session)
+      super.tap do |user|
+        if (data = session['devise.omniauth_data'])
+          user.email = data['email'] if user.email.blank?
+          user.name = data['name'] if user.name.blank?
+          user.twitter_id = data['twitter_uid'] if data['twitter_uid'] && user.twitter_uid.blank?
+          # when to set up the confirmable
+          user.skip_confirmation! if data['email'].present?
+        end
+      end
+    end
+
+    def signin_how(email)
+      case find_by(email: email).provider
+      when nil
+        'メール'
+      when 'twitter'
+        'Twitter'
+      else
+        'Google'
       end
     end
   end
@@ -52,14 +65,19 @@ class User < ApplicationRecord
     name.nil? && confirmed_at.nil? && definition.nil?
   end
 
-  def self.signin_how(email)
-    case find_by(email: email).provider
-    when nil
-      'メール'
-    when 'twitter'
-      'Twitter'
-    else
-      'Google'
-    end
+  def own?(object)
+    id == object.user_id
+  end
+
+  def like(idea)
+    likes.find_or_create_by(idea: idea)
+  end
+
+  def like?(idea)
+    like_ideas.include?(idea)
+  end
+
+  def unlike(idea)
+    like_ideas.delete(idea)
   end
 end

@@ -15,6 +15,23 @@
       <div class='col s4'>
         <%= "更新日：#{l @idea.updated_at}" %>
       </div>
+      <div class='col s2'>
+        <% if current_user&.like?(@idea) %>
+          <%= link_to '#',
+            class: 'like-click clicked',
+            id: "like-idea-#{@idea.id}",
+            data: { id: @idea.id, turbolinks: false } do %>
+            <i class="material-icons">thumb_up</i>いいねした
+          <% end %>
+        <% else %>
+          <%= link_to '#',
+            class: 'like-click',
+            id: "like-idea-#{@idea.id}",
+            data: { id: @idea.id, turbolinks: false } do %>
+            <i class="material-icons">thumb_up</i>いいねする
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class='idea-picture-column-medium'>
@@ -35,7 +52,7 @@
     <%= @views %>
   </p>
 
-  <% if current_user&.id == @idea.user_id %>
+  <% if current_user.own?(@idea) %>
     <p>
       <strong>平均ページ滞在時間:</strong>
       <%= Time.at(@time_on_page.to_i).utc.strftime('%X') %>
@@ -49,7 +66,7 @@
     <% end %>
   </div>
 
-  <% if idea_user_checked(@idea) %>
+  <% if current_user.own?(@idea) %>
     <%= link_to 'Edit', edit_idea_path(@idea) %>
   <% end %>
 </div>

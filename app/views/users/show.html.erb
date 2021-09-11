@@ -34,7 +34,7 @@
   <% end %>
   <% if @user.ideas.present? %>
     <h2>アイデア</h2>
-    <%= render 'ideas/common/column_board', ideas: @user.ideas %>
+    <%= render 'common/column_board', ideas: @user.ideas %>
   <% else %>
     <h2>まだアイデアが投稿されていません</h2>
   <% end %>

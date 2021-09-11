@@ -1,0 +1,15 @@
+<% if current_user&.like?(object) %>
+  <%= link_to '#',
+    class: 'like-click clicked',
+    id: "like-idea-#{object.id}",
+    data: { id: object.id, turbolinks: false } do %>
+    <%= image_tag "like-icon.svg", size: '50x50', class: 'like-svg' %>
+  <% end %>
+<% else %>
+  <%= link_to '#',
+    class: 'like-click',
+    id: "like-idea-#{object.id}",
+    data: { id: object.id, turbolinks: false } do %>
+    <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
+  <% end %>
+<% end %>

@@ -16,21 +16,7 @@
         <%= "更新日：#{l @idea.updated_at}" %>
       </div>
       <div class='col s2'>
-        <% if current_user&.like?(@idea) %>
-          <%= link_to '#',
-            class: 'like-click clicked',
-            id: "like-idea-#{@idea.id}",
-            data: { id: @idea.id, turbolinks: false } do %>
-            <i class="material-icons">thumb_up</i>いいねした
-          <% end %>
-        <% else %>
-          <%= link_to '#',
-            class: 'like-click',
-            id: "like-idea-#{@idea.id}",
-            data: { id: @idea.id, turbolinks: false } do %>
-            <i class="material-icons">thumb_up</i>いいねする
-          <% end %>
-        <% end %>
+        <%= render "common/like", object: @idea %>
       </div>
     </div>
   </div>

@@ -4,9 +4,13 @@
     id: "like-idea-#{object.id}",
     data: { id: object.id } do %>
     <div class='likes-column'>
-      <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
-      <div class='likes-count'>
-        <%= object.like_users.count %>
+      <div class='likes-column-inside'>
+        <div class='like-image'>
+          <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
+        </div>
+        <div class='likes-count'>
+          <%= object.like_users.count %>
+        </div>
       </div>
     </div>
   <% end %>
@@ -16,9 +20,13 @@
     id: "like-idea-#{object.id}",
     data: { id: object.id } do %>
     <div class='likes-column'>
-      <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
-      <div class='likes-count'>
-        <%= object.like_users.count %>
+      <div class='likes-column-inside'>
+        <div class='like-image'>
+          <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
+        </div>
+        <div class='likes-count'>
+          <%= object.like_users.count %>
+        </div>
       </div>
     </div>
   <% end %>

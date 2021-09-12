@@ -10,7 +10,7 @@ $(document).on ('turbolinks:load', function(){
         dataType: 'json'
       })
       .done(function() {
-        $(this_id).html("<i class=\"material-icons\">thumb_up</i>いいねする")
+        $(this_id).closest($('.like-image')).html("<%= image_tag \"like-icon.svg\", size: '45x45', class: 'like-svg' %>")
         $(this_id).toggleClass('clicked')
       })
       .fail(function(data) {
@@ -24,7 +24,7 @@ $(document).on ('turbolinks:load', function(){
         dataType: 'json'
       })
       .done(function() {
-        $(this_id).html("<i class=\"material-icons\">thumb_up</i>いいねした")
+        $(this_id).closest($('.like-image')).html("<%= image_tag \"like-icon.svg\", size: '45x45', class: 'like-svg' %>")
         $(this_id).toggleClass('clicked')
       })
       .fail(function(data) {

@@ -352,6 +352,16 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    sentry-rails (4.7.2)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.7.0)
+    sentry-ruby (4.7.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      faraday (>= 1.0)
+      sentry-ruby-core (= 4.7.2)
+    sentry-ruby-core (4.7.2)
+      concurrent-ruby
+      faraday
     signet (0.15.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -366,7 +376,6 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
-    stripe (5.38.0)
     thor (1.1.0)
     tilt (2.0.10)
     trailblazer-option (0.1.1)
@@ -436,8 +445,9 @@ DEPENDENCIES
   rails-i18n
   sass-rails (>= 6)
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   spring
-  stripe
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

@@ -11,6 +11,10 @@ main {
   margin: 0 auto;
 }
 
+div, p, b {
+  word-break: break-all;
+}
+
 .notification {
   text-align: center;
   vertical-align: middle;
@@ -43,18 +47,3 @@ main {
     color: white;
   }
 }
-
-.like-click {
-  color: red;
-}
-
-.clicked {
-  .like-svg {
-    background: -moz-radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
-    background: -webkit-radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
-    background: radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
-    border-radius: 50%;
-    padding: 10px 10px 0 0;
-  }
-}
-

@@ -1,0 +1,39 @@
+.like-click {
+  :hover {
+    transition-duration: .3s;
+    transform: scale(1.05);
+  }
+
+  .likes-column {
+    display: flex;
+    margin: 1rem 0.5rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, .2);
+    transition-duration: .3s;
+
+    :hover {
+      pointer-events: none;
+    }
+
+    .likes-count {
+      display: grid;
+      place-items: center;
+      padding: 5px;
+      color: #333;
+      pointer-events: none;
+    }
+  }
+}
+
+.clicked {
+  .like-svg {
+    background: -moz-radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
+    background: -webkit-radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
+    background: radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
+    border-radius: 50%;
+    padding: 10px 10px 0 0;
+    pointer-events: none;
+  }
+}
+

@@ -105,6 +105,10 @@
       padding: 0 0.5rem 0.5rem 0.5rem;
       width: 100%;
 
+      .idea-name {
+        font-size: large;
+      }
+
       .idea-info {
         display: flex;
         justify-content: space-between;
@@ -136,6 +140,9 @@
         max-height: 100px;
         margin: 0 auto;
       }
+    }
+    .like-column {
+      width: 150px;
     }
   }
 }

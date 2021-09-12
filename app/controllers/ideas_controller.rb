@@ -82,7 +82,7 @@ class IdeasController < ApplicationController
     end
 
     def own_user_check
-      unless current_user.id == @idea.user_id
+      unless current_user.own?(@idea)
         redirect_to root_path
         flash[:alert] = "権限がないのでリダイレクトされました"
       end

@@ -17,11 +17,12 @@
       }
     }
   }
-  .modal-content {
-    .fund_links {
-      display: flex;
-      justify-content: space-evenly;
-      margin: 2rem 0;
-    }
+}
+
+.modal-content {
+  .modal_links {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 2rem 0;
   }
 }

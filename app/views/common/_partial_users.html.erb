@@ -3,11 +3,7 @@
     <% users.each do |user| %>
       <div class='user-column z-depth-3'>
         <%= link_to user_path(user.id) do %>
-          <div class='user-picture-column-small'>
-            <div class= 'user-img'>
-              <%= user_icon(user) %>
-            </div>
-          </div>
+          <%= user_icon(user, size: 'middle') %>
         <% end %>
         <div class='user-column-body'>
           <h5><%= user.name %></h5>

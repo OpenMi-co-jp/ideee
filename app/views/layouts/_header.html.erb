@@ -35,7 +35,7 @@
       </li>
       <li>
         <%= link_to '#', data: { target: "dropdown_user" }, class:'dropdown-trigger btn-floating btn-large orange lighten-2' do %>
-          <% user_mini_icon(current_user) %>
+          <% user_icon(current_user) %>
         <% end %>
       </li>
       <ul id='dropdown_user' class='dropdown-content'>
@@ -61,7 +61,7 @@
         <%= link_to 'ログイン', new_user_session_path %>
       </li>
       <li class='waves-effect waves-orange btn orange lighten-1 mx-2 nav-item'>
-        <%= link_to '新規登録', new_user_registration_path %>
+        <%= link_to '登録する', new_user_registration_path %>
       </li>
     <% end %>
   </ul>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     confirmations: "users/confirmations"
   }
   resources :users, only: %i[index show]
+  resources :likes, only: %i[create destroy]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

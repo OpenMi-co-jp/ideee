@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_04_070103) do
+ActiveRecord::Schema.define(version: 2021_09_10_130745) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 2021_09_04_070103) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_ideas_on_user_id"
+  end
+
+  create_table "likes", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "idea_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["idea_id"], name: "index_likes_on_idea_id"
+    t.index ["user_id", "idea_id"], name: "index_likes_on_user_id_and_idea_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|

@@ -47,3 +47,7 @@ div, p, b {
     color: white;
   }
 }
+
+.disable-click {
+  pointer-events: none;
+}

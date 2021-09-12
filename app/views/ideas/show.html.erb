@@ -42,7 +42,7 @@
     <%= @views %>
   </p>
 
-  <% if current_user.own?(@idea) %>
+  <% if current_user&.own?(@idea) %>
     <p>
       <strong>平均ページ滞在時間:</strong>
       <%= Time.at(@time_on_page.to_i).utc.strftime('%X') %>
@@ -56,7 +56,7 @@
     <% end %>
   </div>
 
-  <% if current_user.own?(@idea) %>
+  <% if current_user&.own?(@idea) %>
     <%= link_to 'Edit', edit_idea_path(@idea) %>
   <% end %>
 </div>

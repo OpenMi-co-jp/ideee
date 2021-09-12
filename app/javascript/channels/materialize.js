@@ -12,4 +12,8 @@ $(document).on ('turbolinks:load', function(){
   $('#modal-trigger-fund').on('click', function() {
     $('#modal_fund').modal('open');
   });
+
+  $('.modal-trigger-login').on('click', function() {
+    $('#modal_before_login').modal('open');
+  });
 })

@@ -1,24 +1,11 @@
-<% if current_user&.like?(object) %>
-  <%= link_to "javascript:void(0)",
-    class: 'like-click clicked',
-    id: "like-idea-#{object.id}",
-    data: { id: object.id } do %>
-    <div class='likes-column'>
-      <div class='likes-column-inside'>
-        <div class='like-image'>
-          <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
-        </div>
-        <div class='likes-count'>
-          <%= object.like_users.count %>
-        </div>
-      </div>
-    </div>
+<% if current_user %>
+  <% if current_user&.like?(object) %>
+    <%= render 'common/like_link', object: object, clicked: 'clicked' %>
+  <% else %>
+    <%= render 'common/like_link', object: object, clicked: nil %>
   <% end %>
 <% else %>
-  <%= link_to "javascript:void(0)",
-    class: 'like-click',
-    id: "like-idea-#{object.id}",
-    data: { id: object.id } do %>
+  <%= link_to '#modal_before_login', data: { turbolinks: false }, class: 'modal-trigger-login' do %>
     <div class='likes-column'>
       <div class='likes-column-inside'>
         <div class='like-image'>

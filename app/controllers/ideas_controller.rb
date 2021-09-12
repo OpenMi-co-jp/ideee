@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   def index
     @ideas = Idea.all
     @latest_ideas = Idea.all.order(created_at: "DESC").first(3)
-    @liked_ideas = Idea.first(5)
+    @liked_ideas = Idea.all.sort_by { |v| -v.like_users&.count }.first(5)
     @featured_users = User.first(5)
   end
 

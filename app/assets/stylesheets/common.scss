@@ -11,6 +11,10 @@ main {
   margin: 0 auto;
 }
 
+div, p, b {
+  word-break: break-all;
+}
+
 .notification {
   text-align: center;
   vertical-align: middle;
@@ -42,4 +46,8 @@ main {
   a {
     color: white;
   }
+}
+
+.disable-click {
+  pointer-events: none;
 }

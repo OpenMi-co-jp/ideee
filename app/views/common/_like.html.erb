@@ -1,0 +1,20 @@
+<% if current_user && !current_user.own?(object) %>
+  <% if current_user&.like?(object) %>
+    <%= render 'common/like_link', object: object, clicked: 'clicked' %>
+  <% else %>
+    <%= render 'common/like_link', object: object, clicked: nil %>
+  <% end %>
+<% else %>
+  <%= link_to '#modal_before_login', data: { turbolinks: false }, class: "modal-trigger-login #{own_object?(object)}" do %>
+    <div class='likes-column'>
+      <div class='likes-column-inside'>
+        <div class='like-image'>
+          <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
+        </div>
+        <div class='likes-count'>
+          <%= object.like_users.count %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

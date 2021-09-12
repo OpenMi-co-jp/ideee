@@ -103,9 +103,29 @@
 
     .idea-column-body {
       padding: 0 0.5rem 0.5rem 0.5rem;
+      width: 100%;
 
-      .idea-status {
+      .idea-name {
+        font-size: large;
+      }
+
+      .idea-info {
         display: flex;
+        justify-content: space-between;
+
+        .idea-status {
+          display: flex;
+        }
+
+        .idea-belong {
+          display: flex;
+          justify-content: flex-end;
+          .user-name {
+            display: grid;
+            place-items: center;
+            margin-right: 1rem;
+          }
+        }
       }
     }
 
@@ -120,6 +140,9 @@
         max-height: 100px;
         margin: 0 auto;
       }
+    }
+    .like-column {
+      width: 150px;
     }
   }
 }

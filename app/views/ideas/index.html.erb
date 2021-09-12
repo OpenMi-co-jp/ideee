@@ -9,14 +9,14 @@
         id: 'modal-trigger-intro'
       )%>
       <% unless current_user %>
-        <%= link_to '新規登録', new_user_session_path, class: 'waves-effect waves-orange btn orange darken-1 new-user-button' %>
+        <%= link_to '登録する', new_user_session_path, class: 'waves-effect waves-orange btn orange darken-1 new-user-button' %>
       <% end %>
     </div>
     <div id="modal_intro" class="modal">
       <div class="modal-content">
-        <h4>アイディアとエンジニアのマッチングサイト</h4>
-        <p><b>アイディアマン：</b>身の回りで困ってることや「あったらいいな」をエンジニアに投げかけることができる</p>
-        <p><b>エンジニア：</b>需要のあるアイディアが手に入り、人助けができる</p>
+        <h4>アイデアとエンジニアのマッチングサイト</h4>
+        <p><b>アイデアマン：</b>身の回りで困ってることや「あったらいいな」をエンジニアに投げかけることができる</p>
+        <p><b>エンジニア：</b>需要のあるアイデアが手に入り、人助けができる</p>
       </div>
       <div class="modal-footer">
         <%= link_to 'もっと見る', "https://naruhero.netlify.app/blog/3", class: 'waves-effect waves-orange orange lighten-2 btn', target: :_blank %>
@@ -33,10 +33,10 @@
             <p class='icon-mark'>🔥</p>
             <h3 class='social-good-title'>注目ユーザー</h3>
           </div>
-          <%= render 'ideas/common/partial_users', users: @featured_users %>
+          <%= render 'common/partial_users', users: @featured_users %>
         </div>
       </div>
     </div>
-    <%= render 'ideas/common/fund_link' %>
+    <%= render 'common/fund_link' %>
   </div>
 </div>

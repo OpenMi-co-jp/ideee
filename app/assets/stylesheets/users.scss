@@ -16,27 +16,30 @@
   }
 }
 
-.user-img {
-  max-width: 200px;
-  position: relative;
-  border-radius: 3%;
+.icon-circle {
+  object-fit: contain;
+  border-radius: 50%;
   background-color: white;
 
-  img {
-    object-fit: contain;
-    max-height: 100px;
-    margin: 0 auto;
+  &.small {
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
   }
-}
 
-.profile-user-img {
-  max-width: 200px;
-  border-radius: 5%;
-  background-color: white;
+  &.normal {
+    width: 60px;
+    height: 60px;
+  }
 
-  img {
-    object-fit: contain;
-    max-height: 200px;
-    margin: 0 auto;
+  &.middle {
+    width: 100px;
+    height: 100px;
+    padding: 0.8rem;
+  }
+
+  &.large {
+    width: 200px;
+    height: 200px;
   }
 }

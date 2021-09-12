@@ -16,6 +16,7 @@ An application for ideas and engineers
 |type|integer|
 |site_url|string|
 |twitter_id|string|
+|like_id|string|
 
 |idea||
 |:-:|:-:|
@@ -24,10 +25,11 @@ An application for ideas and engineers
 |note|text|
 |views|integer|
 |user_id|string|
+|like_id|string|
 
 |discussion||
 |:-:|:-:|
-|name|name|
+|name|string|
 |icon|image|
 |comment_id|string|
 
@@ -38,12 +40,9 @@ An application for ideas and engineers
 |user_id|string|
 |like_id|string|
 
-|user_comment_like||
+|like||
 |:-:|:-:|
 |user_id|name|
 |comment_id||
-
-|user_idea_like||
-|:-:|:-:|
-|user_id|name|
-|comment_id||
+|idea_id||
+|discussion_id||

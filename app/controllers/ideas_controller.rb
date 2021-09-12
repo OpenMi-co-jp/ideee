@@ -16,10 +16,9 @@ class IdeasController < ApplicationController
     @title = @idea.name
     @user = User.find_by(id: @idea.user_id)
     if Rails.env.production?
-      @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
+      @idea.views_update(params[:id])
       @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
     else
-      @views = '-'
       @time_on_page = '-'
     end
   end

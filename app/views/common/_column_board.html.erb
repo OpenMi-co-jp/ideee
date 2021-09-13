@@ -10,15 +10,15 @@
         <div class='idea-column-body'>
           <b class='idea-name'><%= idea.name %></b>
           <div class='idea-info'>
-            <div class='idea-status'>
+            <div class='idea-status gray-word'>
               <%= "投稿日: #{idea.created_time}" %>
               <i class="material-icons">remove_red_eye</i><%= idea.view %>
             </div>
-            <div class='idea-belong'>
+            <div class='flex-end'>
               <%= link_to user_path(idea.user.id) do %>
                 <% user_icon(idea.user, size: 'small') %>
               <% end %>
-              <p class='user-name'>
+              <p class='grid-middle'>
                 <%= idea.user.name %>
               </p>
             </div>

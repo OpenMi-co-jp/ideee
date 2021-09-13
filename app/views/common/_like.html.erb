@@ -7,11 +7,11 @@
 <% else %>
   <%= link_to '#modal_before_login', data: { turbolinks: false }, class: "modal-trigger-login #{own_object?(object)}" do %>
     <div class='likes-column'>
-      <div class='likes-column-inside'>
+      <div class='flex'>
         <div class='like-image'>
           <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
         </div>
-        <div class='likes-count'>
+        <div class='likes-count grid-middle'>
           <%= object.like_users.count %>
         </div>
       </div>

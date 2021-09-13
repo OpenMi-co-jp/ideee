@@ -18,26 +18,19 @@
     pointer-events: none;
   }
 
-  .likes-column-inside {
-    display: flex;
-
-    .likes-count {
-      display: grid;
-      place-items: center;
-      padding: 5px;
-      color: #333;
-      pointer-events: none;
-    }
+  .likes-count {
+    color: #333;
+    pointer-events: none;
   }
 }
 
 .clicked {
   .like-svg {
-    background: -moz-radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
-    background: -webkit-radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
-    background: radial-gradient(#f91880  10%, #FAC8DF 50%, #FFF);
+    background: -moz-radial-gradient(#f91880  10%, #FAC8DF 40%, #FFF);
+    background: -webkit-radial-gradient(#f91880  10%, #FAC8DF 40%, #FFF);
+    background: radial-gradient(#f91880  10%, #FAC8DF 40%, #FFF);
     border-radius: 50%;
-    padding: 10px 10px 0 0;
+    padding: 6px 6px 0 0;
     pointer-events: none;
   }
 }

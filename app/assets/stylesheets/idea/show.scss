@@ -1,9 +1,17 @@
 .idea-show {
-  .idea-name-column {
-    padding: 1rem;
+  width: 70vw;
+  margin: 0 auto;
+
+  .idea-status-column {
+    padding: 2rem;
+
+    .idea-name {
+      font-size: x-large;
+      color: #FF862E;
+    }
   }
 
-  .idea-picture-column-medium {
+  .idea-picture-column {
     margin: 0.5rem 0;
     max-width: 600px;
     border-radius: 3%;
@@ -14,5 +22,15 @@
       max-height: 400px;
       margin: 0 auto;
     }
+
+    .idea-created {
+      margin: 1rem 0;
+    }
+  }
+
+  .idea-content {
+    background-color: #F5F5F5;
+    padding: 1rem;
+    border-radius: 0.5rem;
   }
 }

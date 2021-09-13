@@ -13,4 +13,9 @@ class Idea < ApplicationRecord
   def created_time
     created_at.strftime("%Y.%m.%d")
   end
+
+  def views_update(id)
+    idea_view = Analytics.new.report_count('pageviews', id)
+    update(view: idea_view)
+  end
 end

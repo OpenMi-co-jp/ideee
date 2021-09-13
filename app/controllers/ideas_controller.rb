@@ -7,7 +7,8 @@ class IdeasController < ApplicationController
   def index
     @ideas = Idea.all
     @latest_ideas = Idea.all.order(created_at: "DESC").first(3)
-    @liked_ideas = Idea.first(5)
+    @liked_ideas = Idea.all.sort_by { |v| -v.like_users&.count }.first(5)
+    @most_viewed_ideas = Idea.all.order(view: "DESC").first(5)
     @featured_users = User.first(5)
   end
 
@@ -16,10 +17,9 @@ class IdeasController < ApplicationController
     @title = @idea.name
     @user = User.find_by(id: @idea.user_id)
     if Rails.env.production?
-      @views = Analytics.new.report_count('pageviews', params[:id]) || '-'
+      @idea.views_update(params[:id])
       @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-'
     else
-      @views = '-'
       @time_on_page = '-'
     end
   end

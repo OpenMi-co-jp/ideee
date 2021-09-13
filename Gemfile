@@ -53,7 +53,11 @@ gem 'high_voltage'
 
 gem 'enum_help'
 
-gem 'stripe'
+# uncomment out when you need
+# gem 'stripe'
+
+gem "sentry-ruby"
+gem "sentry-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

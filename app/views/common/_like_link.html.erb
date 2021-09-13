@@ -1,15 +1,12 @@
-<%= link_to "javascript:void(0)",
-  class: "like-click #{clicked}",
-  id: "like-idea-#{object.id}",
-  data: { id: object.id } do %>
+<div class= 'like-click <%= clicked %>', data-id='<%= object.id %>'>
   <div class='likes-column'>
-    <div class='likes-column-inside'>
+    <div class='flex'>
       <div class='like-image'>
         <%= image_tag "like-icon.svg", size: '45x45', class: 'like-svg' %>
       </div>
-      <div class='likes-count' data-likes='<%= object.like_users.count %>'>
+      <div class='likes-count grid-middle' data-likes='<%= object.like_users.count %>'>
         <%= object.like_users.count %>
       </div>
     </div>
   </div>
-<% end %>
+</div>

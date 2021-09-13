@@ -15,7 +15,7 @@
   transition-duration: .3s;
 
   :hover {
-    pointer-events: none;
+    cursor: url('like.png'), auto;
   }
 
   .likes-count {

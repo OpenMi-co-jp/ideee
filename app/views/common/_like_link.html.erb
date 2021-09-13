@@ -1,7 +1,4 @@
-<%= link_to "javascript:void(0)",
-  class: "like-click #{clicked}",
-  id: "like-idea-#{object.id}",
-  data: { id: object.id } do %>
+<div class= 'like-click <%= clicked %>', data-id='<%= object.id %>'>
   <div class='likes-column'>
     <div class='flex'>
       <div class='like-image'>
@@ -12,4 +9,4 @@
       </div>
     </div>
   </div>
-<% end %>
+</div>

@@ -1,20 +1,20 @@
 $(document).on ('turbolinks:load', function(){
 
   $('.like-click').on('click', function() {
-    const this_id = '#' + this.id
-    like_num = Number($(this_id).find($('.likes-count')).html())
-    if($(this_id).hasClass('clicked')){
-      unlike(this_id).done(function(data) {
-        $(this_id).toggleClass('clicked')
-        $(this_id).find($('.likes-count')).html(like_num - 1)
+    const element = $(this)
+    like_num = Number(element.find($('.likes-count')).html())
+    if(element.hasClass('clicked')){
+      unlike(element).done(function() {
+        element.toggleClass('clicked')
+        element.find($('.likes-count')).html(like_num - 1)
       })
       .fail(function() {
         alert('いいねの取り消しに失敗しました')
       })
     } else {
-      like(this_id).done(function() {
-        $(this_id).toggleClass('clicked')
-        $(this_id).find($('.likes-count')).html(like_num + 1)
+      like(element).done(function() {
+        element.toggleClass('clicked')
+        element.find($('.likes-count')).html(like_num + 1)
       })
       .fail(function() {
         alert('いいねに失敗しました')
@@ -22,20 +22,20 @@ $(document).on ('turbolinks:load', function(){
     }
   });
 
-  function unlike(this_id){
+  function unlike(element){
     return $.ajax({
-      url: '/likes/' + $(this_id).data('id'),
+      url: '/likes/' + element.data('id'),
       type: 'DELETE',
-      data: { id: $(this_id).data('id') },
+      data: { id: element.data('id') },
       dataType: 'json'
     })
   }
 
-  function like(this_id){
+  function like(element){
     return $.ajax({
       url: '/likes',
       type: 'POST',
-      data: { id: $(this_id).data('id') },
+      data: { id: element.data('id') },
       dataType: 'json'
     })
   }

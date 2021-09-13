@@ -11,8 +11,8 @@
           <b class='idea-name'><%= idea.name %></b>
           <div class='idea-info'>
             <div class='idea-status'>
-              <%= "投稿日：#{idea.created_time}" %>
-              <%= idea.view %>
+              <%= "投稿日: #{idea.created_time}" %>
+              <i class="material-icons">remove_red_eye</i><%= idea.view %>
             </div>
             <div class='idea-belong'>
               <%= link_to user_path(idea.user.id) do %>

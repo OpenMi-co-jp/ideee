@@ -3,7 +3,7 @@
     <% users.each do |user| %>
       <%= link_to user_path(user.id) do %>
         <% unless user.undefined? %>
-          <div class='user-column z-depth-3'>
+          <div class='user-column border-line'>
             <%= user_icon(user, size: 'middle') %>
             <div class='user-column-body'>
               <h5><%= user.name %></h5>

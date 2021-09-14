@@ -1,37 +1,37 @@
 ja:
-  defaults:
-    login: 'ログイン'
-    register: '登録'
-    logout: 'ログアウト'
-    create: '作成'
-    post: '投稿'
-    search: '検索'
-    edit: '編集'
-    submit: '送信'
-    delete: '削除'
+  default:
+    login: ログイン
+    register: 登録
+    logout: ログアウト
+    create: 作成
+    post: 投稿
+    search: 検索
+    edit: 編集
+    submit: 送信
+    delete: 削除
   devise:
     confirmations:
       new:
-        title: '確認メールが届いていない場合'
-        submit: '確認メールを再送信'
+        title: 確認メールが届いていない場合
+        submit: 確認メールを再送信
     passwords:
       new:
-        title: 'パスワードをお忘れですか?'
-        submit: 'パスワード再発行'
+        title: パスワードをお忘れですか?
+        submit: パスワード再発行
       edit:
-        title: 'パスワード変更'
-        submit: 'パスワードを変更する'
+        title: パスワード変更
+        submit: パスワードを変更する
     registrations:
       new:
-        title: 'ユーザー登録'
-        submit: 'ユーザー登録する'
+        title: ユーザー登録
+        submit: ユーザー登録する
       edit:
-        title: 'ユーザー情報編集'
-        submit: 'ユーザー情報を更新する'
-        cancel: 'ユーザー情報の取り消し'
+        title: ユーザー情報編集
+        submit: ユーザー情報を更新する
+        cancel: ユーザー情報の取り消し
     unlocks:
       new:
-        title: 'ロック解除'
-        submit: 'ロックを解除する'
+        title: ロック解除
+        submit: ロックを解除する
 
 

@@ -62,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def undefined?
-    name.nil? || confirmed_at.nil? || definition.nil?
+    name.blank? || confirmed_at.blank? || definition.blank?
   end
 
   def own?(object)

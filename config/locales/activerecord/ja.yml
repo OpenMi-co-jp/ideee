@@ -1,0 +1,21 @@
+ja:
+  enums:
+    user:
+      role:
+        general: 一般
+        admin: 管理者
+  activerecord:
+    models:
+      user: ユーザー
+      idea: アイデア
+    attributes:
+      user:
+        name: 氏名
+        email: メールアドレス
+        icon: アイコン
+        password: パスワード
+        password_confirmation: パスワード確認
+      idea:
+        name: アイデア名 
+        icon: アイコン
+        note: 備考

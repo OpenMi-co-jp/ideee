@@ -5,7 +5,7 @@
 .user-column {
   display: flex;
   margin: 1rem 0;
-  height: 100px;
+  height: 110px;
 
   .user-column-body {
     padding: 0 0.5rem 0.5rem 0.5rem;
@@ -17,7 +17,7 @@
 }
 
 .icon-circle {
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
   background-color: white;
 

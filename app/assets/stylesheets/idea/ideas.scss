@@ -92,10 +92,14 @@
 }
 
 .idea-colum-board {
+  .rank-num{
+    font-style: italic;
+  }
+
   .idea-column {
     display: flex;
-    margin: 1rem 0;
-    height: 100px;
+    margin: 0.5rem 0;
+    height: 120px;
 
     .idea-column-body {
       padding: 0 0.5rem 0.5rem 0.5rem;
@@ -103,6 +107,7 @@
 
       .idea-name {
         font-size: large;
+        color: #FF862E;
       }
 
       .idea-info {

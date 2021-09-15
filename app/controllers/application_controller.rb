@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   # before_action :basic_auth
-  before_action :defined_check
 
   # devise settings
   def after_sign_in_path_for(resource)

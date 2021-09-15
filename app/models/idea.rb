@@ -6,6 +6,9 @@ class Idea < ApplicationRecord
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
+  validates :name, presence: true, length: { maximum: 120 }
+  validates :note, presence: true
+
   def user
     return User.find_by(id: self.user_id)
   end

@@ -53,10 +53,18 @@ module ApplicationHelper
   end
 
   def return_ogp_url(title)
+    title_len = title.length
+    size =  if title_len < 10
+              100
+            elsif 10 <= title_len && title_len <= 27
+              70
+            else
+              40
+            end
     transformation = [
       {
         x: 0, y: 0, gravity: 'center', color: '#202124', width: '500',  overlay: {
-          font_size: 30,
+          font_size: size,
           font_weight: 'bold',
           text_align: 'center',
           text: title,

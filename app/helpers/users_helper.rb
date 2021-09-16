@@ -9,16 +9,20 @@ module UsersHelper
     link_to id, "https://twitter.com/#{id}", target: :_blank, rel: "noopener noreferrer"
   end
 
-  def user_definiton(user)
+  def user_definiton(user, ver='normal')
     case user.definition
     when 'idea_man' then
       icon = '💡'
     when 'engineer' then
       icon = '🛠'
     when 'idea_engineer' then
-      icon = '💡・🛠'
+      icon = '💡 🛠'
     end
-    "#{icon} #{I18n.t("enums.user.definition.#{user.definition}")}" if user.definition
+    if ver == 'normal'
+      "#{icon} #{I18n.t("enums.user.definition.#{user.definition}")}" if user.definition
+    elsif ver == 'short'
+      icon if user.definition
+    end
   end
 
   def own_user_checked(user)

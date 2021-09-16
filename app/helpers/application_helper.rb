@@ -57,7 +57,7 @@ module ApplicationHelper
     size =  if title_len < 10
               100
             elsif 10 <= title_len && title_len <= 27
-              70
+              60
             else
               40
             end

@@ -9,6 +9,7 @@
       <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
     </div>
 
+    <%= render 'devise/shared/agreed_note', submit: t('.submit') %>
     <div class="actions">
       <%= f.submit t '.submit' %>
     </div>

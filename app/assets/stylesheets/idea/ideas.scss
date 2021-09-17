@@ -59,31 +59,36 @@
       .latest-idea-colum {
         display: flex;
         justify-content: space-around;
-        width: 100%;
         margin-top: 2rem;
         a {
           color: #6B6B6B;
         }
 
-        .idea-picture-column {
-          position: relative;
+        .idea-column-board {
+          width: 400px;
 
-          .idea-img {
-            max-width: 420px;
+          .idea-column-img {
+            position: relative;
+            border-radius: 10px;
 
-            img {
-              object-fit: contain;
-              height: 280px;
-              margin: 0 auto;
+            .idea-img {
+              max-width: 400px;
+
+              img {
+                object-fit: cover;
+                height: 200px;
+                margin: 0 auto;
+                border-radius: 10px;
+              }
             }
-          }
 
-          .time-label {
-            position: absolute;
-            top: 1rem;
-            padding: 0 1rem;
-            color: white;
-            background-color: rgba(191, 191, 191, 0.8);
+            .time-label {
+              position: absolute;
+              top: 1rem;
+              padding: 0 1rem;
+              color: white;
+              background-color: rgba(191, 191, 191, 0.8);
+            }
           }
         }
       }
@@ -107,7 +112,6 @@
 
       .idea-name {
         font-size: large;
-        color: #FF862E;
       }
 
       .idea-info {

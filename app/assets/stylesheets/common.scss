@@ -42,6 +42,7 @@ div, p, b {
   }
 }
 
+// ボタンの中の色は全て白
 .btn {
   a {
     color: white;
@@ -71,15 +72,16 @@ div, p, b {
   color: #BFBFBF;
 }
 
+.border-line {
+  border-bottom: 5px solid #E3E4E8;
+  margin: 0.5rem 0;
+}
+
+// bootstrap的によく使うセットはここに書く
 .mh-1 {
   margin: 1rem 0;
 }
 
 .pl-1 {
   padding: 0 1rem;
-}
-
-.border-line {
-  border-bottom: 5px solid #E3E4E8;
-  margin: 0.5rem 0;
 }

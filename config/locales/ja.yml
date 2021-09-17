@@ -10,7 +10,7 @@ ja:
       definition:
         idea_man: アイデアマン
         engineer: エンジニア
-        idea_engineer: アイデアマン・エンジニア
+        idea_engineer: アイデアマン / エンジニア
   time:
     formats:
       default: "%Y.%m.%d"

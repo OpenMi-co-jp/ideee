@@ -24,7 +24,7 @@ ja:
     registrations:
       new:
         title: ユーザー登録
-        submit: ユーザー登録する
+        submit: ユーザー登録
       edit:
         title: ユーザー情報編集
         submit: ユーザー情報を更新する

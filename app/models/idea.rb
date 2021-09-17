@@ -6,7 +6,7 @@ class Idea < ApplicationRecord
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
-  validates :name, presence: true, length: { maximum: 120 }
+  validates :name, presence: true, length: { maximum: 60 }
   validates :note, presence: true
 
   def user

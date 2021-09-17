@@ -46,7 +46,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :icon, :description, :definition])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :icon, :description, :definition, :twitter_id])
   end
 
   # The path used after sign up.

@@ -8,7 +8,7 @@ module ApplicationHelper
     end
   end
 
-  def full_url(path)
+  def full_url(path=nil)
     domain = if Rails.env.development?
                'http://localhost:3000'
              else
@@ -47,7 +47,7 @@ module ApplicationHelper
       },
       twitter: {
         card: 'summary_large_image',
-        site: '@1026NT',
+        site: '@ideee_tech',
       }
     }
   end

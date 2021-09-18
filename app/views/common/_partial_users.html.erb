@@ -6,12 +6,14 @@
           <div class='user-column border-line'>
             <%= user_icon(user, size: 'middle') %>
             <div class='user-column-body'>
-              <h5><%= user.name %></h5>
-              <div class='user-status'>
+              <div class='user-name-point'>
+                <h5><%= user.name %></h5>
+                <div class='user-point grid-middle'>
+                  <p>🔥</p>
+                  <%= user.point %>
+                </div>
               </div>
-              <div class='user-belong'>
-                <%= user_definiton(user) %>
-              </div>
+              <%= user_definiton(user) %>
             </div>
           </div>
         <% end %>

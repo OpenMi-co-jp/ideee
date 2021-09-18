@@ -16,6 +16,6 @@ ja:
         password: パスワード
         password_confirmation: パスワード確認
       idea:
-        name: アイデア名 
+        name: アイデア名
         icon: アイコン
-        note: 備考
+        note: ノート

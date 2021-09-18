@@ -8,21 +8,20 @@
     <div class='latest-idea-colum'>
       <% if @latest_ideas%>
         <% @latest_ideas.each do |idea| %>
-          <a href="<%= idea_path(idea.id) %>" %>
-            <div class='idea-picture-column z-depth-1 brown lighten-5'>
-              <div class= 'idea-img'>
-                <%= image_set(idea) %>
+          <div class='idea-column-board'>
+            <%= link_to idea_path(idea.id) do %>
+              <div class='idea-column-img brown lighten-5'>
+                <div class= 'idea-img'>
+                  <%= image_set(idea) %>
+                </div>
+                <div class= 'time-label'>
+                  <%= idea.created_time %>
+                </div>
               </div>
-              <div class= 'time-label'>
-                <%= idea.created_time %>
-              </div>
-              <div class= 'row'>
-                <%= idea.name %>
-                <%= idea.user.name %>
-                <%= idea.view %>
-              </div>
-            </div>
-          </a>
+            <% end %>
+            <p class='orange-word'><%= idea.name %></p>
+            <p class='gray-word'><%= user_definiton(idea.user) %><%= idea.user.name %></p>
+          </div>
         <% end %>
       <% end %>
     </div>

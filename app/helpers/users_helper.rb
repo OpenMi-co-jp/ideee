@@ -6,7 +6,7 @@ module UsersHelper
   def twitter_url(id)
     return if id.nil?
     # TODO: put twitter icon here
-    link_to id, "https://twitter.com/#{id}", target: :_blank, rel: "noopener noreferrer"
+    "https://twitter.com/#{id}"
   end
 
   def user_definiton(user, ver='normal')

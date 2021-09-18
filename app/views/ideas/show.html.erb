@@ -7,18 +7,18 @@
 
 <div class='idea-show'>
   <div class='row'>
-    <div class='idea-picture-column col s3'>
+    <div class='idea-column-img col s3'>
       <%= image_set(@idea) %>
       <p class='idea-created gray-word'><%= "作成日: #{l @idea.created_at}" %></p>
       <div class="sns-share">
-        <%= link_to twitter_share(@idea.name, request.url), target: '_blank' do %>
+        <%= link_to twitter_share(@idea), target: '_blank' do %>
           <%= image_tag "twitter_icon.png", class: "twitter-share" %>
           <%= tag.p '＼ シェア ／', class: "twitter-share" %>
         <% end %>
       </div>
     </div>
     <div class='idea-status-column col s9'>
-      <div class='idea-name'>
+      <div class='idea-name orange-word'>
         <%= @idea.name %>
       </div>
 

@@ -33,11 +33,28 @@ div, p, b {
   }
 }
 
-.sns-share {
+.share-box {
   max-width: 120px;
   text-align: center;
+  margin: 0 0.5rem;
+
+  :hover {
+    transition-duration: .3s;
+    transform: scale(1.05);
+    pointer-events: auto;
+    cursor: pointer;
+  }
 
   .twitter-share {
+    margin: 0 auto;
+
+    &.small {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  p {
     margin: 0 auto;
   }
 }
@@ -79,6 +96,10 @@ div, p, b {
 .border-line {
   border-bottom: 5px solid #E3E4E8;
   margin: 0.5rem 0;
+}
+
+.toasts {
+  background-color: #BFBFBF;
 }
 
 // bootstrap的によく使うセットはここに書く

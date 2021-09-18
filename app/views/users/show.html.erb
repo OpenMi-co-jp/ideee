@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-  <div class="sns-share">
+  <div class="share-box">
     <% if @user&.twitter_id %>
       <%= link_to twitter_url(@user&.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer' do %>
         <%= image_tag "twitter_icon.png", class: "twitter-share" %>

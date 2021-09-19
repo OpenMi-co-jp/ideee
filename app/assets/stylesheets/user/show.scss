@@ -1,0 +1,17 @@
+.user-show {
+  width: 70vw;
+  margin: 0 auto;
+
+  .user-type-column {
+    text-align:center;
+    align-items: center;
+    border: solid 0.2px #C0C0C0;
+    border-radius: 0.5rem;
+  }
+
+  .user-content {
+    background-color: #F5F5F5;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+}

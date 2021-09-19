@@ -1,5 +1,6 @@
 .user-colum-board {
   background-color: white;
+  width: 100%;
 }
 
 .user-column {
@@ -9,10 +10,17 @@
 
   .user-column-body {
     padding: 0 0.5rem 0.5rem 0.5rem;
+    width: 100%;
   }
 
-  .user-status {
+  .user-name-point {
     display: flex;
+    justify-content: space-between;
+  }
+
+  .user-point {
+    margin: 0.5rem 0;
+    font-size: large;
   }
 }
 
@@ -38,7 +46,8 @@
   }
 
   &.large {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
   }
 }

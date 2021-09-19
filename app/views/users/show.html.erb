@@ -1,23 +1,21 @@
-<div class='boad'>
-  <h2>ユーザー情報</h2>
+<div class='user-show'>
   <div class="row">
-    <div class="col s4 grey lighten-2">
-      <%= user_icon(@user, size: 'large') %>
-      <%= "作成日：#{l @user.created_at, format: :long}" %>
+    <div class="user-type-column col s3">
+      <div class='mh-1'><%= user_icon(@user, size: 'large') %></div>
+      <h4 class='mh-1'><%= @user&.name %></h4>
+      <h5><%= @user&.point %></h5>
+      <p class='gray-word'>Contributions</p>
+      <p class='gray-word mh-1'><%= "作成日：#{l @user.created_at}" %></p>
     </div>
-    <div class="col s8 z-depth-1">
+    <div class="col s9">
       <div class="">
         <div class="row">
           <div class="col s10">
-            <%= @user&.name %>
             <%= user_definiton(@user) %>
-          </div>
-          <div class="col s2">
-            <%= @user&.point %>
           </div>
         </div>
       </div>
-      <div class="">
+      <div class="user-content">
         <%= @user&.description %>
       </div>
     </div>
@@ -36,7 +34,7 @@
     <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
   <% end %>
   <% if @user.ideas.present? %>
-    <h2>アイデア</h2>
+    <h4>アイデア</h4>
     <%= render 'common/column_board', ideas: @user.ideas %>
   <% else %>
     <h2>まだアイデアが投稿されていません</h2>

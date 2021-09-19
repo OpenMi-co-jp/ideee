@@ -10,7 +10,7 @@ class IdeasController < ApplicationController
     @latest_ideas = Idea.all.order(created_at: "DESC").first(3)
     @liked_ideas = Idea.all.sort_by { |v| -v.like_users&.count }.first(5)
     @most_viewed_ideas = Idea.all.order(view: "DESC").first(5)
-    @featured_users = User.first(5)
+    @featured_users = User.all.order(point: "DESC").first(5)
   end
 
   # GET /ideas/1 or /ideas/1.json

@@ -80,4 +80,12 @@ class User < ApplicationRecord
   def unlike(idea)
     like_ideas.delete(idea)
   end
+
+  def point_update
+    idea_num = ideas.length
+    idea_like_num = ideas.sum{|n| n.likes.length }
+    like_num = likes.length
+    sum_points = 2*idea_num + 0.5*like_num + idea_like_num
+    update(point: sum_points)
+  end
 end

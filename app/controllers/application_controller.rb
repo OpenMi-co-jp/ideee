@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     render file: Rails.root.join('public', '404.html'), status: :not_found, layout: false, content_type: 'text/html'
   end
 
+  def render500
+    render file: Rails.root.join('public', '500.html'), status: :internal_server_error, layout: false, content_type: 'text/html'
+  end
+  
   protected
 
   # def basic_auth

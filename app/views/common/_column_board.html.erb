@@ -30,6 +30,9 @@
               </p>
             </div>
           </div>
+          <% if current_user.own?(idea) %>
+            <%= link_to '削除', idea_path(idea), method: :delete, data: { confirm: '削除してもよろしいですか？' } %>
+          <% end %>
         </div>
         <div class='like-column'>
           <%= render "common/like", object: idea %>

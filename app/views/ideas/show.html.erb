@@ -71,6 +71,7 @@
   </div>
 
   <% if current_user&.own?(@idea) %>
-    <%= link_to 'Edit', edit_idea_path(@idea) %>
+    <%= link_to '編集', edit_idea_path(@idea) %>
+    <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？'} %>
   <% end %>
 </div>

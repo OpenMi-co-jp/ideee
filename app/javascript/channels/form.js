@@ -15,4 +15,11 @@ $(document).on ('turbolinks:load', function(){
     $('.present-img').remove();
     readURL(this);
   });
+
+  $("#post-user-img").on ('change', function(){
+    $('#avatar_img_prev').removeClass('disabled');
+    $('.present-img').remove();
+    $(this).prev($('.user')).addClass('mh-1 icon-circle large')
+    readURL(this);
+  });
 });

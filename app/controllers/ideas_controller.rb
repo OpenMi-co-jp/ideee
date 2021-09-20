@@ -27,7 +27,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/new
   def new
-    @idea = Idea.new
+    @idea = Idea.new(note: t('.default_set'))
   end
 
   # GET /ideas/1/edit

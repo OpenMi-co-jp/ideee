@@ -31,44 +31,36 @@ class IdeasController < ApplicationController
   end
 
   # GET /ideas/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /ideas or /ideas.json
   def create
     @idea = Idea.new(idea_params.merge(user_id: current_user.id))
-
-    respond_to do |format|
-      if @idea.save
-        format.html { redirect_to @idea, notice: "Idea was successfully created." }
-        format.json { render :show, status: :created, location: @idea }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
-      end
+    if @idea.save
+      flash[:notice] = t('.success')
+      redirect_to @idea
+    else
+      flash.now[:alert] = t('.fail')
+      render :new
     end
   end
 
   # PATCH/PUT /ideas/1 or /ideas/1.json
   def update
-    respond_to do |format|
-      if @idea.update(idea_params.merge(user_id: current_user.id))
-        format.html { redirect_to @idea, notice: "Idea was successfully updated." }
-        format.json { render :show, status: :ok, location: @idea }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
-      end
+    if @idea.update(idea_params.merge(user_id: current_user.id))
+      flash[:notice] = t('.success')
+      redirect_to @idea
+    else
+      flash.now[:alert] = t('.fail')
+      render :edit
     end
   end
 
   # DELETE /ideas/1 or /ideas/1.json
   def destroy
     @idea.destroy
-    respond_to do |format|
-      format.html { redirect_to ideas_url, notice: "Idea was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    flash[:notice] = t('.success')
+    redirect_to ideas_url
   end
 
   private
@@ -85,7 +77,7 @@ class IdeasController < ApplicationController
     def own_user_check
       unless current_user.own?(@idea)
         redirect_to root_path
-        flash[:alert] = "権限がないのでリダイレクトされました"
+        flash[:alert] = t('default.message.unauthorized')
       end
     end
 end

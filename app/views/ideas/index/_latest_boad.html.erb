@@ -10,7 +10,7 @@
         <% @latest_ideas.each do |idea| %>
           <div class='idea-column-board'>
             <%= link_to idea_path(idea.id) do %>
-              <div class='idea-column-img white'>
+              <div class='idea-column-img orange-back'>
                 <%= image_set(idea) %>
                 <div class= 'time-label'>
                   <%= idea.created_time %>

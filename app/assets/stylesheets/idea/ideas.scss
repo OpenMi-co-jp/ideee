@@ -2,7 +2,7 @@
   .full-pic {
     position: relative;
     min-height: 50vh;
-    background: url(idea_main.jpg)
+    background: url(idea_main.png)
       center / cover;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
@@ -72,7 +72,7 @@
             border-radius: 10px;
 
             img {
-              object-fit: cover;
+              object-fit: contain;
               height: 200px;
               width: 400px;
               margin: 0 auto;

@@ -43,16 +43,6 @@
       </div>
     </div>
   </div>
-  <div class="share-box">
-    <% if @user&.twitter_id %>
-      <%= link_to twitter_url(@user&.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer' do %>
-        <%= image_tag "twitter_icon.png", class: "twitter-share" %>
-      <% end %>
-    <% else %>
-      <%# TODO: pngからsvgに切り替えて色の切り替えをするようにする %>
-      <%= image_tag "twitter_gray_icon.png", class: "twitter-share" %>
-    <% end %>
-  </div>
   <% if own_user_checked(@user) %>
     <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
   <% end %>

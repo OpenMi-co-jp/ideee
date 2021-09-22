@@ -36,7 +36,7 @@ div, p, b {
 .share-box {
   max-width: 120px;
   text-align: center;
-  margin: 0 0.5rem;
+  margin: 0.5rem;
 
   :hover {
     transition-duration: .3s;
@@ -56,6 +56,10 @@ div, p, b {
 
   p {
     margin: 0 auto;
+  }
+
+  .material-icons {
+    font-size: 3rem;
   }
 }
 

@@ -11,7 +11,7 @@
           <%= f.label :icon %>
           <%= image_tag '', id: "avatar_img_prev", class:"disabled user"%>
           <div class='present-img'>
-            <% if resource.icon.file.present? %>
+            <% if resource.icon.file.present? || resource.remote_url.present? %>
               <%= user_icon(@user, size: 'large') %>
             <% end %>
           </div>
@@ -45,6 +45,11 @@
         <div class="field">
           <%= f.label :twitter_id %><br />
           <%= f.text_field :twitter_id, placeholder: 'Twitter ID' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :site_url %><br />
+          <%= f.text_field :site_url, placeholder: 'サイトURL' %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

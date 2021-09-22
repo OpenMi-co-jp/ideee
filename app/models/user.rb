@@ -23,6 +23,7 @@ class User < ApplicationRecord
           user.name = auth.info.name
           user.description = auth.info.description
           user.twitter_id = auth.info.nickname
+          user.site_url = auth.info.urls['Website']
         end
         user.email = auth.info.email || ''
         user.password = Devise.friendly_token[0, 20]

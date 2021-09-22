@@ -1,6 +1,6 @@
 module UsersHelper
   def user_icon(user, size: 'normal')
-    user.icon.present? ? image_tag(user.icon.to_s, class: "icon-circle #{size}") : image_tag('undefined_user_icon.png', class: "icon-circle #{size}")
+    user.remote_url || user.icon.present? ? image_tag(user.icon.to_s, class: "icon-circle #{size}") : image_tag('undefined_user_icon.png', class: "icon-circle #{size}")
   end
 
   def twitter_url(id)

@@ -26,7 +26,7 @@ class User < ApplicationRecord
         end
         user.email = auth.info.email || ''
         user.password = Devise.friendly_token[0, 20]
-        user.icon = auth.info.image
+        user.remote_url = auth.info.image
         user.confirmed_at = Time.now.utc
       end
     rescue

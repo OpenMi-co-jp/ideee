@@ -12,7 +12,7 @@
     <% end %>
     <li class='serch_column'>
       <%= form_tag(ideas_path,:method => 'get') do %>
-        <%= text_field_tag :search, '', class: 'search_box', placeholder: 'キーワードを入力してください' %>
+        <%= text_field_tag :search, '', class: 'search_box', size:'30', placeholder: 'キーワードを入力してください' %>
       <% end %>
     </li>
     <li class=''>
@@ -25,9 +25,10 @@
       <li class=''>
         <%= link_to 'ランキング', root_path %>
       </li>
-      <li class=''>
+      <%# TODO: ディスカッション機能の追加 %>
+      <%# <li class=''>
         <%= link_to 'ディスカッション', root_path %>
-      </li>
+      <%# </li> %>
     </li>
     <% if current_user %>
       <li class='waves-effect waves-orange btn orange lighten-2 mx-2 nav-link'>

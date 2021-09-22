@@ -5,8 +5,8 @@
         <div class='mh-1'><%= user_icon(@user, size: 'large') %></div>
         <h4 class='mh-1'><%= @user&.name %></h4>
         <h5><%= @user&.point %></h5>
-        <p class='gray-word'>Contributions</p>
-        <p class='gray-word mh-1'><%= "作成日：#{l @user.created_at}" %></p>
+        <p class='gray-2'>Contributions</p>
+        <p class='gray-2 mh-1'><%= "作成日：#{l @user.created_at}" %></p>
       </div>
       <div class='user-urls'>
         <div class="share-box">
@@ -22,10 +22,10 @@
         <div class="share-box grid-middle">
           <% if @user&.site_url %>
             <%= link_to @user&.site_url, target: '_blank', rel: 'nofollow noopener noreferrer' do %>
-              <i class="material-icons orange-word">link</i>
+              <i class="material-icons medium orange-soft">link</i>
             <% end %>
           <% else %>
-            <i class="material-icons gray-word">link</i>
+            <i class="material-icons small gray-2">link</i>
           <% end %>
         </div>
       </div>

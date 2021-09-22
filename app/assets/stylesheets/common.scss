@@ -57,17 +57,6 @@ div, p, b {
   p {
     margin: 0 auto;
   }
-
-  .material-icons {
-    font-size: 3rem;
-  }
-}
-
-// ボタンの中の色は全て白
-.btn {
-  a {
-    color: white;
-  }
 }
 
 .disable-click {
@@ -89,30 +78,15 @@ div, p, b {
   justify-content: flex-end;
 }
 
-.gray-word {
-  color: #BFBFBF;
-}
-
-.orange-word {
-  color: #FF862E;
-}
-
 .border-line {
   border-bottom: 5px solid #E3E4E8;
   margin: 0.5rem 0;
-}
-
-.toasts {
-  background-color: #BFBFBF;
 }
 
 .field {
   margin: 0.5rem;
 }
 
-.orange-back {
-  background-color: #FDF8EB;
-}
 
 // bootstrap的によく使うセットはここに書く
 .mh-1 {
@@ -121,4 +95,101 @@ div, p, b {
 
 .pw-1 {
   padding: 0 1rem;
+}
+
+.btn-flat {
+  border: #FF862E;
+}
+
+// color css set
+
+.gray {
+  &-1 {
+    color: #F5F5F5 !important;
+    &-back {
+      background-color: #F5F5F5!important;
+    }
+  }
+
+  &-2 {
+    color: #E3E4E8!important;
+    &-back {
+      background-color: #E3E4E8!important;
+    }
+  }
+
+  &-3 {
+    color: #C4C4C4!important;
+    &-back {
+      background-color: #C4C4C4!important;
+    }
+  }
+
+  &-4 {
+    color: #A7A7A7!important;
+    &-back {
+      background-color: #A7A7A7!important;
+    }
+  }
+
+  &-5 {
+    color: #888888!important;
+    &-back {
+      background-color: #888888!important;
+    }
+  }
+}
+
+.orange {
+  &-action {
+    color: #FF862E!important;
+    font-weight: bold;
+    &-back {
+      background-color: #FF862E!important;
+    }
+  }
+
+  &-soft {
+    color: #FFBF85!important;
+    &-back {
+      background-color: #FFBF85!important;
+    }
+  }
+
+  &-dark {
+    color: #D9C2AD!important;
+    &-back {
+      background-color: #D9C2AD!important;
+    }
+  }
+
+  &-red {
+    color: #A6442E!important;
+    &-back {
+      background-color: #A6442E!important;
+    }
+  }
+}
+
+.yellow {
+  &-action {
+    color: #FCEE21!important;
+    &-back {
+      background-color: #FCEE21!important;
+    }
+  }
+
+  &-soft {
+    color: #FDF8EB!important;
+    &-back {
+      background-color: #FDF8EB!important;
+    }
+  }
+}
+
+// ボタンの中の色は全て白
+.btn {
+  a {
+    color: white;
+  }
 }

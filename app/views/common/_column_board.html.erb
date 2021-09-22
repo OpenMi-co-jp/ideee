@@ -14,10 +14,10 @@
         <% end %>
         <div class='idea-column-body'>
           <%= link_to idea_path(idea.id) do %>
-            <b class='idea-name orange-word'><%= idea.name %></b>
+            <b class='idea-name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea-info'>
-            <div class='idea-status gray-word'>
+            <div class='idea-status gray-2'>
               <%= "投稿日: #{idea.created_time}" %>
               <i class="material-icons">remove_red_eye</i><%= idea.view %>
             </div>

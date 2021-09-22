@@ -1,11 +1,34 @@
 <div class='user-show'>
   <div class="row">
-    <div class="user-type-column col s3">
-      <div class='mh-1'><%= user_icon(@user, size: 'large') %></div>
-      <h4 class='mh-1'><%= @user&.name %></h4>
-      <h5><%= @user&.point %></h5>
-      <p class='gray-word'>Contributions</p>
-      <p class='gray-word mh-1'><%= "作成日：#{l @user.created_at}" %></p>
+    <div class="col s3">
+      <div class="user-type-column">
+        <div class='mh-1'><%= user_icon(@user, size: 'large') %></div>
+        <h4 class='mh-1'><%= @user&.name %></h4>
+        <h5><%= @user&.point %></h5>
+        <p class='gray-word'>Contributions</p>
+        <p class='gray-word mh-1'><%= "作成日：#{l @user.created_at}" %></p>
+      </div>
+      <div class='user-urls'>
+        <div class="share-box">
+          <% if @user&.twitter_id %>
+            <%= link_to twitter_url(@user&.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer' do %>
+              <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+            <% end %>
+          <% else %>
+            <%# TODO: pngからsvgに切り替えて色の切り替えをするようにする %>
+            <%= image_tag "twitter_gray_icon.png", class: "twitter-share" %>
+          <% end %>
+        </div>
+        <div class="share-box grid-middle">
+          <% if @user&.site_url %>
+            <%= link_to @user&.site_url, target: '_blank', rel: 'nofollow noopener noreferrer' do %>
+              <i class="material-icons">link</i>
+            <% end %>
+          <% else %>
+            <i class="material-icons gray-word">link</i>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="col s9">
       <div class="">
@@ -19,16 +42,6 @@
         <%= @user&.description %>
       </div>
     </div>
-  </div>
-  <div class="share-box">
-    <% if @user&.twitter_id %>
-      <%= link_to twitter_url(@user&.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer' do %>
-        <%= image_tag "twitter_icon.png", class: "twitter-share" %>
-      <% end %>
-    <% else %>
-      <%# TODO: pngからsvgに切り替えて色の切り替えをするようにする %>
-      <%= image_tag "twitter_gray_icon.png", class: "twitter-share" %>
-    <% end %>
   </div>
   <% if own_user_checked(@user) %>
     <%= link_to 'Edit', edit_user_registration_path(@user.id) %>

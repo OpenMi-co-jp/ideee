@@ -2,7 +2,7 @@
   .full-pic {
     position: relative;
     min-height: 50vh;
-    background: url(idea_main.jpg)
+    background: url(idea_main.png)
       center / cover;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
@@ -24,7 +24,7 @@
 
   .boad {
     position: relative;
-    min-height: 80vh;
+    min-height: 550px;
 
     .back-color-board {
       min-height: 30vh;
@@ -72,7 +72,7 @@
             border-radius: 10px;
 
             img {
-              object-fit: cover;
+              object-fit: contain;
               height: 200px;
               width: 400px;
               margin: 0 auto;
@@ -133,10 +133,15 @@
       border-radius: 3%;
       background-color: white;
 
-      img {
-        object-fit: contain;
-        max-height: 100px;
-        margin: 0 auto;
+      .idea-img-boader {
+        border: solid 1px;
+        border-radius: 3%;
+
+        img {
+          object-fit: contain;
+          max-height: 100px;
+          margin: 0 auto;
+        }
       }
     }
     .like-column {

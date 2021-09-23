@@ -15,7 +15,14 @@ ja:
         icon: アイコン
         password: パスワード
         password_confirmation: パスワード確認
+        description: 説明
+        point: コントリビュート数
+        icon: プロフィール画像
+        twitter_id: TwitterID
+        remote_url: リモート画像
+        site_url: サイトURL
       idea:
         name: アイデア名
         icon: アイコン
         note: ノート
+        view: ビュー数

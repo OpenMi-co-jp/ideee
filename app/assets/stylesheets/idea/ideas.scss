@@ -133,10 +133,15 @@
       border-radius: 3%;
       background-color: white;
 
-      img {
-        object-fit: contain;
-        max-height: 100px;
-        margin: 0 auto;
+      .idea-img-boader {
+        border: solid 1px;
+        border-radius: 3%;
+
+        img {
+          object-fit: contain;
+          max-height: 100px;
+          margin: 0 auto;
+        }
       }
     }
     .like-column {

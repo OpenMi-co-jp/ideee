@@ -7,7 +7,7 @@
       <div class='idea-column border-line col s11'>
         <%= link_to idea_path(idea.id) do %>
           <div class='idea-picture-column-small'>
-            <div class='idea-img'>
+            <div class='idea-img-boader gray-2'>
               <%= image_set(idea) %>
             </div>
           </div>
@@ -17,9 +17,9 @@
             <b class='idea-name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea-info'>
-            <div class='idea-status gray-2'>
+            <div class='idea-status gray-3'>
               <%= "投稿日: #{idea.created_time}" %>
-              <i class="material-icons">remove_red_eye</i><%= idea.view %>
+              <i class="material-icons">remove_red_eye</i><p class='gray-5'><%= idea.view %></p>
             </div>
             <div class='flex-end'>
               <%= link_to user_path(idea.user.id) do %>

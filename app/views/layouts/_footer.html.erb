@@ -8,7 +8,8 @@
             <li><%= link_to 'アイデアマン', users_path, class: "white-text" %></li>
             <li><%= link_to 'エンジニア', users_path, class: "white-text" %></li>
             <li><a class="white-text" href="#!">ランキング</a></li>
-            <li><a class="white-text" href="#!">ディスカッション</a></li>
+            <%# ディスカッションを追加 %>
+            <%# <li><a class="white-text" href="#!">ディスカッション</a></li> %>
           </ul>
         </li>
       </ul>
@@ -18,9 +19,11 @@
             <li><%= link_to 'アイディーについて', "https://naruhero.netlify.app/blog/3", class: "white-text" %></li>
             <li><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
             <li><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>
-            <li><a class="white-text" href="#!">よくあるご質問</a></li>
+            <%# よくあるご質問を追加 %>
+            <%# <li><a class="white-text" href="#!">よくあるご質問</a></li> %>
             <li><%= link_to '運営者', "https://naruhiro-portfolio.firebaseapp.com/", class: "white-text", target: :_blank %></li>
-            <li><a class="white-text" href="#!">募金について</a></li>
+            <%# TODO:募金の説明を追加 %>
+            <%# <li><a class="white-text" href="#!">募金について</a></li> %>
           </ul>
         </li>
         <li>
@@ -31,7 +34,8 @@
                 <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
               <% end %>
             </li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
+            <%# Shareリンクを追加　FBなのか？ %>
+            <%# <li><a class="white-text" href="#!">Link 2</a></li> %>
           </ul>
         </li>
       </ul>

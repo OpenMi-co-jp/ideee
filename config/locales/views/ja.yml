@@ -48,3 +48,7 @@ ja:
       fail: アイデアの更新に失敗しました
     destroy:
       success: アイデアを削除しました
+  common:
+    service_fund:
+      use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます
+

@@ -1,15 +1,15 @@
 <div class='fund-board yellow-soft-back'>
   <div class='fund-column'>
     <div class='fund-link'>
-      <p class='gray-3'>Comming Soon ......</p>
       <%= link_to(
-        "#{object.name}を応援する",
+        'ideeeを応援する',
         '#modal_fund',
         data: { turbolinks: false },
-        class: 'waves-effect waves-light orange-action-back btn-large modal-trigger disabled',
-        id: 'modal-trigger-fund',
+        class: 'waves-effect waves-light orange-action-back btn-large modal-trigger',
+        id: 'modal-trigger-fund'
       )%>
-      <p class='gray-4'>投げ銭機能を追加予定</p>
+      <p><%= t '.use_for' %></p>
+      <p>詳しくは<%= link_to 'こちら', "https://naruhero.site/blog/3", target: '_blank' %></p>
     </div>
   </div>
   <div id="modal_fund" class="modal">

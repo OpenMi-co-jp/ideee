@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_21_022835) do
+ActiveRecord::Schema.define(version: 2021_09_22_104043) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -57,12 +57,11 @@ ActiveRecord::Schema.define(version: 2021_09_21_022835) do
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "description"
-    t.string "type"
     t.bigint "user_id", null: false
-    t.bigint "like_id", null: false
+    t.bigint "idea_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["like_id"], name: "index_comments_on_like_id"
+    t.index ["idea_id"], name: "index_comments_on_idea_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -107,12 +106,14 @@ ActiveRecord::Schema.define(version: 2021_09_21_022835) do
     t.string "twitter_id"
     t.string "provider"
     t.string "uid"
+    t.string "remote_url"
+    t.string "site_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "likes"
+  add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
 end

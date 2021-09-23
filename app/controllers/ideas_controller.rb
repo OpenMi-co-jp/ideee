@@ -37,8 +37,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params.merge(user_id: current_user.id))
     if @idea.save
-      flash[:notice] = t('.success')
-      redirect_to @idea
+      redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')
       render :new
@@ -48,8 +47,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1 or /ideas/1.json
   def update
     if @idea.update(idea_params.merge(user_id: current_user.id))
-      flash[:notice] = t('.success')
-      redirect_to @idea
+      redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')
       render :edit
@@ -59,8 +57,7 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1 or /ideas/1.json
   def destroy
     @idea.destroy
-    flash[:notice] = t('.success')
-    redirect_to ideas_url
+    redirect_to ideas_url, notice: t('.success')
   end
 
   private

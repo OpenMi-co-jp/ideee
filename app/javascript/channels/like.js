@@ -4,7 +4,8 @@ $(document).on ('turbolinks:load', function(){
     const element = $(this)
     like_num = Number(element.find($('.likes-count')).html())
     if(element.hasClass('clicked')){
-      unlike(element).done(function() {
+      unlike(element)
+      .done(function() {
         element.toggleClass('clicked')
         element.find($('.likes-count')).html(like_num - 1)
       })

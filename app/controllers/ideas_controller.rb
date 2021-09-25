@@ -23,6 +23,7 @@ class IdeasController < ApplicationController
     else
       @time_on_page = '-'
     end
+    gon.idea_id = @idea.id
   end
 
   # GET /ideas/new

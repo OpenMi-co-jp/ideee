@@ -83,6 +83,14 @@ class User < ApplicationRecord
     like_ideas.delete(idea)
   end
 
+  def create_comment(param)
+    comments.create(idea_id: param[:idea_id], description: param[:description])
+  end
+
+  # def delete_comment(idea)
+  #   comment_ideas.delete(idea)
+  # end
+
   def point_update
     idea_num = ideas.length
     idea_like_num = ideas.sum{|n| n.likes.length }

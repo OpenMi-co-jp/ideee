@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   def create
-    @comment = current_user.comments.build(description: params[:description])
-    @comment.save
+    current_user.create_comment(comment_params)
   end
 
   def edit; end
@@ -14,6 +13,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:description)
+    params.permit(:description, :idea_id)
   end
 end

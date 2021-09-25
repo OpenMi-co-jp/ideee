@@ -5,9 +5,9 @@
         <li><%= image_tag 'footer-logo.png', class: "footer-logo"%></li>
         <li>
           <ul>
-            <li><%= link_to 'アイデアマン', users_path, class: "white-text" %></li>
-            <li><%= link_to 'エンジニア', users_path, class: "white-text" %></li>
-            <li><a class="white-text" href="#!">ランキング</a></li>
+            <li><%= link_to 'アイデアマン', search_users_path(key: 'idea_man'), class: "white-text" %></li>
+            <li><%= link_to 'エンジニア', search_users_path(key: 'engineer'), class: "white-text" %></li>
+            <li><%= link_to 'ユーザーランキング', users_path, class: "white-text" %></li>
             <%# ディスカッションを追加 %>
             <%# <li><a class="white-text" href="#!">ディスカッション</a></li> %>
           </ul>

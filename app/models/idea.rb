@@ -23,4 +23,8 @@ class Idea < ApplicationRecord
     idea_view = Analytics.new.report_count('pageviews', id)
     update(view: idea_view)
   end
+
+  def self.search(keyword)
+    where(["name like?", "%#{keyword}%"])
+  end
 end

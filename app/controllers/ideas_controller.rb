@@ -61,6 +61,10 @@ class IdeasController < ApplicationController
     redirect_to ideas_url, notice: t('.success')
   end
 
+  def search
+    @searched_ideas = Idea.search(params[:keyword])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_idea

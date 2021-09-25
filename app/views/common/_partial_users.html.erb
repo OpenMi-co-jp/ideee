@@ -1,22 +1,29 @@
-<div class='user-colum-board'>
+<div class='user-colum-board p-1'>
   <% if users %>
-    <% users.each do |user| %>
-      <%= link_to user_path(user.id) do %>
-        <% unless user.undefined? %>
-          <div class='user-column border-line'>
-            <%= user_icon(user, size: 'middle') %>
-            <div class='user-column-body'>
-              <div class='user-name-point'>
-                <h5><%= user.name %></h5>
-                <div class='user-point grid-middle'>
-                  <p>🔥</p>
-                  <%= user.point %>
+    <% users.each_with_index do |user, i| %>
+      <% unless user.undefined? %>
+        <div class='row'>
+          <h4 class='italic col ml-2'>
+            <%= i+1 %>
+          </h4>
+          <%= link_to user_path(user.id) do %>
+            <div class='user-column border-line'>
+              <div class='user-column-inside flex'>
+                <%= user_icon(user, size: 'middle') %>
+                <div class='user-column-body'>
+                  <div class='user-name-point'>
+                    <div class='user-name orange-action'><%= user.name %></div>
+                    <div class='user-point grid-middle'>
+                      <p>🔥</p>
+                      <%= user.point %>
+                    </div>
+                  </div>
+                  <%= user_definiton(user) %>
                 </div>
               </div>
-              <%= user_definiton(user) %>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
   <% end %>

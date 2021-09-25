@@ -31,7 +31,7 @@
       <%# </li> %>
     </li>
     <% if current_user %>
-      <li class='waves-effect waves-orange btn orange-action-back mx-2 nav-link'>
+      <li class='waves-effect btn orange-action-back mx-2 nav-link'>
         <%= link_to 'アイデア投稿', new_idea_path %>
       </li>
       <li>
@@ -61,7 +61,7 @@
       <li class='waves-effect waves-orange btn white mx-2 nav-item'>
         <%= link_to 'ログイン', new_user_session_path, class: 'orange-action' %>
       </li>
-      <li class='waves-effect waves-orange btn orange-action-back mx-2 nav-item'>
+      <li class='waves-effect btn orange-action-back mx-2 nav-item'>
         <%= link_to '登録する', new_user_registration_path %>
       </li>
     <% end %>

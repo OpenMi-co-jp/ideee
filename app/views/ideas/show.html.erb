@@ -74,7 +74,10 @@
     <%= link_to '編集', edit_idea_path(@idea) %>
     <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？'} %>
   <% end %>
-  <%= render 'comments/comments', comments: @comments %>
-  <%= render 'comments/form', idea: @idea, comment: @comment %>
+
+  <hr class='gray-3'>
+
+  <%= render 'comments/board', object: @idea %>
+  <%= render 'comments/form' %>
   <%= render 'common/fund_link', object: @idea %>
 </div>

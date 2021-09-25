@@ -1,0 +1,11 @@
+<div class="comment-board yellow-soft-back ph-1">
+  <h4 class='mw-2'>コメント</h4>
+  <% if object.comments.length > 0 %>
+    <% object.comments.each do |comment| %>
+      <%= render 'comments/unit_comment', owned: current_user.own?(comment), comment: comment %>
+    <% end %>
+  <% else %>
+    <h6 class='gray-3 mw-2 pt-2'>気になることや、おうえんのコメントをしよう！</h6>
+  <% end %>
+  <div id='js-comments'></div>
+</div>

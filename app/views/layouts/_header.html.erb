@@ -5,26 +5,36 @@
         <%= image_tag 'ideee-tech-logo.png', class: "footer-logo"%>
       <% end %>
     </li>
-    <% if current_user %>
-      <li class='text-monospace m-3'>
-        <%# <%= "#{current_user.name}さん"%>
-      </li>
-    <% end %>
-    <li class='serch_column'>
-      <%= form_tag(ideas_path,:method => 'get') do %>
-        <%= text_field_tag :search, '', class: 'search_box', size:'30', placeholder: 'キーワードを入力してください' %>
+    <li class='serch_column flex'>
+      <p class='grid-middle gray-3'>
+        <i class="material-icons">search</i>
+      </p>
+      <%= form_tag(search_ideas_path,:method => 'get') do %>
+        <%= text_field_tag :keyword, '', class: 'search_box', size:'25', placeholder: 'アイデアを検索' %>
       <% end %>
     </li>
     <li class=''>
-      <li class=''>
-        <%= link_to 'アイデアマン', users_path %>
-      </li>
-      <li class=''>
-        <%= link_to 'エンジニア', users_path %>
-      </li>
-      <li class=''>
-        <%= link_to 'ランキング', root_path %>
-      </li>
+      <%= link_to '#', data: { target: "dropdown_rank" }, class:'dropdown-trigger white' do %>
+        <p><%= image_tag 'icons/rank.svg'%></p>
+      <% end %>
+      <ul id='dropdown_rank' class='dropdown-content'>
+        <li>
+          <%= link_to users_path do %>
+            ユーザーランキング
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to search_users_path(key: 'idea_man') do %>
+            <i class="material-icons">lightbulb_outline</i>アイデアマン
+          <% end %>
+        </li>
+        <li>
+          <%= link_to search_users_path(key: 'engineer') do %>
+            <i class="material-icons">computer</i>エンジニア
+          <% end %>
+        </li>
+      </ul>
       <%# TODO: ディスカッション機能の追加 %>
       <%# <li class=''>
         <%= link_to 'ディスカッション', root_path %>

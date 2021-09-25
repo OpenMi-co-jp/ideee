@@ -27,14 +27,15 @@
       <div class="col s8">
         <%= render 'ideas/index/social_good' %>
       </div>
-      <div class="col s4 gray-1-back">
-        <div class='main-board'>
-          <div class='flex'>
-            <p class='icon-mark'>🔥</p>
-            <h3 class='social-good-title'>注目ユーザー</h3>
-          </div>
-          <%= render 'common/partial_users', users: @featured_users %>
+      <div class="user-board col s4 gray-1-back">
+        <div class='flex m-1'>
+          <p class='icon-mark grid-middle'>🔥</p>
+          <b class='board-title'>注目ユーザー</b>
+          <%= link_to users_path, class: 'more-info mt-3 flex gray-5' do %>
+            <i class="material-icons">chevron_right</i>もっと見る
+          <% end %>
         </div>
+        <%= render 'common/partial_users', users: @featured_users %>
       </div>
     </div>
     <div class="row">

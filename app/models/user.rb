@@ -58,6 +58,10 @@ class User < ApplicationRecord
         'Google'
       end
     end
+
+    def search(key)
+      where(definition: key).or(where(definition: :idea_engineer))
+    end
   end
 
   def email_required?

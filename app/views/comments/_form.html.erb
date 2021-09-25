@@ -1,10 +1,22 @@
 <div class="comment-forms row mh-1">
-  <div class="comment-form">
-    <textarea class='comment-area yellow-soft-back mh-1' id="comment-form" placeholder='コメントする'></textarea>
-  </div>
-  <div class='comment-btn'>
-    <a href="#!" class="submit-btn waves-effect btn orange-action-back mx-2 nav-link" id="comment">
-      <b class='white-text'><%= t('default.submit') %></b>
-    </a>
-  </div>
+  <% if current_user %>
+    <div class="comment-form">
+      <textarea class='comment-area yellow-soft-back mh-1' id="comment-form" placeholder='コメントする'></textarea>
+    </div>
+    <div class='comment-btn'>
+      <%= link_to "#modal_before_login",
+        id: "comment",
+        class: "modal-trigger-login submit-btn waves-effect btn orange-action-back mx-2 nav-link" do %>
+        <b class='white-text'><%= t('default.submit') %></b>
+      <% end %>
+    </div>
+  <% else %>
+    <div class='comment-btn'>
+      <%= link_to "#!",
+        data: { turbolinks: false },
+        class: "modal-trigger-login submit-btn waves-effect btn orange-action-back mx-2 nav-link" do %>
+        <b class='white-text'><%= t('default.comment') %></b>
+      <% end %>
+    </div>
+  <% end %>
 </div>

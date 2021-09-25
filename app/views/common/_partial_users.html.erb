@@ -9,16 +9,18 @@
           <%= link_to user_path(user.id) do %>
             <div class='user-column border-line'>
               <div class='user-column-inside flex'>
-                <%= user_icon(user, size: 'middle') %>
+                <%= user_icon(user) %>
                 <div class='user-column-body'>
                   <div class='user-name-point'>
-                    <div class='user-name orange-action'><%= user.name %></div>
+                    <div>
+                      <div class='user-name orange-action'><%= user.name %></div>
+                      <%= user_definiton(user) %>
+                    </div>
                     <div class='user-point grid-middle'>
                       <p>🔥</p>
                       <%= user.point %>
                     </div>
                   </div>
-                  <%= user_definiton(user) %>
                 </div>
               </div>
             </div>

@@ -1,6 +1,10 @@
 .comment-board {
   min-height: 120px;
 
+  .dropdown-trigger {
+    position: relative;
+  }
+
   .comment-column {
     border: solid 1px #E3E4E8;
     border-radius: 0.5rem;
@@ -30,6 +34,17 @@
           min-height: 40px;
         }
       }
+    }
+  }
+
+  .parent {
+    position: relative;
+
+    .comment-option {
+      position: absolute;
+      top: -30px; right: -80px;
+      margin-left: auto;
+      width: 150px;
     }
   }
 }

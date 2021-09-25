@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_ideas, through: :likes, source: :idea
   has_many :comments, dependent: :destroy
+  has_many :comment_ideas, through: :comments, source: :idea
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -87,9 +88,9 @@ class User < ApplicationRecord
     comments.create(idea_id: param[:idea_id], description: param[:description])
   end
 
-  # def delete_comment(idea)
-  #   comment_ideas.delete(idea)
-  # end
+  def delete_comment(id)
+    comment_ideas.delete(id)
+  end
 
   def point_update
     idea_num = ideas.length

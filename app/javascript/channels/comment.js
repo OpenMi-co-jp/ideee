@@ -18,6 +18,11 @@ $(document).on ('turbolinks:load', function(){
     }
   });
 
+  $('#comment-delete').on('click', function() {
+    const element = $(this)
+    element.parents('.parent').remove()
+  });
+
   function create_comment(comment){
     return $.ajax({
       url: '/comments',

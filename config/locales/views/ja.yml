@@ -8,6 +8,7 @@ ja:
     search: 検索
     edit: 編集
     submit: 送信
+    comment: コメント
     delete: 削除
     message:
       unauthorized: 権限がないのでリダイレクトされました

@@ -53,6 +53,8 @@ gem 'high_voltage'
 
 gem 'enum_help'
 
+gem 'gon'
+
 # uncomment out when you need
 # gem 'stripe'
 

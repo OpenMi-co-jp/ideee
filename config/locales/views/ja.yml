@@ -9,6 +9,8 @@ ja:
     edit: 編集
     submit: 送信
     delete: 削除
+    message:
+      unauthorized: 権限がないのでリダイレクトされました
   devise:
     confirmations:
       new:
@@ -38,6 +40,14 @@ ja:
       default_set:  "<strong>困っていること</strong><br><br><br>
                       <strong>どうなって欲しいか</strong><br><br><br>
                       <strong>補足</strong><br><br>"
+    create:
+      success: アイデアの登録が完了しました
+      fail: アイデアの登録に失敗しました
+    update:
+      success: アイデアを更新しました
+      fail: アイデアの更新に失敗しました
+    destroy:
+      success: アイデアを削除しました
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます

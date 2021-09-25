@@ -87,14 +87,42 @@ div, p, b {
   margin: 0.5rem;
 }
 
+hr {
+  border: solid 3px #F5F5F5;
+  margin: 2rem 0;
+}
+
+.date-small {
+  font-size: x-small;
+}
 
 // bootstrap的によく使うセットはここに書く
+.m-1 {
+  margin: 1rem;
+}
+
 .mh-1 {
   margin: 1rem 0;
 }
 
+.mw-1 {
+  margin: 0 1rem;
+}
+
+.mw-2 {
+  margin: 0 2rem;
+}
+
+.ph-1 {
+  padding: 1rem 0;
+}
+
 .pw-1 {
   padding: 0 1rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 // color css set
@@ -188,4 +216,8 @@ div, p, b {
   a {
     color: white;
   }
+}
+
+.white-text {
+  color: white;
 }

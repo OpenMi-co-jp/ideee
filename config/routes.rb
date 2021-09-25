@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'ideas#index'
   resources :ideas
+  resources :comments, only: %i[create edit destroy]
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks',

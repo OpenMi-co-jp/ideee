@@ -7,7 +7,7 @@
 
 <div class='idea-show'>
   <div class='row'>
-    <div class='idea-column-img col s3'>
+    <div class='idea-column-img col l3 s12'>
       <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
       <div class="flex">
@@ -23,23 +23,25 @@
         </div>
       </div>
     </div>
-    <div class='idea-status-column col s9'>
+    <div class='idea-status-column col l9 s12'>
       <div class='idea-name orange-action'>
         <%= @idea.name %>
       </div>
 
       <div class='row gray-4'>
-        <div class='col s6'>
-          <div class='flex'>
-            <%= link_to user_path(@idea.user.id) do %>
-              <% user_icon(@idea.user, size: 'small') %>
-            <% end %>
-            <p class='grid-middle'>
-              <%= @idea.user.name %>
-            </p>
-            <p class='grid-middle'>
+        <div class='col l6 s12'>
+          <div class='row'>
+            <p class='col l6 s12 grid-middle'>
               <%= user_definiton(@idea.user) %>
             </p>
+            <div class='col l6 s12 flex'>
+              <%= link_to user_path(@idea.user.id) do %>
+                <% user_icon(@idea.user, size: 'small') %>
+              <% end %>
+              <p class='grid-middle'>
+                <%= @idea.user.name %>
+              </p>
+            </div>
           </div>
 
           <div class='flex mh-3'>
@@ -55,7 +57,7 @@
             <% end %>
           </div>
         </div>
-        <div class='flex-end'>
+        <div class='s12 l2 flex-end'>
           <%= render "common/like", object: @idea %>
         </div>
       </div>

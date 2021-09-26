@@ -95,9 +95,9 @@
   }
 
   .idea-column {
-    display: flex;
     margin: 0.5rem 0;
     height: 100%;
+    width: 100%;
 
     .idea-column-body {
       padding: 0 0.5rem 0.5rem 0.5rem;
@@ -123,8 +123,8 @@
       }
     }
 
-    .idea-picture-column-small {
-      width: 180px;
+    .idea-column-image {
+      width: 100%;
       position: relative;
       border-radius: 3%;
       background-color: white;

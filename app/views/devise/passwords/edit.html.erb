@@ -1,5 +1,5 @@
 <div class="sign-form">
-  <h2>Change your password</h2>
+  <h2>パスワードを変える</h2>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -18,7 +18,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password' %>
     </div>
 
-    <div class="actions">
+    <div class="waves-effect btn orange-action-back mh-1">
       <%= f.submit "Change my password" %>
     </div>
   <% end %>

@@ -15,3 +15,6 @@ ja:
     formats:
       default: "%Y.%m.%d"
       long: "%Y.%m.%d %H:%M"
+  errors:
+    messages:
+      extension_whitelist_error: 画像は pngかjpeg形式でアップロードしてください

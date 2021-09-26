@@ -14,6 +14,8 @@ class User < ApplicationRecord
   }
   mount_uploader :icon, ImageUploader
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: true
+  validates :description, length: { maximum: 200 }
 
   class << self
     def from_omniauth(auth)

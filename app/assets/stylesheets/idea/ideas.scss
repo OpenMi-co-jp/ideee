@@ -36,7 +36,7 @@
 
     .main-board {
       position: absolute;
-      top: 2rem;
+      top: -1rem;
       width: 100%;
       margin: 2rem;
 
@@ -56,16 +56,13 @@
         margin: 0 0 10px 20px;
       }
 
-      .latest-idea-colum {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 2rem;
-        a {
-          color: #6B6B6B;
-        }
+      .carousel {
+        height: 30rem !important;
+        top: -5rem;
 
-        .idea-column-board {
-          max-width: 400px;
+        .carousel-item {
+          max-width: 24rem!important;
+          width: 24rem !important;
 
           .idea-column-img {
             position: relative;
@@ -73,10 +70,9 @@
 
             img {
               object-fit: contain;
-              height: 200px;
-              width: 400px;
-              margin: 0 auto;
-              border-radius: 10px;
+              height: 12rem;
+              width: 24rem;
+              border-radius: 0.5rem;
             }
 
             .time-label {
@@ -94,11 +90,14 @@
 }
 
 .idea-colum-board {
+  .row {
+    margin-bottom: 0.5rem !important;
+  }
 
   .idea-column {
     display: flex;
     margin: 0.5rem 0;
-    height: 120px;
+    height: 100%;
 
     .idea-column-body {
       padding: 0 0.5rem 0.5rem 0.5rem;
@@ -125,7 +124,7 @@
     }
 
     .idea-picture-column-small {
-      width: 200px;
+      width: 180px;
       position: relative;
       border-radius: 3%;
       background-color: white;
@@ -136,7 +135,7 @@
 
         img {
           object-fit: contain;
-          max-height: 100px;
+          max-height: 90px;
           margin: 0 auto;
         }
       }

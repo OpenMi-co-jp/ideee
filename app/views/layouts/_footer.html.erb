@@ -1,34 +1,34 @@
 <footer>
-  <div class="container">
-    <div class="footer-body">
-      <ul class="footer-top">
-        <li><%= image_tag 'footer-logo.png', class: "footer-logo"%></li>
-        <li>
-          <ul>
-            <li><%= link_to 'アイデアマン', search_users_path(key: 'idea_man'), class: "white-text" %></li>
-            <li><%= link_to 'エンジニア', search_users_path(key: 'engineer'), class: "white-text" %></li>
-            <li><%= link_to 'ユーザーランキング', users_path, class: "white-text" %></li>
+  <div class="container orange-action-back">
+    <div class="footer-body mt-3 p-3">
+      <ul class="footer-top row">
+        <li class='col l6 s12'><%= image_tag 'footer-logo.png', class: "footer-logo ml-3"%></li>
+        <li class='col l6 s12'>
+          <ul class='row footer-list left'>
+            <li class='col l2 m6 s12 offset-l5'><%= link_to 'アイデアマン', search_users_path(key: 'idea_man'), class: "white-text" %></li>
+            <li class='col l2 m6 s12'><%= link_to 'エンジニア', search_users_path(key: 'engineer'), class: "white-text" %></li>
+            <li class='col l3 m6 s12'><%= link_to 'ユーザーランキング', users_path, class: "white-text" %></li>
             <%# ディスカッションを追加 %>
             <%# <li><a class="white-text" href="#!">ディスカッション</a></li> %>
           </ul>
         </li>
       </ul>
-      <ul class="footer-bottom">
-        <li>
-          <ul>
-            <li><%= link_to 'アイディーについて', "https://naruhero.netlify.app/blog/3", class: "white-text" %></li>
-            <li><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
-            <li><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>
+      <ul class="mt-2 row">
+        <li class='col l6 s12 mt-3'>
+          <ul class='row footer-list right'>
+            <li class='col l3 s12'><%= link_to 'アイディーについて', "https://naruhero.netlify.app/blog/3", class: "white-text" %></li>
+            <li class='col l2 s12'><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
+            <li class='col l3 s12'><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>
             <%# よくあるご質問を追加 %>
             <%# <li><a class="white-text" href="#!">よくあるご質問</a></li> %>
-            <li><%= link_to '運営者', "https://naruhiro-portfolio.firebaseapp.com/", class: "white-text", target: :_blank %></li>
+            <li class='col l3 s12'><%= link_to '運営者', "https://naruhiro-portfolio.firebaseapp.com/", class: "white-text", target: :_blank %></li>
             <%# TODO:募金の説明を追加 %>
             <%# <li><a class="white-text" href="#!">募金について</a></li> %>
           </ul>
         </li>
-        <li>
-          <ul>
-            <li class="share-box">
+        <li class='col l6 s12'>
+          <ul class='flex right'>
+            <li class="share-box mr-4">
               <%= link_to twitter_share('アイデアとエンジニアのマッチングサイトideee', root=true), target: '_blank' do %>
                 <%= image_tag "twitter_icon.png", class: "twitter-share" %>
                 <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
@@ -41,7 +41,7 @@
       </ul>
     </div>
   </div>
-  <div class="copyright">
-    Copyright ideee ©️ <%= Time.current.year %> All Rights Reverved.
+  <div class="copyright gray-5">
+    ©️ <%= Time.current.year %> ﾌﾟﾛﾀﾞｸﾄｴﾝｼﾞﾆｱ
   </div>
 </footer>

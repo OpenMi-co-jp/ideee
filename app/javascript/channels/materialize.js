@@ -5,6 +5,14 @@ $(document).on ('turbolinks:load', function(){
   $('.modal').modal({startingTop: '30%', endingTop: '200px'});
   $('.dropdown-trigger').dropdown({constrainWidth: false});
   $('.icon-circle.large').materialbox();
+  $('.carousel').carousel({
+    duration: 100,
+    numVisible: 5,
+    indicators: true,
+    dist: -50,
+    shift: 10,
+    padding: 20
+  });
 
   $('#modal-trigger-intro').on('click', function() {
     $('#modal_intro').modal('open');

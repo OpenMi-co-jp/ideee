@@ -7,7 +7,7 @@ body {
 main {
   flex: 1 0 auto;
   position: relative;
-  width: 80%;
+  width: 80vw;
   margin: 0 auto;
 }
 
@@ -312,4 +312,16 @@ hr {
 
 .white-text {
   color: white;
+}
+
+@media (max-width:992px) {
+  main {
+    width: 90vw !important;
+  }
+}
+
+@media (max-width:600px) {
+  main {
+    width: 95vw !important;
+  }
 }

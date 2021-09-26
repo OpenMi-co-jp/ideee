@@ -6,13 +6,13 @@
       </h4>
       <div class='idea-column border-line col s11'>
         <%= link_to idea_path(idea.id) do %>
-          <div class='idea-picture-column-small'>
+          <div class='idea-picture-column-small mb-2'>
             <div class='idea-img-boader gray-2'>
               <%= image_set(idea) %>
             </div>
           </div>
         <% end %>
-        <div class='idea-column-body'>
+        <div class='idea-column-body mb-2'>
           <%= link_to idea_path(idea.id) do %>
             <b class='idea-name orange-action'><%= idea.name %></b>
           <% end %>

@@ -62,20 +62,19 @@
         </div>
       </div>
 
-      <div class='idea-content'>
+      <div class='idea-content mb-2'>
         <% if current_user %>
           <%= @idea.note %>
         <% else %>
           <%= strip_tags(@idea.note.to_s).gsub(/[\n]/,"").strip.truncate(120) %>
         <% end %>
       </div>
+      <% if current_user&.own?(@idea) %>
+        <%= link_to '編集', edit_idea_path(@idea), class:'mw-1' %>
+        <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？'}, class:'mw-1' %>
+      <% end %>
     </div>
   </div>
-
-  <% if current_user&.own?(@idea) %>
-    <%= link_to '編集', edit_idea_path(@idea) %>
-    <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？'} %>
-  <% end %>
 
   <hr class='gray-3'>
 

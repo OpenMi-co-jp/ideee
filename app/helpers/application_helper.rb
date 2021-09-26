@@ -56,7 +56,7 @@ module ApplicationHelper
     title_len = title.length
     size =  if title_len < 10
               100
-            elsif 10 <= title_len && title_len <= 27
+            elsif 10 <= title_len && title_len <= 24
               60
             else
               40

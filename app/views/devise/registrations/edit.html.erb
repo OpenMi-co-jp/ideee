@@ -55,10 +55,10 @@
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-      </div>
 
-      <div class="actions">
-        <%= f.submit t '.submit', class: 'mh-3' %>
+        <div class="waves-effect btn orange-action-back mh-3">
+          <%= f.submit t '.submit', class: 'mh-3' %>
+        </div>
       </div>
     </div>
 

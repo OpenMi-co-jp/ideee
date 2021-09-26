@@ -1,32 +1,41 @@
-<div class="sign-form">
-  <h2><%= t '.title' %></h2>
+<div class="sign-form row">
+  <div class="col s12 l6">
+    <h2 class='orange-action'><%= t '.message' %></h2>
+    <p>開発して欲しいアイデアを投稿するプラットフォーム</p>
+    <p>アイデアに対して反応が見れる！</p>
+    <p>作りたいアイデアに出会える！</p>
+    <p>投げ銭で応援もできる！</p>
+  </div>
+  <div class="col s12 l6">
+    <h2><%= t '.title' %></h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'ideee@example.com' %>
-    </div>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'ideee@example.com' %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> 文字以上のパスワードを使用してください)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: 'password' %>
-    </div>
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> 文字以上のパスワードを使用してください)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: 'password' %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password' %>
-    </div>
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password' %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit t '.submit' %>
-    </div>
-    <%= render 'devise/shared/agreed_note', submit: t('.submit') %>
-  <% end %>
+      <div class="waves-effect btn orange-action-back mh-1">
+        <%= f.submit t '.submit' %>
+      </div>
+      <%= render 'devise/shared/agreed_note', submit: t('.submit') %>
+    <% end %>
 
-  <%= render "devise/shared/links" %>
+    <%= render "devise/shared/links" %>
+  </div>
 </div>

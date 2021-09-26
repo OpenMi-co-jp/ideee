@@ -8,7 +8,6 @@ $(document).on ('turbolinks:load', function(){
   $('.carousel').carousel({
     duration: 100,
     numVisible: 5,
-    indicators: true,
     dist: -50,
     shift: 10,
     padding: 20

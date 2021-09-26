@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   # GET /ideas or /ideas.json
   def index
     @ideas = Idea.all
-    @latest_ideas = Idea.all.order(created_at: "DESC").first(3)
+    @latest_ideas = Idea.all.order(created_at: "DESC").first(6)
     @liked_ideas = Idea.all.sort_by { |v| -v.like_users&.count }.first(5)
     @most_viewed_ideas = Idea.all.order(view: "DESC").first(5)
     @featured_users = User.all.order(point: "DESC").first(5)
@@ -62,7 +62,7 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @searched_ideas = Idea.search(params[:keyword])
+    @searched_ideas = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }.first(20)
   end
 
   private

@@ -114,6 +114,12 @@ hr {
   font-size: xx-large;
 }
 
+.required:after {
+  font-size: large;
+  content: " *";
+  color: red;
+}
+
 // bootstrap的によく使うセットはここに書く
 .m-1 {
   margin: 1rem;
@@ -124,7 +130,7 @@ hr {
 }
 
 .mh-1 {
-  margin: 1rem 0;
+  margin: 0.25rem 0;
 }
 
 .mw-1 {
@@ -133,6 +139,14 @@ hr {
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mh-2 {
+  margin: 0.5rem 0;
+}
+
+.mh-3 {
+  margin: 1rem 0;
 }
 
 .mt-3 {

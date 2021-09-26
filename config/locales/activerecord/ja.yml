@@ -16,6 +16,7 @@ ja:
         password: パスワード
         password_confirmation: パスワード確認
         description: 説明
+        definition: タイプ
         point: コントリビュート数
         icon: プロフィール画像
         twitter_id: TwitterID

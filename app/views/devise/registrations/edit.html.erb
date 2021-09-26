@@ -15,18 +15,18 @@
               <%= user_icon(@user, size: 'large') %>
             <% end %>
           </div>
-          <%= f.file_field :icon, id: "post-img", class: 'mh-1' %>
+          <%= f.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3' %>
         </div>
       </div>
 
       <div class="col s12 l8">
         <div class="field">
-          <%= f.label :name %><br />
+          <%= f.label :name, class: 'required' %><br />
           <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前' %>
         </div>
 
         <div class="field">
-          <%= f.label :email %><br />
+          <%= f.label :email, class: 'required' %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com' %>
         </div>
 
@@ -36,7 +36,7 @@
         </div>
 
         <div class="field">
-          <%= f.label :definition %><br />
+          <%= f.label :definition, class: 'required' %><br />
           <div class="input-field">
             <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' } %>
           </div>
@@ -58,7 +58,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit t '.submit', class: 'mh-1' %>
+        <%= f.submit t '.submit', class: 'mh-3' %>
       </div>
     </div>
 

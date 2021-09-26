@@ -21,13 +21,13 @@
             <%= image_tag(idea.icon.to_s) %>
           <% end %>
         </div>
-        <%= form.file_field :icon, id: "post-img", class: 'mh-1' %>
+        <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3' %>
       </div>
     </div>
     <div class='idea-status-column col s12 l9'>
       <div class="field">
-        <%= form.label :name %>
-        <%= form.text_field :name %>
+        <%= form.label :name, class: 'required' %>
+        <%= form.text_field :name, placeholder: 'アイデア名' %>
       </div>
       <div class="field">
         <%= form.label :note %>
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="actions">
-      <%= form.submit class: 'mh-1' %>
+      <%= form.submit class: 'mh-3' %>
     </div>
   </div>
 <% end %>

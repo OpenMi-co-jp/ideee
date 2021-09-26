@@ -1,18 +1,18 @@
 <div class='idea-colum-board'>
   <% ideas.each_with_index do |idea, i| %>
-    <div class='row'>
-      <h4 class='italic col'>
+    <div class='flex'>
+      <h4 class='italic'>
         <%= i+1 %>
       </h4>
-      <div class='idea-column border-line'>
-        <%= link_to idea_path(idea.id) do %>
-          <div class='idea-picture-column-small mb-2'>
+      <div class='idea-column border-line pl-3 row'>
+        <%= link_to idea_path(idea.id), class:'col l2 s12' do %>
+          <div class='idea-column-image mb-2'>
             <div class='idea-img-boader gray-2'>
               <%= image_set(idea) %>
             </div>
           </div>
         <% end %>
-        <div class='idea-column-body mb-2'>
+        <div class='idea-column-body mb-2 col l9 s12'>
           <%= link_to idea_path(idea.id) do %>
             <b class='idea-name orange-action'><%= idea.name %></b>
           <% end %>
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div class='like-column'>
+        <div class='like-column col l1 s12'>
           <%= render "common/like", object: idea %>
         </div>
       </div>

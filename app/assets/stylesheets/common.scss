@@ -201,8 +201,16 @@ hr {
   padding-left: 0.5rem;
 }
 
+.pl-3 {
+  padding-left: 1rem;
+}
+
 .mt-4 {
   margin-top: 3rem;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
 }
 
 .p-4 {
@@ -262,6 +270,9 @@ hr {
     font-weight: bold;
     &-back {
       background-color: #FF862E!important;
+      input {
+        color: white!important;
+      }
     }
   }
 

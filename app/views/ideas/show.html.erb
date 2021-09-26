@@ -47,9 +47,13 @@
           <div class='flex mh-3'>
             <%= "更新日：#{l @idea.updated_at}" %>
             <div class='flex pw-1 gray-5'>
-              <%= image_tag 'icons/eye.svg', class:'gray-back'%>
+              <%= image_tag 'icons/eye.svg' %>
               <div class='grid-middle'>
                 <%= @idea.view %>
+              </div>
+              <%= image_tag 'icons/comment.svg' %>
+              <div class='grid-middle'>
+                <%= @idea.comments.length %>
               </div>
             </div>
             <% if current_user&.own?(@idea) %>

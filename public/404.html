@@ -4,8 +4,27 @@
   <title>エラー:404</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
-
+<style>
+  .container {
+    width: 100%;
+    height: 100%;
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .image_default {
+    width: 40%;
+    height: 40%;
+  }
+</style>
 <body>
-  <img src="/error404.svg">
+  <div class="container">
+    <img src="/ideee-tech-logo.png">
+    <h2>ページが存在しないようです。。<br>(404エラー)</h2>
+    <img src="/error404.svg" class="image_default" >
+    <a href='https://www.ideee.tech/'>アプリケーションに戻る</a>
+  </div>
 </body>
 </html>

@@ -114,6 +114,12 @@ hr {
   font-size: xx-large;
 }
 
+.required:after {
+  font-size: large;
+  content: " *";
+  color: red;
+}
+
 // bootstrap的によく使うセットはここに書く
 .m-1 {
   margin: 1rem;

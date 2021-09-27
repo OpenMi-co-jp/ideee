@@ -100,7 +100,6 @@
     width: 100%;
 
     .idea-column-body {
-      padding: 0 0.5rem 0.5rem 0.5rem;
       width: 100%;
 
       .idea-name {
@@ -112,13 +111,11 @@
         justify-content: space-between;
 
         .idea-status {
-          display: flex;
-          color: #BFBFBF;
+          width: 100%;
 
-          .material-icons {
-            margin-right: 0.3rem;
-            margin-left: 1rem;
-          }
+        }
+        .user-def {
+          width: 70px;
         }
       }
     }
@@ -139,9 +136,6 @@
           margin: 0 auto;
         }
       }
-    }
-    .like-column {
-      width: 150px;
     }
   }
 }

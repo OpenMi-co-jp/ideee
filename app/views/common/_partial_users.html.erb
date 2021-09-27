@@ -3,7 +3,7 @@
     <% users.each_with_index do |user, i| %>
       <% unless user.undefined? %>
         <div class='row'>
-          <h4 class='italic col ml-2'>
+          <h5 class='italic col ml-2'>
             <%= i+1 %>
           </h4>
           <%= link_to user_path(user.id) do %>

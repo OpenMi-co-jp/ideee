@@ -1,5 +1,7 @@
 .pages{
   padding: 1rem;
+  width:70vw;
+  margin: 0 auto;
 
   h3 {
     margin: 2rem 0 1rem;
@@ -11,7 +13,32 @@
     padding: 0.25rem 0.5rem;
   }
 
+  .questionnaire {
+    width: 60vw;
+    margin: 0 auto;
+  }
+
   p {
     margin: 1rem 0;
+  }
+}
+
+@media (max-width:992px) {
+  .pages {
+    width: 90vw !important;
+  }
+
+  .questionnaire {
+    width: 90vw !important;
+  }
+}
+
+@media (max-width:600px) {
+  .pages {
+    width: 95vw !important;
+  }
+
+  .questionnaire {
+    width: 95vw !important;
   }
 }

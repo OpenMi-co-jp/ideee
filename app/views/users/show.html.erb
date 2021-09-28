@@ -20,8 +20,8 @@
           <% end %>
         </div>
         <div class="share-box grid-middle">
-          <% if @user&.site_url %>
-            <%= link_to @user&.site_url, target: '_blank', rel: 'nofollow noopener noreferrer' do %>
+          <% if @user.site_url.present? %>
+            <%= link_to @user.site_url, target: '_blank', rel: 'nofollow noopener noreferrer' do %>
               <i class="material-icons medium orange-soft">link</i>
             <% end %>
           <% else %>
@@ -38,9 +38,11 @@
           </div>
         </div>
       </div>
-      <div class="user-content">
-        <%= @user&.description %>
-      </div>
+      <% if @user.description.present? %>
+        <div class="user-content">
+          <%= @user.description %>
+        </div>
+      <% end %>
     </div>
   </div>
   <% if own_user_checked(@user) %>
@@ -50,7 +52,7 @@
     <h4>アイデア</h4>
     <%= render 'common/column_board', ideas: @user.ideas %>
   <% else %>
-    <h2>まだアイデアが投稿されていません</h2>
+    <h4>まだアイデアが投稿されていません</h4>
   <% end %>
   <%= render 'common/fund_link', object: @user %>
 </div>

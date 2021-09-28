@@ -1,9 +1,9 @@
 module UsersHelper
   def user_icon(user, size: 'normal')
-    if user.remote_url
-      image_tag(user.remote_url, class: "icon-circle #{size}")
-    elsif user.icon.present?
+    if user.icon.present?
       image_tag(user.icon.to_s, class: "icon-circle #{size}")
+    elsif user.remote_url
+      image_tag(user.remote_url, class: "icon-circle #{size}")
     else
       image_tag('undefined_user_icon.png', class: "icon-circle #{size}")
     end

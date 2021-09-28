@@ -15,7 +15,7 @@ ja:
         icon: アイコン
         password: パスワード
         password_confirmation: パスワード確認
-        description: 説明
+        description: 自己紹介
         definition: タイプ
         point: コントリビュート数
         icon: プロフィール画像

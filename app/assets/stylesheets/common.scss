@@ -123,7 +123,10 @@ hr {
 .icon-size {
   height: 24px;
   width: 24px;
-  margin: 0 0.25rem;
+}
+
+.max-width {
+  width: 100%;
 }
 
 // bootstrap的によく使うセットはここに書く
@@ -155,6 +158,14 @@ hr {
   margin: 1rem 0;
 }
 
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
 .mt-3 {
   margin-top: 1rem;
 }
@@ -169,6 +180,10 @@ hr {
 
 .mw-2 {
   margin: 0 2rem;
+}
+
+.pr-1 {
+  padding-right: 0.25rem;
 }
 
 .ml-2 {
@@ -192,7 +207,19 @@ hr {
 }
 
 .pw-1 {
-  padding: 0 1rem;
+  padding: 0 0.25rem !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.pw-2 {
+  padding: 0 0.5rem !important;
+}
+
+.pw-3 {
+  padding: 0 1rem !important;
 }
 
 .pt-2 {

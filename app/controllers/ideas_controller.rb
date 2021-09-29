@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :authenticate_user!, except: %i[ index show search ]
   before_action :own_user_check, only: %i[ edit update destroy ]
-  before_action :defined_check, except: %i[ index show ]
+  before_action :defined_check, except: %i[ index show search ]
 
   # GET /ideas or /ideas.json
   def index

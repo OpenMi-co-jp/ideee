@@ -55,6 +55,8 @@ gem 'enum_help'
 
 gem 'gon'
 
+gem 'slack-notifier'
+
 # uncomment out when you need
 # gem 'stripe'
 

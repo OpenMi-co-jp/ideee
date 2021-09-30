@@ -10,7 +10,7 @@
       </div>
       <div class='user-urls'>
         <div class="share-box">
-          <% if @user&.twitter_id %>
+          <% if @user&.twitter_id.present? %>
             <%= link_to twitter_url(@user&.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer' do %>
               <%= image_tag "twitter_icon.png", class: "twitter-share" %>
             <% end %>
@@ -40,7 +40,7 @@
       </div>
       <% if @user.description.present? %>
         <div class="user-content">
-          <%= @user.description %>
+          <%= simple_format(@user.description) %>
         </div>
       <% end %>
     </div>

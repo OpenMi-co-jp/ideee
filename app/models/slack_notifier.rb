@@ -9,7 +9,14 @@ class SlackNotifier
   end
 
   def send(object, url)
-    article = "新しいアイデアの投稿がありました。\nタイトル: #{object.name}\nURL: #{url}"
+    return if !Rails.env.production?
+    if url.include? 'users'
+      type = object.provider == nil ? 'メール' : object.provider
+      article = "新しいユーザーが#{type}で登録されました。\nURL: #{url}"
+    else
+      article = "新しいアイデアの投稿がありました。\nタイトル: #{object.name}\nURL: #{url}"
+    end
+
     Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)
   end
 end

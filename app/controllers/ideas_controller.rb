@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params.merge(user_id: current_user.id))
     if @idea.save
-      SlackNotifier.new.send(@idea, request.url) if Rails.env.production?
+      SlackNotifier.new.send(@idea, idea_url(@idea.id))
       redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')

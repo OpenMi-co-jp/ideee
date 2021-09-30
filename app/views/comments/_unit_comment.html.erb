@@ -1,18 +1,16 @@
-<div class="comment-column m-1 <%= 'own-comment' if owned %>">
-  <div class='comment-column-inside'>
-    <div class="flex">
-      <% unless owned %>
-        <div class='comment-img gray-2'>
-          <%= user_icon(User.find(comment.user_id)) %>
-        </div>
-      <% end %>
-      <div class='comment-info'>
-        <div class='comment-description'>
-          <%== comment.description %>
-        </div>
-        <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
-          <%= l comment.created_at, format: :long %>
-        </div>
+<div class='comment-column-inside'>
+  <div class="flex">
+    <% unless owned %>
+      <div class='comment-img gray-2'>
+        <%= user_icon(User.find(comment.user_id)) %>
+      </div>
+    <% end %>
+    <div class='comment-info'>
+      <div class='comment-description'>
+        <%= simple_format(comment.description) %>
+      </div>
+      <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
+        <%= l comment.created_at, format: :long %>
       </div>
     </div>
   </div>

@@ -41,11 +41,11 @@ $(document).on ('turbolinks:load', function(){
     var m = now.getMinutes()
     return $(
             '<div class="comment-column m-1 own-comment">' +
-              '<div class="comment-column-inside m-1">' +
+              '<div class="comment-column-inside m-1 white-text">' +
                 '<div class="flex">' +
                   '<div class="comment-info">' +
                     '<div class="comment-description">' +
-                      comment +
+                      comment.replace(/\n/g, '<br>') +
                     '</div>' +
                     '<div class="date-small pt-2">' +
                       yy+'.'+mm+'.'+dd+' '+h+':'+m +

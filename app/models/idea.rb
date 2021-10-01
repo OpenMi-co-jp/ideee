@@ -21,7 +21,7 @@ class Idea < ApplicationRecord
 
   def views_update(id)
     idea_view = Analytics.new.report_count('pageviews', id)
-    update(view: idea_view)
+    update(view: idea_view.to_i)
   end
 
   def self.search(keyword)

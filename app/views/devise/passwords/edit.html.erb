@@ -18,9 +18,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password' %>
     </div>
 
-    <div class="waves-effect btn orange-action-back mh-1">
-      <%= f.submit "Change my password" %>
-    </div>
+    <%= f.submit "パスワードを変更", class: 'btn orange-action-back mh-1' %>
   <% end %>
 
   <%= render "devise/shared/links" %>

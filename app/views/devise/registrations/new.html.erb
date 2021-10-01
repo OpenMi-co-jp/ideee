@@ -9,6 +9,8 @@
   <div class="col s12 l6">
     <h2><%= t '.title' %></h2>
 
+    <%= render "devise/shared/omniauth_links" %>
+
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -30,9 +32,7 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password' %>
       </div>
 
-      <div class="waves-effect btn orange-action-back mh-1">
-        <%= f.submit t '.submit' %>
-      </div>
+      <%= f.submit t('.submit'), class: 'btn orange-action-back mh-1' %>
       <%= render 'devise/shared/agreed_note', submit: t('.submit') %>
     <% end %>
 

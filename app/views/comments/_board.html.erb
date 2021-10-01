@@ -1,5 +1,5 @@
-<div class="comment-board yellow-soft-back ph-1">
-  <h4 class='mw-2'>コメント</h4>
+<div class="comment-board yellow-soft-back ">
+  <h4 class='mw-4'>コメント</h4>
   <% if object.comments.length > 0 %>
     <% object.comments.each_with_index do |comment, i| %>
       <% if current_user&.own?(comment) %>
@@ -20,7 +20,7 @@
       <% end %>
     <% end %>
   <% else %>
-    <h6 class='mw-2 pt-2'>気になることや、おうえんのコメントをしよう！</h6>
+    <h6 class='mw-4 pt-2'>気になることや、おうえんのコメントをしよう！</h6>
   <% end %>
   <div id='js-comments'></div>
 </div>

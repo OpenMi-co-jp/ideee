@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render 'layouts/google_analytics' %>
-    <%= render 'layouts/tag_manager' %>
+    <% if Rails.env.production? %>
+      <%= render 'layouts/google_analytics' %>
+      <%= render 'layouts/tag_manager' %>
+    <% end %>
     <title>Ideee</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>

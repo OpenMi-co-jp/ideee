@@ -5,13 +5,25 @@ An application for ideas and engineers
 
 ## セットアップの情報
 
+インストール方法記載予定..
+
+### dockerで設定する場合
+
+1. [DockerをPCにインストールする](https://www.docker.com/)
+2. Dockerを起動させる
+3. githubからローカルにクローンされていることを確認
+4. ideeeのディレクトリに移動 // cd xxxx/ideee
+5. コンテナを起動する
+  `docker-compose build`
+6. dockerコンテナ上でDB作成
+  `docker-compose run web bundle exec rake db:create`
+7. migrationを行いDBのカラムのセットアップ
+  `docker-compose run web bundle exec rake db:migrate`
+## versions
+
 - Rails (6.1.4)
 - Ruby 3.0.2p107
 - mysql2 (0.5.3)
-
-インストール方法記載予定..
-
-## versions
 
 * System dependencies
 

@@ -19,6 +19,11 @@ An application for ideas and engineers
   `docker-compose run web bundle exec rake db:create`
 7. migrationを行いDBのカラムのセットアップ
   `docker-compose run web bundle exec rake db:migrate`
+8. docker起動
+  `docker-compose up`
+9. docker CLI で yarn install
+  `yarn install --check-files`
+
 ## versions
 
 - Rails (6.1.4)

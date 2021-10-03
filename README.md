@@ -14,13 +14,11 @@ An application for ideas and engineers
 3. githubからローカルにクローンされていることを確認
 4. ideeeのディレクトリに移動 // cd xxxx/ideee
 5. コンテナを起動する
-  `docker-compose build`
+  `docker-compose up --build`
 6. dockerコンテナ上でDB作成
   `docker-compose run web bundle exec rake db:create`
 7. migrationを行いDBのカラムのセットアップ
   `docker-compose run web bundle exec rake db:migrate`
-8. docker起動
-  `docker-compose up`
 
 ## versions
 

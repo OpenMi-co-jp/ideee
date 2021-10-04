@@ -2,7 +2,7 @@ class SlackNotifier
   attr_reader :client
 
   WEBHOOK_URL = ENV["SLACK_API_URL"]
-  CHANNEL = "#ideee_idea_bot"
+  CHANNEL = "#ideee_app_bot"
 
   def initialize
     @client = Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL)

@@ -53,7 +53,7 @@
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <div>メールの確認待ち: <%= resource.unconfirmed_email %></div>
         <% end %>
 
         <%= f.submit class: 'btn orange-action-back mh-3' %>

@@ -63,7 +63,8 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @searched_ideas = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }.first(20)
+    list = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }
+    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   private

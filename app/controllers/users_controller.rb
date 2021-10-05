@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = Kaminari.paginate_array(User.where(defined: true).order(point: "DESC"))
-                     .page(params[:page]).per(5)
+                     .page(params[:page])
   end
 
   def show
@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   end
 
   def search
-    @searched_users = User.where(defined: true).search(params[:key]).order(point: "DESC").first(30)
+    @searched_users = Kaminari.paginate_array(User.where(defined: true).search(params[:key]).order(point: "DESC"))
+                              .page(params[:page])
   end
 
   private

@@ -1,7 +1,13 @@
-<p>Hello <%= @resource.email %>!</p>
+<p>※このメールは自動送信メールです。</p>
 
-<p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
+<p><%= @resource.name %> さん</p>
+<p>ideee事務局です。</p>
 
-<p>Click the link below to unlock your account:</p>
 
-<p><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) %></p>
+<p>サインインの失敗回数が上限に達し、アカウントがロックされました。</p>
+
+<p>下記のリンクをクリックすると、アカウントのロックが解除されます。</p>
+
+<p><%= link_to 'アカウントロックを解除する', unlock_url(@resource, unlock_token: @token) %></p>
+
+<%= render 'underwriting' %>

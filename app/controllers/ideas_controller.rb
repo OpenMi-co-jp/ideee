@@ -10,7 +10,7 @@ class IdeasController < ApplicationController
     @latest_ideas = Idea.all.order(created_at: "DESC").first(10)
     @liked_ideas = Idea.all.sort_by { |v| -v.like_users&.count }.first(5)
     @most_viewed_ideas = Idea.all.order(view: "DESC").first(5)
-    @featured_users = User.all.order(point: "DESC").first(5)
+    @featured_users = User.where(defined: true).order(point: "DESC").first(5)
   end
 
   # GET /ideas/1 or /ideas/1.json
@@ -63,7 +63,8 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @searched_ideas = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }.first(20)
+    list = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }
+    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   private

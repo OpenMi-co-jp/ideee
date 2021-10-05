@@ -56,6 +56,7 @@ gem 'enum_help'
 gem 'gon'
 
 gem 'slack-notifier'
+gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 
 # uncomment out when you need
 # gem 'stripe'

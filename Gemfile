@@ -52,6 +52,7 @@ gem 'devise-i18n'
 gem 'high_voltage'
 
 gem 'enum_help'
+gem 'seed-fu'
 
 gem 'gon'
 

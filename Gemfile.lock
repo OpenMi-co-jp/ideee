@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: d369a567f96f164cc3664263a3b9673696a3469d
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
+GIT
   remote: https://github.com/kaminari/kaminari
   revision: 73b93405b95615b5ad3f53c3dffe419a59890cad
   specs:
@@ -458,6 +466,7 @@ DEPENDENCIES
   devise-i18n
   dotenv-rails
   enum_help
+  faker!
   fog-aws
   gon
   google-api-client

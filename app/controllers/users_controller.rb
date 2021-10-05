@@ -4,15 +4,17 @@ class UsersController < ApplicationController
   before_action :defined_check, except: %i[ index ], if: :own_user?
 
   def index
-    @users = User.all.order(point: "DESC").first(30)
+    @users = Kaminari.paginate_array(User.where(defined: true).order(point: "DESC"))
+                     .page(params[:page]).per(5)
   end
 
   def show
     @user.point_update
+    @user.check_defined?
   end
 
   def search
-    @searched_users = User.search(params[:key]).order(point: "DESC").first(30)
+    @searched_users = User.where(defined: true).search(params[:key]).order(point: "DESC").first(30)
   end
 
   private

@@ -70,8 +70,10 @@ class User < ApplicationRecord
     provider == 'twitter' && !email.blank? && super
   end
 
-  def undefined?
-    name.blank? || confirmed_at.blank? || definition.blank?
+  def check_defined?
+    bool = name.present? && confirmed_at.present? && definition.present?
+    update(defined: bool)
+    return bool
   end
 
   def own?(object)

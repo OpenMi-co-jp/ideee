@@ -13,6 +13,7 @@ class User < ApplicationRecord
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
+  before_update :twitter_id_check
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
@@ -64,6 +65,10 @@ class User < ApplicationRecord
     def search(key)
       where(definition: key).or(where(definition: :idea_engineer))
     end
+
+    def twitter_id_check(resource)
+      resource.gsub(/https:/, " ")
+    end
   end
 
   def email_required?
@@ -105,5 +110,9 @@ class User < ApplicationRecord
     like_num = likes.length
     sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_num
     update(point: sum_points)
+  end
+
+  def twitter_id_check
+    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "")
   end
 end

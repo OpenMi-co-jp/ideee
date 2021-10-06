@@ -1,0 +1,13 @@
+Comment.seed(
+  :id,
+  { id: 1, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(1) },
+  { id: 2, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(1) },
+  { id: 3, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(2) },
+  { id: 4, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(2) },
+  { id: 5, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(3) },
+  { id: 6, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(3) },
+  { id: 7, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(4) },
+  { id: 8, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(4) },
+  { id: 9, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(5) },
+  { id: 10, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(5) },
+)

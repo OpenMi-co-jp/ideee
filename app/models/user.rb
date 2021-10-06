@@ -65,10 +65,6 @@ class User < ApplicationRecord
     def search(key)
       where(definition: key).or(where(definition: :idea_engineer))
     end
-
-    def twitter_id_check(resource)
-      resource.gsub(/https:/, " ")
-    end
   end
 
   def email_required?

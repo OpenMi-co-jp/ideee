@@ -14,7 +14,7 @@ class User < ApplicationRecord
   }
   mount_uploader :icon, ImageUploader
   before_update :twitter_id_check
-  validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
+  validates :email, presence: true, length: { maximum: 255 }, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
 
@@ -109,6 +109,8 @@ class User < ApplicationRecord
   end
 
   def twitter_id_check
-    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "")
+    if twitter_id.present?
+      self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "")
+    end
   end
 end

@@ -57,6 +57,8 @@ gem 'gon'
 
 gem 'slack-notifier'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
+# メール送信
+gem 'sendgrid-ruby'
 
 # uncomment out when you need
 # gem 'stripe'

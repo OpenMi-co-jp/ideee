@@ -20,12 +20,12 @@ class SendEmail
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
     if users.instance_of?(Array)
       users.map do |user|
-        to = Email.new(email: user.email ) # 送信したいアドレスが複数
+        to = Email.new(email: user&.email ) # 送信したいアドレスが複数
         mail = Mail.new(@from, subject, to, content)
         response = sg.client.mail._('send').post(request_body: mail.to_json)
       end
     else
-      to = Email.new(email: users.email ) # 送信したいアドレスが一つ
+      to = Email.new(email: users&.email ) # 送信したいアドレスが一つ
       mail = Mail.new(@from, subject, to, content)
       response = sg.client.mail._('send').post(request_body: mail.to_json)
     end

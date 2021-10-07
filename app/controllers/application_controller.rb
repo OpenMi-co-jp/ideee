@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def defined_check
-    if current_user&.undefined?
+    unless current_user&.check_defined?
       redirect_to edit_user_registration_path(params[:id])
       flash[:alert] = "ユーザーの名前を登録してください。" if current_user.name.blank?
       flash[:alert] = "ユーザーのメールアドレスを確認が完了していません。" if current_user.confirmed_at.blank?

@@ -19,6 +19,7 @@ An application for ideas and engineers
   `docker-compose run web bundle exec rake db:create`
 7. migrationを行いDBのカラムのセットアップ
   `docker-compose run web bundle exec rake db:migrate`
+
 ## versions
 
 - Rails (6.1.4)

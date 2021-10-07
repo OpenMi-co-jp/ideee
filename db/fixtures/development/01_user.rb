@@ -1,18 +1,19 @@
-30.times do |n|
+40.times do |n|
   num = n + 1
   User.seed(
     :id,
-    { id: num, name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample, confirmed_at: Time.now },
+    { id: num, name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample, confirmed_at: Time.now, defined: true },
   )
 end
 
 # 後々のadmin user実装時用
 User.seed(
   :id,
-  { id: 31, name: 'admin', password: 'password', email: 'admin@admin.com', definition: 0, confirmed_at: Time.now },
+  { id: 41, name: 'admin', password: 'password', email: 'admin@admin.com', definition: 0, confirmed_at: Time.now, defined: true },
 )
 
 # 30.times do |n|
 #   num = n + 1
-#   User.create!(name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample, confirmed_at: Time.now)
+#   user = User.new(name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample, confirmed_at: Time.now, defined: true)
+#   user.save!
 # end

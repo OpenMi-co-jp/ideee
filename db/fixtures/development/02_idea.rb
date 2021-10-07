@@ -8,6 +8,6 @@ carriwave_path = "./app/assets/images/ideee-tech-logo.png"
   )
   Idea.seed(
     :id,
-    { id: num + 15, name: Faker::JapaneseMedia::Doraemon.gadget , note: Faker::Lorem.paragraph(sentence_count: 20), user: User.find(num), view: (0..200).to_a.sample },
+    { id: num + 15, name: Faker::JapaneseMedia::Doraemon.gadget , note: Faker::Lorem.paragraph(sentence_count: 20), user: User.find(num + 15), view: (0..200).to_a.sample },
   )
 end

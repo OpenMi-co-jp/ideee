@@ -13,10 +13,12 @@ class User < ApplicationRecord
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
-  before_update :twitter_id_check
-  validates :email, presence: true, length: { maximum: 255 }, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
+  before_update :twitter_id_fix
+  validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
+  validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/
+
 
   class << self
     def from_omniauth(auth)
@@ -108,9 +110,7 @@ class User < ApplicationRecord
     update(point: sum_points)
   end
 
-  def twitter_id_check
-    if twitter_id.present?
-      self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "")
-    end
+  def twitter_id_fix
+    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "") if twitter_id.present?
   end
 end

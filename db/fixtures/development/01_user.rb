@@ -1,8 +1,13 @@
+30.times do |n|
+  num = n + 1
+  User.seed(
+    :id,
+    { id: num, name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample },
+  )
+end
+
+# 後々のadmin user実装時用
 User.seed(
   :id,
-  { id: 1, name: Faker::Name.name, password: 'password', email: Faker::Internet.email },
-  { id: 2, name: Faker::Name.name, password: 'password', email: Faker::Internet.email },
-  { id: 3, name: Faker::Name.name, password: 'password', email: Faker::Internet.email },
-  { id: 4, name: Faker::Name.name, password: 'password', email: Faker::Internet.email },
-  { id: 5, name: Faker::Name.name, password: 'password', email: Faker::Internet.email },
+  { id: 31, name: 'admin', password: 'password', email: 'admin@admin.com', definition: 0 },
 )

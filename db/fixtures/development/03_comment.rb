@@ -1,23 +1,7 @@
-Comment.seed(
-  :id,
-  { id: 1, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(1) },
-  { id: 2, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(1) },
-  { id: 3, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(2) },
-  { id: 4, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(2) },
-  { id: 5, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(3) },
-  { id: 6, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(3) },
-  { id: 7, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(4) },
-  { id: 8, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(4) },
-  { id: 9, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(5) },
-  { id: 10, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(5) },
-  { id: 11, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(6) },
-  { id: 12, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(6) },
-  { id: 13, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(7) },
-  { id: 14, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(7) },
-  { id: 15, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(8) },
-  { id: 16, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(8) },
-  { id: 17, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(9) },
-  { id: 18, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(9) },
-  { id: 19, description: Faker::Lorem.sentence, user: User.find(1), idea: Idea.find(10) },
-  { id: 20, description: Faker::Lorem.sentence, user: User.find(2), idea: Idea.find(10) },
-)
+100.times do |n|
+  num = n + 1
+  Comment.seed(
+    :id,
+    { id: num, description: Faker::JapaneseMedia::OnePiece.quote, user: User.find((1..User.count).to_a.sample), idea: Idea.find((1..Idea.count).to_a.sample) },
+  )
+end

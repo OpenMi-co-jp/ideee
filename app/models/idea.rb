@@ -4,7 +4,7 @@ class Idea < ApplicationRecord
   has_many :users, through: :likes
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
-  has_many :users, through: :comments
+  has_many :comment_users, through: :comments, source: :user
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 

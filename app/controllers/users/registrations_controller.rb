@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    SlackNotifier.new.send(resource, user_url(resource&.id))
+    SlackNotifier.new.send(resource, user_url(resource&.id)) if Rails.env.production?
   end
 
   # GET /resource/edit

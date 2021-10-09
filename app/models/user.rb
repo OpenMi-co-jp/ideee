@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
-  validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/
+  validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
 
   class << self

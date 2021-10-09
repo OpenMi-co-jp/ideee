@@ -11,6 +11,7 @@ $(document).on ('turbolinks:load', function(){
         $('#js-comments').append(js_comments(comment))
         $('#comment-form').val('')
         $('.submit-btn').removeClass('disabled')
+        send_email(comment)
       })
       .fail(function() {
         alert('コメントに失敗しました')
@@ -26,6 +27,15 @@ $(document).on ('turbolinks:load', function(){
   function create_comment(comment){
     return $.ajax({
       url: '/comments',
+      type: 'POST',
+      data: { description: comment, idea_id: gon.idea_id},
+      dataType: 'json'
+    })
+  }
+
+  function send_email(comment){
+    return $.ajax({
+      url: '/comments/send_email',
       type: 'POST',
       data: { description: comment, idea_id: gon.idea_id},
       dataType: 'json'

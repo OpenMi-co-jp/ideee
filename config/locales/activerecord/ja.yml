@@ -10,7 +10,7 @@ ja:
       idea: アイデア
     attributes:
       user:
-        name: 氏名
+        name: ユーザー名
         email: メールアドレス
         icon: アイコン
         password: パスワード

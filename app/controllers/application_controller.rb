@@ -1,14 +1,12 @@
 class ApplicationController < ActionController::Base
   # before_action :basic_auth
+  before_action :store_user_location, unless: :devise_controller?
 
   # devise settings
   def after_sign_in_path_for(resource)
-    if current_user
+    if current_user.defined
       flash[:notice] = "ログインに成功しました。"
-      user_path(id: current_user.id)
-    else
-      flash[:alert] = "新規登録完了しました。ユーザー情報を登録してください。"
-      new_profile_path
+      stored_location_for(resource)
     end
   end
 
@@ -34,6 +32,11 @@ class ApplicationController < ActionController::Base
   #     session['basic.auth'] = true
   #   end
   # end
+
+  def store_user_location
+    return if current_user
+    store_location_for(:user, request.fullpath)
+  end
 
   def defined_check
     unless current_user&.check_defined?

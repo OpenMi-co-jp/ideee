@@ -56,6 +56,9 @@ gem 'enum_help'
 gem 'gon'
 
 gem 'slack-notifier'
+gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
+# メール送信
+gem 'sendgrid-ruby'
 
 # uncomment out when you need
 # gem 'stripe'
@@ -79,6 +82,8 @@ group :development do
   gem 'spring'
 
   gem 'letter_opener_web'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do

@@ -70,3 +70,6 @@ An application for ideas and engineers
 |comment_id|string|
 |idea_id|string|
 |discussion_id|string|
+
+# ER図
+![](./er_diagram.png)

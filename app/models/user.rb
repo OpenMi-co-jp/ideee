@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :like_ideas, through: :likes, source: :idea
   has_many :comments, dependent: :destroy
   has_many :comment_ideas, through: :comments, source: :idea
+  has_many :difficultys, dependent: :destroy
+  has_many :difficulty_ideas, through: :difficultys, source: :idea
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2

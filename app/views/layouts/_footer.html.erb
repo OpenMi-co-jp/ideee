@@ -2,7 +2,7 @@
   <div class="container orange-action-back">
     <div class="footer-body mt-3 p-3">
       <ul class="footer-top row">
-        <li class='col l3 s12'><%= image_tag 'footer-logo.png', class: "footer-logo ml-3"%></li>
+        <li class='col l3 s12'><%= image_tag 'footer-logo.svg', class: "footer-logo ml-3", alt: "ideee"%></li>
         <li class='col l9 s12'>
           <ul class='row footer-list left'>
             <li class='col l2 m6 s12 offset-l5'><%= link_to 'アイデアマン', search_users_path(key: 'idea_man'), class: "white-text" %></li>
@@ -29,7 +29,7 @@
           <ul class='flex right'>
             <li class="share-box mr-5">
               <%= link_to twitter_share('アイデアとエンジニアのマッチングサイトideee', root=true), target: '_blank' do %>
-                <%= image_tag "twitter_icon.png", class: "twitter-share" %>
+                <%= image_tag "twitter_icon.svg", class: "twitter-share", alt: "Twitter share"%>
                 <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
               <% end %>
             </li>

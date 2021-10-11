@@ -19,6 +19,12 @@
     display: flex;
     justify-content: space-evenly;
   }
+
+  .share-box {
+    .twitter-share {
+      width: 48px;
+    }
+  }
 }
 
 @media (max-width:992px) {

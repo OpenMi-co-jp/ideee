@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: d369a567f96f164cc3664263a3b9673696a3469d
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
+GIT
   remote: https://github.com/kaminari/kaminari
   revision: 73b93405b95615b5ad3f53c3dffe419a59890cad
   specs:
@@ -385,6 +393,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -468,6 +479,7 @@ DEPENDENCIES
   devise-i18n
   dotenv-rails
   enum_help
+  faker!
   fog-aws
   gon
   google-api-client
@@ -488,6 +500,7 @@ DEPENDENCIES
   rails (~> 6.1.4)
   rails-i18n
   sass-rails (>= 6)
+  seed-fu
   selenium-webdriver
   sendgrid-ruby
   sentry-rails

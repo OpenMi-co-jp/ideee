@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def full_title(page_title = '')
     base_title = 'ideee'
     if page_title.empty?

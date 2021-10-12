@@ -19,7 +19,6 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 200 }
   validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
-
   class << self
     def from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|

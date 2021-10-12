@@ -1,7 +1,7 @@
 require 'google/apis/analyticsreporting_v4'
 
-class Analytics < ApplicationRecord
-  def initialize(_)
+class Analytics
+  def initialize()
     @view_id  = '246703226'
     @analytics = Google::Apis::AnalyticsreportingV4
     auth

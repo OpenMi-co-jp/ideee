@@ -6,8 +6,8 @@
       </div>
     <% end %>
     <div class="comment-info <%= 'white-text' if owned %>">
-      <div class='comment-description'>
-        <%== simple_format(text_url_to_link(comment.description)) %>
+      <div class='comment-description link-color'>
+        <%== simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
       </div>
       <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
         <%= l comment.created_at, format: :long %>

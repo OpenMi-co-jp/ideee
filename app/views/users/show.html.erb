@@ -40,7 +40,7 @@
       </div>
       <% if @user.description.present? %>
         <div class="user-content">
-          <%= simple_format(text_url_to_link(h(@user.description))).html_safe %>
+          <%== simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
         </div>
       <% end %>
     </div>

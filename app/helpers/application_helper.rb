@@ -1,14 +1,5 @@
 module ApplicationHelper
 
-  def text_url_to_link(text)
-    require 'uri'
-    URI.extract(text, ['http', 'https']).uniq.each do |url|
-      sub_text = "<a href=#{url} target=\"_blank\">#{url}</a>"
-      text.gsub!(url, sub_text)
-    end
-    return text
-  end
-
   def full_title(page_title = '')
     base_title = 'ideee'
     if page_title.empty?
@@ -83,5 +74,14 @@ module ApplicationHelper
       }
     ]
     cloudinary_url('ideee_ogp.jpg', sign_url: true, type: 'authenticated', transformation: transformation)
+  end
+
+  def text_url_to_link(text)
+    require 'uri'
+    URI.extract(text, ['http', 'https']).each do |url|
+      sub_text = "<a href=#{url} target=\'_blank\'>#{url}</a>"
+      text.gsub!(url, sub_text)
+    end
+    return text
   end
 end

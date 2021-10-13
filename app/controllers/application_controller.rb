@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
 
   # devise settings
   def after_sign_in_path_for(resource_or_scope)
-    stored_location_for(resource_or_scope) || super
+    if resource.defined
+      stored_location_for(resource_or_scope) || super
+    else
+      edit_user_registration_path(resource)
+    end
   end
 
   if Rails.env.production?

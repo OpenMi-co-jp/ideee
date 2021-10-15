@@ -5,6 +5,7 @@ $(document).on ('turbolinks:load', function(){
   $('.modal').modal({startingTop: '30%', endingTop: '200px'});
   $('.dropdown-trigger').dropdown({constrainWidth: false});
   $('.icon-circle.large').materialbox();
+  $('.collapsible').collapsible();
   $('.carousel').carousel({
     duration: 100,
     numVisible: 5,

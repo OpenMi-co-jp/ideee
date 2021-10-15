@@ -24,4 +24,8 @@ $(document).on ('turbolinks:load', function(){
   $('.modal-trigger-login').on('click', function() {
     $('#modal_before_login').modal('open');
   });
+
+  if($('h4').hasClass('no_idea_posted')) {
+    $('#modal_idea_post').modal('open');
+  };
 })

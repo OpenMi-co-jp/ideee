@@ -101,6 +101,11 @@ class User < ApplicationRecord
     end
   end
 
+  # twitterログインでもメールアドレスがあればメールアドレスを必須項目にする
+  def email_required?
+    provider == 'twitter' && !email.blank? && super
+  end
+
   def check_defined?
     bool = name.present? && confirmed_at.present? && definition.present?
     update(defined: bool) # 名前、メール確認日時、タイプの有無を真偽値として保存

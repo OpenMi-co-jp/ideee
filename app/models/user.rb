@@ -51,6 +51,7 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 200 }
 
   class << self
+    # omniauthを使ったSNSログイン機能
     def from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
@@ -68,6 +69,7 @@ class User < ApplicationRecord
         user.confirmed_at = Time.now.utc
       end
     rescue
+      # メールアドレスが既に登録されていたら登録された方法をエラーで表示
       raise "メールアドレス#{auth.info.email}のアカウントは#{ signin_how(auth.info.email) }で登録されています"
     end
 
@@ -77,7 +79,7 @@ class User < ApplicationRecord
           user.email = data['email'] if user.email.blank?
           user.name = data['name'] if user.name.blank?
           user.twitter_id = data['twitter_uid'] if data['twitter_uid'] && user.twitter_uid.blank?
-          # when to set up the confirmable
+          # メールアドレスが渡されたときにメールアドレスの確認をスキップする
           user.skip_confirmation! if data['email'].present?
         end
       end
@@ -99,16 +101,13 @@ class User < ApplicationRecord
     end
   end
 
-  def email_required?
-    provider == 'twitter' && !email.blank? && super
-  end
-
   def check_defined?
     bool = name.present? && confirmed_at.present? && definition.present?
-    update(defined: bool)
+    update(defined: bool) # 名前、メール確認日時、タイプの有無を真偽値として保存
     return bool
   end
 
+  # ユーザーに紐づいたobjectの所有者を判断
   def own?(object)
     id == object.user_id
   end
@@ -133,6 +132,7 @@ class User < ApplicationRecord
     comment_ideas.delete(id)
   end
 
+  # Contributionの計算
   def point_update
     idea_num = ideas.length
     idea_like_num = ideas.sum{|n| n.likes.length }

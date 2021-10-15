@@ -10,16 +10,10 @@ $(document).on ('turbolinks:load', function(){
     }
   }
 
+  // 画像をアップロードしたら現在表示している画像を消す
   $("#post-img").on ('change', function(){
     $('#avatar_img_prev').removeClass('disabled');
     $('.present-img').remove();
-    readURL(this);
-  });
-
-  $("#post-user-img").on ('change', function(){
-    $('#avatar_img_prev').removeClass('disabled');
-    $('.present-img').remove();
-    $(this).prev($('.user')).addClass('mh-3 icon-circle large')
     readURL(this);
   });
 });

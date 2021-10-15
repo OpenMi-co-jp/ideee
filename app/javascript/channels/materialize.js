@@ -1,11 +1,11 @@
 // materialize initialization
 
 $(document).on ('turbolinks:load', function(){
-  $('select').formSelect();
-  $('.modal').modal({startingTop: '30%', endingTop: '200px'});
-  $('.dropdown-trigger').dropdown({constrainWidth: false});
-  $('.icon-circle.large').materialbox();
-  $('.carousel').carousel({
+  $('select').formSelect(); // selectタブをJSで表示
+  $('.modal').modal({startingTop: '30%', endingTop: '200px'}); // モーダルの大きさ調整
+  $('.dropdown-trigger').dropdown({constrainWidth: false}); // ドロップダウンメニューのための設定
+  $('.icon-circle.large').materialbox(); // 画像拡大表示のための設定
+  $('.carousel').carousel({ // カルーセルの表示設定
     duration: 100,
     numVisible: 5,
     dist: -50,
@@ -13,14 +13,17 @@ $(document).on ('turbolinks:load', function(){
     padding: 20
   });
 
+  // ideee説明用のモーダル
   $('#modal-trigger-intro').on('click', function() {
     $('#modal_intro').modal('open');
   });
 
+  // 募金用のモーダル
   $('#modal-trigger-fund').on('click', function() {
     $('#modal_fund').modal('open');
   });
 
+  // ログイン用のモーダル
   $('.modal-trigger-login').on('click', function() {
     $('#modal_before_login').modal('open');
   });

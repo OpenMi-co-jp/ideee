@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  # before_action :basic_auth
   before_action :store_user_location!, if: :storable_location?
 
   # devise settings
@@ -25,14 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-
-  # def basic_auth
-  #   return if session['basic.auth']
-  #   authenticate_or_request_with_http_basic do |username, password|
-  #     username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
-  #     session['basic.auth'] = true
-  #   end
-  # end
 
   def defined_check
     unless current_user&.check_defined?

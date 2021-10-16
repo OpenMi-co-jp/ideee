@@ -82,6 +82,7 @@ class User < ApplicationRecord
 
   def like(idea)
     likes.find_or_create_by(idea: idea)
+    idea.count_likes
   end
 
   def like?(idea)
@@ -90,6 +91,7 @@ class User < ApplicationRecord
 
   def unlike(idea)
     like_ideas.delete(idea)
+    idea.count_likes
   end
 
   def create_comment(param)

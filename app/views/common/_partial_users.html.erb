@@ -1,6 +1,6 @@
 <div class='user-colum-board p-1'>
   <% if users %>
-    <% users.each_with_index do |user, i| %>
+    <% users.each.with_index(@ranking_count) do |user, i| %>
       <div class='row'>
         <h5 class='italic col ml-2'>
           <%= i+1 %>

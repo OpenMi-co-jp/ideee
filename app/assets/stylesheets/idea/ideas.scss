@@ -121,6 +121,9 @@
   &__box {
     width: 100%;
     margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     @media screen and (max-width: 768px) {
       margin-left: 0;
     }

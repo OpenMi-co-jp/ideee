@@ -8,11 +8,15 @@ $(document).on ('turbolinks:load', function(){
   $('.collapsible').collapsible();
   $('.carousel').carousel({
     duration: 100,
-    numVisible: 5,
-    dist: -50,
-    shift: 10,
-    padding: 20
+    padding: 50,
+    fullWidth: true,
+    indicators: true
   });
+
+  var instance = M.Carousel.getInstance($('.carousel'));
+  setInterval(function(){
+    instance.next(1);
+  },3000);
 
   $('#modal-trigger-intro').on('click', function() {
     $('#modal_intro').modal('open');

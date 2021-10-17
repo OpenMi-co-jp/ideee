@@ -12,6 +12,10 @@ $(document).on ('turbolinks:load', function(){
     shift: 10,
     padding: 20
   });
+  $('.sidenav').sidenav({
+    closeOnClick: true,
+    edge: 'right',
+  });
 
   $('#modal-trigger-intro').on('click', function() {
     $('#modal_intro').modal('open');
@@ -26,6 +30,6 @@ $(document).on ('turbolinks:load', function(){
   });
 
   $('.sidenav-trigger').on('click', function () {
-    $('.sidenav').sidenav();
+    $('.sidenav').sidenav('open');
   });
 })

@@ -1,54 +1,8 @@
 <header class='position-sticky'>
   <ul class='header-body'>
-    <div id="mobile-navigation-bar" class="hide-on-large-only">
-      <li id="humburger-menu" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></li>
-      <div id="slide-out" class="sidenav">
-        <li>
-          <%= link_to root_path  do %>
-            <%= image_tag 'ideee-tech-logo.svg', class: "sidebar-logo", alt: "ideee"%>
-          <% end %>
-        </li>
-        <li class="divider" tabindex="-1"></li>
-      <% if current_user %>
-        <li>
-          <%= link_to new_idea_path do %>
-            <i class="material-icons">batch_prediction</i>アイデア投稿
-          <% end %>
-        </li>
-        <li class="divider" tabindex="-1"></li>
-        <li>
-          <%= link_to user_path(id: current_user.id) do %>
-            <i class="material-icons">account_circle</i>マイページ
-          <% end %>
-        </li>
-        <li class="divider" tabindex="-1"></li>
-        <li>
-          <%= link_to edit_user_registration_path(id: current_user.id)  do %>
-            <i class="material-icons">edit</i>ユーザー情報編集
-          <% end %>
-        </li>
-        <li>
-          <%= link_to destroy_user_session_path, method: :delete do %>
-            <i class="material-icons">directions_walk</i>ログアウト
-          <% end %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to new_user_session_path  do %>
-            <i class="material-icons">login</i>ログイン
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_user_registration_path, method: :delete do %>
-            <i class="material-icons">person_add</i>登録する
-          <% end %>
-        </li>
-      <% end %>
-      </div>
-    </div>
-    <li class='text-monospace m-3 hide-on-med-and-down'>
+    <li class='text-monospace header-logo'>
       <%= link_to root_path  do %>
-        <%= image_tag 'ideee-tech-logo.svg', class: "footer-logo", alt: "ideee"%>
+        <%= image_tag 'ideee-tech-logo.svg',  alt: "ideee"%>
       <% end %>
     </li>
     <li class='serch_column flex'>
@@ -59,7 +13,7 @@
         <%= text_field_tag :keyword, '', class: 'search_box', size:'25', placeholder: 'アイデアを検索' %>
       <% end %>
     </li>
-    <li class=''>
+    <li class='hide-on-med-and-down'>
       <%= link_to '#', data: { target: "dropdown_rank" }, class:'dropdown-trigger white' do %>
         <p><%= image_tag 'icons/rank.svg'%></p>
       <% end %>
@@ -121,5 +75,60 @@
         <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back' %>
       </li>
     <% end %>
+    <div id="mobile-navigation-bar" class="hide-on-large-only">
+      <li id="humburger-menu" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></li>
+      <div id="slide-out" class="sidenav">
+        <li>
+          <%= link_to users_path do %>
+            ユーザーランキング
+          <% end %>
+        </li>
+        <li>
+          <%= link_to search_users_path(key: 'idea_man') do %>
+            <i class="material-icons">lightbulb_outline</i>アイデアマン
+          <% end %>
+        </li>
+        <li>
+          <%= link_to search_users_path(key: 'engineer') do %>
+            <i class="material-icons">computer</i>エンジニア
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+      <% if current_user %>
+        <li>
+          <%= link_to new_idea_path do %>
+            <i class="material-icons">batch_prediction</i>アイデア投稿
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to user_path(id: current_user.id) do %>
+            <i class="material-icons">account_circle</i>マイページ
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_user_registration_path(id: current_user.id)  do %>
+            <i class="material-icons">edit</i>ユーザー情報編集
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="material-icons">directions_walk</i>ログアウト
+          <% end %>
+        </li>
+      <% else %>
+        <li class="text-orange">
+          <%= link_to new_user_registration_path, method: :delete, class: "orange-text" do %>
+            <i class="material-icons orange-text">person_add</i><span class="">登録する</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_session_path  do %>
+            <i class="material-icons">login</i>ログイン
+          <% end %>
+        </li>
+      <% end %>
+      </div>
+    </div>
   </ul>
-</header>
+</header>

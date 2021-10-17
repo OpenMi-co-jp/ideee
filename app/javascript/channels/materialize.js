@@ -5,6 +5,7 @@ $(document).on ('turbolinks:load', function(){
   $('.modal').modal({startingTop: '30%', endingTop: '200px'});
   $('.dropdown-trigger').dropdown({constrainWidth: false});
   $('.icon-circle.large').materialbox();
+  $('.collapsible').collapsible();
   $('.carousel').carousel({
     duration: 100,
     numVisible: 5,
@@ -24,4 +25,8 @@ $(document).on ('turbolinks:load', function(){
   $('.modal-trigger-login').on('click', function() {
     $('#modal_before_login').modal('open');
   });
+
+  if($('h4').hasClass('no_idea_posted')) {
+    $('#modal_idea_post').modal('open');
+  };
 })

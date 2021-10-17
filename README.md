@@ -15,11 +15,8 @@ An application for ideas and engineers
 4. ideeeのディレクトリに移動 // cd xxxx/ideee
 5. コンテナを起動する
   `docker-compose up --build`
-6. dockerコンテナ上でDB作成
-  `docker-compose run web bundle exec rake db:create`
-7. migrationを行いDBのカラムのセットアップ
-  `docker-compose run web bundle exec rake db:migrate`
-
+6. dockerコンテナ上でDB作成、DBのカラムのセットアップ、seedデータを入れる
+  `docker-compose run web db:create db:migrate db:seed_fu`
 ## versions
 
 - Rails (6.1.4)

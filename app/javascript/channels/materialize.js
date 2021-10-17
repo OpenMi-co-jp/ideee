@@ -24,4 +24,8 @@ $(document).on ('turbolinks:load', function(){
   $('.modal-trigger-login').on('click', function() {
     $('#modal_before_login').modal('open');
   });
+
+  $('.sidenav-trigger').on('click', function () {
+    $('.sidenav').sidenav();
+  });
 })

@@ -1,6 +1,52 @@
 <header class='position-sticky'>
   <ul class='header-body'>
-    <li class='text-monospace m-3'>
+    <div id="mobile-navigation-bar" class="hide-on-large-only">
+      <li id="humburger-menu" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></li>
+      <div id="slide-out" class="sidenav">
+        <li>
+          <%= link_to root_path  do %>
+            <%= image_tag 'ideee-tech-logo.svg', class: "sidebar-logo", alt: "ideee"%>
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+      <% if current_user %>
+        <li>
+          <%= link_to new_idea_path do %>
+            <i class="material-icons">batch_prediction</i>アイデア投稿
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to user_path(id: current_user.id) do %>
+            <i class="material-icons">account_circle</i>マイページ
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to edit_user_registration_path(id: current_user.id)  do %>
+            <i class="material-icons">edit</i>ユーザー情報編集
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="material-icons">directions_walk</i>ログアウト
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to new_user_session_path  do %>
+            <i class="material-icons">login</i>ログイン
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_registration_path, method: :delete do %>
+            <i class="material-icons">person_add</i>登録する
+          <% end %>
+        </li>
+      <% end %>
+      </div>
+    </div>
+    <li class='text-monospace m-3 hide-on-med-and-down'>
       <%= link_to root_path  do %>
         <%= image_tag 'ideee-tech-logo.svg', class: "footer-logo", alt: "ideee"%>
       <% end %>
@@ -41,10 +87,10 @@
       <%# </li> %>
     </li>
     <% if current_user %>
-      <li class='nav-link'>
+      <li class='nav-link hide-on-med-and-down'>
         <%= link_to 'アイデア投稿', new_idea_path, class: 'waves-effect btn orange-action-back' %>
       </li>
-      <li>
+      <li class='hide-on-med-and-down'>
         <%= link_to '#', data: { target: "dropdown_user" }, class:'dropdown-trigger btn-floating btn-large white' do %>
           <% user_icon(current_user) %>
         <% end %>
@@ -68,10 +114,10 @@
         </li>
       </ul>
     <% else %>
-      <li class='nav-item'>
+      <li class='nav-item hide-on-med-and-down'>
         <%= link_to 'ログイン', new_user_session_path, class: 'waves-effect waves-orange btn white orange-action' %>
       </li>
-      <li class='nav-item'>
+      <li class='nav-item hide-on-med-and-down'>
         <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back' %>
       </li>
     <% end %>

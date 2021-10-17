@@ -1,5 +1,4 @@
 // materialize initialization
-
 $(document).on ('turbolinks:load', function(){
   $('select').formSelect();
   $('.modal').modal({startingTop: '30%', endingTop: '200px'});
@@ -13,6 +12,7 @@ $(document).on ('turbolinks:load', function(){
     indicators: true
   });
 
+  // カルーセルを3秒ごとに移動
   var instance = M.Carousel.getInstance($('.carousel'));
   setInterval(function(){
     instance.next(1);

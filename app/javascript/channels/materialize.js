@@ -16,6 +16,7 @@ $(document).on ('turbolinks:load', function(){
   $('.sidenav').sidenav({
     closeOnClick: true,
     edge: 'right',
+    draggable: true
   });
 
   $('#modal-trigger-intro').on('click', function() {
@@ -33,6 +34,7 @@ $(document).on ('turbolinks:load', function(){
   $('.sidenav-trigger').on('click', function () {
     $('.sidenav').sidenav('open');
   });
+
   if($('h4').hasClass('no_idea_posted')) {
     $('#modal_idea_post').modal('open');
   };

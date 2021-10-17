@@ -96,8 +96,8 @@
         <li class="divider" tabindex="-1"></li>
       <% if current_user %>
         <li>
-          <%= link_to new_idea_path do %>
-            <i class="material-icons">batch_prediction</i>アイデア投稿
+          <%= link_to new_idea_path, class: "orange-action" do %>
+            <i class="material-icons orange-action">batch_prediction</i>アイデア投稿
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>
@@ -117,13 +117,13 @@
           <% end %>
         </li>
       <% else %>
-        <li class="text-orange">
-          <%= link_to new_user_registration_path, method: :delete, class: "orange-text" do %>
-            <i class="material-icons orange-text">person_add</i><span class="">登録する</span>
+        <li class="orange-action">
+          <%= link_to new_user_registration_path, class: "orange-action" do %>
+            <i class="material-icons orange-action">person_add</i><span class="">登録する</span>
           <% end %>
         </li>
         <li>
-          <%= link_to new_user_session_path  do %>
+          <%= link_to new_user_session_path do %>
             <i class="material-icons">login</i>ログイン
           <% end %>
         </li>

@@ -1,18 +1,21 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: %i[ index show search ]
   prepend_before_action :page_user, only: %i[ show ]
-  before_action :defined_check, except: %i[ index ], if: :own_user?
+  before_action :defined_check, except: %i[ index search ], if: :own_user?
 
   def index
-    @users = User.all.order(point: "DESC").first(30)
+    @users = Kaminari.paginate_array(User.where(defined: true).order(point: "DESC"))
+                     .page(params[:page])
   end
 
   def show
     @user.point_update
+    @user.check_defined?
   end
 
   def search
-    @searched_users = User.search(params[:key]).order(point: "DESC").first(30)
+    @searched_users = Kaminari.paginate_array(User.where(defined: true).search(params[:key]).order(point: "DESC"))
+                              .page(params[:page])
   end
 
   private

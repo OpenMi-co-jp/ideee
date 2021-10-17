@@ -8,9 +8,9 @@ class IdeasController < ApplicationController
   def index
     @ideas = Idea.all
     @latest_ideas = Idea.all.order(created_at: "DESC").first(10)
-    @liked_ideas = Idea.all.sort_by { |v| -v.like_users&.count }.first(5)
+    @liked_ideas = Idea.all.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = Idea.all.order(view: "DESC").first(5)
-    @featured_users = User.all.order(point: "DESC").first(5)
+    @featured_users = User.where(defined: true).order(point: "DESC").first(5)
   end
 
   # GET /ideas/1 or /ideas/1.json
@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params.merge(user_id: current_user.id))
     if @idea.save
-      SlackNotifier.new.send(@idea, idea_url(@idea.id))
+      SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
       redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')
@@ -63,7 +63,9 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @searched_ideas = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }.first(20)
+    sort = params[:sort] || "likes_num"
+    list = Idea.search(params[:keyword]).order("#{sort}": "DESC")
+    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   private

@@ -52,10 +52,14 @@ gem 'devise-i18n'
 gem 'high_voltage'
 
 gem 'enum_help'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 gem 'gon'
 
 gem 'slack-notifier'
+gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
+# メール送信
+gem 'sendgrid-ruby'
 
 # uncomment out when you need
 # gem 'stripe'
@@ -79,6 +83,9 @@ group :development do
   gem 'spring'
 
   gem 'letter_opener_web'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'seed-fu'
 end
 
 group :test do

@@ -13,9 +13,11 @@ class User < ApplicationRecord
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
+  before_update :twitter_id_fix
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
+  validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
   class << self
     def from_omniauth(auth)
@@ -70,8 +72,10 @@ class User < ApplicationRecord
     provider == 'twitter' && !email.blank? && super
   end
 
-  def undefined?
-    name.blank? || confirmed_at.blank? || definition.blank?
+  def check_defined?
+    bool = name.present? && confirmed_at.present? && definition.present?
+    update(defined: bool)
+    return bool
   end
 
   def own?(object)
@@ -80,6 +84,7 @@ class User < ApplicationRecord
 
   def like(idea)
     likes.find_or_create_by(idea: idea)
+    idea.count_likes
   end
 
   def like?(idea)
@@ -88,6 +93,7 @@ class User < ApplicationRecord
 
   def unlike(idea)
     like_ideas.delete(idea)
+    idea.count_likes
   end
 
   def create_comment(param)
@@ -105,5 +111,9 @@ class User < ApplicationRecord
     like_num = likes.length
     sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_num
     update(point: sum_points)
+  end
+
+  def twitter_id_fix
+    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "") if twitter_id.present?
   end
 end

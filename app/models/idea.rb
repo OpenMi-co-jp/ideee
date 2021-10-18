@@ -33,4 +33,9 @@ class Idea < ApplicationRecord
   def count_likes
     update(likes_num: like_users.count )
   end
+
+  def difficulty
+    return '不明' if difficultys.empty?
+    difficultys.group(:level).count.max { |x, y| x[1] <=> y[1] }[0]
+  end
 end

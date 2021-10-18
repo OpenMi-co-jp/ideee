@@ -55,6 +55,10 @@
               <div class='grid-middle'>
                 <%= @idea.comments.length %>
               </div>
+              <%= image_tag 'icons/difficulty.svg', class:'icon-size gray-4' %>
+              <div class='grid-middle'>
+                <%= @idea.difficulty %>
+              </div>
             </div>
             <% if current_user&.own?(@idea) %>
               <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
@@ -92,6 +96,8 @@
       <% end %>
     </div>
   </div>
+
+  <%= render 'difficultys/board', object: @idea %>
 
   <hr class='gray-3'>
 

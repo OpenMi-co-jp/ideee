@@ -12,8 +12,3 @@ User.seed(
   { id: 41, name: 'admin', password: 'password', email: 'admin@admin.com', definition: 0, confirmed_at: Time.now, defined: true },
 )
 
-# 30.times do |n|
-#   num = n + 1
-#   user = User.new(name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample, confirmed_at: Time.now, defined: true)
-#   user.save!
-# end

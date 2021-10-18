@@ -5,7 +5,8 @@
 
 ## セットアップの情報
 
-インストール方法記載予定..
+全セットアップ方法
+https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 
 ### dockerで設定する場合
 

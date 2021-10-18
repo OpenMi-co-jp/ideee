@@ -5,13 +5,14 @@ $(document).on ('turbolinks:load', function(){
     $('.submit-btn').addClass('disabled')
     const comment = $('#comment-form').val()
 
+    // コメントが入力されていれば発火
     if(comment.length > 0) {
       create_comment(comment)
       .done(function() {
-        $('#js-comments').append(js_comments(comment))
-        $('#comment-form').val('')
-        $('.submit-btn').removeClass('disabled')
-        send_email(comment)
+        $('#js-comments').append(js_comments(comment)) // コメントをUIにセット
+        $('#comment-form').val('') // コメントフォームを空にする
+        $('.submit-btn').removeClass('disabled') // コメントの連投を防ぐdisabled
+        send_email(comment) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
         alert('コメントに失敗しました')

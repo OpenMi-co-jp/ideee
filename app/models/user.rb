@@ -98,6 +98,10 @@ class User < ApplicationRecord
     idea.count_likes
   end
 
+  def difficulty_polled?(idea)
+    difficulty_ideas.include?(idea)
+  end
+
   def create_comment(param)
     comments.create(idea_id: param[:idea_id], description: param[:description])
   end

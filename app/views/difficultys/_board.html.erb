@@ -1,0 +1,25 @@
+<% unless current_user&.difficulty_polled?(object) %>
+  <div id="difficuty_board" class="center-align">
+    <%= link_to 'このアイデアの難易度を投票する',
+      '#difficulty_modal',
+      class: 'waves-effect waves-light btn orange-action-back modal-trigger',
+      id: 'modal-trigger-difficulty',
+      data: { turbolinks: false } %>
+  </div>
+
+  <div id="modal_difficuty" class="modal">
+    <div class="modal-content">
+      <h4>このアイデアの難易度は？</h4>
+      <p>このアイデアを実現するためにはどれくらいの難易度が高いか3段階で評価します。</p>
+      <div class='modal_links'>
+        <% Difficulty.levels.each_with_index do |(key, value), index| %>
+          <%= link_to "#{key.upcase}",
+            difficultys_path(difficulty: {idea_id: object, level: key}),
+            method: :post,
+            class:"waves-effect waves-light orange darken-#{index * 2} btn-large modal-close-trigger",
+            remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

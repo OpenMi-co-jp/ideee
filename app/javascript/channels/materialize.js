@@ -29,4 +29,14 @@ $(document).on ('turbolinks:load', function(){
   if($('h4').hasClass('no_idea_posted')) {
     $('#modal_idea_post').modal('open');
   };
+
+
+  $('#modal-trigger-difficulty').on('click', function () {
+    $('#modal_difficuty').modal('open');
+  });
+
+  $('.modal-close-trigger').on('click', function () {
+    $('#modal_difficuty').modal('close');
+    $('#difficuty_board').hide();
+  });
 })

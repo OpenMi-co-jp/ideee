@@ -33,7 +33,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params.merge(user_id: current_user.id))
     if @idea.save
-      SlackNotifier.new.send(@idea, idea_url(@idea.id))
+      SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
       redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')
@@ -56,8 +56,13 @@ class IdeasController < ApplicationController
   end
 
   def search
+<<<<<<< HEAD
     # アイデアに紐づくlikeの数を数えて、降順に並べる
     list = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }
+=======
+    sort = params[:sort] || "likes_num"
+    list = Idea.search(params[:keyword]).order("#{sort}": "DESC")
+>>>>>>> origin/dev
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 

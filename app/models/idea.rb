@@ -44,4 +44,8 @@ class Idea < ApplicationRecord
   def self.search(keyword)
     where(["name like?", "%#{keyword}%"])
   end
+
+  def count_likes
+    update(likes_num: like_users.count )
+  end
 end

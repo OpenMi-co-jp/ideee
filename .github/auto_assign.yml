@@ -5,7 +5,7 @@ addReviewers: true
 addAssignees: author
 
 # A list of reviewers to be added to pull requests (GitHub user name)
-reviewers: 
+reviewers:
   - naru20181117
   - yoshiki707
   - hisashi2002

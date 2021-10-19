@@ -55,36 +55,6 @@
         font-size: 2rem;
         margin: 0 0 10px 20px;
       }
-
-      .carousel {
-        height: 25rem !important;
-        top: -5rem;
-
-        .carousel-item {
-          max-width: 24rem!important;
-          width: 24rem !important;
-
-          .idea-column-img {
-            position: relative;
-            border-radius: 10px;
-
-            img {
-              object-fit: contain;
-              height: 12rem;
-              width: 24rem;
-              border-radius: 0.5rem;
-            }
-
-            .time-label {
-              position: absolute;
-              top: 1rem;
-              padding: 0 1rem;
-              color: white;
-              background-color: rgba(191, 191, 191, 0.8);
-            }
-          }
-        }
-      }
     }
   }
 }

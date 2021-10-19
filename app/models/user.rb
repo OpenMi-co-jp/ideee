@@ -98,7 +98,7 @@ class User < ApplicationRecord
     idea.count_likes
   end
 
-  def difficulty_polled?(idea)
+  def vote?(idea)
     difficulty_ideas.include?(idea)
   end
 

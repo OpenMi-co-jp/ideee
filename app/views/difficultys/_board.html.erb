@@ -1,6 +1,6 @@
-<% if current_user && !current_user&.difficulty_polled?(object) %>
+<% if current_user && !current_user&.vote?(object) %>
   <div id="difficuty_board" class="center-align">
-    <%= link_to 'このアイデアの難易度を投票する',
+    <%= link_to '難易度に投票',
       '#difficulty_modal',
       class: 'waves-effect waves-light btn orange-action-back modal-trigger',
       id: 'modal-trigger-difficulty',

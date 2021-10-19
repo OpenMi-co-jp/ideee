@@ -1,4 +1,6 @@
 module UsersHelper
+  # ユーザーのアイコンサイズをパラメーターで指定できるように設定
+  # アイコンが無ければデフォルトの画像を表示
   def user_icon(user, size: 'normal')
     if user.icon.present?
       image_tag(user.icon.to_s, class: "icon-circle #{size}")
@@ -15,6 +17,7 @@ module UsersHelper
     "https://twitter.com/#{id}"
   end
 
+  # ユーザーのタイプをアイコンで表示
   def user_definiton(user, ver='normal')
     case user.definition
     when 'idea_man' then

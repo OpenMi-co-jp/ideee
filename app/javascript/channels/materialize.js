@@ -12,10 +12,12 @@ $(document).on ('turbolinks:load', function(){
   });
 
   // カルーセルを3秒ごとに移動
-  var instance = M.Carousel.getInstance($('.carousel'));
-  setInterval(function(){
-    instance.next(1);
-  },3000);
+  if($('body').data('page') == "ideas-index") {
+    var instance = M.Carousel.getInstance($('.carousel'));
+    setInterval(function(){
+      instance.next(1);
+    },3000);
+  }
 
   // ideee説明用のモーダル
   $('#modal-trigger-intro').on('click', function() {

@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   def index
     @ideas = Idea.all # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
-    @liked_ideas = @ideas.sort_by { |v| -v.like_users&.count }.first(5)
+    @liked_ideas = Idea.all.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
     @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
   end
@@ -56,13 +56,9 @@ class IdeasController < ApplicationController
   end
 
   def search
-<<<<<<< HEAD
     # アイデアに紐づくlikeの数を数えて、降順に並べる
-    list = Idea.search(params[:keyword]).sort_by { |v| -v.like_users&.count }
-=======
     sort = params[:sort] || "likes_num"
     list = Idea.search(params[:keyword]).order("#{sort}": "DESC")
->>>>>>> origin/dev
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 

@@ -1,5 +1,4 @@
 // materialize initialization
-
 $(document).on ('turbolinks:load', function(){
   $('select').formSelect(); // selectタブをJSで表示
   $('.modal').modal({startingTop: '30%', endingTop: '200px'}); // モーダルの大きさ調整
@@ -8,11 +7,16 @@ $(document).on ('turbolinks:load', function(){
   $('.collapsible').collapsible(); // 折り畳みの初期設定
   $('.carousel').carousel({ // カルーセルの表示初期設定
     duration: 100,
-    numVisible: 5,
-    dist: -50,
-    shift: 10,
-    padding: 20
+    padding: 50,
+    fullWidth: true,
+    indicators: true
   });
+
+  // カルーセルを3秒ごとに移動
+  var instance = M.Carousel.getInstance($('.carousel'));
+  setInterval(function(){
+    instance.next(1);
+  },3000);
 
   // ideee説明用のモーダル
   $('#modal-trigger-intro').on('click', function() {

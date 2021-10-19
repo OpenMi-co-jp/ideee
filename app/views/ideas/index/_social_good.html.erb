@@ -2,6 +2,9 @@
   <div class='flex'>
     <p class='icon-mark grid-middle'>😆</p>
     <h4 class='orange-action'>ソーシャルグッド</h4>
+    <%= link_to search_ideas_path, class: 'more-info mt-3 flex gray-5' do %>
+      <i class="material-icons">chevron_right</i>もっと見る
+    <% end %>
   </div>
   <%= render 'common/column_board', ideas: @liked_ideas %>
 </div>

@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def index
     @users = Kaminari.paginate_array(User.where(defined: true).order(point: "DESC"))
                      .page(params[:page])
-    page_params = User.page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @users.limit_value
   end

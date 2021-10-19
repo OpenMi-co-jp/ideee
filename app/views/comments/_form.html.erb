@@ -4,7 +4,7 @@
       <textarea class='comment-area yellow-soft-back mh-3' id="comment-form" placeholder='コメントする'></textarea>
     </div>
     <div class='comment-btn'>
-      <%= link_to "#modal_before_login",
+      <%= link_to "#!",
         id: "comment",
         class: "submit-btn waves-effect btn orange-action-back nav-link" do %>
         <b class='white-text'><%= t('default.submit') %></b>
@@ -12,7 +12,7 @@
     </div>
   <% else %>
     <div class='comment-btn'>
-      <%= link_to "#!",
+      <%= link_to "#modal_before_login",
         data: { turbolinks: false },
         class: "modal-trigger-login submit-btn waves-effect btn orange-action-back nav-link" do %>
         <b class='white-text'><%= t('default.comment') %></b>

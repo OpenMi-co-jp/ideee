@@ -2,6 +2,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  font-family: 'Roboto', sans-serif;
 }
 
 main {
@@ -11,10 +12,12 @@ main {
   margin: 0 auto;
 }
 
+// 全文字列は、はみ出さずに改行する
 div, p, b {
   word-break: break-all;
 }
 
+// アラートの表示設定
 .notification {
   text-align: center;
   vertical-align: middle;
@@ -59,6 +62,7 @@ div, p, b {
   }
 }
 
+// クリックをできなくする
 .disable-click {
   pointer-events: none;
 }
@@ -114,6 +118,7 @@ hr {
   font-size: xx-large;
 }
 
+// 必須項目の印
 .required:after {
   font-size: large;
   content: " *";
@@ -129,7 +134,7 @@ hr {
   width: 100%;
 }
 
-// bootstrap的によく使うセットはここに書く
+// bootstrap的margin, paddingの設定
 
 .m {
   &-0 {
@@ -377,7 +382,7 @@ hr {
   }
 }
 
-// color css set
+// 基本カラーの設定
 
 .gray {
   &-1 {
@@ -473,6 +478,7 @@ hr {
   }
 }
 
+// 白いもじの設定
 .white-text {
   color: white;
 }

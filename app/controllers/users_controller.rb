@@ -9,8 +9,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user.point_update
-    @user.check_defined?
+    @user.point_update # Contributionの計算/更新
+    @user.check_defined? # definedのチェック/更新
   end
 
   def search

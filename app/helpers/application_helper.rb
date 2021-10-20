@@ -43,7 +43,7 @@ module ApplicationHelper
         type: 'website',
         url: request.original_url,
         locale: 'ja_JP',
-        image: cloudinary_url('main_ogp.jpg', sign_url: true, type: 'authenticated')
+        # image: cloudinary_url('main_ogp.jpg', sign_url: true, type: 'authenticated')
       },
       twitter: {
         card: 'summary_large_image',

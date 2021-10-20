@@ -1,5 +1,5 @@
 <div class='idea-colum-board'>
-  <% ideas.each_with_index do |idea, i| %>
+  <% ideas.each.with_index(@rank_num || 0) do |idea, i| %>
     <div class='flex'>
       <h5 class='italic'>
         <%= i+1 %>

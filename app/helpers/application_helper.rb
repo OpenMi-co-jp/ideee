@@ -81,11 +81,8 @@ module ApplicationHelper
 
   def text_url_to_link(text)
     require 'uri'
-    URI.extract(text, ['http', 'https']).uniq.each do |url|
-      sub_text = "<a href=#{url} target=\'_blank\'>#{url}</a>"
-      text.gsub!(url, sub_text)
-    end
-    return text
+    uri_reg = URI.regexp(['http', 'https'])
+    text.gsub!(uri_reg) {"<a href='#{$&}' target='_blank'\>#{$&}</a>"}
   end
 
   def data_page

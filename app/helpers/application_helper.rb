@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # OGPで使われるタイトルの設定
   def full_title(page_title = '')
     base_title = 'ideee'
     if page_title.empty?
@@ -8,6 +9,7 @@ module ApplicationHelper
     end
   end
 
+  # 現在のドメインを文字列として表示
   def full_url(path=nil)
     domain = if Rails.env.development?
                'http://localhost:3000'
@@ -26,6 +28,7 @@ module ApplicationHelper
     "#{domain}#{path}"
   end
 
+  # デフォルトのOGPを設定して、OGPの記載がないページに設定
   def default_meta_tags
     {
       site: 'ideee.tech',
@@ -52,8 +55,9 @@ module ApplicationHelper
     }
   end
 
+  # Cloudinaryでの画像自動生成メソッド
   def return_ogp_url(title)
-    title_len = title.length
+    title_len = title.length # 文字の大きさを調整
     size =  if title_len < 10
               100
             elsif 10 <= title_len && title_len <= 24
@@ -73,5 +77,18 @@ module ApplicationHelper
       }
     ]
     cloudinary_url('ideee_ogp.jpg', sign_url: true, type: 'authenticated', transformation: transformation)
+  end
+
+  def text_url_to_link(text)
+    require 'uri'
+    URI.extract(text, ['http', 'https']).uniq.each do |url|
+      sub_text = "<a href=#{url} target=\'_blank\'>#{url}</a>"
+      text.gsub!(url, sub_text)
+    end
+    return text
+  end
+
+  def data_page
+    "#{controller_path}-#{action_name}"
   end
 end

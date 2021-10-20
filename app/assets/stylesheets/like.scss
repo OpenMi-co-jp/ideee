@@ -1,7 +1,13 @@
 .like-click {
-  :hover {
+  &:hover {
     transition-duration: .3s;
     transform: scale(1.05);
+    .like-image {
+      background: #FCEE21;
+    }
+    path {
+      fill: #FCEE21;
+    }
   }
 }
 
@@ -23,6 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition-duration: .3s;
     @media screen and (max-width: 768px) {
       margin-right: 8px;
     }
@@ -48,12 +55,11 @@
 
 .clicked {
   .like-image {
-    background: #FCEE21;
+    background: #fff;
 
     path {
-      fill: #fff;
+      fill: #FCEE21;
       pointer-events: none;
     }
   }
 }
-

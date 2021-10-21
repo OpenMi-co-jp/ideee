@@ -11,6 +11,11 @@ $(document).on ('turbolinks:load', function(){
     fullWidth: true,
     indicators: true
   });
+  $('.sidenav').sidenav({
+    closeOnClick: true,
+    edge: 'right',
+    draggable: true
+  });
 
   // カルーセルを3秒ごとに移動
   if($('body').data('page') == "ideas-index") {
@@ -33,6 +38,10 @@ $(document).on ('turbolinks:load', function(){
   // ログイン用のモーダル
   $('.modal-trigger-login').on('click', function() {
     $('#modal_before_login').modal('open');
+  });
+
+  $('.sidenav-trigger').on('click', function () {
+    $('.sidenav').sidenav('open');
   });
 
   // アイデア投稿の導線モーダル

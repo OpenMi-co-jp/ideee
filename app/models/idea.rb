@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  icon       :string(255)
+#  likes_num  :integer          default(0)
 #  name       :string(255)
 #  note       :text(65535)
 #  view       :integer
@@ -22,6 +23,8 @@ class Idea < ApplicationRecord
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
   has_many :comment_users, through: :comments, source: :user
+  has_many :taggings, dependent: :destroy
+  has_many :idea_tags, through: :taggings, source: :idea
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 

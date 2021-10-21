@@ -65,17 +65,6 @@ ActiveRecord::Schema.define(version: 2021_10_16_150413) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "difficulties", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "idea_id", null: false
-    t.integer "level", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["idea_id"], name: "index_difficulties_on_idea_id"
-    t.index ["user_id", "idea_id"], name: "index_difficulties_on_user_id_and_idea_id", unique: true
-    t.index ["user_id"], name: "index_difficulties_on_user_id"
-  end
-
   create_table "ideas", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "icon"
@@ -129,6 +118,4 @@ ActiveRecord::Schema.define(version: 2021_10_16_150413) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
-  add_foreign_key "difficulties", "ideas"
-  add_foreign_key "difficulties", "users"
 end

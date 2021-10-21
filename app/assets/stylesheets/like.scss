@@ -2,12 +2,6 @@
   &:hover {
     transition-duration: .3s;
     transform: scale(1.05);
-    .like-image {
-      background: #FCEE21;
-    }
-    path {
-      fill: #FCEE21;
-    }
   }
 }
 
@@ -54,12 +48,7 @@
 }
 
 .clicked {
-  .like-image {
-    background: #fff;
-
-    path {
-      fill: #FCEE21;
-      pointer-events: none;
-    }
+  path {
+    fill: #FCEE21;
   }
 }

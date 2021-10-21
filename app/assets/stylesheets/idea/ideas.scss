@@ -1,24 +1,30 @@
-.idea-index{
+.idea-index {
   .full-pic {
-    position: relative;
     min-height: 50vh;
-    background: url(idea_main.png)
-      center / cover;
+    background: url(idea_main.png);
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 
-    .turorial-button {
-      margin: 0;
-      position: absolute;
-      top: calc(60% - 0.5em);
-      margin-left: 11rem;
+    #text-and-buttons-on-top-page-before-login {
+      @media screen and (min-width: 480px) {
+        text-align: center;
+      }
+      @media screen and (min-width: 768px) {
+        margin-left: calc(60% - 50vw);
+        text-align: justify;
+      }
+      .orange-text {
+        font-weight: bold;
+        font-size: 2rem;
+        padding-top: 6rem;
+      }
     }
 
+    // .turorial-button {
+    // }
+
     .new-user-button {
-      margin: 0;
-      position: absolute;
-      top: calc(60% - 0.5em);
-      margin-left: 20rem;
+      margin-left: 2rem;
     }
   }
 
@@ -28,8 +34,7 @@
 
     .back-color-board {
       min-height: 30vh;
-      background: url(background_orange.png)
-        center / cover;
+      background: url(background_orange.png) center / cover;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
     }
@@ -82,7 +87,6 @@
 
         .idea-status {
           width: 100%;
-
         }
         .user-def {
           width: 70px;

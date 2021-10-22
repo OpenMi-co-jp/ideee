@@ -32,7 +32,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params.merge(user_id: current_user.id))
-    if @idea.save
+    if @idea.save_with_tags(tag_names: params.dig(:idea, :tag_names).split.uniq)
       SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
       redirect_to @idea, notice: t('.success')
     else

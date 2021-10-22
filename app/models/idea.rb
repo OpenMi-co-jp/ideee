@@ -31,6 +31,8 @@ class Idea < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :note, presence: true
 
+  scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
+
   def user
     return User.find_by(id: self.user_id)
   end

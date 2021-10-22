@@ -51,5 +51,11 @@
 }
 
 .idea-tag {
-  display: inline;
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  margin: 2px;
+  padding: 2px;
+  border-radius: 40%;
+  font-size: smaller;
 }

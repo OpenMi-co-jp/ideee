@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :ideas do
     collection do
       get 'search'
+      get 'tags'
     end
   end
   resources :comments, only: %i[create edit destroy] do

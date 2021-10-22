@@ -65,6 +65,11 @@ class IdeasController < ApplicationController
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
   end
 
+  def tags
+    list = Idea.with_tag(params[:tag_name])
+    @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
+  end
+
   private
     def set_idea
       @idea = Idea.find(params[:id])

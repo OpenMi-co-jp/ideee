@@ -1,5 +1,6 @@
 module ShareHelper
   def twitter_share(content, root=false)
+    # footerでのアプリ自体のシェアか、アイデアのシェアかどうかで分岐
     if root
       url = full_url
       text = content

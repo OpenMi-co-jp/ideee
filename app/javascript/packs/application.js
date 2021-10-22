@@ -12,6 +12,7 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// JSのファイルを作るときにここで読み込ませる必要有
 require("@rails/activestorage").start()
 require("trix")
 require("@rails/actiontext")

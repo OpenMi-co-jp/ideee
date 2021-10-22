@@ -8,8 +8,8 @@ class Analytics
   end
 
   def report_count(demention, idea_id)
-    date_range = @analytics::DateRange.new(start_date: '2021-07-01', end_date: 'today')
-    metric = @analytics::Metric.new(expression: "ga:#{demention}", alias: demention)
+    date_range = @analytics::DateRange.new(start_date: '2021-07-01', end_date: 'today') # ideeeを作ってから本日までの期日範囲
+    metric = @analytics::Metric.new(expression: "ga:#{demention}", alias: demention) # dementionは確認したい項目
     dimension = @analytics::Dimension.new(name: 'ga:pagePath')
     request = @analytics::GetReportsRequest.new(
       report_requests: [@analytics::ReportRequest.new(
@@ -18,6 +18,7 @@ class Analytics
     )
     response = @client.batch_get_reports(request)
     data = response.reports.first.data
+    # 動いているかの確認のため、これまでの累計View数が出るようにしている
     puts "累計View数: #{data.totals.first.values.first}"
     puts '------------------'
     res_data = data&.rows.find {|i| i.dimensions == ["/ideas/#{idea_id}"]}

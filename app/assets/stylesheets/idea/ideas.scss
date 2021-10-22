@@ -1,12 +1,12 @@
 .idea-index {
   .full-pic {
     min-height: 50vh;
-    background: url(idea_main.png);
+    background: url(idea_main.png) left / cover;;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 
     #text-and-buttons-on-top-page-before-login {
-      @media screen and (min-width: 480px) {
+      @media screen and (min-width: 320px) {
         text-align: center;
       }
       @media screen and (min-width: 768px) {

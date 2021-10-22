@@ -42,7 +42,8 @@ class IdeasController < ApplicationController
   end
 
   def update
-    if @idea.update(idea_params.merge(user_id: current_user.id))
+    @idea.assign_attributes(idea_params.merge(user_id: current_user.id))
+    if @idea.save_with_tags(tag_names: params.dig(:idea, :tag_names).split.uniq)
       redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')

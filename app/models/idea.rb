@@ -53,7 +53,6 @@ class Idea < ApplicationRecord
   end
 
   def save_with_tags(tag_names:)
-    byebug
     ActiveRecord::Base.transaction do
       self.idea_tags = tag_names.map { |name| Tag.find_or_initialize_by(name: name.strip) }
       save!
@@ -62,5 +61,9 @@ class Idea < ApplicationRecord
 
     rescue StandardError
     false
+  end
+
+  def tag_names
+    idea_tags.map(&:name).join(' ')
   end
 end

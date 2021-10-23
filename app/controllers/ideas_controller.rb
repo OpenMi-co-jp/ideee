@@ -5,7 +5,6 @@ class IdeasController < ApplicationController
   before_action :defined_check, except: %i[ index show search ]
 
   def index
-    @featured_users = User.where(defined: true).order(point: "DESC").first(5)
     @ideas = Idea.all # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)

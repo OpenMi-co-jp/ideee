@@ -1,0 +1,10 @@
+<% if current_user && !current_user&.vote?(object) %>
+  <%= link_to difficulty_tag(object),
+    '#modal_difficulty',
+    data: { turbolinks: false },
+    class: 'modal-trigger',
+    id: 'modal-trigger-difficulty' %>
+<% else %>
+  <%= link_to difficulty_tag(object), search_ideas_path(difficulty: object.difficulty) %>
+<% end %>
+

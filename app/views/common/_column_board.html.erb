@@ -21,7 +21,7 @@
               <p class='col s12 l5 p-0'><%= "投稿日 #{idea.created_time}" %></p>
               <div class='col s3 l2 flex p-0'><%= image_tag 'icons/comment.svg', class:'icon-size gray-4' %><p class='gray-5 ml-2'><%= idea.comments.length %></p></div>
               <div class='col s3 l2 flex p-0'><%= image_tag 'icons/eye.svg', class:'icon-size gray-4' %><p class='gray-5 ml-1'><%= idea.view %></p></div>
-              <div class='col s3 l2 flex p-0'><%= image_tag 'icons/difficulty.svg', class:'icon-size gray-4' %><p class='gray-5 ml-2'><%= idea.difficulty %></p></div>
+              <div class='col s3 l2 flex p-0'><p class='gray-5 ml-2'><%= difficulty_tag(idea) %></p></div>
             </div>
             <div class='flex-end'>
               <%= link_to user_path(idea.user.id), class: 'max-width' do %>

@@ -40,11 +40,12 @@ $(document).on ('turbolinks:load', function(){
 
 
   $('#modal-trigger-difficulty').on('click', function () {
-    $('#modal_difficuty').modal('open');
+    $('#modal_difficulty').modal('open');
   });
 
   $('.modal-close-trigger').on('click', function () {
-    $('#modal_difficuty').modal('close');
-    $('#difficuty_board').hide();
+    $('#modal_difficulty').modal('close');
+    // TODO: jsでUIの文字を変更するようにする
+    // $('#modal-trigger-difficulty').html($(this))
   });
 })

@@ -87,52 +87,140 @@
   }
 }
 
-.idea-colum-board {
-  .row {
-    margin-bottom: 0.5rem !important;
+.idea {
+  &__list {
+    margin-top: 24px;
+    display: flex;
+    @media screen and (max-width: 768px) {
+      border-bottom: 5px solid #e3e4e8;
+    }
   }
 
-  .idea-column {
-    margin: 0.5rem 0;
-    height: 100%;
+  &__num {
+    width: 40px;
+    font-style: italic;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__content {
     width: 100%;
+    display: flex;
+    padding-bottom: 16px;
+    margin-left: 16px;
+    border-bottom: 5px solid #e3e4e8;
 
-    .idea-column-body {
-      width: 100%;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      border-bottom: none;
+      margin-left: 0;
+    }
+  }
 
-      .idea-name {
-        font-size: large;
+  &__box {
+    width: 100%;
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media screen and (max-width: 768px) {
+      margin: 6px 0 0;
+    }
+
+    > a {
+      display: block;
+      margin-right: 16px;
+      @media screen and (max-width: 768px) {
+        margin-right: 0;
       }
+    }
+  }
 
-      .idea-info {
-        display: flex;
-        justify-content: space-between;
+  &__name {
+    font-size: 18px;
+  }
 
+  &__img {
+    display: block;
+
+    figure {
+      margin: 0;
+    }
+
+<<<<<<< HEAD
         .idea-status {
           width: 100%;
         }
         .user-def {
           width: 70px;
         }
+=======
+    img {
+      min-width: 100px;
+      width: 100px;
+      border-radius: 6px;
+      border: 2px solid #eee;
+      @media screen and (max-width: 768px) {
+        max-height: 151px;
+        object-fit: contain;
+        width: 100%;
+        border: none;
+      }
+    }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    font-size: 15px;
+  }
+
+  &__eyes {
+    display: flex;
+    margin-left: 22px;
+  }
+
+  &__comments {
+    display: flex;
+    margin-left: 22px;
+    color: #A7A7A7;
+  }
+
+  &__info {
+    display: flex;
+    margin-left: auto;
+    color: #A7A7A7;
+
+    @media screen and (max-width: 768px) {
+      margin: 16px 0 0;
+      justify-content: center;
+    }
+  }
+
+  &__detail {
+    align-items: center;
+
+    &.pc {
+      display: flex;
+      margin-left: auto;
+      @media screen and (max-width: 768px) {
+        display: none;
+>>>>>>> origin/dev
       }
     }
 
-    .idea-column-image {
-      width: 100%;
-      position: relative;
-      border-radius: 3%;
-      background-color: white;
-
-      .idea-img-boader {
-        border: solid 1px;
-        border-radius: 3%;
-
-        img {
-          object-fit: contain;
-          max-height: 90px;
-          margin: 0 auto;
-        }
+    &.sp {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: flex;
       }
+    }
+
+    &--def {
+      width: 50px;
+      margin-left: 8px;
     }
   }
 }

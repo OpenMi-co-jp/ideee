@@ -1,16 +1,16 @@
 class ApplicationController < ActionController::Base
-  # before_action :basic_auth
   before_action :store_user_location!, if: :storable_location?
 
-  # devise settings
+  # deviseでログインした後の設定
   def after_sign_in_path_for(resource_or_scope)
-    if resource.defined
+    if resource.defined # ユーザー情報が登録されているか確認
       stored_location_for(resource_or_scope) || super
     else
       edit_user_registration_path(resource)
     end
   end
 
+  # 本番環境でのエラーハンドリング
   if Rails.env.production?
     rescue_from StandardError, with: :render500
     rescue_from ActiveRecord::RecordNotFound, with: :render404
@@ -26,14 +26,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  # def basic_auth
-  #   return if session['basic.auth']
-  #   authenticate_or_request_with_http_basic do |username, password|
-  #     username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
-  #     session['basic.auth'] = true
-  #   end
-  # end
-
+  # ユーザー情報が登録されているか確認し、アラートで登録必須項目を表示
   def defined_check
     unless current_user&.check_defined?
       redirect_to edit_user_registration_path(params[:id])

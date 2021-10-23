@@ -1,11 +1,12 @@
 # ideee
-An application for ideas and engineers
+アイデアとエンジニアのマッチングプラットフォーム
 
 <!-- TODO Readme書く -->
 
 ## セットアップの情報
 
-インストール方法記載予定..
+全セットアップ方法
+https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 
 ### dockerで設定する場合
 
@@ -14,11 +15,9 @@ An application for ideas and engineers
 3. githubからローカルにクローンされていることを確認
 4. ideeeのディレクトリに移動 // cd xxxx/ideee
 5. コンテナを起動する
-  `docker-compose build`
-6. dockerコンテナ上でDB作成
-  `docker-compose run web bundle exec rake db:create`
-7. migrationを行いDBのカラムのセットアップ
-  `docker-compose run web bundle exec rake db:migrate`
+   `docker-compose up --build`
+6. dockerコンテナ上でDB作成、DBのカラムのセットアップ、seedデータを入れる
+   `docker-compose run web db:create db:migrate db:seed_fu`
 
 ## versions
 

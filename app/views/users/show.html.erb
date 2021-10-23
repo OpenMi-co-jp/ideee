@@ -40,7 +40,7 @@
       </div>
       <% if @user.description.present? %>
         <div class="user-content">
-          <%= simple_format(@user.description) %>
+          <%== simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
         </div>
       <% end %>
     </div>
@@ -52,7 +52,8 @@
     <h4>アイデア</h4>
     <%= render 'common/column_board', ideas: @user.ideas %>
   <% else %>
-    <h4>まだアイデアが投稿されていません</h4>
+    <h4 class='no_idea_posted'>まだアイデアが投稿されていません</h4>
   <% end %>
   <%= render 'common/fund_link', object: @user %>
+  <%= render 'users/show/lead_to_post' if own_user_checked(@user) %>
 </div>

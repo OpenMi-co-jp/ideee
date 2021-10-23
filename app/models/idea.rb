@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: ideas
+#
+#  id         :bigint           not null, primary key
+#  icon       :string(255)
+#  name       :string(255)
+#  note       :text(65535)
+#  view       :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint           not null
+#
+# Indexes
+#
+#  index_ideas_on_user_id  (user_id)
+#
 class Idea < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
@@ -26,5 +43,9 @@ class Idea < ApplicationRecord
 
   def self.search(keyword)
     where(["name like?", "%#{keyword}%"])
+  end
+
+  def count_likes
+    update(likes_num: like_users.count )
   end
 end

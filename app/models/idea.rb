@@ -66,6 +66,6 @@ class Idea < ApplicationRecord
   end
 
   def tag_names
-    idea_tags.map(&:name).join(' ')
+    idea_tags.map(&:name).join(',')
   end
 end

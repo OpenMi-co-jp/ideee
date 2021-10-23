@@ -1,13 +1,18 @@
 class DifficultysController < ApplicationController
-  before_action :idea_id
+  before_action :set_idea
 
   def create
-    Difficulty.create!(user_id: current_user.id, idea_id: @idea.id, level: params[:difficulty][:level] )
+    Difficulty.create!(level_params.merge(user_id: current_user.id))
+    @idea.update_difficulty
   end
 
   private
 
-  def idea_id
-    @idea = Idea.find(params[:difficulty][:idea_id])
+  def set_idea
+    @idea = Idea.find(level_params[:idea_id])
+  end
+
+  def level_params
+    params.permit(:idea_id, :level)
   end
 end

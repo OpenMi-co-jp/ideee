@@ -35,9 +35,10 @@
       </div>
       <div class="field">
         <%= form.label :tag_names %>
-        <%= form.text_field :tag_names, class: 'form-control', placeholder: '空白スペースで区切って入力してください' %>
+        <div class="chips"><input></div>
+        <%= form.hidden_field :tag_names, id: 'tag-hidden-field' %>
       </div>
-      <%= form.submit class: 'btn orange-action-back mh-3' %>
+      <%= form.submit class: 'btn orange-action-back mh-3', id: 'idea-btn' %>
     </div>
   </div>
 <% end %>

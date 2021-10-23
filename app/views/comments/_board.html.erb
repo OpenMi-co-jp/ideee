@@ -4,15 +4,15 @@
     <% object.comments.each_with_index do |comment, i| %>
       <% if current_user&.own?(comment) %>
         <div class='parent'>
-          <div class="comment-column m-1 own-comment">
-            <%= link_to '#', data: { target: "dropdown_comment-#{i}" }, class:'dropdown-trigger white-text' do %>
-              <%= render 'comments/unit_comment', owned: true, comment: comment %>
-            <% end %>
-          </div>
           <ul id="dropdown_comment-<%=i%>" class='dropdown-content comment-option'>
             <li>
               <%= link_to comment_path(comment), method: :delete, id: 'comment-delete' do %>
                 <i class="material-icons">delete</i>削除
+                <div class="comment-column m-1 own-comment">
+                  <%= link_to '#', data: { target: "dropdown_comment-#{i}" }, class:'dropdown-trigger white-text' do %>
+                    <%= render 'comments/unit_comment', owned: true, comment: comment %>
+                  <% end %>
+                </div>
               <% end %>
             </li>
           </ul>

@@ -10,10 +10,7 @@
     <div class='idea-column-img col l3 s12'>
       <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
-      <div>
-        <a class="gray-3">タグ: </a>
-        <%= render @idea.idea_tags  %>
-      </div>
+      <%= render 'tags/tags', object: @idea %>
       <div class="flex">
         <div class="share-box">
           <%= link_to twitter_share(@idea), target: '_blank' do %>

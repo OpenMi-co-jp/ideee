@@ -49,3 +49,13 @@
     width: 95vw !important;
   }
 }
+
+.status-info {
+  display: flex;
+  margin: 15px 0;
+  &__eye {
+    display: flex;
+  }
+  &__comment {
+    display: flex;
+  }

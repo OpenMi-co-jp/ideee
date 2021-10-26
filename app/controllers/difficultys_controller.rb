@@ -4,6 +4,7 @@ class DifficultysController < ApplicationController
   def create
     Difficulty.create!(level_params.merge(user_id: current_user.id))
     @idea.update_difficulty
+    redirect_to @idea
   end
 
   private
@@ -16,3 +17,4 @@ class DifficultysController < ApplicationController
     params.permit(:idea_id, :level)
   end
 end
+

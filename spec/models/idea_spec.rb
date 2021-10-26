@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Idea, type: :model do
-  it '有効なファクトリを持つこと' do
+  it 'モデルの作成が有効であること' do
     expect(build(:idea)).to be_valid
   end
 

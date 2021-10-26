@@ -72,6 +72,10 @@
 
   &__comment {
     display: flex;
+
+    img {
+      margin-right: 4px;
+    }
   }
 
   &__vote {

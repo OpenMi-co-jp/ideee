@@ -33,7 +33,7 @@
           min-height: 40px;
 
           a {
-            color: #33CCFF;
+            color: #00FF0D;
           }
         }
       }
@@ -48,6 +48,12 @@
       top: -30px; right: -80px;
       margin-left: auto;
       width: 150px;
+    }
+    .comment-delete-button {
+      position: absolute;
+      bottom: 0px; right: 0px;
+      margin-left: auto;
+      z-index: 1;
     }
   }
 }

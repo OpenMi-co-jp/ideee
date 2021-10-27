@@ -17,4 +17,3 @@ class DifficultysController < ApplicationController
     params.permit(:idea_id, :level)
   end
 end
-

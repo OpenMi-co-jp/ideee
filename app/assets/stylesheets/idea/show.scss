@@ -89,6 +89,29 @@
       width: 100%;
     }
 
+    &.not_yet {
+      position: relative;
+
+      &:hover {
+        &::before {
+          content: "難易度を投票する";
+          position: absolute;
+          padding: 4px 8px;
+          width: 100%;
+          text-align: center;
+          border: 1px solid #f2f2f2;
+          border-radius: 0.5rem;
+          font-size: 12px;
+          top: -14px;
+          left: 50%;
+          transform: translateX(-50%) translateY(-100%);
+          color: #fff;
+          background-color: #FF862E;
+
+        }
+      }
+    }
+
     &.easy {
       background-color: #cce5ff;
       border-color: #b8daff;

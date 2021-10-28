@@ -5,18 +5,8 @@
       <% if current_user&.own?(comment) %>
         <div class='parent'>
           <div class="comment-column m-1 own-comment">
-            <%= render 'comments/unit_comment', owned: true, comment: comment %>
+            <%= render 'comments/unit_comment', owned: true, comment: comment, i: i %>
           </div>
-          <%= link_to '#', data: { target: "dropdown_comment-#{i}" }, class:'dropdown-trigger comment-delete-button white-text' do %>
-            <i class="material-icons">delete</i>
-          <% end %>
-          <ul id="dropdown_comment-<%=i%>" class='dropdown-content comment-option'>
-            <li>
-              <%= link_to comment_path(comment), method: :delete, id: 'comment-delete' do %>
-                削除
-              <% end %>
-            </li>
-          </ul>
         </div>
       <% else %>
         <div class="comment-column m-1">

@@ -14,7 +14,7 @@
 
     &.own-comment {
       margin-left: auto;
-      background-color: #FF862E!important;
+      background-color: #FFBF85;
     }
 
     .comment-column-inside {
@@ -31,10 +31,6 @@
 
         .comment-description {
           min-height: 40px;
-
-          a {
-            color: #00FF0D;
-          }
         }
       }
     }
@@ -49,11 +45,10 @@
       margin-left: auto;
       width: 150px;
     }
-    .comment-delete-button {
+    .comment-delete-btn {
       position: absolute;
       bottom: 0px; right: 0px;
       margin-left: auto;
-      z-index: 1;
     }
   }
 }

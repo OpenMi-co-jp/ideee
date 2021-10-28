@@ -2,14 +2,23 @@
   <div class='board'>
     <% unless current_user %>
       <div class='full-pic'>
-        <%= link_to(
-          'ideeeとは',
-          '#modal_intro',
-          data: { turbolinks: false },
-          class: 'waves-effect waves-white white orange-action btn modal-trigger turorial-button',
-          id: 'modal-trigger-intro'
-        )%>
-        <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back new-user-button' %>
+        <div id='text-and-buttons-on-top-page-before-login' class='row'>
+          <div class='orange-text'>
+            あなたのアイデアを
+            <br/>
+            エンジニアと盛り上げる
+          </div>
+          <div id='buttons-on-top-page-before-login' class='mt-4'>
+            <%= link_to(
+              'ideeeとは',
+              '#modal_intro',
+              data: { turbolinks: false },
+              class: 'waves-effect waves-white white orange-action btn modal-trigger turorial-button',
+              id: 'modal-trigger-intro'
+            )%>
+            <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back new-user-button' %>
+          </div>
+        </div>
       </div>
       <div id="modal_intro" class="modal">
         <div class="modal-content">

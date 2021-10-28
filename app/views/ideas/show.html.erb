@@ -10,7 +10,6 @@
     <div class='idea-column-img col l3 s12'>
       <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
-      <%= render 'tags/links', object: @idea %>
       <div class="flex">
         <div class="share-box">
           <%= link_to twitter_share(@idea), target: '_blank' do %>
@@ -61,6 +60,7 @@
               <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
             <% end %>
           </div>
+          <%= render 'tags/links', object: @idea %>
         </div>
         <div class='s12 l2 flex-end'>
           <%= render "common/like", object: @idea %>

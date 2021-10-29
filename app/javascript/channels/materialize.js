@@ -50,7 +50,6 @@ $(document).on ('turbolinks:load', function(){
     $('#modal_idea_post').modal('open');
   };
 
-
   $('#modal-trigger-difficulty').on('click', function () {
     $('#modal_difficulty').modal('open');
   });

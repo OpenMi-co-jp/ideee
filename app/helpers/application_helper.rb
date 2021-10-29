@@ -88,8 +88,4 @@ module ApplicationHelper
   def data_page
     "#{controller_path}-#{action_name}"
   end
-
-  def data_page
-    "#{controller_path}-#{action_name}"
-  end
 end

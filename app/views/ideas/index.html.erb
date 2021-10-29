@@ -2,14 +2,23 @@
   <div class='board'>
     <% unless current_user %>
       <div class='full-pic'>
-        <%= link_to(
-          'ideeeとは',
-          '#modal_intro',
-          data: { turbolinks: false },
-          class: 'waves-effect waves-white white orange-action btn modal-trigger turorial-button',
-          id: 'modal-trigger-intro'
-        )%>
-        <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back new-user-button' %>
+        <div id='top-page-before-login' class='row'>
+          <div class='orange-text'>
+            あなたのアイデアを
+            <br/>
+            エンジニアと盛り上げる
+          </div>
+          <div id='buttons-on-top-page-before-login' class='mt-4'>
+            <%= link_to(
+              'ideeeとは',
+              '#modal_intro',
+              data: { turbolinks: false },
+              class: 'waves-effect waves-white white orange-action btn modal-trigger turorial-button',
+              id: 'modal-trigger-intro'
+            )%>
+            <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back new-user-button' %>
+          </div>
+        </div>
       </div>
       <div id="modal_intro" class="modal">
         <div class="modal-content">
@@ -25,17 +34,10 @@
     <%= render 'ideas/index/latest_boad' %>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/social_good' %>
+        <%= render 'ideas/index/most_liked' %>
       </div>
-      <div class="user-board col s12 l4 gray-1-back pl-3">
-        <div class='flex mh-3'>
-          <p class='icon-mark grid-middle'>🔥</p>
-          <b class='board-title'>注目ユーザー</b>
-          <%= link_to users_path, class: 'more-info mt-3 flex gray-5' do %>
-            <i class="material-icons">chevron_right</i>もっと見る
-          <% end %>
-        </div>
-        <%= render 'common/partial_users', users: @featured_users %>
+      <div class="col s12 l4">
+        <%= render 'ideas/index/featured_users' %>
       </div>
     </div>
     <div class="row">

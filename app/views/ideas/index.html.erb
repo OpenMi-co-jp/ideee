@@ -47,6 +47,36 @@
       <div class="col l12">
       </div>
     </div>
+    <% unless current_user %>
+      <div class="concept">
+        <div class="concept_bg">
+          <div class="concept_title">
+            <p>CONCEPT</p>
+          </div>
+          <div class="concept_headline">
+            <p>アイデアをデザインし、</p>
+            <p>エンジニアの出会いを</p>
+            <p>盛り上げる</p>
+          </div>
+          <div class="el_word">
+            <p><span>i</span>dea</p>
+            <p><span>d</span>esign</p>
+            <p><span>e</span>ngineer</p>
+            <p><span>e</span>ncounter</p>
+            <p><span>e</span>ncourage</p>
+          </div>
+          <div class="main_copy">
+            <p>
+              「社会の役に立ちそう」「あると助かるな」を投稿<br>
+              サービスの需要を視覚化、市場調査をした上で開発ができる<br>
+              <br>
+              あなたの「困ってる」を形に<br>
+              コードで社会に貢献してみませんか？
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
     <%= render 'common/service_fund' %>
   </div>
 </div>

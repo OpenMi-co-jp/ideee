@@ -9,21 +9,23 @@
       <div class='comment-description'>
         <%== simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
       </div>
-      <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
-        <%= l comment.created_at, format: :long %>
-      </div>
-      <% if owned %>
-        <%= link_to '#', data: { target: "dropdown_comment-#{i}" }, class:'dropdown-trigger comment-delete-btn white-text' do %>
-          <i class="material-icons">delete</i>
+      <div class="flex-end">
+        <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
+          <%= l comment.created_at, format: :long %>
+        </div>
+        <% if owned %>
+          <%= link_to '#', data: { target: "dropdown_comment-#{i}" }, class:'dropdown-trigger comment-delete-btn white-text' do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+          <ul id="dropdown_comment-<%=i%>" class='dropdown-content comment-option'>
+            <li>
+              <%= link_to comment_path(comment), method: :delete, id: 'comment-delete' do %>
+                削除
+              <% end %>
+            </li>
+          </ul>
         <% end %>
-        <ul id="dropdown_comment-<%=i%>" class='dropdown-content comment-option'>
-          <li>
-            <%= link_to comment_path(comment), method: :delete, id: 'comment-delete' do %>
-              削除
-            <% end %>
-          </li>
-        </ul>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

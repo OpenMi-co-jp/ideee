@@ -36,8 +36,14 @@
       <div class="col s12 l8">
         <%= render 'ideas/index/most_liked' %>
       </div>
-      <div class="col s12 l4">
-        <%= render 'ideas/index/featured_users' %>
+      <div class="col s4 gray-1-back">
+        <div class='main-board'>
+          <div class='flex'>
+            <p class='icon-mark'>🔥</p>
+            <h3 class='social-good-title'>注目ユーザー</h3>
+          </div>
+          <%= render 'common/partial_users', users: @featured_users %>
+        </div>
       </div>
     </div>
     <div class="row">

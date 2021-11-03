@@ -25,6 +25,9 @@
               <p class=' gray-5 ml-1'><%= idea.view %></p>
             </div>
             <div class="idea__detail pc">
+              <div class="idea__detail--vote <%= idea.difficulty %>">
+                <%= difficulty_tag(idea) %>
+              </div>
               <%= link_to user_path(idea.user.id), class: '' do %>
                 <% user_icon(idea.user, size: 'small') %>
               <% end %>
@@ -36,6 +39,9 @@
         </div>
         <div class='idea__info'>
           <div class="idea__detail sp">
+            <div class="idea__detail--vote <%= idea.difficulty %>">
+              <%= difficulty_tag(idea) %>
+            </div>
             <%= link_to user_path(idea.user.id), class: '' do %>
               <% user_icon(idea.user, size: 'small') %>
             <% end %>

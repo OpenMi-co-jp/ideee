@@ -190,6 +190,27 @@
       width: 50px;
       margin-left: 8px;
     }
+
+    &--vote {
+      margin-right: 22px;
+      padding: 3px;
+      border-radius: 5px;
+
+      &.easy {
+        background-color: #cce5ff;
+        border-color: #b8daff;
+      }
+
+      &.middle {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+
+      &.hard {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+      }
+    }
   }
 }
 

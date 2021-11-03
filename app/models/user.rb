@@ -41,6 +41,8 @@ class User < ApplicationRecord
   has_many :like_ideas, through: :likes, source: :idea
   has_many :comments, dependent: :destroy
   has_many :comment_ideas, through: :comments, source: :idea
+  has_many :difficultys, dependent: :destroy
+  has_many :difficulty_ideas, through: :difficultys, source: :idea
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -131,6 +133,10 @@ class User < ApplicationRecord
   def unlike(idea)
     like_ideas.delete(idea)
     idea.count_likes
+  end
+
+  def voted?(idea)
+    difficulty_ideas.include?(idea)
   end
 
   def create_comment(param)

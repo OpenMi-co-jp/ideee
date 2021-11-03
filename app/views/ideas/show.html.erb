@@ -1,9 +1,9 @@
 <%# OGP %>
 <% set_meta_tags og: {
-    title: @idea.name,
-    image: return_ogp_url(@idea.name),
-    description: strip_tags(@idea.note.to_s).gsub(/[\n]/,"").strip.truncate(120)
-  } %>
+  title: @idea.name,
+  image: return_ogp_url(@idea.name),
+  description: strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120)
+} %>
 
 <div class='idea-show'>
   <div class='row'>
@@ -13,7 +13,7 @@
       <div class="flex">
         <div class="share-box">
           <%= link_to twitter_share(@idea), target: '_blank' do %>
-            <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share"%>
+            <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share" %>
             <%= tag.p '＼ シェア ／', class: "twitter-share" %>
           <% end %>
         </div>
@@ -29,7 +29,7 @@
       </div>
 
       <div class='row gray-4'>
-        <div class='col l6 s12'>
+        <div class='col l10 s12'>
           <div class='row'>
             <p class='col l6 s12 grid-middle'>
               <%= user_definiton(@idea.user) %>
@@ -44,24 +44,30 @@
             </div>
           </div>
 
-          <div class='flex mh-3'>
-            <%= "更新日：#{l @idea.updated_at}" %>
-            <div class='flex pw-3 gray-5'>
+          <div class='status-info'>
+            <div class="status-info__day">
+              <%= "更新日：#{l @idea.updated_at}" %>
+            </div>
+            <div class="status-info__eye">
               <%= image_tag 'icons/eye.svg' %>
-              <div class='grid-middle'>
-                <%= @idea.view %>
-              </div>
+              <%= @idea.view %>
+            </div>
+            <div class='status-info__comment'>
               <%= image_tag 'icons/comment.svg' %>
-              <div class='grid-middle'>
-                <%= @idea.comments.length %>
-              </div>
+              <%= @idea.comments.length %>
+            </div>
+            <div class="status-info__vote <%= @idea.difficulty %>">
+              <%= render 'difficultys/vote', object: @idea %>
             </div>
             <% if current_user&.own?(@idea) %>
-              <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
+              <div class='status-info__time'>
+                <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
+              </div>
             <% end %>
           </div>
+
         </div>
-        <div class='s12 l2 flex-end'>
+        <div class='col s12 l2 flex-end'>
           <%= render "common/like", object: @idea %>
         </div>
       </div>
@@ -70,7 +76,7 @@
         <% if current_user %>
           <%== text_url_to_link(@idea.note.to_s) %>
         <% else %>
-          <%= strip_tags(@idea.note.to_s).gsub(/[\n]/,"").strip.truncate(120) %>
+          <%= strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
           <div class='white p-3'>
             <div class='flex login-guidance'>
               <div class='nav-item'>
@@ -87,8 +93,8 @@
         <% end %>
       </div>
       <% if current_user&.own?(@idea) %>
-        <%= link_to '編集', edit_idea_path(@idea), class:'mw-3' %>
-        <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？'}, class:'mw-3' %>
+        <%= link_to '編集', edit_idea_path(@idea), class: 'mw-3' %>
+        <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'mw-3' %>
       <% end %>
     </div>
   </div>
@@ -98,4 +104,5 @@
   <%= render 'comments/board', object: @idea %>
   <%= render 'comments/form' %>
   <%= render 'common/fund_link', object: @idea %>
+  <%= render 'ideas/show/vote_modal' %>
 </div>

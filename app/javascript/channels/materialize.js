@@ -11,6 +11,7 @@ $(document).on ('turbolinks:load', function(){
     fullWidth: true,
     indicators: true
   });
+
   $('.sidenav').sidenav({
     closeOnClick: true,
     edge: 'right',
@@ -48,4 +49,14 @@ $(document).on ('turbolinks:load', function(){
   if($('h4').hasClass('no_idea_posted')) {
     $('#modal_idea_post').modal('open');
   };
+
+  $('#modal-trigger-difficulty').on('click', function () {
+    $('#modal_difficulty').modal('open');
+  });
+
+  $('.modal-close-trigger').on('click', function () {
+    $('#modal_difficulty').modal('close');
+    // TODO: jsでUIの文字を変更するようにする
+    // $('#modal-trigger-difficulty').html($(this))
+  });
 })

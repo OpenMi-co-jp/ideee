@@ -1,39 +1,57 @@
-<div class='idea-colum-board'>
-  <% ideas.each_with_index do |idea, i| %>
-    <div class='flex'>
-      <h5 class='italic'>
-        <%= i+1 %>
+<div class='idea'>
+  <% ideas.each.with_index(@rank_num || 0) do |idea, i| %>
+    <div class='idea__list'>
+      <h5 class='idea__num'>
+        <%= i + 1 %>
       </h5>
-      <div class='idea-column border-line pl-3 row'>
-        <%= link_to idea_path(idea.id), class:'col l2 m2 s12' do %>
-          <div class='idea-column-image mb-2'>
-            <div class='idea-img-boader gray-2'>
-              <%= image_set(idea) %>
-            </div>
-          </div>
+      <div class='idea__content'>
+        <%= link_to idea_path(idea.id), class: 'idea__img' do %>
+          <figure>
+            <%= image_set(idea) %>
+          </figure>
         <% end %>
-        <div class='idea-column-body mb-2 col l8 m8 s12'>
+        <div class='idea__box'>
           <%= link_to idea_path(idea.id) do %>
-            <b class='idea-name orange-action'><%= idea.name %></b>
+            <b class='idea__name orange-action'><%= idea.name %></b>
           <% end %>
-          <div class='idea-info'>
-            <div class='idea-status row gray-3'>
-              <p class='col s12 l5 p-0'><%= "投稿日 #{idea.created_time}" %></p>
-              <div class='col s3 l2 flex p-0'><%= image_tag 'icons/comment.svg', class:'icon-size gray-4' %><p class='gray-5 ml-2'><%= idea.comments.length %></p></div>
-              <div class='col s3 l2 flex p-0'><%= image_tag 'icons/eye.svg', class:'icon-size gray-4' %><p class='gray-5 ml-1'><%= idea.view %></p></div>
+          <div class='idea__status gray-3'>
+            <p class=''><%= "投稿日 #{idea.created_time}" %></p>
+            <div class='idea__comments'>
+              <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4' %>
+              <p class='gray-5 ml-2'><%= idea.comments.length %></p>
             </div>
-            <div class='flex-end'>
-              <%= link_to user_path(idea.user.id), class: 'max-width' do %>
+            <div class='idea__eyes'>
+              <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4' %>
+              <p class=' gray-5 ml-1'><%= idea.view %></p>
+            </div>
+            <div class="idea__detail pc">
+              <div class="idea__detail--vote <%= idea.difficulty %>">
+                <%= difficulty_tag(idea) %>
+              </div>
+              <%= link_to user_path(idea.user.id), class: '' do %>
                 <% user_icon(idea.user, size: 'small') %>
               <% end %>
-              <p class='grid-middle p-0 user-def'>
-                <%= user_definiton(idea.user, ver='short') %>
+              <p class='idea__detail--def'>
+                <%= user_definiton(idea.user, ver = 'short') %>
               </p>
             </div>
           </div>
         </div>
-        <div class='like-column col l2 m2 s12'>
-          <%= render "common/like", object: idea %>
+        <div class='idea__info'>
+          <div class="idea__detail sp">
+            <div class="idea__detail--vote <%= idea.difficulty %>">
+              <%= difficulty_tag(idea) %>
+            </div>
+            <%= link_to user_path(idea.user.id), class: '' do %>
+              <% user_icon(idea.user, size: 'small') %>
+            <% end %>
+            <p class='idea__detail--def'>
+              <%= user_definiton(idea.user, ver = 'short') %>
+            </p>
+          </div>
+          <div class='idea__like'>
+            <%= render "common/like", object: idea %>
+          </div>
         </div>
       </div>
     </div>

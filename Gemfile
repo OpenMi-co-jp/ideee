@@ -52,11 +52,14 @@ gem 'devise-i18n'
 gem 'high_voltage'
 
 gem 'enum_help'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 gem 'gon'
 
 gem 'slack-notifier'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
+# メール送信
+gem 'sendgrid-ruby'
 
 # uncomment out when you need
 # gem 'stripe'
@@ -67,6 +70,11 @@ gem "sentry-rails"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  # Test
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -82,6 +90,8 @@ group :development do
   gem 'letter_opener_web'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'seed-fu'
+  gem 'annotate'
 end
 
 group :test do

@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    SlackNotifier.new.send(resource, user_url(resource&.id))
+    SlackNotifier.new.send(resource, user_url(resource&.id)) if Rails.env.production?
   end
 
   # GET /resource/edit
@@ -50,15 +50,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :icon, :description, :definition, :twitter_id, :site_url])
   end
 
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  # Updateメソッドでストロングパラメーターを設定
   def update_params
     params.require(:user).permit(:name, :email, :icon, :description, :definition)
   end

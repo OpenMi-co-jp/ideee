@@ -1,12 +1,7 @@
-User.create!(
-  email: 'example@example.com',
-  password: 'password',
-)
+# seed_fuが上手く動かない時にコメントアウトを外し、rails db:seedを実行
 
-5.times do |n|
-  Idea.create!(
-    name: "test#{n + 1}",
-    note: "Example of Idea note#{n + 1}",
-    user_id: 1
-  )
-end
+# 30.times do |n|
+#   num = n + 1
+#   user = User.new(name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample, confirmed_at: Time.now, defined: true)
+#   user.save!
+# end

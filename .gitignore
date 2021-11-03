@@ -40,3 +40,6 @@ public/uploads/
 .env
 key/
 AWSCLIV2.pkg
+
+# ignore simplecov files
+/coverage/

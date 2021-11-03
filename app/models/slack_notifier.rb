@@ -2,19 +2,18 @@ class SlackNotifier
   attr_reader :client
 
   WEBHOOK_URL = ENV["SLACK_API_URL"]
-  CHANNEL = "#ideee_app_bot"
+  CHANNEL = "#ideee_app_bot" # Slackで送りたいチャンネルを指定
 
   def initialize
     @client = Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL)
   end
 
   def send(object, url)
-    return if !Rails.env.production?
-    if url.include? 'users'
-      type = object.provider == nil ? 'メール' : object.provider
-      article = "新しいユーザーが#{type}で登録されました。\nURL: #{url}"
-    else
-      article = "新しいアイデアの投稿がありました。\nタイトル: #{object.name}\nURL: #{url}"
+    if url.include? 'users' # ユーザーが増加するとき
+      type = object&.provider == nil ? 'メール' : object&.provider
+      article = "🙋‍♂️ #{type}でユーザー登録！\nURL: #{url}\n現在のユーザー数：#{User.all.length} 人 🙋‍♀️"
+    else # アイデアが増加するとき
+      article = "💡 新アイデアの投稿！ by #{object.user.name}\nタイトル: #{object.name}\nURL: #{url}\n現在のアイデア数：#{Idea.all.length} 🚀"
     end
 
     Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)

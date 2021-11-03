@@ -1,17 +1,16 @@
 class ApplicationController < ActionController::Base
-  # before_action :basic_auth
+  before_action :store_user_location!, if: :storable_location?
 
-  # devise settings
-  def after_sign_in_path_for(resource)
-    if current_user
-      flash[:notice] = "ログインに成功しました。"
-      user_path(id: current_user.id)
+  # deviseでログインした後の設定
+  def after_sign_in_path_for(resource_or_scope)
+    if resource.defined # ユーザー情報が登録されているか確認
+      stored_location_for(resource_or_scope) || super
     else
-      flash[:alert] = "新規登録完了しました。ユーザー情報を登録してください。"
-      new_profile_path
+      edit_user_registration_path(resource)
     end
   end
 
+  # 本番環境でのエラーハンドリング
   if Rails.env.production?
     rescue_from StandardError, with: :render500
     rescue_from ActiveRecord::RecordNotFound, with: :render404
@@ -27,14 +26,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  # def basic_auth
-  #   return if session['basic.auth']
-  #   authenticate_or_request_with_http_basic do |username, password|
-  #     username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
-  #     session['basic.auth'] = true
-  #   end
-  # end
-
+  # ユーザー情報が登録されているか確認し、アラートで登録必須項目を表示
   def defined_check
     unless current_user&.check_defined?
       redirect_to edit_user_registration_path(params[:id])
@@ -42,5 +34,15 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "ユーザーのメールアドレスを確認が完了していません。" if current_user.confirmed_at.blank?
       flash[:alert] = "ユーザーのタイプを登録してください。" if current_user.definition.blank?
     end
+  end
+
+  def store_user_location!
+    store_location_for(:user, request.fullpath)
+  end
+
+  def storable_location?
+    # after_sign_outのフレンドリーフォワーディングを使うときはこの行を削除
+    return false if current_user
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
 end

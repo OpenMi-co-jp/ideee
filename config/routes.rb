@@ -5,7 +5,11 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
-  resources :comments, only: %i[create edit destroy]
+  resources :comments, only: %i[create edit destroy] do
+    collection do
+      post 'send_email'
+    end
+  end
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks',
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  resources :difficultys, only: %i[create]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

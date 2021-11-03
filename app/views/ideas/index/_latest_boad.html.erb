@@ -2,8 +2,8 @@
   <div class='back-color-board'></div>
   <div class='main-board'>
     <div class='flex'>
-      <p class='icon-mark'>🎉</p>
-      <b class='latest-title'>最新アイデア</b>
+      <p class='icon-mark white-back'>🎉</p>
+      <b class='board-title white-text'>最新アイデア</b>
     </div>
     <div class='carousel'>
       <% if @latest_ideas%>
@@ -18,7 +18,7 @@
               </div>
             <% end %>
             <p class='orange-action'><%= idea.name %></p>
-            <p class='gray-3'><%= user_definiton(idea.user) %><%= idea.user.name %></p>
+            <p class='gray-3'><%= user_definiton(idea.user, ver='short') %><%= idea.user.name %></p>
           </div>
         <% end %>
       <% end %>

@@ -39,15 +39,15 @@
         </div>
       </div>
       <% if @user.description.present? %>
-        <div class="user-content">
+        <div class="user-content mb-2">
           <%== simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
         </div>
       <% end %>
+      <% if own_user_checked(@user) %>
+        <%= link_to '編集', edit_user_registration_path(@user.id), class: 'mw-3' %>
+      <% end %>
     </div>
   </div>
-  <% if own_user_checked(@user) %>
-    <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
-  <% end %>
   <% if @user.ideas.present? %>
     <h4>アイデア</h4>
     <%= render 'common/column_board', ideas: @user.ideas %>

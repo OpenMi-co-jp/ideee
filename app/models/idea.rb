@@ -3,6 +3,7 @@
 # Table name: ideas
 #
 #  id         :bigint           not null, primary key
+#  difficulty :integer          default("not_yet")
 #  icon       :string(255)
 #  likes_num  :integer          default(0)
 #  name       :string(255)
@@ -25,11 +26,14 @@ class Idea < ApplicationRecord
   has_many :comment_users, through: :comments, source: :user
   has_many :taggings, dependent: :destroy
   has_many :idea_tags, through: :taggings, source: :tag
+  has_many :difficultys, dependent: :destroy
+  has_many :difficulty_users, through: :difficultys, source: :user
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :note, presence: true
+  enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
 
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
 
@@ -46,8 +50,15 @@ class Idea < ApplicationRecord
     update(view: idea_view.to_i)
   end
 
-  def self.search(keyword)
-    where(["name like?", "%#{keyword}%"])
+  def self.search(name: nil, difficulty: nil)
+    # TODO: クソコードをリファクタ
+    if name.nil? && difficulty.nil?
+      all
+    elsif !name.nil?
+      where(["name like?", "%#{name}%"])
+    else !difficulty.nil?
+      where(difficulty: difficulty)
+    end
   end
 
   def count_likes
@@ -67,5 +78,24 @@ class Idea < ApplicationRecord
 
   def tag_names
     idea_tags.map(&:name).join(',')
+  end
+
+  def update_difficulty
+    # difficultyが一つしかなければ現在の値を代入
+    level = if difficultys.count == 1
+              difficultys[0].level
+            else
+              # 2つ以上であればgroup化して計算開始
+              levels_hash = difficultys.group(:level).count
+              if levels_hash.map{ |n| n[1] }.max(2).uniq.length == 1
+                # もし最も多く使われる値が2つ以上ある場合
+                'middle'
+              else
+                # 最も多く使われる値が１つしかない場合
+                levels_hash.max_by{|x| x[1]}[0]
+              end
+            end
+    # ideaを出力されたlevelでupdate
+    update(difficulty: level)
   end
 end

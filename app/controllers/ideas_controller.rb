@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   def index
     @ideas = Idea.all # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
-    @liked_ideas = Idea.all.order(likes_num: "DESC").first(5)
+    @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
     @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
   end
@@ -15,6 +15,7 @@ class IdeasController < ApplicationController
   def show
     @title = @idea.name
     @user = User.find_by(id: @idea.user_id)
+    @levels = Difficulty.levels
     if Rails.env.production?
       @idea.views_update(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
       @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-' # 製作者にのみ見える、アイデアページの滞在時間を設定
@@ -59,7 +60,7 @@ class IdeasController < ApplicationController
   def search
     # アイデアに紐づくlikeの数を数えて、降順に並べる
     sort = params[:sort] || "likes_num"
-    list = Idea.search(params[:keyword]).order("#{sort}": "DESC")
+    list = Idea.search(name: params[:keyword], difficulty: params[:difficulty]).order("#{sort}": "DESC")
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value

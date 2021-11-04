@@ -21,6 +21,7 @@ $(document).on ('turbolinks:load', function(){
     placeholder: "Enterで入力",
     secondaryPlaceholder: "+Tag",
     data: getChipsData($("#tag-hidden-field").val()),
+    limit: 3
   });
 
   // chipsの初期データを取得するメソッド

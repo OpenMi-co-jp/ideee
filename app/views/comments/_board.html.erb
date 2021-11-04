@@ -1,11 +1,11 @@
 <div class="comment-board yellow-soft-back ph-1">
   <h4 class='mw-4'>コメント</h4>
   <% if object.comments.length > 0 %>
-    <% object.comments.each_with_index do |comment, i| %>
+    <% object.comments.each do |comment| %>
       <% if current_user&.own?(comment) %>
         <div class='parent'>
           <div class="comment-column m-1 own-comment">
-            <%= render 'comments/unit_comment', owned: true, comment: comment, i: i %>
+            <%= render 'comments/unit_comment', owned: true, comment: comment %>
           </div>
         </div>
       <% else %>

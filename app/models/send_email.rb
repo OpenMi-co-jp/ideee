@@ -17,7 +17,7 @@ class SendEmail
             "https://www.ideee.tech/ideas/#{idea.id}"
     content = Content.new(type: 'text/plain', value: body)
 
-    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
     if users.instance_of?(Array) # 送信したいアドレスが複数の時
       users.map do |user|
         to = Email.new(email: user&.email )

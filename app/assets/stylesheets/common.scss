@@ -75,6 +75,7 @@ div, p, b {
 
 .flex {
   display: flex;
+  flex-wrap: nowrap
 }
 
 .flex-end {
@@ -98,7 +99,7 @@ hr {
 
 .date-small {
   font-size: x-small;
-  white-space: nowrap;
+  margin-right: 10px;
 }
 
 .italic {

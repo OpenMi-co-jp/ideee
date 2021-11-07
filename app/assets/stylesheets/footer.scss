@@ -28,6 +28,10 @@ footer {
         list-style: none;
         a {
           text-decoration: none;
+          transition: all 0.3s ease 0s;
+        }
+        a:hover {
+          opacity: 0.5;
         }
       }
     }

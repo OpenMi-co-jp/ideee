@@ -112,6 +112,11 @@ hr {
   object-fit: contain;
   width: 110px;
   height: 100%;
+  transition: all 1s;
+}
+
+.more-info:hover {
+  transform: rotateX(360deg);
 }
 
 .board-title {

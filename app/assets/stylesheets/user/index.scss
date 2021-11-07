@@ -2,6 +2,14 @@
   background-color: white;
   width: 95%;
   margin: 0 auto;
+
+  .row {
+    transition: all 0.3s
+  }
+
+  .row:hover {
+    opacity: 0.5;
+  }
 }
 
 .user-column {
@@ -40,6 +48,10 @@
     height: 30px;
   }
 
+  &.small:hover {
+    opacity: 0.5;
+  }
+
   &.normal {
     width: 60px;
     height: 60px;
@@ -56,8 +68,4 @@
     height: 150px;
     margin: 0 auto;
   }
-}
-
-.icon-circle:hover {
-  opacity: 0.5;
 }

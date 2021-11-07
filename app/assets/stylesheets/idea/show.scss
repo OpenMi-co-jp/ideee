@@ -59,6 +59,11 @@
   font-size: smaller;
   background-color: #e3e4e8;
   color: #2ca3b3;
+  transition: all 0.5s;
+}
+
+.idea-tag:hover {
+  opacity: 0.5;
 }
 
 .status-info {

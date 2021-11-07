@@ -1,6 +1,7 @@
 version: '3'
 services:
   db:
+    platform: linux/x86_64
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 'password'
@@ -12,7 +13,7 @@ services:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/ideee
+      - .:/igdeee
     ports:
       - "3000:3000"
     depends_on:

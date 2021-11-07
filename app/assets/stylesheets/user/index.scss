@@ -33,6 +33,7 @@
   object-fit: cover;
   border-radius: 3%;
   background-color: white;
+  transition: all 0.3s ease 0s;
 
   &.small {
     width: 30px;
@@ -55,4 +56,8 @@
     height: 150px;
     margin: 0 auto;
   }
+}
+
+.icon-circle:hover {
+  opacity: 0.5;
 }

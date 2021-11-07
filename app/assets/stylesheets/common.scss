@@ -83,6 +83,11 @@ div, p, b {
   justify-content: flex-end;
 }
 
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .border-line {
   border-bottom: 5px solid #E3E4E8;
   margin: 0.5rem 1rem 0;

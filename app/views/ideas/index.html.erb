@@ -34,7 +34,11 @@
     <%= render 'ideas/index/latest_boad' %>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/most_column', icon_mark: '💛', board_title: 'ハートが多いアイデア', path: search_ideas_path, ideas: @liked_ideas %>
+        <%= render 'ideas/index/most_column',
+          icon_mark: '💛',
+          board_title: 'ハートが多いアイデア',
+          path: search_ideas_path,
+          ideas: @liked_ideas %>
       </div>
       <div class="col s12 l4">
         <%= render 'ideas/index/featured_users' %>
@@ -42,14 +46,22 @@
     </div>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/most_column', icon_mark: '💬', board_title: 'コメントが多いアイデア', path: most_commented_ideas_path, ideas: @most_commented_ideas %>
+        <%= render 'ideas/index/most_column',
+          icon_mark: '💬',
+          board_title: 'コメントが多いアイデア',
+          path: most_commented_ideas_path,
+          ideas: @most_commented_ideas %>
       </div>
       <div class="col l12">
       </div>
     </div>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/most_column', icon_mark: '👀', board_title: 'View数の多いアイデア', path: search_ideas_path(sort: :view), ideas: @most_viewed_ideas %>
+        <%= render 'ideas/index/most_column',
+          icon_mark: '👀',
+          board_title: 'View数の多いアイデア',
+          path: search_ideas_path(sort: :view),
+          ideas: @most_viewed_ideas %>
       </div>
       <div class="col l12">
       </div>

@@ -74,7 +74,7 @@
 
       <div class='idea-content mb-2'>
         <% if current_user %>
-          <%== text_url_to_link(@idea.note.to_s) %>
+          <%== @idea.note %>
         <% else %>
           <%= strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
           <div class='white p-3'>

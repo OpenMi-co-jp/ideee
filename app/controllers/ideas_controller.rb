@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show search ]
+  before_action :authenticate_user!, except: %i[ index show search most_commented ]
   before_action :own_user_check, only: %i[ edit update destroy ]
-  before_action :defined_check, except: %i[ index show search ]
+  before_action :defined_check, except: %i[ index show search most_commented ]
 
   def index
     @ideas = Idea.all # 一度定義することで何度もDBに値を取りに行くことを阻止

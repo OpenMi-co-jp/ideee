@@ -9,6 +9,7 @@ class IdeasController < ApplicationController
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
+    @most_commented_ideas = @ideas.most_commented.first(5)
     @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
   end
 
@@ -63,6 +64,13 @@ class IdeasController < ApplicationController
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
+  end
+
+  def most_commented
+    list = Idea.most_commented
+    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
+    # ビューを指定
+    render 'search'
   end
 
   private

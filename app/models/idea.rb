@@ -33,6 +33,8 @@ class Idea < ApplicationRecord
   validates :note, presence: true
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
 
+  scope :most_commented, -> { find(Comment.group(:idea_id).order('count(idea_id) desc').pluck(:idea_id)) }
+
   def user
     return User.find_by(id: self.user_id)
   end

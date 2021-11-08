@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :ideas do
     collection do
       get 'search'
+      get 'most_commented'
     end
   end
   resources :comments, only: %i[create edit destroy] do

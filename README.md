@@ -8,17 +8,6 @@
 全セットアップ方法
 https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 
-### dockerで設定する場合
-
-1. [DockerをPCにインストールする](https://www.docker.com/)
-2. Dockerを起動させる
-3. githubからローカルにクローンされていることを確認
-4. ideeeのディレクトリに移動 // cd xxxx/ideee
-5. コンテナを起動する
-   `docker-compose up --build`
-6. dockerコンテナ上でDB作成、DBのカラムのセットアップ、seedデータを入れる
-   `docker-compose run web db:create db:migrate db:seed_fu`
-
 ## versions
 
 - Rails (6.1.4)
@@ -69,3 +58,6 @@ https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 |comment_id|string|
 |idea_id|string|
 |discussion_id|string|
+
+# ER図
+![](./er.drawio.png)

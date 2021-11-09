@@ -1,24 +1,27 @@
 .idea-index {
   .full-pic {
-    position: relative;
     min-height: 50vh;
-    background: url(idea_main.png)
-      center / cover;
+    background: url(idea_main.png) left / cover;;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 
-    .turorial-button {
-      margin: 0;
-      position: absolute;
-      top: calc(60% - 0.5em);
-      margin-left: 11rem;
+    #top-page-before-login {
+      @media screen and (min-width: 320px) {
+        text-align: center;
+      }
+      @media screen and (min-width: 768px) {
+        margin-left: calc(60% - 50vw);
+        text-align: justify;
+      }
+      .orange-text {
+        font-weight: bold;
+        font-size: 2rem;
+        padding-top: 6rem;
+      }
     }
 
     .new-user-button {
-      margin: 0;
-      position: absolute;
-      top: calc(60% - 0.5em);
-      margin-left: 20rem;
+      margin-left: 2rem;
     }
   }
 
@@ -27,9 +30,8 @@
     min-height: 450px;
 
     .back-color-board {
-      min-height: 30vh;
-      background: url(background_orange.png)
-        center / cover;
+      min-height: 25vh;
+      background: url(background_orange.png) center / cover;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
     }
@@ -39,27 +41,24 @@
       top: -1rem;
       width: 100%;
       margin: 2rem;
-
-      .icon-mark {
-        background-color: white;
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 10%;
-        font-size: 24px;
-        text-align: center;
-        vertical-align: middle;
-      }
-
-      .latest-title {
-        color: white;
-        font-size: 2rem;
-        margin: 0 0 10px 20px;
-      }
     }
+  }
+
+  .icon-mark {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10%;
+    font-size: 24px;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto 0;
+    padding: 0 5px;
   }
 }
 
 .idea {
+  margin-bottom: 3rem;
+
   &__list {
     margin-top: 24px;
     display: flex;
@@ -116,6 +115,12 @@
   &__img {
     display: block;
 
+    .idea-status {
+      width: 100%;
+    }
+    .user-def {
+      width: 70px;
+    }
     figure {
       margin: 0;
     }
@@ -149,13 +154,13 @@
   &__comments {
     display: flex;
     margin-left: 22px;
-    color: #A7A7A7;
+    color: #a7a7a7;
   }
 
   &__info {
     display: flex;
     margin-left: auto;
-    color: #A7A7A7;
+    color: #a7a7a7;
 
     @media screen and (max-width: 768px) {
       margin: 16px 0 0;
@@ -184,6 +189,204 @@
     &--def {
       width: 50px;
       margin-left: 8px;
+    }
+
+    &--vote {
+      margin-right: 22px;
+      padding: 3px;
+      border-radius: 5px;
+
+      &.easy {
+        background-color: #cce5ff;
+        border-color: #b8daff;
+      }
+
+      &.middle {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+
+      &.hard {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+      }
+    }
+  }
+}
+
+.concept {
+  max-width: 100%;
+  position: relative;
+  min-height: 100vh;
+  margin-top: 10vh;
+
+  p {
+    text-align: center;
+    font-weight: bold;
+    color: #f5f5f5;
+  }
+
+  .concept_bg {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 900px;
+    z-index: -1;
+    background: url(concept.png) center / cover;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    .concept_title {
+      position: absolute;
+      display: flex;
+      width: 25vw;
+      height: 8vh;
+      left: 50%;
+      top: 8%;
+      transform: translate(-50%);
+      background-color: black;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+
+      @media screen and (max-width: 992px) {
+        width: 35vw;
+        font-size: 40px;
+      }
+      @media screen and (max-width: 620px) {
+        width: 50vw;
+        font-size: 36px;
+      }
+      @media screen and (max-width: 400px) {
+        width: 60vw;
+        font-size: 30px;
+      }
+    }
+  }
+
+  .concept_headline {
+    position: absolute;
+    display: flex;
+    width: 90%;
+    height: 8vh;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%);
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 1156px) {
+      flex-direction: column;
+    }
+
+    p {
+      font-size: 40px;
+
+      @media screen and (max-width: 992px) {
+        width: 95%;
+        font-size: 34px;
+        top: 30%;
+        flex-direction: column;
+      }
+      @media screen and (max-width: 600px) {
+        font-size: 28px;
+        top: 25%;
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 23px;
+        top: 20%;
+      }
+    }
+  }
+
+  .el_word {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    width: 60vw;
+    height: 4vh;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%);
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (max-width: 1155px) {
+      top: 52%;
+      width: 80vw;
+    }
+    @media screen and (max-width: 600px) {
+      top: 50%;
+      width: 85vw;
+    }
+    @media screen and (max-width: 400px) {
+      top: 50%;
+      width: 90vw;
+    }
+
+    p {
+      width: 4vw;
+      height: 3vh;
+      font-size: 20px;
+      font-weight: normal;
+      justify-items: center;
+      flex-basis: 20%;
+
+      @media screen and (max-width: 1156px) {
+        flex-basis: 20%;
+        margin-top: 10px;
+      }
+      @media screen and (max-width: 600px) {
+        flex-basis: 40%;
+      }
+      @media screen and (max-width: 300px) {
+        flex-basis: 40%;
+        margin: 5px 10px;
+      }
+
+      span {
+        color: #FCEE21;
+      }
+    }
+  }
+
+  .main_copy {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 8vh;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%);
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    @media screen and (max-width: 1156px) {
+      top: 65%;
+    }
+    @media screen and (max-width: 600px) {
+      top: 70%;
+    }
+    @media screen and (max-width: 400px) {
+      top: 70%;
+    }
+
+    p {
+      width: 80%;
+      font-size: 24px;
+
+      @media screen and (max-width: 1025px) {
+        font-size: 20px;
+      }
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 16px;
+      }
     }
   }
 }

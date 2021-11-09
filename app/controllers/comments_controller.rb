@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+  before_action :set_comment, only: %i[edit destroy]
   def create
     current_user.create_comment(comment_params)
   end
@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
   def edit; end
 
   def destroy
-    @comment = Comment.find(params[:id])
     @comment.destroy
   end
 
@@ -23,5 +22,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.permit(:description, :idea_id)
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 end

@@ -22,24 +22,21 @@
       }
 
       .comment-info {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
+        max-width: 90%;
+
+        &.white-text {
+          max-width: none !important;
+        }
 
         .comment-description {
           min-height: 40px;
         }
       }
-    }
-  }
 
-  .parent {
-    position: relative;
-
-    .comment-option {
-      position: absolute;
-      top: -30px; right: -80px;
-      margin-left: auto;
-      width: 150px;
+      .comment-options {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 }

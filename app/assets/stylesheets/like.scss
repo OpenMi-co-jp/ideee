@@ -10,7 +10,6 @@
 
     &:not(.clicked)::before {
       content: "ほしい！";
-      text-align: center;
       position: absolute;
       padding: 4px 8px;
       width: 70px;

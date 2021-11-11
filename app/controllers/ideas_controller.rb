@@ -33,7 +33,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params.merge(user_id: current_user.id))
-    if @idea.save_with_tags(tag_names: tag_names_params)
+    if @idea.save_with_tags(tags_params)
       SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
       redirect_to @idea, notice: t('.success')
     else
@@ -44,7 +44,7 @@ class IdeasController < ApplicationController
 
   def update
     @idea.assign_attributes(idea_params.merge(user_id: current_user.id))
-    if @idea.save_with_tags(tag_names: tag_names_params)
+    if @idea.save_with_tags(tags_params)
       redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')
@@ -88,7 +88,7 @@ class IdeasController < ApplicationController
       end
     end
 
-    def tag_names_params
-      params.dig(:idea, :tag_names).split(",").uniq
+    def tags_params
+      params.dig(:idea, :tag_list).split(",").uniq
     end
 end

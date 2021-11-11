@@ -34,9 +34,9 @@
         <%= form.rich_text_area :note %>
       </div>
       <div class="field">
-        <%= form.label :tag_names_up_to_three %>
+        <%= form.label :tags_up_to_three %>
         <div class="chips"></div>
-        <%= form.hidden_field :tag_names, id: 'tag-hidden-field' %>
+        <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
       <%= form.submit class: 'btn orange-action-back mh-3', id: 'idea-btn' %>
     </div>

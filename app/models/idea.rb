@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  difficulty :integer          default("not_yet")
+#  draft      :boolean          default(FALSE)
 #  icon       :string(255)
 #  likes_num  :integer          default(0)
 #  name       :string(255)

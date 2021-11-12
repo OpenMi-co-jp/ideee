@@ -49,7 +49,7 @@
         <%= render 'ideas/index/ranking',
           icon_mark: '💬',
           board_title: 'コメントが多いアイデア',
-          path: most_commented_ideas_path,
+          path: search_ideas_path(sort: :comments_num),
           ideas: @most_commented_ideas %>
       </div>
       <div class="col l12">

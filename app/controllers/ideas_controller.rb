@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show search most_commented ]
+  before_action :authenticate_user!, except: %i[ index show search ]
   before_action :own_user_check, only: %i[ edit update destroy ]
-  before_action :defined_check, except: %i[ index show search most_commented ]
+  before_action :defined_check, except: %i[ index show search ]
 
   def index
     @ideas = Idea.all # 一度定義することで何度もDBに値を取りに行くことを阻止
@@ -64,13 +64,6 @@ class IdeasController < ApplicationController
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
-  end
-
-  def most_commented
-    list = Idea.most_commented
-    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
-    # ビューを指定
-    render 'search'
   end
 
   private

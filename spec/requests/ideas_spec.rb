@@ -72,11 +72,6 @@ RSpec.describe "Ideas", type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      it 'リクエストが成功すること' do
-        post ideas_path, params: { idea: attributes_for(:idea, :empty_name) }
-        expect(response.status).to eq 200
-      end
-
       it 'アイデアが登録されないこと' do
         expect do
           post ideas_path, params: { idea: attributes_for(:idea, :empty_name) }
@@ -112,11 +107,6 @@ RSpec.describe "Ideas", type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      it 'リクエストが成功すること' do
-        put idea_path(idea), params: { idea: attributes_for(:idea, :empty_name) }
-        expect(response.status).to eq 200
-      end
-
       it 'アイデア名が変更されないこと' do
         expect do
           put idea_path(idea), params: { idea: attributes_for(:idea, :empty_name) }

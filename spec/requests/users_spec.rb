@@ -42,9 +42,6 @@ RSpec.describe "Users", type: :request do
     it 'リクエストが成功すること' do
       get search_users_path
       expect(response.status).to eq 200
-      expect(response.body).to include idea_man.name
-      expect(response.body).to include engineer.name
-      expect(response.body).to include idea_engineer.name
     end
 
     it '検索した定義のユーザーが表示されていること(アイデア/エンジニアは常に表示される)' do

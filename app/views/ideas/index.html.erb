@@ -34,7 +34,7 @@
     <%= render 'ideas/index/latest_boad' %>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/most_column',
+        <%= render 'ideas/index/ranking',
           icon_mark: '💛',
           board_title: 'ハートが多いアイデア',
           path: search_ideas_path,
@@ -46,7 +46,7 @@
     </div>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/most_column',
+        <%= render 'ideas/index/ranking',
           icon_mark: '💬',
           board_title: 'コメントが多いアイデア',
           path: most_commented_ideas_path,
@@ -57,7 +57,7 @@
     </div>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/most_column',
+        <%= render 'ideas/index/ranking',
           icon_mark: '👀',
           board_title: 'View数の多いアイデア',
           path: search_ideas_path(sort: :view),

@@ -34,6 +34,9 @@ class Idea < ApplicationRecord
   validates :note, presence: true
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
 
+  scope :published, -> { where draft: false }
+  scope :drafts, -> { where draft: true }
+
   def user
     return User.find_by(id: self.user_id)
   end
@@ -50,11 +53,11 @@ class Idea < ApplicationRecord
   def self.search(name: nil, difficulty: nil)
     # TODO: クソコードをリファクタ
     if name.nil? && difficulty.nil?
-      all
+      all.published
     elsif !name.nil?
-      where(["name like?", "%#{name}%"])
+      where(["name like?", "%#{name}%"]).published
     else !difficulty.nil?
-      where(difficulty: difficulty)
+      where(difficulty: difficulty).published
     end
   end
 

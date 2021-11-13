@@ -33,7 +33,14 @@
         <%= form.label :note %>
         <%= form.rich_text_area :note %>
       </div>
-      <%= form.submit class: 'btn orange-action-back mh-3' %>
+      <% if idea.draft || idea.id.nil? %>
+        <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3' %>
+      <% end %>
+      <% if idea.draft %>
+        <%= form.submit t('default.publish'), class: 'btn orange-action-back mh-3' %>
+      <% else %>
+        <%= form.submit class: 'btn orange-action-back mh-3' %>
+      <% end %>
     </div>
   </div>
 <% end %>

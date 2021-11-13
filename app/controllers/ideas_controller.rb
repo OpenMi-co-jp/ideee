@@ -1,11 +1,12 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish ]
   before_action :authenticate_user!, except: %i[ index show search ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search ]
+  before_action :own_draft_check, only: %i[ show ]
 
   def index
-    @ideas = Idea.all # 一度定義することで何度もDBに値を取りに行くことを阻止
+    @ideas = Idea.all.published # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
@@ -32,10 +33,14 @@ class IdeasController < ApplicationController
   def edit; end
 
   def create
-    @idea = Idea.new(idea_params.merge(user_id: current_user.id))
+    @idea = Idea.new(idea_params)
     if @idea.save
-      SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
-      redirect_to @idea, notice: t('.success')
+      if draft_bool
+        redirect_to @idea, notice: t('.draft_save')
+      else
+        SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+        redirect_to @idea, notice: t('.success')
+      end
     else
       flash.now[:alert] = t('.fail')
       render :new
@@ -43,8 +48,9 @@ class IdeasController < ApplicationController
   end
 
   def update
-    if @idea.update(idea_params.merge(user_id: current_user.id))
-      redirect_to @idea, notice: t('.success')
+    if @idea.update(idea_params)
+      message = draft_bool ? t('.draft_save') : t('.success')
+      redirect_to @idea, notice: message
     else
       flash.now[:alert] = t('.fail')
       render :edit
@@ -65,6 +71,12 @@ class IdeasController < ApplicationController
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
   end
 
+  def publish
+    @idea.update(draft: false)
+    SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+    redirect_to @idea, notice: t('.success')
+  end
+
   private
     def set_idea
       @idea = Idea.find(params[:id])
@@ -72,11 +84,25 @@ class IdeasController < ApplicationController
 
     # ストロングパラメーターを設定
     def idea_params
-      params.require(:idea).permit(:name, :icon, :note, :view, :user_id)
+      params.require(:idea)
+            .permit(:name, :icon, :note, :view, :user_id, :commit)
+            .merge(user_id: current_user.id)
+            .merge(draft: draft_bool)
     end
 
     def own_user_check
       unless current_user.own?(@idea)
+        redirect_to root_path
+        flash[:alert] = t('default.message.unauthorized')
+      end
+    end
+
+    def draft_bool
+      params[:commit] == t('default.save_draft')
+    end
+
+    def own_draft_check
+      if @idea.draft && !current_user.own?(@idea)
         redirect_to root_path
         flash[:alert] = t('default.message.unauthorized')
       end

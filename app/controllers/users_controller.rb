@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :defined_check, except: %i[ index search ], if: :own_user?
 
   def index
-    @users = Kaminari.paginate_array(User.where(defined: true).order(point: "DESC"))
+    @users = Kaminari.paginate_array(User.defined_user.order(point: "DESC"))
                      .page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @users.limit_value
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @searched_users = Kaminari.paginate_array(User.where(defined: true).search(params[:key]).order(point: "DESC"))
+    @searched_users = Kaminari.paginate_array(User.defined_user.search(params[:key]).order(point: "DESC"))
                               .page(params[:page])
   end
 

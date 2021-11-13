@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: %i[ edit destroy ]
 
   def create
     current_user.create_comment(comment_params)
@@ -7,7 +8,8 @@ class CommentsController < ApplicationController
   def edit; end
 
   def destroy
-    current_user.destroy_comment(params)
+    @comment.delete
+    @comment.idea.count_comments
   end
 
   def send_email
@@ -21,6 +23,10 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.permit(:description, :idea_id)
+    params.permit(:description, :idea_id, :user_id, :id)
+  end
+
+  def set_comment
+    @comment = Comment.find(comment_params[:id])
   end
 end

@@ -144,19 +144,13 @@ class User < ApplicationRecord
     Idea.find(params[:idea_id]).count_comments
   end
 
-  def destroy_comment(params)
-    comment = comments.find(params[:id])
-    comment.destroy
-    comment.idea.count_comments
-  end
-
   # Contributionの計算
   def point_update
     idea_num = ideas.length
     idea_like_num = ideas.sum{|n| n.likes.length }
-    comment_num = comments.length
+    comment_point = comments.length
     like_num = likes.length
-    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_num
+    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_point
     update(point: sum_points)
   end
 

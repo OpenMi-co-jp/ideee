@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    member do
+      post 'publish'
+    end
   end
   resources :comments, only: %i[create edit destroy] do
     collection do

@@ -54,6 +54,8 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 200 }
   validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
+  scope :defined_user, -> { where defined: true }
+
   class << self
     # omniauthを使ったSNSログイン機能
     def from_omniauth(auth)

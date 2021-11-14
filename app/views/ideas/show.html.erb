@@ -1,9 +1,11 @@
 <%# OGP %>
-<% set_meta_tags og: {
-  title: @idea.name,
-  image: return_ogp_url(@idea.name),
-  description: strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120)
-} %>
+<% unless @idea.draft %>
+  <% set_meta_tags og: {
+    title: @idea.name,
+    image: return_ogp_url(@idea.name),
+    description: strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120)
+  } %>
+<% end %>
 
 <div class='idea-show'>
   <div class='row'>

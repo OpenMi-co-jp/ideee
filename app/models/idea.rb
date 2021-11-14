@@ -36,6 +36,7 @@ class Idea < ApplicationRecord
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
+  scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
 
   def user
     return User.find_by(id: self.user_id)

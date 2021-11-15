@@ -33,7 +33,6 @@ class IdeasController < ApplicationController
   def edit; end
 
   def create
-    byebug
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
       if draft_bool
@@ -49,7 +48,6 @@ class IdeasController < ApplicationController
   end
 
   def update
-    byebug
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
       message = draft_bool ? t('.draft_save') : t('.success')

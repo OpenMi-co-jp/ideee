@@ -4,7 +4,7 @@
   <% end %>
   <ul id="dropdown_comment-<%= comment.id %>" class='dropdown-content comment-option'>
     <li>
-      <%= link_to comment_path(comment), method: :delete, id: 'comment-delete' do %>
+      <%= link_to comment_path(comment.id), method: :delete, id: 'comment-delete' do %>
         削除
       <% end %>
     </li>

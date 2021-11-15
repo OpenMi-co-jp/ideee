@@ -61,7 +61,7 @@
             </div>
             <div class='status-info__comment'>
               <%= image_tag 'icons/comment.svg' %>
-              <%= @idea.comments.length %>
+              <%= @idea.comments_num %>
             </div>
             <div class="status-info__vote <%= @idea.difficulty %>">
               <%= render 'difficultys/vote', object: @idea %>

@@ -36,7 +36,7 @@ $(document).on ('turbolinks:load', function(){
   }
 
   // 更新時にchipsの値をフォームに格納
-  $("#idea-btn").on("click", function () {
+  $(".idea-btn").on("click", function () {
     const tags = M.Chips.getInstance($(".chips")).chipsData.map(function (
       value
     ) {
@@ -72,8 +72,8 @@ $(document).on ('turbolinks:load', function(){
     $('.sidenav').sidenav('open');
   });
 
-  // アイデア投稿の導線モーダル
-  if($('h4').hasClass('no_idea_posted')) {
+  // アイデア投稿の導線モーダル、アイデアと下書きもなければ表示
+  if($('h4').hasClass('no_idea_posted') && $('h5').hasClass('no_draft_posted')) {
     $('#modal_idea_post').modal('open');
   };
 

@@ -13,7 +13,7 @@ class SlackNotifier
       type = object&.provider == nil ? 'メール' : object&.provider
       article = "🙋‍♂️ #{type}でユーザー登録！\nURL: #{url}\n現在のユーザー数：#{User.all.length} 人 🙋‍♀️"
     else # アイデアが増加するとき
-      article = "💡 新アイデアの投稿！ by #{object.user.name}\nタイトル: #{object.name}\nURL: #{url}\n現在のアイデア数：#{Idea.all.length} 🚀"
+      article = "💡 新アイデアの投稿！ by #{object.user.name}\nタイトル: #{object.name}\nURL: #{url}\n現在のアイデア🚀\n投稿数：#{Idea.published.length} 下書き数：#{Idea.drafts.length}"
     end
 
     Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)

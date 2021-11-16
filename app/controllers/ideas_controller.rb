@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[ show edit update destroy publish ]
-  before_action :authenticate_user!, except: %i[ index show search ]
+  before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
-  before_action :defined_check, except: %i[ index show search ]
+  before_action :defined_check, except: %i[ index show search tags]
   before_action :own_draft_check, only: %i[ show ]
 
   def index
@@ -34,7 +34,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
-    if @idea.save
+    if @idea.save_with_tags(tags_params)
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
@@ -48,7 +48,8 @@ class IdeasController < ApplicationController
   end
 
   def update
-    if @idea.update(idea_params)
+    @idea.assign_attributes(idea_params)
+    if @idea.save_with_tags(tags_params)
       message = draft_bool ? t('.draft_save') : t('.success')
       redirect_to @idea, notice: message
     else
@@ -69,6 +70,11 @@ class IdeasController < ApplicationController
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
+  end
+
+  def tags
+    list = Idea.with_tag(params[:tag_name])
+    @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   def publish
@@ -95,6 +101,10 @@ class IdeasController < ApplicationController
         redirect_to root_path
         flash[:alert] = t('default.message.unauthorized')
       end
+    end
+
+    def tags_params
+      params.dig(:idea, :tag_list).split(",").uniq
     end
 
     def draft_bool

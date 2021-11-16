@@ -2,18 +2,17 @@
 #
 # Table name: ideas
 #
-#  id           :bigint           not null, primary key
-#  comments_num :integer          default(0)
-#  difficulty   :integer          default("not_yet")
-#  draft        :boolean          default(FALSE)
-#  icon         :string(255)
-#  likes_num    :integer          default(0)
-#  name         :string(255)
-#  note         :text(65535)
-#  view         :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  user_id      :bigint           not null
+#  id         :bigint           not null, primary key
+#  difficulty :integer          default("not_yet")
+#  draft      :boolean          default(FALSE)
+#  icon       :string(255)
+#  likes_num  :integer          default(0)
+#  name       :string(255)
+#  note       :text(65535)
+#  view       :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint           not null
 #
 # Indexes
 #

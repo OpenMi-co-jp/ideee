@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
   before_action :own_draft_check, only: %i[ show ]
 
   def index
-    @ideas = Idea.all.published # 一度定義することで何度もDBに値を取りに行くことを阻止
+    @ideas = Idea.published.recent_select # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)

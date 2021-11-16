@@ -37,6 +37,7 @@ class Idea < ApplicationRecord
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_commented, -> { order(comments_num: "DESC") }
+  scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
 
   def user
     return User.find_by(id: self.user_id)
@@ -54,7 +55,7 @@ class Idea < ApplicationRecord
   def self.search(name: nil, difficulty: nil)
     # TODO: クソコードをリファクタ
     if name.nil? && difficulty.nil?
-      all.published
+      published
     elsif !name.nil?
       where(["name like?", "%#{name}%"]).published
     else !difficulty.nil?

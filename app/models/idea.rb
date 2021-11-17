@@ -2,17 +2,18 @@
 #
 # Table name: ideas
 #
-#  id         :bigint           not null, primary key
-#  difficulty :integer          default("not_yet")
-#  draft      :boolean          default(FALSE)
-#  icon       :string(255)
-#  likes_num  :integer          default(0)
-#  name       :string(255)
-#  note       :text(65535)
-#  view       :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id          :bigint           not null, primary key
+#  difficulty  :integer          default("not_yet")
+#  draft       :boolean          default(FALSE)
+#  icon        :string(255)
+#  likes_num   :integer          default(0)
+#  name        :string(255)
+#  note        :text(65535)
+#  recruitment :integer          default(0)
+#  view        :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint           not null
 #
 # Indexes
 #
@@ -38,7 +39,8 @@ class Idea < ApplicationRecord
   validates :note, presence: true
   validate :validate_tags_num
 
-  enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
+  enum difficulty:  { not_yet: 0, easy: 1, middle: 2, hard: 3 }
+  enum recruitment: [:not_ongoing, :ongoing, :completed], _prefix: true
 
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }

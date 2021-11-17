@@ -141,21 +141,18 @@ class User < ApplicationRecord
     difficulty_ideas.include?(idea)
   end
 
-  def create_comment(param)
-    comments.create(idea_id: param[:idea_id], description: param[:description])
-  end
-
-  def delete_comment(id)
-    comment_ideas.delete(id)
+  def create_comment(params)
+    comments.create(idea_id: params[:idea_id], description: params[:description])
+    Idea.find(params[:idea_id]).count_comments
   end
 
   # Contributionの計算
   def point_update
     idea_num = ideas.length
     idea_like_num = ideas.sum{|n| n.likes.length }
-    comment_num = comments.length
+    comment_point = comments.length
     like_num = likes.length
-    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_num
+    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_point
     update(point: sum_points)
   end
 

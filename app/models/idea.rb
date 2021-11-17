@@ -2,17 +2,17 @@
 #
 # Table name: ideas
 #
-#  id         :bigint           not null, primary key
-#  difficulty :integer          default("not_yet")
-#  draft      :boolean          default(FALSE)
-#  icon       :string(255)
-#  likes_num  :integer          default(0)
-#  name       :string(255)
-#  note       :text(65535)
-#  view       :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id           :bigint           not null, primary key
+#  comments_num :integer          default(0)
+#  difficulty   :integer          default("not_yet")
+#  icon         :string(255)
+#  likes_num    :integer          default(0)
+#  name         :string(255)
+#  note         :text(65535)
+#  view         :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :bigint           not null
 #
 # Indexes
 #
@@ -43,6 +43,7 @@ class Idea < ApplicationRecord
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
+  scope :most_commented, -> { order(comments_num: "DESC") }
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
 
   def user
@@ -71,6 +72,10 @@ class Idea < ApplicationRecord
 
   def count_likes
     update(likes_num: like_users.count )
+  end
+
+  def count_comments
+    update(comments_num: comments.count)
   end
 
   def save_with_tags(tag_list)

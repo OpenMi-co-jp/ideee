@@ -1,6 +1,6 @@
 <div class="comment-board yellow-soft-back ph-1">
   <h4 class='mw-4'>コメント</h4>
-  <% if object.comments.length > 0 %>
+  <% if object.comments_num > 0 %>
     <% object.comments.each do |comment| %>
       <div class="comment-column m-1 <%= 'own-comment' if current_user&.own?(comment) %>">
         <%= render 'comments/unit_comment', owned: current_user&.own?(comment), comment: comment %>

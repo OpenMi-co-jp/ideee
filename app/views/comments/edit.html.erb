@@ -1,0 +1,14 @@
+<div>
+  <h3><%= t('.title') %></h3>
+
+  <div class="comment-forms row mh-3">
+    <div class="comment-form">
+      <%= form_with model: @comment, local: true do |f| %>
+        <%= f.text_area :description, class: 'comment-area yellow-soft-back mh-3', id: "comment-form", placeholder: "コメントする" %>
+        <div class='comment-btn'>
+          <%= f.submit class: "submit-btn waves-effect btn orange-action-back nav-link" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

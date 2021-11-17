@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       post 'publish'
     end
   end
-  resources :comments, only: %i[create edit destroy] do
+  resources :comments, only: %i[create edit update destroy] do
     collection do
       post 'send_email'
     end

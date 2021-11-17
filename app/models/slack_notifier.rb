@@ -1,7 +1,7 @@
 class SlackNotifier
   attr_reader :client
 
-  WEBHOOK_URL = ENV["SLACK_API_URL"]
+  WEBHOOK_URL = Rails.application.credentials.dig(:slack, :api_url)
   CHANNEL = "#ideee_app_bot" # Slackで送りたいチャンネルを指定
 
   def initialize

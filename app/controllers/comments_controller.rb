@@ -9,8 +9,9 @@ class CommentsController < ApplicationController
   def update
     @idea = Idea.find(@comment.idea.id)
     if @comment.update(comment_update_params)
-      redirect_to @idea
+      redirect_to @idea, notice: t('.success')
     else
+      flash.now[:alert] = t('.fail')
       render :edit
     end
   end

@@ -38,6 +38,12 @@
         <%= form.label :note %>
         <%= form.rich_text_area :note %>
       </div>
+      <% if idea.recruitment_not_started? || idea.id.nil? %>
+        <div class="field">
+          <%= form.label :recruitment %>
+          <%= form.check_box :recruitment, {}, true, false %>
+        </div>
+      <% end %>
       <% if idea.draft || idea.id.nil? %>
         <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3 idea-btn' %>
       <% end %>

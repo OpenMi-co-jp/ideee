@@ -40,7 +40,7 @@ class Idea < ApplicationRecord
   validate :validate_tags_num
 
   enum difficulty:  { not_yet: 0, easy: 1, middle: 2, hard: 3 }
-  enum recruitment: [:not_ongoing, :ongoing, :completed], _prefix: true
+  enum recruitment: [:not_started, :ongoing, :completed], _prefix: true
 
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }

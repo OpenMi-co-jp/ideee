@@ -1,0 +1,7 @@
+<div class='idea-index'>
+  <div class='main-board'>
+    <h4 class='board-title'>開発者募集中のアイデア</h4>
+    <%= render 'common/column_board', ideas: @recruiting_ideas %>
+    <%= paginate @recruiting_ideas %>
+  </div>
+</div>

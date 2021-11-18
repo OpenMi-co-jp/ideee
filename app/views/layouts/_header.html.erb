@@ -40,6 +40,11 @@
         <%= link_to 'ディスカッション', root_path %>
       <%# </li> %>
     </li>
+    <li class='nav-link hide-on-med-and-down'>
+      <%= link_to recruitment_ideas_path, class: 'waves-effect btn orange-action-back' do %>
+        <i class="material-icons">groups</i>
+      <% end %>
+    </li>
     <% if current_user %>
       <li class='nav-link hide-on-med-and-down'>
         <%= link_to 'アイデア投稿', new_idea_path, class: 'waves-effect btn orange-action-back' %>
@@ -91,6 +96,12 @@
         <li>
           <%= link_to search_users_path(key: 'engineer') do %>
             <i class="material-icons">computer</i>エンジニア
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to recruitment_ideas_path do %>
+            <i class="material-icons">groups</i>開発者募集中のアイデア
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>

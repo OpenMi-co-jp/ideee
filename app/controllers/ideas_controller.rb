@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy publish ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish recruitment_start ]
   before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search tags]
@@ -38,6 +38,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
+        @idea.recruitment_ongoing! if params[:idea][:recruitment]
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to @idea, notice: t('.success')
       end
@@ -80,6 +81,16 @@ class IdeasController < ApplicationController
   def publish
     @idea.update(draft: false)
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+    redirect_to @idea, notice: t('.success')
+  end
+
+  def recruitment
+    list = Idea.where(recruitment: :ongoing)
+    @recruiting_ideas = Kaminari.paginate_array(list).page(params[:page])
+  end
+
+  def recruitment_start
+    @idea.recruitment_ongoing!
     redirect_to @idea, notice: t('.success')
   end
 

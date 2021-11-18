@@ -13,6 +13,7 @@ ja:
     draft: 下書き
     save_draft: 下書き保存
     publish: 公開する
+    recruit: 開発者を募集する
     message:
       unauthorized: 権限がないのでリダイレクトされました
   devise:
@@ -42,9 +43,9 @@ ja:
         submit: ロックを解除する
   ideas:
     new:
-      default_set:  "<strong>困っていること</strong><br><br><br>
-                      <strong>どうなって欲しいか</strong><br><br><br>
-                      <strong>補足</strong><br><br>"
+      default_set: "<strong>困っていること</strong><br><br><br>
+        <strong>どうなって欲しいか</strong><br><br><br>
+        <strong>補足</strong><br><br>"
     create:
       success: アイデアの登録が完了しました
       draft_save: アイデアの下書きが保存されました
@@ -57,7 +58,8 @@ ja:
       success: アイデアを削除しました
     publish:
       success: アイデアを公開しました
+    recruitment_start:
+      success: 開発者の募集を開始しました
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます
-

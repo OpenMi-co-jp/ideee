@@ -9,7 +9,7 @@
 #  likes_num   :integer          default(0)
 #  name        :string(255)
 #  note        :text(65535)
-#  recruitment :integer          default(0)
+#  recruitment :integer          default("not_started")
 #  view        :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

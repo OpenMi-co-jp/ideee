@@ -1,7 +1,12 @@
 <div class='idea-index'>
   <div class='main-board'>
     <h4 class='board-title'>検索結果 <%= @searched_ideas.count %>件</h4>
-    <%= render 'common/column_board', ideas: @searched_ideas %>
-    <%= paginate @searched_ideas %>
+    <% if @searched_ideas.present? %>
+      <%= render 'common/column_board', ideas: @searched_ideas %>
+      <%= paginate @searched_ideas %>
+    <% else %>
+      <h6>検索に合致する結果が⾒つかりませんでした。</h6>
+      <h5><%= link_to "アイデアを投稿しませんか？", new_idea_path %></h5>
+    <% end %>
   </div>
 </div>

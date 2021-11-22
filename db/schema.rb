@@ -100,6 +100,23 @@ ActiveRecord::Schema.define(version: 2021_11_11_081411) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "idea_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["idea_id", "tag_id"], name: "index_taggings_on_idea_id_and_tag_id", unique: true
+    t.index ["idea_id"], name: "index_taggings_on_idea_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email"
     t.string "encrypted_password", default: "", null: false
@@ -133,4 +150,6 @@ ActiveRecord::Schema.define(version: 2021_11_11_081411) do
   add_foreign_key "comments", "users"
   add_foreign_key "difficulties", "ideas"
   add_foreign_key "difficulties", "users"
+  add_foreign_key "taggings", "ideas"
+  add_foreign_key "taggings", "tags"
 end

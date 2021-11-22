@@ -1,0 +1,7 @@
+<div class='idea-index'>
+  <div class='main-board'>
+    <h4 class='social-good-title'>タグ検索</h4>
+    <%= render 'common/column_board', ideas: @tagged_ideas %>
+    <%= paginate @tagged_ideas %>
+  </div>
+</div>

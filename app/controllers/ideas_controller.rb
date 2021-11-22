@@ -78,6 +78,11 @@ class IdeasController < ApplicationController
     redirect_to @idea, notice: t('.success')
   end
 
+  def tags
+    list = Idea.with_tag(params[:tag_name])
+    @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
+  end
+
   private
     def set_idea
       @idea = Idea.find(params[:id])

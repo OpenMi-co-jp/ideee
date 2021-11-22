@@ -40,6 +40,8 @@ class Idea < ApplicationRecord
   scope :drafts, -> { where draft: true }
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
 
+  scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
+
   def user
     return User.find_by(id: self.user_id)
   end

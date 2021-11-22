@@ -33,6 +33,10 @@
         <%= form.label :note %>
         <%= form.rich_text_area :note %>
       </div>
+      <div class="field">
+        <%= form.label :tag_names %>
+        <%= form.text_field :tag_names, class: 'form-control', placeholder: '空白スペースで区切って入力してください' %>
+      </div>
       <% if idea.draft || idea.id.nil? %>
         <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3' %>
       <% end %>

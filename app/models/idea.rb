@@ -28,7 +28,7 @@ class Idea < ApplicationRecord
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :taggings, dependent: :destroy
-  has_many :idea_tags, through: :taggings, source: :idea
+  has_many :idea_tags, through: :taggings, source: :tag
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
@@ -85,5 +85,17 @@ class Idea < ApplicationRecord
             end
     # ideaを出力されたlevelでupdate
     update(difficulty: level)
+  end
+
+  def save_with_tags(tag_names:)
+    byebug
+    ActiveRecord::Base.transaction do
+      self.idea_tags = tag_names.map { |name| Tag.find_or_initialize_by(name: name.strip) }
+      save!
+    end
+    true
+
+    rescue StandardError
+    false
   end
 end

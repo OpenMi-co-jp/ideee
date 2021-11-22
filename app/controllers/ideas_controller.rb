@@ -34,7 +34,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
-    if @idea.save
+    if @idea.save_with_tags(tag_names: params.dig(:idea, :tag_names).split.uniq)
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else

@@ -17,6 +17,8 @@ $(document).on ('turbolinks:load', function(){
     edge: 'right',
     draggable: true
   });
+
+  // タグの入力
   $(".chips").chips({
     placeholder: "Enterで入力",
     secondaryPlaceholder: "+Tag",

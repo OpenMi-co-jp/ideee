@@ -113,7 +113,7 @@ class IdeasController < ApplicationController
       flash[:alert] = t('default.message.unauthorized')
     end
 
-    def tag_names_params
-      params.dig(:idea, :tag_names).split(",").uniq
+    def tags_params
+      params.dig(:idea, :tag_list).split(",").uniq
     end
 end

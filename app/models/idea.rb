@@ -36,7 +36,7 @@ class Idea < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :note, presence: true
-  validate :tags_less_than_three?
+  validate :validate_tags_num
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
 
@@ -74,6 +74,21 @@ class Idea < ApplicationRecord
     update(likes_num: like_users.count )
   end
 
+  def save_with_tags(tag_list)
+    ActiveRecord::Base.transaction do
+      self.idea_tags = tag_list.map { |name| Tag.find_or_initialize_by(name: name.strip) }
+      save!
+    end
+    true
+
+    rescue StandardError
+    false
+  end
+
+  def tag_list
+    idea_tags.map(&:name).join(',')
+  end
+
   def update_difficulty
     # difficultyが一つしかなければ現在の値を代入
     level = if difficultys.count == 1
@@ -108,7 +123,7 @@ class Idea < ApplicationRecord
     idea_tags.map(&:name).join(',')
   end
 
-  def tags_less_than_three?
+  def validate_tags_num
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
   end
 end

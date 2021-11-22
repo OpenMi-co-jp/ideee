@@ -57,6 +57,10 @@ ja:
       success: アイデアを削除しました
     publish:
       success: アイデアを公開しました
+  comments:
+    update:
+      success: コメントを更新しました
+      fail: コメントの更新に失敗しました
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます

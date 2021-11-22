@@ -21,7 +21,7 @@ RSpec.describe "Likes", type: :request do
   end
 
   describe 'DELETE #destroy' do
-  let!(:like) { create(:like) }
+    let!(:like) { create(:like) }
     it 'リクエストが成功すること' do
       delete like_path(like.idea.id)
       expect(response.status).to eq 204

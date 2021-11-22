@@ -6,37 +6,41 @@ RSpec.describe "Comments", type: :request do
 
   before { sign_in user }
   describe 'POST #create' do
+    subject { post comments_path, params: params }
     context 'パラメータが妥当な場合' do
+      let(:params) { { description: comment.description, idea_id: comment.idea.id } }
       it 'リクエストが成功すること' do
-        post comments_path, params: { description: comment.description, idea_id: comment.idea.id }
+        subject
         expect(response.status).to eq 204
       end
 
       it 'コメントが登録されること' do
         expect do
-          post comments_path, params: { description: comment.description, idea_id: comment.idea.id }
+          subject
         end.to change(Comment, :count).by(1)
       end
     end
 
     context 'パラメータが不正な場合' do
+      let(:params) { { description: '', idea_id: '' } }
       it 'コメントが登録されないこと' do
         expect do
-          post comments_path, params: { description: '', idea_id: '' }
+          subject
         end.to_not change(Comment, :count)
       end
     end
   end
 
   describe 'DELETE #destroy' do
+    subject { delete comment_path(comment) }
     it 'リクエストが成功すること' do
-      delete comment_path(comment)
+      subject
       expect(response.status).to eq 204
     end
 
     it 'コメントが削除されること' do
       expect do
-        delete comment_path(comment)
+        subject
       end.to change(Comment, :count).by(-1)
     end
   end

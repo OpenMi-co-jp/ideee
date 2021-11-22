@@ -43,9 +43,11 @@ FactoryBot.define do
     trait :idea_man do
       definition { 0 }
     end
+
     trait :engineer do
       definition { 1 }
     end
+
     trait :idea_engineer do
       definition { 2 }
     end

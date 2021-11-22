@@ -50,6 +50,22 @@
   }
 }
 
+.idea-tag {
+  display: inline-block;
+  text-align: center;
+  margin: 2px;
+  padding: 2px;
+  border-radius: 5%;
+  font-size: smaller;
+  background-color: #e3e4e8;
+  color: #2ca3b3;
+  transition: all 0.5s;
+}
+
+.idea-tag:hover {
+  opacity: 0.5;
+}
+
 .status-info {
   display: flex;
   margin: 15px 0;

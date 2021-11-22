@@ -17,6 +17,30 @@ $(document).on ('turbolinks:load', function(){
     edge: 'right',
     draggable: true
   });
+  $(".chips").chips({
+    placeholder: "Enterで入力",
+    secondaryPlaceholder: "+Tag",
+    data: getChipsData($("#tag-hidden-field").val()),
+  });
+
+  // chipsの初期データを取得するメソッド
+  function getChipsData(values) {
+    return !values
+      ? []
+      : values.split(",").map(function (value) {
+          return { tag: value };
+        });
+  }
+
+  // 更新時にchipsの値をフォームに格納
+  $("#idea-btn").on("click", function () {
+    const tags = M.Chips.getInstance($(".chips")).chipsData.map(function (
+      value
+    ) {
+      return value["tag"];
+    });
+    $("#tag-hidden-field").val(tags);
+  });
 
   // カルーセルを3秒ごとに移動
   if($('body').data('page') == "ideas-index") {

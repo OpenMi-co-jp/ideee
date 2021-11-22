@@ -18,7 +18,7 @@
             <p class=''><%= "投稿日 #{idea.created_time}" %></p>
             <div class='idea__comments'>
               <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4' %>
-              <p class='gray-5 ml-2'><%= idea.comments.length %></p>
+              <p class='gray-5 ml-2'><%= idea.comments_num %></p>
             </div>
             <div class='idea__eyes'>
               <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4' %>
@@ -36,6 +36,7 @@
               </p>
             </div>
           </div>
+          <%= render 'tags/links', object: idea %>
         </div>
         <div class='idea__info'>
           <div class="idea__detail sp">

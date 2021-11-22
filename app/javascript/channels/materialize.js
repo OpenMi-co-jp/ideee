@@ -18,6 +18,33 @@ $(document).on ('turbolinks:load', function(){
     draggable: true
   });
 
+  // タグの入力
+  $(".chips").chips({
+    placeholder: "Enterで入力",
+    secondaryPlaceholder: "+Tag",
+    data: getChipsData($("#tag-hidden-field").val()),
+    limit: 3
+  });
+
+  // chipsの初期データを取得するメソッド
+  function getChipsData(values) {
+    return !values
+      ? []
+      : values.split(",").map(function (value) {
+          return { tag: value };
+        });
+  }
+
+  // 更新時にchipsの値をフォームに格納
+  $(".idea-btn").on("click", function () {
+    const tags = M.Chips.getInstance($(".chips")).chipsData.map(function (
+      value
+    ) {
+      return value["tag"];
+    });
+    $("#tag-hidden-field").val(tags);
+  });
+
   // カルーセルを3秒ごとに移動
   if($('body').data('page') == "ideas-index") {
     var instance = M.Carousel.getInstance($('.carousel'));
@@ -45,8 +72,8 @@ $(document).on ('turbolinks:load', function(){
     $('.sidenav').sidenav('open');
   });
 
-  // アイデア投稿の導線モーダル
-  if($('h4').hasClass('no_idea_posted')) {
+  // アイデア投稿の導線モーダル、アイデアと下書きもなければ表示
+  if($('h4').hasClass('no_idea_posted') && $('h5').hasClass('no_draft_posted')) {
     $('#modal_idea_post').modal('open');
   };
 

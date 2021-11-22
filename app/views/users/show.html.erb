@@ -39,21 +39,36 @@
         </div>
       </div>
       <% if @user.description.present? %>
-        <div class="user-content">
+        <div class="user-content mb-2">
           <%== simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
         </div>
       <% end %>
+      <% if own_user_checked(@user) %>
+        <%= link_to '編集', edit_user_registration_path(@user.id), class: 'mw-3' %>
+      <% end %>
     </div>
   </div>
-  <% if own_user_checked(@user) %>
-    <%= link_to 'Edit', edit_user_registration_path(@user.id) %>
-  <% end %>
-  <% if @user.ideas.present? %>
-    <h4>アイデア</h4>
-    <%= render 'common/column_board', ideas: @user.ideas %>
-  <% else %>
-    <h4 class='no_idea_posted'>まだアイデアが投稿されていません</h4>
-  <% end %>
+  <div class="row">
+    <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
+      <% if @user.ideas.published.present? %>
+        <h4>アイデア</h4>
+        <%= render 'common/column_board', ideas: @user.ideas.published %>
+      <% else %>
+        <h4 class='no_idea_posted'>まだアイデアが投稿されていません</h4>
+      <% end %>
+    </div>
+    <% if own_user_checked(@user) %>
+      <div class="col s12 l4">
+        <% if @user.ideas.drafts.present? %>
+          <h4>下書きアイデア</h4>
+          <%= render 'common/simple_board', ideas: @user.ideas.drafts %>
+        <% else %>
+          <h5 class='no_draft_posted'>まだ下書きがありません</h5>
+          <p class='gray-3'>※下書きはあなたにしか見えません</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
   <%= render 'common/fund_link', object: @user %>
   <%= render 'users/show/lead_to_post' if own_user_checked(@user) %>
 </div>

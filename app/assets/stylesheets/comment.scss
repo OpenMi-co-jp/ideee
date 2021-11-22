@@ -1,10 +1,6 @@
 .comment-board {
   min-height: 120px;
 
-  .dropdown-trigger {
-    position: relative;
-  }
-
   .comment-column {
     border: solid 1px #E3E4E8;
     border-radius: 0.5rem;
@@ -14,7 +10,7 @@
 
     &.own-comment {
       margin-left: auto;
-      background-color: #FF862E!important;
+      background-color: #FFBF85;
     }
 
     .comment-column-inside {
@@ -27,28 +23,21 @@
       }
 
       .comment-info {
-        padding-left: 0.5rem;
         max-width: 90%;
+
+        &.white-text {
+          max-width: none !important;
+        }
 
         .comment-description {
           min-height: 40px;
-
-          a {
-            color: #33CCFF;
-          }
         }
       }
-    }
-  }
 
-  .parent {
-    position: relative;
-
-    .comment-option {
-      position: absolute;
-      top: -30px; right: -80px;
-      margin-left: auto;
-      width: 150px;
+      .comment-options {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 }

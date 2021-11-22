@@ -141,12 +141,15 @@ class User < ApplicationRecord
     difficulty_ideas.include?(idea)
   end
 
-  def create_comment(param)
-    comments.create(idea_id: param[:idea_id], description: param[:description])
+  def create_comment(params)
+    comments.create(idea_id: params[:idea_id], description: params[:description])
+    Idea.find(params[:idea_id]).count_comments
   end
 
-  def delete_comment(id)
-    comment_ideas.delete(id)
+  def destroy_comment(params)
+    comment = comments.find(params[:id])
+    comment.destroy
+    comment.idea.count_comments
   end
 
   # Contributionの計算

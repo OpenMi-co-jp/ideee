@@ -89,6 +89,10 @@ class Idea < ApplicationRecord
     idea_tags.map(&:name).join(',')
   end
 
+  def count_comments
+    update(comments_num: comment_users.count)
+  end
+
   def update_difficulty
     # difficultyが一つしかなければ現在の値を代入
     level = if difficultys.count == 1

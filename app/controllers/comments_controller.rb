@@ -7,8 +7,7 @@ class CommentsController < ApplicationController
   def edit; end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    @comment.destroy
+    current_user.destroy_comment(params)
   end
 
   def send_email

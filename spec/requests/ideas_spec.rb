@@ -18,7 +18,7 @@ RSpec.describe "Ideas", type: :request do
       end
 
       it 'アイデアの名前が表示されていること' do
-        get idea_path(idea)
+        get idea_path(idea.id)
         expect(response.body).to include idea.name
       end
     end

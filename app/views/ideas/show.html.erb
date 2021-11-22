@@ -15,24 +15,17 @@
       <% end %>
       <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
-      <div>
-        <a class="gray-3">タグ: </a>
-        <% @idea.idea_tags.each do |tag| %>
-          <li class="idea-tag grey white-text"><%= tag.name %></li>
-        <% end %>
-      </ul>
-      <% unless @idea.draft %>
-        <div class="flex">
-          <div class="share-box">
-            <%= link_to twitter_share(@idea), target: '_blank' do %>
-              <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share" %>
-              <%= tag.p '＼ シェア ／', class: "twitter-share" %>
-            <% end %>
-          </div>
-          <div class="share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
-            <i class="material-icons">content_copy</i>
-            <%= tag.p '＼ コピー ／' %>
-          </div>
+      <%= render 'tags/links', object: @idea %>
+      <div class="flex">
+        <div class="share-box">
+          <%= link_to twitter_share(@idea), target: '_blank' do %>
+            <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share"%>
+            <%= tag.p '＼ シェア ／', class: "twitter-share" %>
+          <% end %>
+        </div>
+        <div class="share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+          <i class="material-icons">content_copy</i>
+          <%= tag.p '＼ コピー ／' %>
         </div>
       <% end %>
     </div>

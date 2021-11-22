@@ -36,7 +36,7 @@ $(document).on ('turbolinks:load', function(){
   }
 
   // 更新時にchipsの値をフォームに格納
-  $("#idea-btn").on("click", function () {
+  $(".idea-btn").on("click", function () {
     const tags = M.Chips.getInstance($(".chips")).chipsData.map(function (
       value
     ) {

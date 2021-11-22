@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[ show edit update destroy publish ]
-  before_action :authenticate_user!, except: %i[ index show search ]
+  before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search tags]
   before_action :own_draft_check, only: %i[ show ]
@@ -35,7 +35,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
-    if @idea.save_with_tags(tag_names: params.dig(:idea, :tag_names).split.uniq)
+    if @idea.save_with_tags(tags_params)
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
@@ -84,11 +84,10 @@ class IdeasController < ApplicationController
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
-  def most_commented
-    list = Idea.most_commented
-    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
-    # ビューを指定
-    render 'search'
+  def publish
+    @idea.update(draft: false)
+    SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+    redirect_to @idea, notice: t('.success')
   end
 
   private

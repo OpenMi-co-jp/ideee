@@ -27,6 +27,8 @@ class Idea < ApplicationRecord
   has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
   has_many :comment_users, through: :comments, source: :user
+  has_many :taggings, dependent: :destroy
+  has_many :idea_tags, through: :taggings, source: :tag
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :taggings, dependent: :destroy
@@ -45,6 +47,7 @@ class Idea < ApplicationRecord
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :most_commented, -> { order(comments_num: "DESC") }
+  scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
 
   def user
     return User.find_by(id: self.user_id)
@@ -74,6 +77,10 @@ class Idea < ApplicationRecord
     update(likes_num: like_users.count )
   end
 
+  def count_comments
+    update(comments_num: comments.count)
+  end
+
   def save_with_tags(tag_list)
     ActiveRecord::Base.transaction do
       self.idea_tags = tag_list.map { |name| Tag.find_or_initialize_by(name: name.strip) }
@@ -87,10 +94,6 @@ class Idea < ApplicationRecord
 
   def tag_list
     idea_tags.map(&:name).join(',')
-  end
-
-  def count_comments
-    update(comments_num: comments.count)
   end
 
   def update_difficulty
@@ -110,17 +113,6 @@ class Idea < ApplicationRecord
             end
     # ideaを出力されたlevelでupdate
     update(difficulty: level)
-  end
-
-  def save_with_tags(tag_names:)
-    ActiveRecord::Base.transaction do
-      self.idea_tags = tag_names.map { |name| Tag.find_or_initialize_by(name: name.strip) }
-      save!
-    end
-    true
-
-    rescue StandardError
-    false
   end
 
   def tag_names

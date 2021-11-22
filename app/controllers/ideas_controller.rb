@@ -48,7 +48,8 @@ class IdeasController < ApplicationController
   end
 
   def update
-    if @idea.update(idea_params)
+    @idea.assign_attributes(idea_params.merge(user_id: current_user.id))
+    if @idea.save_with_tags(tag_names: params.dig(:idea, :tag_names).split.uniq)
       message = draft_bool ? t('.draft_save') : t('.success')
       redirect_to @idea, notice: message
     else

@@ -19,6 +19,8 @@
 #  index_ideas_on_user_id  (user_id)
 #
 class Idea < ApplicationRecord
+  MAX_TAGS_COUNT = 3
+
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :users, through: :likes
@@ -34,6 +36,8 @@ class Idea < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :note, presence: true
+  validate :tags_less_than_three?
+
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
 
   scope :published, -> { where draft: false }
@@ -102,5 +106,9 @@ class Idea < ApplicationRecord
 
   def tag_names
     idea_tags.map(&:name).join(',')
+  end
+
+  def tags_less_than_three?
+    errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
   end
 end

@@ -112,4 +112,8 @@ class IdeasController < ApplicationController
       redirect_to root_path
       flash[:alert] = t('default.message.unauthorized')
     end
+
+    def tag_names_params
+      params.dig(:idea, :tag_names).split(",").uniq
+    end
 end

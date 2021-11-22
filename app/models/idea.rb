@@ -44,7 +44,7 @@ class Idea < ApplicationRecord
   scope :drafts, -> { where draft: true }
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
-  scope :most_commented, -> { find(Comment.group(:idea_id).order('count(idea_id) desc').pluck(:idea_id)) }
+  scope :most_commented, -> { order(comments_num: "DESC") }
 
   def user
     return User.find_by(id: self.user_id)
@@ -90,7 +90,7 @@ class Idea < ApplicationRecord
   end
 
   def count_comments
-    update(comments_num: comment_users.count)
+    update(comments_num: comments.count)
   end
 
   def update_difficulty

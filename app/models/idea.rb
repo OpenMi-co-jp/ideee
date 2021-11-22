@@ -27,6 +27,8 @@ class Idea < ApplicationRecord
   has_many :comment_users, through: :comments, source: :user
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
+  has_many :taggings, dependent: :destroy
+  has_many :idea_tags, through: :taggings, source: :idea
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 

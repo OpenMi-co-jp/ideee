@@ -32,8 +32,6 @@ class Idea < ApplicationRecord
   has_many :idea_tags, through: :taggings, source: :tag
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
-  has_many :taggings, dependent: :destroy
-  has_many :idea_tags, through: :taggings, source: :tag
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
@@ -46,8 +44,6 @@ class Idea < ApplicationRecord
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
-  scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
-  scope :most_commented, -> { order(comments_num: "DESC") }
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
 
   def user
@@ -118,10 +114,6 @@ class Idea < ApplicationRecord
             end
     # ideaを出力されたlevelでupdate
     update(difficulty: level)
-  end
-
-  def tag_names
-    idea_tags.map(&:name).join(',')
   end
 
   def validate_tags_num

@@ -73,12 +73,6 @@ class IdeasController < ApplicationController
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
   end
 
-  def publish
-    @idea.update(draft: false)
-    SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
-    redirect_to @idea, notice: t('.success')
-  end
-
   def tags
     list = Idea.with_tag(params[:tag_name])
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])

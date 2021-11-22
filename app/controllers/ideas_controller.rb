@@ -104,6 +104,10 @@ class IdeasController < ApplicationController
       end
     end
 
+    def tags_params
+      params.dig(:idea, :tag_list)&.split(",")&.uniq
+    end
+
     def draft_bool
       params[:commit] == t('default.save_draft')
     end
@@ -112,9 +116,5 @@ class IdeasController < ApplicationController
       return if !@idea.draft || current_user.own?(@idea)
       redirect_to root_path
       flash[:alert] = t('default.message.unauthorized')
-    end
-
-    def tags_params
-      params.dig(:idea, :tag_list)&.split(",")&.uniq
     end
 end

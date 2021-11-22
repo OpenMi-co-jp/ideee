@@ -118,10 +118,11 @@ hr {
   width: 110px;
   height: 100%;
   transition: all 1s;
-}
 
-.more-info:hover {
-  transform: rotateX(360deg);
+  &:hover {
+    transition-duration: .3s;
+    transform: scale(1.05);
+  }
 }
 
 .board-title {

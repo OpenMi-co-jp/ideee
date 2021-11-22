@@ -29,9 +29,10 @@ footer {
         a {
           text-decoration: none;
           transition: all 0.3s ease 0s;
-        }
-        a:hover {
-          opacity: 0.5;
+
+          &:hover {
+            opacity: 0.5;
+          }
         }
       }
     }
@@ -45,6 +46,11 @@ footer {
 
   .footer-logo {
     width: 187px;
+
+    img:hover {
+      transition-duration: .4s;
+      transform: scale(1.05);
+    }
   }
 
   img.twitter-share {

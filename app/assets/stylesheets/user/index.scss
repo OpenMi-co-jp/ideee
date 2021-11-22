@@ -4,11 +4,11 @@
   margin: 0 auto;
 
   .row {
-    transition: all 0.3s
-  }
+    transition: all 0.3s;
 
-  .row:hover {
-    opacity: 0.5;
+    :hover {
+      opacity: 0.8;
+    }
   }
 }
 
@@ -46,10 +46,10 @@
   &.small {
     width: 30px;
     height: 30px;
-  }
-
-  &.small:hover {
-    opacity: 0.5;
+    
+    &:hover {
+      opacity: 0.6;
+    }
   }
 
   &.normal {

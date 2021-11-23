@@ -151,6 +151,10 @@ class User < ApplicationRecord
     comment_ideas.delete(id)
   end
 
+  def recruitment_joined?(idea)
+    cooperation_ideas.include?(idea)
+  end
+
   # Contributionの計算
   def point_update
     idea_num = ideas.length

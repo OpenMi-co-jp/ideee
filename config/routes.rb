@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     member do
       post 'publish'
       post 'recruitment_start'
+      post 'recruitment_complete'
     end
   end
   resources :comments, only: %i[create edit destroy] do
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  resources :cooperations, only: %i[create destroy]
   resources :difficultys, only: %i[create]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'

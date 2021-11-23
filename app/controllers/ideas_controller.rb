@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy publish recruitment_start ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish recruitment_start recruitment_complete ]
   before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search tags]
@@ -91,6 +91,11 @@ class IdeasController < ApplicationController
 
   def recruitment_start
     @idea.recruitment_ongoing!
+    redirect_to @idea, notice: t('.success')
+  end
+
+  def recruitment_complete
+    @idea.recruitment_completed!
     redirect_to @idea, notice: t('.success')
   end
 

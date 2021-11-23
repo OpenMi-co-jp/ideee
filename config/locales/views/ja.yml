@@ -14,6 +14,10 @@ ja:
     save_draft: 下書き保存
     publish: 公開する
     recruit: 開発者を募集する
+    recruit_complete: 開発者の募集を終了する
+    recruit_restart: 開発者を再募集する
+    recruit_join: 参加する
+    recruit_cancel: 参加を辞退する
     message:
       unauthorized: 権限がないのでリダイレクトされました
   devise:
@@ -60,6 +64,13 @@ ja:
       success: アイデアを公開しました
     recruitment_start:
       success: 開発者の募集を開始しました
+    recruitment_complete:
+      success: 開発者の募集を終了しました
+  cooperations:
+    create:
+      success: 開発者の募集に参加しました
+    destroy:
+      success: 参加を辞退しました
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます

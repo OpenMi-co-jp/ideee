@@ -13,6 +13,7 @@ ja:
     draft: 下書き
     save_draft: 下書き保存
     publish: 公開する
+    cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました
   devise:

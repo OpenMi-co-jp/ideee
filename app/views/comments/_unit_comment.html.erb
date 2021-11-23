@@ -7,7 +7,7 @@
         <% end %>
       </div>
     <% end %>
-    <div class="comment-info pw-2 <%= 'white-text' if owned %>">
+    <div class="comment-info <%= 'white-text' if owned %>">
       <div class='comment-description'>
         <%== simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
       </div>

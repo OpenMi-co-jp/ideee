@@ -10,6 +10,9 @@ ja:
     submit: 送信
     comment: コメント
     delete: 削除
+    draft: 下書き
+    save_draft: 下書き保存
+    publish: 公開する
     message:
       unauthorized: 権限がないのでリダイレクトされました
   devise:
@@ -44,12 +47,16 @@ ja:
                       <strong>補足</strong><br><br>"
     create:
       success: アイデアの登録が完了しました
+      draft_save: アイデアの下書きが保存されました
       fail: アイデアの登録に失敗しました
     update:
-      success: アイデアを更新しました
+      success: アイデア登録に成功しました
+      draft_save: アイデアの下書きが更新されました
       fail: アイデアの更新に失敗しました
     destroy:
       success: アイデアを削除しました
+    publish:
+      success: アイデアを公開しました
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます

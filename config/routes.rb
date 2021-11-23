@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   resources :ideas do
     collection do
       get 'search'
+      get 'tags'
+    end
+    member do
+      post 'publish'
     end
   end
   resources :comments, only: %i[create edit destroy] do
@@ -21,6 +25,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  resources :difficultys, only: %i[create]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

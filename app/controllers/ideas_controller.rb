@@ -1,20 +1,23 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show search ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish ]
+  before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
-  before_action :defined_check, except: %i[ index show search ]
+  before_action :defined_check, except: %i[ index show search tags]
+  before_action :own_draft_check, only: %i[ show ]
 
   def index
-    @ideas = Idea.all # 一度定義することで何度もDBに値を取りに行くことを阻止
+    @ideas = Idea.published.recent_select # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
     @liked_ideas = Idea.includes([:comments]).order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.includes([:comments]).order(view: "DESC").first(5)
+    @most_commented_ideas = @ideas.most_commented.first(5)
     @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
   end
 
   def show
     @title = @idea.name
     @user = User.find_by(id: @idea.user_id)
+    @levels = Difficulty.levels
     if Rails.env.production?
       @idea.views_update(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
       @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-' # 製作者にのみ見える、アイデアページの滞在時間を設定
@@ -31,10 +34,14 @@ class IdeasController < ApplicationController
   def edit; end
 
   def create
-    @idea = Idea.new(idea_params.merge(user_id: current_user.id))
-    if @idea.save
-      SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
-      redirect_to @idea, notice: t('.success')
+    @idea = Idea.new(idea_params)
+    if @idea.save_with_tags(tags_params)
+      if draft_bool
+        redirect_to @idea, notice: t('.draft_save')
+      else
+        SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+        redirect_to @idea, notice: t('.success')
+      end
     else
       flash.now[:alert] = t('.fail')
       render :new
@@ -42,8 +49,10 @@ class IdeasController < ApplicationController
   end
 
   def update
-    if @idea.update(idea_params.merge(user_id: current_user.id))
-      redirect_to @idea, notice: t('.success')
+    @idea.assign_attributes(idea_params)
+    if @idea.save_with_tags(tags_params)
+      message = draft_bool ? t('.draft_save') : t('.success')
+      redirect_to @idea, notice: message
     else
       flash.now[:alert] = t('.fail')
       render :edit
@@ -58,10 +67,21 @@ class IdeasController < ApplicationController
   def search
     # アイデアに紐づくlikeの数を数えて、降順に並べる
     sort = params[:sort] || "likes_num"
-    list = Idea.search(params[:keyword]).order("#{sort}": "DESC")
+    list = Idea.search(name: params[:keyword], difficulty: params[:difficulty]).order("#{sort}": "DESC")
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
+  end
+
+  def tags
+    list = Idea.with_tag(params[:tag_name])
+    @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
+  end
+
+  def publish
+    @idea.update(draft: false)
+    SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+    redirect_to @idea, notice: t('.success')
   end
 
   private
@@ -71,7 +91,10 @@ class IdeasController < ApplicationController
 
     # ストロングパラメーターを設定
     def idea_params
-      params.require(:idea).permit(:name, :icon, :note, :view, :user_id)
+      params.require(:idea)
+            .permit(:name, :icon, :note, :view, :user_id, :commit)
+            .merge(user_id: current_user.id)
+            .merge(draft: draft_bool)
     end
 
     def own_user_check
@@ -79,5 +102,19 @@ class IdeasController < ApplicationController
         redirect_to root_path
         flash[:alert] = t('default.message.unauthorized')
       end
+    end
+
+    def tags_params
+      params.dig(:idea, :tag_list).split(",").uniq
+    end
+
+    def draft_bool
+      params[:commit] == t('default.save_draft')
+    end
+
+    def own_draft_check
+      return if !@idea.draft || current_user.own?(@idea)
+      redirect_to root_path
+      flash[:alert] = t('default.message.unauthorized')
     end
 end

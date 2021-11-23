@@ -1,27 +1,10 @@
 <div class="comment-board yellow-soft-back ph-1">
   <h4 class='mw-4'>コメント</h4>
-  <% if object.comments.length > 0 %>
-    <% object.comments.each_with_index do |comment, i| %>
-      <% if current_user&.own?(comment) %>
-        <div class='parent'>
-          <div class="comment-column m-1 own-comment">
-            <%= link_to '#', data: { target: "dropdown_comment-#{i}" }, class:'dropdown-trigger white-text' do %>
-              <%= render 'comments/unit_comment', owned: true, comment: comment %>
-            <% end %>
-          </div>
-          <ul id="dropdown_comment-<%=i%>" class='dropdown-content comment-option'>
-            <li>
-              <%= link_to comment_path(comment), method: :delete, id: 'comment-delete' do %>
-                <i class="material-icons">delete</i>削除
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      <% else %>
-        <div class="comment-column m-1">
-          <%= render 'comments/unit_comment', owned: false, comment: comment %>
-        </div>
-      <% end %>
+  <% if object.comments_num > 0 %>
+    <% object.comments.each do |comment| %>
+      <div class="comment-column m-1 <%= 'own-comment' if current_user&.own?(comment) %>">
+        <%= render 'comments/unit_comment', owned: current_user&.own?(comment), comment: comment %>
+      </div>
     <% end %>
   <% else %>
     <h6 class='mw-4 pt-2'>気になることや、おうえんのコメントをしよう！</h6>

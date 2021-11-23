@@ -2,14 +2,23 @@
   <div class='board'>
     <% unless current_user %>
       <div class='full-pic'>
-        <%= link_to(
-          'ideeeとは',
-          '#modal_intro',
-          data: { turbolinks: false },
-          class: 'waves-effect waves-white white orange-action btn modal-trigger turorial-button',
-          id: 'modal-trigger-intro'
-        )%>
-        <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back new-user-button' %>
+        <div id='top-page-before-login' class='row'>
+          <div class='orange-text'>
+            あなたのアイデアを
+            <br/>
+            エンジニアと盛り上げる
+          </div>
+          <div id='buttons-on-top-page-before-login' class='mt-4'>
+            <%= link_to(
+              'ideeeとは',
+              '#modal_intro',
+              data: { turbolinks: false },
+              class: 'waves-effect waves-white white orange-action btn modal-trigger turorial-button',
+              id: 'modal-trigger-intro'
+            )%>
+            <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back new-user-button' %>
+          </div>
+        </div>
       </div>
       <div id="modal_intro" class="modal">
         <div class="modal-content">
@@ -25,25 +34,67 @@
     <%= render 'ideas/index/latest_boad' %>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/social_good' %>
+        <%= render 'ideas/index/ranking',
+          icon_mark: '💛',
+          board_title: 'ハートが多いアイデア',
+          path: search_ideas_path,
+          ideas: @liked_ideas %>
       </div>
-      <div class="user-board col s12 l4 gray-1-back pl-3">
-        <div class='flex mh-3'>
-          <p class='icon-mark grid-middle'>🔥</p>
-          <b class='board-title'>注目ユーザー</b>
-          <%= link_to users_path, class: 'more-info mt-3 flex gray-5' do %>
-            <i class="material-icons">chevron_right</i>もっと見る
-          <% end %>
-        </div>
-        <%= render 'common/partial_users', users: @featured_users %>
+      <div class="col s12 l4">
+        <%= render 'ideas/index/featured_users' %>
       </div>
     </div>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/most_viewed' %>
+        <%= render 'ideas/index/ranking',
+          icon_mark: '💬',
+          board_title: 'コメントが多いアイデア',
+          path: search_ideas_path(sort: :comments_num),
+          ideas: @most_commented_ideas %>
       </div>
       <div class="col l12">
       </div>
+    </div>
+    <div class="row">
+      <div class="col s12 l8">
+        <%= render 'ideas/index/ranking',
+          icon_mark: '👀',
+          board_title: 'View数の多いアイデア',
+          path: search_ideas_path(sort: :view),
+          ideas: @most_viewed_ideas %>
+      </div>
+      <div class="col l12">
+      </div>
+    </div>
+    <% unless current_user %>
+      <div class="concept">
+        <div class="concept_bg">
+          <div class="concept_title">
+            <p>CONCEPT</p>
+          </div>
+          <div class="concept_headline">
+            <p>アイデアをデザインし、</p>
+            <p>エンジニアの出会いを</p>
+            <p>盛り上げる</p>
+          </div>
+          <div class="el_word">
+            <p><span>i</span>dea</p>
+            <p><span>d</span>esign</p>
+            <p><span>e</span>ngineer</p>
+            <p><span>e</span>ncounter</p>
+            <p><span>e</span>ncourage</p>
+          </div>
+          <div class="main_copy">
+            <p>
+              「社会の役に立ちそう」「あると助かるな」を投稿<br>
+              サービスの需要を視覚化、市場調査をした上で開発ができる<br>
+              <br>
+              あなたの「困ってる」を形に<br>
+              コードで社会に貢献してみませんか？
+            </p>
+          </div>
+        </div>
+      <% end %>
     </div>
     <%= render 'common/service_fund' %>
   </div>

@@ -1,27 +1,34 @@
 <%# OGP %>
-<% set_meta_tags og: {
+<% unless @idea.draft %>
+  <% set_meta_tags og: {
     title: @idea.name,
     image: return_ogp_url(@idea.name),
-    description: strip_tags(@idea.note.to_s).gsub(/[\n]/,"").strip.truncate(120)
+    description: strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120)
   } %>
+<% end %>
 
 <div class='idea-show'>
   <div class='row'>
     <div class='idea-column-img col l3 s12'>
+      <% if @idea.draft %>
+        <div class='chip'><%= t('default.draft') %></div>
+      <% end %>
       <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
-      <div class="flex">
-        <div class="share-box">
-          <%= link_to twitter_share(@idea), target: '_blank' do %>
-            <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share"%>
-            <%= tag.p '＼ シェア ／', class: "twitter-share" %>
-          <% end %>
+      <% unless @idea.draft %>
+        <div class="flex">
+          <div class="share-box">
+            <%= link_to twitter_share(@idea), target: '_blank' do %>
+              <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share" %>
+              <%= tag.p '＼ シェア ／', class: "twitter-share" %>
+            <% end %>
+          </div>
+          <div class="share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+            <i class="material-icons">content_copy</i>
+            <%= tag.p '＼ コピー ／' %>
+          </div>
         </div>
-        <div class="share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
-          <i class="material-icons">content_copy</i>
-          <%= tag.p '＼ コピー ／' %>
-        </div>
-      </div>
+      <% end %>
     </div>
     <div class='idea-status-column col l9 s12'>
       <div class='idea-name orange-action'>
@@ -29,7 +36,7 @@
       </div>
 
       <div class='row gray-4'>
-        <div class='col l6 s12'>
+        <div class='col l10 s12'>
           <div class='row'>
             <p class='col l6 s12 grid-middle'>
               <%= user_definiton(@idea.user) %>
@@ -44,33 +51,39 @@
             </div>
           </div>
 
-          <div class='flex mh-3'>
-            <%= "更新日：#{l @idea.updated_at}" %>
-            <div class='flex pw-3 gray-5'>
+          <div class='status-info'>
+            <div class="status-info__day">
+              <%= "更新日：#{l @idea.updated_at}" %>
+            </div>
+            <div class="status-info__eye">
               <%= image_tag 'icons/eye.svg' %>
-              <div class='grid-middle'>
-                <%= @idea.view %>
-              </div>
+              <%= @idea.view %>
+            </div>
+            <div class='status-info__comment'>
               <%= image_tag 'icons/comment.svg' %>
-              <div class='grid-middle'>
-                <%= @idea.comments.length %>
-              </div>
+              <%= @idea.comments_num %>
+            </div>
+            <div class="status-info__vote <%= @idea.difficulty %>">
+              <%= render 'difficultys/vote', object: @idea %>
             </div>
             <% if current_user&.own?(@idea) %>
-              <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
+              <div class='status-info__time'>
+                <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
+              </div>
             <% end %>
           </div>
+          <%= render 'tags/links', object: @idea %>
         </div>
-        <div class='s12 l2 flex-end'>
+        <div class='col s12 l2 flex-end'>
           <%= render "common/like", object: @idea %>
         </div>
       </div>
 
       <div class='idea-content mb-2'>
         <% if current_user %>
-          <%== text_url_to_link(@idea.note.to_s) %>
+          <%== @idea.note %>
         <% else %>
-          <%= strip_tags(@idea.note.to_s).gsub(/[\n]/,"").strip.truncate(120) %>
+          <%= strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
           <div class='white p-3'>
             <div class='flex login-guidance'>
               <div class='nav-item'>
@@ -87,15 +100,21 @@
         <% end %>
       </div>
       <% if current_user&.own?(@idea) %>
-        <%= link_to '編集', edit_idea_path(@idea), class:'mw-3' %>
-        <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？'}, class:'mw-3' %>
+        <% if @idea.draft %>
+          <%= link_to t('default.publish'), publish_idea_path(@idea), method: :post, data: { confirm: '公開してもよろしいですか？' }, class: 'btn orange-action-back'%>
+        <% end %>
+        <%= link_to '編集', edit_idea_path(@idea), class: 'mw-3' %>
+        <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'mw-3' %>
       <% end %>
     </div>
   </div>
 
   <hr class='gray-3'>
 
-  <%= render 'comments/board', object: @idea %>
-  <%= render 'comments/form' %>
+  <% unless @idea.draft %>
+    <%= render 'comments/board', object: @idea %>
+    <%= render 'comments/form' %>
+  <% end %>
   <%= render 'common/fund_link', object: @idea %>
+  <%= render 'ideas/show/vote_modal' %>
 </div>

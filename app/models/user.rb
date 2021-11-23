@@ -41,6 +41,8 @@ class User < ApplicationRecord
   has_many :like_ideas, through: :likes, source: :idea
   has_many :comments, dependent: :destroy
   has_many :comment_ideas, through: :comments, source: :idea
+  has_many :difficultys, dependent: :destroy
+  has_many :difficulty_ideas, through: :difficultys, source: :idea
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -51,6 +53,8 @@ class User < ApplicationRecord
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
   validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
+
+  scope :defined_user, -> { where defined: true }
 
   class << self
     # omniauthを使ったSNSログイン機能
@@ -133,21 +137,22 @@ class User < ApplicationRecord
     idea.count_likes
   end
 
-  def create_comment(param)
-    comments.create(idea_id: param[:idea_id], description: param[:description])
+  def voted?(idea)
+    difficulty_ideas.include?(idea)
   end
 
-  def delete_comment(id)
-    comment_ideas.delete(id)
+  def create_comment(params)
+    comments.create(idea_id: params[:idea_id], description: params[:description])
+    Idea.find(params[:idea_id]).count_comments
   end
 
   # Contributionの計算
   def point_update
     idea_num = ideas.length
     idea_like_num = ideas.sum{|n| n.likes.length }
-    comment_num = comments.length
+    comment_point = comments.length
     like_num = likes.length
-    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_num
+    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_point
     update(point: sum_points)
   end
 

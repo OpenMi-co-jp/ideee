@@ -21,11 +21,11 @@ module UsersHelper
   def user_definiton(user, ver='normal')
     case user.definition
     when 'idea_man' then
-      icon = '💡'
+      icon = '💡　'
     when 'engineer' then
-      icon = '🛠'
+      icon = '🛠　'
     when 'idea_engineer' then
-      icon = '💡 🛠'
+      icon = '💡 🛠　'
     end
     if ver == 'normal'
       "#{icon} #{I18n.t("enums.user.definition.#{user.definition}")}" if user.definition

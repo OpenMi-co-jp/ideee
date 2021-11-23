@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_16_150413) do
+ActiveRecord::Schema.define(version: 2021_11_11_233022) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 2021_10_16_150413) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "difficulties", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "idea_id", null: false
+    t.integer "level", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["idea_id"], name: "index_difficulties_on_idea_id"
+    t.index ["user_id", "idea_id"], name: "index_difficulties_on_user_id_and_idea_id", unique: true
+    t.index ["user_id"], name: "index_difficulties_on_user_id"
+  end
+
   create_table "ideas", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "icon"
@@ -74,6 +85,9 @@ ActiveRecord::Schema.define(version: 2021_10_16_150413) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.integer "likes_num", default: 0
+    t.integer "difficulty", default: 0
+    t.boolean "draft", default: false
+    t.integer "comments_num", default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 
@@ -85,6 +99,23 @@ ActiveRecord::Schema.define(version: 2021_10_16_150413) do
     t.index ["idea_id"], name: "index_likes_on_idea_id"
     t.index ["user_id", "idea_id"], name: "index_likes_on_user_id_and_idea_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "idea_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["idea_id", "tag_id"], name: "index_taggings_on_idea_id_and_tag_id", unique: true
+    t.index ["idea_id"], name: "index_taggings_on_idea_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -118,4 +149,8 @@ ActiveRecord::Schema.define(version: 2021_10_16_150413) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
+  add_foreign_key "difficulties", "ideas"
+  add_foreign_key "difficulties", "users"
+  add_foreign_key "taggings", "ideas"
+  add_foreign_key "taggings", "tags"
 end

@@ -82,6 +82,11 @@ div, p, b {
   justify-content: flex-end;
 }
 
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .border-line {
   border-bottom: 5px solid #E3E4E8;
   margin: 0.5rem 1rem 0;
@@ -115,7 +120,16 @@ hr {
 }
 
 .board-title {
-  font-size: xx-large;
+  font-size: x-large;
+  margin: auto 0.5rem;
+
+  @media (max-width:992px) {
+    font-size: large;
+  }
+
+  @media (max-width:600px) {
+    font-size: medium;
+  }
 }
 
 // 必須項目の印
@@ -483,6 +497,10 @@ hr {
   color: white;
 }
 
+.white-back {
+  background-color: white;
+}
+
 @media (max-width:992px) {
   main {
     width: 90vw !important;
@@ -492,5 +510,102 @@ hr {
 @media (max-width:600px) {
   main {
     width: 95vw !important;
+  }
+}
+
+.btn-flat {
+  border: #FF862E;
+}
+
+// color css set
+
+.gray {
+  &-1 {
+    color: #F5F5F5 !important;
+    &-back {
+      background-color: #F5F5F5!important;
+    }
+  }
+
+  &-2 {
+    color: #E3E4E8!important;
+    &-back {
+      background-color: #E3E4E8!important;
+    }
+  }
+
+  &-3 {
+    color: #C4C4C4!important;
+    &-back {
+      background-color: #C4C4C4!important;
+    }
+  }
+
+  &-4 {
+    color: #A7A7A7!important;
+    &-back {
+      background-color: #A7A7A7!important;
+    }
+  }
+
+  &-5 {
+    color: #888888!important;
+    &-back {
+      background-color: #888888!important;
+    }
+  }
+}
+
+.orange {
+  &-action {
+    color: #FF862E!important;
+    font-weight: bold;
+    &-back {
+      background-color: #FF862E!important;
+    }
+  }
+
+  &-soft {
+    color: #FFBF85!important;
+    &-back {
+      background-color: #FFBF85!important;
+    }
+  }
+
+  &-dark {
+    color: #D9C2AD!important;
+    &-back {
+      background-color: #D9C2AD!important;
+    }
+  }
+
+  &-red {
+    color: #A6442E!important;
+    &-back {
+      background-color: #A6442E!important;
+    }
+  }
+}
+
+.yellow {
+  &-action {
+    color: #FCEE21!important;
+    &-back {
+      background-color: #FCEE21!important;
+    }
+  }
+
+  &-soft {
+    color: #FDF8EB!important;
+    &-back {
+      background-color: #FDF8EB!important;
+    }
+  }
+}
+
+// ボタンの中の色は全て白
+.btn {
+  a {
+    color: white;
   }
 }

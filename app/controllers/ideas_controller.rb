@@ -8,8 +8,8 @@ class IdeasController < ApplicationController
   def index
     @ideas = Idea.published.recent_select # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
-    @liked_ideas = Idea.includes([:comments]).order(likes_num: "DESC").first(5)
-    @most_viewed_ideas = @ideas.includes([:comments]).order(view: "DESC").first(5)
+    @liked_ideas = Idea.includes([:idea_tags]).order(likes_num: "DESC").first(5)
+    @most_viewed_ideas = @ideas.includes([:idea_tags]).order(view: "DESC").first(5)
     @most_commented_ideas = @ideas.most_commented.first(5)
     @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
   end

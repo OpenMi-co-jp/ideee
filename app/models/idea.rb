@@ -43,7 +43,7 @@ class Idea < ApplicationRecord
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_commented, -> { order(comments_num: "DESC") }
+  scope :most_commented, -> { includes([:idea_tags]).order(comments_num: "DESC") }
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
 
   def user

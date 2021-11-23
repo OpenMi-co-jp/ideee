@@ -45,6 +45,7 @@ class Idea < ApplicationRecord
   scope :drafts, -> { where draft: true }
   scope :most_commented, -> { order(comments_num: "DESC") }
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
+  scope :has_tag_name_like, -> tag_name { joins(:idea_tags).merge(Tag.name_like(tag_name)) }
 
   def user
     return User.find_by(id: self.user_id)

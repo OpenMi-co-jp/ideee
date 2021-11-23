@@ -34,6 +34,11 @@
   border-radius: 3%;
   background-color: white;
 
+  &.smaller {
+    width: 20px;
+    height: 20px;
+  }
+
   &.small {
     width: 30px;
     height: 30px;

@@ -14,8 +14,8 @@ ja:
     save_draft: 下書き保存
     publish: 公開する
     recruit: 開発者を募集する
-    recruit_complete: 開発者の募集を終了する
-    recruit_restart: 開発者を再募集する
+    recruit_complete: 募集を終了する
+    recruit_restart: 再募集する
     recruit_join: 参加する
     recruit_cancel: 参加を辞退する
     message:

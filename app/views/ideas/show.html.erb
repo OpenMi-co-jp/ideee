@@ -32,15 +32,13 @@
           <% if current_user %>
             <% if @idea.recruitment_not_started? %>
               <% if current_user&.own?(@idea) %>
-                <br />
                 <%= link_to t('default.recruit'), recruitment_start_idea_path(@idea), method: :post, data: { confirm: '開発者を募集しますか？' }, class: 'btn orange-action-back'%>
               <% else %>
-                <br />
                 <div>現在開発者を募集していません</div>
               <% end %>
             <% elsif @idea.recruitment_ongoing? %>
-              <br />
-              <div>開発者募集中</div>
+              <div class=''>開発者募集中<i class="material-icons">announcement</i></div>
+              <%= render 'cooperations/cooperation_users', users: @idea.cooperation_users %>
               <% if current_user&.own?(@idea) %>
                 <%= link_to t('default.recruit_complete'), recruitment_complete_idea_path(@idea), method: :post, data: { confirm: '開発者を募集を終了しますか？' }, class: 'btn orange-action-back'%>
               <% elsif current_user&.recruitment_joined?(@idea) %>
@@ -49,7 +47,6 @@
                 <%= link_to t('default.recruit_join'), cooperations_path(idea_id: @idea), method: :post, data: { confirm: 'このアイデアの開発に参加しますか？' }, class: 'btn orange-action-back'%>
               <% end %>
             <% elsif @idea.recruitment_completed? %>
-              <br />
               <div>開発者の募集は終了しました</div>
               <% if current_user&.own?(@idea) %>
                 <%= link_to t('default.recruit_restart'), recruitment_start_idea_path(@idea), method: :post, data: { confirm: '開発者を再募集しますか？' }, class: 'btn orange-action-back'%>

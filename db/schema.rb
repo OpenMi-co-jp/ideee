@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_233022) do
     t.bigint "user_id", null: false
     t.integer "likes_num", default: 0
     t.integer "difficulty", default: 0
-    t.boolean "draft", default: false
     t.integer "comments_num", default: 0
+    t.boolean "draft", default: false
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

@@ -73,6 +73,7 @@ class IdeasController < ApplicationController
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
+    @deployed_ideas = Idea.deployed.order(updated_at: "DESC").first(10)
   end
 
   def tags

@@ -3,11 +3,11 @@
   <div class='main-board'>
     <div class='flex'>
       <p class='icon-mark white-back'>🎉</p>
-      <b class='board-title white-text'>最新アイデア</b>
+      <b class='board-title white-text'><%= title %></b>
     </div>
     <div class='carousel'>
-      <% if @latest_ideas%>
-        <% @latest_ideas.each do |idea| %>
+      <% if ideas %>
+        <% ideas.each do |idea| %>
           <div class='carousel-item'>
             <%= link_to idea_path(idea.id) do %>
               <div class='idea-column-img yellow-soft-back'>

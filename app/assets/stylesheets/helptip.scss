@@ -1,0 +1,33 @@
+.help-tip {
+  position: relative;
+  background-color: #E3E4E8;
+  padding: 3px 6px;
+  border-radius: 50%;
+
+  &:hover {
+    transition-duration: .4s;
+    transform: scale(1.05);
+    @media screen and (max-width: 768px) {
+      transform: scale(1);
+    }
+
+    &::before {
+      position: absolute;
+      padding: 4px 8px;
+      text-align: center;
+      border: 1px solid #f2f2f2;
+      border-radius: 0.5rem;
+      font-size: 12px;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      color: #fff;
+      background-color: #FFBF85;
+    }
+
+    &.product-url::before {
+      content: "プロダクトとして承認されるとログインなしでサイトが閲覧可能になります。";
+      width: 250px;
+    }
+  }
+}

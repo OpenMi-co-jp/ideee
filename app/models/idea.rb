@@ -71,6 +71,22 @@ class Idea < ApplicationRecord
     end
   end
 
+  def self.order_by(sort)
+    # TODO: クソコードをリファクタ
+    case sort
+    when 'asc' then
+      order(name: sort)
+    when 'desc' then
+      order(name: sort)
+    when 'newly_created' then
+      order(created_at: :asc)
+    when 'old_created' then
+      order(created_at: :desc)
+    else
+      order("#{sort}": "DESC")
+    end
+  end
+
   def count_likes
     update(likes_num: like_users.count )
   end

@@ -1,4 +1,4 @@
-$(window).on('turbolinks:load load', function () {
+$(document).on('turbolinks:load', function () {
     const $loader = $('#Loader');
     $loader.fadeOut(1200);
 });

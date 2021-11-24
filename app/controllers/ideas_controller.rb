@@ -40,6 +40,7 @@ class IdeasController < ApplicationController
         redirect_to @idea, notice: t('.draft_save')
       else
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+        SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
         redirect_to @idea, notice: t('.success')
       end
     else
@@ -51,6 +52,7 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
+      SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
       redirect_to @idea, notice: message
     else
@@ -81,6 +83,7 @@ class IdeasController < ApplicationController
   def publish
     @idea.update(draft: false)
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+    SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
     redirect_to @idea, notice: t('.success')
   end
 
@@ -92,7 +95,7 @@ class IdeasController < ApplicationController
     # ストロングパラメーターを設定
     def idea_params
       params.require(:idea)
-            .permit(:name, :icon, :note, :view, :user_id, :commit)
+            .permit(:name, :icon, :note, :view, :user_id, :commit, :product_url)
             .merge(user_id: current_user.id)
             .merge(draft: draft_bool)
     end

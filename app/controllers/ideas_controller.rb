@@ -39,6 +39,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
+        TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to @idea, notice: t('.success')
       end
@@ -80,6 +81,7 @@ class IdeasController < ApplicationController
 
   def publish
     @idea.update(draft: false)
+    TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
     redirect_to @idea, notice: t('.success')
   end

@@ -29,3 +29,5 @@ ja:
         view: ビュー数
         tag_list: タグ
         tags_up_to_three: タグ（3つまで入力できます）
+      comment:
+        description: コメント

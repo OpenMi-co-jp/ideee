@@ -1,4 +1,4 @@
-window.onload = () => {
-    const loader = document.getElementById('loader');
-    loader.classList.add('loaded');
-}
+$(window).on('turbolinks:load load', function () {
+    const $loader = $('#Loader');
+    $loader.fadeOut(1200);
+});

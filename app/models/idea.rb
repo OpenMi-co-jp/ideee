@@ -55,7 +55,7 @@ class Idea < ApplicationRecord
   end
 
   def views_update(id)
-    idea_view = Analytics.new.report_count('pageviews', id)
+    idea_view = Analytics.new.idea_report('pageviews', id)
     update(view: idea_view.to_i)
   end
 

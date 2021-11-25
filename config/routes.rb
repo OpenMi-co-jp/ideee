@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'
+  get 'about' => 'high_voltage/pages#show', id: 'about'
   get 'privacy_policy' => 'high_voltage/pages#show', id: 'privacy_policy'
   get 'terms_of_service' => 'high_voltage/pages#show', id: 'terms_of_service'
   get 'frequent_questions' => 'high_voltage/pages#show', id: 'frequent_questions'

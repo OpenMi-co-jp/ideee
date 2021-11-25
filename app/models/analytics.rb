@@ -7,8 +7,20 @@ class Analytics
     auth
   end
 
-  def report_count(demention, idea_id)
+  def idea_report(demention, idea_id)
     date_range = @analytics::DateRange.new(start_date: '2021-07-01', end_date: 'today') # ideeeを作ってから本日までの期日範囲
+    data = analytics_data(date_range, demention)
+    res_data = data&.rows.find {|i| i.dimensions == ["/ideas/#{idea_id}"]}
+    return res_data&.metrics&.first&.values&.first
+  end
+
+  def daily_total_count(demention)
+    date_range = @analytics::DateRange.new(start_date: 'yesterday', end_date: 'yesterday') # 昨日から今日まで
+    data = analytics_data(date_range, demention)
+    return data.totals.first&.values&.first.to_i
+  end
+
+  def analytics_data(date_range, demention)
     metric = @analytics::Metric.new(expression: "ga:#{demention}", alias: demention) # dementionは確認したい項目
     dimension = @analytics::Dimension.new(name: 'ga:pagePath')
     request = @analytics::GetReportsRequest.new(
@@ -17,12 +29,7 @@ class Analytics
       )]
     )
     response = @client.batch_get_reports(request)
-    data = response.reports.first.data
-    # 動いているかの確認のため、これまでの累計View数が出るようにしている
-    puts "累計View数: #{data.totals.first.values.first}"
-    puts '------------------'
-    res_data = data&.rows.find {|i| i.dimensions == ["/ideas/#{idea_id}"]}
-    return res_data&.metrics&.first&.values&.first
+    return response.reports.first.data
   end
 
   private

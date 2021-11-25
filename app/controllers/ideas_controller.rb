@@ -66,7 +66,8 @@ class IdeasController < ApplicationController
 
   def search
     # アイデアに紐づくlikeの数を数えて、降順に並べる
-    @sort = params[:sort] || params[:selected_sort] || "likes_num"
+    @sort = params[:sort] || "likes_num"
+    @order = params[:order] || "desc"
     @keyword = params[:keyword]
     @tag_name = params[:tag_name]
     ideas = if @tag_name.present?
@@ -74,7 +75,7 @@ class IdeasController < ApplicationController
             else
               Idea.search(name: @keyword, difficulty: params[:difficulty]) | Idea.has_tag_name_like(@keyword)
             end
-    list = Idea.where(id: ideas.map(&:id)).order_by(@sort)
+    list = Idea.where(id: ideas.map(&:id)).order("#{@sort}": @order)
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value

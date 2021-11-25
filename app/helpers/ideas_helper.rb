@@ -10,13 +10,18 @@ module IdeasHelper
 
   def sort_hash
     {
-      いいねが多い順: :likes_num,
-      コメント数が多い順: :comments_num,
-      View数が多い順: :view,
-      名前の昇順: :asc,
-      名前の降順: :desc,
-      作成日が新しい順: :newly_created,
-      作成日が古い順: :old_created
+      いいね数順: :likes_num,
+      コメント数順: :comments_num,
+      View数順: :view,
+      名前: :name,
+      作成日: :created_at
+    }
+  end
+
+  def order_hash
+    {
+      昇順: :asc,
+      降順: :desc
     }
   end
 end

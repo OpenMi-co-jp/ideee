@@ -1,5 +1,12 @@
-<%= form_with url: search_ideas_path, method: :get, id: 'sort_form' do |f| %>
-  <%= f.select :selected_sort, options_for_select(sort_hash, selected: @sort  ) %>
-  <%= f.hidden_field :keyword, value: @keyword %>
-  <%= f.hidden_field :tag_name, value: @tag_name %>
-<% end %>
+<div class="row">
+  <%= form_with url: search_ideas_path, method: :get, id: 'sort_form' do |f| %>
+    <div class='input-field col s12 m6'>
+      <%= f.select :sort, options_for_select(sort_hash, selected: @sort  ), {}, class: 'sort_select' %>
+    </div>
+    <div class='input-field col s12 m6'>
+      <%= f.select :order, options_for_select(order_hash, selected: @order  ), {}, class: 'sort_select' %>
+    </div>
+    <%= f.hidden_field :keyword, value: @keyword %>
+    <%= f.hidden_field :tag_name, value: @tag_name %>
+  <% end %>
+</div>

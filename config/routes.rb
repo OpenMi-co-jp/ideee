@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :ideas do
     collection do
       get 'search'
-      get 'tags'
     end
     member do
       post 'publish'

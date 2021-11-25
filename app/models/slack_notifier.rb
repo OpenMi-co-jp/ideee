@@ -18,4 +18,10 @@ class SlackNotifier
 
     Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)
   end
+
+  def send_analytics_report(new_users, sessions)
+    channel = "#analytics_bot"
+    article = "ユーザーセッション【#{Time.current.yesterday.strftime('%Y / %m/ %d')}】\n新しいユーザー数：#{new_users}\nセッション数: #{sessions} 👏"
+    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+  end
 end

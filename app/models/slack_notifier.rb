@@ -24,7 +24,7 @@ class SlackNotifier
     return unless Rails.env.production?
     if !object.approved? && object.product_url&.strip.length > 0
       article = "🎉 アイデアが完成したようです！🎉\nURL: #{url}\nプロダクトのあるアイデア数: #{Idea.deployed.length}\n" +
-        "承認待ちURL: #{object.product_url}\n承認する時のコマンド：\n```heroku run rake product_apply:send_approve[#{object.id}]```"
+      "承認待ちURL: #{object.product_url}\n承認する時のコマンド：\n```heroku run rake product_apply:send_approve[#{object.id}]```"
       CHANNEL = "#ideee_user_apply"
       Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)
       object.update(product_apply: :applying)

@@ -2,7 +2,7 @@
   <div class='main-board'>
     <% if @searched_ideas.present? %>
       <h4 class='board-title'>検索結果 <%= @searched_ideas.count %>件</h4>
-      <%= render 'common/sort_form', ideas: @searched_ideas %>
+      <%= render 'common/sort_form', keyword: @keyword, path: search_ideas_path %>
       <%= render 'common/column_board', ideas: @searched_ideas %>
       <%= paginate @searched_ideas %>
     <% else %>

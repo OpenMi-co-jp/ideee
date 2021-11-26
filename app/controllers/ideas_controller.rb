@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy publish recruitment_start recruitment_complete ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish cooperation_start cooperation_complete ]
   before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search tags]
@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        @idea.recruitment_ongoing! if params[:idea][:recruitment]
+        @idea.cooperation_ongoing! if params[:idea][:cooperation]
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to @idea, notice: t('.success')
       end
@@ -84,18 +84,18 @@ class IdeasController < ApplicationController
     redirect_to @idea, notice: t('.success')
   end
 
-  def recruitment
-    list = Idea.where(recruitment: :ongoing)
-    @recruiting_ideas = Kaminari.paginate_array(list).page(params[:page])
+  def cooperation
+    list = Idea.where(cooperation: :ongoing)
+    @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
-  def recruitment_start
-    @idea.recruitment_ongoing!
+  def cooperation_start
+    @idea.cooperation_ongoing!
     redirect_to @idea, notice: t('.success')
   end
 
-  def recruitment_complete
-    @idea.recruitment_completed!
+  def cooperation_complete
+    @idea.cooperation_completed!
     redirect_to @idea, notice: t('.success')
   end
 

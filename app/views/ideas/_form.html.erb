@@ -38,10 +38,10 @@
         <%= form.label :note %>
         <%= form.rich_text_area :note %>
       </div>
-      <% if idea.recruitment_not_started? || idea.id.nil? %>
+      <% if idea.cooperation_not_started? || idea.id.nil? %>
         <div class="field">
-          <%= form.label :recruitment %>
-          <%= form.check_box :recruitment, {}, true, false %>
+          <%= form.label :cooperation %>
+          <%= form.check_box :cooperation, {}, true, false %>
         </div>
       <% end %>
       <% if idea.draft || idea.id.nil? %>

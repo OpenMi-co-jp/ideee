@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_002001) do
     t.integer "likes_num", default: 0
     t.integer "difficulty", default: 0
     t.boolean "draft", default: false
-    t.integer "recruitment", default: 0
+    t.integer "cooperation", default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

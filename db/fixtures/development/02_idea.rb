@@ -4,10 +4,10 @@ carriwave_path = "./app/assets/images/ideee-tech-logo.svg"
   num = n + 1
   Idea.seed(
     :id,
-    { id: num, name: Faker::JapaneseMedia::Doraemon.gadget , note: Faker::Lorem.paragraph(sentence_count: 20), icon: File.open(carriwave_path) , user: User.find(num), view: (0..200).to_a.sample, recruitment: (0..2).to_a.sample },
+    { id: num, name: Faker::JapaneseMedia::Doraemon.gadget , note: Faker::Lorem.paragraph(sentence_count: 20), icon: File.open(carriwave_path) , user: User.find(num), view: (0..200).to_a.sample, cooperation: (0..2).to_a.sample },
   )
   Idea.seed(
     :id,
-    { id: num + 15, name: Faker::JapaneseMedia::Doraemon.gadget , note: Faker::Lorem.paragraph(sentence_count: 20), user: User.find(num + 15), view: (0..200).to_a.sample, recruitment: (0..2).to_a.sample},
+    { id: num + 15, name: Faker::JapaneseMedia::Doraemon.gadget , note: Faker::Lorem.paragraph(sentence_count: 20), user: User.find(num + 15), view: (0..200).to_a.sample, cooperation: (0..2).to_a.sample},
   )
 end

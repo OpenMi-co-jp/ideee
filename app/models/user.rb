@@ -151,7 +151,7 @@ class User < ApplicationRecord
     comment_ideas.delete(id)
   end
 
-  def recruitment_joined?(idea)
+  def cooperation_joined?(idea)
     cooperation_ideas.include?(idea)
   end
 

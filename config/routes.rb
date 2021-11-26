@@ -4,12 +4,12 @@ Rails.application.routes.draw do
     collection do
       get 'search'
       get 'tags'
-      get 'recruitment'
+      get 'cooperation'
     end
     member do
       post 'publish'
-      post 'recruitment_start'
-      post 'recruitment_complete'
+      post 'cooperation_start'
+      post 'cooperation_complete'
     end
   end
   resources :comments, only: %i[create edit destroy] do

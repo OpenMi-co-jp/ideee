@@ -3,13 +3,13 @@
 # Table name: ideas
 #
 #  id          :bigint           not null, primary key
+#  cooperation :integer          default("not_started")
 #  difficulty  :integer          default("not_yet")
 #  draft       :boolean          default(FALSE)
 #  icon        :string(255)
 #  likes_num   :integer          default(0)
 #  name        :string(255)
 #  note        :text(65535)
-#  recruitment :integer          default("not_started")
 #  view        :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

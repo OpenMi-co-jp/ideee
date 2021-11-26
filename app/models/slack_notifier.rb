@@ -25,9 +25,15 @@ class SlackNotifier
     if !object.approved? && object.product_url&.strip.length > 0
       article = "🎉 アイデアが完成したようです！🎉\nURL: #{url}\nプロダクトのあるアイデア数: #{Idea.deployed.length}\n" +
         "承認待ちURL: #{object.product_url}\n承認する時のコマンド：\n```heroku run rake product_apply:send_approve[#{object.id}]```"
-      channel = "#ideee_user_apply"
-      Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+      CHANNEL = "#ideee_user_apply"
+      Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)
       object.update(product_apply: :applying)
     end
+  end
+
+  def send_analytics_report(new_users, sessions)
+    CHANNEL = "#analytics_bot"
+    article = "ユーザーセッション【#{Time.current.yesterday.strftime('%Y / %m/ %d')}】\n新しいユーザー数：#{new_users}\nセッション数: #{sessions} 👏"
+    Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)
   end
 end

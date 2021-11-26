@@ -11,7 +11,7 @@
           </figure>
         <% end %>
         <div class='idea__box'>
-          <%= link_to idea_path(idea.id) do %>
+          <%= link_to idea_path(idea.id), class: 'idea__name_link' do %>
             <b class='idea__name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea__status gray-3'>

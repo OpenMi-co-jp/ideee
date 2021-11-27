@@ -8,20 +8,19 @@ module IdeasHelper
     end
   end
 
-  def sort_hash
+  def idea_sort_hash
     {
-      いいね数順: :likes_num,
-      コメント数順: :comments_num,
-      View数順: :view,
-      名前: :name,
+      いいね数: :likes_num,
+      コメント数: :comments_num,
+      ビュー数: :view,
       作成日: :created_at
     }
   end
 
-  def order_hash
+  def idea_order_hash
     {
-      昇順: :asc,
-      降順: :desc
+      '昇順 ▲': :asc,
+      '降順 ▼': :desc
     }
   end
 end

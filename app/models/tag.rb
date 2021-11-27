@@ -16,6 +16,4 @@ class Tag < ApplicationRecord
   has_many :tagged_ideas, through: :taggings, source: :idea
 
   validates :name, presence: true, uniqueness: true
-
-  scope :name_like, -> name { where('tags.name like ?', "%#{name}%") }
 end

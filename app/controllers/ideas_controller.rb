@@ -69,7 +69,8 @@ class IdeasController < ApplicationController
     @sort = params[:sort] || "likes_num"
     @order = params[:order] || "desc"
     @keyword = params[:keyword]
-    ideas = Idea.search(name: @keyword, difficulty: params[:difficulty]) | Idea.has_tag_name_like(@keyword)
+    # TODO: 検索結果が増えてきたらtag検索を分ける
+    ideas = Idea.published.search(name: @keyword, difficulty: params[:difficulty]) | Idea.published.tag_name_like(@keyword)
     list = Idea.where(id: ideas.map(&:id)).order("#{@sort}": @order)
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i

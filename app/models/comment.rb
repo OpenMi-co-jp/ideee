@@ -23,4 +23,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :idea
   validates :description, presence: true
+
+  scope :weekly_comments, -> { where(created_at: 7.days.ago..Time.now) }
+  scope :pickup_user_commets_five, -> { group_by(&:user_id).transform_values(&:size).max(5){|x, y| x[1] <=> y[1]} }
 end

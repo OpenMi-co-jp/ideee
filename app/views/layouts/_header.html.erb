@@ -15,7 +15,7 @@
     </li>
     <li class='hide-on-med-and-down'>
       <%= link_to '#', data: { target: "dropdown_rank" }, class:'dropdown-trigger white' do %>
-        <p><%= image_tag 'icons/rank.svg'%></p>
+        <p><%= image_tag 'icons/info.svg' %></p>
       <% end %>
       <ul id='dropdown_rank' class='dropdown-content'>
         <li>
@@ -34,16 +34,17 @@
             <i class="material-icons">computer</i>エンジニア
           <% end %>
         </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to cooperation_ideas_path do %>
+            <i class="material-icons">groups</i>開発募集中のアイデア
+          <% end %>
+        </li>
       </ul>
       <%# TODO: ディスカッション機能の追加 %>
       <%# <li class=''>
         <%= link_to 'ディスカッション', root_path %>
       <%# </li> %>
-    </li>
-    <li class='nav-link hide-on-med-and-down'>
-      <%= link_to cooperation_ideas_path, class: 'waves-effect btn orange-action-back' do %>
-        <i class="material-icons">groups</i>
-      <% end %>
     </li>
     <% if current_user %>
       <li class='nav-link hide-on-med-and-down'>
@@ -101,7 +102,7 @@
         <li class="divider" tabindex="-1"></li>
         <li>
           <%= link_to cooperation_ideas_path do %>
-            <i class="material-icons">groups</i>開発者募集中のアイデア
+            <i class="material-icons">groups</i>開発募集中のアイデア
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>

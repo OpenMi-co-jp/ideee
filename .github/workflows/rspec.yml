@@ -14,12 +14,26 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  test:
-
+  build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ['3.0.2']
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    container:
+      image: ruby:3.0.2
+      env:
+        RAILS_ENV: test
+# trialで変更  
+#   test:
+
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         ruby-version: ['3.0.2']
 
     steps:
     - uses: actions/checkout@v2

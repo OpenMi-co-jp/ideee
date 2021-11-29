@@ -11,7 +11,9 @@ class IdeasController < ApplicationController
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
     @most_commented_ideas = @ideas.most_commented.first(5)
-    @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
+    @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
+    @commented_users_array = Comment.where(created_at: 7.days.ago..Time.now).group_by(&:user_id).transform_values(&:size).max(5){|x, y| x[1] <=> y[1]}
+    @weekly_commented_users = @commented_users_array.map{|u| User.find(u[0])}
   end
 
   def show

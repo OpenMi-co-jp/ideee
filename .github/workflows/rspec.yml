@@ -27,7 +27,7 @@ jobs:
       image: ruby:3.0.2
       env:
         RAILS_ENV: test
-        ImageOS: ubuntu18
+        ImageOS: macos1015
     strategy:
       matrix:
         ruby-version: ['3.0.2']

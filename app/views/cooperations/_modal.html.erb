@@ -1,0 +1,22 @@
+<div id="<%= modal_id %>" class="modal">
+  <div class="modal-content">
+    <h4><%= heading %></h4>
+    <div>開発者一覧(<%=  @idea.cooperation_users.length %>名)</div>
+    <ul class="collection m-5 row">
+      <% @idea.cooperation_users.each do |user| %>
+        <li class="collection-item col s12 m6 l3 p-2">
+          <div class='flex'>
+            <%= user_icon(user, size: 'small') %>
+            <div>
+              <div class='pr-3'><%= user.name %><%= user_definiton(user, ver='short') %></div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class='cooperation-submit-btn'>
+      <%= link_to t('default.cancel'), '#cancel', class: 'btn orange-soft-back cooperation-modal-close-btn' %>
+      <%= cooperation_link(path: path, method: method, name: name, color: color) %>
+    </div>
+  </div>
+</div>

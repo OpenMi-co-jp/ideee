@@ -1,27 +1,22 @@
-<div class='center'>
-  <% if idea.cooperation_not_started? %>
-    <div class=''>開発者を募集していません</div>
-    <%= link_to t('default.cooperation_start'), cooperation_confirm_idea_path(idea), class: 'waves-effect waves-light btn-large orange darken-4'%>
-  <% elsif idea.cooperation_ongoing? %>
-    <div class='cooperation-box'>募集中</div>
-    <%= link_to(
-      t('default.cooperation_complete'),
-      '#modal_cooperation_complete',
-      data: { turbolinks: false },
-      class: 'waves-effect waves-light btn-large orange darken-4 modal-trigger',
-      id: 'modal-trigger-cooperation-complete',
-    )%>
-  <% elsif idea.cooperation_completed? %>
-    <div class='cooperation-box'>開発者の募集は終了しました</div>
-    <%= link_to(
-      t('default.cooperation_restart'),
-      '#modal_cooperation_restart',
-      data: { turbolinks: false },
-      class: 'waves-effect waves-light btn-large orange darken-4 modal-trigger',
-      id: 'modal-trigger-cooperation-restart',
-    )%>
-  <% end %>
-</div>
+<% if idea.cooperation_not_started? %>
+  <%= link_to t('default.cooperation_start'), cooperation_start_confirm_idea_path(idea), class: 'waves-effect waves-light btn-large orange darken-4'%>
+<% elsif idea.cooperation_ongoing? %>
+  <%= link_to(
+    t('default.cooperation_complete'),
+    '#modal_cooperation_complete',
+    data: { turbolinks: false },
+    class: 'waves-effect waves-light btn-large orange darken-4 modal-trigger',
+    id: 'modal-trigger-cooperation-complete',
+  )%>
+<% elsif idea.cooperation_completed? %>
+  <%= link_to(
+    t('default.cooperation_restart'),
+    '#modal_cooperation_restart',
+    data: { turbolinks: false },
+    class: 'waves-effect waves-light btn-large orange darken-4 modal-trigger',
+    id: 'modal-trigger-cooperation-restart',
+  )%>
+<% end %>
 
 <div id="modal_cooperation_complete" class="modal">
   <div class="modal-content">

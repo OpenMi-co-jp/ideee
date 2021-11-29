@@ -1,12 +1,7 @@
-<% if idea.cooperation_not_started? %>
-  <div>現在開発者を募集していません</div>
-<% elsif idea.cooperation_ongoing? %>
-  <div class=''>開発者募集中</div>
+<% if idea.cooperation_ongoing? %>
   <% if current_user&.cooperation_joined?(idea) %>
-    <%= link_to t('default.cooperation_cancel'), cooperation_path(idea_id: idea), method: :delete, data: { confirm: 'このアイデアの開発を辞退しますか' }, class: 'btn orange-action-back'%>
+    <%= link_to t('default.cooperation_cancel'), cooperation_path(idea_id: idea), method: :delete, data: { confirm: 'このアイデアの開発を辞退しますか' }, class: 'waves-effect waves-light btn-large orange darken-4'%>
   <% else %>
-    <%= link_to t('default.cooperation_join'), cooperations_path(idea_id: idea), method: :post, data: { confirm: 'このアイデアの開発に参加しますか？' }, class: 'btn orange-action-back'%>
+    <%= link_to t('default.cooperation_join'), cooperations_path(idea_id: idea), method: :post, data: { confirm: 'このアイデアの開発に参加しますか？' }, class: 'waves-effect waves-light btn-large orange darken-4'%>
   <% end %>
-<% elsif idea.cooperation_completed? %>
-  <div>開発者の募集は終了しました</div>
 <% end %>

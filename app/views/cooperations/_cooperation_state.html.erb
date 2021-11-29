@@ -1,0 +1,9 @@
+<div class='cooperation-box'>
+  <% if idea.cooperation_not_started? %>
+    開発者を募集していません
+  <% elsif idea.cooperation_ongoing? %>
+    募集中
+  <% else %>
+    開発者の募集は終了しました
+  <% end %>
+</div>

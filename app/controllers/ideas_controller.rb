@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy publish cooperation_start cooperation_complete cooperation_confirm cooperation_restart ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish cooperation_start cooperation_complete cooperation_start_confirm cooperation_restart ]
   before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search tags]

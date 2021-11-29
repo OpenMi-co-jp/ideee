@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     end
     member do
       post 'publish'
-      get 'cooperation_confirm'
+      get 'cooperation_start_confirm'
+      get 'cooperation_join_confirm'
       post 'cooperation_start'
       post 'cooperation_complete'
       post 'cooperation_restart'

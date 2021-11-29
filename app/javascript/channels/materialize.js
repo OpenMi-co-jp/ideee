@@ -68,9 +68,14 @@ $(document).on ('turbolinks:load', function(){
     $('#modal_cooperation_complete').modal('open');
   });
 
-  // 募集終了のモーダル
+  // 募集再開のモーダル
   $('#modal-trigger-cooperation-restart').on('click', function() {
     $('#modal_cooperation_restart').modal('open');
+  });
+
+  // 募集辞退のモーダル
+  $('#modal-trigger-cooperation-cancel').on('click', function() {
+    $('#modal_cooperation_cancel').modal('open');
   });
 
   // モーダルを閉じる用

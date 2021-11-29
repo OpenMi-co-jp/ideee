@@ -1,5 +1,9 @@
 <div id='cooperation_start_confirm'>
-  <h4 class='orange-text text-orange center'>このアイデアの開発者を募集しますか？</h4>
+  <% if current_user&.own?(@idea) %>
+    <h4 class='orange-text text-orange center'>このアイデアの開発者を募集しますか？</h4>
+  <% else %>
+    <h4 class='orange-text text-orange center'>このアイデアの開発に参加しますか？</h4>
+  <% end %>
   <div class='idea_img mt-3 mb-5'>
     <%= image_set(@idea)  %>
   </div>
@@ -28,7 +32,11 @@
 
   <div class='cooperation-submit'>
     <%= link_to t('default.cancel'), idea_path(@idea), class: 'btn orange-soft-back' %>
-    <%= link_to t('default.cooperation_start'), cooperation_start_idea_path(@idea), method: :post, class: 'btn orange darken-4'%>
+    <% if current_user&.own?(@idea) %>
+      <%= link_to t('default.cooperation_start'), cooperation_start_idea_path(@idea), method: :post, class: 'btn orange darken-4'%>
+    <% else %>
+      <%= link_to t('default.cooperation_join'), cooperations_path(idea_id: @idea), method: :post, class: 'btn orange darken-4'%>
+    <% end %>
   </div>
 </div>
 

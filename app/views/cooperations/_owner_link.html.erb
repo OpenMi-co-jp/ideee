@@ -34,7 +34,7 @@
         </li>
       <% end %>
     </ul>
-    <div class='cooperation-complete-submit'>
+    <div class='cooperation-submit-btn'>
       <%= link_to t('default.cancel'), '#cancel', class: 'btn orange-soft-back cooperation-modal-close-btn' %>
       <%= link_to t('default.cooperation_complete'), cooperation_complete_idea_path(@idea), method: :post, class: 'btn orange darken-4'%>
     </div>
@@ -57,7 +57,7 @@
         </li>
       <% end %>
     </ul>
-    <div class='cooperation-restart-submit'>
+    <div class='cooperation-submit-btn'>
       <%= link_to t('default.cancel'), '#cancel', class: 'btn orange-soft-back cooperation-modal-close-btn' %>
       <%= link_to t('default.cooperation_restart'), cooperation_restart_idea_path(@idea), method: :post, class: 'btn orange darken-4'%>
     </div>

@@ -1,7 +1,36 @@
 <% if idea.cooperation_ongoing? %>
   <% if current_user&.cooperation_joined?(idea) %>
-    <%= link_to t('default.cooperation_cancel'), cooperation_path(idea_id: idea), method: :delete, data: { confirm: 'このアイデアの開発を辞退しますか' }, class: 'waves-effect waves-light btn-large orange darken-4'%>
+    <%= link_to(
+      t('default.cooperation_cancel'),
+      '#modal_cooperation_cancel',
+      data: { turbolinks: false },
+      class: 'waves-effect waves-light btn-large grey darken-2 modal-trigger',
+      id: 'modal-trigger-cooperation-cancel',
+    )%>
   <% else %>
-    <%= link_to t('default.cooperation_join'), cooperations_path(idea_id: idea), method: :post, data: { confirm: 'このアイデアの開発に参加しますか？' }, class: 'waves-effect waves-light btn-large orange darken-4'%>
+    <%= link_to t('default.cooperation_join'), cooperation_start_confirm_idea_path(idea_id: idea), class: 'waves-effect waves-light btn-large orange darken-4'%>
   <% end %>
 <% end %>
+
+<div id="modal_cooperation_cancel" class="modal">
+  <div class="modal-content">
+    <h4>この開発への参加を辞退しますか？</h4>
+    <div>開発者一覧(<%=  idea.cooperation_users.length %>名)</div>
+    <ul class="collection m-5 row">
+      <% idea.cooperation_users.each do |user| %>
+        <li class="collection-item col s12 m6 l3 p-2">
+          <div class='flex'>
+            <%= user_icon(user, size: 'small') %>
+            <div>
+              <div class='pr-3'><%= user.name %><%= user_definiton(user, ver='short') %></div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class='cooperation-submit-btn'>
+      <%= link_to t('default.cancel'), '#cancel', class: 'btn orange-soft-back cooperation-modal-close-btn' %>
+      <%= link_to t('default.cooperation_cancel'), cooperation_path(idea_id: @idea), method: :delete, class: 'btn grey darken-2'%>
+    </div>
+  </div>
+</div>

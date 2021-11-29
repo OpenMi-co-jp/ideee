@@ -64,4 +64,7 @@ RSpec.configure do |config|
 
   # settings to let developers use FactoryBot without writing "FactoryBot"
   config.include FactoryBot::Syntax::Methods
+
+  # settings for Devise's helper to be called when spec is executed
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end

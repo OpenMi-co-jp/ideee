@@ -107,7 +107,7 @@ class IdeasController < ApplicationController
     end
 
     def tags_params
-      params.dig(:idea, :tag_list).split(",").uniq
+      params.dig(:idea, :tag_list)&.split(",")&.uniq
     end
 
     def draft_bool

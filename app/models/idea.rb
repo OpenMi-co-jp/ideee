@@ -5,6 +5,7 @@
 #  id           :bigint           not null, primary key
 #  comments_num :integer          default(0)
 #  difficulty   :integer          default("not_yet")
+#  draft        :boolean          default(FALSE)
 #  icon         :string(255)
 #  likes_num    :integer          default(0)
 #  name         :string(255)
@@ -79,6 +80,10 @@ class Idea < ApplicationRecord
   end
 
   def save_with_tags(tag_list)
+    if tag_list.nil?
+      save!
+      return true
+    end
     ActiveRecord::Base.transaction do
       self.idea_tags = tag_list.map { |name| Tag.find_or_initialize_by(name: name.strip) }
       save!

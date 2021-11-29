@@ -8,8 +8,10 @@ Rails.application.routes.draw do
     end
     member do
       post 'publish'
+      get 'cooperation_confirm'
       post 'cooperation_start'
       post 'cooperation_complete'
+      post 'cooperation_restart'
     end
   end
   resources :comments, only: %i[create edit destroy] do

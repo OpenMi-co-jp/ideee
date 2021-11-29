@@ -1,0 +1,70 @@
+<div class='center'>
+  <% if idea.cooperation_not_started? %>
+    <div class=''>開発者を募集していません</div>
+    <%= link_to t('default.cooperation_start'), cooperation_confirm_idea_path(idea), class: 'waves-effect waves-light btn-large orange darken-4'%>
+  <% elsif idea.cooperation_ongoing? %>
+    <div class='cooperation-box'>募集中</div>
+    <%= link_to(
+      t('default.cooperation_complete'),
+      '#modal_cooperation_complete',
+      data: { turbolinks: false },
+      class: 'waves-effect waves-light btn-large orange darken-4 modal-trigger',
+      id: 'modal-trigger-cooperation-complete',
+    )%>
+  <% elsif idea.cooperation_completed? %>
+    <div class='cooperation-box'>開発者の募集は終了しました</div>
+    <%= link_to(
+      t('default.cooperation_restart'),
+      '#modal_cooperation_restart',
+      data: { turbolinks: false },
+      class: 'waves-effect waves-light btn-large orange darken-4 modal-trigger',
+      id: 'modal-trigger-cooperation-restart',
+    )%>
+  <% end %>
+</div>
+
+<div id="modal_cooperation_complete" class="modal">
+  <div class="modal-content">
+    <h4>募集を終了しますか？</h4>
+    <div>開発者一覧(<%=  idea.cooperation_users.length %>名)</div>
+    <ul class="collection m-5 row">
+      <% idea.cooperation_users.each do |user| %>
+        <li class="collection-item col s12 m6 l3 p-2">
+          <div class='flex'>
+            <%= user_icon(user, size: 'small') %>
+            <div>
+              <div class='pr-3'><%= user.name %><%= user_definiton(user, ver='short') %></div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class='cooperation-complete-submit'>
+      <%= link_to t('default.cancel'), '#cancel', class: 'btn orange-soft-back cooperation-modal-close-btn' %>
+      <%= link_to t('default.cooperation_complete'), cooperation_complete_idea_path(@idea), method: :post, class: 'btn orange darken-4'%>
+    </div>
+  </div>
+</div>
+
+<div id="modal_cooperation_restart" class="modal">
+  <div class="modal-content">
+    <h4>開発者を再募集しますか？</h4>
+    <div>開発者一覧(<%=  idea.cooperation_users.length %>名)</div>
+    <ul class="collection m-5 row">
+      <% idea.cooperation_users.each do |user| %>
+        <li class="collection-item col s12 m6 l3 p-2">
+          <div class='flex'>
+            <%= user_icon(user, size: 'small') %>
+            <div>
+              <div class='pr-3'><%= user.name %><%= user_definiton(user, ver='short') %></div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <div class='cooperation-restart-submit'>
+      <%= link_to t('default.cancel'), '#cancel', class: 'btn orange-soft-back cooperation-modal-close-btn' %>
+      <%= link_to t('default.cooperation_restart'), cooperation_restart_idea_path(@idea), method: :post, class: 'btn orange darken-4'%>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div id='cooperation_start_confirm'>
+  <h4 class='orange-text text-orange center'>このアイデアの開発者を募集しますか？</h4>
+  <div class='idea_img mt-3 mb-5'>
+    <%= image_set(@idea)  %>
+  </div>
+  <div class='status-info'>
+    <div>
+      <%= "更新日：#{l @idea.updated_at}" %>
+    </div>
+    <div>
+      <%= image_tag 'icons/eye.svg' %>
+      <%= @idea.view %>
+    </div>
+    <div class='status-info__comment'>
+      <%= image_tag 'icons/comment.svg' %>
+      <%= @idea.comments.length %>
+    </div>
+    <% if current_user&.own?(@idea) %>
+      <div>
+        <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
+      </div>
+    <% end %>
+  </div>
+  <div class='idea-content'>
+    <label>アイデア詳細</label>
+    <%= @idea.note %>
+  </div>
+
+  <div class='cooperation-submit'>
+    <%= link_to t('default.cancel'), idea_path(@idea), class: 'btn orange-soft-back' %>
+    <%= link_to t('default.cooperation_start'), cooperation_start_idea_path(@idea), method: :post, class: 'btn orange darken-4'%>
+  </div>
+</div>
+

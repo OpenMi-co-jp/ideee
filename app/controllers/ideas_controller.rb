@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy publish cooperation_start cooperation_complete ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish cooperation_start cooperation_complete cooperation_confirm cooperation_restart ]
   before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search tags]
@@ -84,18 +84,25 @@ class IdeasController < ApplicationController
     redirect_to @idea, notice: t('.success')
   end
 
-  def cooperation
-    list = Idea.where(cooperation: :ongoing)
-    @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
-  end
+  def cooperation_start_confirm; end
 
   def cooperation_start
     @idea.cooperation_ongoing!
     redirect_to @idea, notice: t('.success')
   end
 
+  def cooperation
+    list = Idea.where(cooperation: :ongoing)
+    @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
+  end
+
   def cooperation_complete
     @idea.cooperation_completed!
+    redirect_to @idea, notice: t('.success')
+  end
+
+  def cooperation_restart
+    @idea.cooperation_ongoing!
     redirect_to @idea, notice: t('.success')
   end
 

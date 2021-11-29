@@ -13,11 +13,12 @@ ja:
     draft: 下書き
     save_draft: 下書き保存
     publish: 公開する
-    cooperation: 開発者を募集する
+    cooperation_start: 開発者を募集する
     cooperation_complete: 募集を終了する
     cooperation_restart: 再募集する
     cooperation_join: 参加する
     cooperation_cancel: 参加を辞退する
+    cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました
   devise:
@@ -66,6 +67,8 @@ ja:
       success: 開発者の募集を開始しました
     cooperation_complete:
       success: 開発者の募集を終了しました
+    cooperation_restart:
+      success: 開発者の募集を再開しました
   cooperations:
     create:
       success: 開発者の募集に参加しました

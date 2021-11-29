@@ -1,7 +1,7 @@
 class SlackNotifier
   attr_reader :client
 
-  WEBHOOK_URL = ENV["SLACK_API_URL"]
+  WEBHOOK_URL = Rails.application.credentials.dig(:slack, :api_url)
   CHANNEL = "#ideee_app_bot" # Slackで送りたいチャンネルを指定
 
   def initialize
@@ -17,5 +17,11 @@ class SlackNotifier
     end
 
     Slack::Notifier.new(WEBHOOK_URL, channel: CHANNEL).ping(article)
+  end
+
+  def send_analytics_report(new_users, sessions)
+    channel = "#analytics_bot"
+    article = "ユーザーセッション【#{Time.current.yesterday.strftime('%Y / %m/ %d')}】\n新しいユーザー数：#{new_users}\nセッション数: #{sessions} 👏"
+    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
   end
 end

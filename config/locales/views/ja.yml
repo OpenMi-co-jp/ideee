@@ -74,6 +74,12 @@ ja:
       success: 開発者の募集に参加しました
     destroy:
       success: 参加を辞退しました
+  comments:
+    edit:
+      title: コメント編集
+    update:
+      success: コメントを更新しました
+      fail: コメントの更新に失敗しました
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます

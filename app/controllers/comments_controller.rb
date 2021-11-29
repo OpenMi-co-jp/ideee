@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: %i[ edit update destroy ]
 
   def create
     current_user.create_comment(comment_params)
@@ -6,9 +7,19 @@ class CommentsController < ApplicationController
 
   def edit; end
 
+  def update
+    @idea = Idea.find(@comment.idea.id)
+    if @comment.update(comment_update_params)
+      redirect_to @idea, notice: t('.success')
+    else
+      flash.now[:alert] = t('.fail')
+      render :edit
+    end
+  end
+
   def destroy
-    @comment = Comment.find(params[:id])
-    @comment.destroy
+    @comment.delete
+    @comment.idea.count_comments
   end
 
   def send_email
@@ -22,6 +33,14 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.permit(:description, :idea_id)
+    params.permit(:description, :idea_id, :user_id, :id)
+  end
+
+  def comment_update_params
+    params.require(:comment).permit(:description)
+  end
+
+  def set_comment
+    @comment = Comment.find(comment_params[:id])
   end
 end

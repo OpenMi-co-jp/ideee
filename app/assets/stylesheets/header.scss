@@ -44,4 +44,9 @@ header {
 
 .header-logo {
   width: 100px;
+
+  img:hover {
+    transition-duration: .4s;
+    transform: scale(1.1);
+  }
 }

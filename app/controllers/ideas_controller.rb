@@ -10,7 +10,8 @@ class IdeasController < ApplicationController
     @latest_ideas = @ideas.order(created_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
-    @featured_users = User.defined_user.order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
+    @most_commented_ideas = @ideas.most_commented.first(5)
+    @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
   end
 
   def show
@@ -19,7 +20,7 @@ class IdeasController < ApplicationController
     @levels = Difficulty.levels
     if Rails.env.production?
       @idea.views_update(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
-      @time_on_page = Analytics.new.report_count('avgTimeOnPage', params[:id]) || '-' # 製作者にのみ見える、アイデアページの滞在時間を設定
+      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' # 製作者にのみ見える、アイデアページの滞在時間を設定
     else
       @time_on_page = '-'
     end
@@ -39,6 +40,7 @@ class IdeasController < ApplicationController
         redirect_to @idea, notice: t('.draft_save')
       else
         @idea.cooperation_ongoing! if params[:idea][:cooperation]
+        TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to @idea, notice: t('.success')
       end
@@ -80,6 +82,7 @@ class IdeasController < ApplicationController
 
   def publish
     @idea.update(draft: false)
+    TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
     redirect_to @idea, notice: t('.success')
   end

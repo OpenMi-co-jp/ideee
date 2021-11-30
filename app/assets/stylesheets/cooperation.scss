@@ -1,30 +1,11 @@
-#idea_cooperation {
-  box-sizing: border-box;
-  cursor: pointer;
-  position: relative;
-  opacity: 0.7;
-  pointer-events: all;
-}
-
-.cooperation-box {
-  padding: 0.2em 0.5em;
-  margin: 2em 0;
-  color: #6b6b6b;
-  background: #ffe0b2;
-  box-shadow: 0px 0px 0px 10px #ffe0b2;
-  border: dashed 2px #ff9800;
-  border-radius: 8px;
-  font-weight: bold;
-}
-
-#cooperation_start_confirm {
+.cooperation {
   padding: 2rem;
 
   h4 {
     font-weight: bold;
   }
 
-  .idea_img {
+  &__idea_img {
     margin: 0 auto;
 
     img {
@@ -35,21 +16,18 @@
     }
   }
 
-  .idea-content {
+  &__idea-status {
+    justify-content: center;
+  }
+
+  &__idea-content {
     background-color: #fff3e0;
     border-radius: 10px;
     padding: 2rem;
     margin: 2rem;
   }
 
-  .cooperation-submit {
-    text-align: center;
-  }
-}
-
-.modal-content {
-  .cooperation-submit-btn {
-    margin: 1rem;
+  &__btns {
     text-align: center;
   }
 }

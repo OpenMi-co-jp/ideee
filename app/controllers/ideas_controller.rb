@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy publish cooperation_start_confirm cooperation_join_confirm cooperation_start cooperation_complete cooperation_restart ]
+  prepend_before_action :set_idea, only: %i[ show edit update destroy publish ]
   before_action :authenticate_user!, except: %i[ index show search tags ]
   before_action :own_user_check, only: %i[ edit update destroy ]
   before_action :defined_check, except: %i[ index show search tags]
@@ -36,10 +36,10 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
+      @idea.cooperation_ongoing! if params[:idea][:cooperation]
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        @idea.cooperation_ongoing! if params[:idea][:cooperation]
         TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to @idea, notice: t('.success')
@@ -84,34 +84,6 @@ class IdeasController < ApplicationController
     @idea.update(draft: false)
     TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
-    redirect_to @idea, notice: t('.success')
-  end
-
-  def cooperation_start_confirm
-    redirect_to @idea if !@idea.cooperation_not_started?
-  end
-
-  def cooperation_join_confirm
-    redirect_to @idea if current_user.cooperation_joined?(@idea)
-  end
-
-  def cooperation
-    list = Idea.where(cooperation: :ongoing)
-    @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
-  end
-
-  def cooperation_start
-    @idea.cooperation_ongoing!
-    redirect_to @idea, notice: t('.success')
-  end
-
-  def cooperation_complete
-    @idea.cooperation_completed!
-    redirect_to @idea, notice: t('.success')
-  end
-
-  def cooperation_restart
-    @idea.cooperation_ongoing!
     redirect_to @idea, notice: t('.success')
   end
 

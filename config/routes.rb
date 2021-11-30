@@ -4,15 +4,9 @@ Rails.application.routes.draw do
     collection do
       get 'search'
       get 'tags'
-      get 'cooperation'
     end
     member do
       post 'publish'
-      get 'cooperation_start_confirm'
-      get 'cooperation_join_confirm'
-      post 'cooperation_start'
-      post 'cooperation_complete'
-      post 'cooperation_restart'
     end
   end
   resources :comments, only: %i[create edit update destroy] do
@@ -31,7 +25,16 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
-  resources :cooperations, only: %i[create destroy]
+  resources :cooperations, only: %i[create destroy] do
+    collection do
+      get 'ongoing'
+      get 'start_confirm'
+      get 'join_confirm'
+      post 'start'
+      post 'complete'
+      post 'restart'
+    end
+  end
   resources :difficultys, only: %i[create]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'

@@ -145,7 +145,7 @@ class User < ApplicationRecord
 
   def create_comment(params)
     comments.create(idea_id: params[:idea_id], description: params[:description])
-    Idea.find(params[:idea_id]).count_comments
+    Idea.find(params[:idea_id]).count_comments if params[:idea_id].present?
   end
 
   def cooperation_joined?(idea)

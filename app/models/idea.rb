@@ -84,6 +84,10 @@ class Idea < ApplicationRecord
   end
 
   def save_with_tags(tag_list)
+    if tag_list.nil?
+      save!
+      return true
+    end
     ActiveRecord::Base.transaction do
       self.idea_tags = tag_list.map { |name| Tag.find_or_initialize_by(name: name.strip) }
       save!

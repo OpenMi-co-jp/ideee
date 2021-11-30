@@ -62,7 +62,7 @@ class Idea < ApplicationRecord
 
   def self.search(name: nil, difficulty: nil)
     # TODO: クソコードをリファクタ
-    if name &.empty? && difficulty.nil?
+    if name&.empty? && difficulty.nil?
       published
     elsif name.present?
       where(["name like?", "%#{name}%"])

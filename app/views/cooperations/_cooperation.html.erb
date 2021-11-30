@@ -1,5 +1,5 @@
 <div class='p-2 center'>
-  <%= render 'cooperations/cooperation_state', idea: idea %>
+  <%= render 'cooperations/cooperation_status', idea: idea %>
   <% if current_user&.own?(idea) %>
     <%= render 'cooperations/owner_link', idea: idea %>
   <% else %>

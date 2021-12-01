@@ -37,6 +37,6 @@ module ShareHelper
     else
       url = request.url
     end
-    "https://b.hatena.ne.jp/entry/hoge.html#{url}"
+    "https://b.hatena.ne.jp/entry/#{url}"
   end
 end

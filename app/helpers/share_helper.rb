@@ -30,4 +30,13 @@ module ShareHelper
     end
     "https://social-plugins.line.me/lineit/share?url=#{url}"
   end
+
+  def hatebu_share(root=false)
+    if root
+      url = "https://www.ideee.tech"
+    else
+      url = request.url
+    end
+    "https://b.hatena.ne.jp/entry/hoge.html#{url}"
+  end
 end

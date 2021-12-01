@@ -22,13 +22,15 @@ module ShareHelper
     "https://www.facebook.com/share.php?u=#{url}"
   end
 
-  def line_share(root=false)
+  def line_share(content, root=false)
     if root
       url = "https://www.ideee.tech"
+      text = content
     else
       url = request.url
+      text = content.name
     end
-    "https://social-plugins.line.me/lineit/share?url=#{url}"
+    "https://social-plugins.line.me/lineit/share?url=#{text}#{url}"
   end
 
   def hatebu_share(root=false)

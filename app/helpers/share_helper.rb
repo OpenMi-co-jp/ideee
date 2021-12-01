@@ -12,4 +12,13 @@ module ShareHelper
     end
     "https://twitter.com/intent/tweet?text=#{text}&hashtags=ideee&via=#{twitter_id}&related=ideee_tech&url=#{url}"
   end
+
+  def facebook_share(root=false)
+    if root
+      url = "https://www.ideee.tech"
+    else
+      url = request.url
+    end
+    "https://www.facebook.com/share.php?u=#{url}"
+  end
 end

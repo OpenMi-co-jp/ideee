@@ -45,12 +45,13 @@ class Idea < ApplicationRecord
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
 
-  scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
+  scope :with_tag, -> tag_name { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_commented, -> { order(comments_num: "DESC") }
   scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
+  scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
 
   def user
     return User.find_by(id: self.user_id)
@@ -67,12 +68,12 @@ class Idea < ApplicationRecord
 
   def self.search(name: nil, difficulty: nil)
     # TODO: クソコードをリファクタ
-    if name.nil? && difficulty.nil?
+    if name&.empty? && difficulty.nil?
       published
-    elsif !name.nil?
-      where(["name like?", "%#{name}%"]).published
-    else !difficulty.nil?
-      where(difficulty: difficulty).published
+    elsif name.present?
+      where(["name like?", "%#{name}%"])
+    else difficulty.present?
+      where(difficulty: difficulty)
     end
   end
 

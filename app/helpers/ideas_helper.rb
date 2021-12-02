@@ -7,4 +7,20 @@ module IdeasHelper
       image_tag(idea.icon.to_s)
     end
   end
+
+  def idea_sort_hash
+    {
+      いいね数: :likes_num,
+      コメント数: :comments_num,
+      ビュー数: :view,
+      作成日: :created_at
+    }
+  end
+
+  def idea_order_hash
+    {
+      '昇順 ▲': :asc,
+      '降順 ▼': :desc
+    }
+  end
 end

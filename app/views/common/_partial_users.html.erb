@@ -16,7 +16,7 @@
                     <%= user_definiton(user, ver='short') %>
                   </div>
                   <div class='user-point grid-middle'>
-                    <% if users.length > @weekly_commented_users.length %>
+                    <% if @weekly_commented_users && users.length > @weekly_commented_users.length %>
                       <p>🔥</p>
                       <%= user.point %>
                     <% else %>

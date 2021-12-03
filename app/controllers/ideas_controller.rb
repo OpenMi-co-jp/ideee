@@ -13,7 +13,7 @@ class IdeasController < ApplicationController
     @most_commented_ideas = @ideas.most_commented.first(5)
     @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
     # 1週間以内にコメントを追加したユーザーのIDとコメント数とピックアップ
-    @commented_users_array = Comment.weekly_comments.pickup_user_commets(5)
+    @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
     @weekly_commented_users = @commented_users_array.map{|u| User.find(u[0])}
   end
 

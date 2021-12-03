@@ -16,12 +16,12 @@
                     <%= user_definiton(user, ver='short') %>
                   </div>
                   <div class='user-point grid-middle'>
-                    <% if @weekly_commented_users && users.length > @weekly_commented_users.length %>
-                      <p>🔥</p>
-                      <%= user.point %>
-                    <% else %>
+                    <% if users.length == t('default.users.weekly_comments_num') %>
                       <p>💬</p>
                       <%= @commented_users_array.to_h[user.id] %>
+                    <% else %>
+                      <p>🔥</p>
+                      <%= user.point %>
                     <% end %>
                   </div>
                 </div>

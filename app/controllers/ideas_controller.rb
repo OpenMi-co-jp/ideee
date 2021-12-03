@@ -53,6 +53,10 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
+      if params[:commit] == t('default.publish') && Rails.env.production?
+        TwitterTweet.new.tweet(@idea, idea_url(@idea.id))
+        SlackNotifier.new.send(@idea, idea_url(@idea.id))
+      end
       SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
       redirect_to @idea, notice: message

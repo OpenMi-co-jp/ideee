@@ -44,7 +44,7 @@
         <%= render 'ideas/index/featured_users',
           icon: '🚀',
           title: '今週の注目コメンテーター',
-          path: users_path,
+          path: search_users_path(sort: :weekly_comments),
           users: @weekly_commented_users %>
       </div>
     </div>

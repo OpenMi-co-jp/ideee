@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_233022) do
+ActiveRecord::Schema.define(version: 2021_11_24_050122) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 2021_11_11_233022) do
     t.integer "difficulty", default: 0
     t.boolean "draft", default: false
     t.integer "comments_num", default: 0
+    t.string "product_url"
+    t.integer "product_apply", default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

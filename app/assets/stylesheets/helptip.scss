@@ -1,0 +1,33 @@
+.help-tip {
+  position: relative;
+  background-color: #E3E4E8;
+  padding: 3px 6px;
+  border-radius: 50%;
+
+  &:hover {
+    transition-duration: .4s;
+    transform: scale(1.05);
+    @media screen and (max-width: 768px) {
+      transform: scale(1);
+    }
+
+    &::before {
+      position: absolute;
+      padding: 4px 8px;
+      text-align: center;
+      border: 1px solid #FFBF85;
+      border-radius: 0.5rem;
+      font-size: 13px;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      color: #000;
+      background-color: #fff;
+    }
+
+    &.product-url::before {
+      content: "プロダクトとして承認されるとログインなしでサイトが閲覧可能になります。";
+      width: 260px;
+    }
+  }
+}

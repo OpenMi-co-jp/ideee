@@ -18,6 +18,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    puts '-------------'
+    puts params
     @comment.delete
     @comment.idea.count_comments
   end

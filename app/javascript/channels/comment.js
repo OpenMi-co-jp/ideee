@@ -20,20 +20,21 @@ $(document).on ('turbolinks:load', function(){
     }
   });
 
-  $('#comment-delete').on('click', function() {
-    const element = $(this)
-    const comment_body = element.parents('.comment-column')
-    const comment_id = comment_body.attr('id')
+  $('.dropdown-comment-delete').on('click', function() {
+    console.log('------------')
+    comment_id = $(this).attr('id')
+    console.log(comment_id)
     $.ajax({
-      url: '/comments/${comment_id}',
-      type: 'POST',
+      url: '/comments/' + comment_id,
+      type: 'DELETE',
       data: {id: comment_id, _method: "delete"},
       dataType: 'json'
     })
     .done(function(data) {
-      element.parents('.parent').remove()
-      $('#comment-${comment_id}').remove()
-      $('#comments_count').html('<img src="/assets/icons/comment.svg"/>${gon.comment.idea.comments_num}')
+      console.log('------done------')
+      $(this).parents('.comment-column').remove()
+      // $('#comment-${comment_id}').remove()
+      // $('#comments_count').html('<img src="/assets/icons/comment.svg"/>${gon.comment.idea.comments_num}')
     })
   });
 

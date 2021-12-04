@@ -14,7 +14,7 @@
   </ul>
   <ul id="dropdown_comment-delete-<%= comment.id %>" class='dropdown-content comment-option'>
     <li>
-      <%= link_to comment_path(comment), method: :delete, id: 'comment-delete', remote: true do %>
+      <%= link_to comment_path(comment), method: :delete, data: { confirm: '削除してもよろしいですか？' }, id: comment.id, class: 'dropdown-comment-delete', remote: true do %>
         削除
       <% end %>
     </li>

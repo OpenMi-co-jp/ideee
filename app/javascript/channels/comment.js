@@ -22,7 +22,19 @@ $(document).on ('turbolinks:load', function(){
 
   $('#comment-delete').on('click', function() {
     const element = $(this)
-    element.parents('.parent').remove()
+    const comment_body = element.parents('.comment-column')
+    const comment_id = comment_body.attr('id')
+    $.ajax({
+      url: '/comments/${comment_id}',
+      type: 'POST',
+      data: {id: comment_id, _method: "delete"},
+      dataType: 'json'
+    })
+    .done(function(data) {
+      element.parents('.parent').remove()
+      $('#comment-${comment_id}').remove()
+      $('#comments_count').html('<img src="/assets/icons/comment.svg"/>${gon.comment.idea.comments_num}')
+    })
   });
 
   function create_comment(comment){

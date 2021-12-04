@@ -21,20 +21,12 @@ $(document).on ('turbolinks:load', function(){
   });
 
   $('.dropdown-comment-delete').on('click', function() {
-    console.log('------------')
     comment_id = $(this).attr('id')
-    console.log(comment_id)
-    $.ajax({
-      url: '/comments/' + comment_id,
-      type: 'DELETE',
-      data: {id: comment_id, _method: "delete"},
-      dataType: 'json'
-    })
-    .done(function(data) {
-      console.log('------done------')
-      $(this).parents('.comment-column').remove()
-      // $('#comment-${comment_id}').remove()
-      // $('#comments_count').html('<img src="/assets/icons/comment.svg"/>${gon.comment.idea.comments_num}')
+    delete_comment(comment_id)
+    .done(function() {
+      $('#comment-' + comment_id).remove()
+      $comments_count = $('#comments_count').find('p')
+      $comments_count.html(Number($comments_count[0].innerText) - 1)
     })
   });
 
@@ -45,7 +37,16 @@ $(document).on ('turbolinks:load', function(){
       data: { description: comment, idea_id: gon.idea_id},
       dataType: 'json'
     })
-  }
+  };
+
+  function delete_comment(comment_id){
+    return $.ajax({
+      url: '/comments/' + comment_id,
+      type: 'DELETE',
+      data: { id: comment_id },
+      dataType: 'json'
+    })
+  };
 
   function send_email(comment){
     return $.ajax({

@@ -16,6 +16,8 @@ ja:
     cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました
+    users:
+      weekly_comments_num: 5
   devise:
     confirmations:
       new:

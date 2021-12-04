@@ -36,6 +36,12 @@
       justify-content: center;
     }
   }
+
+  .share {
+    &__flex {
+      justify-content: center;
+    }
+  }
 }
 
 @media (max-width: 992px) {

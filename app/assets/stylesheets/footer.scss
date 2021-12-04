@@ -53,7 +53,15 @@ footer {
     }
   }
 
-  img.twitter-share {
-    width: 48px;
+  .share {
+    margin-top: 40px;
+
+    &__flex {
+      justify-content: center;
+    }
+
+    &__icon {
+      width: 48px;
+    }
   }
 }

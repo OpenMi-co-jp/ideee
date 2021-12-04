@@ -2,7 +2,7 @@
   <div class='main-board seach-results'>
     <% if @searched_ideas.present? %>
       <div class='search--sort'>
-        <h4 class='board-title'>検索結果 <%= @searched_ideas.count %>件</h4>
+        <h5 class='board-title'>検索結果 <%= @searched_ideas.count %>件</h5>
         <%= render 'common/sort_form', keyword: @keyword, path: search_ideas_path %>
       </div>
       <%= render 'common/column_board', ideas: @searched_ideas %>

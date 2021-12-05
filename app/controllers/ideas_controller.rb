@@ -38,6 +38,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
+    add_published_at
     if @idea.save_with_tags(tags_params)
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
@@ -97,6 +98,7 @@ class IdeasController < ApplicationController
   end
 
   def publish
+    add_published_at
     @idea.update(draft: false)
     TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
@@ -136,5 +138,9 @@ class IdeasController < ApplicationController
       return if !@idea.draft || current_user.own?(@idea)
       redirect_to root_path
       flash[:alert] = t('default.message.unauthorized')
+    end
+
+    def add_published_at
+      @idea.published_at = Time.now
     end
 end

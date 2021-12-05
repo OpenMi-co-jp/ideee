@@ -13,30 +13,8 @@ module ShareHelper
     "https://twitter.com/intent/tweet?text=#{text}&hashtags=ideee&via=#{twitter_id}&related=ideee_tech&url=#{url}"
   end
 
-  def facebook_share(root=false)
-    if root
-      url = full_url
-    else
-      url = request.url
-    end
-    "https://www.facebook.com/share.php?u=#{url}"
-  end
-
-  def line_share(root=false)
-    if root
-      url = full_url
-    else
-      url = request.url
-    end
-    "https://timeline.line.me/social-plugin/share?url=#{url}"
-  end
-
-  def hatebu_share(root=false)
-    if root
-      url = full_url
-    else
-      url = request.url
-    end
-    "https://b.hatena.ne.jp/entry/#{url}"
+  def sns_share(sns)
+    url = request.url
+    t(".sns.#{sns}", url: url)
   end
 end

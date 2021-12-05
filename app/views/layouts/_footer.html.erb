@@ -37,17 +37,17 @@
             <% end %>
           </li>
           <li class="share__box">
-            <%= link_to "https://www.facebook.com/share.php?u=https://www.ideee.tech/", target: '_blank' do %>
+            <%= link_to sns_share("facebook", root = true), target: '_blank' do %>
               <%= image_tag "facebook_icon.png", class: "share__icon", alt: "Facebook share"%>
             <% end %>
           </li>
           <li class="share__box">
-            <%= link_to "https://timeline.line.me/social-plugin/share?url=https://www.ideee.tech/", target: '_blank' do %>
+            <%= link_to sns_share("line", root = true), target: '_blank' do %>
               <%= image_tag "line_icon.png", class: "share__icon", alt: "LINE share"%>
             <% end %>
           </li>
           <li class="share__box">
-            <%= link_to "https://b.hatena.ne.jp/entry/https://www.ideee.tech/", target: '_blank' do %>
+            <%= link_to sns_share("hatebu", root = true), target: '_blank' do %>
               <%= image_tag "hatebu_icon.png", class: "share__icon", alt: "hatena blog share"%>
             <% end %>
           </li>

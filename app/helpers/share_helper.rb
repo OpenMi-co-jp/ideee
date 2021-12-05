@@ -13,7 +13,11 @@ module ShareHelper
     "https://twitter.com/intent/tweet?text=#{text}&hashtags=ideee&via=#{twitter_id}&related=ideee_tech&url=#{url}"
   end
 
-  def sns_share(sns)
-    t(".share.#{sns}", url: request.url)
+  def sns_share(sns, root=false)
+    if root
+      t(".share.#{sns}")
+    else
+      t(".share.#{sns}", url: request.url)
+    end
   end
 end

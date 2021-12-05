@@ -72,3 +72,9 @@ ja:
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます
+  layouts:
+    footer:
+      share:
+        facebook: "https://www.facebook.com/share.php?u=https://www.ideee.tech/"
+        line: "https://timeline.line.me/social-plugin/share?url=https://www.ideee.tech/"
+        hatebu: "https://b.hatena.ne.jp/entry/https://www.ideee.tech/"

@@ -47,7 +47,7 @@ ja:
                       <strong>どうなって欲しいか</strong><br><br><br>
                       <strong>補足</strong><br><br>"
     show:
-      sns:
+      share:
         facebook: "https://www.facebook.com/share.php?u=%{url}"
         line: "https://timeline.line.me/social-plugin/share?url=%{url}"
         hatebu: "https://b.hatena.ne.jp/entry/%{url}"
@@ -72,4 +72,3 @@ ja:
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます
-

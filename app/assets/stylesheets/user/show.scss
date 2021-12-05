@@ -33,6 +33,10 @@
       }
 
       &.gray {
+        &:hover {
+          pointer-events: none;
+        }
+
         .st0 {
           fill: #bfbfbf;
         }

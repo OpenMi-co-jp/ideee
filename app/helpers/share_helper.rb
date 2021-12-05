@@ -15,27 +15,25 @@ module ShareHelper
 
   def facebook_share(root=false)
     if root
-      url = "https://www.ideee.tech"
+      url = full_url
     else
       url = request.url
     end
     "https://www.facebook.com/share.php?u=#{url}"
   end
 
-  def line_share(content, root=false)
+  def line_share(root=false)
     if root
-      url = "https://www.ideee.tech"
-      text = content
+      url = full_url
     else
       url = request.url
-      text = content.name
     end
-    "https://social-plugins.line.me/lineit/share?url=#{text}#{url}"
+    "https://timeline.line.me/social-plugin/share?url=#{url}"
   end
 
   def hatebu_share(root=false)
     if root
-      url = "https://www.ideee.tech"
+      url = full_url
     else
       url = request.url
     end

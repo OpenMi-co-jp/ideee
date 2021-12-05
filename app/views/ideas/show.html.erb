@@ -24,19 +24,13 @@
               <% end %>
             </li>
             <li class="share__box">
-              <%= link_to sns_share("facebook"), target: '_blank' do %>
-                <%= image_tag "facebook_icon.png", class: "share__icon", alt: "Facebook share"%>
-              <% end %>
+              <%= share_sns("facebook") %>
             </li>
             <li class="share__box">
-              <%= link_to sns_share("line"), target: '_blank' do %>
-                <%= image_tag "line_icon.png", class: "share__icon", alt: "LINE share"%>
-              <% end %>
+              <%= share_sns("line") %>
             </li>
             <li class="share__box">
-              <%= link_to sns_share("hatebu"), target: '_blank' do %>
-                <%= image_tag "hatebu_icon.png", class: "share__icon", alt: "hatena blog share"%>
-              <% end %>
+              <%= share_sns("hatebu") %>
             </li>
           </ul>
           <p class="share__text">＼ シェア ／</p>

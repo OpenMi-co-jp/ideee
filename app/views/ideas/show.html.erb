@@ -16,34 +16,36 @@
       <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
       <% unless @idea.draft %>
-        <div class="share">
-          <ul class="share__flex">
-            <li class="share__box">
-              <%= link_to twitter_share(@idea), target: '_blank' do %>
-                <%= image_tag "twitter_icon.svg", class: "share__icon", alt: "Twitter share"%>
-              <% end %>
-            </li>
-            <li class="share__box">
-              <%= link_to facebook_share(@idea), target: '_blank' do %>
-                <%= image_tag "facebook_icon.png", class: "share__icon", alt: "Facebook share"%>
-              <% end %>
-            </li>
-            <li class="share__box">
-              <%= link_to line_share(@idea), target: '_blank' do %>
-                <%= image_tag "line_icon.png", class: "share__icon", alt: "LINE share"%>
-              <% end %>
-            </li>
-            <li class="share__box">
-              <%= link_to hatebu_share(@idea), target: '_blank' do %>
-                <%= image_tag "hatebu_icon.png", class: "share__icon", alt: "hatena blog share"%>
-              <% end %>
-            </li>
-          </ul>
-          <p class="share__text">＼ シェア ／</p>
-        </div>
-        <div class="share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
-          <i class="material-icons">content_copy</i>
-          <%= tag.p '＼ コピー ／' %>
+        <div class="icon-flex">
+          <div class="share">
+            <ul class="share__flex">
+              <li class="share__box">
+                <%= link_to twitter_share(@idea), target: '_blank' do %>
+                  <%= image_tag "twitter_icon.svg", class: "share__icon", alt: "Twitter share"%>
+                <% end %>
+              </li>
+              <li class="share__box">
+                <%= link_to facebook_share(@idea), target: '_blank' do %>
+                  <%= image_tag "facebook_icon.png", class: "share__icon", alt: "Facebook share"%>
+                <% end %>
+              </li>
+              <li class="share__box">
+                <%= link_to line_share(@idea), target: '_blank' do %>
+                  <%= image_tag "line_icon.png", class: "share__icon", alt: "LINE share"%>
+                <% end %>
+              </li>
+              <li class="share__box">
+                <%= link_to hatebu_share(@idea), target: '_blank' do %>
+                  <%= image_tag "hatebu_icon.png", class: "share__icon", alt: "hatena blog share"%>
+                <% end %>
+              </li>
+            </ul>
+            <p class="share__text">＼ シェア ／</p>
+          </div>
+          <div class="url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+            <i class="material-icons">content_copy</i>
+            <%= tag.p '＼ コピー ／' %>
+          </div>
         </div>
       <% end %>
     </div>

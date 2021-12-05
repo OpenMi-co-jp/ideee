@@ -63,6 +63,9 @@ div, p, b {
     margin: 0 auto;
     border-radius: 50%;
     width: 48px;
+    @media (max-width:768px) {
+      width: 28px;
+    }
   }
 
   &__text {

@@ -51,8 +51,8 @@ $(document).on ('turbolinks:load', function(){
     var h = now.getHours()
     var m = now.getMinutes()
     return $(
-            '<div class="comment-column m-1 own-comment">' +
-              '<div class="comment-column-inside m-1 white-text">' +
+            '<div class="comment-column own-comment">' +
+              '<div class="comment-column-inside white-text">' +
                 '<div class="flex">' +
                   '<div class="comment-info">' +
                     '<div class="comment-description">' +

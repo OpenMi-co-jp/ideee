@@ -46,7 +46,7 @@
 
   .share {
     &__flex {
-      justify-content: center;
+      justify-content: space-around;
     }
 
     &__icon {
@@ -59,12 +59,16 @@
   .url-copy {
     margin-top: 30px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media (max-width: 992px) {
-      margin-top: 0;
+      margin-top: 20px;
     }
 
     i {
+      margin-right: 6px;
       @media (max-width: 992px) {
         margin: 14px 0;
         font-size: 28px;

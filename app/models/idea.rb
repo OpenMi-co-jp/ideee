@@ -12,6 +12,7 @@
 #  note          :text(65535)
 #  product_apply :integer          default("no_apply")
 #  product_url   :string(255)
+#  published_at  :datetime
 #  view          :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

@@ -14,7 +14,6 @@ module ShareHelper
   end
 
   def sns_share(sns)
-    url = request.url
-    t(".share.#{sns}", url: url)
+    t(".share.#{sns}", url: request.url)
   end
 end

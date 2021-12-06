@@ -58,10 +58,14 @@ module ApplicationHelper
   # Cloudinaryでの画像自動生成メソッド
   def return_ogp_url(title)
     title_len = title.length # 文字の大きさを調整
-    size =  if title_len < 10
-              100
-            elsif 10 <= title_len && title_len <= 24
-              60
+    size =  if title_len <= 10
+              90
+            elsif title_len <= 20
+              70 
+            elsif title_len <= 30
+              50
+            elsif title_len <= 40
+              48
             else
               40
             end

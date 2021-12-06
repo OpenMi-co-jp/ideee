@@ -9,16 +9,16 @@
         <p class='gray-3 mh-3'><%= "作成日：#{l @user.created_at}" %></p>
       </div>
       <div class='user-urls'>
-        <div class="share-box">
+        <div class="user-show__url">
           <% if @user&.twitter_id.present? %>
             <%= link_to twitter_url(@user&.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer' do %>
-              <%= embedded_svg "twitter_icon.svg", class: "twitter-share" %>
+              <%= embedded_svg "twitter_icon.svg", class: "user-show__url-twitter" %>
             <% end %>
           <% else %>
-            <%= embedded_svg "twitter_icon.svg", class: "twitter-share gray" %>
+            <%= embedded_svg "twitter_icon.svg", class: "user-show__url-twitter gray" %>
           <% end %>
         </div>
-        <div class="share-box grid-middle">
+        <div class="user-show__url grid-middle">
           <% if @user.site_url.present? %>
             <%= link_to @user.site_url, target: '_blank', rel: 'nofollow noopener noreferrer' do %>
               <i class="material-icons medium orange-soft">link</i>

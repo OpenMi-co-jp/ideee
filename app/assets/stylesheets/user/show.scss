@@ -20,9 +20,18 @@
     justify-content: space-evenly;
   }
 
-  .share-box {
-    .twitter-share {
-      width: 48px;
+  &__url {
+    margin: 0.5rem 0;
+
+    &-twitter {
+      width: 36px;
+
+      &:hover {
+        transition-duration: .3s;
+        transform: scale(1.1);
+        pointer-events: auto;
+        cursor: pointer;
+      }
 
       .st0 {
         fill: #1B9DF0;

@@ -1,7 +1,7 @@
 .idea-index{
   .carousel {
     height: 20rem !important;
-    top: 3rem;
+    top: 2rem;
 
     .carousel-item {
       max-width: 24rem!important;
@@ -10,6 +10,7 @@
       .idea-column-img {
         position: relative;
         border-radius: 10px;
+        transition: all 0.4s ease-in-out;
 
         img {
           object-fit: contain;
@@ -24,6 +25,10 @@
           padding: 0 1rem;
           color: white;
           background-color: rgba(191, 191, 191, 0.8);
+        }
+
+        &:hover {
+          box-shadow: 1px 1px 12px rgba(0,0,0,.65);
         }
       }
     }

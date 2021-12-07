@@ -80,7 +80,7 @@
       </div>
 
       <div class='idea-content mb-2'>
-        <% if current_user %>
+        <% if current_user || @idea.approved? %>
           <%== @idea.note %>
         <% else %>
           <%= strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
@@ -97,6 +97,10 @@
               <p>
             </div>
           </div>
+        <% end %>
+        <% if @idea.approved? %>
+          <b><%= t("activerecord.attributes.idea.product_url") %></b>
+          <%== simple_format(text_url_to_link(@idea.product_url), {}, sanitize: false) %>
         <% end %>
       </div>
       <% if current_user&.own?(@idea) %>

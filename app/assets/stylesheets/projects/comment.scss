@@ -1,11 +1,11 @@
-.comment-board {
+.p-comment-board {
   min-height: 120px;
 
   &__title {
     margin-left: 2rem;
   }
 
-  .comment-column {
+  .p-comment-column {
     border: solid 1px #E3E4E8;
     border-radius: 0.5rem;
     background-color: white;
@@ -18,27 +18,27 @@
       background-color: #FFBF85;
     }
 
-    .comment-column-inside {
+    .p-comment-column-inside {
       margin: 0.5rem;
       min-width: 130px;
 
-      .comment-img {
+      .p-comment-img {
         margin-right: 0.5rem;
       }
 
-      .comment-info {
+      .p-comment-info {
         max-width: 90%;
 
         &.white-text {
           max-width: none !important;
         }
 
-        .comment-description {
+        .p-comment-description {
           min-height: 40px;
         }
       }
 
-      .comment-options {
+      .p-comment-options {
         display: flex;
         justify-content: space-between;
       }
@@ -46,22 +46,22 @@
   }
 }
 
-.comment-forms {
-  .comment-form {
+.p-comment-forms {
+  .p-comment-form {
     width: 80%;
     margin: 0 auto;
-    .comment-area {
+    .p-comment-area {
       padding: 0.7rem;
       border: solid 1px #E3E4E8;
       min-height: 80px;
     }
   }
 
-  .comment-btn {
+  .p-comment-btn {
     text-align: center;
   }
 
-  .submit-btn {
+  .p-submit-btn {
     width: 100px;
     border-radius: 3px;
   }

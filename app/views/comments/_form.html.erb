@@ -1,9 +1,9 @@
-<div class="comment-forms row mh-3">
+<div class="p-comment-forms row mh-3">
   <% if current_user %>
-    <div class="comment-form">
-      <textarea class='comment-area yellow-soft-back mh-3' id="comment-form" placeholder='コメントする'></textarea>
+    <div class="p-comment-form">
+      <textarea class='p-comment-area yellow-soft-back mh-3' id="comment-form" placeholder='コメントする'></textarea>
     </div>
-    <div class='comment-btn'>
+    <div class='p-comment-btn'>
       <%= link_to "#!",
         id: "comment",
         class: "submit-btn waves-effect btn orange-action-back nav-link" do %>
@@ -11,10 +11,10 @@
       <% end %>
     </div>
   <% else %>
-    <div class='comment-btn'>
+    <div class='p-comment-btn'>
       <%= link_to "#modal_before_login",
         data: { turbolinks: false },
-        class: "modal-trigger-login submit-btn waves-effect btn orange-action-back nav-link" do %>
+        class: "modal-trigger-login p-submit-btn waves-effect btn orange-action-back nav-link" do %>
         <b class='white-text'><%= t('default.comment') %></b>
       <% end %>
     </div>

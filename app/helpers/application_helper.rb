@@ -58,17 +58,9 @@ module ApplicationHelper
   # Cloudinaryでの画像自動生成メソッド
   def return_ogp_url(title)
     title_len = title.length # 文字の大きさを調整
-    size =  if title_len <= 10
-              90
-            elsif title_len <= 20
-              70 
-            elsif title_len <= 30
-              50
-            elsif title_len <= 40
-              48
-            else
-              40
-            end
+
+    size = get_ogp_font_size(title_len)
+
     transformation = [
       {
         x: 0, y: 0, gravity: 'center', color: '#202124', width: '500',  overlay: {
@@ -81,6 +73,28 @@ module ApplicationHelper
       }
     ]
     cloudinary_url('ideee_ogp.jpg', sign_url: true, type: 'authenticated', transformation: transformation)
+  end
+
+  def get_ogp_font_size(title_len)
+    image_width = 480
+    image_height = 240
+    max_font_size = 100
+
+    size =  if title_len <= 9
+              ( image_width / title_len ).floor
+            elsif title_len <= 20
+              ( image_width / (title_len / 2.0).ceil ).floor
+            elsif title_len <= 36
+              ( image_width / (title_len / 3.0).ceil ).floor
+            else
+              ( image_width / (title_len / 4.0).ceil ).floor
+            end
+
+    if size > max_font_size
+      return max_font_size
+    else
+      return size
+    end
   end
 
   def text_url_to_link(text)

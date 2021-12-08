@@ -1,5 +1,20 @@
 $(document).on ('turbolinks:load', function(){
 
+  // 画面描画時の初期設定
+  $('#comment.submit-btn').addClass('disabled')
+
+  // コメントが空値の場合　　：送信ボタンを非活性
+  // コメントが空値以外の場合：送信ボタンを活性
+  $('#comment-form').keyup(function() {
+    const comment = $('#comment-form').val()
+
+    if(comment.length > 0) {
+      $('#comment.submit-btn').removeClass('disabled')
+    }else{
+      $('#comment.submit-btn').addClass('disabled')
+    }
+  });
+
   $('#comment').on('click', function(e) {
     e.preventDefault()
     $('.submit-btn').addClass('disabled')

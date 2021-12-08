@@ -14,17 +14,12 @@ module ShareHelper
   end
 
   def sns_share(media, root = false)
-    link_to route_share_type(media, root), target: '_blank' do
+    link_to root ? t(".share.#{media}") : share_page(media), target: '_blank' do
       image_tag "#{media}_icon.png", class: "share__icon", alt: "#{media} share"
     end
   end
 
-  # rootかアイデアページかで分岐、SNS事にURL取得
-  def route_share_type(sns, root)
-    if root
-      t(".share.#{sns}")
-    else
-      t(".share.#{sns}", url: request.url)
-    end
+  def share_page(media)
+    t(".share.#{media}", url: request.url)
   end
 end

@@ -45,6 +45,10 @@
   }
 
   .share {
+    &__box {
+      margin: 0 4%;
+    }
+
     &__flex {
       justify-content: space-around;
     }

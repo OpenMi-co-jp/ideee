@@ -28,7 +28,7 @@ jobs:
       env:
         RAILS_ENV: test
         MYSQL_HOST: db
-        ImageOS: ubuntu-latest
+        ImageOS: ubuntu18
     strategy:
       matrix:
         ruby-version: ['3.0']

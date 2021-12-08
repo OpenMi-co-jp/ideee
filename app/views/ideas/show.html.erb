@@ -59,9 +59,9 @@
               <%= image_tag 'icons/eye.svg' %>
               <%= @idea.view %>
             </div>
-            <div class='status-info__comment'>
+            <div class='status-info__comment', id="comments_count">
               <%= image_tag 'icons/comment.svg' %>
-              <%= @idea.comments_num %>
+              <p><%= @idea.comments_num %></p>
             </div>
             <div class="status-info__vote <%= @idea.difficulty %>">
               <%= render 'difficultys/vote', object: @idea %>

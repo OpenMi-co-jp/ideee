@@ -20,9 +20,14 @@ $(document).on ('turbolinks:load', function(){
     }
   });
 
-  $('#comment-delete').on('click', function() {
-    const element = $(this)
-    element.parents('.parent').remove()
+  $('.dropdown-comment-delete').on('click', function() {
+    comment_id = $(this).attr('id')
+    delete_comment(comment_id)
+    .done(function() {
+      $('#comment-' + comment_id).remove()
+      $comments_count = $('#comments_count').find('p')
+      $comments_count.html(Number($comments_count[0].innerText) - 1)
+    })
   });
 
   function create_comment(comment){
@@ -32,7 +37,16 @@ $(document).on ('turbolinks:load', function(){
       data: { description: comment, idea_id: gon.idea_id},
       dataType: 'json'
     })
-  }
+  };
+
+  function delete_comment(comment_id){
+    return $.ajax({
+      url: '/comments/' + comment_id,
+      type: 'DELETE',
+      data: { id: comment_id },
+      dataType: 'json'
+    })
+  };
 
   function send_email(comment){
     return $.ajax({

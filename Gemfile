@@ -67,8 +67,6 @@ gem 'sendgrid-ruby'
 gem 'twitter'
 
 # エラー関係
-gem "sentry-ruby"
-gem "sentry-rails"
 gem 'rack-timeout'
 gem 'rollbar'
 

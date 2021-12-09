@@ -1,0 +1,25 @@
+.c-unit-comment {
+  margin: 0.5rem;
+  min-width: 130px;
+
+  &__img {
+    margin-right: 0.5rem;
+  }
+
+  &__info {
+    max-width: 90%;
+
+    &.white-text {
+      max-width: none !important;
+    }
+
+    &__description {
+      min-height: 40px;
+    }
+  }
+
+  &__options {
+    display: flex;
+    justify-content: space-between;
+  }
+}

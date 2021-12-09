@@ -5,7 +5,7 @@
     margin-left: 2rem;
   }
 
-  .p-comment-column {
+  &__item {
     border: solid 1px #E3E4E8;
     border-radius: 0.5rem;
     background-color: white;
@@ -16,32 +16,6 @@
     &.own-comment {
       margin-left: auto;
       background-color: #FFBF85;
-    }
-
-    .p-comment-column-inside {
-      margin: 0.5rem;
-      min-width: 130px;
-
-      .p-comment-img {
-        margin-right: 0.5rem;
-      }
-
-      .p-comment-info {
-        max-width: 90%;
-
-        &.white-text {
-          max-width: none !important;
-        }
-
-        .p-comment-description {
-          min-height: 40px;
-        }
-      }
-
-      .p-comment-options {
-        display: flex;
-        justify-content: space-between;
-      }
     }
   }
 }

@@ -82,7 +82,8 @@ class Idea < ApplicationRecord
   end
 
   def count_comments
-    update(comments_num: comments.count)
+    self.comments_num = comments.count
+    save!
   end
 
   def save_with_tags(tag_list)

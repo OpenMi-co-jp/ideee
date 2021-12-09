@@ -58,9 +58,7 @@ module ApplicationHelper
   # Cloudinaryでの画像自動生成メソッド
   def return_ogp_url(title)
     title_len = title.length # 文字の大きさを調整
-
     size = get_ogp_font_size(title_len)
-
     transformation = [
       {
         x: 0, y: 0, gravity: 'center', color: '#202124', width: '500',  overlay: {

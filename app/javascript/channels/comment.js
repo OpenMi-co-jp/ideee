@@ -7,8 +7,8 @@ $(document).on ('turbolinks:load', function(){
 
     // コメントが入力されていれば発火
     if(comment.length > 0) {
-      $('#comment_message').removeClass('comment-message');
-      $("#comment_message").text('');
+      $('#comment-form_messages').removeClass('comment-form-messages');
+      $("#comment-form_messages").text('');
       create_comment(comment)
       .done(function() {
         $('#js-comments').append(js_comments(comment)) // コメントをUIにセット
@@ -20,8 +20,8 @@ $(document).on ('turbolinks:load', function(){
         alert('コメントに失敗しました')
       })
     }else{
-      $('#comment_message').addClass('comment-message');
-      $("#comment_message").text('コメントを入力してください。');
+      $('#comment-form_messages').addClass('comment-form-messages');
+      $("#comment-form_messages").text('コメントを入力してください。');
       $('#comment.submit-btn').removeClass('disabled')
     }
   });

@@ -1,20 +1,5 @@
 $(document).on ('turbolinks:load', function(){
 
-  // 画面描画時の初期設定
-  $('#comment.submit-btn').addClass('disabled')
-
-  // コメントが空値の場合　　：送信ボタンを非活性
-  // コメントが空値以外の場合：送信ボタンを活性
-  $('#comment-form').keyup(function() {
-    const comment = $('#comment-form').val()
-
-    if(comment.length > 0) {
-      $('#comment.submit-btn').removeClass('disabled')
-    }else{
-      $('#comment.submit-btn').addClass('disabled')
-    }
-  });
-
   $('#comment').on('click', function(e) {
     e.preventDefault()
     $('.submit-btn').addClass('disabled')
@@ -22,15 +7,22 @@ $(document).on ('turbolinks:load', function(){
 
     // コメントが入力されていれば発火
     if(comment.length > 0) {
+      $('#comment_message').removeClass('comment-message');
+      $("#comment_message").text('');
       create_comment(comment)
       .done(function() {
         $('#js-comments').append(js_comments(comment)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
+        $('#comment.submit-btn').removeClass('disabled')
         send_email(comment) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
         alert('コメントに失敗しました')
       })
+    }else{
+      $('#comment_message').addClass('comment-message');
+      $("#comment_message").text('コメントを入力してください。');
+      $('#comment.submit-btn').removeClass('disabled')
     }
   });
 

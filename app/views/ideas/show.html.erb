@@ -19,18 +19,16 @@
         <div class="c-share">
           <ul class="c-share__flex idea-show__share-flex">
             <li class="c-share__box idea-show__share-box">
-              <%= link_to twitter_share(@idea), target: '_blank' do %>
-                <%= image_tag "twitter_icon.svg", class: "c-share__icon idea-show__share-icon", alt: "Twitter share"%>
-              <% end %>
+              <%= sns_share_icon("twitter") %>
             </li>
             <li class="c-share__box idea-show__share-box">
-              <%= sns_share("facebook") %>
+              <%= sns_share_icon("facebook") %>
             </li>
             <li class="c-share__box idea-show__share-box">
-              <%= sns_share("line") %>
+              <%= sns_share_icon("line") %>
             </li>
             <li class="c-share__box idea-show__share-box">
-              <%= sns_share("hatebu") %>
+              <%= sns_share_icon("hatebu") %>
             </li>
           </ul>
           <p class="c-share__text">＼ シェア ／</p>

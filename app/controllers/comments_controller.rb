@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.delete
+    @comment.destroy!
     @comment.idea.count_comments
   end
 

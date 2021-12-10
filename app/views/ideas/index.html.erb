@@ -31,7 +31,7 @@
         </div>
       </div>
     <% end %>
-    <%= render 'ideas/index/latest_boad' %>
+    <%= render 'ideas/index/latest_boad', title: '最新アイデア', ideas: @latest_ideas %>
     <div class="row">
       <div class="col s12 l8">
         <%= render 'ideas/index/ranking',
@@ -41,7 +41,11 @@
           ideas: @liked_ideas %>
       </div>
       <div class="col s12 l4">
-        <%= render 'ideas/index/featured_users' %>
+        <%= render 'ideas/index/featured_users',
+          icon: '🚀',
+          title: '今週の注目コメンテーター',
+          path: search_users_path(sort: :weekly_comments),
+          users: @weekly_commented_users %>
       </div>
     </div>
     <div class="row">
@@ -51,19 +55,18 @@
           board_title: 'コメントが多いアイデア',
           path: search_ideas_path(sort: :comments_num),
           ideas: @most_commented_ideas %>
-      </div>
-      <div class="col l12">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 l8">
         <%= render 'ideas/index/ranking',
           icon_mark: '👀',
           board_title: 'View数の多いアイデア',
           path: search_ideas_path(sort: :view),
           ideas: @most_viewed_ideas %>
       </div>
-      <div class="col l12">
+      <div class="col s12 l4">
+        <%= render 'ideas/index/featured_users',
+          icon: '🔥',
+          title: '注目のユーザー',
+          path: users_path,
+          users: @featured_users %>
       </div>
     </div>
     <% unless current_user %>

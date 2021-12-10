@@ -1,8 +1,8 @@
 <div class="comment-board yellow-soft-back ph-1">
-  <h4 class='mw-4'>コメント</h4>
+  <h4 class='comment-board__title'>コメント</h4>
   <% if object.comments_num > 0 %>
     <% object.comments.each do |comment| %>
-      <div class="comment-column m-1 <%= 'own-comment' if current_user&.own?(comment) %>">
+      <div class="comment-column <%= 'own-comment' if current_user&.own?(comment) %>", id="comment-<%= comment.id %>">
         <%= render 'comments/unit_comment', owned: current_user&.own?(comment), comment: comment %>
       </div>
     <% end %>

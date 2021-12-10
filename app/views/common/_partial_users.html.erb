@@ -13,11 +13,21 @@
                 <div class='user-name-point'>
                   <div>
                     <div class='user-name orange-action'><%= user.name %></div>
-                    <%= user_definiton(user, ver='short') %>
+                    <div class='flex'>
+                      <%= user_definiton(user, ver='short') %>
+                      <div class='row-user__ideas'>
+                        <%= image_tag 'icons/idea.svg', class: 'icon-size' %><%= user.ideas.published.count %>
+                      </div>
+                    </div>
                   </div>
                   <div class='user-point grid-middle'>
-                    <p>🔥</p>
-                    <%= user.point %>
+                    <% if users.length == t('default.users.weekly_comments_num') %>
+                      <p>💬</p>
+                      <%= @commented_users_array.to_h[user.id] %>
+                    <% else %>
+                      <p>🔥</p>
+                      <%= user.point %>
+                    <% end %>
                   </div>
                 </div>
               </div>

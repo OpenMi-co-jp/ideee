@@ -355,6 +355,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rack-timeout (0.6.0)
     rails (6.1.4.1)
       actioncable (= 6.1.4.1)
       actionmailbox (= 6.1.4.1)
@@ -405,6 +406,7 @@ GEM
       netrc (~> 0.8)
     retriable (3.1.2)
     rexml (3.2.5)
+    rollbar (3.3.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -562,8 +564,10 @@ DEPENDENCIES
   omniauth-twitter
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
+  rack-timeout
   rails (~> 6.1.4)
   rails-i18n
+  rollbar
   rspec-rails
   sass-rails (>= 6)
   seed-fu

@@ -29,24 +29,24 @@
           </ul>
         </li>
       </ul>
-      <div class="share">
-        <ul class="share__flex">
-          <li class="share__box">
-            <%= link_to twitter_share('アイデアとエンジニアのマッチングサイトideee', root=true), target: '_blank' do %>
-              <%= image_tag "twitter_icon.svg", class: "share__icon", alt: "Twitter share"%>
+      <div class="c-share footer-share">
+        <ul class="c-share__flex">
+          <li class="c-share__box">
+            <%= link_to twitter_share(nil), target: '_blank' do %>
+              <%= image_tag "twitter_icon.svg", class: "c-share__icon", alt: "Twitter share"%>
             <% end %>
           </li>
-          <li class="share__box">
-            <%= sns_share("facebook", root = true) %>
+          <li class="c-share__box">
+            <%= sns_share("facebook") %>
           </li>
-          <li class="share__box">
-            <%= sns_share("line", root = true) %>
+          <li class="c-share__box">
+            <%= sns_share("line") %>
           </li>
-          <li class="share__box">
-            <%= sns_share("hatebu", root = true) %>
+          <li class="c-share__box">
+            <%= sns_share("hatebu") %>
           </li>
         </ul>
-        <p class="share__text">＼ シェア ／</p>
+        <p class="c-share__text footer-share__text">＼ シェア ／</p>
       </div>
     </div>
   </div>

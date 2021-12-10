@@ -16,26 +16,26 @@
       <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
       <% unless @idea.draft %>
-        <div class="share">
-          <ul class="share__flex">
-            <li class="share__box">
+        <div class="c-share">
+          <ul class="c-share__flex idea-show__share-flex">
+            <li class="c-share__box idea-show__share-box">
               <%= link_to twitter_share(@idea), target: '_blank' do %>
-                <%= image_tag "twitter_icon.svg", class: "share__icon", alt: "Twitter share"%>
+                <%= image_tag "twitter_icon.svg", class: "c-share__icon idea-show__share-icon", alt: "Twitter share"%>
               <% end %>
             </li>
-            <li class="share__box">
+            <li class="c-share__box idea-show__share-box">
               <%= sns_share("facebook") %>
             </li>
-            <li class="share__box">
+            <li class="c-share__box idea-show__share-box">
               <%= sns_share("line") %>
             </li>
-            <li class="share__box">
+            <li class="c-share__box idea-show__share-box">
               <%= sns_share("hatebu") %>
             </li>
           </ul>
-          <p class="share__text">＼ シェア ／</p>
+          <p class="c-share__text">＼ シェア ／</p>
         </div>
-        <div class="url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+        <div class="c-url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
           <i class="material-icons">content_copy</i>
           <%= tag.p '＼ URL コピー ／' %>
         </div>

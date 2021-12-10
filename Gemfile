@@ -70,7 +70,10 @@ gem 'twitter'
 gem "sentry-ruby"
 gem "sentry-rails"
 gem 'rack-timeout'
-gem 'rollbar'
+
+group :production do
+  gem 'rollbar'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

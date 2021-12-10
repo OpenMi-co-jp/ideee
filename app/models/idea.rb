@@ -50,7 +50,7 @@ class Idea < ApplicationRecord
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_commented, -> { order(comments_num: "DESC") }
-  scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
+  scope :recent_select, -> { where(published_at: 40.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
 
@@ -58,8 +58,8 @@ class Idea < ApplicationRecord
     return User.find_by(id: self.user_id)
   end
 
-  def created_time
-    created_at.strftime("%Y.%m.%d")
+  def published_time
+    published_at.strftime("%Y.%m.%d")
   end
 
   def views_update(id)

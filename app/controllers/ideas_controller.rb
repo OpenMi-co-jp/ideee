@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
 
   def index
     @ideas = Idea.published.recent_select # 一度定義することで何度もDBに値を取りに行くことを阻止
-    @latest_ideas = @ideas.order(created_at: "DESC").first(10)
+    @latest_ideas = @ideas.order(published_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
     @most_commented_ideas = @ideas.most_commented.first(5)
@@ -38,7 +38,6 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(idea_params)
-    add_published_at
     if @idea.save_with_tags(tags_params)
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
@@ -46,6 +45,7 @@ class IdeasController < ApplicationController
         TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+        @idea.update!(published_at: Time.now)
         redirect_to @idea, notice: t('.success')
       end
     else
@@ -60,6 +60,7 @@ class IdeasController < ApplicationController
       if params[:commit] == t('default.publish') && Rails.env.production?
         TwitterTweet.new.tweet(@idea, idea_url(@idea.id))
         SlackNotifier.new.send(@idea, idea_url(@idea.id))
+        @idea.update!(published_at: Time.now)
       end
       SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
@@ -98,8 +99,7 @@ class IdeasController < ApplicationController
   end
 
   def publish
-    add_published_at
-    @idea.update(draft: false)
+    @idea.update(draft: false, published_at: Time.now)
     TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
     SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
@@ -138,9 +138,5 @@ class IdeasController < ApplicationController
       return if !@idea.draft || current_user.own?(@idea)
       redirect_to root_path
       flash[:alert] = t('default.message.unauthorized')
-    end
-
-    def add_published_at
-      @idea.published_at = Time.now
     end
 end

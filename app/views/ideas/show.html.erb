@@ -14,8 +14,8 @@
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
       <%= image_set(@idea) %>
-      <p class='idea-created gray-3'><%= "公開日: #{l @idea.published_at}" %></p>
       <% unless @idea.draft %>
+        <p class='idea-created gray-3'><%= "公開日: #{l @idea.published_at}" %></p>
         <div class="flex">
           <div class="share-box">
             <%= link_to twitter_share(@idea), target: '_blank' do %>
@@ -28,6 +28,8 @@
             <%= tag.p '＼ コピー ／' %>
           </div>
         </div>
+      <% else %>
+        <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
       <% end %>
     </div>
     <div class='idea-status-column col l9 s12'>

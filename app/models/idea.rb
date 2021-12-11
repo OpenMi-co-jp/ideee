@@ -62,6 +62,10 @@ class Idea < ApplicationRecord
     published_at.strftime("%Y.%m.%d")
   end
 
+  def created_time
+    created_at.strftime("%Y.%m.%d")
+  end
+
   def views_update(id)
     idea_view = Analytics.new.idea_report('pageviews', id)
     update(view: idea_view.to_i)

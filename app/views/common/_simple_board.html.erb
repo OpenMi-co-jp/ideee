@@ -12,7 +12,11 @@
             <b class='idea__name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea__status gray-3'>
-            <p class=''><%= "投稿日 #{idea.created_time}" %></p>
+            <% if idea.draft %>
+              <p class=''><%= "作成日 #{idea.created_time}" %></p>
+            <% else %>
+              <p class=''><%= "公開日 #{idea.published_time}" %></p>
+            <% end %>
           </div>
         </div>
       </div>

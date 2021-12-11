@@ -1,7 +1,7 @@
 <h3><%= t('.title') %></h3>
 
-<div class="c-comment-forms row mh-3">
-  <div class="c-comment-forms__comment-form">
+<div class="c-comment-form row mh-3">
+  <div class="c-comment-form__input">
     <%= form_with model: @comment, local: true do |f| %>
       <% if @comment.errors.any? %>
         <div id="error_explanation">
@@ -14,9 +14,9 @@
           </ul>
         </div>
       <% end %>
-      <%= f.text_area :description, class: 'c-comment-forms__comment-form__comment-area yellow-soft-back mh-3', id: "comment-form", placeholder: "コメントする" %>
-      <div class='c-comment-forms__comment-btn'>
-        <%= f.submit class: "c-comment-forms__submit-btn waves-effect btn orange-action-back nav-link" %>
+      <%= f.text_area :description, class: 'c-comment-form__input__comment-area yellow-soft-back mh-3', id: "comment-form", placeholder: "コメントする" %>
+      <div class='c-comment-form__btn-area'>
+        <%= f.submit class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" %>
         <%= link_to t('default.cancel'), idea_path(@comment.idea.id), class: 'waves-effect btn orange-soft-back nav-link' %>
       </div>
     <% end %>

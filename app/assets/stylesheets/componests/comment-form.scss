@@ -1,7 +1,8 @@
-.c-comment-forms {
-  &__comment-form {
+.c-comment-form {
+  &__input {
     width: 80%;
     margin: 0 auto;
+
     &__comment-area {
       padding: 0.7rem;
       border: solid 1px #E3E4E8;
@@ -9,7 +10,7 @@
     }
   }
 
-  &__comment-btn {
+  &__btn-area {
     text-align: center;
   }
 

@@ -1,20 +1,20 @@
-<div class="c-comment-forms row mh-3">
+<div class="c-comment-form row mh-3">
   <% if current_user %>
-    <div class="c-comment-forms__comment-form">
-      <textarea class='c-comment-forms__comment-form__comment-area yellow-soft-back mh-3' id="comment-form" placeholder='コメントする'></textarea>
+    <div class="c-comment-form__input">
+      <textarea class='c-comment-form__input__comment-area yellow-soft-back mh-3' id="comment-form" placeholder='コメントする'></textarea>
     </div>
-    <div class='c-comment-forms__comment-btn'>
+    <div class='c-comment-form__btn-area'>
       <%= link_to "#!",
         id: "comment",
-        class: "c-comment-forms__submit-btn waves-effect btn orange-action-back nav-link" do %>
+        class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" do %>
         <b class='white-text'><%= t('default.submit') %></b>
       <% end %>
     </div>
   <% else %>
-    <div class='c-comment-forms__comment-btn'>
+    <div class='c-comment-form__btn-area'>
       <%= link_to "#modal_before_login",
         data: { turbolinks: false },
-        class: "modal-trigger-login c-comment-forms__submit-btn waves-effect btn orange-action-back nav-link" do %>
+        class: "modal-trigger-login c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" do %>
         <b class='white-text'><%= t('default.comment') %></b>
       <% end %>
     </div>

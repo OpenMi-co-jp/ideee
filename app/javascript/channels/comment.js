@@ -69,7 +69,7 @@ $(document).on ('turbolinks:load', function(){
               '<div class="c-unit-comment white-text">' +
                 '<div class="flex">' +
                   '<div class="c-unit-comment__info">' +
-                    '<div class="c-unit-comment__description">' +
+                    '<div class="c-unit-comment--description">' +
                       comment.replace(/\n/g, '<br>') +
                     '</div>' +
                     '<div class="date-small pt-2">' +

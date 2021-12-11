@@ -68,10 +68,7 @@ gem 'twitter'
 
 # エラー関係
 gem 'rack-timeout'
-
-group :production do
-  gem 'rollbar'
-end
+gem 'rollbar' # 本番のみで運用
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -82,3 +82,9 @@ header {
     transform: scale(1.1);
   }
 }
+
+.debug-display {
+  display: flex;
+  justify-content: center;
+  color: red;
+}

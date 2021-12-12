@@ -24,7 +24,7 @@ module IdeasHelper
     }
   end
 
-  def idea_date_view(idea)
+  def idea_opened_date(idea)
     if idea.draft
       "作成日 #{idea.created_time}"
     else

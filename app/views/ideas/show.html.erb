@@ -15,7 +15,7 @@
       <% end %>
       <%= image_set(@idea) %>
       <div class='idea__status gray-3'>
-        <%= idea_date_view(@idea) %>
+        <%= idea_opened_date(@idea) %>
       </div>
       <% unless @idea.draft %>
         <div class="flex">

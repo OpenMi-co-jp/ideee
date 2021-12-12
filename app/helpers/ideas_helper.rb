@@ -23,4 +23,12 @@ module IdeasHelper
       '降順 ▼': :desc
     }
   end
+
+  def idea_date_view(idea)
+    if idea.draft
+      "作成日 #{idea.created_time}"
+    else
+      "公開日 #{idea.published_time}"
+    end
+  end
 end

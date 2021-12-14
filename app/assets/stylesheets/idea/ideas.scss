@@ -158,11 +158,23 @@
     align-items: center;
     margin-top: 4px;
     font-size: 15px;
+
+    &--clock {
+      margin-right: 5px;
+    }
   }
 
   &__eyes {
     display: flex;
     margin-left: 22px;
+  }
+
+  &__time {
+    display: flex;
+
+    &--clock {
+      margin-right: 7.5px;
+    }
   }
 
   &__comments {

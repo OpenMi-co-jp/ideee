@@ -14,7 +14,8 @@
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
       <%= image_set(@idea) %>
-      <div class='idea__status gray-3'>
+      <div class='idea-date gray-3'>
+        <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock'%>
         <%= idea_opened_date(@idea) %>
       </div>
       <% unless @idea.draft %>

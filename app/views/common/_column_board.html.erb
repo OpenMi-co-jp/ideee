@@ -15,7 +15,10 @@
             <b class='idea__name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea__status gray-3'>
-            <p class=''><%= "公開日 #{idea.published_time}" %></p>
+            <div class='idea__time'>
+              <%= embedded_svg 'icons/clock.svg', class: 'icon-size gray-4 idea__time--clock' %>
+              <p><%= idea.published_time %></p>
+            </div>
             <div class='idea__comments'>
               <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4' %>
               <p class='gray-5 ml-2'><%= idea.comments_num %></p>

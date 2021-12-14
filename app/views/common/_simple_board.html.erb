@@ -12,6 +12,7 @@
             <b class='idea__name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea__status gray-3'>
+            <%= embedded_svg 'icons/clock.svg', class:'idea__status--clock' %>
             <%= idea_opened_date(idea) %>
           </div>
         </div>

@@ -36,6 +36,22 @@
       justify-content: center;
     }
   }
+
+  &__share {
+    &-flex {
+      justify-content: space-around;
+    }
+
+    &-box {
+      margin: 0 4%;
+    }
+
+    &-icon {
+      @media (max-width: 992px) {
+        width: 28px;
+      }
+    }
+  }
 }
 
 @media (max-width: 992px) {

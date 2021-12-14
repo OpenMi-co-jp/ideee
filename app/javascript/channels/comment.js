@@ -6,8 +6,8 @@ $(document).on ('turbolinks:load', function(){
     const comment_input = $('#comment-form').val().replace(/^\s*(.*?)\s*$/, "$1");
     // コメントが入力されていれば発火
     if(comment_input.length > 0) {
-      $('#comment-form_messages').removeClass('comment-form-messages');
-      $("#comment-form_messages").text('');
+      $('#comment-form_message').removeClass('comment-form-message');
+      $("#comment-form_message").text('');
       create_comment(comment_input)
       .done(function() {
         $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
@@ -19,15 +19,15 @@ $(document).on ('turbolinks:load', function(){
         alert('コメントに失敗しました')
       })
     } else {
-      $('#comment-form_messages').addClass('comment-form-messages');
-      $("#comment-form_messages").text('コメントを入力してください。');
+      $('#comment-form_message').addClass('comment-form-message');
+      $("#comment-form_message").text('コメントを入力してください。');
       $('#comment.submit-btn').removeClass('disabled')
     }
   });
 
   $('#comment-form').on('keyup', function(e) {
     if($(this).length > 0) {
-      $("#comment-form_messages").text('');
+      $("#comment-form_message").text('');
     }
   });
 

@@ -17,13 +17,13 @@
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
       <% unless @idea.draft %>
         <div class="flex">
-          <div class="share-box">
+          <div class="c-share-box">
             <%= link_to twitter_share(@idea), target: '_blank' do %>
-              <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share" %>
-              <%= tag.p '＼ シェア ／', class: "twitter-share" %>
+              <%= image_tag "twitter_icon.svg", class: "c-share-box__twitter-share small", alt: "Twitter share" %>
+              <%= tag.p '＼ シェア ／', class: "c-share-box__twitter-share" %>
             <% end %>
           </div>
-          <div class="share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+          <div class="c-share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
             <i class="material-icons">content_copy</i>
             <%= tag.p '＼ コピー ／' %>
           </div>

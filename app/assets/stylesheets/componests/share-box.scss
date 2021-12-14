@@ -1,0 +1,28 @@
+.c-share-box {
+  max-width: 120px;
+  text-align: center;
+  margin: 0.5rem;
+
+  :hover {
+    transition-duration: .3s;
+    transform: scale(1.05);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  &__twitter-share {
+    margin: 0 auto;
+
+    &--width {
+      width: 48px;
+    }
+    &.small {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  p {
+    margin: 0 auto;
+  }
+}

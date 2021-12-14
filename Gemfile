@@ -64,10 +64,11 @@ gem 'sendgrid-ruby'
 # uncomment out when you need
 # gem 'stripe'
 
-gem "sentry-ruby"
-gem "sentry-rails"
-
 gem 'twitter'
+
+# エラー関係
+gem 'rack-timeout'
+gem 'rollbar' # 本番のみで運用
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

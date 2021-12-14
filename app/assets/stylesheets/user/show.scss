@@ -3,7 +3,7 @@
   margin: 0 auto;
 
   .user-type-column {
-    text-align:center;
+    text-align: center;
     align-items: center;
     border: solid 0.2px #C0C0C0;
     border-radius: 0.5rem;
@@ -20,20 +20,47 @@
     justify-content: space-evenly;
   }
 
-  .share-box {
-    .twitter-share {
-      width: 48px;
+  &__url {
+    margin: 0.5rem 0;
+
+    &-twitter {
+      width: 36px;
+
+      &:hover {
+        transition-duration: .3s;
+        transform: scale(1.1);
+        pointer-events: auto;
+        cursor: pointer;
+      }
+
+      .st0 {
+        fill: #1B9DF0;
+      }
+
+      .st1 {
+        fill: #FFFFFF;
+      }
+
+      &.gray {
+        &:hover {
+          pointer-events: none;
+        }
+
+        .st0 {
+          fill: #bfbfbf;
+        }
+      }
     }
   }
 }
 
-@media (max-width:992px) {
+@media (max-width: 992px) {
   .user-show {
     width: 90vw !important;
   }
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
   .user-show {
     width: 95vw !important;
   }

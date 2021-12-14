@@ -3,26 +3,31 @@ $(document).on ('turbolinks:load', function(){
   $('#comment').on('click', function(e) {
     e.preventDefault()
     $('.submit-btn').addClass('disabled')
-    const comment = $('#comment-form').val()
-
+    const comment_input = $('#comment-form').val().replace(/^\s*(.*?)\s*$/, "$1");
     // コメントが入力されていれば発火
-    if(comment.length > 0) {
+    if(comment_input.length > 0) {
       $('#comment-form_messages').removeClass('comment-form-messages');
       $("#comment-form_messages").text('');
-      create_comment(comment)
+      create_comment(comment_input)
       .done(function() {
-        $('#js-comments').append(js_comments(comment)) // コメントをUIにセット
+        $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
         $('#comment.submit-btn').removeClass('disabled')
-        send_email(comment) // アイデアの持ち主や関わる人にメールを送る
+        send_email(comment_input) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
         alert('コメントに失敗しました')
       })
-    }else{
+    } else {
       $('#comment-form_messages').addClass('comment-form-messages');
       $("#comment-form_messages").text('コメントを入力してください。');
       $('#comment.submit-btn').removeClass('disabled')
+    }
+  });
+
+  $('#comment-form').on('keyup', function(e) {
+    if($(this).length > 0) {
+      $("#comment-form_messages").text('');
     }
   });
 

@@ -8,20 +8,18 @@
       </div>
     <% end %>
     <div class="comment-info <%= 'white-text' if owned %>">
-      <div class="comment-user <%= 'gray-3' unless owned %>">
+      <div class="comment-options <%= 'gray-3' unless owned %>">
         <div class="comment-user-name">
         <%= unless owned
         "@" + User.find(comment.user_id).name        
         end %>
+        <% if owned %>
+          <%= render 'comments/icons', comment: comment %>
+        <% end %>
         </div>
         <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
           <%= l comment.created_at, format: :long %>
         </div>
-      </div>
-      <div class="comment-options">
-        <% if owned %>
-          <%= render 'comments/icons', comment: comment %>
-        <% end %>
       </div>
       <div class='comment-description'>
         <%== simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>

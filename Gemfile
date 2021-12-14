@@ -67,10 +67,8 @@ gem 'sendgrid-ruby'
 gem 'twitter'
 
 # エラー関係
-gem "sentry-ruby"
-gem "sentry-rails"
 gem 'rack-timeout'
-gem 'rollbar'
+gem 'rollbar' # 本番のみで運用
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

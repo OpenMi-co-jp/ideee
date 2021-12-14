@@ -37,13 +37,6 @@
     }
   }
 
-  .icon-flex {
-    @media (max-width: 992px) {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
   &__share {
     &-flex {
       justify-content: space-around;

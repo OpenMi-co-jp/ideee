@@ -41,15 +41,15 @@ div, p, b {
   text-align: center;
   margin: 0.5rem;
 
-  :hover {
-    transition-duration: .3s;
-    transform: scale(1.05);
-    pointer-events: auto;
-    cursor: pointer;
-  }
-
   .twitter-share {
     margin: 0 auto;
+
+    &:hover {
+      transition-duration: .3s;
+      transform: scale(1.1);
+      pointer-events: auto;
+      cursor: pointer;
+    }
 
     &.small {
       width: 28px;

@@ -13,7 +13,7 @@ module IdeasHelper
       いいね数: :likes_num,
       コメント数: :comments_num,
       ビュー数: :view,
-      作成日: :created_at
+      公開日: :published_at
     }
   end
 
@@ -22,5 +22,13 @@ module IdeasHelper
       '昇順 ▲': :asc,
       '降順 ▼': :desc
     }
+  end
+
+  def idea_opened_date(idea)
+    if idea.draft
+      idea.created_time
+    else
+      idea.published_time
+    end
   end
 end

@@ -30,12 +30,21 @@
             <li class="c-share__box">
               <%= sns_share_icon("hatebu") %>
             </li>
+            <li class="c-share__box hide-on-med-and-up">
+              <div class="c-url-copy__mobile" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+                <i class="material-icons">content_copy</i>
+              </div>
+            </li>
           </ul>
-          <p class="c-share__text">＼ シェア ／</p>
+          <div class="hide-on-small-only">
+            <p class="c-share__text">＼ シェア ／</p>
+          </div>
         </div>
-        <div class="c-url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
-          <i class="material-icons">content_copy</i>
-          <%= tag.p '＼ URL コピー ／' %>
+        <div class="hide-on-small-only">
+          <div class="c-url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+            <i class="material-icons">content_copy</i>
+            <%= tag.p '＼ URL コピー ／' %>
+          </div>
         </div>
       <% end %>
     </div>

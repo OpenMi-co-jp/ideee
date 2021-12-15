@@ -9,6 +9,10 @@
   margin: 30px auto;
   cursor: pointer;
 
+  &__mobile {
+    border: 0;
+  }
+
   &:hover {
     transition-duration: .3s;
     transform: scale(1.05);

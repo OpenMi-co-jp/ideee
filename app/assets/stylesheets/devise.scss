@@ -2,6 +2,18 @@
   margin: 0 auto;
   width: 70vw;
 
+  &__twitter {
+    margin-top: 20px;
+
+    &--text {
+      color: #C4C4C4;
+    }
+
+    &--btn {
+      margin: 0.5rem 0;
+    }
+  }
+
   .sign-up-box {
     text-align: center;
     min-width: 250px;

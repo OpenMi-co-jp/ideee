@@ -35,7 +35,7 @@
       <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
     <% end %>
     <div class='status-info'>
-      <div class="status-info__vote status-info__vote--mobile <%= idea.difficulty %>">
+      <div class="status-info__vote <%= idea.difficulty %>">
         <%= render 'difficultys/vote', object: idea %>
       </div>
       <%= render "common/like", object: idea %>

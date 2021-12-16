@@ -7,16 +7,7 @@
     <p>Engineerが</p>
     <p>Encounter(出会い)を</p>
     <p>Encourage(盛り上げる)</p>
-    <div class='sign-form__twitter'>
-      <p class='sign-form__twitter--text'>
-        Twitterにて最新情報を発信しています。<br>
-        ideeeの公式Tiwwterアカウントをチェックしてください。
-      </p>
-      <div class='sign-form__twitter--btn'>
-        <a href="https://twitter.com/ideee_tech?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @ideee_tech</a>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-      </div>
-    </div>
+    <%= render "devise/shared/twitter_share" %>
   </div>
   <div class="col s12 l6">
     <h2><%= t 'default.login' %></h2>

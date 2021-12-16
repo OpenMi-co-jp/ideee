@@ -28,19 +28,24 @@
             <%# <li><a class="white-text" href="#!">募金について</a></li> %>
           </ul>
         </li>
-        <li class='col l4 s12'>
-          <ul class='flex right'>
-            <li class="share-box mr-5">
-              <%= link_to twitter_share('アイデアとエンジニアのマッチングサイトideee', root=true), target: '_blank' do %>
-                <%= image_tag "twitter_icon.svg", class: "twitter-share", alt: "Twitter share"%>
-                <%= tag.p "＼ シェア ／", class: "twitter-share white-text" %>
-              <% end %>
-            </li>
-            <%# Shareリンクを追加　FBなのか？ %>
-            <%# <li><a class="white-text" href="#!">Link 2</a></li> %>
-          </ul>
-        </li>
       </ul>
+      <div class="c-share footer-share">
+        <ul class="c-share__flex">
+          <li class="c-share__box">
+            <%= sns_share_icon("twitter") %>
+          </li>
+          <li class="c-share__box">
+            <%= sns_share_icon("facebook") %>
+          </li>
+          <li class="c-share__box">
+            <%= sns_share_icon("line") %>
+          </li>
+          <li class="c-share__box">
+            <%= sns_share_icon("hatebu") %>
+          </li>
+        </ul>
+        <p class="c-share__text footer-share__text">＼ シェア ／</p>
+      </div>
     </div>
   </div>
   <div class="copyright gray-5">

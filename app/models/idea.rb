@@ -12,6 +12,7 @@
 #  note          :text(65535)
 #  product_apply :integer          default("no_apply")
 #  product_url   :string(255)
+#  published_at  :datetime
 #  view          :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -49,12 +50,16 @@ class Idea < ApplicationRecord
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_commented, -> { order(comments_num: "DESC") }
-  scope :recent_select, -> { where(created_at: 40.days.ago..Time.now) }
+  scope :recent_select, -> { where(published_at: 40.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
 
   def user
     return User.find_by(id: self.user_id)
+  end
+
+  def published_time
+    published_at.strftime("%Y.%m.%d")
   end
 
   def created_time

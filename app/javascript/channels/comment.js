@@ -3,26 +3,42 @@ $(document).on ('turbolinks:load', function(){
   $('#comment').on('click', function(e) {
     e.preventDefault()
     $('.submit-btn').addClass('disabled')
-    const comment = $('#comment-form').val()
-
+    const comment_input = $('#comment-form').val().replace(/^\s*(.*?)\s*$/, "$1");
     // コメントが入力されていれば発火
-    if(comment.length > 0) {
-      create_comment(comment)
+    if(comment_input.length > 0) {
+      $('#comment-form_message').removeClass('comment-form-message');
+      $("#comment-form_message").text('');
+      create_comment(comment_input)
       .done(function() {
-        $('#js-comments').append(js_comments(comment)) // コメントをUIにセット
+        $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
-        $('.submit-btn').removeClass('disabled') // コメントの連投を防ぐdisabled
-        send_email(comment) // アイデアの持ち主や関わる人にメールを送る
+        $('#comment.submit-btn').removeClass('disabled')
+        send_email(comment_input) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
         alert('コメントに失敗しました')
       })
+    } else {
+      $('#comment-form_message').addClass('comment-form-message');
+      $("#comment-form_message").text('コメントを入力してください。');
+      $('#comment.submit-btn').removeClass('disabled')
     }
   });
 
-  $('#comment-delete').on('click', function() {
-    const element = $(this)
-    element.parents('.parent').remove()
+  $('#comment-form').on('keyup', function(e) {
+    if($(this).length > 0) {
+      $("#comment-form_message").text('');
+    }
+  });
+
+  $('.dropdown-comment-delete').on('click', function() {
+    comment_id = $(this).attr('id')
+    delete_comment(comment_id)
+    .done(function() {
+      $('#comment-' + comment_id).remove()
+      $comments_count = $('#comments_count').find('p')
+      $comments_count.html(Number($comments_count[0].innerText) - 1)
+    })
   });
 
   function create_comment(comment){
@@ -32,7 +48,16 @@ $(document).on ('turbolinks:load', function(){
       data: { description: comment, idea_id: gon.idea_id},
       dataType: 'json'
     })
-  }
+  };
+
+  function delete_comment(comment_id){
+    return $.ajax({
+      url: '/comments/' + comment_id,
+      type: 'DELETE',
+      data: { id: comment_id },
+      dataType: 'json'
+    })
+  };
 
   function send_email(comment){
     return $.ajax({
@@ -51,11 +76,11 @@ $(document).on ('turbolinks:load', function(){
     var h = now.getHours()
     var m = now.getMinutes()
     return $(
-            '<div class="comment-column m-1 own-comment">' +
-              '<div class="comment-column-inside m-1 white-text">' +
+            '<div class="p-comment-board__item own-comment">' +
+              '<div class="c-unit-comment white-text">' +
                 '<div class="flex">' +
-                  '<div class="comment-info">' +
-                    '<div class="comment-description">' +
+                  '<div class="c-unit-comment__info">' +
+                    '<div class="c-unit-comment--description">' +
                       comment.replace(/\n/g, '<br>') +
                     '</div>' +
                     '<div class="date-small pt-2">' +

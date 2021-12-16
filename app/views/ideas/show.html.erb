@@ -14,19 +14,31 @@
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
       <%= image_set(@idea) %>
-      <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
+      <div class='idea-date gray-3'>
+        <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock'%>
+        <%= idea_opened_date(@idea) %>
+      </div>
       <% unless @idea.draft %>
-        <div class="flex">
-          <div class="share-box">
-            <%= link_to twitter_share(@idea), target: '_blank' do %>
-              <%= image_tag "twitter_icon.svg", class: "twitter-share small", alt: "Twitter share" %>
-              <%= tag.p '＼ シェア ／', class: "twitter-share" %>
-            <% end %>
-          </div>
-          <div class="share-box url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
-            <i class="material-icons">content_copy</i>
-            <%= tag.p '＼ コピー ／' %>
-          </div>
+        <div class="c-share">
+          <ul class="c-share__flex idea-show__share-flex">
+            <li class="c-share__box">
+              <%= sns_share_icon("twitter") %>
+            </li>
+            <li class="c-share__box">
+              <%= sns_share_icon("facebook") %>
+            </li>
+            <li class="c-share__box">
+              <%= sns_share_icon("line") %>
+            </li>
+            <li class="c-share__box">
+              <%= sns_share_icon("hatebu") %>
+            </li>
+          </ul>
+          <p class="c-share__text">＼ シェア ／</p>
+        </div>
+        <div class="c-url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
+          <i class="material-icons">content_copy</i>
+          <%= tag.p '＼ URL コピー ／' %>
         </div>
         <div>
           <%= render 'cooperations/cooperation', idea: @idea %>
@@ -62,9 +74,9 @@
               <%= image_tag 'icons/eye.svg' %>
               <%= @idea.view %>
             </div>
-            <div class='status-info__comment'>
+            <div class='status-info__comment', id="comments_count">
               <%= image_tag 'icons/comment.svg' %>
-              <%= @idea.comments_num %>
+              <p><%= @idea.comments_num %></p>
             </div>
             <div class="status-info__vote <%= @idea.difficulty %>">
               <%= render 'difficultys/vote', object: @idea %>
@@ -83,7 +95,7 @@
       </div>
 
       <div class='idea-content mb-2'>
-        <% if current_user %>
+        <% if current_user || @idea.approved? %>
           <%== @idea.note %>
         <% else %>
           <%= strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
@@ -100,6 +112,10 @@
               <p>
             </div>
           </div>
+        <% end %>
+        <% if @idea.approved? %>
+          <b><%= t("activerecord.attributes.idea.product_url") %></b>
+          <%== simple_format(text_url_to_link(@idea.product_url), {}, sanitize: false) %>
         <% end %>
       </div>
       <% if current_user&.own?(@idea) %>

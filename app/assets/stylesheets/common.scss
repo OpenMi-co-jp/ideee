@@ -36,32 +36,6 @@ div, p, b {
   }
 }
 
-.share-box {
-  max-width: 120px;
-  text-align: center;
-  margin: 0.5rem;
-
-  :hover {
-    transition-duration: .3s;
-    transform: scale(1.05);
-    pointer-events: auto;
-    cursor: pointer;
-  }
-
-  .twitter-share {
-    margin: 0 auto;
-
-    &.small {
-      width: 28px;
-      height: 28px;
-    }
-  }
-
-  p {
-    margin: 0 auto;
-  }
-}
-
 // クリックをできなくする
 .disable-click {
   pointer-events: none;
@@ -126,7 +100,7 @@ hr {
 }
 
 .board-title {
-  font-size: x-large;
+  font-weight: bold;
   margin: auto 0.5rem;
 
   @media (max-width:992px) {
@@ -158,22 +132,22 @@ hr {
 
 .m {
   &-0 {
-    margin: 0　!important;
+    margin: 0 !important;
   }
   &-1 {
-    margin: 0.25rem　!important;
+    margin: 0.25rem !important;
   }
   &-2 {
-    margin: 0.5rem　!important;
+    margin: 0.5rem !important;
   }
   &-3 {
-    margin: 1rem　!important;
+    margin: 1rem !important;
   }
   &-4 {
-    margin: 1.5rem　!important;
+    margin: 1.5rem !important;
   }
   &-5 {
-    margin: 3rem　!important;
+    margin: 3rem !important;
   }
   &t {
     &-1 {

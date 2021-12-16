@@ -30,5 +30,6 @@ ja:
         tag_list: タグ
         tags_up_to_three: タグ（3つまで入力できます）
         cooperation: 開発者を募集する
+        product_url: 作っているアプリ
       comment:
         description: コメント

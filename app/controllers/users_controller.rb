@@ -16,8 +16,14 @@ class UsersController < ApplicationController
   end
 
   def search
-    @searched_users = Kaminari.paginate_array(User.defined_user.search(params[:key]).order(point: "DESC"))
-                              .page(params[:page])
+    if params[:sort] == "weekly_comments"
+      comments = Comment.weekly_comments
+      users_array = comments.pickup_user_commets(comments.length)
+      list = users_array.map{|u| User.find(u[0])}
+    else
+      list = User.defined_user.search(params[:key]).order(point: "DESC")
+    end
+    @searched_users = Kaminari.paginate_array(list).page(params[:page])
   end
 
   private

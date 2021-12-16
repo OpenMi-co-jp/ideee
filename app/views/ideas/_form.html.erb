@@ -44,6 +44,10 @@
           <%= form.check_box :cooperation, {}, true, false %>
         </div>
       <% end %>
+      <div class="field">
+        <%= form.label :product_url %><a class="help-tip product-url ml-2">?</a>
+        <%= form.text_field :product_url, placeholder: 'プロダクトのURL' %>
+      </div>
       <% if idea.draft || idea.id.nil? %>
         <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3 idea-btn' %>
       <% end %>

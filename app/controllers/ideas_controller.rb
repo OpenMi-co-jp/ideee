@@ -7,11 +7,14 @@ class IdeasController < ApplicationController
 
   def index
     @ideas = Idea.published.recent_select # 一度定義することで何度もDBに値を取りに行くことを阻止
-    @latest_ideas = @ideas.order(created_at: "DESC").first(10)
+    @latest_ideas = @ideas.order(published_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
     @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
     @most_commented_ideas = @ideas.most_commented.first(5)
-    @featured_users = User.where(defined: true).order(point: "DESC").first(5) # 定義がされているユーザーだけをポイントが高い準に5名
+    @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
+    # 1週間以内にコメントを追加したユーザーのIDとコメント数とピックアップ
+    @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
+    @weekly_commented_users = @commented_users_array.map{|u| User.find(u[0])}
   end
 
   def show
@@ -42,6 +45,8 @@ class IdeasController < ApplicationController
       else
         TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+        SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+        @idea.update!(published_at: Time.now)
         redirect_to @idea, notice: t('.success')
       end
     else
@@ -53,6 +58,12 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
+      @idea.update!(published_at: Time.now)
+      if params[:commit] == t('default.publish') && Rails.env.production?
+        TwitterTweet.new.tweet(@idea, idea_url(@idea.id))
+        SlackNotifier.new.send(@idea, idea_url(@idea.id))
+      end
+      SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
       redirect_to @idea, notice: message
     else
@@ -68,22 +79,31 @@ class IdeasController < ApplicationController
 
   def search
     # アイデアに紐づくlikeの数を数えて、降順に並べる
-    sort = params[:sort] || "likes_num"
-    list = Idea.search(name: params[:keyword], difficulty: params[:difficulty]).order("#{sort}": "DESC")
+    @sort = params[:sort] || "likes_num"
+    @order = params[:order] || "desc"
+    @keyword = params[:keyword]
+    # TODO: 検索結果が増えてきたらtag検索を分ける
+    ideas = Idea.published.search(name: @keyword, difficulty: params[:difficulty]) | Idea.published.tag_name_like(@keyword)
+    list = Idea.where(id: ideas.map(&:id)).order("#{@sort}": @order)
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
+    @deployed_ideas = Idea.deployed.order(updated_at: "DESC").first(10)
   end
 
   def tags
-    list = Idea.with_tag(params[:tag_name])
+    @sort = params[:sort] || "likes_num"
+    @order = params[:order] || "desc"
+    @tag_name = params[:keyword]
+    list = Idea.with_tag(@tag_name).order("#{@sort}": @order)
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   def publish
-    @idea.update(draft: false)
+    @idea.update(draft: false, published_at: Time.now)
     TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
     SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+    SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
     redirect_to @idea, notice: t('.success')
   end
 
@@ -95,7 +115,7 @@ class IdeasController < ApplicationController
     # ストロングパラメーターを設定
     def idea_params
       params.require(:idea)
-            .permit(:name, :icon, :note, :view, :user_id, :commit)
+            .permit(:name, :icon, :note, :view, :user_id, :commit, :product_url)
             .merge(user_id: current_user.id)
             .merge(draft: draft_bool)
     end

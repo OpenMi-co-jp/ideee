@@ -1,12 +1,16 @@
 <div class='idea-index'>
-  <div class='main-board'>
+  <div class='main-board seach-results'>
     <% if @searched_ideas.present? %>
-      <h4 class='board-title'>検索結果 <%= @searched_ideas.count %>件</h4>
+      <div class='search--sort'>
+        <h5 class='board-title'>検索結果 <%= @searched_ideas.count %>件</h5>
+        <%= render 'common/sort_form', keyword: @keyword, path: search_ideas_path %>
+      </div>
       <%= render 'common/column_board', ideas: @searched_ideas %>
       <%= paginate @searched_ideas %>
     <% else %>
-      <h4>検索に合致する結果が⾒つかりませんでした。</h4>
-      <h5><%= link_to "アイデアを投稿しませんか？", new_idea_path %></h5>
+      <h4>検索に合致するアイデアが⾒つかりませんでした</h4>
+      <h5><%= link_to "あなたのアイデアを投稿しませんか？", new_idea_path %></h5>
     <% end %>
   </div>
+  <%= render 'ideas/index/latest_boad', title: '最近実現したアイデア', ideas: @deployed_ideas %>
 </div>

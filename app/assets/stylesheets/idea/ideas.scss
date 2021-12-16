@@ -30,7 +30,7 @@
     min-height: 450px;
 
     .back-color-board {
-      min-height: 25vh;
+      min-height: 20vh;
       background: url(background_orange.png) center / cover;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
@@ -158,11 +158,23 @@
     align-items: center;
     margin-top: 4px;
     font-size: 15px;
+
+    &--clock {
+      margin-right: 5px;
+    }
   }
 
   &__eyes {
     display: flex;
     margin-left: 22px;
+  }
+
+  &__time {
+    display: flex;
+
+    &--clock {
+      margin-right: 7.5px;
+    }
   }
 
   &__comments {

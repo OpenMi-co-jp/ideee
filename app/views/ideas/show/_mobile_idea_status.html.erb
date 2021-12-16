@@ -1,45 +1,47 @@
-<div class='idea-name orange-action grid-middle'>
-  <%= idea.name %>
-</div>
+<div class='grid-middle'>
+  <div class='idea-name orange-action'>
+    <%= idea.name %>
+  </div>
 
-<div class='row gray-4'>
-  <div class='col s12'>
-    <div class='row'>
-      <p class='col s6'>
-        <%= user_definiton(idea.user) %>
-      </p>
-      <div class='col s6 flex'>
-        <%= link_to user_path(idea.user.id) do %>
-          <% user_icon(idea.user, size: 'small') %>
-        <% end %>
-        <p class='grid-middle'>
-          <%= idea.user.name %>
+  <div class='row gray-4'>
+    <div class='col s12'>
+      <div class='row'>
+        <p class='col s6'>
+          <%= user_definiton(idea.user) %>
         </p>
+        <div class='col s6 flex'>
+          <%= link_to user_path(idea.user.id) do %>
+            <% user_icon(idea.user, size: 'small') %>
+          <% end %>
+          <p class='grid-middle'>
+            <%= idea.user.name %>
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div class='status-info'>
-      <div class="status-info__day">
-        <%= "更新日：#{l idea.updated_at}" %>
+      <div class='status-info'>
+        <div class="status-info__day">
+          <%= "更新日：#{l idea.updated_at}" %>
+        </div>
+        <div class="status-info__eye status-info__eye--mobile">
+          <%= image_tag 'icons/eye.svg' %>
+          <p><%= idea.view %></p>
+        </div>
+        <div class='status-info__comment', id="comments_count">
+          <%= image_tag 'icons/comment.svg' %>
+          <p><%= idea.comments_num %></p>
+        </div>
       </div>
-      <div class="status-info__eye status-info__eye--mobile">
-        <%= image_tag 'icons/eye.svg' %>
-        <p><%= idea.view %></p>
+      <% if current_user&.own?(idea) %>
+        <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
+      <% end %>
+      <div class='status-info'>
+        <div class="status-info__vote status-info__vote--mobile <%= idea.difficulty %>">
+          <%= render 'difficultys/vote', object: idea %>
+        </div>
+        <%= render "common/like", object: idea %>
       </div>
-      <div class='status-info__comment', id="comments_count">
-        <%= image_tag 'icons/comment.svg' %>
-        <p><%= idea.comments_num %></p>
-      </div>
+      <%= render 'tags/links', object: idea %>
     </div>
-    <% if current_user&.own?(idea) %>
-      <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
-    <% end %>
-    <div class='status-info'>
-      <div class="status-info__vote <%= idea.difficulty %>">
-        <%= render 'difficultys/vote', object: idea %>
-      </div>
-      <%= render "common/like", object: idea %>
-    </div>
-    <%= render 'tags/links', object: idea %>
   </div>
 </div>

@@ -21,5 +21,18 @@
   &__options {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 5px;
+    justify-content: flex-end;
+  }
+
+  &__user {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 5px;
+    justify-content: space-between;
+  }
+
+  &__username {
+    margin-right: 50px;
   }
 }

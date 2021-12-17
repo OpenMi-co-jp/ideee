@@ -106,4 +106,9 @@ $(document).on ('turbolinks:load', function(){
     // TODO: jsでUIの文字を変更するようにする
     // $('#modal-trigger-difficulty').html($(this))
   });
+
+  // 開発者募集をrailsに渡す
+  $('#cooperation_switch').on('click', function () {
+    $('#idea_cooperation').val($(this).prop('checked'))
+  });
 })

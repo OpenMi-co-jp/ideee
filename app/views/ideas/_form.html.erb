@@ -39,9 +39,17 @@
         <%= form.rich_text_area :note %>
       </div>
       <% if idea.cooperation_not_started? || idea.id.nil? %>
-        <div class="field">
+        <div class="field switch c-cooperation-switch">
           <%= form.label :cooperation %>
-          <%= form.check_box :cooperation, {}, true, false %>
+          <%= form.hidden_field :cooperation, value: params[:cooperation_switch] %>
+          <div class="switch c-cooperation-switch__btn">
+            <label class="c-cooperation-switch__label">
+              募集しない
+              <input type="checkbox" id='cooperation_switch'>
+              <span class="lever"></span>
+              募集する
+            </label>
+          </div>
         </div>
       <% end %>
       <div class="field">

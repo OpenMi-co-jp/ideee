@@ -39,7 +39,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
-      @idea.cooperation_ongoing! if params[:idea][:cooperation]
+      @idea.cooperation_ongoing! if params[:idea][:cooperation_switch] == 'true'
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else

@@ -11,9 +11,9 @@
       <div class="c-unit-comment__user <%= 'gray-3' unless owned %>">
         <div class="c-unit-comment__username">
           <%= link_to user_path(comment.user_id) do %>
-            <%= unless owned
-            User.find(comment.user_id).name        
-            end %>
+            <% unless owned %>
+              <% User.find(comment.user_id).name %>
+            <% end %>
           <% end %>
         </div>
         <div class="date-small pt-2 <%= 'gray-3' unless owned %>">

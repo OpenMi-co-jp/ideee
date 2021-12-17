@@ -13,11 +13,11 @@
       <% if @idea.draft %>
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
-      <%= image_set(@idea) %>
       <div class='idea-date gray-3'>
         <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock'%>
         <%= idea_opened_date(@idea) %>
       </div>
+      <%= image_set(@idea) %>
       <% unless @idea.draft %>
         <div class="c-share">
           <ul class="c-share__flex idea-show__share-flex">

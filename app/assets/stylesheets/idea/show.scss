@@ -22,8 +22,13 @@
       margin: 0 auto;
     }
 
-    .idea-created {
-      margin: 1rem 0;
+    .idea-date {
+      margin: 5px 0 5px;
+      display: flex;
+
+      &--clock {
+        margin-right: 5px;
+      }
     }
   }
 

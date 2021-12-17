@@ -13,8 +13,8 @@
       <% if @idea.draft %>
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
-      <%= image_set(@idea) %>
       <p class='idea-created gray-3'><%= "作成日: #{l @idea.created_at}" %></p>
+      <%= image_set(@idea) %>
       <% unless @idea.draft %>
         <div class="c-share">
           <ul class="c-share__flex idea-show__share-flex">

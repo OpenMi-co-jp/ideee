@@ -13,6 +13,20 @@
     padding: 0.25rem 0.5rem;
   }
 
+  .pages {
+
+    &__body {
+      border-radius: 5px;
+      background-color: #f7f9fa;
+      padding: 1rem 1.25rem;
+    }
+
+    &__image {
+      max-height: 400px;
+      margin: 0 auto;
+    }
+  }
+
   .questionnaire {
     width: 60vw;
     margin: 0 auto;

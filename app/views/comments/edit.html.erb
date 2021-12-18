@@ -1,0 +1,24 @@
+<h3><%= t('.title') %></h3>
+
+<div class="c-comment-form row mh-3">
+  <div class="c-comment-form__input-area">
+    <%= form_with model: @comment, local: true do |f| %>
+      <% if @comment.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @comment.errors.each do |error| %>
+              <h4>
+                <li><%= error.full_message %></li>
+              </h4>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= f.text_area :description, class: 'c-comment-form__input-area--textarea yellow-soft-back mh-3', id: "comment-form", placeholder: "コメントする" %>
+      <div class='c-comment-form__btn-area'>
+        <%= f.submit class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" %>
+        <%= link_to t('default.cancel'), idea_path(@comment.idea.id), class: 'waves-effect btn orange-soft-back nav-link' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -22,8 +22,13 @@
       margin: 0 auto;
     }
 
-    .idea-created {
-      margin: 1rem 0;
+    .idea-date {
+      margin: 5px 0 5px;
+      display: flex;
+
+      &--clock {
+        margin-right: 5px;
+      }
     }
   }
 
@@ -34,6 +39,22 @@
 
     .login-guidance {
       justify-content: center;
+    }
+  }
+
+  &__share {
+    &-flex {
+      justify-content: space-around;
+    }
+
+    &-box {
+      margin: 0 4%;
+    }
+
+    &-icon {
+      @media (max-width: 992px) {
+        width: 28px;
+      }
     }
   }
 }
@@ -60,10 +81,10 @@
   background-color: #e3e4e8;
   color: #2ca3b3;
   transition: all 0.5s;
-}
 
-.idea-tag:hover {
-  opacity: 0.5;
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 .status-info {

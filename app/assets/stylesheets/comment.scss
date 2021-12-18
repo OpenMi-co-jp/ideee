@@ -1,12 +1,17 @@
 .comment-board {
   min-height: 120px;
 
+  &__title {
+    margin-left: 2rem;
+  }
+
   .comment-column {
     border: solid 1px #E3E4E8;
     border-radius: 0.5rem;
     background-color: white;
     max-width: 80%;
     width: fit-content;
+    margin: 10px;
 
     &.own-comment {
       margin-left: auto;
@@ -15,7 +20,7 @@
 
     .comment-column-inside {
       margin: 0.5rem;
-      min-width: 120px;
+      min-width: 130px;
 
       .comment-img {
         margin-right: 0.5rem;
@@ -49,6 +54,13 @@
       padding: 0.7rem;
       border: solid 1px #E3E4E8;
       min-height: 80px;
+    }
+
+    .comment-form-message {
+      text-align: left;
+      color: red;
+      margin-top : -20px;
+      margin-bottom : 20px;
     }
   }
 

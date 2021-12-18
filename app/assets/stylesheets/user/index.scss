@@ -2,6 +2,14 @@
   background-color: white;
   width: 95%;
   margin: 0 auto;
+
+  .row {
+    transition: all 0.3s;
+
+    :hover {
+      opacity: 0.8;
+    }
+  }
 }
 
 .user-column {
@@ -33,10 +41,15 @@
   object-fit: cover;
   border-radius: 3%;
   background-color: white;
+  transition: all 0.3s ease 0s;
 
   &.small {
     width: 30px;
     height: 30px;
+    
+    &:hover {
+      opacity: 0.6;
+    }
   }
 
   &.normal {

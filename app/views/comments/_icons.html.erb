@@ -1,10 +1,20 @@
-<div class='comment-icons'>
-  <%= link_to '#', data: { target: "dropdown_comment-#{comment.id}" }, class:'dropdown-trigger white-text' do %>
+<div class='c-comment-icons'>
+  <%= link_to '#', data: { target: "dropdown_comment-edit-#{comment.id}" }, class:'dropdown-trigger white-text' do %>
+    <i class="material-icons">edit</i>
+  <% end %>
+  <%= link_to '#', data: { target: "dropdown_comment-delete-#{comment.id}" }, class:'dropdown-trigger white-text' do %>
     <i class="material-icons">delete</i>
   <% end %>
-  <ul id="dropdown_comment-<%= comment.id %>" class='dropdown-content comment-option'>
+  <ul id="dropdown_comment-edit-<%= comment.id %>" class='dropdown-content'>
     <li>
-      <%= link_to comment_path(comment.id), method: :delete, id: 'comment-delete' do %>
+      <%= link_to edit_comment_path(comment) do %>
+        編集
+      <% end %>
+    </li>
+  </ul>
+  <ul id="dropdown_comment-delete-<%= comment.id %>" class='dropdown-content comment-option'>
+    <li>
+      <%= link_to '#', id: comment.id, class: 'dropdown-comment-delete', remote: true do %>
         削除
       <% end %>
     </li>

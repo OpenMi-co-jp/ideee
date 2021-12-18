@@ -1,7 +1,7 @@
 <header class='position-sticky'>
   <ul class='header-body'>
     <li class='text-monospace header-logo'>
-      <%= link_to root_path  do %>
+      <%= link_to root_path do %>
         <%= image_tag 'ideee-tech-logo.svg',  alt: "ideee"%>
       <% end %>
     </li>
@@ -19,8 +19,18 @@
       <% end %>
       <ul id='dropdown_rank' class='dropdown-content'>
         <li>
-          <%= link_to users_path do %>
-            ユーザーランキング
+          <%= link_to search_ideas_path do %>
+            <i class="material-icons">favorite_border</i>ハートランキング
+          <% end %>
+        </li>
+        <li>
+          <%= link_to search_ideas_path(sort: :comments_num) do %>
+            <i class="material-icons">chat_bubble_outline</i>コメントランキング
+          <% end %>
+        </li>
+        <li>
+          <%= link_to search_ideas_path(sort: :view) do %>
+            <i class="material-icons">visibility</i>View数ランキング
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>
@@ -79,8 +89,18 @@
       <li id="humburger-menu" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></li>
       <div id="slide-out" class="sidenav">
         <li>
-          <%= link_to users_path do %>
-            ユーザーランキング
+          <%= link_to search_ideas_path do %>
+            <i class="material-icons">favorite_border</i>ハートランキング
+          <% end %>
+        </li>
+        <li>
+          <%= link_to search_ideas_path(sort: :comments_num) do %>
+            <i class="material-icons">chat_bubble_outline</i>コメントランキング
+          <% end %>
+        </li>
+        <li>
+          <%= link_to search_ideas_path(sort: :view) do %>
+            <i class="material-icons">visibility</i>View数ランキング
           <% end %>
         </li>
         <li>

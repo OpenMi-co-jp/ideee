@@ -13,8 +13,11 @@ ja:
     draft: 下書き
     save_draft: 下書き保存
     publish: 公開する
+    cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました
+    users:
+      weekly_comments_num: 5
   devise:
     confirmations:
       new:
@@ -45,6 +48,13 @@ ja:
       default_set:  "<strong>困っていること</strong><br><br><br>
                       <strong>どうなって欲しいか</strong><br><br><br>
                       <strong>補足</strong><br><br>"
+    show:
+      page: idea-show
+      share:
+        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=ideee&via=%{twitter_id}&related=ideee_tech&url=%{url}"
+        facebook: "https://www.facebook.com/share.php?u=%{url}"
+        line: "https://timeline.line.me/social-plugin/share?url=%{url}"
+        hatebu: "https://b.hatena.ne.jp/entry/%{url}"
     create:
       success: アイデアの登録が完了しました
       draft_save: アイデアの下書きが保存されました
@@ -57,7 +67,20 @@ ja:
       success: アイデアを削除しました
     publish:
       success: アイデアを公開しました
+  comments:
+    edit:
+      title: コメント編集
+    update:
+      success: コメントを更新しました
+      fail: コメントの更新に失敗しました
   common:
     service_fund:
       use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます
-
+  layouts:
+    footer:
+      page: footer
+      share:
+        twitter: "https://twitter.com/intent/tweet?text=アイデアとエンジニアのマッチングサイトideee&hashtags=ideee&via=ideee_tech&related=ideee_tech&url=https://www.ideee.tech"
+        facebook: "https://www.facebook.com/share.php?u=https://www.ideee.tech"
+        line: "https://timeline.line.me/social-plugin/share?url=https://www.ideee.tech"
+        hatebu: "https://b.hatena.ne.jp/entry/https://www.ideee.tech"

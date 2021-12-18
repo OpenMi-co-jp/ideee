@@ -1,7 +1,3 @@
-<div class='idea-name orange-action'>
-  <%= idea.name %>
-</div>
-
 <div class='row gray-4'>
   <div class='col l10'>
     <div class='row'>
@@ -18,23 +14,23 @@
       </div>
     </div>
 
-    <div class='status-info'>
-      <div class="status-info__day">
+    <div class='c-pc-status-info'>
+      <div class="c-pc-status-info__day">
         <%= "更新日：#{l idea.updated_at}" %>
       </div>
-      <div class="status-info__eye">
+      <div class="c-pc-status-info__eye">
         <%= image_tag 'icons/eye.svg' %>
         <%= idea.view %>
       </div>
-      <div class='status-info__comment', id="comments_count">
+      <div class='c-pc-status-info__comment', id="comments_count">
         <%= image_tag 'icons/comment.svg' %>
         <p><%= idea.comments_num %></p>
       </div>
-      <div class="status-info__vote <%= idea.difficulty %>">
+      <div class="c-pc-status-info__vote <%= idea.difficulty %>">
         <%= render 'difficultys/vote', object: idea %>
       </div>
       <% if current_user&.own?(idea) %>
-        <div class='status-info__time'>
+        <div class='c-pc-status-info__time'>
           <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
         </div>
       <% end %>

@@ -47,25 +47,49 @@
       <% end %>
     </div>
   </div>
-  <div class="row">
-    <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
-      <% if @user.ideas.published.present? %>
-        <h4>アイデア</h4>
-        <%= render 'common/column_board', ideas: @user.ideas.published %>
-      <% else %>
-        <h4 class='no_idea_posted'>まだアイデアが投稿されていません</h4>
-      <% end %>
+  <nav class="nav-extended c-nav-var">
+    <div class="nav-content c-nav-var__content">
+      <ul class="tabs tabs-transparent">
+        <li class="tab c-nav-var__tabs--tab"><a class="active" href="#tab1">アイデアリスト</a></li>
+        <li class="tab c-nav-var__tabs--tab"><a href="#tab2">ハート</a></li>
+        <li class="tab c-nav-var__tabs--tab"><a href="#tab3">コメント</a></li>
+      </ul>
     </div>
-    <% if own_user_checked(@user) %>
-      <div class="col s12 l4">
-        <% if @user.ideas.drafts.present? %>
-          <h4>下書きアイデア</h4>
-          <%= render 'common/simple_board', ideas: @user.ideas.drafts %>
+  </nav>
+  <div id="tab1" class="col s12">
+    <div class="row">
+      <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
+        <% if @user.ideas.published.present? %>
+          <%= render 'common/column_board', ideas: @user.ideas.published %>
         <% else %>
-          <h5 class='no_draft_posted'>まだ下書きがありません</h5>
-          <p class='gray-3'>※下書きはあなたにしか見えません</p>
+          <h5 class='no_idea_posted'>まだアイデアが投稿されていません</h5>
         <% end %>
       </div>
+      <% if own_user_checked(@user) %>
+        <div class="col s12 l4">
+          <% if @user.ideas.drafts.present? %>
+            <h4>下書きアイデア</h4>
+            <%= render 'common/simple_board', ideas: @user.ideas.drafts %>
+          <% else %>
+            <h5 class='no_draft_posted'>まだ下書きがありません</h5>
+            <p class='gray-3'>※下書きはあなたにしか見えません</p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div id="tab2" class="col s12">
+    <% if @user.likes.present? %>
+      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find(n.idea_id) } %>
+    <% else %>
+      <h5>まだアイデアにハートを送っていません</h5>
+    <% end %>
+  </div>
+  <div id="tab3" class="col s12">
+    <% if @user.comments.present? %>
+      <%= render 'common/column_board', ideas: @user.comments.map{|n| Idea.find(n.idea_id) } %>
+    <% else %>
+      <h5>まだアイデアにコメントをしていません</h5>
     <% end %>
   </div>
   <%= render 'common/fund_link', object: @user %>

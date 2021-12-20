@@ -11,6 +11,7 @@ $(document).on ('turbolinks:load', function(){
     fullWidth: true,
     indicators: true
   });
+  $('ul.tabs').tabs(); // nav tabsの初期設定
 
   $('.sidenav').sidenav({
     closeOnClick: true,

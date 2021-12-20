@@ -13,32 +13,17 @@
       <% if @idea.draft %>
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
-      <%= image_set(@idea) %>
       <div class='idea-date gray-3'>
         <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock'%>
         <%= idea_opened_date(@idea) %>
       </div>
+      <%= image_set(@idea) %>
       <% unless @idea.draft %>
-        <div class="c-share">
-          <ul class="c-share__flex idea-show__share-flex">
-            <li class="c-share__box">
-              <%= sns_share_icon("twitter") %>
-            </li>
-            <li class="c-share__box">
-              <%= sns_share_icon("facebook") %>
-            </li>
-            <li class="c-share__box">
-              <%= sns_share_icon("line") %>
-            </li>
-            <li class="c-share__box">
-              <%= sns_share_icon("hatebu") %>
-            </li>
-          </ul>
-          <p class="c-share__text">＼ シェア ／</p>
+        <div class='hide-on-small-only'>
+          <%= render 'ideas/show/pc_idea_share' %>
         </div>
-        <div class="c-url-copy" onclick="M.toast({html: 'コピーしました', classes: 'orange lighten-3 rounded'})">
-          <i class="material-icons">content_copy</i>
-          <%= tag.p '＼ URL コピー ／' %>
+        <div class='hide-on-med-and-up'>
+          <%= render 'ideas/show/mobile_idea_share' %>
         </div>
       <% end %>
     </div>
@@ -46,51 +31,12 @@
       <div class='idea-name orange-action'>
         <%= @idea.name %>
       </div>
-
-      <div class='row gray-4'>
-        <div class='col l10 s12'>
-          <div class='row'>
-            <p class='col l6 s12 grid-middle'>
-              <%= user_definiton(@idea.user) %>
-            </p>
-            <div class='col l6 s12 flex'>
-              <%= link_to user_path(@idea.user.id) do %>
-                <% user_icon(@idea.user, size: 'small') %>
-              <% end %>
-              <p class='grid-middle'>
-                <%= @idea.user.name %>
-              </p>
-            </div>
-          </div>
-
-          <div class='status-info'>
-            <div class="status-info__day">
-              <%= "更新日：#{l @idea.updated_at}" %>
-            </div>
-            <div class="status-info__eye">
-              <%= image_tag 'icons/eye.svg' %>
-              <%= @idea.view %>
-            </div>
-            <div class='status-info__comment', id="comments_count">
-              <%= image_tag 'icons/comment.svg' %>
-              <p><%= @idea.comments_num %></p>
-            </div>
-            <div class="status-info__vote <%= @idea.difficulty %>">
-              <%= render 'difficultys/vote', object: @idea %>
-            </div>
-            <% if current_user&.own?(@idea) %>
-              <div class='status-info__time'>
-                <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
-              </div>
-            <% end %>
-          </div>
-          <%= render 'tags/links', object: @idea %>
-        </div>
-        <div class='col s12 l2 flex-end'>
-          <%= render "common/like", object: @idea %>
-        </div>
+      <div class='hide-on-small-only'>
+        <%= render 'ideas/show/pc_idea_status', idea: @idea, time_on_page: @time_on_page %>
       </div>
-
+      <div class='hide-on-med-and-up'>
+        <%= render 'ideas/show/mobile_idea_status', idea: @idea, time_on_page: @time_on_page %>
+      </div>
       <div class='idea-content mb-2'>
         <% if current_user || @idea.approved? %>
           <%== @idea.note %>

@@ -87,7 +87,7 @@
   </div>
   <div id="tab3" class="col s12">
     <% if @user.comments.present? %>
-      <%= render 'common/column_board', ideas: @user.comments.map{|n| Idea.find_by(ide: n.idea_id) }.uniq %>
+      <%= render 'common/column_board', ideas: @user.comments.map{|n| Idea.find_by(id: n.idea_id) }.uniq %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
     <% end %>

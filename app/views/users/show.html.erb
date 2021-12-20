@@ -50,9 +50,9 @@
   <nav class="nav-extended c-nav-var">
     <div class="nav-content c-nav-var__content">
       <ul class="tabs tabs-transparent">
-        <li class="tab c-nav-var__tabs--tab"><a class="active" href="#tab1">アイデアリスト</a></li>
-        <li class="tab c-nav-var__tabs--tab"><a href="#tab2">ハート</a></li>
-        <li class="tab c-nav-var__tabs--tab"><a href="#tab3">コメント</a></li>
+        <li class="tab c-nav-var__tab"><a class="active" href="#tab1">アイデアリスト</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab2">ハート</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab3">コメント</a></li>
       </ul>
     </div>
   </nav>
@@ -80,14 +80,14 @@
   </div>
   <div id="tab2" class="col s12">
     <% if @user.likes.present? %>
-      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find(n.idea_id) } %>
+      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find(n.idea_id) }.uniq %>
     <% else %>
       <h5>まだアイデアにハートを送っていません</h5>
     <% end %>
   </div>
   <div id="tab3" class="col s12">
     <% if @user.comments.present? %>
-      <%= render 'common/column_board', ideas: @user.comments.map{|n| Idea.find(n.idea_id) } %>
+      <%= render 'common/column_board', ideas: @user.comments.map{|n| Idea.find(n.idea_id) }.uniq %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
     <% end %>

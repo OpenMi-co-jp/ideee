@@ -13,11 +13,12 @@ ja:
     draft: 下書き
     save_draft: 下書き保存
     publish: 公開する
-    cooperation_start: 開発者を募集する
-    cooperation_complete: 募集を終了する
-    cooperation_restart: 再募集する
-    cooperation_join: 参加する
-    cooperation_cancel: 参加を辞退する
+    cooperation:
+      start: 開発者を募集する
+      complete: 募集を終了する
+      restart: 再募集する
+      join: 参加する
+      cancel: 参加を辞退する
     cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました

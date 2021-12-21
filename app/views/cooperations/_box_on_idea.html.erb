@@ -1,5 +1,9 @@
 <div class='center'>
-  <%= render 'cooperations/cooperation_status', idea: idea %>
+  <% if idea.cooperation_ongoing? %>
+    <div class='cooperation-status-box'>
+      開発者募集中
+    </div>
+  <% end %>
   <% if current_user&.own?(idea) %>
     <%= render 'cooperations/owner_link', idea: idea %>
   <% else %>

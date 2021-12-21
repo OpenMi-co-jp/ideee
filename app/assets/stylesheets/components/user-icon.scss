@@ -1,6 +1,14 @@
-.c-user-type-column {
+.c-user-icon {
   text-align: center;
   align-items: center;
   border: solid 0.2px #C0C0C0;
   border-radius: 0.5rem;
+
+  &__mh {
+    margin: 1rem 0;
+  }
+
+  &__gray {
+    color: #C4C4C4;
+  }
 }

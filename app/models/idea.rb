@@ -46,7 +46,7 @@ class Idea < ApplicationRecord
   validate :validate_tags_num
   validates :product_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
-  enum difficulty:  { not_yet: 0, easy: 1, middle: 2, hard: 3 }
+  enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
   enum cooperation: %i(not_started ongoing completed), _prefix: true
 

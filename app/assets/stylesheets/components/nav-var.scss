@@ -1,0 +1,14 @@
+.c-nav-var {
+  margin-top: 30px;
+  background-color: #FFBF85;
+  width: 340px;
+
+  &__content {
+    min-width: 340px;
+  }
+
+  &__tab {
+    background-color: #FFBF85;
+    font-weight: bold;
+  }
+}

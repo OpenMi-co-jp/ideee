@@ -110,6 +110,6 @@ $(document).on ('turbolinks:load', function(){
 
   // 開発者募集をrailsに渡す
   $('#cooperation_switch').on('click', function () {
-    $('#idea_cooperation').val($(this).prop('checked'))
+    $('#idea_cooperation_switch').val($(this).prop('checked'))
   });
 })

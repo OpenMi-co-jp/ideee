@@ -41,7 +41,7 @@
       <% if idea.cooperation_not_started? || idea.id.nil? %>
         <div class="field switch c-cooperation-switch">
           <%= form.label :cooperation %>
-          <%= form.hidden_field :cooperation, value: params[:cooperation_switch] %>
+          <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
           <div class="switch c-cooperation-switch__btn">
             <label class="c-cooperation-switch__label">
               募集しない

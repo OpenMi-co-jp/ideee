@@ -135,7 +135,7 @@ class User < ApplicationRecord
   end
 
   def unlike(idea)
-    like_ideas.delete(idea)
+    like_ideas.destroy(idea)
     idea.count_likes
   end
 

@@ -1,23 +1,21 @@
 <% if !users.blank? %>
-  <div class='p-2'>
-    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'><i class="material-icons left">groups</i>開発者一覧</a>
-    <ul id='dropdown1' class='dropdown-content'>
-      <% users.each do |user| %>
-        <li>
-          <%= link_to user_path(user.id), target: :_blank do %>
-              <div class='flex'>
-                <%= user_icon(user, size: 'smaller') %>
-                <div class='user-column-body'>
-                  <div class='user-name-point'>
-                    <div class='pl-3'>
-                      <div class='user-name'><%= user.name %><%= user_definiton(user, ver='short') %></div>
-                    </div>
+  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'><i class="material-icons left">groups</i>参加者リスト</a>
+  <ul id='dropdown1' class='dropdown-content'>
+    <% users.each do |user| %>
+      <li>
+        <%= link_to user_path(user.id), target: :_blank do %>
+            <div class='flex'>
+              <%= user_icon(user, size: 'smaller') %>
+              <div class='user-column-body'>
+                <div class='user-name-point'>
+                  <div class='pl-3'>
+                    <div class='user-name'><%= user.name %><%= user_definiton(user, ver='short') %></div>
                   </div>
-              </div>
+                </div>
             </div>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>

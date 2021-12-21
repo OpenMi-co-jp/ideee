@@ -10,6 +10,7 @@ class CooperationsController < ApplicationController
 
   def create
     current_user.cooperations.find_or_create_by(idea: @idea)
+    SendEmail.new.join_cooperation(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end
 

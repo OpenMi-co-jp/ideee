@@ -1,13 +1,15 @@
 <div class='center'>
   <% if idea.cooperation_ongoing? %>
-    <div class='cooperation-status-box'>
+    <div class='c-cooperation-box__status'>
       開発者募集中
     </div>
   <% end %>
-  <% if current_user&.own?(idea) %>
-    <%= render 'cooperations/owner_link', idea: idea %>
-  <% else %>
-    <%= render 'cooperations/cooperator_link', idea: idea %>
-  <% end %>
-  <%= render 'cooperations/members', users: idea.cooperation_users %>
+  <div class='c-cooperation-box__apply'>
+    <% if current_user&.own?(idea) %>
+      <%= render 'cooperations/owner_link', idea: idea %>
+    <% else %>
+      <%= render 'cooperations/cooperator_link', idea: idea %>
+    <% end %>
+    <%= render 'cooperations/members', users: idea.cooperation_users %>
+  </div>    
 </div>

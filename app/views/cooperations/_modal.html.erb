@@ -14,9 +14,10 @@
         </li>
       <% end %>
     </ul>
+    <p class='gray-5'><%= message %></p>
     <div class='cooperation-submit-btn'>
-      <%= link_to t('default.cancel'), '#cancel', class: 'btn orange-soft-back cooperation-modal-close-btn' %>
-      <%= cooperation_link(path: path, method: method, name: name, color: color) %>
+      <%= link_to t('default.cancel'), '#cancel', class: 'btn gray-3-back cooperation-modal-close-btn' %>
+      <%= link_to name, path, method: method, class: "btn orange-action-back" %>
     </div>
   </div>
 </div>

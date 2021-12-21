@@ -1,7 +1,12 @@
 class CooperationsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ ongoing ]
-  before_action :defined_check, except: %i[ ongoing ]
-  before_action :set_idea, except: %i[ ongoing ]
+  before_action :authenticate_user!, except: %i[ index ]
+  before_action :defined_check, except: %i[ index ]
+  before_action :set_idea, except: %i[ index ]
+
+  def index
+    list = Idea.where(cooperation: :ongoing)
+    @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
+  end
 
   def create
     current_user.cooperations.find_or_create_by(idea: @idea)
@@ -11,15 +16,6 @@ class CooperationsController < ApplicationController
   def destroy
     current_user.cooperations.find_by(idea: @idea).destroy
     redirect_to @idea, notice: t('.success')
-  end
-
-  def ongoing
-    list = Idea.where(cooperation: :ongoing)
-    @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
-  end
-
-  def join_confirm
-    redirect_to @idea if current_user.cooperation_joined?(@idea)
   end
 
   def start_confirm
@@ -37,8 +33,7 @@ class CooperationsController < ApplicationController
   end
 
   def restart
-    @idea.cooperation_ongoing!
-    redirect_to @idea, notice: t('.success')
+    start
   end
 
   private

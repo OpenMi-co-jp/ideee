@@ -25,11 +25,9 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
-  resources :cooperations, only: %i[create destroy] do
+  resources :cooperations, only: %i[index create destroy] do
     collection do
-      get 'ongoing'
       get 'start_confirm'
-      get 'join_confirm'
       post 'start'
       post 'complete'
       post 'restart'

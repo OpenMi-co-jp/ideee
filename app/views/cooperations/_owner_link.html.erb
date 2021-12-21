@@ -1,11 +1,11 @@
 <% if idea.cooperation_not_started? %>
-  <%= link_to t('default.cooperation.start'), start_confirm_cooperations_path(idea_id: idea), class: 'waves-effect waves-light btn orange darken-4'%>
+  <%= link_to t('default.cooperation.start'), start_confirm_cooperations_path(idea_id: idea), class: 'btn orange-action-back'%>
 <% elsif idea.cooperation_ongoing? %>
   <%= link_to(
     t('default.cooperation.complete'),
     '#modal_cooperation_complete',
     data: { turbolinks: false },
-    class: 'waves-effect waves-light btn orange darken-4 modal-trigger',
+    class: 'btn orange-action-back modal-trigger',
     id: 'modal-trigger-cooperation-complete',
   )%>
   <%= render 'cooperations/modal',
@@ -14,14 +14,14 @@
     name: t('default.cooperation.complete'),
     path: complete_cooperations_path(idea_id: idea),
     method: :post,
-    color: 'orange darken-4'
+    message: nil
   %>
 <% elsif idea.cooperation_completed? %>
   <%= link_to(
     t('default.cooperation.restart'),
     '#modal_cooperation_restart',
     data: { turbolinks: false },
-    class: 'waves-effect waves-light btn orange darken-4 modal-trigger',
+    class: 'btn orange-action-back modal-trigger',
     id: 'modal-trigger-cooperation-restart',
   )%>
   <%= render 'cooperations/modal',
@@ -30,7 +30,7 @@
     name: t('default.cooperation.restart'),
     path: restart_cooperations_path(idea_id: idea),
     method: :post,
-    color: 'orange darken-4'
+    message: nil
   %>
 <% end %>
 

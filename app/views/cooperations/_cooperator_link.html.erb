@@ -4,7 +4,7 @@
       t('default.cooperation.cancel'),
       '#modal_cooperation_cancel',
       data: { turbolinks: false },
-      class: 'waves-effect waves-light btn grey darken-2 modal-trigger',
+      class: 'waves-effect waves-light btn gray-3-back modal-trigger',
       id: 'modal-trigger-cooperation-cancel',
     )%>
     <%= render 'cooperations/modal',
@@ -13,9 +13,23 @@
       name: t('default.cooperation.cancel'),
       path: cooperation_path(idea_id: idea),
       method: :delete,
-      color: 'grey darken-2'
+      message: nil
     %>
   <% else %>
-    <%= link_to t('default.cooperation.join'), join_confirm_cooperations_path(idea_id: idea), class: 'waves-effect waves-light btn orange darken-4'%>
+    <%= link_to(
+      t('default.cooperation.join'),
+      '#modal_cooperation_join',
+      data: { turbolinks: false },
+      class: 'btn orange-action-back modal-trigger',
+      id: 'modal-trigger-cooperation-cancel',
+    )%>
+    <%= render 'cooperations/modal',
+      modal_id: 'modal_cooperation_cancel',
+      heading: '協働開発への参加を希望しますか？',
+      name: t('default.cooperation.join'),
+      path: cooperations_path(idea_id: idea),
+      method: :post,
+      message: nil
+    %>
   <% end %>
 <% end %>

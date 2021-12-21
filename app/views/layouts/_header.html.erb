@@ -35,6 +35,12 @@
         </li>
         <li class="divider" tabindex="-1"></li>
         <li>
+          <%= link_to cooperations_path do %>
+            <i class="material-icons">groups</i>開発募集中のアイデア
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
           <%= link_to search_users_path(key: 'idea_man') do %>
             <i class="material-icons">lightbulb_outline</i>アイデアマン
           <% end %>
@@ -42,12 +48,6 @@
         <li>
           <%= link_to search_users_path(key: 'engineer') do %>
             <i class="material-icons">computer</i>エンジニア
-          <% end %>
-        </li>
-        <li class="divider" tabindex="-1"></li>
-        <li>
-          <%= link_to ongoing_cooperations_path do %>
-            <i class="material-icons">groups</i>開発募集中のアイデア
           <% end %>
         </li>
       </ul>
@@ -110,6 +110,11 @@
           <% end %>
         </li>
         <li>
+          <%= link_to cooperations_path do %>
+            <i class="material-icons">groups</i>開発募集中のアイデア
+          <% end %>
+        </li>
+        <li>
           <%= link_to search_users_path(key: 'idea_man') do %>
             <i class="material-icons">lightbulb_outline</i>アイデアマン
           <% end %>
@@ -117,12 +122,6 @@
         <li>
           <%= link_to search_users_path(key: 'engineer') do %>
             <i class="material-icons">computer</i>エンジニア
-          <% end %>
-        </li>
-        <li class="divider" tabindex="-1"></li>
-        <li>
-          <%= link_to ongoing_cooperations_path do %>
-            <i class="material-icons">groups</i>開発募集中のアイデア
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>

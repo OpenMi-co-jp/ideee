@@ -59,7 +59,7 @@ class Idea < ApplicationRecord
   end
 
   def published_time
-    published_at.strftime("%Y.%m.%d")
+    published_at&.strftime("%Y.%m.%d")
   end
 
   def created_time

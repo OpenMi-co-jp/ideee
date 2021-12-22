@@ -4,8 +4,12 @@ class CooperationsController < ApplicationController
   before_action :set_idea, except: %i[ index ]
 
   def index
-    list = Idea.where(cooperation: :ongoing)
+    list = Idea.published.where(cooperation: :ongoing)
     @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
+  end
+
+  def new
+    redirect_to @idea if !@idea.cooperation_not_started?
   end
 
   def create
@@ -17,10 +21,6 @@ class CooperationsController < ApplicationController
   def destroy
     current_user.cooperations.find_by(idea: @idea).destroy
     redirect_to @idea, notice: t('.success')
-  end
-
-  def start_confirm
-    redirect_to @idea if !@idea.cooperation_not_started?
   end
 
   def start

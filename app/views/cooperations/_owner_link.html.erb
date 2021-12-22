@@ -1,5 +1,5 @@
 <% if idea.cooperation_not_started? %>
-  <%= link_to t('default.cooperation.start'), start_confirm_cooperations_path(idea_id: idea), class: 'btn orange-action-back'%>
+  <%= link_to t('default.cooperation.start'), new_cooperation_path(idea_id: idea), class: 'btn orange-action-back'%>
 <% elsif idea.cooperation_ongoing? %>
   <%= link_to(
     t('default.cooperation.complete'),

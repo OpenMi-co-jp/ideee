@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def show
     @user.point_update # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
+    @ideas = Kaminari.paginate_array(@user.ideas.published).page(params[:page])
   end
 
   def search

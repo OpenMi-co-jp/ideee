@@ -25,6 +25,13 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  resources :cooperations, only: %i[index new create destroy] do
+    collection do
+      post 'start'
+      post 'complete'
+      post 'restart'
+    end
+  end
   resources :difficultys, only: %i[create]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'

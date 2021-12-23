@@ -1,0 +1,17 @@
+<% if idea.cooperation_not_started? %>
+  <%= link_to t('default.cooperation.start'), new_cooperation_path(idea_id: idea), class: 'btn orange-action-back'%>
+<% elsif idea.cooperation_ongoing? %>
+  <%= modal_link('complete','orange-action-back') %>
+  <%= render 'cooperations/modal',
+    action: 'complete',
+    path: complete_cooperations_path(idea_id: idea),
+    method: :post
+  %>
+<% elsif idea.cooperation_completed? %>
+  <%= modal_link('restart','orange-action-back') %>
+  <%= render 'cooperations/modal',
+    action: 'restart',
+    path: restart_cooperations_path(idea_id: idea),
+    method: :post
+  %>
+<% end %>

@@ -15,7 +15,7 @@
     </li>
     <li class='hide-on-med-and-down'>
       <%= link_to '#', data: { target: "dropdown_rank" }, class:'dropdown-trigger white' do %>
-        <p><%= image_tag 'icons/rank.svg'%></p>
+        <p><%= embedded_svg 'icons/rank.svg', class: 'header__rank' %></p>
       <% end %>
       <ul id='dropdown_rank' class='dropdown-content'>
         <li>
@@ -31,6 +31,12 @@
         <li>
           <%= link_to search_ideas_path(sort: :view) do %>
             <i class="material-icons">visibility</i>View数ランキング
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to cooperations_path do %>
+            <i class="material-icons">groups</i>開発募集中のアイデア
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>
@@ -101,6 +107,11 @@
         <li>
           <%= link_to search_ideas_path(sort: :view) do %>
             <i class="material-icons">visibility</i>View数ランキング
+          <% end %>
+        </li>
+        <li>
+          <%= link_to cooperations_path do %>
+            <i class="material-icons">groups</i>開発募集中のアイデア
           <% end %>
         </li>
         <li>

@@ -70,7 +70,7 @@ $(document).on ('turbolinks:load', function(){
   });
 
   // モーダルを閉じる用
-  $('.cooperation-modal-close-btn').on('click', function() {
+  $('.modal-close-btn').on('click', function() {
     $('.modal').modal('close');
   });
 

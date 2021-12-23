@@ -19,6 +19,16 @@ ja:
       restart: 再募集
       join: 参加
       cancel: 参加を辞退
+      titles:
+        complete: 募集を終了しますか？
+        restart: 開発者を再募集しますか？
+        join: 協働開発への参加を希望しますか？
+        cancel: この開発の参加を辞退しますか？
+      messages:
+        complete: ''
+        restart: 参加者が連絡を取りやすいようにTwitterやURLを登録しましょう！
+        join: 参加後、連絡を取りやすいようにTwitterやURLを登録しましょう！
+        cancel: ''
     cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました

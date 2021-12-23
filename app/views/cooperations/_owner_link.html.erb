@@ -1,36 +1,18 @@
 <% if idea.cooperation_not_started? %>
   <%= link_to t('default.cooperation.start'), new_cooperation_path(idea_id: idea), class: 'btn orange-action-back'%>
 <% elsif idea.cooperation_ongoing? %>
-  <%= link_to(
-    t('default.cooperation.complete'),
-    '#modal_cooperation_complete',
-    data: { turbolinks: false },
-    class: 'btn orange-action-back modal-trigger',
-    id: 'modal-trigger-cooperation-complete',
-  )%>
+  <%= modal_link('complete','orange-action-back') %>
   <%= render 'cooperations/modal',
-    modal_id: 'modal_cooperation_complete',
-    heading: '募集を終了しますか？',
-    name: t('default.cooperation.complete'),
+    action: 'complete',
     path: complete_cooperations_path(idea_id: idea),
-    method: :post,
-    message: nil
+    method: :post
   %>
 <% elsif idea.cooperation_completed? %>
-  <%= link_to(
-    t('default.cooperation.restart'),
-    '#modal_cooperation_restart',
-    data: { turbolinks: false },
-    class: 'btn orange-action-back modal-trigger',
-    id: 'modal-trigger-cooperation-restart',
-  )%>
+  <%= modal_link('restart','orange-action-back') %>
   <%= render 'cooperations/modal',
-    modal_id: 'modal_cooperation_restart',
-    heading: '開発者を再募集しますか？',
-    name: t('default.cooperation.restart'),
+    action: 'restart',
     path: restart_cooperations_path(idea_id: idea),
-    method: :post,
-    message: nil
+    method: :post
   %>
 <% end %>
 

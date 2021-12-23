@@ -64,19 +64,9 @@ $(document).on ('turbolinks:load', function(){
     $('#modal_fund').modal('open');
   });
 
-  // 募集終了のモーダル
-  $('#modal-trigger-cooperation-complete').on('click', function() {
-    $('#modal_cooperation_complete').modal('open');
-  });
-
-  // 募集再開のモーダル
-  $('#modal-trigger-cooperation-restart').on('click', function() {
-    $('#modal_cooperation_restart').modal('open');
-  });
-
-  // 募集辞退のモーダル
-  $('#modal-trigger-cooperation-cancel').on('click', function() {
-    $('#modal_cooperation_cancel').modal('open');
+  // 協働開発者募集のモーダル
+  $('#modal-trigger-cooperation').on('click', function() {
+    $('#modal_cooperation').modal('open');
   });
 
   // モーダルを閉じる用

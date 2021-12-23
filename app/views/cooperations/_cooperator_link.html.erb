@@ -1,35 +1,17 @@
 <% if idea.cooperation_ongoing? %>
   <% if current_user&.cooperation_joined?(idea) %>
-    <%= link_to(
-      t('default.cooperation.cancel'),
-      '#modal_cooperation_cancel',
-      data: { turbolinks: false },
-      class: 'waves-effect waves-light btn gray-3-back modal-trigger',
-      id: 'modal-trigger-cooperation-cancel',
-    )%>
+    <%= modal_link('cancel','gray-3-back') %>
     <%= render 'cooperations/modal',
-      modal_id: 'modal_cooperation_cancel',
-      heading: 'この開発への参加を辞退しますか？',
-      name: t('default.cooperation.cancel'),
+      action: 'cancel',
       path: cooperation_path(idea_id: idea),
-      method: :delete,
-      message: nil
+      method: :delete
     %>
   <% else %>
-    <%= link_to(
-      t('default.cooperation.join'),
-      '#modal_cooperation_join',
-      data: { turbolinks: false },
-      class: 'btn orange-action-back modal-trigger',
-      id: 'modal-trigger-cooperation-cancel',
-    )%>
+    <%= modal_link('join','orange-action-back') %>
     <%= render 'cooperations/modal',
-      modal_id: 'modal_cooperation_cancel',
-      heading: '協働開発への参加を希望しますか？',
-      name: t('default.cooperation.join'),
+      action: 'join',
       path: cooperations_path(idea_id: idea),
-      method: :post,
-      message: '参加後、連絡を取りやすいようにTwitterやURLを登録しましょう！' 
+      method: :post
     %>
   <% end %>
 <% end %>

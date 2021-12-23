@@ -50,7 +50,7 @@ class Idea < ApplicationRecord
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_commented, -> { order(comments_num: "DESC") }
-  scope :recent_select, -> { where(published_at: 40.days.ago..Time.now) }
+  scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
 

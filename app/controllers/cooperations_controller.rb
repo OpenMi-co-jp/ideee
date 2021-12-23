@@ -14,7 +14,7 @@ class CooperationsController < ApplicationController
 
   def create
     current_user.cooperations.find_or_create_by(idea: @idea)
-    SendEmail.new.join_cooperation(current_user, @idea)
+    SendEmail.new.join_cooperation(current_user, @idea) if Rails.env.production?
     redirect_to @idea, notice: t('.success')
   end
 

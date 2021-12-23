@@ -1,0 +1,21 @@
+.p-user-show {
+  width: 70vw;
+  margin: 0 auto;
+
+  &__time {
+    margin: 0 auto;
+    display: flex;
+  }
+}
+
+@media (max-width: 992px) {
+  .p-user-show {
+    width: 90vw !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .p-user-show {
+    width: 95vw !important;
+  }
+}

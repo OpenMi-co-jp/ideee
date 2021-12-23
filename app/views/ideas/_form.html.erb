@@ -38,14 +38,14 @@
         <%= form.label :note %>
         <%= form.rich_text_area :note %>
       </div>
-      <% if idea.cooperation_not_started? || idea.id.nil? %>
+      <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
         <div class="field switch c-cooperation-switch">
           <%= form.label :cooperation %>
           <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
           <div class="switch c-cooperation-switch__btn">
             <label class="c-cooperation-switch__label">
               募集しない
-              <input type="checkbox" id='cooperation_switch'>
+              <input type="checkbox" id='cooperation_switch' <%= 'checked' if idea.cooperation_ongoing? %>>
               <span class="lever"></span>
               募集する
             </label>

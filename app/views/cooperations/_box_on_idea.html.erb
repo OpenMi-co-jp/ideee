@@ -1,15 +1,17 @@
 <div class='center'>
-  <% if idea.cooperation_ongoing? %>
+  <% if idea.cooperation_ongoing? || idea.draft %>
     <div class='c-cooperation-box__status'>
-      開発者募集中
+      <%= I18n.t("enums.idea.cooperations.#{idea.cooperation}") %>
     </div>
   <% end %>
-  <div class='c-cooperation-box__apply'>
-    <% if current_user&.own?(idea) %>
-      <%= render 'cooperations/owner_link', idea: idea %>
-    <% else %>
-      <%= render 'cooperations/cooperator_link', idea: idea %>
-    <% end %>
-    <%= render 'cooperations/members', users: idea.cooperation_users %>
-  </div>    
+  <% unless idea.draft %>
+    <div class='c-cooperation-box__apply'>
+      <% if current_user&.own?(idea) %>
+        <%= render 'cooperations/owner_link', idea: idea %>
+      <% else %>
+        <%= render 'cooperations/cooperator_link', idea: idea %>
+      <% end %>
+      <%= render 'cooperations/members', users: idea.cooperation_users %>
+    </div>
+  <% end %>
 </div>

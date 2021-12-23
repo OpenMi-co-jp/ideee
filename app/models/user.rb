@@ -43,6 +43,8 @@ class User < ApplicationRecord
   has_many :comment_ideas, through: :comments, source: :idea
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_ideas, through: :difficultys, source: :idea
+  has_many :cooperations, dependent: :destroy
+  has_many :cooperation_ideas, through: :cooperations, source: :idea
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -133,7 +135,7 @@ class User < ApplicationRecord
   end
 
   def unlike(idea)
-    like_ideas.delete(idea)
+    like_ideas.destroy(idea)
     idea.count_likes
   end
 
@@ -144,6 +146,10 @@ class User < ApplicationRecord
   def create_comment(params)
     comments.create(idea_id: params[:idea_id], description: params[:description])
     Idea.find(params[:idea_id]).count_comments if params[:idea_id].present?
+  end
+
+  def cooperation_joined?(idea)
+    cooperation_ideas.include?(idea)
   end
 
   # Contributionの計算

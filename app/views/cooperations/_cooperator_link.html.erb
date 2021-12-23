@@ -1,0 +1,17 @@
+<% if idea.cooperation_ongoing? %>
+  <% if current_user&.cooperation_joined?(idea) %>
+    <%= modal_link('cancel','gray-3-back') %>
+    <%= render 'cooperations/modal',
+      action: 'cancel',
+      path: cooperation_path(idea_id: idea),
+      method: :delete
+    %>
+  <% else %>
+    <%= modal_link('join','orange-action-back') %>
+    <%= render 'cooperations/modal',
+      action: 'join',
+      path: cooperations_path(idea_id: idea),
+      method: :post
+    %>
+  <% end %>
+<% end %>

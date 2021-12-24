@@ -1,6 +1,9 @@
 namespace :send_heart_ranking do
-  desc '先週ハートが多かったアイデアをメールで送る'
+  desc '最近ハートが多かったアイデアをメールで送る'
   task send: :environment do
-    SendEmail.new.send_heart_ranking
+    @users = User.all
+    @ideas = Idea.published.recent_select
+    @liked_ideas = @ideas.order(likes_num: "DESC").first(10)
+    SendEmail.new.send_heart_ranking(@users, @liked_ideas)
   end
 end

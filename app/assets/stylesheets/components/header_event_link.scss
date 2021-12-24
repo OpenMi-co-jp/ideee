@@ -1,0 +1,15 @@
+.c-header_event_link {
+  min-height: 30px;
+  background-color: #FF862E;
+  display: flex;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+
+  a {
+    color: white;
+    padding: 10px;
+    margin: 0 auto;
+    width: 80vw;
+  }
+}

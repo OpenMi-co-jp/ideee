@@ -64,6 +64,16 @@ $(document).on ('turbolinks:load', function(){
     $('#modal_fund').modal('open');
   });
 
+  // 協働開発者募集のモーダル
+  $('#modal-trigger-cooperation').on('click', function() {
+    $('#modal_cooperation').modal('open');
+  });
+
+  // モーダルを閉じる用
+  $('.modal-close-btn').on('click', function() {
+    $('.modal').modal('close');
+  });
+
   // ログイン用のモーダル
   $('.modal-trigger-login').on('click', function() {
     $('#modal_before_login').modal('open');
@@ -86,5 +96,10 @@ $(document).on ('turbolinks:load', function(){
     $('#modal_difficulty').modal('close');
     // TODO: jsでUIの文字を変更するようにする
     // $('#modal-trigger-difficulty').html($(this))
+  });
+
+  // 開発者募集をrailsに渡す
+  $('#cooperation_switch').on('click', function () {
+    $('#idea_cooperation_switch').val($(this).prop('checked'))
   });
 })

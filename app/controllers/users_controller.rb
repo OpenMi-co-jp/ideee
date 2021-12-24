@@ -13,7 +13,9 @@ class UsersController < ApplicationController
   def show
     @user.point_update # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
-    @ideas = Kaminari.paginate_array(@user.ideas.published).page(params[:page]).per(10)
+    @idea_published = Kaminari.paginate_array(@user.ideas.published).page(params[:page]).per(10)
+    @idea_liked = Kaminari.paginate_array(@user.likes.map{|n| Idea.find_by(id: n.idea_id) }.uniq).page(params[:page]).per(10)
+    @idea_commented = Kaminari.paginate_array(@user.comments.map{|n| Idea.find_by(id: n.idea_id) }.uniq).page(params[:page]).per(10)
   end
 
   def search

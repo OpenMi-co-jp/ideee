@@ -58,8 +58,8 @@
     <div class="row">
       <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
         <% if @user.ideas.published.present? %>
-          <%= render 'common/column_board', ideas: @ideas %>
-          <%= paginate @ideas %>
+          <%= render 'common/column_board', ideas: @idea_published %>
+          <%= paginate @idea_published %>
         <% else %>
           <h5 class='no_idea_posted'>まだアイデアが投稿されていません</h5>
         <% end %>
@@ -79,14 +79,16 @@
   </div>
   <div id="tab2" class="col s12">
     <% if @user.likes.present? %>
-      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find_by(id: n.idea_id) }.uniq %>
+      <%= render 'common/column_board', ideas: @idea_liked %>
+      <%= paginate @idea_liked %>
     <% else %>
       <h5>まだアイデアにハートを送っていません</h5>
     <% end %>
   </div>
   <div id="tab3" class="col s12">
     <% if @user.comments.present? %>
-      <%= render 'common/column_board', ideas: @user.comments.map{|n| Idea.find_by(id: n.idea_id) }.uniq %>
+      <%= render 'common/column_board', ideas: @idea_commented %>
+      <%= paginate @idea_commented %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
     <% end %>

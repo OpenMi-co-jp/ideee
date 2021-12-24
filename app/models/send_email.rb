@@ -43,11 +43,28 @@ class SendEmail
     end
   end
 
+  def join_cooperation(user, idea)
+    subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
+    content = Content.new(type: 'text/html', value: join_cooperation_body(user, idea))
+
+    sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
+    idea_user = User.find_by(id: idea.user_id)
+    to = Email.new(email: idea_user.email )
+    mail = Mail.new(@from, subject, to, content)
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
   private
+
+  def twitter_url(user)
+    if user&.twitter_id.present?
+      "Twitter: <a href='https://twitter.com/#{user.twitter_id}', target: '_blank'>#{user.twitter_id}</a><br>"
+    end
+  end
 
   def ranking_body(liked_ideas)
     """
-      <html>
+    <html>
         <body>
           <div style='background-color: #FDF8EB; padding: 10px 20px;'>
             #{mail_head}
@@ -64,6 +81,28 @@ class SendEmail
               URL: https://www.ideee.tech/users/
             </div>
             <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/</p>
+          </div>
+          #{signature}
+        </body>
+      </html>
+    """
+  end
+
+  def join_cooperation_body(user, idea)
+    """
+      <html>
+        <body>
+          <div style='background-color: #FDF8EB; padding: 10px 20px;'>
+            #{mail_head}
+            <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
+            <hr>
+            <b>応募者情報</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              名前: #{user.name}<br>
+              #{twitter_url(user)}
+              URL: https://www.ideee.tech/users/#{user.id}
+            </div>
+            <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/#{idea.id}</p>
           </div>
           #{signature}
         </body>

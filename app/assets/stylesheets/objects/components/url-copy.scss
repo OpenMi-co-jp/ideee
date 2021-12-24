@@ -3,11 +3,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #000;
+  border: 1px solid #A7A7A7;
   border-radius: 20px;
   max-width: 220px;
-  margin: 30px auto;
+  margin: 20px auto;
   cursor: pointer;
+
+  &__mobile {
+    border: 0;
+  }
 
   &:hover {
     transition-duration: .3s;
@@ -23,5 +27,9 @@
     @media (max-width: 992px) {
       font-size: 28px;
     }
+  }
+
+  &__text {
+    color: #888;
   }
 }

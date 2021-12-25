@@ -4,21 +4,24 @@
   }
 
   &__eyecatch {
-    font-size: 2rem;
+    font-size: 1.5rem;
 
     &--first {
-      font-size: 3.5rem;
+      font-size: 3rem;
       color: #FF862E;
+      font-weight: bold;
     }
 
     &--second {
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: #D9C2AD;
+      font-weight: bold;
     }
 
     &--third {
-      font-size: 2.5rem;
+      font-size: 2rem;
       color: #FFBF85;
+      font-weight: bold;
     }
 
     &--detail {
@@ -28,7 +31,8 @@
   }
 
   &__terms {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
 
     &.twitter {
       color: #1B9DF0;

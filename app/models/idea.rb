@@ -4,6 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  comments_num  :integer          default(0)
+#  cooperation   :integer          default(0)
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
 #  icon          :string(255)

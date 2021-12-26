@@ -4,6 +4,7 @@ class SendEmail
 
   def initialize
     @from = Email.new(email: 'ideee.info@gmail.com') # SendGridの管理画面でSenderに登録したアドレス
+    @sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
   end
 
   def comment(users, idea, comment)
@@ -17,17 +18,16 @@ class SendEmail
             "https://www.ideee.tech/ideas/#{idea.id}"
     content = Content.new(type: 'text/plain', value: body)
 
-    sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
     if users.instance_of?(Array) # 送信したいアドレスが複数の時
       users.map do |user|
         to = Email.new(email: user&.email )
         mail = Mail.new(@from, subject, to, content)
-        response = sg.client.mail._('send').post(request_body: mail.to_json)
+        response = @sg.client.mail._('send').post(request_body: mail.to_json)
       end
     else # 送信したいアドレスが一つの時
       to = Email.new(email: users&.email )
       mail = Mail.new(@from, subject, to, content)
-      response = sg.client.mail._('send').post(request_body: mail.to_json)
+      response = @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 
@@ -44,14 +44,69 @@ class SendEmail
   end
 
   def join_cooperation(user, idea)
+    body = """
+            <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
+            <hr>
+            <b>応募者情報</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              名前: #{user.name}<br>
+              #{twitter_url(user)}
+              URL: https://www.ideee.tech/users/#{user.id}
+            </div>
+            <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/#{idea.id}</p>
+          """
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
-    content = Content.new(type: 'text/html', value: join_cooperation_body(user, idea))
+    content = Content.new(type: 'text/html', value: html_frame(body))
 
-    sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
     idea_user = User.find_by(id: idea.user_id)
     to = Email.new(email: idea_user.email )
     mail = Mail.new(@from, subject, to, content)
-    response = sg.client.mail._('send').post(request_body: mail.to_json)
+    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
+  def event_new_year
+    body = """
+            <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank'>
+              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;'>        
+            </a>
+            <h4 style='color: #FF862E;'>🎍ideeeお年玉キャンペーン🎍</h4>
+            <hr>
+            <h3>キャンペーン内容</h3>
+            <ul style='font-size: 1.3rem;'>
+              <li style='font-size: 2.5rem; color: #FF862E;'>Amazonギフト券3000円分</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥇アイデアが盛り上がったで賞 １名</li>
+              <li style='font-size: 2rem; color: #D9C2AD;'>Amazonギフト券1000円分</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥈コメント投稿から抽選 1名</li>
+              <li style='font-size: 1.5rem; color: #FFBF85;'>Amazonギフト券500円分</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥉アイデア投稿から抽選 2名</li>
+            </ul>
+            <h3>キャンペーン期間</h3>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              2021年12月26日(日)〜2022年1月5日(水)
+            </div>
+            <h3>キャンペーン対象の条件</h3>
+            <ul style='margin-bottom: 40px;'>
+              <li style='font-size: 1.5rem; color: #1B9DF0;'>1. Twitter IDをプロフィールに登録</li>
+              <li style='font-size: 1.5rem;'>2. アイデアを投稿💡</li>
+              <span>もしくは</span>
+              <li style='font-size: 1.5rem;'>2. 新規アイデアにコメントを投稿💬</li>
+            </ul>
+            <h4>
+              <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank'>
+                  詳細はこちらのキャンペーンページにて
+              </a>
+            </h4>
+          """
+
+    subject = "ideee初のお年玉キャンペーン🎍10日間の盛り上がり"
+    content = Content.new(type: 'text/html', value: html_frame(body))
+
+    users = User.all
+    users.map do |user|
+      to = Email.new(email: user&.email )
+      mail = Mail.new(@from, subject, to, content)
+      response = @sg.client.mail._('send').post(request_body: mail.to_json)
+    end
   end
 
   private
@@ -88,21 +143,13 @@ class SendEmail
     """
   end
 
-  def join_cooperation_body(user, idea)
+  def html_frame(body)
     """
       <html>
         <body>
           <div style='background-color: #FDF8EB; padding: 10px 20px;'>
             #{mail_head}
-            <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
-            <hr>
-            <b>応募者情報</b>
-            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              名前: #{user.name}<br>
-              #{twitter_url(user)}
-              URL: https://www.ideee.tech/users/#{user.id}
-            </div>
-            <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/#{idea.id}</p>
+            #{body}
           </div>
           #{signature}
         </body>
@@ -119,7 +166,7 @@ class SendEmail
 
   def signature
     """
-      <div style='padding: 5px 20px;'>
+      <div style='margin-top: 30px; padding: 5px 20px;'>
         <b>アイデアとエンジニアのマッチングサイト ideee</b>
         <p>
           URL: https://www.ideee.tech/about<br>

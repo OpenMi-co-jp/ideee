@@ -24,6 +24,9 @@
                     <% if users.length == t('default.users.weekly_comments_num') %>
                       <p>💬</p>
                       <%= @commented_users_array.to_h[user.id] %>
+                    <% elsif users.length == t('default.users.monthly_publisher_num') %>
+                      <p>💡</p>
+                      <%= @idea_publisher_array.to_h[user.id] %>
                     <% else %>
                       <p>🔥</p>
                       <%= user.point %>

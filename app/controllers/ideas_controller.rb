@@ -9,12 +9,12 @@ class IdeasController < ApplicationController
     @ideas = Idea.published.recent_select # 一度定義することで何度もDBに値を取りに行くことを阻止
     @latest_ideas = @ideas.order(published_at: "DESC").first(10)
     @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
-    @most_viewed_ideas = @ideas.order(view: "DESC").first(5)
-    @most_commented_ideas = @ideas.most_commented.first(5)
-    @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
+    @most_commented_ideas = @ideas.most_commented.first(10)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数とピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
     @weekly_commented_users = @commented_users_array.map{|u| User.find(u[0])}
+    @idea_publisher_array = @ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
+    @monthly_published_users = @idea_publisher_array.map{|u| User.find(u[0])}
   end
 
   def show

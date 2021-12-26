@@ -20,6 +20,10 @@ class UsersController < ApplicationController
       comments = Comment.weekly_comments
       users_array = comments.pickup_user_commets(comments.length)
       list = users_array.map{|u| User.find(u[0])}
+    elsif params[:sort] == "monthly_published"
+      ideas = Idea.published.recent_select
+      users_array = ideas.pickup_user_nums(ideas.length)
+      list = users_array.map{|u| User.find(u[0])}
     else
       list = User.defined_user.search(params[:key]).order(point: "DESC")
     end

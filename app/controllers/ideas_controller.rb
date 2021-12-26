@@ -59,7 +59,7 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
-      @idea.cooperation_ongoing! if params.dig(:idea, :cooperation_switch) == 'true'
+      params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
       if params[:commit] == t('default.publish') && Rails.env.production?
         TwitterTweet.new.tweet(@idea, idea_url(@idea.id))
         SlackNotifier.new.send(@idea, idea_url(@idea.id))

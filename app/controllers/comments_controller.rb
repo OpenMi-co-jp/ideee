@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     current_user.create_comment(comment_params)
+    Idea.find(comment_params[:idea_id]).create_notification_comment!(current_user, Comment.last.id)
   end
 
   def edit; end

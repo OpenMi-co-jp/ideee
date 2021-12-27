@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2021_12_19_080816) do
     t.integer "idea_id"
     t.integer "comment_id"
     t.integer "like_id"
-    t.string "action"
+    t.integer "action", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

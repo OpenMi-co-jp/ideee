@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
+  before_action :get_notifications
 
   # deviseでログインした後の設定
   def after_sign_in_path_for(resource_or_scope)
@@ -44,5 +45,14 @@ class ApplicationController < ActionController::Base
     # after_sign_outのフレンドリーフォワーディングを使うときはこの行を削除
     return false if current_user
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def get_notifications
+    return unless current_user
+
+    @notifications = current_user.passive_notifications
+    @notifications.where(checked: false).each do |notification|
+      notification.update(checked: true)
+    end
   end
 end

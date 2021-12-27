@@ -3,7 +3,7 @@
 # Table name: notifications
 #
 #  id         :bigint           not null, primary key
-#  action     :string(255)
+#  action     :integer          not null
 #  checked    :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -19,4 +19,6 @@ class Notification < ApplicationRecord
   belongs_to :like, optional: true
   belongs_to :visitor, class_name: 'User', foreign_key: 'visitor_id', optional: true
   belongs_to :visited, class_name: 'User', foreign_key: 'visited_id', optional: true
+
+  enum action: %i(like comment), _prefix: true
 end

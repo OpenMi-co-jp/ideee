@@ -31,18 +31,6 @@ class SendEmail
     end
   end
 
-  def send_heart_ranking(users, liked_ideas)
-    puts "test"
-    subject = "【ideee】最近ハートが多かった人気アイデア💡"
-    content = Content.new(type: 'text/html', value: ranking_body(liked_ideas))
-    sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
-    users.map do |user|
-      to = Email.new(email: "" )
-      mail = Mail.new(@from, subject, to, content)
-      response = sg.client.mail._('send').post(request_body: mail.to_json)
-    end
-  end
-
   def join_cooperation(user, idea)
     body = """
             <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
@@ -67,7 +55,7 @@ class SendEmail
   def event_new_year
     body = """
             <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank'>
-              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;'>        
+              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;'>
             </a>
             <h4 style='color: #FF862E;'>🎍ideeeお年玉キャンペーン🎍</h4>
             <hr>
@@ -109,38 +97,31 @@ class SendEmail
     end
   end
 
+  def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
+    body = """
+    　　　　　　<h1 style='color: #FF862E;'>最近ハート💖が多かったアイデアベスト10！</h1>
+              <hr>
+              #{ranking_idea(liked_ideas)}
+            　<br>
+              <h1 style='color: #FF862E;'>💡新着アイデア10件！💡</h1>
+              <hr>
+              #{new_idea(new_ideas)}
+           """
+    subject = "【ideee】最近ハート💖が多かった人気アイデア💡、新着アイデア💡"
+    content = Content.new(type: 'text/html', value: html_frame(body))
+    users.map do |user|
+      to = Email.new(email: user&.email )
+      mail = Mail.new(@from, subject, to, content)
+      response = @sg.client.mail._('send').post(request_body: mail.to_json)
+    end
+  end
+
   private
 
   def twitter_url(user)
     if user&.twitter_id.present?
       "Twitter: <a href='https://twitter.com/#{user.twitter_id}', target: '_blank'>#{user.twitter_id}</a><br>"
     end
-  end
-
-  def ranking_body(liked_ideas)
-    """
-    <html>
-        <body>
-          <div style='background-color: #FDF8EB; padding: 10px 20px;'>
-            #{mail_head}
-            <p>最近ハートが多かったアイデアベスト10！</p>
-            <hr>
-            　#{
-                liked_ideas.each do |liked_idea|
-                  "#{liked_idea[:name]}"
-                  "https://www.ideee.tech/ideas/#{liked_idea[:id]}"
-                end
-              }
-            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              アイデア名:
-              URL: https://www.ideee.tech/users/
-            </div>
-            <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/</p>
-          </div>
-          #{signature}
-        </body>
-      </html>
-    """
   end
 
   def html_frame(body)
@@ -175,5 +156,32 @@ class SendEmail
         </p>
       </div>
     """
+  end
+
+  def ranking_idea(liked_ideas)
+    str = ''
+    liked_ideas.each.with_index(1) do |liked_idea, index|
+      str +=  """
+                第#{index}位<br>
+                アイデア名: #{liked_idea[:name]}<br>
+                URL: https://www.ideee.tech/ideas/#{liked_idea[:id]}<br>
+                <br>
+              """
+    end
+    return str
+  end
+
+  def new_idea(new_ideas)
+    str = ''
+    new_ideas.each.with_index(1) do |new_idea, index|
+      str +=  """
+                #{index}.<br>
+                アイデア名: #{new_idea[:name]}<br>
+                URL: https://www.ideee.tech/ideas/#{new_idea[:id]}<br>
+                投稿日: #{new_idea.published_time}<br>
+                <br>
+              """
+    end
+    return str
   end
 end

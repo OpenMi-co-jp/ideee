@@ -11,11 +11,11 @@
 #  idea_id    :integer
 #  like_id    :integer
 #  visited_id :integer
-#  visiter_id :integer
+#  visitor_id :integer
 #
 FactoryBot.define do
   factory :notification do
-    visiter_id { 1 }
+    visitor_id { 1 }
     visited_id { 1 }
     idea_id { 1 }
     comment_id { 1 }

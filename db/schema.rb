@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2021_12_19_080816) do
   end
 
   create_table "notifications", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "visiter_id"
+    t.integer "visitor_id"
     t.integer "visited_id"
     t.integer "idea_id"
     t.integer "comment_id"

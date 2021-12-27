@@ -66,23 +66,10 @@
         <% end %>
       </li>
       <ul id='dropdown_bell' class='dropdown-content'>
-        <% @notifications&.each do |notification| %>
-          <li>
-            <%= link_to user_path(notification.visitor_id) do %>
-              <div class="row">
-                <div class="col s3">
-                  <%= user_icon(notification.visitor, size: 'small') %>
-                </div>
-                <div class="col s9">
-                  <%= notification_text(notification) %>
-                  <% if notification.action_comment? %>
-                    <%= content_tag(:p, "#{truncate(notification.comment.description)}", style: 'font-size: 0.8rem') %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </li>
-          <li class="divider" tabindex="-1"></li>
+        <% if @notifications.any? %>
+          <%= render @notifications %>
+        <% else %>
+          <li>通知はありません</li>
         <% end %>
       </ul>
       <li class='hide-on-med-and-down'>

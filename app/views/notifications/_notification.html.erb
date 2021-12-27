@@ -1,0 +1,31 @@
+<div class="p-2">
+  <% if notification.action_like? %>
+    <div class="row teal-text text-lighten-1">
+      <div class="col s3">
+        <%= user_icon(notification.visitor, size: 'small') %>
+      </div>
+      <div class="col s9">
+        <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "orange-text text-darken-2" %>
+        <%= "さんがあなたの「" %>
+        <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "orange-text text-darken-2" %>
+        <%= "」にLikeしました。" %>
+      </div>
+    </div>
+  <% elsif notification.action_comment? %>
+    <%= link_to idea_path(notification.idea_id) do %>
+      <div class="row teal-text text-lighten-1">
+        <div class="col s3">
+          <%= user_icon(notification.visitor, size: 'small') %>
+        </div>
+        <div class="col s9">
+          <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "orange-text text-darken-2" %>
+          <%= "さんがあなたの「" %>
+          <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "orange-text text-darken-2" %>
+          <%= "」にコメントしました。" %>
+          <%= content_tag(:p, "#{truncate(notification.comment.description)}", style: 'font-size: 0.7rem') %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<li class="divider" tabindex="-1"></li>

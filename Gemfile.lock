@@ -342,6 +342,17 @@ GEM
       rack
     orm_adapter (0.5.0)
     os (1.1.1)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-byebug (3.9.0)
+      byebug (~> 11.0)
+      pry (~> 0.13.0)
+    pry-doc (1.2.0)
+      pry (~> 0.11)
+      yard (~> 0.9.11)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (4.0.6)
     puma (5.5.0)
       nio4r (~> 2.0)
@@ -516,6 +527,8 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yard (0.9.27)
+      webrick (~> 1.7.0)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -552,6 +565,9 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   omniauth-twitter
+  pry-byebug
+  pry-doc
+  pry-rails
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rack-timeout

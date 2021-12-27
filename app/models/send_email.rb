@@ -99,15 +99,15 @@ class SendEmail
 
   def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
     body = """
-    　　　　　　<h1 style='color: #FF862E;'>最近ハート💖が多かったアイデアベスト10！</h1>
+    　　　　　　<h1 style='color: #FF862E;'>最近ハート💛が多かったアイデアベスト10！</h1>
               <hr>
               #{ranking_idea(liked_ideas)}
             　<br>
-              <h1 style='color: #FF862E;'>💡新着アイデア10件！💡</h1>
+              <h1 style='color: #FF862E;'>💡最新の新着アイデア！💡</h1>
               <hr>
               #{new_idea(new_ideas)}
            """
-    subject = "【ideee】最近ハート💖が多かった人気アイデア💡、新着アイデア💡"
+    subject = "【ideee】最近ハート💛が多かった人気アイデア💡、最新の新着アイデア情報💡"
     content = Content.new(type: 'text/html', value: html_frame(body))
     users.map do |user|
       to = Email.new(email: user&.email )
@@ -142,6 +142,7 @@ class SendEmail
     """
       <p style='color: #C4C4C4;'>※このメールは自動送信メールです。</p>
       <p>ideee事務局です。</p>
+      <p>いつもideeeをご利用いただきありがとうございます。</p>
     """
   end
 
@@ -160,28 +161,45 @@ class SendEmail
 
   def ranking_idea(liked_ideas)
     str = ''
-    liked_ideas.each.with_index(1) do |liked_idea, index|
-      str +=  """
-                第#{index}位<br>
-                アイデア名: #{liked_idea[:name]}<br>
-                URL: https://www.ideee.tech/ideas/#{liked_idea[:id]}<br>
-                <br>
-              """
+    liked_ideas.each.with_index(1) do |idea, index|
+      idea_user = User.find_by(id: idea[:user_id])
+      if index == 1
+        str +=  """
+                  👑第#{index}位👑<br>
+                  #{idea_html_frame(idea, idea_user)}
+                  <br>
+                """
+      else
+        str +=  """
+                  第#{index}位<br>
+                  #{idea_html_frame(idea, idea_user)}
+                  <br>
+                """
+      end
     end
     return str
   end
 
   def new_idea(new_ideas)
     str = ''
-    new_ideas.each.with_index(1) do |new_idea, index|
+    new_ideas.each.with_index(1) do |idea, index|
+      idea_user = User.find_by(id: idea[:user_id])
       str +=  """
                 #{index}.<br>
-                アイデア名: #{new_idea[:name]}<br>
-                URL: https://www.ideee.tech/ideas/#{new_idea[:id]}<br>
-                投稿日: #{new_idea.published_time}<br>
+                #{idea_html_frame(idea, idea_user)}
                 <br>
               """
     end
     return str
+  end
+
+  def idea_html_frame(idea, idea_user)
+    """
+      アイデア名: #{idea[:name]}<br>
+      ハート数: #{idea[:likes_num]}<br>
+      投稿者: #{idea_user.name}<br>
+      URL: https://www.ideee.tech/ideas/#{idea[:id]}<br>
+      投稿日: #{idea.published_time}<br>
+    """
   end
 end

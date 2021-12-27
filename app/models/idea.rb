@@ -38,6 +38,7 @@ class Idea < ApplicationRecord
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :cooperations, dependent: :destroy
   has_many :cooperation_users, through: :cooperations, source: :user
+  has_many :notifications, dependent: :destroy
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 

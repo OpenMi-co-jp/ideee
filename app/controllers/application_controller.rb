@@ -50,8 +50,8 @@ class ApplicationController < ActionController::Base
   def get_notifications
     return unless current_user
 
-    @notifications = current_user.passive_notifications
-    @notifications.where(checked: false).each do |notification|
+    @header_notifications = current_user.passive_notifications.order(created_at: :desc).limit(10)
+    @header_notifications.where(checked: false).each do |notification|
       notification.update(checked: true)
     end
   end

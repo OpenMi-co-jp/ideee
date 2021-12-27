@@ -66,8 +66,8 @@
         <% end %>
       </li>
       <ul id='dropdown_bell' class='dropdown-content'>
-        <% if @notifications.any? %>
-          <%= render @notifications %>
+        <% if @header_notifications.any? %>
+          <%= render @header_notifications %>
         <% else %>
           <li>通知はありません</li>
         <% end %>

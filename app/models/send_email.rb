@@ -39,14 +39,14 @@ class SendEmail
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               名前: #{user.name}<br>
               #{twitter_url(user)}
-              URL: https://www.ideee.tech/users/#{user.id}
+              URL: #{analytics_url('users/'+user.id, 'join_cooperation', 'https://www.ideee.tech/users/'+user.id)}
             </div>
             <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/#{idea.id}</p>
           """
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
-    content = Content.new(type: 'text/html', value: html_frame(body))
+    content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
 
-    idea_user = User.find_by(id: idea.user_id)
+    idea_user = User.find_by!(id: idea.user_id)
     to = Email.new(email: idea_user.email )
     mail = Mail.new(@from, subject, to, content)
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -80,14 +80,12 @@ class SendEmail
               <li style='font-size: 1.5rem;'>2. 新規アイデアにコメントを投稿💬</li>
             </ul>
             <h4>
-              <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank'>
-                  詳細はこちらのキャンペーンページにて
-              </a>
+              #{analytics_url('new_year_event', 'event_mail', '詳細はこちらのキャンペーンページにて')}
             </h4>
           """
 
     subject = "ideee初のお年玉キャンペーン🎍10日間の盛り上がり"
-    content = Content.new(type: 'text/html', value: html_frame(body))
+    content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
     users = User.all
     users.map do |user|
@@ -99,18 +97,20 @@ class SendEmail
 
   def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
     body = """
-    　　　　　　<h1 style='color: #FF862E;'>最近ハート💛が多かったアイデアベスト10！</h1>
-              <hr>
-              #{ranking_idea(liked_ideas)}
-            　<br>
-              <h1 style='color: #FF862E;'>💡最新の新着アイデア！💡</h1>
-              <hr>
-              #{new_idea(new_ideas)}
+            <h3 style='color: #FF862E;'>最近ハートが多かったアイデアベスト10💛</h3>
+            #{ranking_idea(liked_ideas)}
+            <hr>
+            <h3 style='color: #FF862E;'>💡最新の新着アイデア💡</h3>
+            #{new_idea_colum(new_ideas)}
            """
-    subject = "【ideee】最近ハート💛が多かった人気アイデア💡、最新の新着アイデア情報💡"
-    content = Content.new(type: 'text/html', value: html_frame(body))
-    users.map do |user|
-      to = Email.new(email: user&.email )
+    subject = "【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡"
+    content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
+    emails = ['t.naruhiro.1026@gmail.com', 'sayahaya1129@gmail.com']
+    emails.map do |email|
+    # users.map do |user|
+      # to = Email.new(email: user&.email )
+      
+      to = Email.new(email: email )
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
     end
@@ -120,86 +120,89 @@ class SendEmail
 
   def twitter_url(user)
     if user&.twitter_id.present?
-      "Twitter: <a href='https://twitter.com/#{user.twitter_id}', target: '_blank'>#{user.twitter_id}</a><br>"
+      "Twitter: #{analytics_url(user.twitter_id, 'join_cooperation', user.twitter_id)}<br>"
     end
   end
 
-  def html_frame(body)
+  def html_frame(body, source)
     """
       <html>
         <body>
           <div style='background-color: #FDF8EB; padding: 10px 20px;'>
-            #{mail_head}
+            <p style='color: #C4C4C4;'>※このメールは自動送信メールです。</p>
+            <p>ideee事務局です。</p>
             #{body}
           </div>
-          #{signature}
+          <div style='margin-top: 30px; padding: 5px 20px;'>
+            <b>アイデアとエンジニアのマッチングサイト ideee</b>
+            <p>
+              URL: #{analytics_url('about', source, 'https://www.ideee.tech/about')}<br>
+              利用規約： #{analytics_url('terms_of_service', source, 'https://www.ideee.tech/terms_of_service')}<br>
+              プライバシーポリシー： #{analytics_url('privacy_policy', source, 'https://www.ideee.tech/privacy_policy')}
+            </p>
+          </div>
         </body>
       </html>
     """
   end
 
-  def mail_head
-    """
-      <p style='color: #C4C4C4;'>※このメールは自動送信メールです。</p>
-      <p>ideee事務局です。</p>
-      <p>いつもideeeをご利用いただきありがとうございます。</p>
-    """
+  def ranking_idea(liked_ideas)
+    str = ''
+    liked_ideas.each.with_index(1) do |idea, i|
+      idea_user = User.find_by!(id: idea.user_id)
+      str += idea_ranking_item(rank(i), idea, idea_user)
+    end
+    return str
   end
 
-  def signature
+  def new_idea_colum(new_ideas)
+    str = ''
+    new_ideas.each.with_index(1) do |idea, i|
+      idea_user = User.find_by!(id: idea.user_id)
+      str += idea_ranking_item(i, idea, idea_user)
+    end
+    return str
+  end
+
+  def idea_ranking_item(i, idea, idea_user)
     """
-      <div style='margin-top: 30px; padding: 5px 20px;'>
-        <b>アイデアとエンジニアのマッチングサイト ideee</b>
-        <p>
-          URL: https://www.ideee.tech/about<br>
-          利用規約： https://www.ideee.tech/terms_of_service<br>
-          プライバシーポリシー： https://www.ideee.tech/privacy_policy
-        </p>
+      <div style='background-color: white; margin: 3px 0; padding: 5px; display: flex;'>
+        <div style='display: flex;'>
+          <b>#{i}　</b><a href='https://www.ideee.tech/ideas/#{idea.id}' target='_blank'>#{idea.name}</a>
+          　#{tag_box(idea&.idea_tags)}　💛 #{idea.likes_num} by #{idea_user.name}
+        </div>
       </div>
     """
   end
 
-  def ranking_idea(liked_ideas)
+  def rank(i)
+    if i == 1
+      "👑第#{i}位👑"
+    elsif i == 2
+      "🥈第#{i}位🥈"
+    elsif i == 3
+      "🥉第#{i}位🥉"
+    else
+      "第#{i}位"
+    end
+  end
+
+  def tag_box(tags)
+    return if tags.nil?
     str = ''
-    liked_ideas.each.with_index(1) do |idea, index|
-      idea_user = User.find_by(id: idea[:user_id])
-      if index == 1
-        str +=  """
-                  👑第#{index}位👑<br>
-                  #{idea_html_frame(idea, idea_user)}
-                  <br>
-                """
-      else
-        str +=  """
-                  第#{index}位<br>
-                  #{idea_html_frame(idea, idea_user)}
-                  <br>
-                """
-      end
+    tags.map do |t|
+      str += """
+              <div style='border-radius: 5px; background-color: #F5F5F5; padding: 2px; margin: 2px; height: 20px;'>
+                #{t.name}
+              </div>
+            """
     end
     return str
   end
 
-  def new_idea(new_ideas)
-    str = ''
-    new_ideas.each.with_index(1) do |idea, index|
-      idea_user = User.find_by(id: idea[:user_id])
-      str +=  """
-                #{index}.<br>
-                #{idea_html_frame(idea, idea_user)}
-                <br>
-              """
-    end
-    return str
-  end
-
-  def idea_html_frame(idea, idea_user)
+  def analytics_url(path, source, content)
     """
-      アイデア名: #{idea[:name]}<br>
-      ハート数: #{idea[:likes_num]}<br>
-      投稿者: #{idea_user.name}<br>
-      URL: https://www.ideee.tech/ideas/#{idea[:id]}<br>
-      投稿日: #{idea.published_time}<br>
+      <a href='https://www.ideee.tech/#{path}?utm_source=#{source}&utm_medium=mail&utm_id=#{path}', target: '_blank'>#{content}</a>
     """
-  end
 end
+

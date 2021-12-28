@@ -105,11 +105,8 @@ class SendEmail
            """
     subject = "【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡"
     content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
-    emails = ['sayahaya1129@gmail.com']
-    emails.map do |email|
-    # users.map do |user|
-      # to = Email.new(email: user&.email )
-      to = Email.new(email: email )
+    users.map do |user|
+      to = Email.new(email: user&.email )
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
     end

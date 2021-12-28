@@ -2,21 +2,16 @@
   <div class="p-notification__user_icon">
     <%= user_icon(notification.visitor, size: 'small') %>
   </div>
-  <% if notification.action_like? %>
-    <div class="p-notification__message">
-      <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "p-notification__message__link" %>
-      <%= "さんがあなたの「" %>
-      <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "p-notification__message__link" %>
+  <div class="p-notification__message">
+    <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "p-notification__message__link" %>
+    <%= "さんがあなたの「" %>
+    <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "p-notification__message__link" %>
+    <% if notification.action_like? %>
       <%= "」にLikeしました。" %>
-    </div>
-  <% elsif notification.action_comment? %>
-    <div class="p-notification__message">
-      <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "p-notification__message__link" %>
-      <%= "さんが「" %>
-      <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "p-notification__message__link" %>
+    <% elsif notification.action_comment? %>
       <%= "」にコメントしました。" %>
-      <%= content_tag(:p, "#{notification.created_at.time.to_s(:long)}", class: "p-notification__message__date") %>
-    </div>
-  <% end %>
+    <% end %>
+    <%= content_tag(:p, "#{notification.created_at.time.to_s(:long)}", class: "p-notification__message__date") %>
+  </div>
 </div>
 <li class="divider" tabindex="-1"></li>

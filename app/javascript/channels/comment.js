@@ -81,7 +81,7 @@ $(document).on ('turbolinks:load', function(){
                 '<div class="flex">' +
                   '<div class="c-unit-comment__info">' +
                     '<div class="c-unit-comment--description">' +
-                      comment.replace(/\n/g, '<br>') +
+                      comment.replace(/\n/g, '<br>').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;') +
                     '</div>' +
                     '<div class="date-small pt-2">' +
                       yy+'.'+mm+'.'+dd+' '+h+':'+m +

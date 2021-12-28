@@ -1,28 +1,21 @@
-<div class="p-2">
+<div class="p-notification__container">
+  <div class="p-notification__user_icon">
+    <%= user_icon(notification.visitor, size: 'small') %>
+  </div>
   <% if notification.action_like? %>
-    <div class="row teal-text text-lighten-1">
-      <div class="col s3">
-        <%= user_icon(notification.visitor, size: 'small') %>
-      </div>
-      <div class="col s9">
-        <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "orange-text text-darken-2" %>
-        <%= "さんがあなたの「" %>
-        <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "orange-text text-darken-2" %>
-        <%= "」にLikeしました。" %>
-      </div>
+    <div class="p-notification__message">
+      <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "p-notification__message__link" %>
+      <%= "さんがあなたの「" %>
+      <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "p-notification__message__link" %>
+      <%= "」にLikeしました。" %>
     </div>
   <% elsif notification.action_comment? %>
-    <div class="row teal-text text-lighten-1">
-      <div class="col s3">
-        <%= user_icon(notification.visitor, size: 'small') %>
-      </div>
-      <div class="col s9">
-        <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "orange-text text-darken-2" %>
-        <%= "さんが「" %>
-        <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "orange-text text-darken-2" %>
-        <%= "」にコメントしました。" %>
-        <%= content_tag(:p, "#{truncate(notification.comment.description)}", style: 'font-size: 0.7rem') %>
-      </div>
+    <div class="p-notification__message">
+      <%= link_to "#{notification.visitor.name}", user_path(notification.visitor_id), class: "p-notification__message__link" %>
+      <%= "さんが「" %>
+      <%= link_to "#{notification.idea.name}", idea_path(notification.idea_id), class: "p-notification__message__link" %>
+      <%= "」にコメントしました。" %>
+      <%= content_tag(:p, "#{notification.created_at.time.to_s(:long)}", class: "p-notification__message__date") %>
     </div>
   <% end %>
 </div>

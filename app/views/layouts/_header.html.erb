@@ -65,10 +65,12 @@
           <p><%= embedded_svg 'icons/bell.svg', class: 'header__bell' %></p>
         <% end %>
       </li>
-      <ul id='dropdown_bell' class='dropdown-content'>
+      <ul id='dropdown_bell' class='dropdown-content p-notification p-notification__ul'>
         <% if @header_notifications.any? %>
           <%= render @header_notifications %>
-          <%= link_to ">> 通知一覧を見る", notifications_path, class: '' %>
+          <div class="p-notification__index_path">
+            <%= link_to ">> 通知一覧を見る", notifications_path, class: 'p-notification__index_path__link' %>
+          </div>
         <% else %>
           <li>通知はありません</li>
         <% end %>

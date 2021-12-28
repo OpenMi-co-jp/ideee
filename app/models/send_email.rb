@@ -39,7 +39,7 @@ class SendEmail
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               名前: #{user.name}<br>
               #{twitter_url(user)}
-              URL: #{analytics_url('users/'+user.id, 'join_cooperation', 'https://www.ideee.tech/users/'+user.id)}
+              URL: #{analytics_url('users/'+user.id.to_s, 'join_cooperation', 'https://www.ideee.tech/users/'+user.id)}
             </div>
             <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/#{idea.id}</p>
           """

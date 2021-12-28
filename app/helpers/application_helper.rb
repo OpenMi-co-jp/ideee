@@ -98,7 +98,7 @@ module ApplicationHelper
   def text_url_to_link(text)
     require 'uri'
     uri_reg = URI.regexp(%w[http https])
-    return text.gsub(uri_reg) {"<a href='#{$&}' target='_blank'\>#{$&}</a>"}
+    return sanitize(text.gsub(uri_reg) {"<a href='#{$&}' target='_blank'\>#{$&}</a>"})
   end
 
   def data_page

@@ -66,7 +66,7 @@
         <% end %>
       </li>
       <ul id='dropdown_bell' class='dropdown-content p-notification p-notification__ul'>
-        <% if @header_notifications.any? %>
+        <% if @header_notifications&.any? %>
           <% @header_notifications.each do |notification| %>
             <%= render 'notifications/notification', notification: notification %>
           <% end %>
@@ -74,7 +74,7 @@
             <%= link_to ">> 通知一覧を見る", notifications_path, class: 'p-notification__index_path__link' %>
           </div>
         <% else %>
-          <li>通知はありません</li>
+          <li class='p-notification__no_message'>通知はありません</li>
         <% end %>
       </ul>
       <li class='hide-on-med-and-down'>

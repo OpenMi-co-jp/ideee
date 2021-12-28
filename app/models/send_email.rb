@@ -105,11 +105,10 @@ class SendEmail
            """
     subject = "【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡"
     content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
-    emails = ['t.naruhiro.1026@gmail.com', 'sayahaya1129@gmail.com']
+    emails = ['sayahaya1129@gmail.com']
     emails.map do |email|
     # users.map do |user|
       # to = Email.new(email: user&.email )
-      
       to = Email.new(email: email )
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -159,7 +158,7 @@ class SendEmail
     str = ''
     new_ideas.each.with_index(1) do |idea, i|
       idea_user = User.find_by!(id: idea.user_id)
-      str += idea_ranking_item(i, idea, idea_user)
+      str += idea_ranking_item(number_list(i), idea, idea_user)
     end
     return str
   end
@@ -168,8 +167,8 @@ class SendEmail
     """
       <div style='background-color: white; margin: 3px 0; padding: 5px; display: flex;'>
         <div style='display: flex;'>
-          <b>#{i}　</b><a href='https://www.ideee.tech/ideas/#{idea.id}' target='_blank'>#{idea.name}</a>
-          　#{tag_box(idea&.idea_tags)}　💛 #{idea.likes_num} by #{idea_user.name}
+          <b>#{i}　</b>#{analytics_url('ideas/'+idea.id.to_s, 'ranking', idea.name)}
+          　#{tag_box(idea&.idea_tags)}　<p style='margin-top: 0.1px;'>💛</p> #{idea.likes_num} by #{idea_user.name}
         </div>
       </div>
     """
@@ -183,8 +182,12 @@ class SendEmail
     elsif i == 3
       "🥉第#{i}位🥉"
     else
-      "第#{i}位"
+      "　第#{i}位　"
     end
+  end
+
+  def number_list(i)
+    "💡 #{i}"
   end
 
   def tag_box(tags)
@@ -204,5 +207,6 @@ class SendEmail
     """
       <a href='https://www.ideee.tech/#{path}?utm_source=#{source}&utm_medium=mail&utm_id=#{path}', target: '_blank'>#{content}</a>
     """
+  end
 end
 

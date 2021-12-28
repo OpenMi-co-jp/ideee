@@ -68,6 +68,7 @@
       <ul id='dropdown_bell' class='dropdown-content'>
         <% if @header_notifications.any? %>
           <%= render @header_notifications %>
+          <%= link_to ">> 通知一覧を見る", notifications_path, class: '' %>
         <% else %>
           <li>通知はありません</li>
         <% end %>

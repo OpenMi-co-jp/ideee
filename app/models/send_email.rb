@@ -41,7 +41,7 @@ class SendEmail
               #{twitter_url(user)}
               URL: #{analytics_url('users/'+user.id.to_s, 'join_cooperation', 'https://www.ideee.tech/users/'+user.id.to_s)}
             </div>
-            <p>アイデアページに飛ぶ: https://www.ideee.tech/ideas/#{idea.id}</p>
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/'+idea.id.to_s, 'join_cooperation', 'https://www.ideee.tech/ideas/'+idea.id.to_s)}</p>
           """
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
     content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
@@ -100,7 +100,7 @@ class SendEmail
             <h3 style='color: #FF862E;'>最近ハートが多かったアイデアベスト10💛</h3>
             #{ranking_idea(liked_ideas)}
             <hr>
-            <h3 style='color: #FF862E;'>💡最新の新着アイデア💡</h3>
+            <h3 style='color: #FF862E;'>最新の新着アイデア💡</h3>
             #{new_idea_colum(new_ideas)}
            """
     subject = "【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡"
@@ -165,7 +165,7 @@ class SendEmail
       <div style='background-color: white; margin: 3px 0; padding: 5px; display: flex;'>
         <div style='display: flex;'>
           <b>#{i}　</b>#{analytics_url('ideas/'+idea.id.to_s, 'ranking', idea.name)}
-          　#{tag_box(idea&.idea_tags)}　<p style='margin-top: 0.1px;'>💛</p> #{idea.likes_num} by #{idea_user.name}
+          　#{tag_box(idea&.idea_tags)}　<div>💛</div> #{idea.likes_num} by #{idea_user.name}
         </div>
       </div>
     """

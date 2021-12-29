@@ -30,6 +30,26 @@
     border-radius: 0.5rem;
     border: none;
   }
+
+  .user_name_message {
+    text-align: left;
+    color: red;
+    margin-bottom : 10px;
+  }
+
+  .user_email_message {
+    text-align: left;
+    color: red;
+    margin-bottom : 10px;
+  }
+
+  .user_definition_message {
+    text-align: left;
+    color: red;
+    margin-top : -10px;
+    margin-bottom : 10px;
+  }
+
 }
 
 @media (max-width:992px) {

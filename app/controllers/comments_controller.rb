@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
   end
 
   def send_email
+    return unless Rails.env.production?
     @idea = Idea.find(comment_params[:idea_id])
     @users = [@idea.user].push(@idea.comment_users.uniq).flatten
     @users.delete(current_user)

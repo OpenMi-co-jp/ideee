@@ -165,7 +165,7 @@ class SendEmail
       <div style='background-color: white; margin: 3px 0; padding: 5px; display: flex;'>
         <div style='display: flex;'>
           <b>#{i}　</b>#{analytics_url('ideas/'+idea.id.to_s, 'ranking', idea.name)}
-          　#{tag_box(idea&.idea_tags)}　<div>💛</div> #{idea.likes_num} by #{idea_user.name}
+          　#{tag_box(idea&.idea_tags)}　<span>💛</span> #{idea.likes_num} by #{idea_user.name}
         </div>
       </div>
     """

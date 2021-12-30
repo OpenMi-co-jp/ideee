@@ -17,7 +17,7 @@
 
   &__message {
 
-    &__link {
+    &--link {
       color: #f57c00;
 
       &:hover {
@@ -26,11 +26,11 @@
       }
     }
 
-    &__comment {
+    &--comment {
       font-size: 0.7rem;
     }
 
-    &__date {
+    &--date {
       font-size: 0.7rem;
     }
   }
@@ -38,7 +38,7 @@
   &__index_path {
     text-align: center;
     
-    &__link {
+    &--link {
 
       &:hover {
         opacity: 0.5;

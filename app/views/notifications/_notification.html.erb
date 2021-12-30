@@ -1,6 +1,8 @@
 <div class="p-notification__container">
   <div class="p-notification__user_icon">
-    <%= user_icon(notification.visitor, size: 'small') %>
+    <%= link_to user_path(notification.visitor_id) do %>
+      <%= user_icon(notification.visitor, size: 'small') %>
+    <% end %>
   </div>
   <div class="p-notification__message">
     <%= link_to "#{truncate(notification.visitor.name)}", user_path(notification.visitor_id), class: "p-notification__message__link" %>

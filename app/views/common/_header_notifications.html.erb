@@ -1,5 +1,8 @@
 <li class='nav-link'>
   <%= link_to '#', data: { target: "dropdown_bell" }, class:'dropdown-trigger white' do %>
+    <% if !notifications.map{|n| n.checked}.all? %>
+      <i class="material-icons p-notification__circle" style="font-size: 2px;">circle</i>
+    <% end %>
     <p><%= embedded_svg 'icons/bell.svg', class: 'header__bell' %></p>
   <% end %>
 </li>

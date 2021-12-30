@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def show
     @user.point_update # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
+    Notification.find(params[:notification]).update(checked: true) if params[:notification]
   end
 
   def search

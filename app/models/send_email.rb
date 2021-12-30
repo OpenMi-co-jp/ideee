@@ -7,16 +7,24 @@ class SendEmail
     @sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
   end
 
-  def comment(users, idea, comment)
+  def comment(users, commenter, idea, comment)
+    body = """
+            <p>
+              気になるコメントが来ました！さっそく反応してみましょう！
+            </p>
+            <hr>
+            <b>コメンター名:</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              #{analytics_url('users/'+commenter.id.to_s, 'comment', commenter.name)}
+            </div>
+            <b>コメント内容:</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              #{xss_support(comment)}
+            </div>
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/'+idea.id.to_s, 'comment', 'https://www.ideee.tech/ideas/'+idea.id.to_s)}</p>
+          """
     subject = "【ideee】【#{idea.name}】にコメントがきました💡"
-    body = "※このメールは自動送信メールです。\n" +
-            "ideee事務局です。\n\n" +
-            "気になるコメントが来ました！\nさっそく反応してみましょう！\n\n" +
-            "---------------\n\n" +
-            "#{comment}\n\n" +
-            "---------------\n" +
-            "https://www.ideee.tech/ideas/#{idea.id}"
-    content = Content.new(type: 'text/plain', value: body)
+    content = Content.new(type: 'text/html', value: html_frame(body, 'comment'))
 
     if users.instance_of?(Array) # 送信したいアドレスが複数の時
       users.map do |user|
@@ -204,6 +212,16 @@ class SendEmail
     """
       <a href='https://www.ideee.tech/#{path}?utm_source=#{source}&utm_medium=mail&utm_id=#{path}', target: '_blank'>#{content}</a>
     """
+  end
+
+  def xss_support(text)
+    text.gsub(/\R/, '<br>')
+        .gsub(/&/, '&amp;')
+        .gsub(/</, '&lt;')
+        .gsub(/>/, '&gt;')
+        .gsub(/"/, '&quot;')
+        .gsub(/'/, '&#39;')
+        .gsub(/&lt;br&gt;/, '<br>') # 改行だけは反映されるように設定
   end
 end
 

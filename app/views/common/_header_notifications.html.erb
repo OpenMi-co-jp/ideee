@@ -3,7 +3,7 @@
     <p><%= embedded_svg 'icons/bell.svg', class: 'header__bell' %></p>
   <% end %>
 </li>
-<ul id='dropdown_bell' class='dropdown-content p-notification p-notification__ul'>
+<ul id='dropdown_bell' class='dropdown-content p-notification__ul'>
   <% if notifications&.any? %>
     <% notifications.each do |notification| %>
       <%= render 'notifications/notification', notification: notification %>

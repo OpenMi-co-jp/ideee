@@ -14,25 +14,31 @@ footer {
 
       .right {
         justify-content: right;
+
+        & li {
+          @media (max-width: 1390px) {
+            padding-left: 0;
+          }
+        }
       }
 
       .left {
         justify-content: left;
         margin-left: auto;
       }
+    }
 
-      ul {
-        width: 100%;
-      }
-      li {
-        list-style: none;
-        a {
-          text-decoration: none;
-          transition: all 0.3s ease 0s;
+    ul {
+      width: 100%;
+    }
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        transition: all 0.3s ease 0s;
 
-          &:hover {
-            opacity: 0.5;
-          }
+        &:hover {
+          opacity: 0.5;
         }
       }
     }
@@ -48,7 +54,7 @@ footer {
     width: 187px;
 
     img:hover {
-      transition-duration: .4s;
+      transition-duration: 0.4s;
       transform: scale(1.05);
     }
   }

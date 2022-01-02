@@ -4,6 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  comments_num  :integer          default(0)
+#  cooperation   :integer          default("not_started")
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
 #  icon          :string(255)
@@ -12,6 +13,7 @@
 #  note          :text(65535)
 #  product_apply :integer          default("no_apply")
 #  product_url   :string(255)
+#  published_at  :datetime
 #  view          :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

@@ -98,10 +98,19 @@ module ApplicationHelper
   def text_url_to_link(text)
     require 'uri'
     uri_reg = URI.regexp(%w[http https])
-    return text.gsub(uri_reg) {"<a href='#{$&}' target='_blank'\>#{$&}</a>"}
+    return sanitize(text.gsub(uri_reg) {"<a href='#{$&}' target='_blank'\>#{$&}</a>"})
   end
 
   def data_page
     "#{controller_path}-#{action_name}"
+  end
+
+  # svgをviewで使用する
+  def embedded_svg(filename, options = {})
+    file = File.read(Rails.root.join('app', 'assets', 'images', filename))
+    doc = Nokogiri::HTML::DocumentFragment.parse file
+    svg = doc.at_css 'svg'
+    svg['class'] = options[:class] if options[:class].present?
+    doc.to_html.html_safe
   end
 end

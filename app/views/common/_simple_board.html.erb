@@ -12,7 +12,8 @@
             <b class='idea__name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea__status gray-3'>
-            <p class=''><%= "投稿日 #{idea.created_time}" %></p>
+            <%= embedded_svg 'icons/clock.svg', class:'idea__status--clock' %>
+            <%= idea_opened_date(idea) %>
           </div>
         </div>
       </div>

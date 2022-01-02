@@ -51,12 +51,4 @@
     padding: 1rem;
     font-weight: bold;
   }
-
-  &__circle {
-    color: #f57c00;
-    position: absolute;
-    padding-left: 1.1rem;
-    padding-top: 1.1rem;
-    // font-size: 2px; スタイルが効かないためhtmlで直接指定
-  }
 }

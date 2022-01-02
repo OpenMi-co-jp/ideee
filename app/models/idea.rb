@@ -140,45 +140,31 @@ class Idea < ApplicationRecord
   end
 
   def create_notification_like!(current_user)
-    # すでに「いいね」されているか検索
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and idea_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
-    # いいねされていない場合のみ、通知レコードを作成
-    if temp.blank?
-      notification = current_user.active_notifications.new(
-        idea_id: id,
-        visited_id: user_id,
-      )
-      # 自分の投稿に対するいいねの場合は、通知済みとする
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
-      end
-      notification.action_like!
-      notification.save if notification.valid?
-    end
+    notification = current_user.active_notifications.find_or_initialize_by(
+      visitor_id: current_user.id,
+      visited_id: user_id,
+      idea_id: id,
+      action: :like,
+    )
+    notification.visited_id = nil
+    notification.save if notification.valid?
   end
 
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
-    temp_ids = Comment.select(:user_id).where(idea_id: id).or(Comment.where(user_id: user.id)).where.not(user_id: current_user.id).distinct
-    temp_ids.each do |temp_id|
-      save_notification_comment!(current_user, comment_id, temp_id['user_id'])
+    users = Comment.select(:user_id).where(idea_id: id).or(Comment.where(user_id: user.id)).where.not(user_id: current_user.id).distinct
+    return if users.blank? # 自分しかコメントしていければ何もしない
+    users.each do |user|
+      save_notification_comment!(current_user, comment_id, user['user_id'])
     end
-    # まだ誰もコメントしていない場合は、投稿者に通知を送る
-    save_notification_comment!(current_user, comment_id, user_id) if temp_ids.blank?
   end
 
   def save_notification_comment!(current_user, comment_id, visited_id)
-    # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
-    notification = current_user.active_notifications.new(
-      idea_id: id,
-      comment_id: comment_id,
+    current_user.active_notifications.create!(
       visited_id: visited_id,
+      idea_id: self.id,
+      comment_id: comment_id,
+      action: :comment
     )
-    # 自分の投稿に対するコメントの場合は、通知済みとする
-    if notification.visitor_id == notification.visited_id
-      notification.checked = true
-    end
-    notification.action_comment!
-    notification.save if notification.valid?
   end
 end

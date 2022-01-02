@@ -45,7 +45,7 @@ class IdeasController < ApplicationController
         redirect_to @idea, notice: t('.draft_save')
       else
         TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
-        SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+        SlackNotifier.new.send(@idea, idea_url(@idea.id))
         SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
         @idea.update!(published_at: Time.now)
         redirect_to @idea, notice: t('.success')
@@ -104,7 +104,7 @@ class IdeasController < ApplicationController
   def publish
     @idea.update(draft: false, published_at: Time.now)
     TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
-    SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+    SlackNotifier.new.send(@idea, idea_url(@idea.id))
     SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
     redirect_to @idea, notice: t('.success')
   end

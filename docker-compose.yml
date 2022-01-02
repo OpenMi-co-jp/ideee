@@ -25,5 +25,7 @@ services:
       - db
     env_file:
       - web-variables.env
+    environment:
+      REDIS_URL: redis://redis:6379
 volumes:
   redis:

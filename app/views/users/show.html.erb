@@ -57,8 +57,9 @@
   <div id="tab1" class="col s12">
     <div class="row">
       <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
-        <% if @user.ideas.published.present? %>
-          <%= render 'common/column_board', ideas: @user.ideas.published %>
+        <% if @published_ideas.present? %>
+          <%= render 'common/column_board', ideas: @published_ideas %>
+          <%= paginate @published_ideas %>
         <% else %>
           <h5 class='no_idea_posted'>まだアイデアが投稿されていません</h5>
         <% end %>

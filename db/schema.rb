@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
     t.string "product_url"
     t.integer "product_apply", default: 0
     t.datetime "published_at"
-    t.integer "cooperation", default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

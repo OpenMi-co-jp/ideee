@@ -4,7 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  comments_num  :integer          default(0)
-#  cooperation   :integer          default(0)
+#  cooperation   :integer          default("not_started")
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
 #  icon          :string(255)
@@ -36,6 +36,8 @@ class Idea < ApplicationRecord
   has_many :idea_tags, through: :taggings, source: :tag
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
+  has_many :cooperations, dependent: :destroy
+  has_many :cooperation_users, through: :cooperations, source: :user
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
@@ -46,6 +48,7 @@ class Idea < ApplicationRecord
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
+  enum cooperation: %i(not_started ongoing completed), _prefix: true
 
   scope :with_tag, -> tag_name { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
@@ -54,13 +57,14 @@ class Idea < ApplicationRecord
   scope :recent_select, -> { where(published_at: 40.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
+  scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
 
   def user
     return User.find_by(id: self.user_id)
   end
 
   def published_time
-    published_at.strftime("%Y.%m.%d")
+    published_at&.strftime("%Y.%m.%d")
   end
 
   def created_time

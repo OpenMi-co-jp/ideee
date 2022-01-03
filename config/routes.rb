@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'ideas#index'
   resources :ideas do
@@ -25,6 +27,13 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
+  resources :cooperations, only: %i[index new create destroy] do
+    collection do
+      post 'start'
+      post 'complete'
+      post 'restart'
+    end
+  end
   resources :difficultys, only: %i[create]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
@@ -33,7 +42,9 @@ Rails.application.routes.draw do
   get 'privacy_policy' => 'high_voltage/pages#show', id: 'privacy_policy'
   get 'terms_of_service' => 'high_voltage/pages#show', id: 'terms_of_service'
   get 'frequent_questions' => 'high_voltage/pages#show', id: 'frequent_questions'
+  get 'new_year_event' => 'high_voltage/pages#show', id: 'new_year_event'
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+  mount Sidekiq::Web => '/sidekiq'
 end

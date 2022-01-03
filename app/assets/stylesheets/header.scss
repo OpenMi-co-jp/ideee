@@ -1,6 +1,5 @@
 header {
   width: 100%;
-  min-height: 3rem;
   position: sticky;
   z-index: 9999;
   top: 0;
@@ -15,7 +14,7 @@ header {
     justify-content: space-between;
 
     &.header-body {
-      padding: 1rem 0;
+      padding: 0.5rem 0;
     }
 
     li {
@@ -27,6 +26,10 @@ header {
       .serch_column {
         opacity: 0.5;
         width: 200px;
+      }
+
+      .header__rank {
+        fill: #FFBF85;
       }
     }
   }

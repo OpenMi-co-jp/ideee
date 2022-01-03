@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
     t.integer "difficulty", default: 0
     t.boolean "draft", default: false
     t.integer "comments_num", default: 0
+    t.integer "cooperation", default: 0
     t.string "product_url"
     t.integer "product_apply", default: 0
     t.datetime "published_at"

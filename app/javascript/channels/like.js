@@ -4,21 +4,20 @@ $(document).on ('turbolinks:load', function(){
     const element = $(this)
     like_num = Number(element.find($('.likes-count')).html())
     if(element.hasClass('clicked')){
+      element.toggleClass('clicked')
+      element.find($('.likes-count')).html(--like_num)
       unlike(element)
-      .done(function() {
-        element.toggleClass('clicked')
-        element.find($('.likes-count')).html(like_num - 1)
-      })
       .fail(function() {
-        alert('いいねの取り消しに失敗しました')
+        element.toggleClass('clicked')
+        element.find($('.likes-count')).html(++like_num)  
       })
     } else {
-      like(element).done(function() {
-        element.toggleClass('clicked')
-        element.find($('.likes-count')).html(like_num + 1)
-      })
+      element.toggleClass('clicked')
+      element.find($('.likes-count')).html(++like_num)
+      like(element)
       .fail(function() {
-        alert('いいねに失敗しました')
+        element.toggleClass('clicked')
+        element.find($('.likes-count')).html(--like_num)
       })
     }
   });

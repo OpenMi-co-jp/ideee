@@ -65,6 +65,7 @@ gem 'sendgrid-ruby'
 # gem 'stripe'
 
 gem 'twitter'
+gem 'sidekiq'
 
 # エラー関係
 gem 'rack-timeout'

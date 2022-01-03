@@ -1,0 +1,41 @@
+.event-pages {
+  &__section {
+    margin: 70px 0;
+  }
+
+  &__eyecatch {
+    font-size: 1.5rem;
+
+    &--first {
+      font-size: 3rem;
+      color: #FF862E;
+      font-weight: bold;
+    }
+
+    &--second {
+      font-size: 2.5rem;
+      color: #D9C2AD;
+      font-weight: bold;
+    }
+
+    &--third {
+      font-size: 2rem;
+      color: #FFBF85;
+      font-weight: bold;
+    }
+
+    &--detail {
+      margin-bottom: 40px;
+      text-decoration: underline #FF862E;
+    }
+  }
+
+  &__terms {
+    font-size: 1.8rem;
+    font-weight: bold;
+
+    &.twitter {
+      color: #1B9DF0;
+    }
+  }
+}

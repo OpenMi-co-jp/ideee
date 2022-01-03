@@ -24,4 +24,4 @@ require("channels/copy");
 require("channels/form");
 require("channels/comment");
 require("channels/sort");
-require("channels/devise");
+require("channels/user_validation");

@@ -23,13 +23,14 @@
         <div class="field">
           <%= f.label :name, class: 'required' %><br />
           <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前' %>
-          <div id="user_name_message"></div>
+          <div class="error_message js_empty_check">ユーザー名を入力してください。</div>
         </div>
 
         <div class="field">
           <%= f.label :email, class: 'required' %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com' %>
-          <div id="user_email_message"></div>
+          <div class="error_message js_empty_check">メールアドレスを入力してください。</div>
+          <div class="error_message js_email_format_check">正しい形式のメールアドレスを入力してください。</div>
         </div>
 
         <div class="field">
@@ -41,8 +42,8 @@
           <%= f.label :definition, class: 'required' %><br />
           <div class="input-field">
             <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' } %>
+            <div class="error_message js_unselected_check">タイプを選択してください。</div>
           </div>
-          <div id="user_definition_message"></div>
         </div>
 
         <div class="field">

@@ -11,9 +11,9 @@ module ShareHelper
     if t('.page') == 'footer'
       t(".share.#{media}")
     elsif media == 'twitter'
-      t(".share.twitter", url: request.url, text: @idea.name, twitter_id: @idea&.user.twitter_id)
+      t("sns.share.twitter", url: request.url, text: @idea.name, twitter_id: @idea&.user.twitter_id)
     else
-      t(".share.#{media}", url: request.url)
+      t("default.sns.share.#{media}", url: request.url)
     end
   end
 end

@@ -18,5 +18,5 @@ class Like < ApplicationRecord
   belongs_to :user
   belongs_to :idea
 
-  scope :idea_liked, -> { map{|n| Idea.find_by(id: n.idea_id) }.uniq }
+  scope :like_idea, -> { map{|n| Idea.find_by(id: n.idea_id) }.uniq }
 end

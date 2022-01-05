@@ -13,6 +13,35 @@ $(document).on ('turbolinks:load', function(){
   });
   $('ul.tabs').tabs(); // nav tabsの初期設定
 
+  $('#tab1').on("click", 'ul.pagination a', function () {
+    url = $(this).attr('href');
+    page_transition(url);
+  });
+
+  $('#tab2').on("click", 'ul.pagination a', function () {
+    url = $(this).attr('href');
+    page_transition(url);
+  });
+
+  $('#tab3').on("click", 'ul.pagination a', function () {
+    url = $(this).attr('href');
+    page_transition(url);
+  });
+
+  function page_transition(url){
+    return $.ajax({
+      url: url,
+      type: 'GET',
+      data: url
+    })
+    .done(function(data) {
+      window.location.href = data;
+    })
+    .fail(function() {
+      alert('失敗しました')
+    })
+  };
+
   $('.sidenav').sidenav({
     closeOnClick: true,
     edge: 'right',

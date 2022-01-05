@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def show
     published_list = @user.ideas.published.order(published_at: "DESC")
-    @published_ideas = Kaminari.paginate_array(published_list).page(params[:page]).per(10)
+    @published_ideas = Kaminari.paginate_array(published_list).page(params[:published_ideas]).per(10)
     @like_ideas = Kaminari.paginate_array(@user.likes.like_idea).page(params[:like_ideas]).per(10)
     @comment_ideas = Kaminari.paginate_array(@user.comments.comment_idea).page(params[:comment_ideas]).per(10)
     @user.point_update # Contributionの計算/更新

@@ -6,12 +6,12 @@
   </div>
   <div class="p-notification__message">
     <%= link_to "#{truncate(notification.visitor.name)}", user_path(id: notification.visitor_id, notification: notification), class: "p-notification__message--link" %>
-      さんが「
+      さんが
     <%= link_to "#{truncate(notification.idea.name)}", idea_path(id: notification.idea_id, notification: notification), class: "p-notification__message--link" %>
     <% if notification.action_like? %>
-      」にLikeしました。
+      にハートを送りました。
     <% elsif notification.action_comment? %>
-      」にコメントしました。
+      にコメントしました。
       <%= content_tag(:p, "「#{truncate(notification.comment.description)}」", class: "p-notification__message--comment") %>
     <% end %>
     <%= content_tag(:p, "#{notification.created_at.time.to_s(:long)}", class: "p-notification__message--date") %>

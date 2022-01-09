@@ -146,16 +146,16 @@ class Idea < ApplicationRecord
       idea_id: id,
       action: :like,
     )
-    notification.visited_id = nil
     notification.save if notification.valid?
   end
 
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
-    users = Comment.select(:user_id).where(idea_id: id).or(Comment.where(user_id: user.id)).where.not(user_id: current_user.id).distinct
-    return if users.blank? # 自分しかコメントしていければ何もしない
-    users.each do |user|
-      save_notification_comment!(current_user, comment_id, user['user_id'])
+    comments = Comment.select(:user_id).where(idea_id: id).distinct
+    comments.each do |comment|
+      # 自分しかコメントしていければ何もしない
+      next if comment.user_id == current_user.id
+      save_notification_comment!(current_user, comment_id, comment.user_id)
     end
   end
 

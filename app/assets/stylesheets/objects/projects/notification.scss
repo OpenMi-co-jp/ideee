@@ -1,0 +1,54 @@
+.p-notification {
+
+  &__ul {
+    max-height: 650px;
+  }
+
+  &__container {
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  &__user_icon {
+    flex-shrink: 0;
+    margin-right: 1rem;
+  }
+
+  &__message {
+
+    &--link {
+      color: #f57c00;
+
+      &:hover {
+        opacity: 0.5;
+        transition-duration: .3s;
+      }
+    }
+
+    &--comment {
+      font-size: 0.7rem;
+    }
+
+    &--date {
+      font-size: 0.7rem;
+    }
+  }
+
+  &__index_path {
+    text-align: center;
+    
+    &--link {
+
+      &:hover {
+        opacity: 0.5;
+        transition-duration: .3s;
+      }
+    }
+  }
+
+  &__no_message {
+    padding: 1rem;
+    font-weight: bold;
+  }
+}

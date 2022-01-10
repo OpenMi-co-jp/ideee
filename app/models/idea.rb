@@ -38,6 +38,7 @@ class Idea < ApplicationRecord
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :cooperations, dependent: :destroy
   has_many :cooperation_users, through: :cooperations, source: :user
+  has_many :notifications, dependent: :destroy
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
@@ -136,5 +137,34 @@ class Idea < ApplicationRecord
 
   def validate_tags_num
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
+  end
+
+  def create_notification_like!(current_user)
+    notification = current_user.active_notifications.find_or_initialize_by(
+      visitor_id: current_user.id,
+      visited_id: user_id,
+      idea_id: id,
+      action: :like,
+    )
+    notification.save if notification.valid?
+  end
+
+  def create_notification_comment!(current_user, comment_id)
+    # アイデア作成者も含めたuser_id取得
+    user_ids = Comment.where(idea_id: id).map(&:user_id).push(self.user_id).uniq
+    user_ids.each do |user_id|
+      # 自分以外のコメントした人全員に通知を送る
+      next if user_id == current_user.id
+      save_notification_comment!(current_user, comment_id, user_id)
+    end
+  end
+
+  def save_notification_comment!(current_user, comment_id, visited_id)
+    current_user.active_notifications.create!(
+      visited_id: visited_id,
+      idea_id: self.id,
+      comment_id: comment_id,
+      action: :comment
+    )
   end
 end

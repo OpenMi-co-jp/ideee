@@ -29,6 +29,7 @@ class IdeasController < ApplicationController
       @time_on_page = '-'
     end
     gon.idea_id = @idea.id # JSにアイデアのIDを渡す
+    Notification.find(params[:notification]).update(checked: true) if params[:notification]
   end
 
   def new

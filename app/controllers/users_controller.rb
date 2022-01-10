@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @published_ideas = Kaminari.paginate_array(published_list).page(params[:page]).per(10)
     @user.point_update # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
+    Notification.find(params[:notification]).update(checked: true) if params[:notification]
   end
 
   def search

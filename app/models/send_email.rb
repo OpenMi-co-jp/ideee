@@ -121,12 +121,6 @@ class SendEmail
 
   private
 
-  def twitter_url(user)
-    if user&.twitter_id.present?
-      "Twitter: #{analytics_url(user.twitter_id, 'join_cooperation', user.twitter_id)}<br>"
-    end
-  end
-
   def html_frame(body, source)
     """
       <html>

@@ -12,5 +12,7 @@
       <h5><%= link_to "あなたのアイデアを投稿しませんか？", new_idea_path %></h5>
     <% end %>
   </div>
-  <%= render 'ideas/index/latest_boad', title: '最近実現したアイデア', ideas: @deployed_ideas %>
+  <% unless params[:product_apply] == 'approved' %>
+    <%= render 'ideas/index/latest_boad', title: '最近実現したアイデア', ideas: @deployed_ideas %>
+  <% end %>
 </div>

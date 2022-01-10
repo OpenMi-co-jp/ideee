@@ -76,14 +76,16 @@ class Idea < ApplicationRecord
     update(view: idea_view.to_i)
   end
 
-  def self.search(name: nil, difficulty: nil)
+  def self.search(name: nil, difficulty: nil, product_apply: nil)
     # TODO: クソコードをリファクタ
-    if name&.empty? && difficulty.nil?
+    if name.nil? && difficulty.nil? && product_apply.nil?
       published
     elsif name.present?
       where(["name like?", "%#{name}%"])
-    else difficulty.present?
+    elsif difficulty.present?
       where(difficulty: difficulty)
+    elsif product_apply.present?
+      where(product_apply: product_apply)
     end
   end
 

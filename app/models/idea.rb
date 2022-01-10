@@ -150,12 +150,13 @@ class Idea < ApplicationRecord
   end
 
   def create_notification_comment!(current_user, comment_id)
-    # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
-    comments = Comment.select(:user_id).where(idea_id: id).distinct
-    comments.each do |comment|
-      # 自分しかコメントしていければ何もしない
-      next if comment.user_id == current_user.id
-      save_notification_comment!(current_user, comment_id, comment.user_id)
+    # アイデア作成者も含めたuser_id取得
+    user_ids = Comment.where(idea_id: id).map(&:user_id).push(self.user_id).uniq
+    user_ids.each do |user_id|
+      puts user_id == current_user.id
+      # 自分以外のコメントした人全員に通知を送る
+      next if user_id == current_user.id
+      save_notification_comment!(current_user, comment_id, user_id)
     end
   end
 

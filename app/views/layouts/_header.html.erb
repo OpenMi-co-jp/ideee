@@ -60,6 +60,7 @@
       <li class='nav-link hide-on-med-and-down'>
         <%= link_to 'アイデア投稿', new_idea_path, class: 'waves-effect btn orange-action-back' %>
       </li>
+      <%= render "common/header_notifications", notifications: @header_notifications %>
       <li class='hide-on-med-and-down'>
         <%= link_to '#', data: { target: "dropdown_user" }, class:'dropdown-trigger btn-floating btn-large white' do %>
           <% user_icon(current_user) %>
@@ -91,7 +92,7 @@
         <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back' %>
       </li>
     <% end %>
-    <div id="mobile-navigation-bar" class="hide-on-large-only">
+    <div id="mobile-navigation-bar" class="hide-on-large-only ml-3">
       <li id="humburger-menu" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></li>
       <div id="slide-out" class="sidenav">
         <li>
@@ -162,5 +163,6 @@
       </div>
     </div>
   </ul>
-  <%= render 'layouts/header_event_link' %>
+  <%# イベント時のヘッダー下リンク %>
+  <%# <%= render 'layouts/header_event_link' %>
 </header>

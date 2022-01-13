@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'ideas#index'
   resources :ideas do
@@ -33,6 +35,7 @@ Rails.application.routes.draw do
     end
   end
   resources :difficultys, only: %i[create]
+  resources :notifications, only: %i[index]
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'
@@ -44,4 +47,5 @@ Rails.application.routes.draw do
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+  mount Sidekiq::Web => '/sidekiq'
 end

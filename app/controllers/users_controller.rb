@@ -14,9 +14,12 @@ class UsersController < ApplicationController
     published_list = @user.ideas.published.order(published_at: "DESC")
     @published_ideas = Kaminari.paginate_array(published_list).page(params[:published_ideas]).per(10)
     @like_ideas = Kaminari.paginate_array(@user.likes.like_idea).page(params[:like_ideas]).per(10)
-    @comment_ideas = Kaminari.paginate_array(@user.comments.comment_idea).page(params[:comment_ideas]).per(10)
+    # 自分のアイデア以外でコメントしたアイデアを表示
+    # 後でリファクタする
+    @commented_ideas = Kaminari.paginate_array(@user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by(id: n) }.select{ |i| i.user_id != @user.id }).page(params[:comment_ideas]).per(10)
     @user.point_update # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
+    Notification.find(params[:notification]).update(checked: true) if params[:notification]
   end
 
   def search

@@ -87,8 +87,8 @@
   </div>
   <div id="tab3" class="col s12">
     <% if @user.comments.present? %>
-      <%= render 'common/column_board', ideas: @comment_ideas %>
-      <%= paginate @comment_ideas, remote: true, param_name: :comment_ideas %>
+      <%= render 'common/column_board', ideas: @commented_ideas %>
+      <%= paginate @commented_ideas, remote: true, param_name: :comment_ideas %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
     <% end %>

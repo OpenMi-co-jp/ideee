@@ -41,4 +41,10 @@ class SlackNotifier
               "今月のアイデア数に対してのコメント数値：  🔥#{(monthly_comments/recent_ideas.to_f).round(2)}🔥 = (#{monthly_comments} / #{recent_ideas})"  
     Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
   end
+
+  def trial
+    channel = "#times_なる"
+    article = "テストデータ"
+    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+  end
 end

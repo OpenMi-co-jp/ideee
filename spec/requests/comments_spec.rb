@@ -22,7 +22,7 @@ RSpec.describe "Comments", type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      let(:params) { { description: '', idea_id: '' } }
+      let(:params) { { description: '', idea_id: comment.idea.id } }
       it 'コメントが登録されないこと' do
         expect do
           subject

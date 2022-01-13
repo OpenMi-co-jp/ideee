@@ -58,6 +58,20 @@
           users: @monthly_published_users %>
       </div>
     </div>
+    <div class="row">
+      <div class="col s12 l8">
+        <%= render 'ideas/index/ranking',
+          icon_mark: tag.i('groups', class: 'material-icons'),
+          board_title: '開発者募集中のアイデア',
+          path: cooperations_path,
+          ideas: @on_board_ideas %>
+        <%= render 'ideas/index/ranking',
+          icon_mark: tag.i('check_circle', class: 'material-icons'),
+          board_title: '最近実現したアイデア',
+          path: search_ideas_path(product_apply: :approved),
+          ideas: @deployed_ideas %>
+      </div>
+    </div>
     <% unless current_user %>
       <div class="concept">
         <div class="concept_bg">

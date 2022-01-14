@@ -49,7 +49,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
+        TwitterJob.Tweet.perform_later(@idea) if Rails.env.production?
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
         @idea.update!(published_at: Time.now)
@@ -66,7 +66,7 @@ class IdeasController < ApplicationController
     if @idea.save_with_tags(tags_params)
       params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
       if params[:commit] == t('default.publish') && Rails.env.production?
-        TwitterTweet.new.tweet(@idea, idea_url(@idea.id))
+        TwitterJob.Tweet.perform_later(@idea)
         SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
         @idea.update!(published_at: Time.now)
       end
@@ -112,7 +112,7 @@ class IdeasController < ApplicationController
 
   def publish
     @idea.update(draft: false, published_at: Time.now)
-    TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
+    TwitterJob.Tweet.perform_later(@idea) if Rails.env.production?
     SlackNotifier.new.send(@idea, idea_url(@idea.id))
     SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
     redirect_to @idea, notice: t('.success')

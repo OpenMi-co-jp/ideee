@@ -26,13 +26,14 @@ class IdeasController < ApplicationController
     @user = User.find_by(id: @idea.user_id)
     @levels = Difficulty.levels
     if Rails.env.production?
-      @idea.views_update(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
-      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' # 製作者にのみ見える、アイデアページの滞在時間を設定
+      AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
+      # 製作者にのみ見える、アイデアページの滞在時間を設定
+      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' if current_user&.own?(@idea)
     else
       @time_on_page = '-'
     end
     gon.idea_id = @idea.id # JSにアイデアのIDを渡す
-    Notification.find(params[:notification]).update(checked: true) if params[:notification]
+    Notifications::UpdateReadJob.perform_later(params[:notification]) if params[:notification]
   end
 
   def new

@@ -44,7 +44,7 @@ class SlackNotifier
 
   def trial
     channel = "#times_なる"
-    article = "テストデータ"  
+    article = "テストデータ"
     Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
   end
 end

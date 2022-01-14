@@ -79,14 +79,14 @@
   </div>
   <div id="tab2" class="col s12">
     <% if @user.likes.present? %>
-      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find_by(id: n.idea_id) }.uniq %>
+      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find_by(id: n.idea_id) } %>
     <% else %>
       <h5>まだアイデアにハートを送っていません</h5>
     <% end %>
   </div>
   <div id="tab3" class="col s12">
     <% if @user.comments.present? %>
-      <%= render 'common/column_board', ideas: @user.comments.map{|n| Idea.find_by(id: n.idea_id) }.uniq %>
+      <%= render 'common/column_board', ideas: @commented_ideas %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
     <% end %>

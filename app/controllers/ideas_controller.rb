@@ -6,15 +6,18 @@ class IdeasController < ApplicationController
   before_action :own_draft_check, only: %i[ show ]
 
   def index
-    @ideas = Idea.published.recent_select # 一度定義することで何度もDBに値を取りに行くことを阻止
-    @latest_ideas = @ideas.order(published_at: "DESC").first(10)
-    @liked_ideas = @ideas.order(likes_num: "DESC").first(5)
-    @most_commented_ideas = @ideas.most_commented.first(10)
+    ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
+    recent_ideas = ideas.recent_select
+    @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
+    @liked_ideas = recent_ideas.order(likes_num: "DESC").first(5)
+    @most_commented_ideas = recent_ideas.most_commented.first(10)
+    @on_board_ideas = ideas.where(cooperation: :ongoing).most_commented.first(5)
+    @deployed_ideas = ideas.deployed.order(updated_at: "DESC").first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
     @weekly_commented_users = @commented_users_array.map{|u| User.find(u[0])}
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
-    @idea_publisher_array = @ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
+    @idea_publisher_array = recent_ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
     @monthly_published_users = @idea_publisher_array.map{|u| User.find(u[0])}
   end
 
@@ -29,6 +32,7 @@ class IdeasController < ApplicationController
       @time_on_page = '-'
     end
     gon.idea_id = @idea.id # JSにアイデアのIDを渡す
+    Notification.find(params[:notification]).update(checked: true) if params[:notification]
   end
 
   def new
@@ -85,7 +89,11 @@ class IdeasController < ApplicationController
     @order = params[:order] || "desc"
     @keyword = params[:keyword]
     # TODO: 検索結果が増えてきたらtag検索を分ける
-    ideas = Idea.published.search(name: @keyword, difficulty: params[:difficulty]) | Idea.published.tag_name_like(@keyword)
+    ideas = if @keyword.present?
+              Idea.published.search(name: @keyword) | Idea.published.tag_name_like(@keyword)
+            else
+              Idea.published.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
+            end
     list = Idea.where(id: ideas.map(&:id)).order("#{@sort}": @order)
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i

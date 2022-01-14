@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
+  before_action :get_notifications, if: :defined_user?
 
   # deviseでログインした後の設定
   def after_sign_in_path_for(resource_or_scope)
@@ -28,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   # ユーザー情報が登録されているか確認し、アラートで登録必須項目を表示
   def defined_check
-    unless current_user&.check_defined?
+    unless defined_user?
       redirect_to edit_user_registration_path(params[:id])
       flash[:alert] = "ユーザーの名前を登録してください。" if current_user.name.blank?
       flash[:alert] = "ユーザーのメールアドレスを確認が完了していません。" if current_user.confirmed_at.blank?
@@ -44,5 +45,13 @@ class ApplicationController < ActionController::Base
     # after_sign_outのフレンドリーフォワーディングを使うときはこの行を削除
     return false if current_user
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def get_notifications
+    @header_notifications = current_user.passive_notifications.order(created_at: :desc).limit(5)
+  end
+
+  def defined_user?
+    current_user&.check_defined?
   end
 end

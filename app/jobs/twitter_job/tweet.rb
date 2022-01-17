@@ -2,8 +2,8 @@ module TwitterJob
   class Tweet < ApplicationJob
     queue_as :default
 
-    def perform(idea)
-      TwitterTweet.new.tweet(idea, idea_url(idea.id))
+    def perform(idea, url)
+      TwitterTweet.new.tweet(idea, url)
     end
   end
 end

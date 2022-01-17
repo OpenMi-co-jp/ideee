@@ -52,6 +52,6 @@ class ApplicationController < ActionController::Base
   end
 
   def defined_user?
-    current_user&.check_defined?
+    current_user&.defined
   end
 end

@@ -111,7 +111,7 @@ class IdeasController < ApplicationController
   end
 
   def publish
-    @idea.update(draft: false, published_at: Time.now)
+    @idea.update!(draft: false, published_at: Time.now)
     TwitterJob.Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
     Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
     Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @commented_ideas = @user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by(id: n) }.select{ |i| i.user_id != @user.id }
     UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
-    Notification.find(params[:notification]).update(checked: true) if params[:notification]
+    Notification.find(params[:notification]).update!(checked: true) if params[:notification]
   end
 
   def search

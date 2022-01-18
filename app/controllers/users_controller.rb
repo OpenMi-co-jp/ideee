@@ -15,9 +15,9 @@ class UsersController < ApplicationController
     @published_ideas = Kaminari.paginate_array(published_list).page(params[:page]).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
     @commented_ideas = @user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by(id: n) }.select{ |i| i.user_id != @user.id }
-    @user.point_update # Contributionの計算/更新
+    UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
-    Notification.find(params[:notification]).update(checked: true) if params[:notification]
+    Notification.find(params[:notification]).update!(checked: true) if params[:notification]
   end
 
   def search

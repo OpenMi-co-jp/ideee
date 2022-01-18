@@ -72,11 +72,6 @@ class Idea < ApplicationRecord
     created_at.strftime("%Y.%m.%d")
   end
 
-  def views_update(id)
-    idea_view = Analytics.new.idea_report('pageviews', id)
-    update(view: idea_view.to_i)
-  end
-
   def self.search(name: nil, difficulty: nil, product_apply: nil)
     # TODO: クソコードをリファクタ
     if name.nil? && difficulty.nil? && product_apply.nil?

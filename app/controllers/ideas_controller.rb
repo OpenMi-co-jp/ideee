@@ -27,13 +27,14 @@ class IdeasController < ApplicationController
     @user = User.find_by(id: @idea.user_id)
     @levels = Difficulty.levels
     if Rails.env.production?
-      @idea.views_update(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
-      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' # 製作者にのみ見える、アイデアページの滞在時間を設定
+      AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
+      # 製作者にのみ見える、アイデアページの滞在時間を設定
+      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' if current_user&.own?(@idea)
     else
       @time_on_page = '-'
     end
     gon.idea_id = @idea.id # JSにアイデアのIDを渡す
-    Notification.find(params[:notification]).update(checked: true) if params[:notification]
+    Notifications::UpdateReadJob.perform_later(params[:notification]) if params[:notification]
   end
 
   def new
@@ -49,9 +50,9 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
-        SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
-        SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+        Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
         @idea.update!(published_at: Time.now)
         redirect_to @idea, notice: t('.success')
       end
@@ -66,11 +67,11 @@ class IdeasController < ApplicationController
     if @idea.save_with_tags(tags_params)
       params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
       if params[:commit] == t('default.publish') && Rails.env.production?
-        TwitterTweet.new.tweet(@idea, idea_url(@idea.id))
-        SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
+        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         @idea.update!(published_at: Time.now)
       end
-      SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+      Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
       redirect_to @idea, notice: message
     else
@@ -111,10 +112,10 @@ class IdeasController < ApplicationController
   end
 
   def publish
-    @idea.update(draft: false, published_at: Time.now)
-    TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
-    SlackNotifier.new.send(@idea, idea_url(@idea.id))
-    SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+    @idea.update!(draft: false, published_at: Time.now)
+    TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+    Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
+    Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
     redirect_to @idea, notice: t('.success')
   end
 

@@ -19,6 +19,7 @@ class IdeasController < ApplicationController
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
     @idea_publisher_array = recent_ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
     @monthly_published_users = @idea_publisher_array.map{|u| User.find(u[0])}
+    @popular_tags = Tag.recent_tags.popular_tags
   end
 
   def show

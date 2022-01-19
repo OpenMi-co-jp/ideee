@@ -56,6 +56,7 @@
           title: '今月の注目アイデアマン',
           path: search_users_path(sort: :monthly_published),
           users: @monthly_published_users %>
+        <%= render 'tags/popular_tags', object: @popular_tags %>
       </div>
     </div>
     <div class="row">

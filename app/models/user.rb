@@ -45,6 +45,8 @@ class User < ApplicationRecord
   has_many :difficulty_ideas, through: :difficultys, source: :idea
   has_many :cooperations, dependent: :destroy
   has_many :cooperation_ideas, through: :cooperations, source: :idea
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -116,6 +118,7 @@ class User < ApplicationRecord
 
   def check_defined?
     bool = name.present? && confirmed_at.present? && definition.present?
+    return true if defined && bool
     update(defined: bool) # 名前、メール確認日時、タイプの有無を真偽値として保存
     return bool
   end

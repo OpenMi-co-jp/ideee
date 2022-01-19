@@ -11,7 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   begin
     @user = User.from_omniauth(request.env["omniauth.auth"])
     if Rails.env.production? && @user.created_at > Time.now.ago(5.minute)
-      SlackNotifier.new.send(@user, user_url(@user.id))
+      Slack::SendNewJob.perform_later(@user, user_url(@user.id))
     end
   rescue => e
     redirect_to new_user_session_path

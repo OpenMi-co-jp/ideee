@@ -36,12 +36,12 @@
       <div class="col s12 l8">
         <%= render 'ideas/index/ranking',
           icon_mark: '💬',
-          board_title: 'コメントが多いアイデア',
+          board_title: '今月のコメントが多いアイデア',
           path: search_ideas_path(sort: :comments_num),
           ideas: @most_commented_ideas %>
         <%= render 'ideas/index/ranking',
           icon_mark: '💛',
-          board_title: 'ハートが多いアイデア',
+          board_title: '今月のハートが多いアイデア',
           path: search_ideas_path,
           ideas: @liked_ideas %>
       </div>

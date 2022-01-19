@@ -24,7 +24,7 @@ $(document).on ('turbolinks:load', function(){
 
   /**
    * 値が空であることを確認する（submit処理時）
-   * @module invalid_empty
+   * @module invalid_empty_when_submit
    * @param {string} item_id 項目ID
    * @returns true:無効な値である、false:有効な値である
    */  
@@ -36,7 +36,7 @@ $(document).on ('turbolinks:load', function(){
 
   /**
    * 値が空であることを確認する（項目の修正時）
-   * @module invalid_empty
+   * @module invalid_empty_when_modify
    * @param {string} item_id 項目ID
    * @returns true:無効な値である、false:有効な値である
    */  
@@ -48,7 +48,7 @@ $(document).on ('turbolinks:load', function(){
 
   /**
    * email形式かどうかを確認する（submit処理時）
-   * @module invalid_email_format
+   * @module invalid_email_format_when_submit
    * @param {string} item_id 項目ID
    * @returns true:無効な値である、false:有効な値である
    */
@@ -62,7 +62,7 @@ $(document).on ('turbolinks:load', function(){
 
   /**
    * email形式かどうかを確認する（項目の修正時）
-   * @module invalid_email_format
+   * @module invalid_email_format_when_modify
    * @param {string} item_id 項目ID
    * @returns true:無効な値である、false:有効な値である
    */
@@ -77,7 +77,7 @@ $(document).on ('turbolinks:load', function(){
 
   /**
    * プルダウンメニュー項目の値が未選択であることを確認する（submit処理時）
-   * @module invalid_selected
+   * @module invalid_selected_when_submit
    * @param {string} item_id 項目ID
    * @returns true:無効な値である、false:有効な値である
    */
@@ -89,7 +89,7 @@ $(document).on ('turbolinks:load', function(){
 
   /**
    * プルダウンメニュー項目の値が未選択であることを確認する（項目の修正時）
-   * @module invalid_selected
+   * @module invalid_selected_when_modify
    * @param {string} item_id 項目ID
    * @returns true:無効な値である、false:有効な値である
    */

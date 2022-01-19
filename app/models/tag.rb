@@ -16,4 +16,7 @@ class Tag < ApplicationRecord
   has_many :tagged_ideas, through: :taggings, source: :idea
 
   validates :name, presence: true, uniqueness: true
+
+  scope :recent_tags, -> { where created_at: 4.months.ago..Time.zone.now }
+  scope :popular_tags, -> { max(10){|x| x.tagged_ideas.length } }
 end

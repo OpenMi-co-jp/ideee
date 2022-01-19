@@ -61,7 +61,7 @@ class Idea < ApplicationRecord
   scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
 
   def user
-    return User.find_by(id: self.user_id)
+    return User.find_by!(id: self.user_id)
   end
 
   def published_time

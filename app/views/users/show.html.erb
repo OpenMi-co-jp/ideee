@@ -79,7 +79,7 @@
   </div>
   <div id="tab2" class="col s12">
     <% if @user.likes.present? %>
-      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find_by(id: n.idea_id) } %>
+      <%= render 'common/column_board', ideas: @user.likes.map{|n| Idea.find_by!(id: n.idea_id) } %>
     <% else %>
       <h5>まだアイデアにハートを送っていません</h5>
     <% end %>

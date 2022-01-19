@@ -24,7 +24,7 @@ class IdeasController < ApplicationController
 
   def show
     @title = @idea.name
-    @user = User.find_by(id: @idea.user_id)
+    @user = User.find_by!(id: @idea.user_id)
     @levels = Difficulty.levels
     if Rails.env.production?
       AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得

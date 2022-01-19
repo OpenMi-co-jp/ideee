@@ -96,7 +96,7 @@ class User < ApplicationRecord
     end
 
     def signin_how(email)
-      case find_by(email: email).provider
+      case find_by!(email: email).provider
       when nil
         'メール'
       when 'twitter'

@@ -19,7 +19,7 @@ class CooperationsController < ApplicationController
   end
 
   def destroy
-    current_user.cooperations.find_by(idea: @idea).destroy
+    current_user.cooperations.find_by!(idea: @idea).destroy
     redirect_to @idea, notice: t('.success')
   end
 

@@ -11,7 +11,7 @@ class IdeasController < ApplicationController
     @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
     @liked_ideas = recent_ideas.order(likes_num: "DESC").first(5)
     @most_commented_ideas = recent_ideas.most_commented.first(10)
-    @on_board_ideas = ideas.where(cooperation: :ongoing).most_commented.first(5)
+    @on_board_ideas = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
     @deployed_ideas = ideas.deployed.order(updated_at: "DESC").first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))

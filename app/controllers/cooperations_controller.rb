@@ -40,6 +40,6 @@ class CooperationsController < ApplicationController
   private
 
   def set_idea
-    @idea = Idea.find(params[:idea_id])
+    @idea = Idea.find_by!(id: params[:idea_id])
   end
 end

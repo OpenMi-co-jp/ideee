@@ -15,10 +15,10 @@ class IdeasController < ApplicationController
     @deployed_ideas = ideas.deployed.order(updated_at: "DESC").first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
-    @weekly_commented_users = @commented_users_array.map{|u| User.find(u[0])}
+    @weekly_commented_users = @commented_users_array.map{|u| User.find_by!(id: u[0])}
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
     @idea_publisher_array = recent_ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
-    @monthly_published_users = @idea_publisher_array.map{|u| User.find(u[0])}
+    @monthly_published_users = @idea_publisher_array.map{|u| User.find_by!(id: u[0])}
     @popular_tags = Tag.recent_tags.popular_tags
   end
 
@@ -121,7 +121,7 @@ class IdeasController < ApplicationController
 
   private
     def set_idea
-      @idea = Idea.find(params[:id])
+      @idea = Idea.find_by!(id: params[:id])
     end
 
     # ストロングパラメーターを設定

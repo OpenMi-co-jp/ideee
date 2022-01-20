@@ -14,24 +14,36 @@ footer {
 
       .right {
         justify-content: right;
+
+        @media (max-width: 992px) {
+          li {
+            padding-left: 0;
+          }
+        }
       }
 
       .left {
         justify-content: left;
         margin-left: auto;
+
+        @media (max-width: 992px) {
+          margin-top: 1rem;
+        }
       }
 
       ul {
         width: 100%;
-      }
-      li {
-        list-style: none;
-        a {
-          text-decoration: none;
-          transition: all 0.3s ease 0s;
 
-          &:hover {
-            opacity: 0.5;
+        li {
+          list-style: none;
+
+          a {
+            text-decoration: none;
+            transition: all 0.3s ease 0s;
+
+            &:hover {
+              opacity: 0.5;
+            }
           }
         }
       }

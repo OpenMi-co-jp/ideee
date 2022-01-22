@@ -10,7 +10,7 @@ class DifficultysController < ApplicationController
   private
 
   def set_idea
-    @idea = Idea.find(level_params[:idea_id])
+    @idea = Idea.find_by!(id: level_params[:idea_id])
   end
 
   def level_params

@@ -43,6 +43,11 @@
   background-color: white;
   transition: all 0.3s ease 0s;
 
+  &.smaller {
+    width: 20px;
+    height: 20px;
+  }
+
   &.small {
     width: 30px;
     height: 30px;

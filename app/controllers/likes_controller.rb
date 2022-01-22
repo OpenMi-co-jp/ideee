@@ -3,6 +3,7 @@ class LikesController < ApplicationController
 
   def create
     current_user.like(@idea)
+    @idea.create_notification_like!(current_user)
   end
 
   def destroy
@@ -12,6 +13,6 @@ class LikesController < ApplicationController
   private
 
   def idea_id
-    @idea = Idea.find(params[:id])
+    @idea = Idea.find_by!(id: params[:id])
   end
 end

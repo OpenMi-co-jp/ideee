@@ -6,7 +6,7 @@ $(document).on ('turbolinks:load', function(){
     const comment_input = $('#comment-form').val().replace(/^\s*(.*?)\s*$/, "$1");
     // コメントが入力されていれば発火
     if(comment_input.length > 0) {
-      $('#comment-form_message').removeClass('comment-form-message');
+      $('#comment-form_message').removeClass('c-comment-form__message');
       $("#comment-form_message").text('');
       create_comment(comment_input)
       .done(function() {
@@ -19,7 +19,7 @@ $(document).on ('turbolinks:load', function(){
         alert('コメントに失敗しました')
       })
     } else {
-      $('#comment-form_message').addClass('comment-form-message');
+      $('#comment-form_message').addClass('c-comment-form__message');
       $("#comment-form_message").text('コメントを入力してください。');
       $('#comment.submit-btn').removeClass('disabled')
     }
@@ -75,13 +75,20 @@ $(document).on ('turbolinks:load', function(){
     var dd = now.getDate()
     var h = now.getHours()
     var m = now.getMinutes()
+    var escaped_comment = comment
+                            .replace(/\n/g, '<br>')
+                            .replace(/&/g, '&amp;')
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/"/g, '&quot;')
+                            .replace(/'/g, '&#39;')
     return $(
             '<div class="p-comment-board__item own-comment">' +
               '<div class="c-unit-comment white-text">' +
                 '<div class="flex">' +
                   '<div class="c-unit-comment__info">' +
                     '<div class="c-unit-comment--description">' +
-                      comment.replace(/\n/g, '<br>') +
+                      escaped_comment +
                     '</div>' +
                     '<div class="date-small pt-2">' +
                       yy+'.'+mm+'.'+dd+' '+h+':'+m +

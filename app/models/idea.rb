@@ -4,6 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  comments_num  :integer          default(0)
+#  cooperation   :integer          default("not_started")
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
 #  icon          :string(255)
@@ -35,6 +36,9 @@ class Idea < ApplicationRecord
   has_many :idea_tags, through: :taggings, source: :tag
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
+  has_many :cooperations, dependent: :destroy
+  has_many :cooperation_users, through: :cooperations, source: :user
+  has_many :notifications, dependent: :destroy
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
@@ -45,42 +49,40 @@ class Idea < ApplicationRecord
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
+  enum cooperation: %i(not_started ongoing completed), _prefix: true
 
   scope :with_tag, -> tag_name { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_liked, -> { includes([:idea_tags]).order(likes_num: "DESC").first(5) }
-  scope :most_viewed, -> { includes([:idea_tags]).order(view: "DESC").first(5) }
-  scope :most_commented, -> { includes([:idea_tags]).order(comments_num: "DESC").first(5) }
-  scope :recent_select, -> { where(published_at: 40.days.ago..Time.now) }
+  scope :most_commented, -> { includes([:idea_tags]).order(comments_num: "DESC") }
+  scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
+  scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
 
   def user
-    return User.find_by(id: self.user_id)
+    return User.find_by!(id: self.user_id)
   end
 
   def published_time
-    published_at.strftime("%Y.%m.%d")
+    published_at&.strftime("%Y.%m.%d")
   end
 
   def created_time
     created_at.strftime("%Y.%m.%d")
   end
 
-  def views_update(id)
-    idea_view = Analytics.new.idea_report('pageviews', id)
-    update(view: idea_view.to_i)
-  end
-
-  def self.search(name: nil, difficulty: nil)
+  def self.search(name: nil, difficulty: nil, product_apply: nil)
     # TODO: クソコードをリファクタ
-    if name&.empty? && difficulty.nil?
+    if name.nil? && difficulty.nil? && product_apply.nil?
       published
     elsif name.present?
       where(["name like?", "%#{name}%"])
-    else difficulty.present?
+    elsif difficulty.present?
       where(difficulty: difficulty)
+    elsif product_apply.present?
+      where(product_apply: product_apply)
     end
   end
 
@@ -133,5 +135,34 @@ class Idea < ApplicationRecord
 
   def validate_tags_num
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
+  end
+
+  def create_notification_like!(current_user)
+    notification = current_user.active_notifications.find_or_initialize_by(
+      visitor_id: current_user.id,
+      visited_id: user_id,
+      idea_id: id,
+      action: :like,
+    )
+    notification.save if notification.valid?
+  end
+
+  def create_notification_comment!(current_user, comment_id)
+    # アイデア作成者も含めたuser_id取得
+    user_ids = Comment.where(idea_id: id).map(&:user_id).push(self.user_id).uniq
+    user_ids.each do |user_id|
+      # 自分以外のコメントした人全員に通知を送る
+      next if user_id == current_user.id
+      save_notification_comment!(current_user, comment_id, user_id)
+    end
+  end
+
+  def save_notification_comment!(current_user, comment_id, visited_id)
+    current_user.active_notifications.create!(
+      visited_id: visited_id,
+      idea_id: self.id,
+      comment_id: comment_id,
+      action: :comment
+    )
   end
 end

@@ -15,7 +15,7 @@
     </li>
     <li class='hide-on-med-and-down'>
       <%= link_to '#', data: { target: "dropdown_rank" }, class:'dropdown-trigger white' do %>
-        <p><%= image_tag 'icons/rank.svg'%></p>
+        <p><%= embedded_svg 'icons/rank.svg', class: 'header__rank' %></p>
       <% end %>
       <ul id='dropdown_rank' class='dropdown-content'>
         <li>
@@ -31,6 +31,12 @@
         <li>
           <%= link_to search_ideas_path(sort: :view) do %>
             <i class="material-icons">visibility</i>View数ランキング
+          <% end %>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <%= link_to cooperations_path do %>
+            <i class="material-icons">groups</i>開発募集中のアイデア
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>
@@ -54,6 +60,7 @@
       <li class='nav-link hide-on-med-and-down'>
         <%= link_to 'アイデア投稿', new_idea_path, class: 'waves-effect btn orange-action-back' %>
       </li>
+      <%= render "common/header_notifications", notifications: @header_notifications %>
       <li class='hide-on-med-and-down'>
         <%= link_to '#', data: { target: "dropdown_user" }, class:'dropdown-trigger btn-floating btn-large white' do %>
           <% user_icon(current_user) %>
@@ -85,7 +92,7 @@
         <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back' %>
       </li>
     <% end %>
-    <div id="mobile-navigation-bar" class="hide-on-large-only">
+    <div id="mobile-navigation-bar" class="hide-on-large-only ml-3">
       <li id="humburger-menu" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></li>
       <div id="slide-out" class="sidenav">
         <li>
@@ -101,6 +108,11 @@
         <li>
           <%= link_to search_ideas_path(sort: :view) do %>
             <i class="material-icons">visibility</i>View数ランキング
+          <% end %>
+        </li>
+        <li>
+          <%= link_to cooperations_path do %>
+            <i class="material-icons">groups</i>開発募集中のアイデア
           <% end %>
         </li>
         <li>
@@ -151,4 +163,6 @@
       </div>
     </div>
   </ul>
+  <%# イベント時のヘッダー下リンク %>
+  <%= render 'layouts/header_event_link' %>
 </header>

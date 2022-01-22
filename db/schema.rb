@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_05_060234) do
+ActiveRecord::Schema.define(version: 2021_12_19_080816) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "cooperations", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "idea_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["idea_id", "user_id"], name: "index_cooperations_on_idea_id_and_user_id", unique: true
+    t.index ["idea_id"], name: "index_cooperations_on_idea_id"
+    t.index ["user_id"], name: "index_cooperations_on_user_id"
+  end
+
   create_table "difficulties", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "idea_id", null: false
@@ -88,6 +98,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
     t.integer "difficulty", default: 0
     t.boolean "draft", default: false
     t.integer "comments_num", default: 0
+    t.integer "cooperation", default: 0
     t.string "product_url"
     t.integer "product_apply", default: 0
     t.datetime "published_at"
@@ -102,6 +113,18 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
     t.index ["idea_id"], name: "index_likes_on_idea_id"
     t.index ["user_id", "idea_id"], name: "index_likes_on_user_id_and_idea_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "notifications", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "idea_id"
+    t.integer "comment_id"
+    t.integer "like_id"
+    t.integer "action", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
@@ -152,6 +175,8 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
+  add_foreign_key "cooperations", "ideas"
+  add_foreign_key "cooperations", "users"
   add_foreign_key "difficulties", "ideas"
   add_foreign_key "difficulties", "users"
   add_foreign_key "taggings", "ideas"

@@ -30,7 +30,7 @@
         <%= form.text_field :name, placeholder: 'アイデア名' %>
       </div>
       <div class="field">
-        <%= form.label :tags_up_to_three %>
+        <%= form.label :tags_up_to_three %><a class="help-tip tags ml-2">?</a>
         <div class="chips"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>

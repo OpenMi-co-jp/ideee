@@ -19,5 +19,5 @@ class Like < ApplicationRecord
   belongs_to :idea
   has_many :notifications, dependent: :destroy
 
-  scope :like_idea, -> { map{|n| Idea.find_by(id: n.idea_id) }.uniq }
+  scope :like_idea, -> { map{|n| Idea.find_by!(id: n.idea_id) } }
 end

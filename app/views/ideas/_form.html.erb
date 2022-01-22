@@ -40,7 +40,7 @@
       </div>
       <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
         <div class="field switch c-cooperation-switch">
-          <%= form.label :cooperation %>
+          <%= form.label :cooperation %><a class="help-tip cooperation-guide ml-2">?</a>
           <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
           <div class="switch c-cooperation-switch__btn">
             <label class="c-cooperation-switch__label">

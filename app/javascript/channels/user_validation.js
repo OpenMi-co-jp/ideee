@@ -12,10 +12,7 @@ $(document).on ('turbolinks:load', function(){
     if(invalid_selected_submit('#user_definition')) error_num++;
 
     if(error_num == 0){
-      console.log('1')
-      console.log($("#edit_user")[0])
       Rails.fire($("#edit_user")[0],'submit');
-      console.log('2')
     }
   });
 

@@ -13,6 +13,6 @@ class LikesController < ApplicationController
   private
 
   def idea_id
-    @idea = Idea.find(params[:id])
+    @idea = Idea.find_by!(id: params[:id])
   end
 end

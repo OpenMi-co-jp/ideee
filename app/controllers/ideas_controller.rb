@@ -11,28 +11,30 @@ class IdeasController < ApplicationController
     @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
     @liked_ideas = recent_ideas.order(likes_num: "DESC").first(5)
     @most_commented_ideas = recent_ideas.most_commented.first(10)
-    @on_board_ideas = ideas.where(cooperation: :ongoing).most_commented.first(5)
+    @on_board_ideas = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
     @deployed_ideas = ideas.deployed.order(updated_at: "DESC").first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
-    @weekly_commented_users = @commented_users_array.map{|u| User.find(u[0])}
+    @weekly_commented_users = @commented_users_array.map{|u| User.find_by!(id: u[0])}
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
     @idea_publisher_array = recent_ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
-    @monthly_published_users = @idea_publisher_array.map{|u| User.find(u[0])}
+    @monthly_published_users = @idea_publisher_array.map{|u| User.find_by!(id: u[0])}
+    @popular_tags = Tag.recent_tags.popular_tags
   end
 
   def show
     @title = @idea.name
-    @user = User.find_by(id: @idea.user_id)
+    @user = User.find_by!(id: @idea.user_id)
     @levels = Difficulty.levels
     if Rails.env.production?
-      @idea.views_update(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
-      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' # 製作者にのみ見える、アイデアページの滞在時間を設定
+      AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
+      # 製作者にのみ見える、アイデアページの滞在時間を設定
+      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' if current_user&.own?(@idea)
     else
       @time_on_page = '-'
     end
     gon.idea_id = @idea.id # JSにアイデアのIDを渡す
-    Notification.find(params[:notification]).update(checked: true) if params[:notification]
+    Notifications::UpdateReadJob.perform_later(params[:notification]) if params[:notification]
   end
 
   def new
@@ -48,9 +50,9 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
-        SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
-        SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+        Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
         @idea.update!(published_at: Time.now)
         redirect_to @idea, notice: t('.success')
       end
@@ -65,11 +67,11 @@ class IdeasController < ApplicationController
     if @idea.save_with_tags(tags_params)
       params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
       if params[:commit] == t('default.publish') && Rails.env.production?
-        TwitterTweet.new.tweet(@idea, idea_url(@idea.id))
-        SlackNotifier.new.send(@idea, idea_url(@idea.id)) if Rails.env.production?
+        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
+        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         @idea.update!(published_at: Time.now)
       end
-      SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+      Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
       redirect_to @idea, notice: message
     else
@@ -110,16 +112,16 @@ class IdeasController < ApplicationController
   end
 
   def publish
-    @idea.update(draft: false, published_at: Time.now)
-    TwitterTweet.new.tweet(@idea, idea_url(@idea.id)) if Rails.env.production?
-    SlackNotifier.new.send(@idea, idea_url(@idea.id))
-    SlackNotifier.new.apply_send(@idea, idea_url(@idea.id))
+    @idea.update!(draft: false, published_at: Time.now)
+    TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+    Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
+    Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
     redirect_to @idea, notice: t('.success')
   end
 
   private
     def set_idea
-      @idea = Idea.find(params[:id])
+      @idea = Idea.find_by!(id: params[:id])
     end
 
     # ストロングパラメーターを設定

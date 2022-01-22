@@ -16,21 +16,21 @@ class UsersController < ApplicationController
     @like_ideas = Kaminari.paginate_array(@user.likes.like_idea).page(params[:like_ideas]).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
     # 後でリファクタする
-    @commented_ideas = Kaminari.paginate_array(@user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by(id: n) }.select{ |i| i.user_id != @user.id }).page(params[:comment_ideas]).per(10)
-    @user.point_update # Contributionの計算/更新
+    @commented_ideas = Kaminari.paginate_array(@user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by!(id: n) }.select{ |i| i.user_id != @user.id }).page(params[:comment_ideas]).per(10)
+    UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
     @user.check_defined? # definedのチェック/更新
-    Notification.find(params[:notification]).update(checked: true) if params[:notification]
+    Notification.find_by!(id: params[:notification]).update!(checked: true) if params[:notification]
   end
 
   def search
     if params[:sort] == "weekly_comments"
       comments = Comment.weekly_comments
       users_array = comments.pickup_user_commets(comments.length)
-      list = users_array.map{|u| User.find(u[0])}
+      list = users_array.map{|u| User.find_by!(id: u[0])}
     elsif params[:sort] == "monthly_published"
       ideas = Idea.published.recent_select
       users_array = ideas.pickup_user_nums(ideas.length)
-      list = users_array.map{|u| User.find(u[0])}
+      list = users_array.map{|u| User.find_by!(id: u[0])}
     else
       list = User.defined_user.search(params[:key]).order(point: "DESC")
     end
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   private
 
   def page_user
-    @user = User.find(params[:id])
+    @user = User.find_by!(id: params[:id])
   end
 
   def own_user?

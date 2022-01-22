@@ -96,7 +96,7 @@ class User < ApplicationRecord
     end
 
     def signin_how(email)
-      case find_by(email: email).provider
+      case find_by!(email: email).provider
       when nil
         'メール'
       when 'twitter'
@@ -118,6 +118,7 @@ class User < ApplicationRecord
 
   def check_defined?
     bool = name.present? && confirmed_at.present? && definition.present?
+    return true if defined && bool
     update(defined: bool) # 名前、メール確認日時、タイプの有無を真偽値として保存
     return bool
   end
@@ -146,8 +147,8 @@ class User < ApplicationRecord
   end
 
   def create_comment(params)
-    comments.create(idea_id: params[:idea_id], description: params[:description])
-    Idea.find(params[:idea_id]).count_comments if params[:idea_id].present?
+    comments.create!(idea_id: params[:idea_id], description: params[:description])
+    Idea.find_by!(id: params[:idea_id]).count_comments if params[:idea_id].present?
   end
 
   def cooperation_joined?(idea)

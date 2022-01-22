@@ -61,7 +61,7 @@ class Idea < ApplicationRecord
   scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
 
   def user
-    return User.find_by(id: self.user_id)
+    return User.find_by!(id: self.user_id)
   end
 
   def published_time
@@ -70,11 +70,6 @@ class Idea < ApplicationRecord
 
   def created_time
     created_at.strftime("%Y.%m.%d")
-  end
-
-  def views_update(id)
-    idea_view = Analytics.new.idea_report('pageviews', id)
-    update(view: idea_view.to_i)
   end
 
   def self.search(name: nil, difficulty: nil, product_apply: nil)

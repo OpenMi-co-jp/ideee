@@ -43,7 +43,9 @@ Rails.application.routes.draw do
   get 'privacy_policy' => 'high_voltage/pages#show', id: 'privacy_policy'
   get 'terms_of_service' => 'high_voltage/pages#show', id: 'terms_of_service'
   get 'frequent_questions' => 'high_voltage/pages#show', id: 'frequent_questions'
+  get 'how_to_find_idea' => 'high_voltage/pages#show', id: 'how_to_find_idea'
   get 'new_year_event' => 'high_voltage/pages#show', id: 'new_year_event'
+  get 'events/valentine' => 'high_voltage/pages#show', id: 'events/valentine'
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

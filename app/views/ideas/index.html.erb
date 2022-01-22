@@ -46,6 +46,7 @@
           ideas: @liked_ideas %>
       </div>
       <div class="col s12 l4">
+        <%= render 'tags/popular_tags', object: @popular_tags %>
         <%= render 'ideas/index/featured_users',
           icon: '🚀',
           title: '今週の注目コメンテーター',
@@ -56,7 +57,6 @@
           title: '今月の注目アイデアマン',
           path: search_users_path(sort: :monthly_published),
           users: @monthly_published_users %>
-        <%= render 'tags/popular_tags', object: @popular_tags %>
       </div>
     </div>
     <div class="row">

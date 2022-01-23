@@ -25,7 +25,14 @@ ja:
       idea:
         name: アイデア名
         icon: アイコン
-        note: ノート
+        background: 背景
+        issue: イシュー
+        goal: ゴール
+        wish_function: メイン機能
+        hypothesis: 仮説（数値的）
+        target: ターゲット（ペルソナ）
+        similar: 類似サービス
+        note: 補足
         view: ビュー数
         tag_list: タグ
         tags_up_to_three: タグ（3つまで入力できます）

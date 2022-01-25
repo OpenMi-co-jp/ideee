@@ -5,7 +5,10 @@
   </div>
 <% elsif item == 'note' && @idea.note.to_s.length > 0 %>
   <div class="mh-3">
-    <b><%= t("activerecord.attributes.idea.#{item}") %></b>
+    <%# TODO:1ヶ月後に削除よてい %>
+    <% unless @idea.note.to_s.include?('補足') %>
+      <b><%= t("activerecord.attributes.idea.#{item}") %></b>
+    <% end %>
     <%== @idea&.note %>
   </div>
 <% end %>

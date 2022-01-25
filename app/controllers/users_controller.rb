@@ -16,7 +16,6 @@ class UsersController < ApplicationController
     # 自分のアイデア以外でコメントしたアイデアを表示
     @commented_ideas = @user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by!(id: n) }.select{ |i| i.user_id != @user.id }
     UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
-    @user.check_defined? # definedのチェック/更新
     Notification.find_by!(id: params[:notification]).update!(checked: true) if params[:notification]
   end
 

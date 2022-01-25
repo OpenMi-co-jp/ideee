@@ -21,10 +21,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-    # super
-    # current_user.active_relationships.update(update_params)
-  # end
+  def update
+    super
+    bool = resource.name.present? && resource.confirmed_at.present? && resource.definition.present?
+    resource.update!(defined: bool)
+  end
 
   # DELETE /resource
   # def destroy

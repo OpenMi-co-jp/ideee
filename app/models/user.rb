@@ -116,13 +116,6 @@ class User < ApplicationRecord
     provider == 'twitter' && !email.blank? && super
   end
 
-  def check_defined?
-    bool = name.present? && confirmed_at.present? && definition.present?
-    return true if defined && bool
-    update(defined: bool) # 名前、メール確認日時、タイプの有無を真偽値として保存
-    return bool
-  end
-
   # ユーザーに紐づいたobjectの所有者を判断
   def own?(object)
     id == object.user_id

@@ -83,8 +83,7 @@ header {
   }
 }
 
-.debug-display {
-  display: flex;
-  justify-content: center;
-  color: red;
+.dev-text {
+  text-align: center;
+  background-color: rgba(191,191,191,0.8)
 }

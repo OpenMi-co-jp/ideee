@@ -113,9 +113,9 @@ hr {
 }
 
 // 必須項目の印
-.required:after {
-  font-size: large;
-  content: " *";
+.required:before {
+  font-size: x-large;
+  content: "* ";
   color: red;
 }
 
@@ -126,6 +126,11 @@ hr {
 
 .max-width {
   width: 100%;
+}
+
+// materialize cssのための調整
+.field {
+  padding: .5rem 0 1rem;
 }
 
 // bootstrap的margin, paddingの設定

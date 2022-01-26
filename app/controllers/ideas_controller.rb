@@ -38,7 +38,7 @@ class IdeasController < ApplicationController
   end
 
   def new
-    @idea = Idea.new(note: t('.default_set')) # アイデア新規作成時のフォーマットを設定
+    @idea = Idea.new
   end
 
   def edit; end
@@ -127,7 +127,9 @@ class IdeasController < ApplicationController
     # ストロングパラメーターを設定
     def idea_params
       params.require(:idea)
-            .permit(:name, :icon, :note, :view, :user_id, :commit, :product_url)
+            .permit(
+              :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :note, :view, :user_id, :commit, :product_url
+            )
             .merge(user_id: current_user.id)
             .merge(draft: draft_bool)
     end

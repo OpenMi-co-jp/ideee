@@ -67,10 +67,6 @@ ja:
         title: ロック解除
         submit: ロックを解除する
   ideas:
-    new:
-      default_set:  "<strong>困っていること</strong><br><br><br>
-                      <strong>どうなって欲しいか</strong><br><br><br>
-                      <strong>補足</strong><br><br>"
     show:
       page: idea-show
     create:

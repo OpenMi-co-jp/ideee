@@ -12,6 +12,7 @@ $(document).on ('turbolinks:load', function(){
     indicators: true
   });
   $('ul.tabs').tabs(); // nav tabsの初期設定
+  $('input#idea_name').characterCounter(); // テキスト入力の文字制限表示
 
   $('.sidenav').sidenav({
     closeOnClick: true,

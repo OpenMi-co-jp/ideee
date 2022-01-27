@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_072830) do
+ActiveRecord::Schema.define(version: 2022_01_26_143828) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -102,8 +102,8 @@ ActiveRecord::Schema.define(version: 2022_01_22_072830) do
     t.string "product_url"
     t.integer "product_apply", default: 0
     t.datetime "published_at"
-    t.string "background", null: false
-    t.string "goal", null: false
+    t.string "background"
+    t.string "goal"
     t.string "issue"
     t.string "wish_function"
     t.string "hypothesis"

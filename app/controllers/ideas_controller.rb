@@ -29,7 +29,7 @@ class IdeasController < ApplicationController
     if Rails.env.production?
       AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
       # 製作者にのみ見える、アイデアページの滞在時間を設定
-      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' if current_user&.own?(@idea)
+      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id])
     else
       @time_on_page = '-'
     end

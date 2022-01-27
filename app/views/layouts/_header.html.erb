@@ -165,9 +165,5 @@
   </ul>
   <%# イベント時のヘッダー下リンク %>
   <%= render 'layouts/header_event_link' %>
-  <% if Rails.env.development? %>
-    <div class="dev-text">
-      現在は開発環境です。
-    </div>
-  <% end %>
+  <%= render 'layouts/header_dev_mark' %>
 </header>

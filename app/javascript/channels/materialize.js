@@ -102,4 +102,59 @@ $(document).on ('turbolinks:load', function(){
   $('#cooperation_switch').on('click', function () {
     $('#idea_cooperation_switch').val($(this).prop('checked'))
   });
+
+  // select用validation
+  M.init_validate_select = function () {
+    const _requiredSelects = $("select[required].validate");
+  
+    // inputセレクタはMaterializeで自動生成される要素のため、
+    // あらかじめhelper-textをhtml側で設定できないため、JS側で動的にinputセレクタの後に、
+    // helper-textが来る様にしている。
+    _requiredSelects.each(function(){
+      const _this = $(this);
+      const _helper = _this.parent().parent().find('.helper-text');
+      if (_helper !== undefined) {
+        const _input = _this.parent().find('input');
+        _helper.insertAfter(_input);
+      }
+    });
+  };
+
+  M.init_validate_select();
+
+  M.validate_select_field = function (object) {
+    const _select = object;
+    const _value = $(_select).val();
+    const _input = $(_select).parent().find('input');
+    _input.removeAttr('readonly', '');
+
+    if (_value != '') {
+      _input.addClass('valid');
+      _input.removeClass('invalid');
+    } else {
+      _input.addClass('invalid');
+      _input.removeClass('valid');
+    }    
+  };
+
+  var input_selector = 'select[required].validate'
+  $(document).on('change', input_selector, function () {
+    M.validate_select_field($(this));
+  });
+
+  $(document).on('blur', input_selector, function () {
+    M.validate_select_field($(this));
+  });
+
+  M.validate_field_submit = function (object) {
+    var len = object[0].value.length; 
+
+    if (len === 0 && object[0].validity.badInput === false && object.is(':required')) {
+      if (object.hasClass('validate')) {
+        object.addClass('invalid');
+        object.removeClass('valid');
+      }
+    } 
+  };
+  
 })

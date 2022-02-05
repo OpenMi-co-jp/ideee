@@ -104,13 +104,11 @@ $(document).on ('turbolinks:load', function(){
   });
 
   // select用validation
-  M.init_validate_select = function () {
-    const _requiredSelects = $("select[required].validate");
-  
+  M.init_validate_select = function () {  
     // inputセレクタはMaterializeで自動生成される要素のため、
     // あらかじめhelper-textをhtml側で設定できないため、JS側で動的にinputセレクタの後に、
     // helper-textが来る様にしている。
-    _requiredSelects.each(function(){
+    $("select[required].validate").each(function(){
       const _this = $(this);
       const _helper = _this.parent().parent().find('.helper-text');
       if (_helper !== undefined) {
@@ -146,15 +144,24 @@ $(document).on ('turbolinks:load', function(){
     M.validate_select_field($(this));
   });
 
-  M.validate_field_submit = function (object) {
-    var len = object[0].value.length; 
-
-    if (len === 0 && object[0].validity.badInput === false && object.is(':required')) {
-      if (object.hasClass('validate')) {
-        object.addClass('invalid');
-        object.removeClass('valid');
+  M.validate_submit = function () {
+    var input_selector = 'input[type=text].validate, input[type=password].validate, input[type=email].validate, input[type=url].validate, input[type=tel].validate, input[type=number].validate, input[type=search].validate, input[type=date].validate, input[type=time].validate, textarea.validate';
+    $(input_selector).each(function (element, index) {
+      var _this = $(this);
+      var len = _this[0].value.length; 
+      if (len === 0 && _this[0].validity.badInput === false && _this.is(':required')) {
+        if (_this.hasClass('validate')) {
+          _this.addClass('invalid');
+          _this.removeClass('valid');
+        }
       }
-    } 
+    });
+
+    $("select[required].validate").each(function(){
+      M.validate_select_field($(this));
+    });
+
+    return $(".invalid").length;
   };
-  
+
 })

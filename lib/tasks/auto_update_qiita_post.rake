@@ -79,9 +79,16 @@ namespace :auto_update_qiita_post do
       title: title
     }
     client = HTTPClient.new
-    response = client.patch(url, header: header, query: query) #headerとqueryを指定
-
-    # HTTPステータスコードを表示
-    puts "Get stocks Status code #{response.code.to_i}"
+    begin
+      response = client.patch(url, header: header, query: query) #headerとqueryを指定
+      # HTTPステータスコードを表示
+      puts "Get stocks Status code #{response.code.to_i}"
+      if response.code.to_i != 200
+        SlackNotifier.new.send_error_report('Qiita自動投稿', response.http_header.reason_phrase)
+      end
+    rescue => e
+      puts "============rescue error #{e}========"
+      SlackNotifier.new.send_error_report('Qiita自動投稿', e)
+    end
   end
 end

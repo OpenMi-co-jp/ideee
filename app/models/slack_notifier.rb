@@ -42,6 +42,12 @@ class SlackNotifier
     Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
   end
 
+  def send_error_report(title, error)
+    channel = "#エラー報告channel"
+    article = "タイトル： #{title}\n--------------------\n#{error}"
+    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+  end
+
   def trial
     channel = "#times_なる"
     article = "テストデータ"

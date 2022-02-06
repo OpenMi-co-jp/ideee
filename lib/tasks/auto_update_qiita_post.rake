@@ -15,13 +15,26 @@ namespace :auto_update_qiita_post do
     # アイデア一括取得
     ideas = Idea.all
     # コメントランキングの作成
-    selected_items = ideas.recent_select.most_commented.first(8)
+    selected_items = ideas.recent_select.most_commented.first(10)
     body += idea_columns(selected_items)
 
     body += "## 🚀 新しいアイデア\n"
 
     new_items = ideas.recent_select.order(published_at: "DESC").first(10)
     body += idea_columns(new_items, new: true)
+
+    body += "## 👬 開発者募集中のアイデア\n"
+    cooperation_items = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
+    body += idea_columns(cooperation_items)
+
+    body += "```\n" + \
+      "ideeeはサービス開発の「もったいない」を無くすために努力していきます。\n" + \
+      "よろしければLGTMなどで応援よろしくお願いします🙇‍♂️\n" + \
+      "```\n\n" + \
+      "## 自己紹介\n" + \
+      "なる　　Twitter: [@1026NT](https://twitter.com/1026NT)\n" + \
+      "個人開発で発信中！フォローください！👏\n" + \
+      "<img src=\"https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/3db40e7d-3213-be1f-8650-c6ad5dff69c9.jpeg\" width=\"250px\">\n"
 
     body
   end
@@ -49,7 +62,7 @@ namespace :auto_update_qiita_post do
     body = ''
     items.map{ |item|
       body += "### #{new ? num : rank(num)}. [#{item.name}](#{analytics_url(item.id)})\n"
-      body += "**💬 : #{item.comments_num}**　　📮 : #{item.published_at.strftime("%Y/%m/%d")}\n"
+      body += "**💛 : #{item.likes_num}　　💬 : #{item.comments_num}**　　📮 : #{item.published_at.strftime("%Y / %m / %d")}\n"
 
       if item.idea_tags.length > 0
         item.idea_tags.map{|a| body += "`#{a.name}` " }
@@ -73,14 +86,17 @@ namespace :auto_update_qiita_post do
     title = "アイデア総数【#{Idea.all.length}】個人開発アイデアまとめ【毎日更新】"
 
     url = "https://qiita.com/api/v2/items/#{post_id}"
-    header = { "Authorization" => "Bearer #{Rails.application.credentials.dig(:qiita, :access_token)}" } # 例) ヘッダーに"Bearer xxxxx"を付与
-    query = {
+    header = {
+      "Authorization" => "Bearer #{Rails.application.credentials.dig(:qiita, :access_token)}",
+      "Content-Type" => "application/json"
+    } # 例) ヘッダーに"Bearer xxxxx"を付与
+    body = {
       body: make_body,
       title: title
-    }
+    }.to_json
     client = HTTPClient.new
     begin
-      response = client.patch(url, header: header, query: query) #headerとqueryを指定
+      response = client.patch(url, header: header, body: body) #headerとqueryを指定
       # HTTPステータスコードを表示
       puts "Get stocks Status code #{response.code.to_i}"
       if response.code.to_i != 200

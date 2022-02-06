@@ -10,24 +10,27 @@ namespace :auto_update_qiita_post do
       "アイデアとエンジニアのマッチングアプリ ideeeの最新アイデアを投稿中！\n"+ \
       "```\n" + \
       "https://www.ideee.tech/about?utm_source=qiita&utm_medium=post&utm_id=auto_post\n\n" + \
-      "## 🏆 ランキング（コメント）\n"
+      "## 🏆 ランキング（コメント）\n" + \
+      "`直近１ヶ月でコメントが盛り上がったアイデアをランキング化`\n"
 
     # アイデア一括取得
     ideas = Idea.all
     # コメントランキングの作成
     selected_items = ideas.recent_select.most_commented.first(10)
-    body += idea_columns(selected_items)
+    body += idea_columns(selected_items, rank: true)
 
-    body += "## 🚀 新しいアイデア\n"
+    body += "## 🚀 新しいアイデア\n" + \
+      "`最近投稿されたアイデアをピックアップ🐥`\n"
 
     new_items = ideas.recent_select.order(published_at: "DESC").first(10)
-    body += idea_columns(new_items, new: true)
+    body += idea_columns(new_items)
 
-    body += "## 👬 開発者募集中のアイデア\n"
+    body += "## 👬 チーム開発開発者募集中のアイデア\n" + \
+      "`最近更新されたチーム開発を募集しているアイデア`\n"
     cooperation_items = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
     body += idea_columns(cooperation_items)
 
-    body += "```\n\n" + \
+    body += "\n```\n" + \
       "ideeeはサービス開発の「もったいない」を無くすために努力していきます。\n" + \
       "よろしければLGTMなどで応援よろしくお願いします🙇‍♂️\n" + \
       "```\n\n" + \
@@ -57,11 +60,11 @@ namespace :auto_update_qiita_post do
     "https://www.ideee.tech/ideas/#{id}?utm_source=qiita_auto_post&utm_medium=post&utm_id=#{id}"
   end
 
-  def idea_columns(items, new: false)
+  def idea_columns(items, rank: false)
     num = 1
     body = ''
     items.map{ |item|
-      body += "### #{new ? num : rank(num)}. [#{item.name}](#{analytics_url(item.id)})\n"
+      body += "### #{rank ? rank(num) : num}. [#{item.name}](#{analytics_url(item.id)})\n"
       body += "**💛 : #{item.likes_num}　　💬 : #{item.comments_num}**　　📮 : #{item.published_at.strftime("%Y / %m / %d")}\n"
 
       if item.idea_tags.length > 0

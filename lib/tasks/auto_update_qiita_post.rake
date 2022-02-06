@@ -15,7 +15,7 @@ namespace :auto_update_qiita_post do
     # アイデア一括取得
     ideas = Idea.all
     # コメントランキングの作成
-    selected_items = ideas.recent_select.most_commented.first(10)
+    selected_items = ideas.recent_select.most_commented.first(8)
     body += idea_columns(selected_items)
 
     body += "## 🚀 新しいアイデア\n"

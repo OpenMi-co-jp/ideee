@@ -27,7 +27,7 @@ namespace :auto_update_qiita_post do
     cooperation_items = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
     body += idea_columns(cooperation_items)
 
-    body += "```\n" + \
+    body += "```\n\n" + \
       "ideeeはサービス開発の「もったいない」を無くすために努力していきます。\n" + \
       "よろしければLGTMなどで応援よろしくお願いします🙇‍♂️\n" + \
       "```\n\n" + \
@@ -72,6 +72,7 @@ namespace :auto_update_qiita_post do
 
       twitter_id = item.user.twitter_id
       body += "Twitter: [@#{twitter_id}](https://twitter.com/#{twitter_id})" if twitter_id.present?
+      body += "\n<img src=\"#{item.icon.to_s}\" height=\"150px\">\n" if item.icon.present?
       body += "\n"
       num += 1
     }

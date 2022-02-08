@@ -20,7 +20,7 @@
 #  published_at  :datetime
 #  similar       :string(255)
 #  target        :string(255)
-#  view          :integer
+#  view          :integer          default(0)
 #  wish_function :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -171,5 +171,10 @@ class Idea < ApplicationRecord
       comment_id: comment_id,
       action: :comment
     )
+  end
+
+  def increment_view
+    self.view += 1
+    self.save!
   end
 end

@@ -172,9 +172,4 @@ class Idea < ApplicationRecord
       action: :comment
     )
   end
-
-  def increment_view
-    self.view += 1
-    self.save!
-  end
 end

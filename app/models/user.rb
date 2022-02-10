@@ -159,6 +159,6 @@ class User < ApplicationRecord
   end
 
   def twitter_id_fix
-    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "") if twitter_id.present?
+    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\/|@/, "") if twitter_id.present?
   end
 end

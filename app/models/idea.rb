@@ -20,7 +20,7 @@
 #  published_at  :datetime
 #  similar       :string(255)
 #  target        :string(255)
-#  view          :integer
+#  view          :integer          default(0)
 #  wish_function :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

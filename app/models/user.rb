@@ -13,7 +13,7 @@
 #  encrypted_password     :string(255)      default(""), not null
 #  icon                   :string(255)
 #  name                   :string(30)       default("")
-#  point                  :integer
+#  point                  :integer          default(0)
 #  provider               :string(255)
 #  remember_created_at    :datetime
 #  remote_url             :string(255)
@@ -159,6 +159,6 @@ class User < ApplicationRecord
   end
 
   def twitter_id_fix
-    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\//, "") if twitter_id.present?
+    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\/|@/, "") if twitter_id.present?
   end
 end

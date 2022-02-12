@@ -103,17 +103,13 @@ $(document).on ('turbolinks:load', function(){
     $('#idea_cooperation_switch').val($(this).prop('checked'))
   });
 
-  // select用validation
+  // select用のhelper-textクラスの初期設定
   M.init_validate_select = function () {  
-    // inputセレクタはMaterializeで自動生成される要素のため、
-    // あらかじめhelper-textをhtml側で設定できないため、JS側で動的にinputセレクタの後に、
-    // helper-textが来る様にしている。
     $("select[required].validate").each(function(){
-      const _this = $(this);
-      const _helper = _this.parent().parent().find('.helper-text');
-      if (_helper !== undefined) {
-        const _input = _this.parent().find('input');
-        _helper.insertAfter(_input);
+      const element = $(this);
+      const helper = element.parent().parent().find('.helper-text');
+      if (helper !== undefined) {
+        helper.insertAfter(element.parent().find('input'));
       }
     });
   };
@@ -121,38 +117,32 @@ $(document).on ('turbolinks:load', function(){
   M.init_validate_select();
 
   M.validate_select_field = function (object) {
-    const _select = object;
-    const _value = $(_select).val();
-    const _input = $(_select).parent().find('input');
-    _input.removeAttr('readonly', '');
+    const select_value = $(object).val();
+    const input_element = $(object).parent().find('input');
+    input_element.removeAttr('readonly', '');
 
-    if (_value != '') {
-      _input.addClass('valid');
-      _input.removeClass('invalid');
+    if (select_value != '') {
+      input_element.addClass('valid');
+      input_element.removeClass('invalid');
     } else {
-      _input.addClass('invalid');
-      _input.removeClass('valid');
+      input_element.addClass('invalid');
+      input_element.removeClass('valid');
     }    
   };
 
-  var input_selector = 'select[required].validate'
-  $(document).on('change', input_selector, function () {
-    M.validate_select_field($(this));
-  });
-
-  $(document).on('blur', input_selector, function () {
+  $(document).on('change', 'select[required].validate', function () {
     M.validate_select_field($(this));
   });
 
   M.validate_submit = function () {
     var input_selector = 'input[type=text].validate, input[type=password].validate, input[type=email].validate, input[type=url].validate, input[type=tel].validate, input[type=number].validate, input[type=search].validate, input[type=date].validate, input[type=time].validate, textarea.validate';
     $(input_selector).each(function (element, index) {
-      var _this = $(this);
-      var len = _this[0].value.length; 
-      if (len === 0 && _this[0].validity.badInput === false && _this.is(':required')) {
-        if (_this.hasClass('validate')) {
-          _this.addClass('invalid');
-          _this.removeClass('valid');
+      var element = $(this);
+      var len = element[0].value.length; 
+      if (len === 0 && element[0].validity.badInput === false && element.is(':required')) {
+        if (element.hasClass('validate')) {
+          element.addClass('invalid');
+          element.removeClass('valid');
         }
       }
     });

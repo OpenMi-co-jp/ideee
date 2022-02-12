@@ -39,7 +39,7 @@
 
         <div class="field">
           <%= f.label :definition, class: 'required' %><br />
-          <%= f.select :definition ,User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' }, class: 'validate', required:'required' %>
+          <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' }, class: 'validate', required:'required' %>
           <span class="helper-text" data-error="タイプを選択してください。"></span>
         </div>
 
@@ -57,7 +57,7 @@
           <div>メールの確認待ち: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <%= f.button id: 'edit_user_submit' ,type:'button' ,class: 'btn orange-action-back mh-3' %>
+        <%= f.button id: 'edit_user_submit', type:'button' ,class: 'btn orange-action-back mh-3' %>
       </div>
     </div>
 

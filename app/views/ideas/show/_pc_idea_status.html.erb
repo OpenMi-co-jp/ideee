@@ -30,11 +30,9 @@
         <div class="c-pc-status-info__vote <%= idea.difficulty %>">
           <%= render 'difficultys/vote', object: idea %>
         </div>
-        <% if current_user&.own?(idea) %>
-          <div class='c-pc-status-info__time'>
-            <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
-          </div>
-        <% end %>
+        <div class='c-pc-status-info__time'>
+          <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
+        </div>
       </div>
       <%= render 'tags/links', object: idea %>
     </div>

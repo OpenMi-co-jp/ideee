@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_05_060234) do
+ActiveRecord::Schema.define(version: 2022_01_26_143828) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,13 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
     t.string "product_url"
     t.integer "product_apply", default: 0
     t.datetime "published_at"
+    t.string "background"
+    t.string "goal"
+    t.string "issue"
+    t.string "wish_function"
+    t.string "hypothesis"
+    t.string "target"
+    t.string "similar"
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 
@@ -113,6 +120,18 @@ ActiveRecord::Schema.define(version: 2021_12_05_060234) do
     t.index ["idea_id"], name: "index_likes_on_idea_id"
     t.index ["user_id", "idea_id"], name: "index_likes_on_user_id_and_idea_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "notifications", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "idea_id"
+    t.integer "comment_id"
+    t.integer "like_id"
+    t.integer "action", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|

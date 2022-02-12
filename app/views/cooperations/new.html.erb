@@ -13,11 +13,6 @@
       <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4' %>
       <p class=' gray-5 ml-1'><%= @idea.view %></p>
     </div>
-    <% if current_user&.own?(@idea) %>
-      <div>
-        <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
-      </div>
-    <% end %>
   </div>
   <div class='cooperation__idea-content'>
     <label>アイデア詳細</label>

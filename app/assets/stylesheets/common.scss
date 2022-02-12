@@ -71,8 +71,8 @@ div, p, b {
 }
 
 hr {
-  border: solid 3px #F5F5F5;
-  margin: 2rem 0;
+  border: solid 3px white;
+  margin: 3rem 0;
 }
 
 .date-small {
@@ -113,9 +113,9 @@ hr {
 }
 
 // 必須項目の印
-.required:after {
-  font-size: large;
-  content: " *";
+.required:before {
+  font-size: x-large;
+  content: "* ";
   color: red;
 }
 
@@ -126,6 +126,11 @@ hr {
 
 .max-width {
   width: 100%;
+}
+
+// materialize cssのための調整
+.field {
+  padding: .5rem 0 1rem;
 }
 
 // bootstrap的margin, paddingの設定

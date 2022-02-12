@@ -27,7 +27,7 @@ class SlackNotifier
       "承認待ちURL: #{object.product_url}\n承認する時のコマンド：\n```heroku run rake product_apply:send_approve[#{object.id}]```"
       channel = "#ideee_user_apply"
       Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
-      object.update(product_apply: :applying)
+      object.update!(product_apply: :applying)
     end
   end
 
@@ -44,7 +44,7 @@ class SlackNotifier
 
   def trial
     channel = "#times_なる"
-    article = "テストデータ"  
+    article = "テストデータ"
     Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
   end
 end

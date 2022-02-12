@@ -35,6 +35,12 @@ ja:
     users:
       weekly_comments_num: 5
       monthly_publisher_num: 10
+    sns:
+      share:
+        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=ideee&via=%{twitter_id}&related=ideee_tech&url=%{url}"
+        facebook: "https://www.facebook.com/share.php?u=%{url}"
+        line: "https://timeline.line.me/social-plugin/share?url=%{url}"
+        hatebu: "https://b.hatena.ne.jp/entry/%{url}"
   devise:
     confirmations:
       new:
@@ -61,17 +67,8 @@ ja:
         title: ロック解除
         submit: ロックを解除する
   ideas:
-    new:
-      default_set:  "<strong>困っていること</strong><br><br><br>
-                      <strong>どうなって欲しいか</strong><br><br><br>
-                      <strong>補足</strong><br><br>"
     show:
       page: idea-show
-      share:
-        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=ideee&via=%{twitter_id}&related=ideee_tech&url=%{url}"
-        facebook: "https://www.facebook.com/share.php?u=%{url}"
-        line: "https://timeline.line.me/social-plugin/share?url=%{url}"
-        hatebu: "https://b.hatena.ne.jp/entry/%{url}"
     create:
       success: アイデアの登録が完了しました
       draft_save: アイデアの下書きが保存されました

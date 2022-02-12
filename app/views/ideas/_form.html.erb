@@ -25,22 +25,57 @@
       </div>
     </div>
     <div class='idea-status-column col s12 l9'>
-      <div class="field">
-        <%= form.label :name, class: 'required' %>
-        <%= form.text_field :name, placeholder: 'アイデア名' %>
+      <div class="field input-field">
+        <%= form.text_field :name, placeholder: 'アイデア名', data: { length: 50 } %>
+        <%= form.label :name, class: 'required active' %>
       </div>
       <div class="field">
-        <%= form.label :tags_up_to_three %>
+        <%= form.label :tags_up_to_three %><a class="help-tip tags ml-2">?</a>
         <div class="chips"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
+      <div class="field input-field">
+        <%= form.text_area :background, placeholder: '背景やストーリー', class: 'materialize-textarea' %>
+        <%= form.label :background, class: 'required active' %>
+      </div>
+      <div class="field input-field">
+        <%= form.text_area :goal, placeholder: 'どうなって欲しいか', class: 'materialize-textarea' %>
+        <%= form.label :goal, class: 'required active' %>
+      </div>
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">expand_more</i>さらにブラッシュアップ</div>
+          <div class="collapsible-body">
+            <div class="field input-field">
+              <%= form.text_area :issue, placeholder: '課題・困っていること', class: 'materialize-textarea' %>
+              <%= form.label :issue, class: 'active' %>
+            </div>
+            <div class="field input-field">
+              <%= form.text_area :wish_function, placeholder: '欲しい機能', class: 'materialize-textarea' %>
+              <%= form.label :wish_function, class: 'active' %>
+            </div>
+            <div class="field input-field">
+              <%= form.text_area :hypothesis, placeholder: '検証のための仮説', class: 'materialize-textarea' %>
+              <%= form.label :hypothesis, class: 'active' %>
+            </div>
+            <div class="field input-field">
+              <%= form.text_area :target, placeholder: 'サービスを利用する典型的なユーザー像', class: 'materialize-textarea' %>
+              <%= form.label :target, class: 'active' %>
+            </div>
+            <div class="field input-field">
+              <%= form.text_area :similar, placeholder: '類似サービス・競合', class: 'materialize-textarea' %>
+              <%= form.label :similar, class: 'active' %>
+            </div>
+          </div>
+        </li>
+      </ul>
       <div class="field">
         <%= form.label :note %>
-        <%= form.rich_text_area :note %>
+        <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
       <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
         <div class="field switch c-cooperation-switch">
-          <%= form.label :cooperation %>
+          <%= form.label :cooperation %><a class="help-tip cooperation-guide ml-2">?</a>
           <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
           <div class="switch c-cooperation-switch__btn">
             <label class="c-cooperation-switch__label">

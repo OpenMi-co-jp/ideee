@@ -3,13 +3,14 @@ class CommentsController < ApplicationController
 
   def create
     current_user.create_comment(comment_params)
+    Idea.find_by!(id: comment_params[:idea_id]).create_notification_comment!(current_user, current_user.comments.last.id)
   end
 
   def edit; end
 
   def update
-    @idea = Idea.find(@comment.idea.id)
-    if @comment.update(comment_update_params)
+    @idea = Idea.find_by!(id: @comment.idea.id)
+    if @comment.update!(comment_update_params)
       redirect_to @idea, notice: t('.success')
     else
       flash.now[:alert] = t('.fail')
@@ -24,7 +25,7 @@ class CommentsController < ApplicationController
 
   def send_email
     return unless Rails.env.production?
-    @idea = Idea.find(comment_params[:idea_id])
+    @idea = Idea.find_by!(id: comment_params[:idea_id])
     @users = [@idea.user].push(@idea.comment_users.uniq).flatten
     @users.delete(current_user)
     return if @users.nil?
@@ -42,6 +43,6 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find(comment_params[:id])
+    @comment = Comment.find_by!(id: comment_params[:id])
   end
 end

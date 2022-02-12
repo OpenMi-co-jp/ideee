@@ -19,7 +19,7 @@ class CooperationsController < ApplicationController
   end
 
   def destroy
-    current_user.cooperations.find_by(idea: @idea).destroy
+    current_user.cooperations.find_by!(idea: @idea).destroy
     redirect_to @idea, notice: t('.success')
   end
 
@@ -40,6 +40,6 @@ class CooperationsController < ApplicationController
   private
 
   def set_idea
-    @idea = Idea.find(params[:idea_id])
+    @idea = Idea.find_by!(id: params[:idea_id])
   end
 end

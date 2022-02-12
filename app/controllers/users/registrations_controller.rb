@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    SlackNotifier.new.send(resource, user_url(resource&.id)) if Rails.env.production?
+    Slack::SendNewJob.perform_later(resource, user_url(resource&.id)) if Rails.env.production?
   end
 
   # GET /resource/edit
@@ -21,10 +21,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-    # super
-    # current_user.active_relationships.update(update_params)
-  # end
+  def update
+    super
+    bool = resource.name.present? && resource.confirmed_at.present? && resource.definition.present?
+    resource.update!(defined: bool)
+  end
 
   # DELETE /resource
   # def destroy

@@ -3,18 +3,25 @@
 # Table name: ideas
 #
 #  id            :bigint           not null, primary key
+#  background    :string(255)
 #  comments_num  :integer          default(0)
 #  cooperation   :integer          default("not_started")
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
+#  goal          :string(255)
+#  hypothesis    :string(255)
 #  icon          :string(255)
+#  issue         :string(255)
 #  likes_num     :integer          default(0)
 #  name          :string(255)
 #  note          :text(65535)
 #  product_apply :integer          default("no_apply")
 #  product_url   :string(255)
 #  published_at  :datetime
+#  similar       :string(255)
+#  target        :string(255)
 #  view          :integer
+#  wish_function :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  user_id       :bigint           not null
@@ -38,11 +45,13 @@ class Idea < ApplicationRecord
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :cooperations, dependent: :destroy
   has_many :cooperation_users, through: :cooperations, source: :user
+  has_many :notifications, dependent: :destroy
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :note, presence: true
+  validates :background, presence: true
+  validates :goal, presence: true
   validate :validate_tags_num
   validates :product_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
@@ -54,13 +63,13 @@ class Idea < ApplicationRecord
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_commented, -> { order(comments_num: "DESC") }
-  scope :recent_select, -> { where(published_at: 40.days.ago..Time.now) }
+  scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
 
   def user
-    return User.find_by(id: self.user_id)
+    return User.find_by!(id: self.user_id)
   end
 
   def published_time
@@ -71,19 +80,16 @@ class Idea < ApplicationRecord
     created_at.strftime("%Y.%m.%d")
   end
 
-  def views_update(id)
-    idea_view = Analytics.new.idea_report('pageviews', id)
-    update(view: idea_view.to_i)
-  end
-
-  def self.search(name: nil, difficulty: nil)
+  def self.search(name: nil, difficulty: nil, product_apply: nil)
     # TODO: クソコードをリファクタ
-    if name&.empty? && difficulty.nil?
+    if name.nil? && difficulty.nil? && product_apply.nil?
       published
     elsif name.present?
       where(["name like?", "%#{name}%"])
-    else difficulty.present?
+    elsif difficulty.present?
       where(difficulty: difficulty)
+    elsif product_apply.present?
+      where(product_apply: product_apply)
     end
   end
 
@@ -136,5 +142,34 @@ class Idea < ApplicationRecord
 
   def validate_tags_num
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
+  end
+
+  def create_notification_like!(current_user)
+    notification = current_user.active_notifications.find_or_initialize_by(
+      visitor_id: current_user.id,
+      visited_id: user_id,
+      idea_id: id,
+      action: :like,
+    )
+    notification.save if notification.valid?
+  end
+
+  def create_notification_comment!(current_user, comment_id)
+    # アイデア作成者も含めたuser_id取得
+    user_ids = Comment.where(idea_id: id).map(&:user_id).push(self.user_id).uniq
+    user_ids.each do |user_id|
+      # 自分以外のコメントした人全員に通知を送る
+      next if user_id == current_user.id
+      save_notification_comment!(current_user, comment_id, user_id)
+    end
+  end
+
+  def save_notification_comment!(current_user, comment_id, visited_id)
+    current_user.active_notifications.create!(
+      visited_id: visited_id,
+      idea_id: self.id,
+      comment_id: comment_id,
+      action: :comment
+    )
   end
 end

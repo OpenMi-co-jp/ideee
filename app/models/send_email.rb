@@ -46,7 +46,6 @@ class SendEmail
             <b>応募者情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               名前: #{user.name}<br>
-              #{twitter_url(user)}
               URL: #{analytics_url('users/'+user.id.to_s, 'join_cooperation', 'https://www.ideee.tech/users/'+user.id.to_s)}
             </div>
             <p>アイデアページに飛ぶ: #{analytics_url('ideas/'+idea.id.to_s, 'join_cooperation', 'https://www.ideee.tech/ideas/'+idea.id.to_s)}</p>
@@ -59,6 +58,24 @@ class SendEmail
     mail = Mail.new(@from, subject, to, content)
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
   end
+
+  def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
+    body = """
+            <h3 style='color: #FF862E;'>最近ハートが多かったアイデアベスト10💛</h3>
+            #{ranking_idea(liked_ideas)}
+            <hr>
+            <h3 style='color: #FF862E;'>最新の新着アイデア💡</h3>
+            #{new_idea_colum(new_ideas)}
+           """
+    subject = "【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡"
+    content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
+    users.map do |user|
+      to = Email.new(email: user&.email )
+      mail = Mail.new(@from, subject, to, content)
+      response = @sg.client.mail._('send').post(request_body: mail.to_json)
+    end
+  end
+
 
   def event_new_year
     body = """
@@ -103,16 +120,44 @@ class SendEmail
     end
   end
 
-  def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
+  def event_valentine
     body = """
-            <h3 style='color: #FF862E;'>最近ハートが多かったアイデアベスト10💛</h3>
-            #{ranking_idea(liked_ideas)}
+            <a href='https://www.ideee.tech/events/valentine?utm_source=event_mail&utm_medium=mail&utm_id=valentine' target='_blank'>
+              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/valentine_event.png' style='max-height: 400px; margin: 0 auto;'>
+            </a>
+            <h4 style='color: #FF862E;'>🍫ideeeバレンタイン1ヶ月キャンペーン🍫</h4>
             <hr>
-            <h3 style='color: #FF862E;'>最新の新着アイデア💡</h3>
-            #{new_idea_colum(new_ideas)}
-           """
-    subject = "【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡"
-    content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
+            <h3>キャンペーン内容</h3>
+            <ul style='font-size: 1.3rem;'>
+              <li style='font-size: 2.5rem; color: #FF862E;'>GODIVA ギフト券3000円分</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥇アイデアが盛り上がったで賞 １名</li>
+              <li style='font-size: 2rem; color: #D9C2AD;'>スタバ ギフトチケット1000円</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥈アイデアを実現した人先着 2名</li>
+              <li style='font-size: 1.5rem; color: #FFBF85;'>ハーゲンダッツ ギフト券</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥉アイデア投稿から抽選 2名</li>
+              <li style='font-size: 1.5rem; color: #FFBF85;'>ブラックサンダー ギフト券</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥉コメント投稿から抽選 2名</li>
+            </ul>
+            <h3>キャンペーン期間</h3>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              2022年1月17日(月)〜2022年2月16日(水)
+            </div>
+            <h3>キャンペーン対象の条件</h3>
+            <ul style='margin-bottom: 40px;'>
+              <li style='font-size: 1.5rem; color: #1B9DF0;'>1. Twitter IDをプロフィールに登録</li>
+              <li style='font-size: 1.5rem;'>2. 「バレンタイン」のタグをつけてアイデアを投稿🍫</li>
+              <span>もしくは</span>
+              <li style='font-size: 1.5rem;'>2. バレンタインのアイデアにコメントを投稿💬</li>
+            </ul>
+            <h4>
+              #{analytics_url('events/valentine', 'event_mail', '詳細はこちらのキャンペーンページにて')}
+            </h4>
+          """
+
+    subject = "🍫ideeeバレンタインキャンペーン🍫"
+    content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
+
+    users = User.all
     users.map do |user|
       to = Email.new(email: user&.email )
       mail = Mail.new(@from, subject, to, content)
@@ -121,12 +166,6 @@ class SendEmail
   end
 
   private
-
-  def twitter_url(user)
-    if user&.twitter_id.present?
-      "Twitter: #{analytics_url(user.twitter_id, 'join_cooperation', user.twitter_id)}<br>"
-    end
-  end
 
   def html_frame(body, source)
     """

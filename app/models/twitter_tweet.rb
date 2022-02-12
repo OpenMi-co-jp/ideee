@@ -9,7 +9,7 @@ class TwitterTweet
   end
 
   def tweet(idea, url)
-    user = User.find(idea.user_id)
+    user = User.find_by!(id: idea.user_id)
     twitter_user = user&.twitter_id.present? ? "@#{user.twitter_id} " : ''
     @client.update("【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#ideee\n#{url}")
   end

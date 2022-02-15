@@ -5,20 +5,20 @@
         <%= image_tag 'footer-logo.svg', alt: "ideee"%></li>
       <% end %>
       <ul class='col l3 m6 s12'>
-        <li class='white-text mb-3'><b>About</b></li>
+        <li class='footer-title'><b>About</b></li>
         <li><%= link_to 'アイディーについて', about_path, class: "white-text" %></li>
         <li><%= link_to 'アイデアの探し方', how_to_find_idea_path, class: "white-text" %></li>
         <li><%= link_to 'Twitter', "https://twitter.com/ideee_tech/", class: "white-text" , target: :_blank%></li>
         <li><%= link_to '月間トレンド', "https://qiita.com/naruqiita/items/0ef4b963434226eacb6b", class: "white-text" , target: :_blank %></li>
       </ul>
       <ul class='col l3 m6 s12'>
-        <li class='white-text mb-3'><b>Ranking</b></li>
+        <li class='footer-title'><b>Ranking</b></li>
         <li><%= link_to 'ハートランキング', search_ideas_path, class: "white-text" %></li>
         <li><%= link_to 'コメントランキング', search_ideas_path(sort: :comments_num), class: "white-text" %></li>
         <li><%= link_to 'View数ランキング', search_ideas_path(sort: :view), class: "white-text" %></li>
       </ul>
       <ul class='col l3 m6 s12'>
-        <li class='white-text mb-3'><b>Legal</b></li>
+        <li class='footer-title'><b>Legal</b></li>
         <li><%= link_to 'よくある質問', frequent_questions_path, class: "white-text" %></li>
         <li><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
         <li><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>

@@ -102,6 +102,7 @@ group :development do
   gem 'seed-fu'
   gem 'annotate'
   gem 'bullet'
+  gem 'brakeman'
 end
 
 group :test do

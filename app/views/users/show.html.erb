@@ -37,7 +37,7 @@
       </div>
       <% if @user.description.present? %>
         <div class="c-user-content mb-2">
-          <%== simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
+          <%= simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
         </div>
       <% end %>
       <% if own_user_checked(@user) %>

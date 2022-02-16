@@ -18,10 +18,16 @@ RSpec.describe Idea, type: :model do
       expect(idea.errors[:name]).to include("は50文字以内で入力してください")
     end
 
-    it 'noteがなかったら、ユーザー登録に失敗すること' do
-      idea = build(:idea, note: nil)
+    it 'backgroundがなかったら、ユーザー登録に失敗すること' do
+      idea = build(:idea, background: nil)
       idea.valid?
-      expect(idea.errors[:note]).to include("を入力してください")
+      expect(idea.errors[:background]).to include("を入力してください")
+    end
+
+    it 'goalがなかったら、ユーザー登録に失敗すること' do
+      idea = build(:idea, goal: nil)
+      idea.valid?
+      expect(idea.errors[:goal]).to include("を入力してください")
     end
   end
 end

@@ -1,0 +1,17 @@
+.c-dev-mark {
+  background-color: rgba(191,191,191,0.8);
+  display: flex;
+
+  &__items {
+    margin: 0 auto;
+    display: flex;
+
+    &--word {
+      padding: 3px;
+      font-size: 1.1rem;
+    }
+  }
+  i {
+    padding-top: 3px;
+  }
+}

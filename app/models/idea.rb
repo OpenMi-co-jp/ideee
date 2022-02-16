@@ -3,18 +3,25 @@
 # Table name: ideas
 #
 #  id            :bigint           not null, primary key
+#  background    :string(255)
 #  comments_num  :integer          default(0)
 #  cooperation   :integer          default("not_started")
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
+#  goal          :string(255)
+#  hypothesis    :string(255)
 #  icon          :string(255)
+#  issue         :string(255)
 #  likes_num     :integer          default(0)
 #  name          :string(255)
 #  note          :text(65535)
 #  product_apply :integer          default("no_apply")
 #  product_url   :string(255)
 #  published_at  :datetime
-#  view          :integer
+#  similar       :string(255)
+#  target        :string(255)
+#  view          :integer          default(0)
+#  wish_function :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  user_id       :bigint           not null
@@ -43,7 +50,8 @@ class Idea < ApplicationRecord
   mount_uploader :icon, ImageUploader
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :note, presence: true
+  validates :background, presence: true
+  validates :goal, presence: true
   validate :validate_tags_num
   validates :product_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
 
@@ -54,7 +62,8 @@ class Idea < ApplicationRecord
   scope :with_tag, -> tag_name { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_commented, -> { order(comments_num: "DESC") }
+  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: "DESC").first(5) }
+  scope :most_commented, -> { includes([:idea_tags]).order(comments_num: "DESC") }
   scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }

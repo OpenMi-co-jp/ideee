@@ -40,9 +40,20 @@
       </div>
       <div class='idea-content mb-2'>
         <% if current_user || @idea.approved? %>
-          <%== @idea.note %>
+          <%= render 'ideas/show/title_set', item: 'background' %>
+          <%= render 'ideas/show/title_set', item: 'goal' %>
+          <%= render 'ideas/show/title_set', item: 'issue' %>
+          <%= render 'ideas/show/title_set', item: 'wish_function' %>
+          <%= render 'ideas/show/title_set', item: 'hypothesis' %>
+          <%= render 'ideas/show/title_set', item: 'target' %>
+          <%= render 'ideas/show/title_set', item: 'similar' %>
+          <%= render 'ideas/show/title_set', item: 'note' %>
         <% else %>
-          <%= strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
+          <% if @idea&.background.length > 0 %>
+            <%= strip_tags(@idea&.background).gsub(/[\n]/, "").strip.truncate(60) %>
+          <% else %>
+            <%= strip_tags(@idea&.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
+          <% end %>
           <div class='white p-3'>
             <div class='flex login-guidance'>
               <div class='nav-item'>
@@ -58,8 +69,7 @@
           </div>
         <% end %>
         <% if @idea.approved? %>
-          <b><%= t("activerecord.attributes.idea.product_url") %></b>
-          <%== simple_format(text_url_to_link(@idea.product_url), {}, sanitize: false) %>
+          <%= render 'ideas/show/title_set', item: 'product_url' %>
         <% end %>
       </div>
       <% if current_user&.own?(@idea) %>

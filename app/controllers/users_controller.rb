@@ -18,7 +18,6 @@ class UsersController < ApplicationController
     # 後でリファクタする
     @commented_ideas = Kaminari.paginate_array(@user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by!(id: n) }.select{ |i| i.user_id != @user.id }).page(params[:comment_ideas]).per(10)
     UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
-    @user.check_defined? # definedのチェック/更新
     Notification.find_by!(id: params[:notification]).update!(checked: true) if params[:notification]
   end
 

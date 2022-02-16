@@ -24,4 +24,5 @@ require("channels/copy");
 require("channels/form");
 require("channels/comment");
 require("channels/sort");
+require("channels/kaminari");
 require("channels/dev-mark");

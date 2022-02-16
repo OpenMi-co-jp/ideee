@@ -92,12 +92,13 @@ class IdeasController < ApplicationController
     @order = params[:order] || "desc"
     @keyword = params[:keyword]
     # TODO: 検索結果が増えてきたらtag検索を分ける
+    base_ideas = Idea.includes([:idea_tags]).published
     ideas = if @keyword.present?
-              Idea.published.search(name: @keyword) | Idea.published.tag_name_like(@keyword)
+              base_ideas.search(name: @keyword) | base_ideas.tag_name_like(@keyword)
             else
-              Idea.published.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
+              base_ideas.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
             end
-    list = Idea.where(id: ideas.map(&:id)).order("#{@sort}": @order)
+    list = base_ideas.where(id: ideas.map(&:id)).order("#{@sort}": @order)
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value

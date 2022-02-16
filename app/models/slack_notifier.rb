@@ -34,7 +34,7 @@ class SlackNotifier
   def send_analytics_report(new_users, sessions)
     channel = "#analytics_bot"
     recent_ideas = Idea.published.recent_select.count
-    recent_comment_users = Comment.weekly_comments.map(&:user_id).uniq.count
+    recent_comment_users = Comment.weekly_comments.pluck(:user_id).uniq.count
     monthly_comments = Comment.where(created_at: 40.days.ago..Time.now).count.to_f
     article = "データ【#{Time.current.yesterday.strftime('%Y / %m/ %d')}】\n新しいユーザーセッション：#{new_users}👏 セッション数: #{sessions} 👀\n" +
               "40日以内のアイデア： #{recent_ideas}💡 今週のコメンテーター数： #{recent_comment_users}💬\n" +

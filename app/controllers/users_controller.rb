@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     comment_idea_list = @user.comment_ideas.includes([:idea_tags]).uniq.select{ |i| i.user_id != @user.id }
     @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_ideas]).per(10)
     UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
-    Notification.find_by!(id: params[:notification]).update!(checked: true) if params[:notification]
+    Notifications::UpdateReadJob.perform_later(params[:notification]) if params[:notification]
   end
 
   def search

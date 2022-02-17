@@ -1,4 +1,5 @@
 $(document).on ('turbolinks:load', function(){
+  if ($('body').data('page') != "ideas-show") { return }
 
   $('#comment').on('click', function(e) {
     e.preventDefault()

@@ -8,7 +8,7 @@ class IdeasController < ApplicationController
   def index
     ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
     recent_ideas = ideas.recent_select
-    @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
+    @latest_ideas = recent_ideas.includes([:user]).order(published_at: "DESC").first(10)
     @liked_ideas = recent_ideas.most_liked
     @most_commented_ideas = recent_ideas.most_commented.first(10)
     @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
@@ -89,7 +89,7 @@ class IdeasController < ApplicationController
     @order = params[:order] || "desc"
     @keyword = params[:keyword]
     # TODO: 検索結果が増えてきたらtag検索を分ける
-    base_ideas = Idea.includes([:idea_tags]).published
+    base_ideas = Idea.includes([:idea_tags, :user]).published
     ideas = if @keyword.present?
               base_ideas.search(name: @keyword) | base_ideas.tag_name_like(@keyword)
             else

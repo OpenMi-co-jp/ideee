@@ -112,8 +112,7 @@ class SendEmail
     subject = "ideee初のお年玉キャンペーン🎍10日間の盛り上がり"
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
-    users = User.all
-    users.map do |user|
+    User.find_each.map do |user|
       to = Email.new(email: user&.email )
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -157,8 +156,7 @@ class SendEmail
     subject = "🍫ideeeバレンタインキャンペーン🍫"
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
-    users = User.all
-    users.map do |user|
+    User.find_each.map do |user|
       to = Email.new(email: user&.email )
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)

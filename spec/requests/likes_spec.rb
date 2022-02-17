@@ -23,14 +23,14 @@ RSpec.describe "Likes", type: :request do
   describe 'DELETE #destroy' do
     let!(:like) { create(:like) }
     it 'リクエストが成功すること' do
-      delete like_path(like.idea.id)
+      delete like_path(like.idea_id)
       expect(response.status).to eq 204
     end
 
     # Likeの総数は減っているがdeleteメソッドでlikeを削除しているためActive Recordが反映されずテストが成功しない
     # it 'いいねが削除されること' do
     #   expect do
-    #     delete like_path(like.idea.id)
+    #     delete like_path(like.idea_id)
     #   end.to change(Like, :count).by(-1)
     # end
   end

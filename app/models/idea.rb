@@ -69,10 +69,6 @@ class Idea < ApplicationRecord
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
 
-  def user
-    return User.find_by!(id: self.user_id)
-  end
-
   def published_time
     published_at&.strftime("%Y.%m.%d")
   end
@@ -95,11 +91,11 @@ class Idea < ApplicationRecord
   end
 
   def count_likes
-    update(likes_num: like_users.count )
+    update(likes_num: like_users.size )
   end
 
   def count_comments
-    self.comments_num = comments.count
+    self.comments_num = comments.size
     save!
   end
 
@@ -124,11 +120,11 @@ class Idea < ApplicationRecord
 
   def update_difficulty
     # difficultyが一つしかなければ現在の値を代入
-    level = if difficultys.count == 1
+    level = if difficultys.size == 1
               difficultys[0].level
             else
               # 2つ以上であればgroup化して計算開始
-              levels_hash = difficultys.group(:level).count
+              levels_hash = difficultys.group(:level).size
               if levels_hash.map{ |n| n[1] }.max(2).uniq.length == 1
                 # もし最も多く使われる値が2つ以上ある場合
                 'middle'
@@ -147,9 +143,9 @@ class Idea < ApplicationRecord
 
   def create_notification_like!(current_user)
     notification = current_user.active_notifications.find_or_initialize_by(
-      visitor_id: current_user.id,
-      visited_id: user_id,
-      idea_id: id,
+      visitor: current_user,
+      visited: user,
+      idea: self,
       action: :like,
     )
     notification.save if notification.valid?
@@ -168,7 +164,7 @@ class Idea < ApplicationRecord
   def save_notification_comment!(current_user, comment_id, visited_id)
     current_user.active_notifications.create!(
       visited_id: visited_id,
-      idea_id: self.id,
+      idea: self,
       comment_id: comment_id,
       action: :comment
     )

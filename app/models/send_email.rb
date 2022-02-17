@@ -53,8 +53,7 @@ class SendEmail
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
     content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
 
-    idea_user = User.find_by!(id: idea.user_id)
-    to = Email.new(email: idea_user.email )
+    to = Email.new(email: idea.user.email )
     mail = Mail.new(@from, subject, to, content)
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
   end
@@ -112,8 +111,7 @@ class SendEmail
     subject = "ideee初のお年玉キャンペーン🎍10日間の盛り上がり"
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
-    users = User.all
-    users.map do |user|
+    User.find_each.map do |user|
       to = Email.new(email: user&.email )
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -157,8 +155,7 @@ class SendEmail
     subject = "🍫ideeeバレンタインキャンペーン🍫"
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
-    users = User.all
-    users.map do |user|
+    User.find_each.map do |user|
       to = Email.new(email: user&.email )
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -192,8 +189,7 @@ class SendEmail
   def ranking_idea(liked_ideas)
     str = ''
     liked_ideas.each.with_index(1) do |idea, i|
-      idea_user = User.find_by!(id: idea.user_id)
-      str += idea_ranking_item(rank(i), idea, idea_user)
+      str += idea_ranking_item(rank(i), idea)
     end
     return str
   end
@@ -201,18 +197,17 @@ class SendEmail
   def new_idea_colum(new_ideas)
     str = ''
     new_ideas.each.with_index(1) do |idea, i|
-      idea_user = User.find_by!(id: idea.user_id)
-      str += idea_ranking_item(number_list(i), idea, idea_user)
+      str += idea_ranking_item(number_list(i), idea)
     end
     return str
   end
 
-  def idea_ranking_item(i, idea, idea_user)
+  def idea_ranking_item(i, idea)
     """
       <div style='background-color: white; margin: 3px 0; padding: 5px; display: flex;'>
         <div style='display: flex;'>
           <b>#{i}　</b>#{analytics_url('ideas/'+idea.id.to_s, 'ranking', idea.name)}
-          　#{tag_box(idea&.idea_tags)}　<span>💛</span>&nbsp;#{idea.likes_num} by #{idea_user.name}
+          　#{tag_box(idea&.idea_tags)}　<span>💛</span>&nbsp;#{idea.likes_num} by #{idea.user.name}
         </div>
       </div>
     """

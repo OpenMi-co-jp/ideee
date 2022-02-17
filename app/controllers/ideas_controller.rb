@@ -8,7 +8,7 @@ class IdeasController < ApplicationController
   def index
     ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
     recent_ideas = ideas.recent_select
-    @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
+    @latest_ideas = recent_ideas.includes([:user]).order(published_at: "DESC").first(10)
     @liked_ideas = recent_ideas.most_liked
     @most_commented_ideas = recent_ideas.most_commented.first(10)
     @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
@@ -24,9 +24,6 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @title = @idea.name
-    @user = User.find_by!(id: @idea.user_id)
-    @levels = Difficulty.levels
     if Rails.env.production?
       AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
       # 製作者にのみ見える、アイデアページの滞在時間を設定
@@ -54,7 +51,7 @@ class IdeasController < ApplicationController
         TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
-        @idea.update!(published_at: Time.now)
+        @idea.update_attribute(:published_at, Time.now)
         redirect_to @idea, notice: t('.success')
       end
     else
@@ -70,7 +67,7 @@ class IdeasController < ApplicationController
       if params[:commit] == t('default.publish') && Rails.env.production?
         TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
         Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        @idea.update!(published_at: Time.now)
+        @idea.update_attribute(:published_at, Time.now)
       end
       Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
@@ -92,7 +89,7 @@ class IdeasController < ApplicationController
     @order = params[:order] || "desc"
     @keyword = params[:keyword]
     # TODO: 検索結果が増えてきたらtag検索を分ける
-    base_ideas = Idea.includes([:idea_tags]).published
+    base_ideas = Idea.includes([:idea_tags, :user]).published
     ideas = if @keyword.present?
               base_ideas.search(name: @keyword) | base_ideas.tag_name_like(@keyword)
             else
@@ -109,7 +106,7 @@ class IdeasController < ApplicationController
     @sort = params[:sort] || "likes_num"
     @order = params[:order] || "desc"
     @tag_name = params[:keyword]
-    list = Idea.with_tag(@tag_name).order("#{@sort}": @order)
+    list = Idea.includes([:idea_tags, :taggings]).with_tag(@tag_name).order("#{@sort}": @order)
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
@@ -132,8 +129,7 @@ class IdeasController < ApplicationController
             .permit(
               :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :note, :view, :user_id, :commit, :product_url
             )
-            .merge(user_id: current_user.id)
-            .merge(draft: draft_bool)
+            .merge(user: current_user, draft: draft_bool)
     end
 
     def own_user_check

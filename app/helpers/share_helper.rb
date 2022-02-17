@@ -3,7 +3,8 @@ module ShareHelper
     link_to link_url(media), target: '_blank' do
       image_tag "sns-icons/#{media}_icon.png",
         class: "c-share__icon #{'idea-show__share-icon' if t('.page') == 'idea-show'}",
-        alt: "#{media.capitalize} share"
+        alt: "#{media.capitalize} share",
+        loading: "lazy"
     end
   end
 

@@ -1,4 +1,6 @@
 $(document).on("turbolinks:load", function () {
+  if ($('body').data('page') != "users-show") { return }
+
   if($(location).attr('search').startsWith("?published_page") ) {
     $('#link1')[0].click();
   }

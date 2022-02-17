@@ -1,4 +1,4 @@
-carriwave_path = "./app/assets/images/ideee-tech-logo.svg"
+carriwave_path = "./app/assets/images/ideee-tech-logo"
 
 15.times do |n|
   num = n + 1

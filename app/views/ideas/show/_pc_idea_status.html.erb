@@ -6,7 +6,7 @@
           <%= user_definiton(idea.user) %>
         </p>
         <div class='col l6 flex'>
-          <%= link_to user_path(idea.user.id) do %>
+          <%= link_to user_path(idea.user_id) do %>
             <% user_icon(idea.user, size: 'small') %>
           <% end %>
           <p class='grid-middle'>

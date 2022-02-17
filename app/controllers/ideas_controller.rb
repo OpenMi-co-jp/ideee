@@ -24,9 +24,6 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @title = @idea.name
-    @user = User.find_by!(id: @idea.user_id)
-    @levels = Difficulty.levels
     if Rails.env.production?
       AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
       # 製作者にのみ見える、アイデアページの滞在時間を設定
@@ -54,7 +51,7 @@ class IdeasController < ApplicationController
         TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
-        @idea.update!(published_at: Time.now)
+        @idea.update_attribute(:published_at, Time.now)
         redirect_to @idea, notice: t('.success')
       end
     else
@@ -70,7 +67,7 @@ class IdeasController < ApplicationController
       if params[:commit] == t('default.publish') && Rails.env.production?
         TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
         Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        @idea.update!(published_at: Time.now)
+        @idea.update_attribute(:published_at, Time.now)
       end
       Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')

@@ -98,7 +98,7 @@ class IdeasController < ApplicationController
             else
               base_ideas.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
             end
-    list = base_ideas.where(id: ideas.map(&:id)).order("#{@sort}": @order)
+    list = base_ideas.where(id: ideas.pluck(:id)).order("#{@sort}": @order)
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value

@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_notifications
-    @header_notifications = current_user.passive_notifications.order(created_at: :desc).limit(5)
+    @header_notifications = current_user.passive_notifications.includes([:visitor, :idea, :comment]).order(created_at: :desc).limit(5)
   end
 
   def defined_user?

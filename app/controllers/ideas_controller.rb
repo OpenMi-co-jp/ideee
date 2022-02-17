@@ -132,8 +132,7 @@ class IdeasController < ApplicationController
             .permit(
               :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :note, :view, :user_id, :commit, :product_url
             )
-            .merge(user_id: current_user.id)
-            .merge(draft: draft_bool)
+            .merge(user: current_user, draft: draft_bool)
     end
 
     def own_user_check

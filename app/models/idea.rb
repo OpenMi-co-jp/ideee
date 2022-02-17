@@ -143,9 +143,9 @@ class Idea < ApplicationRecord
 
   def create_notification_like!(current_user)
     notification = current_user.active_notifications.find_or_initialize_by(
-      visitor_id: current_user.id,
-      visited_id: user_id,
-      idea_id: id,
+      visitor: current_user,
+      visited: user,
+      idea: self,
       action: :like,
     )
     notification.save if notification.valid?
@@ -164,7 +164,7 @@ class Idea < ApplicationRecord
   def save_notification_comment!(current_user, comment_id, visited_id)
     current_user.active_notifications.create!(
       visited_id: visited_id,
-      idea_id: self.id,
+      idea: self,
       comment_id: comment_id,
       action: :comment
     )

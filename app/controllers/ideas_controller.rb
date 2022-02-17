@@ -7,18 +7,18 @@ class IdeasController < ApplicationController
 
   def index
     ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
-    recent_ideas = ideas.recent_select
-    @latest_ideas = recent_ideas.includes([:user]).order(published_at: "DESC").first(10)
+    recent_ideas = ideas.recent_select.includes([:user])
+    @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
     @liked_ideas = recent_ideas.most_liked
     @most_commented_ideas = recent_ideas.most_commented.first(10)
     @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
-    @on_board_ideas = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
-    @deployed_ideas = ideas.deployed.order(updated_at: "DESC").first(5)
+    @on_board_ideas = ideas.includes([:user]).where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
+    @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: "DESC").first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
     @weekly_commented_users = @commented_users_array.map{|u| User.find_by!(id: u[0])}
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
-    @idea_publisher_array = recent_ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
+    @idea_publisher_array = ideas.recent_select.pickup_user_nums(t('default.users.monthly_publisher_num'))
     @monthly_published_users = @idea_publisher_array.map{|u| User.find_by!(id: u[0])}
     @popular_tags = Tag.recent_tags.popular_tags
   end

@@ -7,7 +7,7 @@ module UsersHelper
     elsif user.remote_url
       image_tag(user.remote_url, class: "icon-circle #{size}", loading: "lazy")
     else
-      image_tag('undefined_user_icon.png', class: "icon-circle #{size}", loading: "lazy")
+      image_tag('undefined_user_icon', class: "icon-circle #{size}", loading: "lazy")
     end
   end
 

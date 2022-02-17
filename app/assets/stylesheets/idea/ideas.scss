@@ -1,7 +1,7 @@
 .idea-index {
   .full-pic {
     min-height: 50vh;
-    background: url(idea_main.png) left / cover;;
+    background: url(idea_main) left / cover;;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 
@@ -32,7 +32,7 @@
 
     .back-color-board {
       min-height: 20vh;
-      background: url(background_orange.png) center / cover;
+      background: url(background_orange) center / cover;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
     }
@@ -268,7 +268,7 @@
     width: 100vw;
     height: 900px;
     z-index: -1;
-    background: url(concept.png) center / cover;
+    background: url(concept) center / cover;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 

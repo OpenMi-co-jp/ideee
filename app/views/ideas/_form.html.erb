@@ -15,10 +15,10 @@
     <div class='idea-column-img col s12 l3'>
       <div class="field">
         <%= form.label :icon %>
-        <%= image_tag '', id: "avatar_img_prev", class:"disabled"%>
+        <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy" %>
         <div class='present-img'>
           <% if idea.icon.file.present? %>
-            <%= image_tag(idea.icon.to_s) %>
+            <%= image_tag(idea.icon.to_s, loading: "lazy") %>
           <% end %>
         </div>
         <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3' %>

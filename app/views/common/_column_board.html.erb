@@ -20,11 +20,11 @@
               <p><%= idea.published_time %></p>
             </div>
             <div class='idea__comments'>
-              <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4' %>
+              <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4', loading: "lazy" %>
               <p class='gray-5 ml-2'><%= idea.comments_num %></p>
             </div>
             <div class='idea__eyes'>
-              <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4' %>
+              <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4', loading: "lazy" %>
               <p class=' gray-5 ml-1'><%= idea.view %></p>
             </div>
             <div class="idea__detail pc">

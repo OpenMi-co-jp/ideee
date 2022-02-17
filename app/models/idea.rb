@@ -95,11 +95,11 @@ class Idea < ApplicationRecord
   end
 
   def count_likes
-    update(likes_num: like_users.count )
+    update(likes_num: like_users.size )
   end
 
   def count_comments
-    self.comments_num = comments.count
+    self.comments_num = comments.size
     save!
   end
 
@@ -124,11 +124,11 @@ class Idea < ApplicationRecord
 
   def update_difficulty
     # difficultyが一つしかなければ現在の値を代入
-    level = if difficultys.count == 1
+    level = if difficultys.size == 1
               difficultys[0].level
             else
               # 2つ以上であればgroup化して計算開始
-              levels_hash = difficultys.group(:level).count
+              levels_hash = difficultys.group(:level).size
               if levels_hash.map{ |n| n[1] }.max(2).uniq.length == 1
                 # もし最も多く使われる値が2つ以上ある場合
                 'middle'

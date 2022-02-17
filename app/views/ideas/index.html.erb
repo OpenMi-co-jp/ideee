@@ -4,8 +4,7 @@
       <div class='full-pic'>
         <div class='top-page-before-login row'>
           <div class='orange-text'>
-            あなたのアイデアを
-            <br/>
+            あなたのアイデアを<br/>
             エンジニアと盛り上げる
           </div>
           <div class='mh-4'>
@@ -18,7 +17,7 @@
             )%>
             <%= link_to '登録する', new_user_registration_path, class: 'waves-effect btn orange-action-back new-user-button' %>
           </div>
-          <span class='gray-4'>現在のアイデア：</span>
+          <span class='gray-4'>現在のアイデア数：</span>
           <span class='orange-text'><%= Idea.all.length %></span>
         </div>
       </div>

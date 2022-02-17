@@ -109,7 +109,7 @@ class IdeasController < ApplicationController
     @sort = params[:sort] || "likes_num"
     @order = params[:order] || "desc"
     @tag_name = params[:keyword]
-    list = Idea.with_tag(@tag_name).order("#{@sort}": @order)
+    list = Idea.includes([:idea_tags, :taggings]).with_tag(@tag_name).order("#{@sort}": @order)
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 

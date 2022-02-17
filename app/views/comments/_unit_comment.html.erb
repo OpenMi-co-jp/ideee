@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class='c-unit-comment__info--description'>
-        <%== simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
+        <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
       </div>
       <div class="c-unit-comment__options <%= 'gray-3' unless owned %>">
         <% if owned %>

@@ -1,7 +1,7 @@
 <% if @idea["#{item}"].present? %>
   <div class="mh-3">
     <b><%= t("activerecord.attributes.idea.#{item}") %></b>
-    <%== simple_format(text_url_to_link(@idea["#{item}"]), {}, sanitize: false) %>
+    <%= simple_format(text_url_to_link(@idea["#{item}"]), {}, sanitize: false) %>
   </div>
 <% elsif item == 'note' && @idea.note.to_s.length > 0 %>
   <div class="mh-3">
@@ -9,6 +9,6 @@
     <% unless @idea.note.to_s.include?('補足') %>
       <b><%= t("activerecord.attributes.idea.#{item}") %></b>
     <% end %>
-    <%== @idea&.note %>
+    <%= @idea&.note %>
   </div>
 <% end %>

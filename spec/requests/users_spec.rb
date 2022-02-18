@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  let!(:user) { create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
 
   describe "GET #index" do
     subject { get users_path }
@@ -38,9 +38,9 @@ RSpec.describe "Users", type: :request do
   end
 
   describe 'GET #search' do
-    let!(:idea_man) { create(:user, :idea_man) }
-    let!(:engineer) { create(:user, :engineer) }
-    let!(:idea_engineer) { create(:user, :idea_engineer) }
+    let!(:idea_man) { FactoryBot.create(:user, :idea_man) }
+    let!(:engineer) { FactoryBot.create(:user, :engineer) }
+    let!(:idea_engineer) { FactoryBot.create(:user, :idea_engineer) }
     subject { get search_users_path, params: params }
     let(:params) { { } }
 

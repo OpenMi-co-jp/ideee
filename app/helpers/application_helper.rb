@@ -46,7 +46,7 @@ module ApplicationHelper
         type: 'website',
         url: request.original_url,
         locale: 'ja_JP',
-        image: cloudinary_url('main_ogp.jpg', sign_url: true, type: 'authenticated')
+        image: cloudinary_url('default_ogp.webp', sign_url: true, type: 'authenticated')
       },
       twitter: {
         card: 'summary_large_image',
@@ -70,7 +70,7 @@ module ApplicationHelper
         }, crop: "fit"
       }
     ]
-    cloudinary_url('ideee_ogp.jpg', sign_url: true, type: 'authenticated', transformation: transformation)
+    cloudinary_url('ideee_ogp_back.webp', sign_url: true, type: 'authenticated', transformation: transformation)
   end
 
   def get_ogp_font_size(title_len)

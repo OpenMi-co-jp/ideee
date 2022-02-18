@@ -22,6 +22,7 @@ RUN wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg |
 
 RUN set -x && apt-get update -y -qq && apt-get install -yq nodejs yarn
 
+# dockerの待機時間を指定
 ENV DOCKERIZE_VERSION v0.6.1
 RUN apt-get update && apt-get install -y wget \
     && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \

@@ -15,7 +15,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu 20.04.3
 
     services:
       mysql:
@@ -24,14 +24,14 @@ jobs:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
     container:
-      image: ruby:3.0
+      image: ruby:3.0,2
       env:
         RAILS_ENV: test
         MYSQL_HOST: db
         ImageOS: ubuntu18
     strategy:
       matrix:
-        ruby-version: ['3.0']
+        ruby-version: ['3.0.2']
 
 # trialで変更  
 #   test:

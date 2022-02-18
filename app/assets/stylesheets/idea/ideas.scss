@@ -1,9 +1,13 @@
 .idea-index {
   .full-pic {
     min-height: 50vh;
-    background: url(idea_main) left / cover;;
+    background: none;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
+
+    &.show {
+      background: url(idea_main) left / cover;
+    }
 
     .top-page-before-login {
       padding: 4rem 0;
@@ -268,9 +272,13 @@
     width: 100vw;
     height: 900px;
     z-index: -1;
-    background: url(concept) center / cover;
+    background: none;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
+
+    &.show {
+      background: url(concept) center / cover;
+    }
 
     .concept_title {
       position: absolute;

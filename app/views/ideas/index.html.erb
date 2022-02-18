@@ -1,7 +1,7 @@
 <div class='idea-index'>
   <div class='board'>
     <% unless current_user %>
-      <div class='full-pic'>
+      <div class="full-pic <%= 'show' unless current_user %>">
         <div class='top-page-before-login row'>
           <div class='orange-text'>
             あなたのアイデアを<br/>
@@ -76,7 +76,7 @@
     </div>
     <% unless current_user %>
       <div class="concept">
-        <div class="concept_bg">
+        <div class="concept_bg <%= 'show' unless current_user %>">
           <div class="concept_title">
             <p>CONCEPT</p>
           </div>

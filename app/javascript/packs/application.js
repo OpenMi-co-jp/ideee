@@ -28,3 +28,4 @@ require("channels/kaminari");
 require("channels/dev-mark");
 require("channels/carousel");
 require("channels/modal");
+require("channels/chips");

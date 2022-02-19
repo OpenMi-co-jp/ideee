@@ -30,7 +30,7 @@ module ApplicationHelper
 
   # デフォルトのOGPを設定して、OGPの記載がないページに設定
   def default_meta_tags
-    return if Rails.env.test?
+    return {} if Rails.env.test?
     {
       site: 'ideee.tech',
       title: 'ideee',

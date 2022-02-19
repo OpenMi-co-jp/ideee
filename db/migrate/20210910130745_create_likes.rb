@@ -4,7 +4,7 @@ class CreateLikes < ActiveRecord::Migration[6.1]
       t.references :user
       t.references :idea
 
-      t.index [:user_id, :idea_id], unique: true
+      t.index %i[user_id idea_id], unique: true
       t.timestamps
     end
   end

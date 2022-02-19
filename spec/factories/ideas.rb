@@ -30,7 +30,7 @@
 #
 #  index_ideas_on_user_id  (user_id)
 #
-carriwave_path = "./app/assets/images/idea_main"
+carriwave_path = './app/assets/images/idea_main'
 # これを書かないとなぜか関連モデルが作成されない
 FactoryBot.use_parent_strategy = false
 

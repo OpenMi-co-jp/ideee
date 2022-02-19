@@ -1,7 +1,7 @@
 class CooperationsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index ]
-  before_action :defined_check, except: %i[ index ]
-  before_action :set_idea, except: %i[ index ]
+  before_action :authenticate_user!, except: %i[index]
+  before_action :defined_check, except: %i[index]
+  before_action :set_idea, except: %i[index]
 
   def index
     list = Idea.includes([:idea_tags]).published.where(cooperation: :ongoing)
@@ -9,7 +9,7 @@ class CooperationsController < ApplicationController
   end
 
   def new
-    redirect_to @idea if !@idea.cooperation_not_started?
+    redirect_to @idea unless @idea.cooperation_not_started?
   end
 
   def create

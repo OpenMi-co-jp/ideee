@@ -58,7 +58,7 @@ module ApplicationHelper
 
   # Cloudinaryでの画像自動生成メソッド
   def return_ogp_url(title)
-    return if Rails.env.test?
+    return '' if Rails.env.test?
     title_len = title.length # 文字の大きさを調整
     size = get_ogp_font_size(title_len)
     transformation = [

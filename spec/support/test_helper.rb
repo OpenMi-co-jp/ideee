@@ -7,4 +7,5 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Features::SessionHelpers, type: :request
+  config.infer_spec_type_from_file_location!
 end

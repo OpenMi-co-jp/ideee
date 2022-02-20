@@ -9,7 +9,7 @@ name: Ruby
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
   pull_request:
     branches: [ dev ]
 
@@ -23,11 +23,20 @@ jobs:
       shell: bash
       run: |
         docker-compose build
+        docker-compose run web rails action_text:install
         docker-compose run web rails db:create
       env:
         RAILS_ENV: test
+        MYSQL_HOST: db
+
     - name: Rspec
       run:  |
-        docker-compose run web bundle exec rspec
+        docker-compose run web bundle exec rspec --exclude-pattern "spec/requests/*_spec.rb"
+      env:
+        RAILS_ENV: test
+
+    - name: Brakeman
+      run:  |
+        docker-compose run web bundle exec brakeman
       env:
         RAILS_ENV: test

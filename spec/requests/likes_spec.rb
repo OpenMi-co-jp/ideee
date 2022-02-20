@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Likes', type: :request do
-  let!(:user) { create(:user) }
-  let(:idea) { create(:idea) }
+  let!(:user) { FactoryBot.create(:user) }
+  let(:idea) { FactoryBot.create(:idea) }
 
   before { sign_in user }
   describe 'POST #create' do
@@ -21,7 +21,7 @@ RSpec.describe 'Likes', type: :request do
   end
 
   describe 'DELETE #destroy' do
-    let!(:like) { create(:like) }
+    let!(:like) { FactoryBot.create(:like) }
     it 'リクエストが成功すること' do
       delete like_path(like.idea_id)
       expect(response.status).to eq 204

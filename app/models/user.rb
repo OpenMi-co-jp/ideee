@@ -154,7 +154,7 @@ class User < ApplicationRecord
     idea_like_num = ideas.sum { |n| n.likes.length }
     comment_point = comments.length
     like_num = likes.length
-    sum_points = 2 * idea_num + 0.5 * like_num + idea_like_num + comment_point
+    sum_points = (2 * idea_num) + (0.5 * like_num) + idea_like_num + comment_point
     update(point: sum_points)
   end
 

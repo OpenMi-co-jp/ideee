@@ -1,5 +1,3 @@
-carriwave_path = './app/assets/images/ideee-tech-logo'
-
 attributes = {
   name: Faker::JapaneseMedia::Doraemon.gadget,
   background: Faker::Lorem.paragraph(sentence_count: 20),
@@ -15,7 +13,6 @@ attributes = {
     :id,
     {
       id: num,
-      icon: File.open(carriwave_path),
       user: User.find(num),
       **attributes
     }

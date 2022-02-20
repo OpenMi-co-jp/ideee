@@ -8,7 +8,7 @@ class SendEmail
   end
 
   def comment(users, commenter, idea, comment)
-    body = ''"
+    body = "
             <p>
               気になるコメントが来ました！さっそく反応してみましょう！
             </p>
@@ -23,7 +23,7 @@ class SendEmail
             </div>
             <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'comment',
                                                      'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
-          "''
+          "
     subject = "【ideee】【#{idea.name}】にコメントがきました💡"
     content = Content.new(type: 'text/html', value: html_frame(body, 'comment'))
 
@@ -41,7 +41,7 @@ class SendEmail
   end
 
   def join_cooperation(user, idea)
-    body = ''"
+    body = "
             <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
             <hr>
             <b>応募者情報</b>
@@ -52,7 +52,7 @@ class SendEmail
             </div>
             <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'join_cooperation',
                                                      'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
-          "''
+          "
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
     content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
 
@@ -62,13 +62,13 @@ class SendEmail
   end
 
   def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
-    body = ''"
+    body = "
             <h3 style='color: #FF862E;'>最近ハートが多かったアイデアベスト10💛</h3>
             #{ranking_idea(liked_ideas)}
             <hr>
             <h3 style='color: #FF862E;'>最新の新着アイデア💡</h3>
             #{new_idea_colum(new_ideas)}
-           "''
+           "
     subject = '【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡'
     content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
     users.map do |user|
@@ -79,7 +79,7 @@ class SendEmail
   end
 
   def event_new_year
-    body = ''"
+    body = "
             <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank'>
               <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;'>
             </a>
@@ -108,7 +108,7 @@ class SendEmail
             <h4>
               #{analytics_url('new_year_event', 'event_mail', '詳細はこちらのキャンペーンページにて')}
             </h4>
-          "''
+          "
 
     subject = 'ideee初のお年玉キャンペーン🎍10日間の盛り上がり'
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
@@ -121,7 +121,7 @@ class SendEmail
   end
 
   def event_valentine
-    body = ''"
+    body = "
             <a href='https://www.ideee.tech/events/valentine?utm_source=event_mail&utm_medium=mail&utm_id=valentine' target='_blank'>
               <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/valentine_event.png' style='max-height: 400px; margin: 0 auto;'>
             </a>
@@ -152,7 +152,7 @@ class SendEmail
             <h4>
               #{analytics_url('events/valentine', 'event_mail', '詳細はこちらのキャンペーンページにて')}
             </h4>
-          "''
+          "
 
     subject = '🍫ideeeバレンタインキャンペーン🍫'
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
@@ -167,7 +167,7 @@ class SendEmail
   private
 
   def html_frame(body, source)
-    ''"
+    "
       <html>
         <body>
           <div style='background-color: #FDF8EB; padding: 10px 20px;'>
@@ -185,7 +185,7 @@ class SendEmail
           </div>
         </body>
       </html>
-    "''
+    "
   end
 
   def ranking_idea(liked_ideas)
@@ -205,14 +205,14 @@ class SendEmail
   end
 
   def idea_ranking_item(i, idea)
-    ''"
+    "
       <div style='background-color: white; margin: 3px 0; padding: 5px; display: flex;'>
         <div style='display: flex;'>
           <b>#{i}　</b>#{analytics_url('ideas/' + idea.id.to_s, 'ranking', idea.name)}
           　#{tag_box(idea&.idea_tags)}　<span>💛</span>&nbsp;#{idea.likes_num} by #{idea.user.name}
         </div>
       </div>
-    "''
+    "
   end
 
   def rank(i)
@@ -236,19 +236,19 @@ class SendEmail
 
     str = ''
     tags.map do |t|
-      str += ''"
+      str += "
               <div style='border-radius: 5px; background-color: #F5F5F5; padding: 2px; margin: 2px; height: 20px;'>
                 #{t.name}
               </div>
-            "''
+            "
     end
     str
   end
 
   def analytics_url(path, source, content)
-    ''"
+    "
       <a href='https://www.ideee.tech/#{path}?utm_source=#{source}&utm_medium=mail&utm_id=#{path}', target: '_blank'>#{content}</a>
-    "''
+    "
   end
 
   def xss_support(text)

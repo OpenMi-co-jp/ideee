@@ -1,11 +1,10 @@
 module ApplicationHelper
   # OGPで使われるタイトルの設定
   def full_title(page_title = '')
-    base_title = 'ideee'
     if page_title.empty?
-      base_title
+      'ideee'
     else
-      "#{page_title} | #{base_title}"
+      "#{page_title} | ideee"
     end
   end
 
@@ -79,7 +78,6 @@ module ApplicationHelper
 
   def get_ogp_font_size(title_len)
     image_width = 480
-    image_height = 240
     max_font_size = 100
 
     size =  if title_len <= 9

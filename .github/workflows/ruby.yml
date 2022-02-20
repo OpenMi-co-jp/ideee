@@ -43,6 +43,6 @@ jobs:
 
     - name: Rubocop
       run:  |
-        docker-compose run web bundle exec rubocop
+        docker-compose run web bundle exec rubocop -a
       env:
         RAILS_ENV: test

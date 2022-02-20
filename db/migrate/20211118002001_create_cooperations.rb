@@ -7,6 +7,6 @@ class CreateCooperations < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_index :cooperations, [:idea_id, :user_id], unique: true
+    add_index :cooperations, %i[idea_id user_id], unique: true
   end
 end

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Ideas", type: :request do
+RSpec.describe 'Ideas', type: :request do
   let!(:idea) { FactoryBot.create(:idea) }
   before { sign_in idea.user }
 
-  describe "GET #index" do
-    it "リクエストが成功すること" do
+  describe 'GET #index' do
+    it 'リクエストが成功すること' do
       get ideas_path
       expect(response.status).to eq 200
     end

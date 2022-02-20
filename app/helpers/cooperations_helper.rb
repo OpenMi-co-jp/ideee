@@ -5,7 +5,7 @@ module CooperationsHelper
       '#modal_cooperation',
       data: { turbolinks: false },
       class: "waves-effect waves-light btn #{color} modal-trigger",
-      id: 'modal-trigger-cooperation',
+      id: 'modal-trigger-cooperation'
     )
   end
 end

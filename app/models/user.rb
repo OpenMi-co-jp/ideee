@@ -45,8 +45,8 @@ class User < ApplicationRecord
   has_many :difficulty_ideas, through: :difficultys, source: :idea
   has_many :cooperations, dependent: :destroy
   has_many :cooperation_ideas, through: :cooperations, source: :idea
-  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -56,7 +56,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
-  validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
+  validates :site_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   scope :defined_user, -> { where defined: true }
 
@@ -66,7 +66,7 @@ class User < ApplicationRecord
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
         when 'google_oauth2'
-          user.name = ""
+          user.name = ''
         when 'twitter'
           user.name = auth.info.name
           user.description = auth.info.description
@@ -78,9 +78,9 @@ class User < ApplicationRecord
         user.remote_url = auth.info.image
         user.confirmed_at = Time.now.utc
       end
-    rescue
+    rescue StandardError
       # メールアドレスが既に登録されていたら登録された方法をエラーで表示
-      raise "メールアドレス#{auth.info.email}のアカウントは#{ signin_how(auth.info.email) }で登録されています"
+      raise "メールアドレス#{auth.info.email}のアカウントは#{signin_how(auth.info.email)}で登録されています"
     end
 
     def new_with_session(_, session)
@@ -151,14 +151,14 @@ class User < ApplicationRecord
   # Contributionの計算
   def point_update
     idea_num = ideas.length
-    idea_like_num = ideas.sum{|n| n.likes.length }
+    idea_like_num = ideas.sum { |n| n.likes.length }
     comment_point = comments.length
     like_num = likes.length
-    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_point
+    sum_points = (2 * idea_num) + (0.5 * like_num) + idea_like_num + comment_point
     update(point: sum_points)
   end
 
   def twitter_id_fix
-    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\/|@/, "") if twitter_id.present?
+    self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
   end
 end

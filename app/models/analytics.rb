@@ -1,8 +1,8 @@
 require 'google/apis/analyticsreporting_v4'
 
 class Analytics
-  def initialize()
-    @view_id  = '246703226'
+  def initialize
+    @view_id = '246703226'
     @analytics = Google::Apis::AnalyticsreportingV4
     auth
   end
@@ -10,14 +10,14 @@ class Analytics
   def idea_report(demention, idea_id)
     date_range = @analytics::DateRange.new(start_date: '2021-07-01', end_date: 'today') # ideeeを作ってから本日までの期日範囲
     data = analytics_data(date_range, demention)
-    res_data = data&.rows.find {|i| i.dimensions == ["/ideas/#{idea_id}"]}
-    return res_data&.metrics&.first&.values&.first
+    res_data = data&.rows.find { |i| i.dimensions == ["/ideas/#{idea_id}"] }
+    res_data&.metrics&.first&.values&.first
   end
 
   def daily_total_count(demention)
     date_range = @analytics::DateRange.new(start_date: 'yesterday', end_date: 'yesterday') # 昨日から今日まで
     data = analytics_data(date_range, demention)
-    return data.totals.first&.values&.first.to_i
+    data.totals.first&.values&.first.to_i
   end
 
   def analytics_data(date_range, demention)
@@ -29,7 +29,7 @@ class Analytics
       )]
     )
     response = @client.batch_get_reports(request)
-    return response.reports.first.data
+    response.reports.first.data
   end
 
   private
@@ -42,5 +42,4 @@ class Analytics
       scope: scope
     )
   end
-
 end

@@ -2,6 +2,6 @@
   num = n + 1
   Tag.seed(
     :id,
-    { id: num, name: Faker::App.unique.name },
+    { id: num, name: Faker::App.unique.name }
   )
 end

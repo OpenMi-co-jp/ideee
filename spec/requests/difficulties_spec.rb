@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Difficulties", type: :request do
+RSpec.describe 'Difficulties', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let(:idea) { FactoryBot.create(:idea) }
 

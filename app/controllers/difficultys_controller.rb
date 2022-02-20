@@ -3,7 +3,7 @@ class DifficultysController < ApplicationController
 
   def create
     Difficulty.create!(level_params.merge(user: current_user))
-    @idea.update_difficulty
+    IdeaJob.UpdateDifficultyJob.perform_later(@idea.id)
     redirect_to @idea
   end
 

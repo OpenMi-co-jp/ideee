@@ -118,25 +118,6 @@ class Idea < ApplicationRecord
     idea_tags.pluck(:name).join(',')
   end
 
-  def update_difficulty
-    # difficultyが一つしかなければ現在の値を代入
-    level = if difficultys.size == 1
-              difficultys[0].level
-            else
-              # 2つ以上であればgroup化して計算開始
-              levels_hash = difficultys.group(:level).size
-              if levels_hash.map{ |n| n[1] }.max(2).uniq.length == 1
-                # もし最も多く使われる値が2つ以上ある場合
-                'middle'
-              else
-                # 最も多く使われる値が１つしかない場合
-                levels_hash.max_by{|x| x[1]}[0]
-              end
-            end
-    # ideaを出力されたlevelでupdate
-    update(difficulty: level)
-  end
-
   def validate_tags_num
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
   end

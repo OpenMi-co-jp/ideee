@@ -1,6 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    confirmations: "users/confirmations"
+  }
   root 'ideas#index'
   resources :ideas do
     collection do
@@ -16,11 +21,6 @@ Rails.application.routes.draw do
       post 'send_email'
     end
   end
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    confirmations: "users/confirmations"
-  }
   resources :users, only: %i[index show] do
     collection do
       get 'search'

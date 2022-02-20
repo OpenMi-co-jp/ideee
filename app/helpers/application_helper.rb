@@ -30,6 +30,7 @@ module ApplicationHelper
 
   # デフォルトのOGPを設定して、OGPの記載がないページに設定
   def default_meta_tags
+    return {} if Rails.env.test?
     {
       site: 'ideee.tech',
       title: 'ideee',
@@ -57,6 +58,7 @@ module ApplicationHelper
 
   # Cloudinaryでの画像自動生成メソッド
   def return_ogp_url(title)
+    return '' if Rails.env.test?
     title_len = title.length # 文字の大きさを調整
     size = get_ogp_font_size(title_len)
     transformation = [

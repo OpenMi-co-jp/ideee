@@ -4,7 +4,7 @@ class CooperationsController < ApplicationController
   before_action :set_idea, except: %i[ index ]
 
   def index
-    list = Idea.published.where(cooperation: :ongoing)
+    list = Idea.includes([:idea_tags]).published.where(cooperation: :ongoing)
     @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
@@ -19,6 +19,7 @@ class CooperationsController < ApplicationController
   end
 
   def destroy
+    # メソッドごと変えるので無視
     current_user.cooperations.find_by!(idea: @idea).destroy
     redirect_to @idea, notice: t('.success')
   end

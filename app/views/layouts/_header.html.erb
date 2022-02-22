@@ -2,7 +2,7 @@
   <ul class='header-body'>
     <li class='text-monospace header-logo'>
       <%= link_to root_path do %>
-        <%= image_tag 'ideee-tech-logo.svg',  alt: "ideee"%>
+        <%= image_tag 'ideee-tech-logo', alt: "ideee", loading: "lazy" %>
       <% end %>
     </li>
     <li class='serch_column flex'>
@@ -164,5 +164,6 @@
     </div>
   </ul>
   <%# イベント時のヘッダー下リンク %>
-  <%= render 'layouts/header_event_link' %>
+  <%# <%= render 'layouts/header_event_link' %>
+  <%= render 'layouts/header_dev_mark' %>
 </header>

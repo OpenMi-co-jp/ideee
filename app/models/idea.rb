@@ -3,12 +3,12 @@
 # Table name: ideas
 #
 #  id            :bigint           not null, primary key
-#  background    :string(255)      not null
+#  background    :string(255)
 #  comments_num  :integer          default(0)
 #  cooperation   :integer          default("not_started")
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
-#  goal          :string(255)      not null
+#  goal          :string(255)
 #  hypothesis    :string(255)
 #  icon          :string(255)
 #  issue         :string(255)
@@ -20,7 +20,7 @@
 #  published_at  :datetime
 #  similar       :string(255)
 #  target        :string(255)
-#  view          :integer
+#  view          :integer          default(0)
 #  wish_function :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -62,15 +62,12 @@ class Idea < ApplicationRecord
   scope :with_tag, -> tag_name { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_commented, -> { order(comments_num: "DESC") }
+  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: "DESC").first(5) }
+  scope :most_commented, -> { includes([:idea_tags]).order(comments_num: "DESC") }
   scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
-
-  def user
-    return User.find_by!(id: self.user_id)
-  end
 
   def published_time
     published_at&.strftime("%Y.%m.%d")
@@ -94,11 +91,11 @@ class Idea < ApplicationRecord
   end
 
   def count_likes
-    update(likes_num: like_users.count )
+    update(likes_num: like_users.size )
   end
 
   def count_comments
-    self.comments_num = comments.count
+    self.comments_num = comments.size
     save!
   end
 
@@ -118,16 +115,16 @@ class Idea < ApplicationRecord
   end
 
   def tag_list
-    idea_tags.map(&:name).join(',')
+    idea_tags.pluck(:name).join(',')
   end
 
   def update_difficulty
     # difficultyが一つしかなければ現在の値を代入
-    level = if difficultys.count == 1
+    level = if difficultys.size == 1
               difficultys[0].level
             else
               # 2つ以上であればgroup化して計算開始
-              levels_hash = difficultys.group(:level).count
+              levels_hash = difficultys.group(:level).size
               if levels_hash.map{ |n| n[1] }.max(2).uniq.length == 1
                 # もし最も多く使われる値が2つ以上ある場合
                 'middle'
@@ -146,9 +143,9 @@ class Idea < ApplicationRecord
 
   def create_notification_like!(current_user)
     notification = current_user.active_notifications.find_or_initialize_by(
-      visitor_id: current_user.id,
-      visited_id: user_id,
-      idea_id: id,
+      visitor: current_user,
+      visited: user,
+      idea: self,
       action: :like,
     )
     notification.save if notification.valid?
@@ -156,7 +153,7 @@ class Idea < ApplicationRecord
 
   def create_notification_comment!(current_user, comment_id)
     # アイデア作成者も含めたuser_id取得
-    user_ids = Comment.where(idea_id: id).map(&:user_id).push(self.user_id).uniq
+    user_ids = Comment.where(idea_id: id).pluck(:user_id).push(self.user_id).uniq
     user_ids.each do |user_id|
       # 自分以外のコメントした人全員に通知を送る
       next if user_id == current_user.id
@@ -167,7 +164,7 @@ class Idea < ApplicationRecord
   def save_notification_comment!(current_user, comment_id, visited_id)
     current_user.active_notifications.create!(
       visited_id: visited_id,
-      idea_id: self.id,
+      idea: self,
       comment_id: comment_id,
       action: :comment
     )

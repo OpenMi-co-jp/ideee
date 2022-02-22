@@ -41,8 +41,8 @@
       <div class='idea-content mb-2'>
         <% if current_user || @idea.approved? %>
           <%= render 'ideas/show/title_set', item: 'background' %>
-          <%= render 'ideas/show/title_set', item: 'issue' %>
           <%= render 'ideas/show/title_set', item: 'goal' %>
+          <%= render 'ideas/show/title_set', item: 'issue' %>
           <%= render 'ideas/show/title_set', item: 'wish_function' %>
           <%= render 'ideas/show/title_set', item: 'hypothesis' %>
           <%= render 'ideas/show/title_set', item: 'target' %>

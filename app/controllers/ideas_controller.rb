@@ -7,29 +7,27 @@ class IdeasController < ApplicationController
 
   def index
     ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
-    recent_ideas = ideas.recent_select
+    recent_ideas = ideas.recent_select.includes([:user])
     @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
-    @liked_ideas = recent_ideas.order(likes_num: "DESC").first(5)
+    @liked_ideas = recent_ideas.most_liked
     @most_commented_ideas = recent_ideas.most_commented.first(10)
-    @on_board_ideas = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
-    @deployed_ideas = ideas.deployed.order(updated_at: "DESC").first(5)
+    @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
+    @on_board_ideas = ideas.includes([:user]).where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
+    @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: "DESC").first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
     @weekly_commented_users = @commented_users_array.map{|u| User.find_by!(id: u[0])}
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
-    @idea_publisher_array = recent_ideas.pickup_user_nums(t('default.users.monthly_publisher_num'))
+    @idea_publisher_array = ideas.recent_select.pickup_user_nums(t('default.users.monthly_publisher_num'))
     @monthly_published_users = @idea_publisher_array.map{|u| User.find_by!(id: u[0])}
     @popular_tags = Tag.recent_tags.popular_tags
   end
 
   def show
-    @title = @idea.name
-    @user = User.find_by!(id: @idea.user_id)
-    @levels = Difficulty.levels
     if Rails.env.production?
       AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
       # 製作者にのみ見える、アイデアページの滞在時間を設定
-      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id]) || '-' if current_user&.own?(@idea)
+      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id])
     else
       @time_on_page = '-'
     end
@@ -53,7 +51,7 @@ class IdeasController < ApplicationController
         TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
-        @idea.update!(published_at: Time.now)
+        @idea.update_attribute(:published_at, Time.now)
         redirect_to @idea, notice: t('.success')
       end
     else
@@ -69,7 +67,7 @@ class IdeasController < ApplicationController
       if params[:commit] == t('default.publish') && Rails.env.production?
         TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
         Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        @idea.update!(published_at: Time.now)
+        @idea.update_attribute(:published_at, Time.now)
       end
       Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
       message = draft_bool ? t('.draft_save') : t('.success')
@@ -91,12 +89,13 @@ class IdeasController < ApplicationController
     @order = params[:order] || "desc"
     @keyword = params[:keyword]
     # TODO: 検索結果が増えてきたらtag検索を分ける
+    base_ideas = Idea.includes([:idea_tags, :user]).published
     ideas = if @keyword.present?
-              Idea.published.search(name: @keyword) | Idea.published.tag_name_like(@keyword)
+              base_ideas.search(name: @keyword) | base_ideas.tag_name_like(@keyword)
             else
-              Idea.published.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
+              base_ideas.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
             end
-    list = Idea.where(id: ideas.map(&:id)).order("#{@sort}": @order)
+    list = base_ideas.where(id: ideas.pluck(:id)).order("#{@sort}": @order)
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
@@ -107,7 +106,7 @@ class IdeasController < ApplicationController
     @sort = params[:sort] || "likes_num"
     @order = params[:order] || "desc"
     @tag_name = params[:keyword]
-    list = Idea.with_tag(@tag_name).order("#{@sort}": @order)
+    list = Idea.includes([:idea_tags, :taggings]).with_tag(@tag_name).order("#{@sort}": @order)
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
@@ -130,8 +129,7 @@ class IdeasController < ApplicationController
             .permit(
               :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :note, :view, :user_id, :commit, :product_url
             )
-            .merge(user_id: current_user.id)
-            .merge(draft: draft_bool)
+            .merge(user: current_user, draft: draft_bool)
     end
 
     def own_user_check

@@ -20,18 +20,18 @@
               <p><%= idea.published_time %></p>
             </div>
             <div class='idea__comments'>
-              <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4' %>
+              <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4', loading: "lazy" %>
               <p class='gray-5 ml-2'><%= idea.comments_num %></p>
             </div>
             <div class='idea__eyes'>
-              <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4' %>
+              <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4', loading: "lazy" %>
               <p class=' gray-5 ml-1'><%= idea.view %></p>
             </div>
             <div class="idea__detail pc">
               <div class="idea__detail--vote <%= idea.difficulty %>">
                 <%= difficulty_tag(idea) %>
               </div>
-              <%= link_to user_path(idea.user.id), class: '' do %>
+              <%= link_to user_path(idea.user_id), class: '' do %>
                 <% user_icon(idea.user, size: 'small') %>
               <% end %>
               <p class='idea__detail--def'>
@@ -46,7 +46,7 @@
             <div class="idea__detail--vote <%= idea.difficulty %>">
               <%= difficulty_tag(idea) %>
             </div>
-            <%= link_to user_path(idea.user.id), class: '' do %>
+            <%= link_to user_path(idea.user_id), class: '' do %>
               <% user_icon(idea.user, size: 'small') %>
             <% end %>
             <p class='idea__detail--def'>

@@ -3,12 +3,12 @@
 # Table name: ideas
 #
 #  id            :bigint           not null, primary key
-#  background    :string(255)      not null
+#  background    :string(255)
 #  comments_num  :integer          default(0)
 #  cooperation   :integer          default("not_started")
 #  difficulty    :integer          default("not_yet")
 #  draft         :boolean          default(FALSE)
-#  goal          :string(255)      not null
+#  goal          :string(255)
 #  hypothesis    :string(255)
 #  icon          :string(255)
 #  issue         :string(255)
@@ -20,7 +20,7 @@
 #  published_at  :datetime
 #  similar       :string(255)
 #  target        :string(255)
-#  view          :integer
+#  view          :integer          default(0)
 #  wish_function :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -30,7 +30,7 @@
 #
 #  index_ideas_on_user_id  (user_id)
 #
-carriwave_path = "./app/assets/images/idea_main.png"
+carriwave_path = "./app/assets/images/idea_main"
 # これを書かないとなぜか関連モデルが作成されない
 FactoryBot.use_parent_strategy = false
 

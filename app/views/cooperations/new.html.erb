@@ -6,18 +6,13 @@
   <div class='idea__status cooperation__idea-status gray-3'>
     <p><%= "投稿日 #{@idea.created_time}" %></p>
     <div class='idea__comments'>
-      <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4' %>
+      <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4', loading: "lazy" %>
       <p class='gray-5 ml-2'><%= @idea.comments_num %></p>
     </div>
     <div class='idea__eyes'>
-      <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4' %>
+      <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4', loading: "lazy" %>
       <p class=' gray-5 ml-1'><%= @idea.view %></p>
     </div>
-    <% if current_user&.own?(@idea) %>
-      <div>
-        <%= "平均ページ滞在時間: #{Time.at(@time_on_page.to_i).utc.strftime('%X')}" %>
-      </div>
-    <% end %>
   </div>
   <div class='cooperation__idea-content'>
     <label>アイデア詳細</label>

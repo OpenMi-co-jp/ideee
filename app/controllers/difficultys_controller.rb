@@ -2,7 +2,7 @@ class DifficultysController < ApplicationController
   before_action :set_idea
 
   def create
-    Difficulty.create!(level_params.merge(user_id: current_user.id))
+    Difficulty.create!(level_params.merge(user: current_user))
     @idea.update_difficulty
     redirect_to @idea
   end

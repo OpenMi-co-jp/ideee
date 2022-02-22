@@ -11,13 +11,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    published_list = @user.ideas.published.order(published_at: "DESC")
-    @published_ideas = Kaminari.paginate_array(published_list).page(params[:page]).per(10)
+    published_list = @user.ideas.published.includes([:idea_tags]).order(published_at: "DESC")
+    @published_ideas = Kaminari.paginate_array(published_list).page(params[:published_ideas]).per(10)
+    @like_ideas = Kaminari.paginate_array(@user.like_ideas.includes([:idea_tags])).page(params[:like_ideas]).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
-    @commented_ideas = @user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by!(id: n) }.select{ |i| i.user_id != @user.id }
+    comment_idea_list = @user.comment_ideas.includes([:idea_tags]).uniq.select{ |i| i.user_id != @user.id }
+    @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_ideas]).per(10)
     UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
-    @user.check_defined? # definedのチェック/更新
-    Notification.find_by!(id: params[:notification]).update!(checked: true) if params[:notification]
+    Notifications::UpdateReadJob.perform_later(params[:notification]) if params[:notification]
   end
 
   def search

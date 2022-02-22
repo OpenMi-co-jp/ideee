@@ -7,11 +7,11 @@ addAssignees: author
 # A list of reviewers to be added to pull requests (GitHub user name)
 reviewers:
   - naru20181117
-  - hisashi2002
   - sayahaya
   - SakitaDaiki0623
   - ShotaMatsushima
   - yamanoura
+  - crazymaki
 
 # A list of keywords to be skipped the process that add reviewers if pull requests include it 
 skipKeywords:
@@ -20,4 +20,4 @@ skipKeywords:
 
 # A number of reviewers added to the pull request
 # Set 0 to add all the reviewers (default: 0)
-numberOfReviewers: 0
+numberOfReviewers: 3

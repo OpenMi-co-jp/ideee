@@ -6,7 +6,7 @@
           <%= user_definiton(idea.user) %>
         </p>
         <div class='col s6 flex'>
-          <%= link_to user_path(idea.user.id) do %>
+          <%= link_to user_path(idea.user_id) do %>
             <% user_icon(idea.user, size: 'small') %>
           <% end %>
           <p class='grid-middle'>
@@ -20,19 +20,17 @@
           <%= "更新日：#{l idea.updated_at}" %>
         </div>
         <div class="c-mobile-status-info__eye">
-          <%= image_tag 'icons/eye.svg' %>
+          <%= image_tag 'icons/eye.svg', loading: "lazy" %>
           <p><%= idea.view %></p>
         </div>
         <div class='c-mobile-status-info__comment', id="comments_count">
-          <%= image_tag 'icons/comment.svg' %>
+          <%= image_tag 'icons/comment.svg', loading: "lazy" %>
           <p><%= idea.comments_num %></p>
         </div>
       </div>
-      <% if current_user&.own?(idea) %>
-        <div class='c-mobile-status-info__time'>
-          <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
-        </div>
-      <% end %>
+      <div class='c-mobile-status-info__time'>
+        <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
+      </div>
       <div class='c-mobile-status-info'>
         <div class="c-mobile-status-info__vote <%= idea.difficulty %>">
           <%= render 'difficultys/vote', object: idea %>

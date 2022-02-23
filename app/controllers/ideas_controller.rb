@@ -48,9 +48,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
+        sidekiq_jobs if Rails.env.production?
         @idea.update_attribute(:published_at, Time.now)
         redirect_to @idea, notice: t('.success')
       end
@@ -64,14 +62,13 @@ class IdeasController < ApplicationController
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
       params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
-      if params[:commit] == t('default.publish') && Rails.env.production?
-        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
-        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+      if draft_bool
+        redirect_to @idea, notice: t('.draft_save')
+      else
+        sidekiq_jobs if Rails.env.production?
         @idea.update_attribute(:published_at, Time.now)
+        redirect_to @idea, notice: t('.success')
       end
-      Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
-      message = draft_bool ? t('.draft_save') : t('.success')
-      redirect_to @idea, notice: message
     else
       flash.now[:alert] = t('.fail')
       render :edit
@@ -112,9 +109,7 @@ class IdeasController < ApplicationController
 
   def publish
     @idea.update!(draft: false, published_at: Time.now)
-    TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-    Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
-    Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
+    sidekiq_jobs if Rails.env.production?
     redirect_to @idea, notice: t('.success')
   end
 
@@ -153,5 +148,11 @@ class IdeasController < ApplicationController
 
     redirect_to root_path
     flash[:alert] = t('default.message.unauthorized')
+  end
+
+  def sidekiq_jobs
+    TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
+    Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
+    Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
   end
 end

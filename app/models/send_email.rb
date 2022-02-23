@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class SendEmail
   require 'sendgrid-ruby'
   include SendGrid
@@ -69,7 +70,7 @@ class SendEmail
             <b>アイデア情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               アイデア名: #{idea.name}<br>
-              承認待ちURL: #{idea.product_url.to_s}
+              承認待ちURL: #{idea.product_url}
             </div>
             <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'confirm_apply',
                                                      'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
@@ -282,3 +283,4 @@ class SendEmail
         .gsub(/&lt;br&gt;/, '<br>') # 改行だけは反映されるように設定
   end
 end
+# rubocop:enable Metrics/ClassLength

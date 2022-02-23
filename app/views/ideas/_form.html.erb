@@ -92,7 +92,6 @@
         <%= form.text_field :product_url, placeholder: 'プロダクトのURL' %>
       </div>
       <% if idea.draft || idea.id.nil? %>
-        
         <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3 idea-btn' %>
       <% end %>
       <% if idea.draft %>

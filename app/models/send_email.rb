@@ -61,6 +61,27 @@ class SendEmail
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
+  def confirm_apply(idea)
+    body = "
+            <p>プロダクトのURL承認申請をお受け取り致しました。</p>
+            <p>URLの確認を行いますので承認まで今しばらくお待ちください。</p>
+            <hr>
+            <b>アイデア情報</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              アイデア名: #{idea.name}<br>
+              承認待ちURL: #{idea.product_url.to_s}
+            </div>
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'confirm_apply',
+                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+          "
+    subject = "【ideee】【#{idea.name}】のURL承認申請を受信しました🙇‍♂️"
+    content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
+
+    to = Email.new(email: idea.user.email)
+    mail = Mail.new(@from, subject, to, content)
+    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
   def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
     body = "
             <h3 style='color: #FF862E;'>最近ハートが多かったアイデアベスト10💛</h3>

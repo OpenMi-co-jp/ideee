@@ -1,6 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    confirmations: 'users/confirmations'
+  }
   root 'ideas#index'
   resources :ideas do
     collection do
@@ -16,11 +21,6 @@ Rails.application.routes.draw do
       post 'send_email'
     end
   end
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    confirmations: "users/confirmations"
-  }
   resources :users, only: %i[index show] do
     collection do
       get 'search'
@@ -46,8 +46,6 @@ Rails.application.routes.draw do
   get 'how_to_find_idea' => 'high_voltage/pages#show', id: 'how_to_find_idea'
   get 'new_year_event' => 'high_voltage/pages#show', id: 'new_year_event'
   get 'events/valentine' => 'high_voltage/pages#show', id: 'events/valentine'
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount Sidekiq::Web => '/sidekiq'
 end

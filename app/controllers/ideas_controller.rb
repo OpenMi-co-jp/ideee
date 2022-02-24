@@ -1,25 +1,25 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[ show edit update destroy publish ]
-  before_action :authenticate_user!, except: %i[ index show search tags ]
-  before_action :own_user_check, only: %i[ edit update destroy ]
-  before_action :defined_check, except: %i[ index show search tags]
-  before_action :own_draft_check, only: %i[ show ]
+  prepend_before_action :set_idea, only: %i[show edit update destroy publish]
+  before_action :authenticate_user!, except: %i[index show search tags]
+  before_action :own_user_check, only: %i[edit update destroy]
+  before_action :defined_check, except: %i[index show search tags]
+  before_action :own_draft_check, only: %i[show]
 
   def index
     ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
     recent_ideas = ideas.recent_select.includes([:user])
-    @latest_ideas = recent_ideas.order(published_at: "DESC").first(10)
+    @latest_ideas = recent_ideas.order(published_at: 'DESC').first(10)
     @liked_ideas = recent_ideas.most_liked
     @most_commented_ideas = recent_ideas.most_commented.first(10)
-    @featured_users = User.where(defined: true).order(point: "DESC").first(10) # 定義がされているユーザーだけをポイントが高い準に5名
-    @on_board_ideas = ideas.includes([:user]).where(cooperation: :ongoing).most_commented.order(updated_at: "DESC").first(5)
-    @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: "DESC").first(5)
+    @featured_users = User.where(defined: true).order(point: 'DESC').first(10) # 定義がされているユーザーだけをポイントが高い準に5名
+    @on_board_ideas = ideas.includes([:user]).where(cooperation: :ongoing).most_commented.order(updated_at: 'DESC').first(5)
+    @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: 'DESC').first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
-    @weekly_commented_users = @commented_users_array.map{|u| User.find_by!(id: u[0])}
+    @weekly_commented_users = @commented_users_array.map { |u| User.find_by!(id: u[0]) }
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
     @idea_publisher_array = ideas.recent_select.pickup_user_nums(t('default.users.monthly_publisher_num'))
-    @monthly_published_users = @idea_publisher_array.map{|u| User.find_by!(id: u[0])}
+    @monthly_published_users = @idea_publisher_array.map { |u| User.find_by!(id: u[0]) }
     @popular_tags = Tag.recent_tags.popular_tags
   end
 
@@ -48,9 +48,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
+        sidekiq_jobs if Rails.env.production?
         @idea.update_attribute(:published_at, Time.now)
         redirect_to @idea, notice: t('.success')
       end
@@ -64,14 +62,13 @@ class IdeasController < ApplicationController
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
       params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
-      if params[:commit] == t('default.publish') && Rails.env.production?
-        TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
-        Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
+      if draft_bool
+        redirect_to @idea, notice: t('.draft_save')
+      else
+        sidekiq_jobs if Rails.env.production?
         @idea.update_attribute(:published_at, Time.now)
+        redirect_to @idea, notice: t('.success')
       end
-      Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
-      message = draft_bool ? t('.draft_save') : t('.success')
-      redirect_to @idea, notice: message
     else
       flash.now[:alert] = t('.fail')
       render :edit
@@ -85,11 +82,11 @@ class IdeasController < ApplicationController
 
   def search
     # アイデアに紐づくlikeの数を数えて、降順に並べる
-    @sort = params[:sort] || "likes_num"
-    @order = params[:order] || "desc"
+    @sort = params[:sort] || 'likes_num'
+    @order = params[:order] || 'desc'
     @keyword = params[:keyword]
     # TODO: 検索結果が増えてきたらtag検索を分ける
-    base_ideas = Idea.includes([:idea_tags, :user]).published
+    base_ideas = Idea.includes(%i[idea_tags user]).published
     ideas = if @keyword.present?
               base_ideas.search(name: @keyword) | base_ideas.tag_name_like(@keyword)
             else
@@ -99,57 +96,63 @@ class IdeasController < ApplicationController
     @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @searched_ideas.limit_value
-    @deployed_ideas = Idea.deployed.order(updated_at: "DESC").first(10)
+    @deployed_ideas = Idea.deployed.order(updated_at: 'DESC').first(10)
   end
 
   def tags
-    @sort = params[:sort] || "likes_num"
-    @order = params[:order] || "desc"
+    @sort = params[:sort] || 'likes_num'
+    @order = params[:order] || 'desc'
     @tag_name = params[:keyword]
-    list = Idea.includes([:idea_tags, :taggings]).with_tag(@tag_name).order("#{@sort}": @order)
+    list = Idea.includes(%i[idea_tags taggings]).with_tag(@tag_name).order("#{@sort}": @order)
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   def publish
     @idea.update!(draft: false, published_at: Time.now)
-    TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-    Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
-    Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
+    sidekiq_jobs if Rails.env.production?
     redirect_to @idea, notice: t('.success')
   end
 
   private
-    def set_idea
-      @idea = Idea.find_by!(id: params[:id])
-    end
 
-    # ストロングパラメーターを設定
-    def idea_params
-      params.require(:idea)
-            .permit(
-              :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :note, :view, :user_id, :commit, :product_url
-            )
-            .merge(user: current_user, draft: draft_bool)
-    end
+  def set_idea
+    @idea = Idea.find_by!(id: params[:id])
+  end
 
-    def own_user_check
-      unless current_user.own?(@idea)
-        redirect_to root_path
-        flash[:alert] = t('default.message.unauthorized')
-      end
-    end
+  # ストロングパラメーターを設定
+  def idea_params
+    params.require(:idea)
+          .permit(
+            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :note, :view, :user_id, :commit, :product_url
+          )
+          .merge(user: current_user, draft: draft_bool)
+  end
 
-    def tags_params
-      params.dig(:idea, :tag_list)&.split(",")&.uniq
-    end
-
-    def draft_bool
-      params[:commit] == t('default.save_draft')
-    end
-
-    def own_draft_check
-      return if !@idea.draft || current_user.own?(@idea)
+  def own_user_check
+    unless current_user.own?(@idea)
       redirect_to root_path
       flash[:alert] = t('default.message.unauthorized')
     end
+  end
+
+  def tags_params
+    params.dig(:idea, :tag_list)&.split(',')&.uniq
+  end
+
+  def draft_bool
+    params[:commit] == t('default.save_draft')
+  end
+
+  def own_draft_check
+    return if !@idea.draft || current_user.own?(@idea)
+
+    redirect_to root_path
+    flash[:alert] = t('default.message.unauthorized')
+  end
+
+  def sidekiq_jobs
+    TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
+    Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
+    Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
+  end
 end

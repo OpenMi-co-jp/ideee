@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class SendEmail
   require 'sendgrid-ruby'
   include SendGrid
@@ -8,76 +9,99 @@ class SendEmail
   end
 
   def comment(users, commenter, idea, comment)
-    body = """
+    body = "
             <p>
               気になるコメントが来ました！さっそく反応してみましょう！
             </p>
             <hr>
             <b>コメンター名:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{analytics_url('users/'+commenter.id.to_s, 'comment', commenter.name)}
+              #{analytics_url('users/' + commenter.id.to_s, 'comment', commenter.name)}
             </div>
             <b>コメント内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               #{xss_support(comment)}
             </div>
-            <p>アイデアページに飛ぶ: #{analytics_url('ideas/'+idea.id.to_s, 'comment', 'https://www.ideee.tech/ideas/'+idea.id.to_s)}</p>
-          """
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'comment',
+                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+          "
     subject = "【ideee】【#{idea.name}】にコメントがきました💡"
     content = Content.new(type: 'text/html', value: html_frame(body, 'comment'))
 
     if users.instance_of?(Array) # 送信したいアドレスが複数の時
       users.map do |user|
-        to = Email.new(email: user&.email )
+        to = Email.new(email: user&.email)
         mail = Mail.new(@from, subject, to, content)
         response = @sg.client.mail._('send').post(request_body: mail.to_json)
       end
     else # 送信したいアドレスが一つの時
-      to = Email.new(email: users&.email )
+      to = Email.new(email: users&.email)
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 
   def join_cooperation(user, idea)
-    body = """
+    body = "
             <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
             <hr>
             <b>応募者情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               名前: #{user.name}<br>
-              URL: #{analytics_url('users/'+user.id.to_s, 'join_cooperation', 'https://www.ideee.tech/users/'+user.id.to_s)}
+              URL: #{analytics_url('users/' + user.id.to_s, 'join_cooperation',
+                                   'https://www.ideee.tech/users/' + user.id.to_s)}
             </div>
-            <p>アイデアページに飛ぶ: #{analytics_url('ideas/'+idea.id.to_s, 'join_cooperation', 'https://www.ideee.tech/ideas/'+idea.id.to_s)}</p>
-          """
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'join_cooperation',
+                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+          "
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
     content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
 
-    to = Email.new(email: idea.user.email )
+    to = Email.new(email: idea.user.email)
+    mail = Mail.new(@from, subject, to, content)
+    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
+  def confirm_apply(idea)
+    body = "
+            <p>プロダクトのURL承認申請をお受け取り致しました。</p>
+            <p>URLの確認を行いますので承認まで今しばらくお待ちください。</p>
+            <hr>
+            <b>アイデア情報</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              アイデア名: #{idea.name}<br>
+              承認待ちURL: #{idea.product_url}
+            </div>
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'confirm_apply',
+                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+          "
+    subject = "【ideee】【#{idea.name}】のURL承認申請を受信しました🙇‍♂️"
+    content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
+
+    to = Email.new(email: idea.user.email)
     mail = Mail.new(@from, subject, to, content)
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
   def send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
-    body = """
+    body = "
             <h3 style='color: #FF862E;'>最近ハートが多かったアイデアベスト10💛</h3>
             #{ranking_idea(liked_ideas)}
             <hr>
             <h3 style='color: #FF862E;'>最新の新着アイデア💡</h3>
             #{new_idea_colum(new_ideas)}
-           """
-    subject = "【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡"
+           "
+    subject = '【ideee】最近ハートが多かったアイデア💛最新の新着アイデア💡'
     content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
     users.map do |user|
-      to = Email.new(email: user&.email )
+      to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 
-
   def event_new_year
-    body = """
+    body = "
             <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank'>
               <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;'>
             </a>
@@ -106,20 +130,20 @@ class SendEmail
             <h4>
               #{analytics_url('new_year_event', 'event_mail', '詳細はこちらのキャンペーンページにて')}
             </h4>
-          """
+          "
 
-    subject = "ideee初のお年玉キャンペーン🎍10日間の盛り上がり"
+    subject = 'ideee初のお年玉キャンペーン🎍10日間の盛り上がり'
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
     User.find_each.map do |user|
-      to = Email.new(email: user&.email )
+      to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 
   def event_valentine
-    body = """
+    body = "
             <a href='https://www.ideee.tech/events/valentine?utm_source=event_mail&utm_medium=mail&utm_id=valentine' target='_blank'>
               <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/valentine_event.png' style='max-height: 400px; margin: 0 auto;'>
             </a>
@@ -150,13 +174,13 @@ class SendEmail
             <h4>
               #{analytics_url('events/valentine', 'event_mail', '詳細はこちらのキャンペーンページにて')}
             </h4>
-          """
+          "
 
-    subject = "🍫ideeeバレンタインキャンペーン🍫"
+    subject = '🍫ideeeバレンタインキャンペーン🍫'
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
     User.find_each.map do |user|
-      to = Email.new(email: user&.email )
+      to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       response = @sg.client.mail._('send').post(request_body: mail.to_json)
     end
@@ -165,7 +189,7 @@ class SendEmail
   private
 
   def html_frame(body, source)
-    """
+    "
       <html>
         <body>
           <div style='background-color: #FDF8EB; padding: 10px 20px;'>
@@ -183,7 +207,7 @@ class SendEmail
           </div>
         </body>
       </html>
-    """
+    "
   end
 
   def ranking_idea(liked_ideas)
@@ -191,7 +215,7 @@ class SendEmail
     liked_ideas.each.with_index(1) do |idea, i|
       str += idea_ranking_item(rank(i), idea)
     end
-    return str
+    str
   end
 
   def new_idea_colum(new_ideas)
@@ -199,18 +223,18 @@ class SendEmail
     new_ideas.each.with_index(1) do |idea, i|
       str += idea_ranking_item(number_list(i), idea)
     end
-    return str
+    str
   end
 
   def idea_ranking_item(i, idea)
-    """
+    "
       <div style='background-color: white; margin: 3px 0; padding: 5px; display: flex;'>
         <div style='display: flex;'>
-          <b>#{i}　</b>#{analytics_url('ideas/'+idea.id.to_s, 'ranking', idea.name)}
+          <b>#{i}　</b>#{analytics_url('ideas/' + idea.id.to_s, 'ranking', idea.name)}
           　#{tag_box(idea&.idea_tags)}　<span>💛</span>&nbsp;#{idea.likes_num} by #{idea.user.name}
         </div>
       </div>
-    """
+    "
   end
 
   def rank(i)
@@ -231,21 +255,22 @@ class SendEmail
 
   def tag_box(tags)
     return if tags.nil?
+
     str = ''
     tags.map do |t|
-      str += """
+      str += "
               <div style='border-radius: 5px; background-color: #F5F5F5; padding: 2px; margin: 2px; height: 20px;'>
                 #{t.name}
               </div>
-            """
+            "
     end
-    return str
+    str
   end
 
   def analytics_url(path, source, content)
-    """
+    "
       <a href='https://www.ideee.tech/#{path}?utm_source=#{source}&utm_medium=mail&utm_id=#{path}', target: '_blank'>#{content}</a>
-    """
+    "
   end
 
   def xss_support(text)
@@ -258,4 +283,4 @@ class SendEmail
         .gsub(/&lt;br&gt;/, '<br>') # 改行だけは反映されるように設定
   end
 end
-
+# rubocop:enable Metrics/ClassLength

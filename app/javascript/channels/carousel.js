@@ -2,7 +2,6 @@ $(document).on ('turbolinks:load', function() {
   if ($('body').data('page') != "ideas-index") { return }
 
   $('.carousel').carousel({ // カルーセルの表示初期設定
-    duration: 100,
     padding: 50,
     fullWidth: true,
     indicators: true
@@ -12,5 +11,5 @@ $(document).on ('turbolinks:load', function() {
   var instance = M.Carousel.getInstance($('.carousel'));
   setInterval(function(){
     instance.next(1);
-  },3000);
+  },8000);
 })

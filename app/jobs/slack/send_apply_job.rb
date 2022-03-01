@@ -3,7 +3,8 @@ module Slack
     queue_as :default
 
     def perform(idea, url)
-      return if idea.applying?
+      # 承認済みか申請中、もしくはURLがない場合はスキップ
+      return if idea.approved? || idea.applying? || idea.product_url&.strip.blank?
 
       SlackNotifier.new.apply_send(idea, url)
       SendEmail.new.confirm_apply(idea)

@@ -65,8 +65,10 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        sidekiq_jobs if Rails.env.production?
-        @idea.update_attribute(:published_at, Time.now)
+        if params[:commit] == t('default.publish')
+          sidekiq_jobs if Rails.env.production?
+          @idea.update_attribute(:published_at, Time.now)
+        end
         redirect_to @idea, notice: t('.success')
       end
     else

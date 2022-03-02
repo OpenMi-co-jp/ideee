@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
-  let!(:user) { create(:user) }
+RSpec.describe 'Users', type: :request do
+  let!(:user) { FactoryBot.create(:user) }
 
-  describe "GET #index" do
+  describe 'GET #index' do
     subject { get users_path }
-    it "リクエストが成功すること" do
+    it 'リクエストが成功すること' do
       subject
       expect(response.status).to eq 200
     end
@@ -38,11 +38,11 @@ RSpec.describe "Users", type: :request do
   end
 
   describe 'GET #search' do
-    let!(:idea_man) { create(:user, :idea_man) }
-    let!(:engineer) { create(:user, :engineer) }
-    let!(:idea_engineer) { create(:user, :idea_engineer) }
+    let!(:idea_man) { FactoryBot.create(:user, :idea_man) }
+    let!(:engineer) { FactoryBot.create(:user, :engineer) }
+    let!(:idea_engineer) { FactoryBot.create(:user, :idea_engineer) }
     subject { get search_users_path, params: params }
-    let(:params) { { } }
+    let(:params) { {} }
 
     describe '検索項目を指定しない場合' do
       it 'リクエストが成功すること' do

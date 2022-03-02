@@ -6,6 +6,6 @@ class ChangeEmailDefault < ActiveRecord::Migration[6.1]
 
   def down
     change_column :users, :email, :string, null: false
-    change_column_default :users, :email, ""
+    change_column_default :users, :email, ''
   end
 end

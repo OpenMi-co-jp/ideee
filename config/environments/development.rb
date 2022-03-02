@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -47,12 +47,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-    port:                 587,
-    address:              'smtp.gmail.com',
-    domain:               'smtp.gmail.com',
-    user_name:            Rails.application.credentials.dig(:email, :address),
-    password:             Rails.application.credentials.dig(:email, :pass),
-    authentication:       'login',
+    port: 587,
+    address: 'smtp.gmail.com',
+    domain: 'smtp.gmail.com',
+    user_name: Rails.application.credentials.dig(:email, :address),
+    password: Rails.application.credentials.dig(:email, :pass),
+    authentication: 'login',
     enable_starttls_auto: true
   }
 

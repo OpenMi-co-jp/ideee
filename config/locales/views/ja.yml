@@ -100,7 +100,7 @@ ja:
       fail: コメントの更新に失敗しました
   common:
     service_fund:
-      use_for: アイデアと開発者のマッチングサイトideeeの開発費用に使わせて頂きます
+      use_for: ideeeの運営は皆様の寄付によって、無料で使うことができます 。
   layouts:
     footer:
       page: footer

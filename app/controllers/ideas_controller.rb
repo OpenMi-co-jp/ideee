@@ -48,7 +48,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        sidekiq_jobs if Rails.env.production?
+        sidekiq_jobs
         @idea.update_attribute(:published_at, Time.now)
         redirect_to @idea, notice: t('.success')
       end
@@ -66,7 +66,7 @@ class IdeasController < ApplicationController
         redirect_to @idea, notice: t('.draft_save')
       else
         if params[:commit] == t('default.publish')
-          sidekiq_jobs if Rails.env.production?
+          sidekiq_jobs
           @idea.update_attribute(:published_at, Time.now)
         end
         redirect_to @idea, notice: t('.success')
@@ -111,7 +111,7 @@ class IdeasController < ApplicationController
 
   def publish
     @idea.update!(draft: false, published_at: Time.now)
-    sidekiq_jobs if Rails.env.production?
+    sidekiq_jobs
     redirect_to @idea, notice: t('.success')
   end
 
@@ -153,6 +153,8 @@ class IdeasController < ApplicationController
   end
 
   def sidekiq_jobs
+    return unless Rails.env.production?
+
     TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
     Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
     Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))

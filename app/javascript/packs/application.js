@@ -29,4 +29,4 @@ require("channels/dev-mark");
 require("channels/carousel");
 require("channels/modal");
 require("channels/chips");
-require("channels/header_scrole");
+require("channels/header_scroll");

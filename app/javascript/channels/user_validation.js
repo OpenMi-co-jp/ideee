@@ -1,3 +1,4 @@
+// Rails.fireをするには、個別のJSファイルにてRailsをimportする必要がある
 import Rails from "@rails/ujs";
 
 $(document).on ('turbolinks:load', function(){

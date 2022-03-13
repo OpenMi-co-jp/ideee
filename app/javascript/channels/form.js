@@ -1,4 +1,7 @@
 $(document).on ('turbolinks:load', function(){
+  // アイデアのnewとedit以外のページではreturn
+  if (!['ideas-edit', 'ideas-new'].includes($('body').data('page'))) { return }
+
   function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();

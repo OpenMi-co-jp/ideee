@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_143828) do
+ActiveRecord::Schema.define(version: 2022_02_08_113035) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_143828) do
     t.string "name"
     t.string "icon"
     t.text "note"
-    t.integer "view"
+    t.integer "view", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_143828) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", limit: 30, default: ""
     t.string "description", limit: 200
-    t.integer "point"
+    t.integer "point", default: 0
     t.string "icon"
     t.integer "definition", limit: 2
     t.string "twitter_id"

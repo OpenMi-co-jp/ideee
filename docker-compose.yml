@@ -22,6 +22,12 @@ services:
       - web-variables.env
     environment:
       REDIS_URL: redis://redis:6379
+    entrypoint:
+      - dockerize
+      - -timeout
+      - 60s
+      - -wait
+      - tcp://db:3306
   redis:
     image: redis:latest
     volumes:

@@ -1,4 +1,6 @@
 $(document).on ('turbolinks:load', function(){
+  // こちらlikeをidea-showページだけでできるように変更後取り込み
+  // if ($('body').data('page') != "ideas-show") { return }
 
   $('.like-click').on('click', function() {
     const element = $(this)
@@ -9,7 +11,7 @@ $(document).on ('turbolinks:load', function(){
       unlike(element)
       .fail(function() {
         element.toggleClass('clicked')
-        element.find($('.likes-count')).html(++like_num)  
+        element.find($('.likes-count')).html(++like_num)
       })
     } else {
       element.toggleClass('clicked')

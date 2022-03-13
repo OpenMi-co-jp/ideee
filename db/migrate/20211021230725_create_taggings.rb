@@ -6,6 +6,6 @@ class CreateTaggings < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :taggings, [:idea_id, :tag_id], unique: true
+    add_index :taggings, %i[idea_id tag_id], unique: true
   end
 end

@@ -8,7 +8,7 @@ if Rails.env.production?
     }
 
     config.fog_public = false
-    config.fog_directory  = 'ideee-bucket'
+    config.fog_directory = 'ideee-bucket'
     config.cache_storage = :fog
   end
 end

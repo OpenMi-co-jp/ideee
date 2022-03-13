@@ -20,7 +20,7 @@
 #  published_at  :datetime
 #  similar       :string(255)
 #  target        :string(255)
-#  view          :integer
+#  view          :integer          default(0)
 #  wish_function :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -30,7 +30,6 @@
 #
 #  index_ideas_on_user_id  (user_id)
 #
-carriwave_path = "./app/assets/images/idea_main.png"
 # これを書かないとなぜか関連モデルが作成されない
 FactoryBot.use_parent_strategy = false
 
@@ -40,7 +39,6 @@ FactoryBot.define do
     background { Faker::Creature::Animal.name }
     goal { Faker::Fantasy::Tolkien.character }
     note { Faker::Lorem.paragraph(sentence_count: 20) }
-    icon { File.open(carriwave_path) }
     view { (0..200).to_a.sample }
     user
 

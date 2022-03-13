@@ -20,7 +20,7 @@ FactoryBot.define do
     idea_id { 1 }
     comment_id { 1 }
     like_id { 1 }
-    action { "MyString" }
+    action { 'MyString' }
     checked { false }
   end
 end

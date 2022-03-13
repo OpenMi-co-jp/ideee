@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "Comments", type: :request do
-  let!(:user) { create(:user) }
-  let!(:comment) { create(:comment) }
+RSpec.describe 'Comments', type: :request do
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:comment) { FactoryBot.create(:comment) }
 
   before { sign_in user }
   describe 'POST #create' do
     subject { post comments_path, params: params }
     context 'パラメータが妥当な場合' do
-      let(:params) { { description: comment.description, idea_id: comment.idea.id } }
+      let(:params) { { description: comment.description, idea_id: comment.idea_id } }
       it 'リクエストが成功すること' do
         subject
         expect(response.status).to eq 204
@@ -22,7 +22,7 @@ RSpec.describe "Comments", type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      let(:params) { { description: '', idea_id: comment.idea.id } }
+      let(:params) { { description: '', idea_id: comment.idea_id } }
       it 'コメントが登録されないこと' do
         expect do
           subject

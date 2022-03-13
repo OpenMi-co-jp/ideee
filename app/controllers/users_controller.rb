@@ -1,35 +1,37 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index show search ]
-  prepend_before_action :page_user, only: %i[ show ]
-  before_action :defined_check, except: %i[ index search ], if: :own_user?
+  before_action :authenticate_user!, except: %i[index show search]
+  prepend_before_action :page_user, only: %i[show]
+  before_action :defined_check, except: %i[index search], if: :own_user?
 
   def index
-    @users = Kaminari.paginate_array(User.defined_user.order(point: "DESC"))
+    @users = Kaminari.paginate_array(User.defined_user.order(point: 'DESC'))
                      .page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @users.limit_value
   end
 
   def show
-    published_list = @user.ideas.published.order(published_at: "DESC")
-    @published_ideas = Kaminari.paginate_array(published_list).page(params[:page]).per(10)
+    published_list = @user.ideas.published.includes([:idea_tags]).order(published_at: 'DESC')
+    @published_ideas = Kaminari.paginate_array(published_list).page(params[:published_page]).per(10)
+    @like_ideas = Kaminari.paginate_array(@user.like_ideas.includes([:idea_tags])).page(params[:like_page]).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
-    @commented_ideas = @user.comments.map(&:idea_id).uniq.map{ |n| Idea.find_by!(id: n) }.select{ |i| i.user_id != @user.id }
+    comment_idea_list = @user.comment_ideas.includes([:idea_tags]).uniq.select { |i| i.user_id != @user.id }
+    @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
     UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
-    Notification.find_by!(id: params[:notification]).update!(checked: true) if params[:notification]
+    Notifications::UpdateReadJob.perform_later(params[:notification]) if params[:notification]
   end
 
   def search
-    if params[:sort] == "weekly_comments"
+    if params[:sort] == 'weekly_comments'
       comments = Comment.weekly_comments
       users_array = comments.pickup_user_commets(comments.length)
-      list = users_array.map{|u| User.find_by!(id: u[0])}
-    elsif params[:sort] == "monthly_published"
+      list = users_array.map { |u| User.find_by!(id: u[0]) }
+    elsif params[:sort] == 'monthly_published'
       ideas = Idea.published.recent_select
       users_array = ideas.pickup_user_nums(ideas.length)
-      list = users_array.map{|u| User.find_by!(id: u[0])}
+      list = users_array.map { |u| User.find_by!(id: u[0]) }
     else
-      list = User.defined_user.search(params[:key]).order(point: "DESC")
+      list = User.defined_user.search(params[:key]).order(point: 'DESC')
     end
     @searched_users = Kaminari.paginate_array(list).page(params[:page])
   end

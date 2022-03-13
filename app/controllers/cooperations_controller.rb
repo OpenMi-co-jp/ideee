@@ -1,15 +1,15 @@
 class CooperationsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index ]
-  before_action :defined_check, except: %i[ index ]
-  before_action :set_idea, except: %i[ index ]
+  before_action :authenticate_user!, except: %i[index]
+  before_action :defined_check, except: %i[index]
+  before_action :set_idea, except: %i[index]
 
   def index
-    list = Idea.published.where(cooperation: :ongoing)
+    list = Idea.includes([:idea_tags]).published.where(cooperation: :ongoing)
     @cooperation_ongoing_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   def new
-    redirect_to @idea if !@idea.cooperation_not_started?
+    redirect_to @idea unless @idea.cooperation_not_started?
   end
 
   def create
@@ -19,6 +19,7 @@ class CooperationsController < ApplicationController
   end
 
   def destroy
+    # メソッドごと変えるので無視
     current_user.cooperations.find_by!(idea: @idea).destroy
     redirect_to @idea, notice: t('.success')
   end

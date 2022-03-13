@@ -19,7 +19,7 @@ $(document).on ('turbolinks:load', function(){
   });
 
   // select用のhelper-textクラスの初期設定
-  M.init_validate_select = function () {  
+  M.init_validate_select = function () {
     $("select[required].validate").each(function(){
       const element = $(this);
       const helper = element.parent().parent().find('.helper-text');
@@ -42,7 +42,7 @@ $(document).on ('turbolinks:load', function(){
     } else {
       input_element.addClass('invalid');
       input_element.removeClass('valid');
-    }    
+    }
   };
 
   $(document).on('change', 'select[required].validate', function () {
@@ -53,7 +53,7 @@ $(document).on ('turbolinks:load', function(){
     var input_selector = 'input[type=text].validate, input[type=password].validate, input[type=email].validate, input[type=url].validate, input[type=tel].validate, input[type=number].validate, input[type=search].validate, input[type=date].validate, input[type=time].validate, textarea.validate';
     $(input_selector).each(function (element, index) {
       var element = $(this);
-      var len = element[0].value.length; 
+      var len = element[0].value.length;
       if (len === 0 && element[0].validity.badInput === false && element.is(':required')) {
         if (element.hasClass('validate')) {
           element.addClass('invalid');

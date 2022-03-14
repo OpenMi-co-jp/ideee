@@ -32,6 +32,7 @@ $(document).on ('turbolinks:load', function(){
   M.init_validate_select();
 
   M.validate_select_field = function (param) {
+    var select_invalid_num = 0;
     if(param === undefined){
       $("select[required].validate").each(function(){
         const select_value = $(this).val();
@@ -57,6 +58,8 @@ $(document).on ('turbolinks:load', function(){
         input_element.removeClass('valid');
       }
     }
+    select_invalid_num = $('input[type=text].select-dropdown.dropdown-trigger.invalid').length;
+    return select_invalid_num;
   }
 
   $(document).on('change', 'select[required].validate', function () {

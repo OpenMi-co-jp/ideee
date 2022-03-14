@@ -31,26 +31,49 @@ $(document).on ('turbolinks:load', function(){
 
   M.init_validate_select();
 
-  M.validate_select_field = function (object) {
-    const select_value = $(object).val();
-    const input_element = $(object).parent().find('input');
-    input_element.removeAttr('readonly', '');
-
-    if (select_value != '') {
-      input_element.addClass('valid');
-      input_element.removeClass('invalid');
-    } else {
-      input_element.addClass('invalid');
-      input_element.removeClass('valid');
+  M.validate_select_field = function (param) {
+    if(param === undefined){
+      $("select[required].validate").each(function(){
+        const select_value = $(this).val();
+        const input_element = $(this).parent().find('input');
+        input_element.removeAttr('readonly', '');
+        if (select_value != '') {
+          input_element.addClass('valid');
+          input_element.removeClass('invalid');
+        } else {
+          input_element.addClass('invalid');
+          input_element.removeClass('valid');
+        }
+      });
+    }else{
+      const select_value = param.val();
+      const input_element = param.parent().find('input');
+      input_element.removeAttr('readonly', '');
+      if (select_value != '') {
+        input_element.addClass('valid');
+        input_element.removeClass('invalid');
+      } else {
+        input_element.addClass('invalid');
+        input_element.removeClass('valid');
+      }
     }
-  };
+  }
 
   $(document).on('change', 'select[required].validate', function () {
     M.validate_select_field($(this));
   });
 
-  M.validate_submit = function () {
-    var input_selector = 'input[type=text].validate, input[type=password].validate, input[type=email].validate, input[type=url].validate, input[type=tel].validate, input[type=number].validate, input[type=search].validate, input[type=date].validate, input[type=time].validate, textarea.validate';
+  M.validate_input = function (types) {
+    var input_selector = '';
+    var invalid_num = 0;
+    $.each(types,function(index,val){
+      if(input_selector==''){
+        input_selector += 'input[type=' + val + '].validate ';
+      }else{
+        input_selector += ', input[type=' + val + '].validate ';
+      }
+    });
+
     $(input_selector).each(function (element, index) {
       var element = $(this);
       var len = element[0].value.length;
@@ -62,11 +85,35 @@ $(document).on ('turbolinks:load', function(){
       }
     });
 
-    $("select[required].validate").each(function(){
-      M.validate_select_field($(this));
+    var input_invalid_num = 0;
+    $.each(types,function(index,val){
+      // selectセレクタについてはmaterializeではinput[type=text]セレクタに自動で置き換えが行われるため、selectセレクタのinvalid数を除く
+      if(val === 'text'){
+        var input_text_invalid_num = $('input[type=' + val + '].invalid').length;
+        var select_invalid_num = $('input[type=' + val + '].select-dropdown.dropdown-trigger.invalid').length;
+        input_invalid_num += input_text_invalid_num - select_invalid_num;
+      }else{
+        input_invalid_num += $('input[type=' + val + '].invalid').length
+      }
     });
 
-    return $(".invalid").length;
+    return input_invalid_num;
+  };
+
+  M.validate_textarea = function () {
+    var input_selector = 'textarea.validate';
+    $(input_selector).each(function (element, index) {
+      var element = $(this);
+      var len = element[0].value.length;
+      if (len === 0 && element[0].validity.badInput === false && element.is(':required')) {
+        if (element.hasClass('validate')) {
+          element.addClass('invalid');
+          element.removeClass('valid');
+        }
+      }
+    });
+
+    return $("textarea.invalid").length;
   };
 
 })

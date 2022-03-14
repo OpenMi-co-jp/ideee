@@ -39,11 +39,9 @@ $(document).on ('turbolinks:load', function(){
         const input_element = $(this).parent().find('input');
         input_element.removeAttr('readonly', '');
         if (select_value != '') {
-          input_element.addClass('valid');
           input_element.removeClass('invalid');
         } else {
           input_element.addClass('invalid');
-          input_element.removeClass('valid');
         }
       });
     }else{
@@ -51,11 +49,9 @@ $(document).on ('turbolinks:load', function(){
       const input_element = param.parent().find('input');
       input_element.removeAttr('readonly', '');
       if (select_value != '') {
-        input_element.addClass('valid');
         input_element.removeClass('invalid');
       } else {
         input_element.addClass('invalid');
-        input_element.removeClass('valid');
       }
     }
     select_invalid_num = $('input[type=text].select-dropdown.dropdown-trigger.invalid').length;
@@ -83,7 +79,6 @@ $(document).on ('turbolinks:load', function(){
       if (len === 0 && element[0].validity.badInput === false && element.is(':required')) {
         if (element.hasClass('validate')) {
           element.addClass('invalid');
-          element.removeClass('valid');
         }
       }
     });
@@ -111,7 +106,6 @@ $(document).on ('turbolinks:load', function(){
       if (len === 0 && element[0].validity.badInput === false && element.is(':required')) {
         if (element.hasClass('validate')) {
           element.addClass('invalid');
-          element.removeClass('valid');
         }
       }
     });

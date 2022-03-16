@@ -2,6 +2,7 @@
 import Rails from "@rails/ujs";
 
 $(document).on ('turbolinks:load', function(){
+  if ($('body').data('page') != "user-edit") { return }
 
   $('#edit_user_submit').on('click',function() {
     var invalid_num = 0;

@@ -31,69 +31,30 @@ $(document).on ('turbolinks:load', function(){
 
   M.init_validate_select();
 
-  M.validate_select_field = function (param) {
-    var select_invalid_num = 0;
-    if(param === undefined){
-      $("select[required].validate").each(function(){
-        const select_value = $(this).val();
-        const input_element = $(this).parent().find('input');
-        if (select_value != '') {
-          input_element.removeClass('invalid');
-        } else {
-          input_element.addClass('invalid');
-        }
-      });
-    }else{
-      const select_value = param.val();
-      const input_element = param.parent().find('input');
-      if (select_value != '') {
-        input_element.removeClass('invalid');
-      } else {
-        input_element.addClass('invalid');
-      }
+  M.invalidate_selected_num = function (id) {
+    const selected_field = $('#' + id).val();
+    const parent_element = $('#' + id).parent().find('input');
+    if (selected_field == null) {
+      parent_element.addClass('invalid');
+      return 1;
+    } else {
+      parent_element.removeClass('invalid');
+      return 0;
     }
-    select_invalid_num = $('input[type=text].select-dropdown.dropdown-trigger.invalid').length;
-    return select_invalid_num;
   }
 
   $(document).on('change', 'select[required].validate', function () {
     M.validate_select_field($(this));
   });
 
-  M.validate_input = function (types) {
-    var input_selector = '';
-    var invalid_num = 0;
-    $.each(types,function(index,val){
-      if(input_selector==''){
-        input_selector += 'input[type=' + val + '].validate ';
-      }else{
-        input_selector += ', input[type=' + val + '].validate ';
-      }
-    });
-
-    $(input_selector).each(function (element, index) {
-      var element = $(this);
-      var len = element[0].value.length;
-      if (len === 0 && element[0].validity.badInput === false && element.is(':required')) {
-        if (element.hasClass('validate')) {
-          element.addClass('invalid');
-        }
-      }
-    });
-
-    var input_invalid_num = 0;
-    $.each(types,function(index,val){
-      // selectセレクタについてはmaterializeではinput[type=text]セレクタに自動で置き換えが行われるため、selectセレクタのinvalid数を除く
-      if(val === 'text'){
-        var input_text_invalid_num = $('input[type=' + val + '].invalid').length;
-        var select_invalid_num = $('input[type=' + val + '].select-dropdown.dropdown-trigger.invalid').length;
-        input_invalid_num += input_text_invalid_num - select_invalid_num;
-      }else{
-        input_invalid_num += $('input[type=' + val + '].invalid').length
-      }
-    });
-
-    return input_invalid_num;
+  M.invalid_input_num = function (id) {
+    var element = $('#' + id + '.validate');
+    var len = element[0].value.length;
+    if (len === 0 && element.is(':required')) {
+      element.addClass('invalid');
+      return 1;
+    }
+    return 0;
   };
 
   M.validate_textarea = function () {

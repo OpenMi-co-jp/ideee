@@ -34,7 +34,7 @@ $(document).on ('turbolinks:load', function(){
   M.invalidate_selected_num = function (id) {
     const selected_field = $('#' + id).val();
     const parent_element = $('#' + id).parent().find('input');
-    if (selected_field == null) {
+    if (selected_field == '') {
       parent_element.addClass('invalid');
       return 1;
     } else {
@@ -43,8 +43,9 @@ $(document).on ('turbolinks:load', function(){
     }
   }
 
-  $(document).on('change', 'select[required].validate', function () {
-    M.validate_select_field($(this));
+  $('select[required].validate').on('change', function () {
+    var selected_field_id = $(this)[0].id;
+    M.invalidate_selected_num(selected_field_id);
   });
 
   M.invalid_input_num = function (id) {

@@ -37,7 +37,6 @@ $(document).on ('turbolinks:load', function(){
       $("select[required].validate").each(function(){
         const select_value = $(this).val();
         const input_element = $(this).parent().find('input');
-        input_element.removeAttr('readonly', '');
         if (select_value != '') {
           input_element.removeClass('invalid');
         } else {
@@ -47,7 +46,6 @@ $(document).on ('turbolinks:load', function(){
     }else{
       const select_value = param.val();
       const input_element = param.parent().find('input');
-      input_element.removeAttr('readonly', '');
       if (select_value != '') {
         input_element.removeClass('invalid');
       } else {

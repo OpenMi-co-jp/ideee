@@ -18,22 +18,10 @@ $(document).on ('turbolinks:load', function(){
     $('#idea_cooperation_switch').val($(this).prop('checked'))
   });
 
-  // select用のhelper-textクラスの初期設定
-  M.init_validate_select = function () {
-    $("select[required].validate").each(function(){
-      const element = $(this);
-      const helper = element.parent().parent().find('.helper-text');
-      if (helper !== undefined) {
-        helper.insertAfter(element.parent().find('input'));
-      }
-    });
-  };
-
-  M.init_validate_select();
-
+  // 選択必須のバリデーション
   M.invalidate_selected_num = function (id) {
-    const selected_field = $('#' + id).val();
-    const parent_element = $('#' + id).parent().find('input');
+    const selected_field = $(id).val();
+    const parent_element = $(id).siblings('input');
     if (selected_field == '') {
       parent_element.addClass('invalid');
       return 1;
@@ -43,13 +31,9 @@ $(document).on ('turbolinks:load', function(){
     }
   }
 
-  $('select[required].validate').on('change', function () {
-    var selected_field_id = $(this)[0].id;
-    M.invalidate_selected_num(selected_field_id);
-  });
-
+  // 入力必須のバリデーション
   M.invalid_input_num = function (id) {
-    var element = $('#' + id + '.validate');
+    var element = $(id + '.validate');
     var len = element[0].value.length;
     if (len === 0 && element.is(':required')) {
       element.addClass('invalid');
@@ -58,14 +42,17 @@ $(document).on ('turbolinks:load', function(){
     return 0;
   };
 
-  M.invalid_textarea_num = function (id) {
-    var element = $('#' + id + '.validate');
-    var len = element[0].value.length;
-    if (len === 0 && element.is(':required')) {
-      element.addClass('invalid');
-      return 1;
+  // 選択必須の時に必要な機能セット
+  M.validation_select_set = function (id) {
+    // select用のhelper-textクラスの初期設定
+    var helper = $(id).parent().siblings('.helper-text');
+    if (helper !== undefined) {
+      helper.insertAfter($(id).siblings('input'));
     }
-    return 0;
-  };
 
+    // selectが変更されたらエラーメッセージを表示
+    $(id).on('change', function () {
+      M.invalidate_selected_num($(this));
+    });
+  };
 })

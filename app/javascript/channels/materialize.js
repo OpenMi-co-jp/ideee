@@ -58,19 +58,14 @@ $(document).on ('turbolinks:load', function(){
     return 0;
   };
 
-  M.validate_textarea = function () {
-    var input_selector = 'textarea.validate';
-    $(input_selector).each(function (element, index) {
-      var element = $(this);
-      var len = element[0].value.length;
-      if (len === 0 && element[0].validity.badInput === false && element.is(':required')) {
-        if (element.hasClass('validate')) {
-          element.addClass('invalid');
-        }
-      }
-    });
-
-    return $("textarea.invalid").length;
+  M.invalid_textarea_num = function (id) {
+    var element = $('#' + id + '.validate');
+    var len = element[0].value.length;
+    if (len === 0 && element.is(':required')) {
+      element.addClass('invalid');
+      return 1;
+    }
+    return 0;
   };
 
 })

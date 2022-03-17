@@ -23,10 +23,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
-    unless resource.defined
-      bool = resource.name.present? && resource.confirmed_at.present? && resource.definition.present?
-      resource.update!(defined: bool)
-    end
+    return if resource.defined
+
+    bool = resource.name.present? && resource.confirmed_at.present? && resource.definition.present?
+    resource.update!(defined: bool)
   end
 
   # DELETE /resource

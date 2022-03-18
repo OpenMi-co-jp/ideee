@@ -2,7 +2,7 @@
 
   <h4><%= t '.title' %></h4>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= form_with(model: @user, url: user_registration_path, id: 'edit_user', local: false) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="row">
@@ -20,43 +20,44 @@
       </div>
 
       <div class="col s12 l8">
-        <div class="field">
-          <%= f.label :name, class: 'required' %><br />
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前' %>
+        <div class="field input-field">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', class: 'validate', required:'required' %>
+          <%= f.label :name, class: 'required' %>
+          <span class="helper-text" data-error="ユーザー名を入力してください。"></span>
         </div>
 
-        <div class="field">
-          <%= f.label :email, class: 'required' %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com' %>
+        <div class="field input-field">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com', class: 'validate', required:'required' %>
+          <%= f.label :email, class: 'required' %>
+          <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
         </div>
 
-        <div class="field">
-          <%= f.label :description %><br />
+        <div class="field input-field">
           <%= f.text_area :description, class: 'user-content', placeholder: 'どんな人？' %>
+          <%= f.label :description %>
         </div>
 
-        <div class="field">
-          <%= f.label :definition, class: 'required' %><br />
-          <div class="input-field">
-            <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' } %>
-          </div>
+        <div class="field input-field">
+          <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' }, class: 'validate', required:'required' %>
+          <%= f.label :definition, class: 'required' %>
+          <span class="helper-text" data-error="タイプを選択してください。"></span>
         </div>
 
-        <div class="field">
-          <%= f.label :twitter_id %><br />
+        <div class="field input-field">
           <%= f.text_field :twitter_id, placeholder: 'Twitter ID' %>
+          <%= f.label :twitter_id %>
         </div>
 
-        <div class="field">
-          <%= f.label :site_url %><br />
+        <div class="field input-field">
           <%= f.text_field :site_url, placeholder: 'サイトURL' %>
+          <%= f.label :site_url %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>メールの確認待ち: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <%= f.submit class: 'btn orange-action-back mh-3' %>
+        <%= f.button id: 'edit_user_submit', type:'button' ,class: 'btn orange-action-back mh-3' %>
       </div>
     </div>
 

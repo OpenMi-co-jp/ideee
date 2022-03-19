@@ -21,36 +21,36 @@
 
       <div class="col s12 l8">
         <div class="field input-field">
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', class: 'validate', required:'required' %>
-          <%= f.label :name, class: 'required' %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', class: 'validate', required:'required active' %>
+          <%= f.label :name, class: 'required active' %>
           <span class="helper-text" data-error="ユーザー名を入力してください。"></span>
         </div>
 
         <div class="field input-field">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com', class: 'validate', required:'required' %>
-          <%= f.label :email, class: 'required' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com', class: 'validate', required:'required active' %>
+          <%= f.label :email, class: 'required active' %>
           <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
         </div>
 
         <div class="field input-field">
           <%= f.text_area :description, class: 'user-content', placeholder: 'どんな人？' %>
-          <%= f.label :description %>
+          <%= f.label :description, class: 'active' %>
         </div>
 
         <div class="field input-field">
-          <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' }, class: 'validate', required:'required' %>
-          <%= f.label :definition, class: 'required' %>
+          <%= f.select :definition, User.definitions.keys.map { |k| [I18n.t("enums.user.definition.#{k}"), k] }, { include_blank: '自分のタイプを選んでください' }, class: 'validate', required:'required active' %>
+          <%= f.label :definition, class: 'required active' %>
           <span class="helper-text" data-error="タイプを選択してください。"></span>
         </div>
 
         <div class="field">
-          <%= f.label :twitter_id %><a class="help-tip twitter-id">?</a>
+          <%= f.label :twitter_id, class: 'active' %><a class="help-tip twitter-id">?</a>
           <%= f.text_field :twitter_id, placeholder: 'Twitter ID' %>
         </div>
 
         <div class="field input-field">
           <%= f.text_field :site_url, placeholder: 'サイトURL' %>
-          <%= f.label :site_url %>
+          <%= f.label :site_url, class: 'active' %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

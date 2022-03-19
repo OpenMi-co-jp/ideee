@@ -122,8 +122,9 @@ class User < ApplicationRecord
   end
 
   def like(idea)
-    likes.find_or_create_by(idea: idea)
-    idea.count_likes
+    like = likes.find_or_create_by(idea: idea)
+    idea.count_likes if like.valid?
+    like
   end
 
   def like?(idea)

@@ -140,14 +140,14 @@ class Idea < ApplicationRecord
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
   end
 
-  def create_notification_like!(current_user)
-    notification = current_user.active_notifications.find_or_initialize_by(
+  def create_notification_like(current_user, like)
+    notification = current_user.active_notifications.find_or_create_by!(
       visitor: current_user,
       visited: user,
       idea: self,
-      action: :like
+      action: :like, # 削除予定
+      notificatable: like
     )
-    notification.save if notification.valid?
   end
 
   def create_notification_comment(current_user, comment)

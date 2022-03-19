@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2022_03_19_074946) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "notificatable_id"
     t.string "notificatable_type"
-    t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type", unique: true
+    t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|

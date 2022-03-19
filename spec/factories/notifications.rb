@@ -17,7 +17,7 @@
 #
 # Indexes
 #
-#  index_notifications_on_notificatable_id_and_notificatable_type  (notificatable_id,notificatable_type) UNIQUE
+#  index_notifications_on_notificatable_id_and_notificatable_type  (notificatable_id,notificatable_type)
 #
 FactoryBot.define do
   factory :notification do
@@ -27,6 +27,6 @@ FactoryBot.define do
     action { 'like' } # 削除予定
     checked { false }
     notificatable_id { 1 }
-    notificatable_type { "Like" }
+    notificatable_type { 'Like' }
   end
 end

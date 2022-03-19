@@ -17,7 +17,7 @@
 #
 # Indexes
 #
-#  index_notifications_on_notificatable_id_and_notificatable_type  (notificatable_id,notificatable_type) UNIQUE
+#  index_notifications_on_notificatable_id_and_notificatable_type  (notificatable_id,notificatable_type)
 #
 class Notification < ApplicationRecord
   belongs_to :idea, optional: true

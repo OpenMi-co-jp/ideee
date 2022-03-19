@@ -141,7 +141,7 @@ class Idea < ApplicationRecord
   end
 
   def create_notification_like(current_user, like)
-    notification = current_user.active_notifications.find_or_create_by!(
+    current_user.active_notifications.find_or_create_by!(
       visitor: current_user,
       visited: user,
       idea: self,
@@ -153,7 +153,7 @@ class Idea < ApplicationRecord
   def create_notification_comment(current_user, comment)
     user_ids = select_notify_commenter(current_user)
     user_ids.each do |user_id|
-      current_user.active_notifications.create!(
+      current_user.active_notifications.find_or_create_by!(
         visited_id: user_id,
         idea: self,
         comment_id: comment.id, # 削除予定
@@ -165,7 +165,7 @@ class Idea < ApplicationRecord
 
   def select_notify_commenter(current_user)
     # アイデア作成者も含めたuser_id取得
-    user_ids = self.comments.pluck(:user_id).push(user_id).uniq
+    user_ids = comments.pluck(:user_id).push(user_id).uniq
     user_ids.delete(current_user.id)
     user_ids
   end

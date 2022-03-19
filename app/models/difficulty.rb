@@ -23,5 +23,6 @@
 class Difficulty < ApplicationRecord
   belongs_to :user
   belongs_to :idea
+  has_many :notifications, dependent: :destroy, as: :notificatable
   enum level: { easy: 1, middle: 2, hard: 3 }
 end

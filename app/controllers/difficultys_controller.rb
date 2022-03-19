@@ -2,8 +2,9 @@ class DifficultysController < ApplicationController
   before_action :set_idea
 
   def create
-    Difficulty.create!(level_params.merge(user: current_user))
+    difficulty = Difficulty.create!(level_params)
     @idea.update_difficulty
+    Notifications::UpdateDifficultyJob.perform_later(current_user, difficulty)
     redirect_to @idea
   end
 
@@ -14,6 +15,6 @@ class DifficultysController < ApplicationController
   end
 
   def level_params
-    params.permit(:idea_id, :level)
+    params.permit(:idea_id, :level).merge(user: current_user)
   end
 end

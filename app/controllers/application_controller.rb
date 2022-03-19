@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
 
   def get_notifications
     @header_notifications = current_user.passive_notifications
-                                        .includes(%i[visitor])
+                                        .includes(%i[visitor idea])
                                         .order(created_at: :desc)
                                         .limit(5)
   end

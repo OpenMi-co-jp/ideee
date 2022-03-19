@@ -2,9 +2,9 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
 
   def create
-    current_user.create_comment(comment_params)
-    Idea.find_by!(id: comment_params[:idea_id]).create_notification_comment!(current_user,
-                                                                             current_user.comments.last.id)
+    comment = current_user.create_comment(comment_params)
+    idea = Idea.find_by!(id: comment_params[:idea_id])
+    idea.create_notification_comment(current_user, comment)
   end
 
   def edit; end

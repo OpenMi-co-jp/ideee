@@ -150,23 +150,23 @@ class Idea < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  def create_notification_comment!(current_user, comment_id)
-    # アイデア作成者も含めたuser_id取得
-    user_ids = Comment.where(idea_id: id).pluck(:user_id).push(user_id).uniq
+  def create_notification_comment(current_user, comment)
+    user_ids = select_notify_commenter(current_user)
     user_ids.each do |user_id|
-      # 自分以外のコメントした人全員に通知を送る
-      next if user_id == current_user.id
-
-      save_notification_comment!(current_user, comment_id, user_id)
+      current_user.active_notifications.create!(
+        visited_id: user_id,
+        idea: self,
+        comment_id: comment.id, # 削除予定
+        action: :comment, # 削除予定
+        notificatable: comment
+      )
     end
   end
 
-  def save_notification_comment!(current_user, comment_id, visited_id)
-    current_user.active_notifications.create!(
-      visited_id: visited_id,
-      idea: self,
-      comment_id: comment_id,
-      action: :comment
-    )
+  def select_notify_commenter(current_user)
+    # アイデア作成者も含めたuser_id取得
+    user_ids = self.comments.pluck(:user_id).push(user_id).uniq
+    user_ids.delete(current_user.id)
+    user_ids
   end
 end

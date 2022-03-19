@@ -145,7 +145,6 @@ class Idea < ApplicationRecord
       visitor: current_user,
       visited: user,
       idea: self,
-      action: :like, # 削除予定
       notificatable: like
     )
   end
@@ -156,8 +155,6 @@ class Idea < ApplicationRecord
       current_user.active_notifications.find_or_create_by!(
         visited_id: user_id,
         idea: self,
-        comment_id: comment.id, # 削除予定
-        action: :comment, # 削除予定
         notificatable: comment
       )
     end

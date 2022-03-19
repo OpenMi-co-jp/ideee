@@ -21,12 +21,12 @@
 #
 class Notification < ApplicationRecord
   belongs_to :idea, optional: true
-  belongs_to :comment, optional: true
-  belongs_to :like, optional: true
+  belongs_to :comment, optional: true # 削除予定
+  belongs_to :like, optional: true # 削除予定
   belongs_to :notificatable, polymorphic: true
   belongs_to :visitor, class_name: 'User', foreign_key: 'visitor_id', optional: true
   # visitedは活用事例が無ければ削除予定
   belongs_to :visited, class_name: 'User', foreign_key: 'visited_id', optional: true
 
-  enum action: %i[like comment], _prefix: true
+  enum action: %i[like comment], _prefix: true # 削除予定
 end

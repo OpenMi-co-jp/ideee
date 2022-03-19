@@ -24,9 +24,9 @@ FactoryBot.define do
     visitor_id { 1 }
     visited_id { 1 }
     idea_id { 1 }
-    comment_id { 1 }
-    like_id { 1 }
-    action { 'MyString' }
+    action { 'like' } # 削除予定
     checked { false }
+    notificatable_id { 1 }
+    notificatable_type { "Like" }
   end
 end

@@ -109,3 +109,6 @@ ja:
         facebook: "https://www.facebook.com/share.php?u=https://www.ideee.tech"
         line: "https://timeline.line.me/social-plugin/share?url=https://www.ideee.tech"
         hatebu: "https://b.hatena.ne.jp/entry/https://www.ideee.tech"
+  notifications:
+    Comment: にコメントしました。
+    Like: にハートを送りました。

@@ -122,8 +122,9 @@ class User < ApplicationRecord
   end
 
   def like(idea)
-    likes.find_or_create_by(idea: idea)
-    idea.count_likes
+    like = likes.find_or_create_by(idea: idea)
+    idea.count_likes if like.valid?
+    like
   end
 
   def like?(idea)
@@ -140,8 +141,9 @@ class User < ApplicationRecord
   end
 
   def create_comment(params)
-    comments.create(idea_id: params[:idea_id], description: params[:description])
-    Idea.find_by!(id: params[:idea_id]).count_comments if params[:idea_id].present?
+    comment = comments.create(idea_id: params[:idea_id], description: params[:description])
+    comment.idea.count_comments if comment.valid?
+    comment
   end
 
   def cooperation_joined?(idea)

@@ -8,12 +8,7 @@
     <%= link_to "#{truncate(notification.visitor.name)}", user_path(id: notification.visitor_id, notification: notification), class: "p-notification__message--link" %>
       さんが
     <%= link_to "#{truncate(notification.idea.name)}", idea_path(id: notification.idea_id, notification: notification), class: "p-notification__message--link" %>
-    <% if notification.action_like? %>
-      にハートを送りました。
-    <% elsif notification.action_comment? %>
-      にコメントしました。
-      <%= content_tag(:p, "「#{truncate(notification.comment.description)}」", class: "p-notification__message--comment") %>
-    <% end %>
+    <%= t("notifications.#{notification.notificatable_type}") %>
     <%= content_tag(:p, "#{notification.created_at.time.to_s(:long)}", class: "p-notification__message--date") %>
   </div>
 </div>

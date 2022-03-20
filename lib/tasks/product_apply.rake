@@ -1,6 +1,8 @@
 namespace :product_apply do
   desc 'product_urlの承認許可コマンド'
   task :send_approve, ['id'] => :environment do |_task, args|
-    Idea.find_by!(id: args[:id]).update!(product_apply: :approved)
+    idea = Idea.find_by!(id: args[:id])
+    idea.update!(product_apply: :approved)
+    idea.create_notification_product_apply
   end
 end

@@ -9,4 +9,15 @@ $(document).on ('turbolinks:load', function(){
       };
     };
   })
+
+  // 通知をクリックしたらアップデート
+  $('#js_notification_check').on('click', function() {
+    // checkedが付いていたら既読なのでreturn
+    if ($(this).children('.checked').length != 0) { return }
+
+    $.ajax({
+      url: '/notifications/check',
+      type: 'POST'
+    })
+  })
 });

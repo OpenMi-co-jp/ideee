@@ -32,7 +32,6 @@ class IdeasController < ApplicationController
       @time_on_page = '-'
     end
     gon.idea_id = @idea.id # JSにアイデアのIDを渡す
-    Notifications::UpdateReadJob.perform_later(params[:notification]) if params[:notification]
   end
 
   def new

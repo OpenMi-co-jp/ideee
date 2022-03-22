@@ -84,7 +84,7 @@ header {
 }
 
 /*　上に上がる動き　*/
-#header.UpMove{
+header.js-up-move{
   animation: UpAnime 0.5s forwards;
 }
 
@@ -100,7 +100,7 @@ header {
 }
 
 /*　下に下がる動き　*/
-#header.DownMove{
+header.js-down-move{
   animation: DownAnime 0.5s forwards;
 }
 @keyframes DownAnime{

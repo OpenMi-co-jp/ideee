@@ -26,8 +26,9 @@
     </div>
     <div class='idea-status-column col s12 l9'>
       <div class="field input-field">
-        <%= form.text_field :name, placeholder: 'アイデア名', data: { length: 50 } %>
+        <%= form.text_field :name, placeholder: 'アイデア名', data: { length: 50 }, class: 'validate', required:'required' %>
         <%= form.label :name, class: 'required active' %>
+        <span class="helper-text" data-error="アイデア名を入力してください。"></span>
       </div>
       <div class="field">
         <%= form.label :tags_up_to_three %><a class="help-tip tags ml-2">?</a>
@@ -35,12 +36,14 @@
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
       <div class="field input-field">
-        <%= form.text_area :background, placeholder: '背景やストーリー', class: 'materialize-textarea' %>
+        <%= form.text_area :background, placeholder: '背景やストーリー', class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :background, class: 'required active' %>
+        <span class="helper-text" data-error="背景を入力してください。"></span>
       </div>
       <div class="field input-field">
-        <%= form.text_area :goal, placeholder: 'どうなって欲しいか', class: 'materialize-textarea' %>
+        <%= form.text_area :goal, placeholder: 'どうなって欲しいか', class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :goal, class: 'required active' %>
+        <span class="helper-text" data-error="ゴールを入力してください。"></span>
       </div>
       <ul class="collapsible">
         <li>

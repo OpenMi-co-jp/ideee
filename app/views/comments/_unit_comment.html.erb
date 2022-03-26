@@ -1,5 +1,10 @@
 <div class='c-unit-comment'>
   <div class="flex">
+    <% if owned %>
+    <div class="date-small pt-2 <%= 'gray-3' unless owned %> ">
+      <%= l comment.created_at, format: :long %>
+    </div>
+    <% end %>
     <% unless owned %>
       <div class='c-unit-comment__img gray-2'>
         <%= link_to user_path(comment.user_id) do %>
@@ -7,19 +12,7 @@
         <% end %>
       </div>
     <% end %>
-    <div class="c-unit-comment__info <%= 'white-text' if owned %>">
-      <div class="c-unit-comment__user <%= 'gray-3' unless owned %>">
-        <div class="c-unit-comment__username">
-          <%= link_to user_path(comment.user_id) do %>
-            <% unless owned %>
-              <% User.find(comment.user_id).name %>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
-          <%= l comment.created_at, format: :long %>
-        </div>
-      </div>
+    <div class="c-unit-comment__info <%= 'white-text' if owned %> <%= 'background-color: white' unless owned %>" style='background-color: #FFBF85'>
       <div class='c-unit-comment__info--description'>
         <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
       </div>
@@ -29,5 +22,10 @@
         <% end %>
       </div>
     </div>
+    <% unless owned %>
+    <div class="date-small pt-2 <%= 'gray-3' unless owned %> ">
+      <%= l comment.created_at, format: :long %>
+    </div>
+    <% end %>
   </div>
 </div>

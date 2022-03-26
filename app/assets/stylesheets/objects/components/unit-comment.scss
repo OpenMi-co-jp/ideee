@@ -9,6 +9,10 @@
 
   &__info {
     max-width: 90%;
+    border: solid 1px #E3E4E8;
+    border-radius: 0.5rem;
+    //background-color: white;
+
 
     &.white-text {
       max-width: none !important;

@@ -140,33 +140,40 @@ class Idea < ApplicationRecord
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
   end
 
-  def create_notification_like!(current_user)
-    notification = current_user.active_notifications.find_or_initialize_by(
-      visitor: current_user,
-      visited: user,
-      idea: self,
-      action: :like
-    )
-    notification.save if notification.valid?
+  def create_notification_like(current_user, like)
+    create_notification(current_user, user_id, like)
   end
 
-  def create_notification_comment!(current_user, comment_id)
-    # アイデア作成者も含めたuser_id取得
-    user_ids = Comment.where(idea_id: id).pluck(:user_id).push(user_id).uniq
+  def create_notification_comment(current_user, comment)
+    user_ids = select_notify_commenter(current_user)
     user_ids.each do |user_id|
-      # 自分以外のコメントした人全員に通知を送る
-      next if user_id == current_user.id
-
-      save_notification_comment!(current_user, comment_id, user_id)
+      create_notification(current_user, user_id, comment)
     end
   end
 
-  def save_notification_comment!(current_user, comment_id, visited_id)
-    current_user.active_notifications.create!(
+  def create_notification_difficulty(current_user, difficulty)
+    create_notification(current_user, user_id, difficulty)
+  end
+
+  def create_notification_product_apply
+    admin_user = User.first
+    notification = create_notification(admin_user, user_id, nil)
+    notification.update_column(:notificatable_type, "product_apply")
+  end
+
+  def select_notify_commenter(current_user)
+    # アイデア作成者も含めたuser_id取得
+    user_ids = comments.pluck(:user_id).push(user_id).uniq
+    user_ids.delete(current_user.id)
+    user_ids
+  end
+
+  def create_notification(current_user, visited_id, notificatable)
+    current_user.active_notifications.find_or_create_by!(
+      visitor: current_user,
       visited_id: visited_id,
       idea: self,
-      comment_id: comment_id,
-      action: :comment
+      notificatable: notificatable
     )
   end
 end

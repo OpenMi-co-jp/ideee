@@ -31,7 +31,7 @@
         <span class="helper-text" data-error="アイデア名を入力してください。"></span>
       </div>
       <div class="field">
-        <%= form.label :tags_up_to_three %><a class="help-tip tags ml-2">?</a>
+        <%= form.label :tags_up_to_three %><a class="help-tip tags">?</a>
         <div class="chips"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
@@ -78,7 +78,7 @@
       </div>
       <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
         <div class="field switch c-cooperation-switch">
-          <%= form.label :cooperation %><a class="help-tip cooperation-guide ml-2">?</a>
+          <%= form.label :cooperation %><a class="help-tip cooperation-guide">?</a>
           <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
           <div class="switch c-cooperation-switch__btn">
             <label class="c-cooperation-switch__label">
@@ -91,7 +91,7 @@
         </div>
       <% end %>
       <div class="field">
-        <%= form.label :product_url %><a class="help-tip product-url ml-2">?</a>
+        <%= form.label :product_url %><a class="help-tip product-url">?</a>
         <%= form.text_field :product_url, placeholder: 'プロダクトのURL' %>
       </div>
       <% if idea.draft || idea.id.nil? %>

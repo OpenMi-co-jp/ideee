@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_113035) do
+ActiveRecord::Schema.define(version: 2022_03_19_143755) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -126,12 +126,12 @@ ActiveRecord::Schema.define(version: 2022_02_08_113035) do
     t.integer "visitor_id"
     t.integer "visited_id"
     t.integer "idea_id"
-    t.integer "comment_id"
-    t.integer "like_id"
-    t.integer "action", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "notificatable_id"
+    t.string "notificatable_type"
+    t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|

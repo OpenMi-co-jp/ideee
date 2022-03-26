@@ -1,7 +1,5 @@
 <div class='idea-index'>
-  <div class='main-board'>
-    <h4 class='board-title'>開発者募集中のアイデア</h4>
-    <%= render 'common/column_board', ideas: @cooperation_ongoing_ideas %>
-    <%= paginate @cooperation_ongoing_ideas %>
-  </div>
+  <h4 class='board-title'>開発者募集中のアイデア</h4>
+  <%= render 'common/column_board', ideas: @cooperation_ongoing_ideas %>
+  <%= paginate @cooperation_ongoing_ideas %>
 </div>

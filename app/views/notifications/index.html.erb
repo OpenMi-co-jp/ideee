@@ -1,7 +1,5 @@
-<div class='boad'>
-  <h2>通知一覧</h2>
-  <div class="p-notification">
-    <%= render partial: 'notification', collection: @notifications %>
-  </div>
-  <%= paginate @notifications %>
+<h2>通知一覧</h2>
+<div class="p-notification">
+  <%= render partial: 'notification', collection: @notifications %>
 </div>
+<%= paginate @notifications %>

@@ -575,6 +575,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   aws-sdk-s3
+  bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.4)
@@ -613,6 +614,7 @@ DEPENDENCIES
   rack-timeout
   rails (~> 6.1.4)
   rails-i18n
+  redis (~> 4.6)
   rollbar
   rspec-rails
   rubocop

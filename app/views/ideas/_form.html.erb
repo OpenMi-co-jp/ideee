@@ -95,12 +95,12 @@
         <%= form.text_field :product_url, placeholder: 'プロダクトのURL' %>
       </div>
       <% if idea.draft || idea.id.nil? %>
-        <%= form.button t('default.save_draft'), id: 'save_draft_submit', type:'button', class: 'btn orange-soft-back mh-3 idea-btn' %>
+        <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3 idea-btn' %>
       <% end %>
       <% if idea.draft %>
-        <%= form.button t('default.publish'), type:'button', class: 'btn orange-action-back mh-3 idea-btn' %>
+        <%= form.submit t('default.publish'), class: 'btn orange-action-back mh-3 idea-btn' %>
       <% else %>
-        <%= form.button id: 'register_submit', type:'button', class: 'btn orange-action-back mh-3 idea-btn' %>
+        <%= form.submit class: 'btn orange-action-back mh-3 idea-btn' %>
       <% end %>
     </div>
   </div>

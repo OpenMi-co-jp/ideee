@@ -68,22 +68,22 @@ header {
   .text-monospace img {
     width: 155px;
   }
-}
 
-#humburger-menu {
-  cursor: pointer;
-}
+  #humburger-menu {
+    cursor: pointer;
+  }
 
-.header-logo {
-  width: 100px;
+  .header-logo {
+    width: 100px;
 
-  img:hover {
-    transition-duration: .4s;
-    transform: scale(1.1);
+    img:hover {
+      transition-duration: .4s;
+      transform: scale(1.1);
+    }
   }
 }
 
-/*　上に上がる動き　*/
+/* 上に上がる動き */
 header.js-up-move{
   animation: UpAnime 0.5s forwards;
 }
@@ -99,11 +99,12 @@ header.js-up-move{
   }
 }
 
-/*　下に下がる動き　*/
-header.js-down-move{
+/* 下に下がる動き */
+header.js-down-move {
   animation: DownAnime 0.5s forwards;
 }
-@keyframes DownAnime{
+
+@keyframes DownAnime {
   from {
     opacity: 0;
     transform: translateY(-100px);

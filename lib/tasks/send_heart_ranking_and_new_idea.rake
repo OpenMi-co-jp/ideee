@@ -1,4 +1,5 @@
 namespace :send_heart_ranking_and_new_ideas do
+  # 自動化ができていたら削除予定
   desc '最近のハートが多いアイデア、最新アイデアをメールで送る'
   task send_ranking_email: :environment do
     users = User.all

@@ -11,6 +11,6 @@
   visited = User.all.where.not(id: visitor.id).sample
   Notification.seed(
     :id,
-    { id: 100 + num, visitor: visitor, visited: visited, idea: Idea.all.sample, notificatable: Comment.all.sample}
+    { id: 100 + num, visitor: visitor, visited: visited, idea: Idea.all.sample, notificatable: Comment.all.sample }
   )
 end

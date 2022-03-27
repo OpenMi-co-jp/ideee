@@ -160,7 +160,7 @@ class Idea < ApplicationRecord
   def create_notification_product_apply
     admin_user = User.first
     notification = create_notification(admin_user, user_id, nil)
-    notification.update_column(:notificatable_type, "product_apply")
+    notification.update_column(:notificatable_type, 'product_apply')
   end
 
   def select_notify_commenter(current_user)

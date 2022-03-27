@@ -2,29 +2,30 @@
 #
 # Table name: ideas
 #
-#  id            :bigint           not null, primary key
-#  background    :string(255)
-#  comments_num  :integer          default(0)
-#  cooperation   :integer          default("not_started")
-#  difficulty    :integer          default("not_yet")
-#  draft         :boolean          default(FALSE)
-#  goal          :string(255)
-#  hypothesis    :string(255)
-#  icon          :string(255)
-#  issue         :string(255)
-#  likes_num     :integer          default(0)
-#  name          :string(255)
-#  note          :text(65535)
-#  product_apply :integer          default("no_apply")
-#  product_url   :string(255)
-#  published_at  :datetime
-#  similar       :string(255)
-#  target        :string(255)
-#  view          :integer          default(0)
-#  wish_function :string(255)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  user_id       :bigint           not null
+#  id                                                       :bigint           not null, primary key
+#  background                                               :string(255)
+#  comments_num                                             :integer          default(0)
+#  cooperation                                              :integer          default("not_started")
+#  difficulty                                               :integer          default("not_yet")
+#  draft                                                    :boolean          default(FALSE)
+#  emailed_at(weeklyメールで新規アイデアとして送られた日時) :datetime
+#  goal                                                     :string(255)
+#  hypothesis                                               :string(255)
+#  icon                                                     :string(255)
+#  issue                                                    :string(255)
+#  likes_num                                                :integer          default(0)
+#  name                                                     :string(255)
+#  note                                                     :text(65535)
+#  product_apply                                            :integer          default("no_apply")
+#  product_url                                              :string(255)
+#  published_at                                             :datetime
+#  similar                                                  :string(255)
+#  target                                                   :string(255)
+#  view                                                     :integer          default(0)
+#  wish_function                                            :string(255)
+#  created_at                                               :datetime         not null
+#  updated_at                                               :datetime         not null
+#  user_id                                                  :bigint           not null
 #
 # Indexes
 #
@@ -65,6 +66,7 @@ class Idea < ApplicationRecord
   scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC').first(5) }
   scope :most_commented, -> { includes([:idea_tags]).order(comments_num: 'DESC') }
   scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
+  scope :not_emailed, -> { where(emailed_at: nil) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }

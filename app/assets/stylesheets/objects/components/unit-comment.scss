@@ -5,14 +5,15 @@
   &__img {
     margin-right: 0.5rem;
     min-width: 60px;
+    max-width: 60px;
   }
 
   &__info {
     max-width: 90%;
     border: solid 1px #E3E4E8;
     border-radius: 0.5rem;
-    //background-color: white;
-
+    background-color: white;
+    margin: 0px 5px;
 
     &.white-text {
       max-width: none !important;
@@ -20,6 +21,11 @@
 
     &--description {
       min-height: 40px;
+      margin: 5px;
+    }
+
+    &.own-comment {
+      background-color: #FFBF85;
     }
   }
 

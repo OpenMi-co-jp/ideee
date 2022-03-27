@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
   end
 
   create_table "teams", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "owner_id", null: false
     t.bigint "idea_id", null: false
     t.integer "status", default: 0, null: false
     t.string "requirement", null: false
@@ -171,8 +171,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["idea_id"], name: "index_teams_on_idea_id"
-    t.index ["status", "user_id"], name: "index_teams_on_status_and_user_id"
-    t.index ["user_id"], name: "index_teams_on_user_id"
+    t.index ["status", "owner_id"], name: "index_teams_on_status_and_owner_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -213,5 +212,4 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
   add_foreign_key "taggings", "ideas"
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "ideas"
-  add_foreign_key "teams", "users"
 end

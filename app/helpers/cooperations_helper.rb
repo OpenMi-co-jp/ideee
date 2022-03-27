@@ -2,10 +2,10 @@ module CooperationsHelper
   def modal_link(method, color)
     link_to(
       t("default.cooperation.#{method}"),
-      '#modal_cooperation',
+      '#modal_team',
       data: { turbolinks: false },
       class: "waves-effect waves-light btn #{color} modal-trigger",
-      id: 'modal-trigger-cooperation'
+      id: 'modal-trigger-team'
     )
   end
 end

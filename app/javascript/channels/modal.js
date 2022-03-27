@@ -13,8 +13,8 @@ $(document).on ('turbolinks:load', function(){
   });
 
   // 協働開発者募集のモーダル
-  $('#modal-trigger-cooperation').on('click', function() {
-    $('#modal_cooperation').modal('open');
+  $('#modal-trigger-team').on('click', function() {
+    $('#modal_team').modal('open');
   });
 
   // モーダルを閉じる用

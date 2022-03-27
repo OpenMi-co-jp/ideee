@@ -1,6 +1,6 @@
-<div id="modal_cooperation" class="modal">
+<div id="modal_team" class="modal">
   <div class="modal-content">
-    <h4><%= t("default.cooperation.titles.#{action}") %></h4>
+    <h4><%= t("default.team.titles.#{action}") %></h4>
     <div>開発者一覧(<%=  @idea.cooperation_users.length %>名)</div>
     <ul class="collection m-5 row">
       <% @idea.cooperation_users.each do |user| %>
@@ -14,10 +14,10 @@
         </li>
       <% end %>
     </ul>
-    <p class='gray-5'><%= t("default.cooperation.messages.#{action}") %></p>
+    <p class='gray-5'><%= t("default.team.messages.#{action}") %></p>
     <div class='cooperation-submit-btn'>
       <%= link_to t('default.cancel'), '#cancel', class: 'btn gray-3-back modal-close-btn' %>
-      <%= link_to t("default.cooperation.#{action}"), path, method: method, class: "btn orange-action-back" %>
+      <%= link_to t("default.team.#{action}"), path, method: method, class: "btn orange-action-back" %>
     </div>
   </div>
 </div>

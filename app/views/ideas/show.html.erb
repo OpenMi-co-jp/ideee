@@ -87,6 +87,7 @@
   <% unless @idea.draft %>
     <%= render 'comments/board', object: @idea %>
     <%= render 'comments/form' %>
+    <%= render "common/like", object: @idea %>
   <% end %>
   <%= render 'common/fund_link', object: @idea %>
   <%= render 'ideas/show/vote_modal' %>

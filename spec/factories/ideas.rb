@@ -31,6 +31,8 @@
 #
 #  index_ideas_on_user_id  (user_id)
 #
+
+# これを書かないとなぜか関連モデルが作成されない
 FactoryBot.use_parent_strategy = false
 
 FactoryBot.define do

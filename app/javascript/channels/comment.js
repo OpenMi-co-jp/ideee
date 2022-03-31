@@ -85,14 +85,16 @@ $(document).on ('turbolinks:load', function(){
                             .replace(/'/g, '&#39;')
     return $(
             '<div class="p-comment-board__item own-comment">' +
-              '<div class="c-unit-comment white-text">' +
+              '<div class="c-unit-comment">' +
                 '<div class="flex">' +
-                  '<div class="c-unit-comment__info">' +
+                  '<div class="date-small pt-2">' +
+                    yy+'.'+mm+'.'+dd+' '+h+':'+m +
+                  '</div>' +
+                  '<div class="c-unit-comment__info white-text own-comment">' +
                     '<div class="c-unit-comment--description">' +
-                      escaped_comment +
-                    '</div>' +
-                    '<div class="date-small pt-2">' +
-                      yy+'.'+mm+'.'+dd+' '+h+':'+m +
+                      '<p>' +
+                        escaped_comment +
+                      '</p>' +
                     '</div>' +
                   '</div>' +
                 '</div>' +

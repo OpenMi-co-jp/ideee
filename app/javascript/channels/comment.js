@@ -72,10 +72,10 @@ $(document).on ('turbolinks:load', function(){
   function js_comments(comment){
     const now = new Date()
     var yy = now.getFullYear()
-    var mm = now.getMonth() + 1
-    var dd = now.getDate()
-    var h = now.getHours()
-    var m = now.getMinutes()
+    var mm = ('00' + (now.getMonth() + 1)).slice(-2);
+    var dd = ('00' + now.getDate()).slice(-2);
+    var h = ('00' + now.getHours()).slice(-2);
+    var m = ('00' + now.getMinutes()).slice(-2);
     var escaped_comment = comment
                             .replace(/\n/g, '<br>')
                             .replace(/&/g, '&amp;')
@@ -91,10 +91,17 @@ $(document).on ('turbolinks:load', function(){
                     yy+'.'+mm+'.'+dd+' '+h+':'+m +
                   '</div>' +
                   '<div class="c-unit-comment__info white-text own-comment">' +
-                    '<div class="c-unit-comment--description">' +
+                    '<div class="c-unit-comment__info--description">' +
                       '<p>' +
                         escaped_comment +
                       '</p>' +
+                    '</div>' +
+                    '<div class="c-unit-comment__options ">' +
+                      '<div class="c-comment-icons">' +
+                        '<a data-target="dropdown_comment-more_vert-14" class="dropdown-trigger white-text" href="#">' +
+                          '<i class="material-icons">more_vert</i>' +
+                        '</a>' +
+                      '</div>' +
                     '</div>' +
                   '</div>' +
                 '</div>' +

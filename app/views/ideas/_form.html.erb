@@ -78,7 +78,7 @@
       </div>
       <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
         <div class="field switch c-team-switch">
-          <%= form.label :cooperation %><a class="help-tip cooperation-guide">?</a>
+          <%= form.label :cooperation %><a class="help-tip team-guide">?</a>
           <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
           <div class="switch c-team-switch__btn">
             <label class="c-team-switch__label">

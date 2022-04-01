@@ -27,11 +27,9 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
-  resources :cooperations, only: %i[index new create destroy] do
+  resources :teams do
     collection do
-      post 'start'
-      post 'complete'
-      post 'restart'
+      post 'join'
     end
   end
   resources :difficultys, only: %i[create]

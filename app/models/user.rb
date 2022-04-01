@@ -43,8 +43,6 @@ class User < ApplicationRecord
   has_many :comment_ideas, through: :comments, source: :idea
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_ideas, through: :difficultys, source: :idea
-  has_many :cooperations, dependent: :destroy
-  has_many :cooperation_ideas, through: :cooperations, source: :idea
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
@@ -146,8 +144,8 @@ class User < ApplicationRecord
     comment
   end
 
-  def cooperation_joined?(idea)
-    cooperation_ideas.include?(idea)
+  def team_joined?(idea)
+    idea.team.members.include?(self)
   end
 
   # Contributionの計算

@@ -1,8 +1,8 @@
-100.times do |n|
+50.times do |n|
   num = n + 1
-  Cooperation.seed(
+  Team.seed(
     :id,
-    { id: num, user: User.all.sample, idea: Idea.where.not(cooperation: :not_started).sample }
+    { id: num, team: Team.all.sample, idea: Idea.select{|i| i.team == nil}.sample }
   )
   # 同一の組み合わせがあった場合はrescueでエラーハンドリング
 rescue ActiveRecord::RecordNotUnique

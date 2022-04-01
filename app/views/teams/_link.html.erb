@@ -1,0 +1,17 @@
+<% if idea.team&.status_active? %>
+  <% if current_user&.team_joined?(idea) %>
+    <%= modal_link('cancel','gray-3-back') %>
+    <%= render 'teams/modal',
+      action: 'cancel',
+      path: edit_team_path(idea_id: idea),
+      method: :post
+    %>
+  <% else %>
+    <%= modal_link('join','orange-action-back') %>
+    <%= render 'teams/modal',
+      action: 'join',
+      path: join_teams_path(idea_id: idea),
+      method: :post
+    %>
+  <% end %>
+<% end %>

@@ -12,7 +12,8 @@ class IdeasController < ApplicationController
     @liked_ideas = recent_ideas.most_liked
     @most_commented_ideas = recent_ideas.most_commented.first(10)
     @featured_users = User.where(defined: true).order(point: 'DESC').first(10) # 定義がされているユーザーだけをポイントが高い準に5名
-    @on_board_ideas = ideas.includes([:user]).where(cooperation: :ongoing).most_commented.order(updated_at: 'DESC').first(5)
+    team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
+    @taam_active_ideas = Idea.where(id: team_active_ids).includes([:idea_tags, :user])
     @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: 'DESC').first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
@@ -43,13 +44,13 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
-      @idea.cooperation_ongoing! if params.dig(:idea, :cooperation_switch) == 'true'
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
       if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
+        redirect_to destination, notice: t('.draft_save')
       else
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.now)
-        redirect_to @idea, notice: t('.success')
+        redirect_to destination, notice: t('.success')
       end
     else
       flash.now[:alert] = t('.fail')
@@ -60,15 +61,15 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
-      params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
       if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
+        redirect_to destination, notice: t('.draft_save')
       else
         if params[:commit] == t('default.publish')
           sidekiq_jobs
           @idea.update_attribute(:published_at, Time.now)
         end
-        redirect_to @idea, notice: t('.success')
+        redirect_to destination, notice: t('.success')
       end
     else
       flash.now[:alert] = t('.fail')

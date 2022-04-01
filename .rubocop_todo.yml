@@ -35,7 +35,7 @@ Lint/SuppressedException:
     - 'db/fixtures/development/04_like.rb'
     - 'db/fixtures/development/05_difficulty.rb'
     - 'db/fixtures/development/07_tagging.rb'
-    - 'db/fixtures/development/08_cooperation.rb'
+    - 'db/fixtures/development/08_team.rb'
 
 # Offense count: 7
 Lint/UselessAssignment:

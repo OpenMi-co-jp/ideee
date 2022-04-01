@@ -26,8 +26,9 @@ namespace :auto_update_qiita_post do
 
     body += "## 👬 チーム開発開発者募集中のアイデア\n" + \
             "`最近更新されたチーム開発を募集しているアイデア`\n"
-    cooperation_items = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: 'DESC').first(5)
-    body += idea_columns(cooperation_items)
+    team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
+    team_items = Idea.where(id: team_active_ids).includes([:idea_tags, :user])
+    body += idea_columns(team_items)
 
     body += "\n```\n" + \
             "ideeeはサービス開発の「もったいない」を無くすために努力していきます。\n" + \

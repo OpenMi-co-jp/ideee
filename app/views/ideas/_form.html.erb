@@ -76,14 +76,14 @@
         <%= form.label :note %>
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
-      <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
+      <% if idea.team.nil? || idea.id.nil? || idea.draft %>
         <div class="field switch c-team-switch">
-          <%= form.label :cooperation %><a class="help-tip team-guide">?</a>
-          <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
+          <%= form.label :team %><a class="help-tip team-guide">?</a>
+          <%= form.hidden_field :team_switch, value: params[:team_switch] %>
           <div class="switch c-team-switch__btn">
             <label class="c-team-switch__label">
               募集しない
-              <input type="checkbox" id='cooperation_switch' <%= 'checked' if idea.cooperation_ongoing? %>>
+              <input type="checkbox" id='team_switch' <%= 'checked' if idea.team&.status_active? %>>
               <span class="lever"></span>
               募集する
             </label>

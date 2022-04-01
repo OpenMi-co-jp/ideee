@@ -1,4 +1,4 @@
-module CooperationsHelper
+module TeamsHelper
   def modal_link(method, color)
     link_to(
       t("default.team.#{method}"),

@@ -81,7 +81,7 @@ ja:
       success: アイデアを削除しました
     publish:
       success: アイデアを公開しました
-  cooperations:
+  teams:
     create:
       success: 開発者の募集に参加しました
     destroy:

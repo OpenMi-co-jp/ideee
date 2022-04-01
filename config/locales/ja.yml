@@ -19,6 +19,7 @@ ja:
   time:
     formats:
       default: "%Y.%m.%d"
+      month_time: "%m/%d %H:%M"
       long: "%Y.%m.%d %H:%M"
   errors:
     messages:

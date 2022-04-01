@@ -1,32 +1,22 @@
 <div class='c-unit-comment'>
   <div class="flex">
     <% if owned %>
-      <div class="date-small pt-2 <%= 'gray-3' unless owned %> ">
-        <%= l comment.created_at, format: :long %>
+      <%= render 'comments/comment_time', created_at: comment.created_at %>
+      <div class='c-unit-comment__info'>
+        <%= render 'comments/comment_description', description: comment.description %>
+        <%= render 'comments/option', comment: comment %>
       </div>
-    <% end %>
-    <% unless owned %>
-      <div class='c-unit-comment__img gray-2'>
+    <% else %>
+      <div class='c-unit-comment__user'>
         <%= link_to user_path(comment.user_id) do %>
-          <%= user_icon(User.find(comment.user_id)) %>
-          <%= User.find(comment.user_id).name %>
+          <%= user_icon(User.find(comment.user_id), size: 'small') %>
+          <span class='c-unit-comment__user--name'><%= User.find(comment.user_id).name %></span>
         <% end %>
       </div>
-    <% end %>
-    <div class="c-unit-comment__info <%= 'white-text own-comment' if owned %>">
-      <div class='c-unit-comment__info--description'>
-        <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
+      <div class='c-unit-comment__info'>
+        <%= render 'comments/comment_description', description: comment.description %>
       </div>
-      <div class="c-unit-comment__options <%= 'gray-3' unless owned %>">
-        <% if owned %>
-          <%= render 'comments/icons', comment: comment %>
-        <% end %>
-      </div>
-    </div>
-    <% unless owned %>
-      <div class="date-small pt-2 <%= 'gray-3' unless owned %> ">
-        <%= l comment.created_at, format: :long %>
-      </div>
+      <%= render 'comments/comment_time', created_at: comment.created_at %>
     <% end %>
   </div>
 </div>

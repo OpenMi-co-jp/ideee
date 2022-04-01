@@ -71,7 +71,6 @@ $(document).on ('turbolinks:load', function(){
 
   function js_comments(comment){
     const now = new Date()
-    var yy = now.getFullYear()
     var mm = ('00' + (now.getMonth() + 1)).slice(-2);
     var dd = ('00' + now.getDate()).slice(-2);
     var h = ('00' + now.getHours()).slice(-2);
@@ -87,18 +86,18 @@ $(document).on ('turbolinks:load', function(){
             '<div class="p-comment-board__item own-comment">' +
               '<div class="c-unit-comment">' +
                 '<div class="flex">' +
-                  '<div class="date-small pt-2">' +
-                    yy+'.'+mm+'.'+dd+' '+h+':'+m +
+                  '<div class="date-small">' +
+                    '<span>' + mm+'/'+dd+' '+h+':'+m + '</span>' +
                   '</div>' +
-                  '<div class="c-unit-comment__info white-text own-comment">' +
+                  '<div class="c-unit-comment__info">' +
                     '<div class="c-unit-comment__info--description">' +
                       '<p>' +
                         escaped_comment +
                       '</p>' +
                     '</div>' +
-                    '<div class="c-unit-comment__options ">' +
+                    '<div class="c-unit-comment__options">' +
                       '<div class="c-comment-icons">' +
-                        '<a data-target="dropdown_comment-more_vert-14" class="dropdown-trigger white-text" href="#">' +
+                        '<a data-target="dropdown_comment-more_vert-14" class="dropdown-trigger" href="#">' +
                           '<i class="material-icons">more_vert</i>' +
                         '</a>' +
                       '</div>' +

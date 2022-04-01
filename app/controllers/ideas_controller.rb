@@ -13,7 +13,7 @@ class IdeasController < ApplicationController
     @most_commented_ideas = recent_ideas.most_commented.first(10)
     @featured_users = User.where(defined: true).order(point: 'DESC').first(10) # 定義がされているユーザーだけをポイントが高い準に5名
     team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
-    @taam_active_ideas = Idea.where(id: team_active_ids).includes([:idea_tags, :user])
+    @taam_active_ideas = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
     @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: 'DESC').first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))

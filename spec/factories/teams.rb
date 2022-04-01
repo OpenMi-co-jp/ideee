@@ -22,5 +22,9 @@
 #
 FactoryBot.define do
   factory :team do
+    offer { 'test_offer' }
+    requirement { 'test_requirement' }
+    status { 'active' }
+    idea
   end
 end

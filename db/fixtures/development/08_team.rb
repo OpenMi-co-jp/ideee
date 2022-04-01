@@ -4,7 +4,7 @@
     :id,
     {
       id: num,
-      idea: Idea.select{|i| i.team == nil}.sample,
+      idea: Idea.select { |i| i.team.nil? }.sample,
       offer: Faker::JapaneseMedia::StudioGhibli.character,
       requirement: Faker::JapaneseMedia::StudioGhibli.quote,
       status: Faker::JapaneseMedia::StudioGhibli.movie

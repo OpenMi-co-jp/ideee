@@ -7,15 +7,15 @@
         <li class="collection-item col s12 m6 l3 p-2">
           <div class='flex'>
             <%= user_icon(user, size: 'small') %>
-            <div>
-              <div class='pr-3'><%= user.name %><%= user_definiton(user, ver='short') %></div>
+            <div class='pr-3'>
+              <%= user.name %><%= user_definiton(user, ver='short') %>
             </div>
           </div>
         </li>
       <% end %>
     </ul>
     <p class='gray-5'><%= t("default.team.messages.#{action}") %></p>
-    <div class='cooperation-submit-btn'>
+    <div class='team-submit-btn'>
       <%= link_to t('default.cancel'), '#cancel', class: 'btn gray-3-back modal-close-btn' %>
       <%= link_to t("default.team.#{action}"), path, method: method, class: "btn orange-action-back" %>
     </div>

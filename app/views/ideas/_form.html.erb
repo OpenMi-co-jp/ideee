@@ -77,11 +77,11 @@
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
       <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
-        <div class="field switch c-cooperation-switch">
+        <div class="field switch c-team-switch">
           <%= form.label :cooperation %><a class="help-tip cooperation-guide">?</a>
           <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
-          <div class="switch c-cooperation-switch__btn">
-            <label class="c-cooperation-switch__label">
+          <div class="switch c-team-switch__btn">
+            <label class="c-team-switch__label">
               募集しない
               <input type="checkbox" id='cooperation_switch' <%= 'checked' if idea.cooperation_ongoing? %>>
               <span class="lever"></span>

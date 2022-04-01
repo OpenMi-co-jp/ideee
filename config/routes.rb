@@ -35,7 +35,11 @@ Rails.application.routes.draw do
     end
   end
   resources :difficultys, only: %i[create]
-  resources :notifications, only: %i[index]
+  resources :notifications, only: %i[index] do
+    collection do
+      post 'check'
+    end
+  end
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

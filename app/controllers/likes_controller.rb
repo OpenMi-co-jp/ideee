@@ -2,8 +2,8 @@ class LikesController < ApplicationController
   before_action :idea_id
 
   def create
-    current_user.like(@idea)
-    @idea.create_notification_like!(current_user)
+    like = current_user.like(@idea)
+    @idea.create_notification_like(current_user, like)
   end
 
   def destroy

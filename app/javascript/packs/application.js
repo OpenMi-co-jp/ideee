@@ -30,3 +30,5 @@ require("channels/user_validation");
 require("channels/carousel");
 require("channels/modal");
 require("channels/chips");
+require("channels/idea_validation");
+require("channels/header_scroll");

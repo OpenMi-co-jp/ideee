@@ -4,14 +4,13 @@
   visited = User.all.where.not(id: visitor.id).sample
   Notification.seed(
     :id,
-    { id: num, visitor: visitor, visited: visited, idea: Idea.all.sample, like: Like.all.sample, action: 0 }
+    { id: num, visitor: visitor, visited: visited, idea: Idea.all.sample, notificatable: Like.all.sample }
   )
   # いいねするユーザーとコメントするユーザーを分けるため
   visitor = User.all.sample
   visited = User.all.where.not(id: visitor.id).sample
   Notification.seed(
     :id,
-    { id: 100 + num, visitor: visitor, visited: visited, idea: Idea.all.sample, comment: Comment.all.sample,
-      action: 1 }
+    { id: 100 + num, visitor: visitor, visited: visited, idea: Idea.all.sample, notificatable: Comment.all.sample }
   )
 end

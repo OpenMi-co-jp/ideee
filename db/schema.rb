@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_08_113035) do
+ActiveRecord::Schema.define(version: 2022_03_27_044231) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2022_02_08_113035) do
     t.string "hypothesis"
     t.string "target"
     t.string "similar"
+    t.datetime "emailed_at", comment: "weeklyメールで新規アイデアとして送られた日時"
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 
@@ -126,12 +127,12 @@ ActiveRecord::Schema.define(version: 2022_02_08_113035) do
     t.integer "visitor_id"
     t.integer "visited_id"
     t.integer "idea_id"
-    t.integer "comment_id"
-    t.integer "like_id"
-    t.integer "action", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "notificatable_id"
+    t.string "notificatable_type"
+    t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
@@ -149,6 +150,28 @@ ActiveRecord::Schema.define(version: 2022_02_08_113035) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "team_users", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_team_users_on_team_id"
+    t.index ["user_id", "team_id"], name: "index_team_users_on_user_id_and_team_id", unique: true
+    t.index ["user_id"], name: "index_team_users_on_user_id"
+  end
+
+  create_table "teams", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "owner_id", null: false
+    t.bigint "idea_id", null: false
+    t.integer "status", default: 0, null: false
+    t.string "requirement", null: false
+    t.string "offer", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["idea_id"], name: "index_teams_on_idea_id"
+    t.index ["status", "owner_id"], name: "index_teams_on_status_and_owner_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -188,4 +211,5 @@ ActiveRecord::Schema.define(version: 2022_02_08_113035) do
   add_foreign_key "difficulties", "users"
   add_foreign_key "taggings", "ideas"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "teams", "ideas"
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_27_044231) do
+ActiveRecord::Schema.define(version: 2022_04_01_180508) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
   end
 
   create_table "teams", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "owner_id", null: false
+    t.bigint "owner_id", null: false
     t.bigint "idea_id", null: false
     t.integer "status", default: 0, null: false
     t.string "requirement", null: false
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["idea_id"], name: "index_teams_on_idea_id"
+    t.index ["owner_id"], name: "index_teams_on_owner_id"
     t.index ["status", "owner_id"], name: "index_teams_on_status_and_owner_id"
   end
 
@@ -212,4 +213,5 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
   add_foreign_key "taggings", "ideas"
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "ideas"
+  add_foreign_key "teams", "users", column: "owner_id"
 end

@@ -19,6 +19,8 @@ ja:
       restart: 再募集
       join: 参加
       cancel: 参加を辞退
+      edit: 募集を編集
+      stop: 募集を停止
       titles:
         complete: 募集を終了しますか？
         restart: 開発者を再募集しますか？
@@ -83,15 +85,13 @@ ja:
       success: アイデアを公開しました
   teams:
     create:
-      success: 開発者の募集に参加しました
-    destroy:
-      success: 参加を辞退しました
-    start:
-      success: 開発者の募集を開始しました
-    complete:
-      success: 開発者の募集を終了しました
-    restart:
-      success: 開発者の募集を再開しました
+      success: チーム開発の募集をスタートしました
+    stop:
+      success: チーム開発の募集を終了しました
+    update:
+      success: チーム開発を更新しました
+    update:
+      success: チーム開発を更新しました
   comments:
     edit:
       title: コメント編集

@@ -40,3 +40,7 @@ ja:
         product_url: 作っているアプリ
       comment:
         description: コメント
+      team:
+        offer: 得られること
+        requirement: お願いしたいこと
+        status: ステータス

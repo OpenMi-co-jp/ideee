@@ -1,12 +1,8 @@
 .c-team-form {
   padding: 2rem;
 
-  h4 {
-    font-weight: bold;
-  }
-
   &__idea_img {
-    margin: 0 auto;
+    margin: 1rem 0 0;
 
     img {
       min-width: 300px;
@@ -16,8 +12,9 @@
     }
   }
 
-  &__idea-status {
-    justify-content: center;
+  &__idea_info {
+    text-align: center;
+    color: #C4C4C4;
   }
 
   &__idea-content {

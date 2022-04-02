@@ -31,6 +31,9 @@ Rails.application.routes.draw do
     collection do
       post 'join'
     end
+    member do
+      post 'stop'
+    end
   end
   resources :difficultys, only: %i[create]
   resources :notifications, only: %i[index] do

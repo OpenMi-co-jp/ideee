@@ -155,7 +155,7 @@ class User < ApplicationRecord
     comment_point = comments.length
     like_num = likes.length
     sum_points = (2 * idea_num) + (0.5 * like_num) + idea_like_num + comment_point
-    update(point: sum_points)
+    update_column(:point, sum_points)
   end
 
   def twitter_id_fix

@@ -4,6 +4,7 @@ class IdeasController < ApplicationController
   before_action :own_user_check, only: %i[edit update destroy]
   before_action :defined_check, except: %i[index show search tags]
   before_action :own_draft_check, only: %i[show]
+  after_action :update_user_point, only: %i[create]
 
   def index
     ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止

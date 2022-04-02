@@ -9,16 +9,18 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  idea_id     :bigint           not null
-#  owner_id    :integer          not null
+#  owner_id    :bigint           not null
 #
 # Indexes
 #
 #  index_teams_on_idea_id              (idea_id)
+#  index_teams_on_owner_id             (owner_id)
 #  index_teams_on_status_and_owner_id  (status,owner_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (idea_id => ideas.id)
+#  fk_rails_...  (owner_id => users.id)
 #
 class Team < ApplicationRecord
   validates :offer, presence: true

@@ -95,13 +95,6 @@ $(document).on ('turbolinks:load', function(){
                         escaped_comment +
                       '</p>' +
                     '</div>' +
-                    '<div class="c-unit-comment__options">' +
-                      '<div class="c-comment-icons">' +
-                        '<a data-target="dropdown_comment-more_vert-14" class="dropdown-trigger" href="#">' +
-                          '<i class="material-icons">more_vert</i>' +
-                        '</a>' +
-                      '</div>' +
-                    '</div>' +
                   '</div>' +
                 '</div>' +
               '</div>' +

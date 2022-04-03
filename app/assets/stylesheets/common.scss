@@ -76,7 +76,15 @@ hr {
 }
 
 .date-small {
+  position: relative;
   font-size: x-small;
+  min-width: 65px;
+
+  span {
+    color: #C4C4C4;
+    position: absolute;
+    bottom: 5px;
+  }
 }
 
 .italic {

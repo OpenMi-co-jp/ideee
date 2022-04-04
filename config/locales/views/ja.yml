@@ -14,23 +14,20 @@ ja:
     save_draft: 下書き保存
     publish: 公開する
     team:
-      start: 開発者を募集
+      start: チーム開発を募集
       complete: 募集を終了
-      restart: 再募集
+      check: チーム開発をチェック
       join: 参加
       cancel: 参加を辞退
       edit: 募集を編集
       stop: 募集を停止
+      activate: 募集を再開
+      finish: 募集を終了
       titles:
         complete: 募集を終了しますか？
         restart: 開発者を再募集しますか？
-        join: 協働開発への参加を希望しますか？
+        join: チーム開発への参加を希望しますか？
         cancel: この開発の参加を辞退しますか？
-      messages:
-        complete: ''
-        restart: 参加者が連絡を取りやすいようにTwitterやURLを登録しましょう！
-        join: 参加後、連絡を取りやすいようにTwitterやURLを登録しましょう！
-        cancel: ''
     cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました
@@ -86,12 +83,17 @@ ja:
   teams:
     create:
       success: チーム開発の募集をスタートしました
+      not_owner: オーナー権限がありません
+    update:
+      success: チーム開発を更新しました
+    join:
+      success: チーム開発に参加しました！オーナーにメッセージしましょう！
     stop:
-      success: チーム開発の募集を終了しました
-    update:
-      success: チーム開発を更新しました
-    update:
-      success: チーム開発を更新しました
+      success: チーム開発の募集を停止しました
+    activate:
+      success: チーム開発を再開しました
+    finish:
+      success: チーム開発を終了しました
   comments:
     edit:
       title: コメント編集

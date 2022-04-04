@@ -1,20 +1,35 @@
 .c-team-form {
-  padding: 2rem;
+  padding: 1rem 2rem 3rem;
 
   &__idea_img {
-    margin: 1rem 0 0;
+    width: 100%;
 
     img {
       min-width: 300px;
       max-height: 151px;
       object-fit: contain;
-      width: 100%;
+      margin: 0 auto;
+
+      &:hover {
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+        transform: translateY(-0.1875em);
+      }
     }
   }
 
   &__idea_info {
     text-align: center;
-    color: #C4C4C4;
+
+    &--name {
+      font-size: x-large;
+      font-weight: bold;
+      color: #FF862E;
+    }
+
+    &--time {
+      color: #C4C4C4;
+      margin: 0.5rem 0;
+    }
   }
 
   &__idea-content {

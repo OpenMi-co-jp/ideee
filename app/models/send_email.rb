@@ -43,7 +43,7 @@ class SendEmail
 
   def join_team(user, idea)
     body = "
-            <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
+            <p>チーム開発の希望者がいます。さっそく連絡してみましょう！</p>
             <hr>
             <b>応募者情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>

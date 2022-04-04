@@ -12,15 +12,10 @@ $(document).on ('turbolinks:load', function(){
     $('#modal_fund').modal('open');
   });
 
-  // 協働開発者募集のモーダル
-  $('#modal-trigger-team').on('click', function() {
-    $('#modal_team').modal('open');
-  });
-
   // モーダルを閉じる用
-  $('.modal-close-btn').on('click', function() {
-    $('.modal').modal('close');
-  });
+  // $('.modal-close-btn').on('click', function() {
+  //   $('.modal').modal('close');
+  // });
 
   // ログイン用のモーダル
   $('.modal-trigger-login').on('click', function() {

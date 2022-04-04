@@ -1,0 +1,9 @@
+<% if team.status_active? %>
+  <%= link_to t('default.team.stop'), stop_team_path(team), method: :post, class: 'btn gray-3-back' %>
+<% elsif team.status_stop? %>
+  <%= link_to t('default.team.finish'), finish_team_path(team), method: :post, class: 'btn gray-3-back' %>
+  <%= link_to t('default.team.activate'), activate_team_path(team), method: :post, class: 'btn orange-action-back' %>
+<% elsif team.status_finished? %>
+  <%= link_to t('default.team.activate'), activate_team_path(team), method: :post, class: 'btn orange-action-back' %>
+<% end %>
+<%= link_to t('default.team.edit'), edit_team_path(team), method: :get, class: 'btn orange-soft-back' %>

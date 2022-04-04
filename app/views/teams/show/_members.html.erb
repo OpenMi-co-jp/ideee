@@ -1,6 +1,6 @@
 <% if !users.blank? %>
   <a class='dropdown-trigger btn orange-soft-back' href='#' data-target='dropdown-team-member'>
-    <i class="material-icons left">groups</i>協働開発メンバー
+    <i class="material-icons left">groups</i>メンバー：<%= users.length %>名
   </a>
   <ul id='dropdown-team-member' class='dropdown-content'>
     <% users.each do |user| %>

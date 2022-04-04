@@ -37,8 +37,4 @@ class Team < ApplicationRecord
   def member?(user)
     members.include?(user)
   end
-
-  def active_or_stop?
-    status_active? || status_stop?
-  end
 end

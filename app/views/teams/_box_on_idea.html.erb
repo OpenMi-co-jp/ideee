@@ -8,8 +8,10 @@
     <div class='c-team-box__apply'>
       <% if current_user&.own?(idea) && idea.team.nil? %>
         <%= link_to t('default.team.start'), new_team_path(idea_id: idea), class: 'btn orange-action-back'%>
-      <% elsif idea&.team.active_or_stop? || current_user&.own?(idea) %>
+      <% elsif idea.team&.status_active? || current_user&.own?(idea) %>
         <%= link_to t('default.team.check'), team_path(idea.team), class: 'btn orange-action-back' %>
+      <% elsif idea.team&.status_stop? %>
+        <%= link_to t('default.team.check'), team_path(idea.team), class: 'btn gray-3-back' %>
       <% end %>
     </div>
   <% end %>

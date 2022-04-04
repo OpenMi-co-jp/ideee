@@ -3,6 +3,7 @@ class TeamsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :defined_check, except: %i[index]
   before_action :set_idea, only: %i[new edit destroy stop join activate finish]
+  before_action :check_owner, only: %i[edit update stop activate finish]
 
   def index
     idea_list = Team.where(status: :active).pluck(:idea_id)
@@ -76,5 +77,11 @@ class TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:offer, :requirement, :status, :idea_id, :owner_id)
+  end
+
+  def check_owner
+    unless current_user == @team&.owner
+      redirect_to @idea, notice: 'オーナー権限がありません'
+    end
   end
 end

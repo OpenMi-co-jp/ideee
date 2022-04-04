@@ -15,19 +15,13 @@ ja:
     publish: 公開する
     team:
       start: チーム開発を募集
-      complete: 募集を終了
       check: チーム開発をチェック
       join: 参加
       cancel: 参加を辞退
       edit: 募集を編集
       stop: 募集を停止
       activate: 募集を再開
-      finish: 募集を終了
-      titles:
-        complete: 募集を終了しますか？
-        restart: 開発者を再募集しますか？
-        join: チーム開発への参加を希望しますか？
-        cancel: この開発の参加を辞退しますか？
+      finish: チーム開発を終了
     cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました
@@ -81,6 +75,8 @@ ja:
     publish:
       success: アイデアを公開しました
   teams:
+    new:
+      exist: このアイデアのチーム開発は既に存在します
     create:
       success: チーム開発の募集をスタートしました
       not_owner: オーナー権限がありません

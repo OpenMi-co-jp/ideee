@@ -16,12 +16,12 @@
     </div>
     <div class='c-team-form__idea-content'>
       <div class="field input-field">
-        <%= form.text_field :offer, placeholder: 'チーム開発に参加すると◯◯を得ることができます！', data: { length: 255 }, class: 'validate', required:'required' %>
+        <%= form.text_area :offer, placeholder: 'チーム開発に参加すると◯◯を得ることができます！', data: { length: 255 }, class: 'validate materialize-textarea', required:'required' %>
         <%= form.label :offer, class: 'required active' %>
         <span class="helper-text" data-error="得られることを入力してください。"></span>
       </div>
       <div class="field input-field">
-        <%= form.text_field "requirement", placeholder: 'チームの中で〇〇をお願いしたいです。', data: { length: 255 }, class: 'validate', required:'required' %>
+        <%= form.text_area "requirement", placeholder: 'チームの中で〇〇をお願いしたいです。', data: { length: 255 }, class: 'validate materialize-textarea', required:'required' %>
         <%= form.label :requirement, class: 'required active' %>
         <span class="helper-text" data-error="お願いしたいことを入力してください。"></span>
       </div>

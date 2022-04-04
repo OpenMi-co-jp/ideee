@@ -15,7 +15,7 @@ ja:
       status:
         active: チーム開発募集中
         stop: 募集停止中
-        finished: 募集終了
+        finished: チーム開発終了
   time:
     formats:
       default: "%Y.%m.%d"

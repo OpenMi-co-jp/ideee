@@ -9,36 +9,36 @@ Rails.application.routes.draw do
   root 'ideas#index'
   resources :ideas do
     collection do
-      get 'search'
-      get 'tags'
+      get :search
+      get :tags
     end
     member do
-      post 'publish'
+      post :publish
     end
   end
   resources :comments, only: %i[create edit update destroy] do
     collection do
-      post 'send_email'
+      post :send_email
     end
   end
   resources :users, only: %i[index show] do
     collection do
-      get 'search'
+      get :search
     end
   end
   resources :likes, only: %i[create destroy]
-  resources :teams do
-    collection do
-      post 'join'
-    end
+  resources :teams, except: %i[destroy] do
     member do
-      post 'stop'
+      post :join
+      post :stop
+      post :activate
+      post :finish
     end
   end
   resources :difficultys, only: %i[create]
   resources :notifications, only: %i[index] do
     collection do
-      post 'check'
+      post :check
     end
   end
   get 'login', to: 'devise/sessions#new'

@@ -32,4 +32,13 @@ class Team < ApplicationRecord
   has_many :members, through: :team_users, source: :user
 
   enum status: %i[active stop finished], _prefix: true
+  alias user owner # owner?メソッドを使うために設定
+
+  def member?(user)
+    members.include?(user)
+  end
+
+  def active_or_stop?
+    status_active? || status_stop?
+  end
 end

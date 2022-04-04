@@ -1,8 +1,8 @@
 class TeamsController < ApplicationController
-  prepend_before_action :set_team, only: %i[show edit update destroy stop]
+  prepend_before_action :set_team, only: %i[show edit update destroy stop join activate finish]
   before_action :authenticate_user!, except: %i[index]
   before_action :defined_check, except: %i[index]
-  before_action :set_idea, only: %i[new edit destroy stop]
+  before_action :set_idea, only: %i[new edit destroy stop join activate finish]
 
   def index
     idea_list = Team.where(status: :active).pluck(:idea_id)
@@ -38,18 +38,24 @@ class TeamsController < ApplicationController
     redirect_to @team, notice: t('.success')
   end
 
-  def destroy
-    # メソッドごと変えるので無視
-    redirect_to @idea, notice: t('.success')
-  end
-
   def join
+    @team.team_users.create(user: current_user)
     SendEmail.new.join_team(current_user, @idea) if Rails.env.production?
     redirect_to @idea, notice: t('.success')
   end
 
   def stop
     @team.status_stop!
+    redirect_to @idea, notice: t('.success')
+  end
+
+  def activate
+    @team.status_active!
+    redirect_to @team, notice: t('.success')
+  end
+
+  def finish
+    @team.status_finished!
     redirect_to @idea, notice: t('.success')
   end
 

@@ -116,7 +116,7 @@ class User < ApplicationRecord
 
   # ユーザーに紐づいたobjectの所有者を判断
   def own?(object)
-    id == object.user_id
+    id == object.user.id
   end
 
   def like(idea)

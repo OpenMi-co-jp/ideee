@@ -160,6 +160,10 @@ class Idea < ApplicationRecord
     notification.update_column(:notificatable_type, 'product_apply')
   end
 
+  def create_notification_team(current_user, team_user)
+    create_notification(current_user, user_id, team_user)
+  end
+
   def select_notify_commenter(current_user)
     # アイデア作成者も含めたuser_id取得
     user_ids = comments.pluck(:user_id).push(user_id).uniq

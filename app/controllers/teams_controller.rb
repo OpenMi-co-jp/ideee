@@ -1,8 +1,8 @@
 class TeamsController < ApplicationController
-  prepend_before_action :set_team, only: %i[show edit update destroy stop join activate finish]
+  prepend_before_action :set_team, except: %i[index new create]
   before_action :authenticate_user!, except: %i[index]
-  before_action :defined_check, except: %i[index]
-  before_action :set_idea, only: %i[new edit destroy stop join activate finish]
+  before_action :defined_check, except: %i[index show]
+  before_action :set_idea, only: %i[new edit stop join activate finish]
   before_action :check_owner, only: %i[edit update stop activate finish]
 
   def index
@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if current_user == @team.owner
-      @team.status_active!
+      @team.status = :active
       @team.save!
       redirect_to @team, notice: t('.success')
     else
@@ -41,7 +41,7 @@ class TeamsController < ApplicationController
 
   def join
     @team.team_users.create(user: current_user)
-    SendEmail.new.join_team(current_user, @idea) if Rails.env.production?
+    Notifications::JoinTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end
 

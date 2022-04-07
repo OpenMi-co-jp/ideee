@@ -55,4 +55,19 @@ $(document).on ('turbolinks:load', function(){
       M.invalidate_selected_num($(this));
     });
   };
+
+  // 選択必須の時に必要な機能セット
+  M.validation_min_length_set = function (id) {
+    // inputセレクタが変更されたら、data-min-lengthサイズよりも文字数が少ない場合に発火
+    $(id).on('change', function () {
+      var min_length = $(id).attr('data-min-length');
+      var input_length = $(id).val().length;
+      if(input_length < min_length){
+        $(id).addClass('invalid');
+      }else{
+        $(id).removeClass('invalid');
+      }
+    });
+  };
+
 })

@@ -26,15 +26,17 @@
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> 文字以上のパスワードを使用してください)</em>
         <% end %><br />
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: 'password' %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: 'password', class: '', data:{"min-length": @minimum_password_length} %>
+        <span class="helper-text" data-error="<%= @minimum_password_length %>文字以上のパスワードを入力してください。"></span>
       </div>
 
       <div class="field">
         <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password', class: '', data:{"min-length": @minimum_password_length} %>
+        <span class="helper-text" data-error="<%= @minimum_password_length %>文字以上のパスワードを入力してください。"></span>
       </div>
 
-      <%= f.submit t('.submit'), class: 'btn orange-action-back mh-1' %>
+      <%= f.button t('.submit'), id: 'new_user_submit', type:'button', class: 'btn orange-action-back mh-1' %>
       <%= render 'devise/shared/agreed_note', submit: t('.submit') %>
     <% end %>
 

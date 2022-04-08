@@ -1,8 +1,8 @@
 <% if !users.blank? %>
-  <a class='dropdown-trigger btn orange-soft-back' href='#' data-target='dropdown-cooperation-member'>
-    <i class="material-icons left">groups</i>協働開発メンバー
+  <a class='dropdown-trigger btn orange-soft-back' href='#' data-target='dropdown-team-member'>
+    <i class="material-icons left">groups</i>メンバー：<%= users.length %>名
   </a>
-  <ul id='dropdown-cooperation-member' class='dropdown-content'>
+  <ul id='dropdown-team-member' class='dropdown-content'>
     <% users.each do |user| %>
       <li>
         <%= link_to user_path(user.id), target: :_blank do %>

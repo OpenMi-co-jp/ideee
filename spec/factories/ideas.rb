@@ -5,7 +5,6 @@
 #  id                                                       :bigint           not null, primary key
 #  background                                               :string(255)
 #  comments_num                                             :integer          default(0)
-#  cooperation                                              :integer          default("not_started")
 #  difficulty                                               :integer          default("not_yet")
 #  draft                                                    :boolean          default(FALSE)
 #  emailed_at(weeklyメールで新規アイデアとして送られた日時) :datetime

@@ -5,7 +5,6 @@
 #  id                                                       :bigint           not null, primary key
 #  background                                               :string(255)
 #  comments_num                                             :integer          default(0)
-#  cooperation                                              :integer          default("not_started")
 #  difficulty                                               :integer          default("not_yet")
 #  draft                                                    :boolean          default(FALSE)
 #  emailed_at(weeklyメールで新規アイデアとして送られた日時) :datetime
@@ -44,8 +43,6 @@ class Idea < ApplicationRecord
   has_many :idea_tags, through: :taggings, source: :tag
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
-  has_many :cooperations, dependent: :destroy
-  has_many :cooperation_users, through: :cooperations, source: :user
   has_many :notifications, dependent: :destroy
   has_one :team, dependent: :destroy
   has_rich_text :note
@@ -59,7 +56,6 @@ class Idea < ApplicationRecord
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
-  enum cooperation: %i[not_started ongoing completed], _prefix: true
 
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
@@ -162,6 +158,10 @@ class Idea < ApplicationRecord
     admin_user = User.first
     notification = create_notification(admin_user, user_id, nil)
     notification.update_column(:notificatable_type, 'product_apply')
+  end
+
+  def create_notification_team(current_user, team_user)
+    create_notification(current_user, user_id, team_user)
   end
 
   def select_notify_commenter(current_user)

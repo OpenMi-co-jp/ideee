@@ -11,11 +11,11 @@ ja:
         idea_man: アイデアマン
         engineer: エンジニア
         idea_engineer: アイデアマン / エンジニア
-    idea:
-      cooperations:
-        not_started: 募集前
-        ongoing: 開発者募集中
-        completed: 募集終了
+    team:
+      status:
+        active: チーム開発募集中
+        stop: 募集停止中
+        finished: チーム開発終了
   time:
     formats:
       default: "%Y.%m.%d"

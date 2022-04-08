@@ -13,22 +13,15 @@ ja:
     draft: 下書き
     save_draft: 下書き保存
     publish: 公開する
-    cooperation:
-      start: 開発者を募集
-      complete: 募集を終了
-      restart: 再募集
+    team:
+      start: チーム開発を募集
+      check: チーム開発をチェック
       join: 参加
       cancel: 参加を辞退
-      titles:
-        complete: 募集を終了しますか？
-        restart: 開発者を再募集しますか？
-        join: 協働開発への参加を希望しますか？
-        cancel: この開発の参加を辞退しますか？
-      messages:
-        complete: ''
-        restart: 参加者が連絡を取りやすいようにTwitterやURLを登録しましょう！
-        join: 参加後、連絡を取りやすいようにTwitterやURLを登録しましょう！
-        cancel: ''
+      edit: 募集を編集
+      stop: 募集を停止
+      activate: 募集を再開
+      finish: チーム開発を終了
     cancel: キャンセル
     message:
       unauthorized: 権限がないのでリダイレクトされました
@@ -81,17 +74,22 @@ ja:
       success: アイデアを削除しました
     publish:
       success: アイデアを公開しました
-  cooperations:
+  teams:
+    new:
+      exist: このアイデアのチーム開発は既に存在します
     create:
-      success: 開発者の募集に参加しました
-    destroy:
-      success: 参加を辞退しました
-    start:
-      success: 開発者の募集を開始しました
-    complete:
-      success: 開発者の募集を終了しました
-    restart:
-      success: 開発者の募集を再開しました
+      success: チーム開発の募集をスタートしました
+      not_owner: オーナー権限がありません
+    update:
+      success: チーム開発を更新しました
+    join:
+      success: チーム開発に参加しました！オーナーにメッセージしましょう！
+    stop:
+      success: チーム開発の募集を停止しました
+    activate:
+      success: チーム開発を再開しました
+    finish:
+      success: チーム開発を終了しました
   comments:
     edit:
       title: コメント編集
@@ -114,3 +112,4 @@ ja:
     Like: にハートを送りました。
     Difficulty: に難易度の投票をしました。
     product_apply: にプロダクトURLの承認を行いました。
+    TeamUser: のチーム開発に参加しました。

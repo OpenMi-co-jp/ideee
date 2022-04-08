@@ -12,10 +12,8 @@ namespace :auto_update_qiita_post do
            "## 🏆 ランキング（コメント）\n" + \
            "`直近１ヶ月でコメントが盛り上がったアイデアをランキング化`\n"
 
-    # アイデア一括取得
-    ideas = Idea.all
-    # コメントランキングの作成
-    selected_items = ideas.recent_select.most_commented.first(10)
+    ideas = Idea.all # アイデア一括取得
+    selected_items = ideas.recent_select.most_commented.first(10) # コメントランキングの作成
     body += idea_columns(selected_items, rank: true)
 
     body += "## 🚀 新しいアイデア\n" + \
@@ -26,8 +24,9 @@ namespace :auto_update_qiita_post do
 
     body += "## 👬 チーム開発開発者募集中のアイデア\n" + \
             "`最近更新されたチーム開発を募集しているアイデア`\n"
-    cooperation_items = ideas.where(cooperation: :ongoing).most_commented.order(updated_at: 'DESC').first(5)
-    body += idea_columns(cooperation_items)
+    team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
+    team_items = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
+    body += idea_columns(team_items)
 
     body += "\n```\n" + \
             "ideeeはサービス開発の「もったいない」を無くすために努力していきます。\n" + \

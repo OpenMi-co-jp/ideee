@@ -22,19 +22,11 @@
 #  fk_rails_...  (idea_id => ideas.id)
 #  fk_rails_...  (owner_id => users.id)
 #
-class Team < ApplicationRecord
-  validates :offer, presence: true
-  validates :requirement, presence: true
-  validates :status, presence: true
-  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
-  belongs_to :idea
-  has_many :team_users, dependent: :destroy
-  has_many :members, through: :team_users, source: :user
-
-  enum status: %i[active stop finished], _prefix: true
-  alias user owner # owner?メソッドを使うために設定
-
-  def member?(user)
-    members.include?(user)
+FactoryBot.define do
+  factory :team do
+    offer { 'test_offer' }
+    requirement { 'test_requirement' }
+    status { 'active' }
+    idea
   end
 end

@@ -35,7 +35,7 @@ Lint/SuppressedException:
     - 'db/fixtures/development/04_like.rb'
     - 'db/fixtures/development/05_difficulty.rb'
     - 'db/fixtures/development/07_tagging.rb'
-    - 'db/fixtures/development/08_cooperation.rb'
+    - 'db/fixtures/development/08_team.rb'
 
 # Offense count: 7
 Lint/UselessAssignment:
@@ -46,7 +46,7 @@ Lint/UselessAssignment:
 # Offense count: 22
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 39
+  Max: 40
 
 # Offense count: 13
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.

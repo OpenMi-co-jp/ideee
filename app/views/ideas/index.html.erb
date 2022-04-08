@@ -65,8 +65,8 @@
         <%= render 'ideas/index/ranking',
           icon_mark: tag.i('groups', class: 'material-icons'),
           board_title: '開発者募集中のアイデア',
-          path: cooperations_path,
-          ideas: @on_board_ideas %>
+          path: teams_path,
+          ideas: @taam_active_ideas %>
         <%= render 'ideas/index/ranking',
           icon_mark: tag.i('check_circle', class: 'material-icons'),
           board_title: '最近実現したアイデア',

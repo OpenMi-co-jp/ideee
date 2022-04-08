@@ -31,7 +31,7 @@
     </div>
     <div class='c-team-form__btns'>
       <% if @team.id.nil? %>
-        <%= link_to t('default.team.cancel'), idea_path(@idea), class: 'btn gray-3-back' %>
+        <%= link_to t('default.cancel'), idea_path(@idea), class: 'btn gray-3-back' %>
         <%= form.submit class: 'btn orange-action-back mh-3' %>
       <% else %>
         <%= form.submit class: 'btn orange-action-back mh-3', data: { confirm: '参加者がいる場合、メンバーに通知がいきます。' } %>

@@ -13,7 +13,7 @@ RSpec.describe 'Likes', type: :request do
         expect(response.status).to eq 204
       end
 
-      it 'いいねが登録されること' do
+      it 'ハートが送られること' do
         expect do
           subject
         end.to change(Like, :count).by(1)
@@ -29,7 +29,7 @@ RSpec.describe 'Likes', type: :request do
     end
 
     # Likeの総数は減っているがdeleteメソッドでlikeを削除しているためActive Recordが反映されずテストが成功しない
-    # it 'いいねが削除されること' do
+    # it 'ハートが削除されること' do
     #   expect do
     #     delete like_path(like.idea_id)
     #   end.to change(Like, :count).by(-1)

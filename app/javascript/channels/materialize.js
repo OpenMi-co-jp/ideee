@@ -42,6 +42,19 @@ $(document).on ('turbolinks:load', function(){
     return 0;
   };
 
+  // 入力必須のバリデーション
+  M.invalid_input_min_len_num = function (id) {
+    var element = $(id + '.validate');
+    var input_len = element[0].value.length;
+    var min_len = element.attr('data-min-length');
+
+    if(input_len < min_len){
+      element.addClass('invalid');
+      return 1;
+    }
+    return 0;
+  };
+
   // 選択必須の時に必要な機能セット
   M.validation_select_set = function (id) {
     // select用のhelper-textクラスの初期設定
@@ -57,12 +70,13 @@ $(document).on ('turbolinks:load', function(){
   };
 
   // 選択必須の時に必要な機能セット
-  M.validation_min_length_set = function (id) {
+  M.validation_min_len_set = function (id) {
     // inputセレクタが変更されたら、data-min-lengthサイズよりも文字数が少ない場合に発火
-    $(id).on('change', function () {
-      var min_length = $(id).attr('data-min-length');
-      var input_length = $(id).val().length;
-      if(input_length < min_length){
+    $(id).on('blur', function () {
+      var element = $(id + '.validate');
+      var input_len = element[0].value.length;
+      var min_len = element.attr('data-min-length');
+      if(input_len < min_len){
         $(id).addClass('invalid');
       }else{
         $(id).removeClass('invalid');

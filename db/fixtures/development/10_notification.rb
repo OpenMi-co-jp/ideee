@@ -6,7 +6,7 @@
     :id,
     { id: num, visitor: visitor, visited: visited, idea: Idea.all.sample, notificatable: Like.all.sample }
   )
-  # いいねするユーザーとコメントするユーザーを分けるため
+  # ハートを送るユーザーとコメントするユーザーを分けるため
   visitor = User.all.sample
   visited = User.all.where.not(id: visitor.id).sample
   Notification.seed(

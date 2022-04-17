@@ -16,8 +16,8 @@
       <% end %>
       <%= f.text_area :description, class: 'c-comment-form__input-area--textarea yellow-soft-back mh-3', id: "comment-form", placeholder: "コメントする" %>
       <div class='c-comment-form__btn-area'>
-        <%= f.submit class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" %>
         <%= link_to t('default.cancel'), idea_path(@comment.idea_id), class: 'waves-effect btn orange-soft-back nav-link' %>
+        <%= f.submit class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" %>
       </div>
     <% end %>
   </div>

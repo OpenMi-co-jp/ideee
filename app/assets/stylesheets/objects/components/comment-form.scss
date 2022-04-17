@@ -19,6 +19,12 @@
     border-radius: 3px;
   }
 
+  // キャンセルボタンの色を#E3E4E8にしたい
+  // これで色が変わると思ったのに変わらない
+  &__waves-effect-btn {
+    background-color: #E3E4E8;
+  }
+
   &__message {
     text-align: left;
     color: red;

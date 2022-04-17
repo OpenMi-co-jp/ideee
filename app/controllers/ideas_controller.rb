@@ -121,7 +121,7 @@ class IdeasController < ApplicationController
       title = '同じタグのアイデア'
       # TODO: リファクタしたい
       idea_ids = []
-      @idea.idea_tags.map{|t| idea_ids << t.tagged_ideas.pluck(:id) }
+      @idea.idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
       idea_ids.flatten!.uniq
       suggest_ideas = Idea.published.where(id: idea_ids).where.not(id: @idea.id).sample(3)
     else
@@ -134,7 +134,7 @@ class IdeasController < ApplicationController
         suggest_ideas = Idea.published.sample(3)
       end
     end
-    render partial: "suggest", locals: { suggest_ideas: suggest_ideas, title: title }
+    render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
   end
 
   private

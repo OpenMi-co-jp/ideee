@@ -13,7 +13,7 @@ RSpec.describe 'Likes', type: :request do
         expect(response.status).to eq 204
       end
 
-      it 'ハートが登録されること' do
+      it 'ハートが送られること' do
         expect do
           subject
         end.to change(Like, :count).by(1)

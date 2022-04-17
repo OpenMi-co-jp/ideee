@@ -412,6 +412,7 @@ GEM
       ffi (~> 1.0)
     redis (4.6.0)
     regexp_parser (2.1.1)
+    render_async (2.1.11)
     representable (3.1.1)
       declarative (< 0.1.0)
       trailblazer-option (>= 0.1.1, < 0.2.0)
@@ -615,6 +616,7 @@ DEPENDENCIES
   rails (~> 6.1.4)
   rails-i18n
   redis (~> 4.6)
+  render_async
   rollbar
   rspec-rails
   rubocop

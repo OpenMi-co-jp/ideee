@@ -60,6 +60,7 @@ gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 gem 'slack-notifier'
 # メール送信
 gem 'sendgrid-ruby'
+gem 'render_async' # 遅延読み込み
 
 # uncomment out when you need
 # gem 'stripe'

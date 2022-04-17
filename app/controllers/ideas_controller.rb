@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[show edit update destroy publish]
+  prepend_before_action :set_idea, only: %i[show edit update destroy publish suggest]
   before_action :authenticate_user!, except: %i[index show search tags]
   before_action :own_user_check, only: %i[edit update destroy]
   before_action :defined_check, except: %i[index show search tags]
@@ -114,6 +114,27 @@ class IdeasController < ApplicationController
     @idea.update!(draft: false, published_at: Time.now)
     sidekiq_jobs
     redirect_to @idea, notice: t('.success')
+  end
+
+  def suggest
+    if @idea.idea_tags.present?
+      title = '同じタグのアイデア'
+      # TODO: リファクタしたい
+      idea_ids = []
+      @idea.idea_tags.map{|t| idea_ids << t.tagged_ideas.pluck(:id) }
+      idea_ids.flatten!.uniq
+      suggest_ideas = Idea.published.where(id: idea_ids).where.not(id: @idea.id).sample(3)
+    else
+      user_ideas = @idea.user.ideas.published
+      if user_ideas.length > 1 # 自分が作成したアイデアが1つ以上ある場合
+        title = '投稿者の他アイデア'
+        suggest_ideas = user_ideas.sample(3)
+      else
+        title = '他アイデアをのぞいてみる'
+        suggest_ideas = Idea.published.sample(3)
+      end
+    end
+    render partial: "suggest", locals: { suggest_ideas: suggest_ideas, title: title }
   end
 
   private

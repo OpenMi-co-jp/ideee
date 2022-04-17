@@ -7,12 +7,12 @@
 <% else %>
   <%= link_to '#modal_before_login', data: { turbolinks: false }, class: "modal-trigger-login #{own_object?(object)}" do %>
     <div class='likes-column'>
-      <p class='like-image'>
+      <div class='like-image'>
         <%= embedded_svg "like-heart.svg" %>
-      </p>
-      <p class='likes-count'>
+      </div>
+      <div class='likes-count'>
         <%= object.likes_num %>
-      </p>
+      </div>
     </div>
   <% end %>
 <% end %>

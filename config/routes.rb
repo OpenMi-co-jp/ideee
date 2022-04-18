@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show] do
     collection do
       get :search
+      get :commenter
+      get :idea_man
     end
   end
   resources :likes, only: %i[create destroy]
@@ -46,6 +48,7 @@ Rails.application.routes.draw do
       post :check
     end
   end
+  get 'tags_popular', to: 'tags#popular'
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

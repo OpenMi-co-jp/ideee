@@ -7,17 +7,8 @@ class IdeasController < ApplicationController
   after_action :update_user_point, only: %i[create]
 
   def index
-    ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
-    recent_ideas = ideas.recent_select.includes([:user])
+    recent_ideas = Idea.published.recent_select.includes([:user])
     @latest_ideas = recent_ideas.order(published_at: 'DESC').first(10)
-    @featured_users = User.where(defined: true).order(point: 'DESC').first(10) # 定義がされているユーザーだけをポイントが高い準に5名
-    # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
-    @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
-    @weekly_commented_users = @commented_users_array.map { |u| User.find_by!(id: u[0]) }
-    # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
-    @idea_publisher_array = ideas.recent_select.pickup_user_nums(t('default.users.monthly_publisher_num'))
-    @monthly_published_users = @idea_publisher_array.map { |u| User.find_by!(id: u[0]) }
-    @popular_tags = Tag.recent_tags.popular_tags
   end
 
   def show

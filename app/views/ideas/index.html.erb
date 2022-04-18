@@ -47,17 +47,17 @@
         <%= render_async most_liked_ideas_path %>
       </div>
       <div class="col s12 l4">
-        <%= render 'tags/popular_tags', object: @popular_tags %>
+        <%= render_async tags_popular_path %>
         <%= render 'ideas/index/featured_users',
           icon: '🚀',
           title: '今週の注目コメンテーター',
           path: search_users_path(sort: :weekly_comments),
-          users: @weekly_commented_users %>
+          users_url: commenter_users_path %>
         <%= render 'ideas/index/featured_users',
           icon: '💡',
           title: '今月の注目アイデアマン',
           path: search_users_path(sort: :monthly_published),
-          users: @monthly_published_users %>
+          users_url: idea_man_users_path %>
       </div>
     </div>
     <div class="row">

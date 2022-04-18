@@ -1,10 +1,6 @@
-<%# TODO: rank_listに統合 %>
 <div class='idea'>
-  <% ideas.each.with_index(@rank_num || 0) do |idea, i| %>
+  <% ideas.each do |idea| %>
     <div class='idea__list'>
-      <h5 class='idea__num'>
-        <%= i + 1 %>
-      </h5>
       <div class='idea__content'>
         <%= link_to idea_path(idea.id), class: 'idea__img' do %>
           <figure>
@@ -53,9 +49,6 @@
             <p class='idea__detail--def'>
               <%= user_definiton(idea.user, ver = 'short') %>
             </p>
-          </div>
-          <div class='idea__like'>
-            <%= render "common/like", object: idea %>
           </div>
         </div>
       </div>

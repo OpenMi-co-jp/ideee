@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       get :search
       get :tags
       get :suggest
+      get :most_comment
+      get :most_liked
+      get :team_active
+      get :deployed
     end
     member do
       post :publish

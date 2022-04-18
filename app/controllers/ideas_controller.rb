@@ -10,12 +10,7 @@ class IdeasController < ApplicationController
     ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
     recent_ideas = ideas.recent_select.includes([:user])
     @latest_ideas = recent_ideas.order(published_at: 'DESC').first(10)
-    @liked_ideas = recent_ideas.most_liked
-    @most_commented_ideas = recent_ideas.most_commented.first(10)
     @featured_users = User.where(defined: true).order(point: 'DESC').first(10) # 定義がされているユーザーだけをポイントが高い準に5名
-    team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
-    @taam_active_ideas = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
-    @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: 'DESC').first(5)
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
     @weekly_commented_users = @commented_users_array.map { |u| User.find_by!(id: u[0]) }
@@ -135,6 +130,27 @@ class IdeasController < ApplicationController
       end
     end
     render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
+  end
+
+  def most_comment
+    idea_list = Idea.published.recent_select.includes([:user]).most_commented.first(10)
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
+  end
+
+  def most_liked
+    idea_list = Idea.published.recent_select.includes([:user]).most_liked.first(5)
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
+  end
+
+  def team_active
+    team_active_ids = Team.where(status: :active).sample(5).pluck(:idea_id)
+    idea_list = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
+  end
+
+  def deployed
+    idea_list = Idea.published.includes([:user]).deployed.sample(5)
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   private

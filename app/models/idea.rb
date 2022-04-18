@@ -60,7 +60,7 @@ class Idea < ApplicationRecord
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC').first(5) }
+  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC') }
   scope :most_commented, -> { includes([:idea_tags]).order(comments_num: 'DESC') }
   scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }

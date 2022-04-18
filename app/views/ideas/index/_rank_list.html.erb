@@ -31,9 +31,6 @@
               <%= link_to user_path(idea.user_id), class: '' do %>
                 <% user_icon(idea.user, size: 'small') %>
               <% end %>
-              <p class='idea__detail--def'>
-                <%= user_definiton(idea.user, ver = 'short') %>
-              </p>
             </div>
           </div>
           <%= render 'tags/links', object: idea %>
@@ -46,9 +43,6 @@
             <%= link_to user_path(idea.user_id), class: '' do %>
               <% user_icon(idea.user, size: 'small') %>
             <% end %>
-            <p class='idea__detail--def'>
-              <%= user_definiton(idea.user, ver = 'short') %>
-            </p>
           </div>
         </div>
       </div>

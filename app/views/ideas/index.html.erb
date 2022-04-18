@@ -35,16 +35,18 @@
     <%= render 'ideas/index/latest_boad', title: '最新アイデア', ideas: @latest_ideas %>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/ranking_head',
-          icon_mark: '💬',
-          board_title: '今月のコメントが多いアイデア',
-          path: search_ideas_path(sort: :comments_num) %>
-        <%= render_async most_comment_ideas_path %>
-        <%= render 'ideas/index/ranking_head',
-          icon_mark: '💛',
-          board_title: '今月のハートが多いアイデア',
-          path: search_ideas_path %>
-        <%= render_async most_liked_ideas_path %>
+        <div class="index-rank">
+          <%= render 'ideas/index/ranking_head',
+            icon_mark: '💬',
+            board_title: '今月のコメントが多いアイデア',
+            path: search_ideas_path(sort: :comments_num) %>
+          <%= render_async most_comment_ideas_path %>
+          <%= render 'ideas/index/ranking_head',
+            icon_mark: '💛',
+            board_title: '今月のハートが多いアイデア',
+            path: search_ideas_path %>
+          <%= render_async most_liked_ideas_path %>
+        </div>
       </div>
       <div class="col s12 l4">
         <%= render_async tags_popular_path %>
@@ -62,16 +64,18 @@
     </div>
     <div class="row">
       <div class="col s12 l8">
-        <%= render 'ideas/index/ranking_head',
-          icon_mark: tag.i('groups', class: 'material-icons'),
-          board_title: '開発者募集中のアイデア',
-          path: teams_path %>
-        <%= render_async team_active_ideas_path %>
-        <%= render 'ideas/index/ranking_head',
-          icon_mark: tag.i('check_circle', class: 'material-icons'),
-          board_title: '最近実現したアイデア',
-          path: search_ideas_path(product_apply: :approved) %>
-        <%= render_async deployed_ideas_path %>
+        <div class="index-rank">
+          <%= render 'ideas/index/ranking_head',
+            icon_mark: tag.i('groups', class: 'material-icons'),
+            board_title: '開発者募集中のアイデア',
+            path: teams_path %>
+          <%= render_async team_active_ideas_path %>
+          <%= render 'ideas/index/ranking_head',
+            icon_mark: tag.i('check_circle', class: 'material-icons'),
+            board_title: '最近実現したアイデア',
+            path: search_ideas_path(product_apply: :approved) %>
+          <%= render_async deployed_ideas_path %>
+        </div>
       </div>
     </div>
     <% unless current_user %>

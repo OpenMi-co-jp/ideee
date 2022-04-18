@@ -17,10 +17,7 @@ class UsersController < ApplicationController
     # 自分のアイデア以外でコメントしたアイデアを表示
     comment_idea_list = @user.comment_ideas.includes([:idea_tags]).uniq.select { |i| i.user_id != @user.id }
     @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
-    # c-nav-varにアイデア数・ハート数・コメント数をそれぞれ表示
-    @ideas_count = current_user.ideas.count
-    @likes_count = current_user.likes.count
-    @comment_count = current_user.comments.count
+
   end
 
   def search

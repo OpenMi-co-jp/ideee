@@ -105,11 +105,7 @@ class IdeasController < ApplicationController
   def suggest
     if @idea.idea_tags.present?
       title = '同じタグのアイデア'
-      # TODO: リファクタしたい
-      idea_ids = []
-      @idea.idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
-      idea_ids.flatten!.uniq
-      suggest_ideas = Idea.published.where(id: idea_ids).where.not(id: @idea.id).sample(3)
+      suggest_ideas = @idea.same_tag_ideas.sample(3)
     else
       user_ideas = @idea.user.ideas.published
       if user_ideas.length > 1 # 自分が作成したアイデアが1つ以上ある場合

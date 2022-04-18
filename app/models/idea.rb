@@ -179,4 +179,12 @@ class Idea < ApplicationRecord
       notificatable: notificatable
     )
   end
+
+  def same_tag_ideas
+    # TODO: リファクタしたい
+    idea_ids = []
+    idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
+    idea_ids.flatten!.uniq
+    Idea.published.where(id: idea_ids).where.not(id: id)
+  end
 end

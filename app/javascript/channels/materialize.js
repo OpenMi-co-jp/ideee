@@ -13,7 +13,7 @@ $(document).on ('turbolinks:load', function(){
     draggable: true
   });
 
-  // 開発者募集をrailsに渡す
+  // チーム開発募集をrailsに渡す
   $('#team_switch').on('click', function () {
     $('#idea_team_switch').val($(this).prop('checked'))
   });

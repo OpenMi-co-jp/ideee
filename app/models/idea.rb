@@ -181,10 +181,18 @@ class Idea < ApplicationRecord
   end
 
   def same_tag_ideas
+    return [] if idea_tags.empty?
+
     # TODO: リファクタしたい
     idea_ids = []
     idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
     idea_ids.flatten!.uniq
     Idea.published.where(id: idea_ids).where.not(id: id)
+  end
+
+  def same_user_other_ideas
+    return [] if user.ideas.published.length == 1
+
+    user.ideas.published.where.not(id: id)
   end
 end

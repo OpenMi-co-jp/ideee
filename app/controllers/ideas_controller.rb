@@ -103,18 +103,16 @@ class IdeasController < ApplicationController
   end
 
   def suggest
-    if @idea.idea_tags.present?
+    if @idea.same_tag_ideas.length.positive? # タグがあり、かつ同じタグのアイデアがある場合
       title = '同じタグのアイデア'
       suggest_ideas = @idea.same_tag_ideas.sample(3)
-    else
-      user_ideas = @idea.user.ideas.published
-      if user_ideas.length > 1 # 自分が作成したアイデアが1つ以上ある場合
-        title = '投稿者の他アイデア'
-        suggest_ideas = user_ideas.sample(3)
-      else
-        title = '他アイデアをのぞいてみる'
-        suggest_ideas = Idea.published.sample(3)
-      end
+    elsif @idea.same_user_other_ideas.length.positive? # 自分が作成したアイデアが1つ以上ある場合
+      title = '投稿者の他アイデア'
+      suggest_ideas = @idea.same_user_other_ideas.sample(3)
+    end
+    if title.nil?
+      title = '他アイデアをのぞいてみる'
+      suggest_ideas = Idea.published.sample(3)
     end
     render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
   end

@@ -22,7 +22,7 @@ namespace :auto_update_qiita_post do
     new_items = ideas.recent_select.order(published_at: 'DESC').first(10)
     body += idea_columns(new_items)
 
-    body += "## 👬 チーム開発開発者募集中のアイデア\n" + \
+    body += "## 👬 チーム開発募集中のアイデア\n" + \
             "`最近更新されたチーム開発を募集しているアイデア`\n"
     team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
     team_items = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
@@ -72,7 +72,6 @@ namespace :auto_update_qiita_post do
 
       twitter_id = item.user.twitter_id
       body += "Twitter: [@#{twitter_id}](https://twitter.com/#{twitter_id})" if twitter_id.present?
-      body += "\n<img src=\"#{item.icon}\" width=\"150px\">\n" if item.icon.present?
       body += "\n"
       num += 1
     end

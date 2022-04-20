@@ -1,0 +1,40 @@
+.c-suggest-ideas {
+  margin: 7rem 0;
+
+  &--box {
+    padding: 2rem;
+    text-align: center;
+
+    &__img {
+      border-radius: 10px;
+      transition: all 0.4s ease-in-out;
+      position: relative;
+
+      img {
+        object-fit: contain;
+        height: 12rem;
+        width: 24rem;
+        border-radius: 0.5rem;
+        background-color: #FDF8EB;
+
+        &:hover {
+          box-shadow: 1px 1px 12px rgba(0,0,0,.65);
+        }
+      }
+    }
+
+    &__time {
+      position: absolute;
+      top: 1rem;
+      padding: 0 1rem;
+      color: white;
+      background-color: rgba(191, 191, 191, 0.8);
+    }
+
+    &__name {
+      color: #FF862E;
+      font-weight: bold;
+      font-size: 1.5rem
+    }
+  }
+}

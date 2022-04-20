@@ -88,6 +88,8 @@
     <%= render 'comments/board', object: @idea %>
     <%= render 'comments/form' %>
   <% end %>
+
+  <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>
   <%= render 'common/fund_link', object: @idea %>
   <%= render 'ideas/show/vote_modal' %>
 </div>

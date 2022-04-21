@@ -60,7 +60,7 @@ class Idea < ApplicationRecord
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC').first(5) }
+  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC') }
   scope :most_commented, -> { includes([:idea_tags]).order(comments_num: 'DESC') }
   scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }
@@ -178,5 +178,21 @@ class Idea < ApplicationRecord
       idea: self,
       notificatable: notificatable
     )
+  end
+
+  def same_tag_ideas
+    return [] if idea_tags.empty?
+
+    # TODO: リファクタしたい
+    idea_ids = []
+    idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
+    idea_ids.flatten!.uniq
+    Idea.published.where(id: idea_ids).where.not(id: id)
+  end
+
+  def same_user_other_ideas
+    return [] if user.ideas.published.length == 1
+
+    user.ideas.published.where.not(id: id)
   end
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search]
+  before_action :authenticate_user!, except: %i[index show search commenter idea_man]
   prepend_before_action :page_user, only: %i[show]
-  before_action :defined_check, except: %i[index search], if: :own_user?
+  before_action :defined_check, except: %i[index search commenter idea_man], if: :own_user?
 
   def index
     @users = Kaminari.paginate_array(User.defined_user.order(point: 'DESC'))

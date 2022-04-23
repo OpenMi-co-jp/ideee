@@ -34,9 +34,8 @@ class Idea < ApplicationRecord
   MAX_TAGS_COUNT = 3
 
   belongs_to :user
-  has_many :likes, dependent: :destroy
+  has_many :likes, dependent: :destroy, as: :likable
   has_many :users, through: :likes
-  has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
   has_many :comment_users, through: :comments, source: :user
   has_many :taggings, dependent: :destroy
@@ -90,7 +89,7 @@ class Idea < ApplicationRecord
   end
 
   def count_likes
-    update(likes_num: like_users.size)
+    update_column(:likes_num, likes.size)
   end
 
   def count_comments

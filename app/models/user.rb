@@ -38,7 +38,6 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :like_ideas, through: :likes, source: :idea
   has_many :comments, dependent: :destroy
   has_many :comment_ideas, through: :comments, source: :idea
   has_many :difficultys, dependent: :destroy
@@ -119,19 +118,23 @@ class User < ApplicationRecord
     id == object.user.id
   end
 
-  def like(idea)
-    like = likes.find_or_create_by(idea: idea)
-    idea.count_likes if like.valid?
+  def like(item)
+    like = likes.find_or_create_by(likable: item)
+    item.count_likes if like.valid? && item.is_a?(Idea)
     like
   end
 
-  def like?(idea)
-    like_ideas.include?(idea)
+  def like?(item)
+    like_ideas.include?(item)
   end
 
-  def unlike(idea)
-    like_ideas.destroy(idea)
-    idea.count_likes
+  def unlike(item)
+    like_ideas.destroy(item)
+    item.count_likes if item.is_a?(Idea)
+  end
+
+  def like_ideas
+    likes.where(likable_type: "Idea").includes(:likable).map(&:likable)
   end
 
   def voted?(idea)

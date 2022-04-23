@@ -1,10 +1,10 @@
-<div class='like-click <%= clicked %>', data-id='<%= object.id %>'>
+<div class='like-click <%= 'clicked' if current_user&.like?(object) %>', data-id='<%= object.id %>'>
   <div class='likes-column'>
     <div class='like-image'>
       <%= embedded_svg "like-heart.svg" %>
     </div>
-    <div class='likes-count' data-likes='<%= object.likes_num %>'>
-      <%= object.likes_num %>
+    <div class='likes-count'>
+      <%= object.likes.length %>
     </div>
   </div>
 </div>

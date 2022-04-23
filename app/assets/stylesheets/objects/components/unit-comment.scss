@@ -11,8 +11,8 @@
 
     &--name {
       color: #C4C4C4;
-      font-size: x-small;
-      margin-top: 0.3rem;
+      font-size: small;
+      margin-left: 0.5rem;
     }
   }
 
@@ -22,6 +22,7 @@
     border-radius: 0.5rem;
     background-color: white;
     margin: 0px 5px;
+    min-height: 50px;
 
     &--description {
       min-height: 20px;

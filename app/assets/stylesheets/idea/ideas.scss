@@ -191,9 +191,14 @@
     }
   }
 
-  &__eyes {
+  &__item {
     display: flex;
     margin-left: 22px;
+    color: #a7a7a7;
+
+    p {
+      margin-left: 5px;
+    }
   }
 
   &__time {
@@ -206,7 +211,7 @@
 
   &__comments {
     display: flex;
-    margin-left: 22px;
+    margin-left: 20px;
     color: #a7a7a7;
   }
 

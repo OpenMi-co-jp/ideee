@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     # 自分のアイデア以外でコメントしたアイデアを表示
     comment_idea_list = @user.comment_ideas.includes([:idea_tags]).uniq.select { |i| i.user_id != @user.id }
     @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
-
   end
 
   def search

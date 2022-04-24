@@ -11,7 +11,7 @@
     <h2><%= t '.title' %></h2>
 
     <%= render "devise/shared/omniauth_links" %>
-    <%= form_with(model: @user, url: user_registration_path, id: 'new_user', local: false) do |f| %>
+    <%= form_with(model: @user, url: user_registration_path, id: 'new_user') do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
@@ -35,7 +35,7 @@
         <span class="helper-text" data-error="<%= @minimum_password_length %>文字以上のパスワードを入力してください。"></span>
       </div>
 
-      <%= f.button t('.submit'), id: 'new_user_submit', type:'button', class: 'btn orange-action-back mh-1' %>
+      <%= f.submit t('.submit'), class: 'btn orange-action-back mh-1' %>
       <%= render 'devise/shared/agreed_note', submit: t('.submit') %>
     <% end %>
 

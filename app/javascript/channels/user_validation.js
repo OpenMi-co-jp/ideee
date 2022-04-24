@@ -26,8 +26,7 @@ $(document).on ('turbolinks:load', function(){
       invalid_num += M.invalid_input_min_len_num('#user_password');
       invalid_num += M.invalid_input_min_len_num('#user_password_confirmation');
       console.log(invalid_num)
-      //if(invalid_num == 0) Rails.fire($("#new_user")[0],'submit');
-      if(invalid_num == 0) $('#new_user').submit();
+      if(invalid_num == 0) Rails.fire($("#new_user")[0],'submit');
     });
 
     M.validation_min_len_set('#user_password');

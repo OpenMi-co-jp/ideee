@@ -107,10 +107,10 @@ ActiveRecord::Schema.define(version: 2022_04_23_072228) do
     t.bigint "idea_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "likable_id"
-    t.string "likable_type"
+    t.string "likable_type", null: false
+    t.bigint "likable_id", null: false
     t.index ["idea_id"], name: "index_likes_on_idea_id"
-    t.index ["likable_id", "likable_type"], name: "index_likes_on_likable_id_and_likable_type"
+    t.index ["likable_type", "likable_id"], name: "index_likes_on_likable"
     t.index ["user_id", "idea_id"], name: "index_likes_on_user_id_and_idea_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end

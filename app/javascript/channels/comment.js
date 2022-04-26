@@ -42,6 +42,26 @@ $(document).on ('turbolinks:load', function(){
     })
   });
 
+  $('.c-comment-description__prompt').on('click', function(e) {
+    e.preventDefault();
+    var desc_id = $(this).attr('href');
+    var prompt_class = $(this).attr('class');
+    var prompt_class_array = prompt_class.split(" ");
+    var mode = prompt_class_array[1];
+
+    if(mode=="contract"){
+      $('#desc_contract_' + desc_id).removeClass('c-comment-description__contract');
+      $('#desc_contract_' + desc_id).addClass('c-comment-description__expand');
+      $('#desc_expand_' + desc_id).addClass('c-comment-description__contract');
+      $('#desc_expand_' + desc_id).removeClass('c-comment-description__expand');
+    }else{
+      $('#desc_contract_' + desc_id).addClass('c-comment-description__contract');
+      $('#desc_contract_' + desc_id).removeClass('c-comment-description__expand');
+      $('#desc_expand_' + desc_id).removeClass('c-comment-description__contract');
+      $('#desc_expand_' + desc_id).addClass('c-comment-description__expand');
+    }
+  });
+
   function create_comment(comment){
     return $.ajax({
       url: '/comments',

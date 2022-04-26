@@ -16,6 +16,7 @@
         width: 24rem;
         border-radius: 0.5rem;
         background-color: #FDF8EB;
+        margin: 0 auto;
 
         &:hover {
           box-shadow: 1px 1px 12px rgba(0,0,0,.65);
@@ -26,6 +27,7 @@
     &__time {
       position: absolute;
       top: 1rem;
+      left: 28px;
       padding: 0 1rem;
       color: white;
       background-color: rgba(191, 191, 191, 0.8);
@@ -34,7 +36,12 @@
     &__name {
       color: #FF862E;
       font-weight: bold;
-      font-size: 1.5rem
+      font-size: 1.5rem;
+
+      &:hover {
+        opacity: 0.5;
+        transition-duration: .3s;
+      }
     }
   }
 }

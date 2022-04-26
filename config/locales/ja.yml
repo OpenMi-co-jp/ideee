@@ -24,3 +24,6 @@ ja:
   errors:
     messages:
       extension_whitelist_error: 画像は pngかjpeg形式でアップロードしてください
+  views:
+    pagination:
+      truncate: ...

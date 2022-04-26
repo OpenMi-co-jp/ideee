@@ -23,4 +23,6 @@ class Like < ApplicationRecord
   belongs_to :likable, polymorphic: true, optional: true
 
   has_many :notifications, dependent: :destroy, as: :notificatable
+
+  scope :type_idea_ids, -> { where(likable_type: "Idea").pluck(:likable_id) }
 end

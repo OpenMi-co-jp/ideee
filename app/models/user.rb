@@ -118,23 +118,8 @@ class User < ApplicationRecord
     id == object.user.id
   end
 
-  def like(item)
-    like = likes.find_or_create_by(likable: item)
-    item.count_likes if like.valid? && item.is_a?(Idea)
-    like
-  end
-
   def like?(item)
-    like_ideas.include?(item)
-  end
-
-  def unlike(item)
-    like_ideas.destroy(item)
-    item.count_likes if item.is_a?(Idea)
-  end
-
-  def like_ideas
-    likes.where(likable_type: "Idea").includes(:likable).map(&:likable)
+    likes.includes(:likable).map(&:likable).include?(item)
   end
 
   def voted?(idea)

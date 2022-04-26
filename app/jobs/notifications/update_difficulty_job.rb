@@ -3,7 +3,7 @@ module Notifications
     queue_as :default
 
     def perform(current_user, difficulty)
-      difficulty.idea.create_notification_difficulty(current_user, difficulty)
+      current_user.create_notification_difficulty(difficulty)
     end
   end
 end

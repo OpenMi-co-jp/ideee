@@ -57,6 +57,9 @@ class User < ApplicationRecord
 
   scope :defined_user, -> { where defined: true }
 
+  # 通知を作成する
+  include CreateNotification
+
   class << self
     # omniauthを使ったSNSログイン機能
     def from_omniauth(auth)

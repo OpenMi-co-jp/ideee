@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     return if comment.nil?
 
     idea = Idea.find_by!(id: comment_params[:idea_id])
-    idea.create_notification_comment(current_user, comment)
+    current_user.create_notification_comment(idea, comment)
   end
 
   def edit; end

@@ -1,5 +1,4 @@
 $(document).on ('turbolinks:load', function(){
-  // こちらlikeをidea-showページだけでできるように変更後取り込み
   if ($('body').data('page') != "ideas-show") { return }
 
   $('.like-click').on('click', function() {

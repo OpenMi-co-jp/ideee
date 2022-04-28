@@ -2,29 +2,29 @@
 #
 # Table name: ideas
 #
-#  id            :bigint           not null, primary key
-#  background    :string(255)
-#  comments_num  :integer          default(0)
-#  cooperation   :integer          default("not_started")
-#  difficulty    :integer          default("not_yet")
-#  draft         :boolean          default(FALSE)
-#  goal          :string(255)
-#  hypothesis    :string(255)
-#  icon          :string(255)
-#  issue         :string(255)
-#  likes_num     :integer          default(0)
-#  name          :string(255)
-#  note          :text(65535)
-#  product_apply :integer          default("no_apply")
-#  product_url   :string(255)
-#  published_at  :datetime
-#  similar       :string(255)
-#  target        :string(255)
-#  view          :integer          default(0)
-#  wish_function :string(255)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  user_id       :bigint           not null
+#  id                                                       :bigint           not null, primary key
+#  background                                               :string(255)
+#  comments_num                                             :integer          default(0)
+#  difficulty                                               :integer          default("not_yet")
+#  draft                                                    :boolean          default(FALSE)
+#  emailed_at(weeklyメールで新規アイデアとして送られた日時) :datetime
+#  goal                                                     :string(255)
+#  hypothesis                                               :string(255)
+#  icon                                                     :string(255)
+#  issue                                                    :string(255)
+#  likes_num                                                :integer          default(0)
+#  name                                                     :string(255)
+#  note                                                     :text(65535)
+#  product_apply                                            :integer          default("no_apply")
+#  product_url                                              :string(255)
+#  published_at                                             :datetime
+#  similar                                                  :string(255)
+#  target                                                   :string(255)
+#  view                                                     :integer          default(0)
+#  wish_function                                            :string(255)
+#  created_at                                               :datetime         not null
+#  updated_at                                               :datetime         not null
+#  user_id                                                  :bigint           not null
 #
 # Indexes
 #
@@ -34,18 +34,16 @@ class Idea < ApplicationRecord
   MAX_TAGS_COUNT = 3
 
   belongs_to :user
-  has_many :likes, dependent: :destroy
+  has_many :likes, dependent: :destroy, as: :likable
   has_many :users, through: :likes
-  has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
   has_many :comment_users, through: :comments, source: :user
   has_many :taggings, dependent: :destroy
   has_many :idea_tags, through: :taggings, source: :tag
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
-  has_many :cooperations, dependent: :destroy
-  has_many :cooperation_users, through: :cooperations, source: :user
   has_many :notifications, dependent: :destroy
+  has_one :team, dependent: :destroy
   has_rich_text :note
   mount_uploader :icon, ImageUploader
 
@@ -53,28 +51,29 @@ class Idea < ApplicationRecord
   validates :background, presence: true
   validates :goal, presence: true
   validate :validate_tags_num
-  validates :product_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
+  validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
-  enum cooperation: %i(not_started ongoing completed), _prefix: true
 
-  scope :with_tag, -> tag_name { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
+  scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: "DESC").first(5) }
-  scope :most_commented, -> { includes([:idea_tags]).order(comments_num: "DESC") }
+  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC') }
+  scope :most_commented, -> { includes([:idea_tags]).order(comments_num: 'DESC') }
   scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
+  scope :not_emailed, -> { where(emailed_at: nil) }
   scope :deployed, -> { where product_apply: :approved }
-  scope :tag_name_like, -> tag_name { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
-  scope :pickup_user_nums, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
+  scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
+  scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
+  scope :commented_others_ideas, ->(own_user) { includes([:idea_tags]).uniq.select{ |i| i.user_id != own_user.id} }
 
   def published_time
-    published_at&.strftime("%Y.%m.%d")
+    published_at&.strftime('%Y.%m.%d')
   end
 
   def created_time
-    created_at.strftime("%Y.%m.%d")
+    created_at.strftime('%Y.%m.%d')
   end
 
   def self.search(name: nil, difficulty: nil, product_apply: nil)
@@ -82,7 +81,7 @@ class Idea < ApplicationRecord
     if name.nil? && difficulty.nil? && product_apply.nil?
       published
     elsif name.present?
-      where(["name like?", "%#{name}%"])
+      where(['name like?', "%#{name}%"])
     elsif difficulty.present?
       where(difficulty: difficulty)
     elsif product_apply.present?
@@ -91,7 +90,7 @@ class Idea < ApplicationRecord
   end
 
   def count_likes
-    update(likes_num: like_users.size )
+    update_column(:likes_num, likes.size)
   end
 
   def count_comments
@@ -109,8 +108,7 @@ class Idea < ApplicationRecord
       save!
     end
     true
-
-    rescue StandardError
+  rescue StandardError
     false
   end
 
@@ -122,32 +120,19 @@ class Idea < ApplicationRecord
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
   end
 
-  def create_notification_like!(current_user)
-    notification = current_user.active_notifications.find_or_initialize_by(
-      visitor: current_user,
-      visited: user,
-      idea: self,
-      action: :like,
-    )
-    notification.save if notification.valid?
+  def same_tag_ideas
+    return [] if idea_tags.empty?
+
+    # TODO: リファクタしたい
+    idea_ids = []
+    idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
+    idea_ids.flatten!.uniq
+    Idea.published.where(id: idea_ids).where.not(id: id)
   end
 
-  def create_notification_comment!(current_user, comment_id)
-    # アイデア作成者も含めたuser_id取得
-    user_ids = Comment.where(idea_id: id).pluck(:user_id).push(self.user_id).uniq
-    user_ids.each do |user_id|
-      # 自分以外のコメントした人全員に通知を送る
-      next if user_id == current_user.id
-      save_notification_comment!(current_user, comment_id, user_id)
-    end
-  end
+  def same_user_other_ideas
+    return [] if user.ideas.published.length == 1
 
-  def save_notification_comment!(current_user, comment_id, visited_id)
-    current_user.active_notifications.create!(
-      visited_id: visited_id,
-      idea: self,
-      comment_id: comment_id,
-      action: :comment
-    )
+    user.ideas.published.where.not(id: id)
   end
 end

@@ -3,6 +3,7 @@
   background-color: #E3E4E8;
   padding: 3px 7px;
   border-radius: 50%;
+  margin-left: 0.5rem;
 
   &:hover {
     transition-duration: .4s;
@@ -30,7 +31,7 @@
       width: 260px;
     }
 
-    &.cooperation-guide::before {
+    &.team-guide::before {
       content: "参加開発者のリストが作れ、アイデアがより注目されます";
       width: 190px;
     }
@@ -38,6 +39,11 @@
     &.tags::before {
       content: "タグを付けると検索されやすくなります。文字を入力後Enterを押して登録できます";
       width: 270px;
+    }
+
+    &.twitter-id::before {
+      content: "ID登録で公式Twitterアカウントからメンションを受けられます";
+      width: 210px;
     }
   }
 }

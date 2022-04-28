@@ -24,8 +24,9 @@ class Comment < ApplicationRecord
   belongs_to :idea
   validates :description, presence: true
 
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, dependent: :destroy, as: :notificatable
+  has_many :likes, dependent: :destroy, as: :likable
 
   scope :weekly_comments, -> { where(created_at: 7.days.ago..Time.now) }
-  scope :pickup_user_commets, -> num { group_by(&:user_id).transform_values(&:size).max(num){|x, y| x[1] <=> y[1]} }
+  scope :pickup_user_commets, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
 end

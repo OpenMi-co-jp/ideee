@@ -1,33 +1,27 @@
 <div class='c-unit-comment'>
   <div class="flex">
-    <% unless owned %>
-      <div class='c-unit-comment__img gray-2'>
+    <% if owned %>
+      <%= render 'comments/comment_time', created_at: comment.created_at %>
+      <div class='c-unit-comment__info'>
+        <%= render 'comments/comment_description', description: comment.description %>
+        <%= render 'comments/option', comment: comment %>
+      </div>
+    <% else %>
+      <div class='c-unit-comment__user'>
         <%= link_to user_path(comment.user_id) do %>
-          <%= user_icon(User.find(comment.user_id)) %>
+          <%= user_icon(User.find(comment.user_id), size: 'small') %>
         <% end %>
       </div>
+      <div>
+        <div class='c-unit-comment__user--name'><%= User.find(comment.user_id).name %></div>
+        <div class='c-unit-comment__info'>
+          <%= render 'comments/comment_description', description: comment.description %>
+          <div class='c-unit-comment__options'>
+            <%= render "common/like", object: comment, render_to: 'comments/comment_heart' %>
+          </div>
+        </div>
+      </div>
+      <%= render 'comments/comment_time', created_at: comment.created_at %>
     <% end %>
-    <div class="c-unit-comment__info <%= 'white-text' if owned %>">
-      <div class="c-unit-comment__user <%= 'gray-3' unless owned %>">
-        <div class="c-unit-comment__username">
-          <%= link_to user_path(comment.user_id) do %>
-            <% unless owned %>
-              <% User.find(comment.user_id).name %>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="date-small pt-2 <%= 'gray-3' unless owned %>">
-          <%= l comment.created_at, format: :long %>
-        </div>
-      </div>
-      <div class='c-unit-comment__info--description'>
-        <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
-      </div>
-      <div class="c-unit-comment__options <%= 'gray-3' unless owned %>">
-        <% if owned %>
-          <%= render 'comments/icons', comment: comment %>
-        <% end %>
-      </div>
-    </div>
   </div>
 </div>

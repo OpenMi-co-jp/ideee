@@ -23,8 +23,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
+    return if resource.defined
+
     bool = resource.name.present? && resource.confirmed_at.present? && resource.definition.present?
-    resource.update!(defined: bool)
+    resource.update_column(:defined, bool)
   end
 
   # DELETE /resource
@@ -44,11 +46,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :remember_me])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[email password password_confirmation remember_me])
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :icon, :description, :definition, :twitter_id, :site_url])
+    devise_parameter_sanitizer.permit(:account_update,
+                                      keys: %i[name email icon description definition twitter_id site_url])
   end
 
   # The path used after sign up for inactive accounts.
@@ -65,7 +68,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
 
-  def after_update_path_for(resource)
+  def after_update_path_for(_resource)
     user_path(@user.id)
   end
 

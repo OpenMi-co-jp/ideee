@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Difficulties", type: :request do
+RSpec.describe 'Difficulties', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let(:idea) { FactoryBot.create(:idea) }
 
@@ -13,7 +13,7 @@ RSpec.describe "Difficulties", type: :request do
         expect(response.status).to eq 302
       end
 
-      it 'いいねが登録されること' do
+      it 'ハートが送られること' do
         expect do
           subject
         end.to change(Difficulty, :count).by(1)

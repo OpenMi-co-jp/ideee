@@ -18,18 +18,18 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.6'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 
+gem 'aws-sdk-s3', require: false
 gem 'carrierwave'
 gem 'fog-aws'
-gem 'aws-sdk-s3', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -37,35 +37,36 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dotenv-rails'
 
 gem 'omniauth'
-gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-twitter'
 
 gem 'google-api-client'
 
 gem 'cloudinary'
 gem 'meta-tags'
 
-gem 'rails-i18n'
 gem 'devise-i18n'
+gem 'rails-i18n'
 
 gem 'high_voltage'
 
 gem 'enum_help'
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 
 gem 'gon'
 
-gem 'slack-notifier'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
-# メール送信
-gem 'sendgrid-ruby'
+gem 'slack-notifier'
+
+gem 'render_async' # 遅延読み込み
+gem 'sendgrid-ruby' # メール送信
 
 # uncomment out when you need
 # gem 'stripe'
 
-gem 'twitter'
 gem 'sidekiq'
+gem 'twitter'
 
 # エラー関係
 gem 'rack-timeout'
@@ -73,7 +74,7 @@ gem 'rollbar' # 本番のみで運用
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
   # Test
   gem 'factory_bot_rails'
@@ -81,9 +82,15 @@ group :development, :test do
   gem 'simplecov', require: false
 
   # Debug
-  gem 'pry-rails'
-  gem 'pry-doc'
   gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-rails'
+
+  # rubocop
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec'
 end
 
 group :development do
@@ -91,18 +98,18 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  gem 'letter_opener_web'
+  gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'seed-fu'
-  gem 'annotate'
-  gem 'bullet'
   gem 'brakeman'
+  gem 'bullet'
+  gem 'letter_opener_web'
+  gem 'seed-fu'
 end
 
 group :test do
@@ -114,4 +121,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

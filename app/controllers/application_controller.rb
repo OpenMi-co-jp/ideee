@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
   end
 
   def render500
-    render file: Rails.root.join('public', '500.html'), status: :internal_server_error, layout: false, content_type: 'text/html'
+    render file: Rails.root.join('public', '500.html'), status: :internal_server_error, layout: false,
+           content_type: 'text/html'
   end
 
   protected
@@ -31,9 +32,9 @@ class ApplicationController < ActionController::Base
   def defined_check
     unless defined_user?
       redirect_to edit_user_registration_path(params[:id])
-      flash[:alert] = "ユーザーの名前を登録してください。" if current_user.name.blank?
-      flash[:alert] = "ユーザーのメールアドレスを確認が完了していません。" if current_user.confirmed_at.blank?
-      flash[:alert] = "ユーザーのタイプを登録してください。" if current_user.definition.blank?
+      flash[:alert] = 'ユーザーの名前を登録してください。' if current_user.name.blank?
+      flash[:alert] = 'ユーザーのメールアドレスを確認が完了していません。' if current_user.confirmed_at.blank?
+      flash[:alert] = 'ユーザーのタイプを登録してください。' if current_user.definition.blank?
     end
   end
 
@@ -44,14 +45,22 @@ class ApplicationController < ActionController::Base
   def storable_location?
     # after_sign_outのフレンドリーフォワーディングを使うときはこの行を削除
     return false if current_user
+
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
 
   def get_notifications
-    @header_notifications = current_user.passive_notifications.includes([:visitor, :idea, :comment]).order(created_at: :desc).limit(5)
+    @header_notifications = current_user.passive_notifications
+                                        .includes(%i[visitor idea])
+                                        .order(created_at: :desc)
+                                        .limit(5)
   end
 
   def defined_user?
     current_user&.defined
+  end
+
+  def update_user_point
+    UserJob::UpdatePointJob.perform_later(current_user) # Contributionの計算/更新
   end
 end

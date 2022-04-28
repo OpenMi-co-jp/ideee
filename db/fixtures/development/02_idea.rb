@@ -1,10 +1,7 @@
-carriwave_path = "./app/assets/images/ideee-tech-logo"
-
 attributes = {
   name: Faker::JapaneseMedia::Doraemon.gadget,
   background: Faker::Lorem.paragraph(sentence_count: 20),
   goal: Faker::Lorem.paragraph(sentence_count: 20),
-  cooperation: (0..2).to_a.sample,
   published_at: Faker::Date.between(from: 10.days.ago, to: 5.days.ago),
   view: (0..200).to_a.sample
 }
@@ -15,10 +12,9 @@ attributes = {
     :id,
     {
       id: num,
-      icon: File.open(carriwave_path),
       user: User.find(num),
       **attributes
-    },
+    }
   )
   Idea.seed(
     :id,
@@ -26,6 +22,6 @@ attributes = {
       id: num + 20,
       user: User.find(num + 20),
       **attributes
-    },
+    }
   )
 end

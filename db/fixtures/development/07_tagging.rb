@@ -6,9 +6,9 @@
   (0..2).each do |num|
     Tagging.seed(
       :id,
-      { id: num+outer_num, idea_id: idea_num, tag: tags[num] },
+      { id: num + outer_num, idea_id: idea_num, tag: tags[num] }
     )
     # 同一の組み合わせがあった場合はrescueでエラーハンドリング
-    rescue ActiveRecord::RecordNotUnique
+  rescue ActiveRecord::RecordNotUnique
   end
 end

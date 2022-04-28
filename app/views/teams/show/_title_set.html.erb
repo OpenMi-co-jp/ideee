@@ -1,0 +1,4 @@
+<div class="mh-3">
+  <b><%= t("activerecord.attributes.team.#{item}") %></b>
+  <%= simple_format(text_url_to_link(@team["#{item}"]), {}, sanitize: false) %>
+</div>

@@ -4,38 +4,51 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks',
-    confirmations: "users/confirmations"
+    confirmations: 'users/confirmations'
   }
   root 'ideas#index'
   resources :ideas do
     collection do
-      get 'search'
-      get 'tags'
+      get :search
+      get :tags
+      get :suggest
+      get :most_comment
+      get :most_liked
+      get :team_active
+      get :deployed
     end
     member do
-      post 'publish'
+      post :publish
     end
   end
   resources :comments, only: %i[create edit update destroy] do
     collection do
-      post 'send_email'
+      post :send_email
     end
   end
   resources :users, only: %i[index show] do
     collection do
-      get 'search'
+      get :search
+      get :commenter
+      get :idea_man
     end
   end
   resources :likes, only: %i[create destroy]
-  resources :cooperations, only: %i[index new create destroy] do
-    collection do
-      post 'start'
-      post 'complete'
-      post 'restart'
+  resources :teams, except: %i[destroy] do
+    member do
+      post :join
+      post :stop
+      post :activate
+      post :finish
     end
   end
   resources :difficultys, only: %i[create]
-  resources :notifications, only: %i[index]
+  resources :notifications, only: %i[index] do
+    collection do
+      post :check
+    end
+  end
+  get 'tags_popular', to: 'tags#popular'
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'
@@ -46,8 +59,6 @@ Rails.application.routes.draw do
   get 'how_to_find_idea' => 'high_voltage/pages#show', id: 'how_to_find_idea'
   get 'new_year_event' => 'high_voltage/pages#show', id: 'new_year_event'
   get 'events/valentine' => 'high_voltage/pages#show', id: 'events/valentine'
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount Sidekiq::Web => '/sidekiq'
 end

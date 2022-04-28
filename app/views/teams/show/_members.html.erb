@@ -1,0 +1,23 @@
+<% if !users.blank? %>
+  <a class='dropdown-trigger btn orange-soft-back' href='#' data-target='dropdown-team-member'>
+    <i class="material-icons left">groups</i>メンバー：<%= users.length %>名
+  </a>
+  <ul id='dropdown-team-member' class='dropdown-content'>
+    <% users.each do |user| %>
+      <li>
+        <%= link_to user_path(user.id), target: :_blank do %>
+            <div class='flex'>
+              <%= user_icon(user, size: 'smaller') %>
+              <div class='user-column-body'>
+                <div class='user-name-point'>
+                  <div class='pl-3'>
+                    <div class='user-name'><%= user.name %><%= user_definiton(user, ver='short') %></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

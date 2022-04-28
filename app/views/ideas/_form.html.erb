@@ -1,4 +1,4 @@
-<%= form_with(model: idea, multipart: true) do |form| %>
+<%= form_with(model: idea, multipart: true, id: 'idea_form', local: false) do |form| %>
   <% if idea.errors.any? %>
     <div id="error_explanation">
       <ul>
@@ -26,21 +26,24 @@
     </div>
     <div class='idea-status-column col s12 l9'>
       <div class="field input-field">
-        <%= form.text_field :name, placeholder: 'アイデア名', data: { length: 50 } %>
+        <%= form.text_field :name, placeholder: 'アイデア名', data: { length: 50 }, class: 'validate', required:'required' %>
         <%= form.label :name, class: 'required active' %>
+        <span class="helper-text" data-error="アイデア名を入力してください。"></span>
       </div>
       <div class="field">
-        <%= form.label :tags_up_to_three %><a class="help-tip tags ml-2">?</a>
+        <%= form.label :tags_up_to_three %><a class="help-tip tags">?</a>
         <div class="chips"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
       <div class="field input-field">
-        <%= form.text_area :background, placeholder: '背景やストーリー', class: 'materialize-textarea' %>
+        <%= form.text_area :background, placeholder: '背景やストーリー', class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :background, class: 'required active' %>
+        <span class="helper-text" data-error="背景を入力してください。"></span>
       </div>
       <div class="field input-field">
-        <%= form.text_area :goal, placeholder: 'どうなって欲しいか', class: 'materialize-textarea' %>
+        <%= form.text_area :goal, placeholder: 'どうなって欲しいか', class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :goal, class: 'required active' %>
+        <span class="helper-text" data-error="ゴールを入力してください。"></span>
       </div>
       <ul class="collapsible">
         <li>
@@ -73,14 +76,14 @@
         <%= form.label :note %>
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
-      <% if idea.cooperation_not_started? || idea.id.nil? || idea.draft %>
-        <div class="field switch c-cooperation-switch">
-          <%= form.label :cooperation %><a class="help-tip cooperation-guide ml-2">?</a>
-          <%= form.hidden_field :cooperation_switch, value: params[:cooperation_switch] %>
-          <div class="switch c-cooperation-switch__btn">
-            <label class="c-cooperation-switch__label">
+      <% if idea.team.nil? || idea.id.nil? || idea.draft %>
+        <div class="field switch c-team-switch">
+          <%= form.label :team %><a class="help-tip team-guide">?</a>
+          <%= form.hidden_field :team_switch, value: params[:team_switch] %>
+          <div class="switch c-team-switch__btn">
+            <label class="c-team-switch__label">
               募集しない
-              <input type="checkbox" id='cooperation_switch' <%= 'checked' if idea.cooperation_ongoing? %>>
+              <input type="checkbox" id='team_switch' <%= 'checked' if idea.team&.status_active? %>>
               <span class="lever"></span>
               募集する
             </label>
@@ -88,7 +91,7 @@
         </div>
       <% end %>
       <div class="field">
-        <%= form.label :product_url %><a class="help-tip product-url ml-2">?</a>
+        <%= form.label :product_url %><a class="help-tip product-url">?</a>
         <%= form.text_field :product_url, placeholder: 'プロダクトのURL' %>
       </div>
       <% if idea.draft || idea.id.nil? %>

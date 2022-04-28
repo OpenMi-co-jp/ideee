@@ -1,9 +1,13 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ edit update destroy ]
+  before_action :set_comment, only: %i[edit update destroy]
+  after_action :update_user_point, only: %i[create]
 
   def create
-    current_user.create_comment(comment_params)
-    Idea.find_by!(id: comment_params[:idea_id]).create_notification_comment!(current_user, current_user.comments.last.id)
+    comment = current_user.create_comment(comment_params)
+    return if comment.nil?
+
+    idea = Idea.find_by!(id: comment_params[:idea_id])
+    current_user.create_notification_comment(idea, comment)
   end
 
   def edit; end
@@ -25,10 +29,12 @@ class CommentsController < ApplicationController
 
   def send_email
     return unless Rails.env.production?
+
     @idea = Idea.find_by!(id: comment_params[:idea_id])
     @users = [@idea.user].push(@idea.comment_users.uniq).flatten
     @users.delete(current_user)
     return if @users.nil?
+
     SendEmail.new.comment(@users, current_user, @idea, comment_params[:description])
   end
 

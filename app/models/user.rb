@@ -38,15 +38,12 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :like_ideas, through: :likes, source: :idea
   has_many :comments, dependent: :destroy
   has_many :comment_ideas, through: :comments, source: :idea
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_ideas, through: :difficultys, source: :idea
-  has_many :cooperations, dependent: :destroy
-  has_many :cooperation_ideas, through: :cooperations, source: :idea
-  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -56,9 +53,12 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
-  validates :site_url, format: /\A#{URI::regexp(%w(http https))}\z/, allow_blank: true
+  validates :site_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   scope :defined_user, -> { where defined: true }
+
+  # 通知を作成する
+  include CreateNotification
 
   class << self
     # omniauthを使ったSNSログイン機能
@@ -66,7 +66,7 @@ class User < ApplicationRecord
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
         when 'google_oauth2'
-          user.name = ""
+          user.name = ''
         when 'twitter'
           user.name = auth.info.name
           user.description = auth.info.description
@@ -78,9 +78,9 @@ class User < ApplicationRecord
         user.remote_url = auth.info.image
         user.confirmed_at = Time.now.utc
       end
-    rescue
+    rescue StandardError
       # メールアドレスが既に登録されていたら登録された方法をエラーで表示
-      raise "メールアドレス#{auth.info.email}のアカウントは#{ signin_how(auth.info.email) }で登録されています"
+      raise "メールアドレス#{auth.info.email}のアカウントは#{signin_how(auth.info.email)}で登録されています"
     end
 
     def new_with_session(_, session)
@@ -118,21 +118,11 @@ class User < ApplicationRecord
 
   # ユーザーに紐づいたobjectの所有者を判断
   def own?(object)
-    id == object.user_id
+    id == object.user.id
   end
 
-  def like(idea)
-    likes.find_or_create_by(idea: idea)
-    idea.count_likes
-  end
-
-  def like?(idea)
-    like_ideas.include?(idea)
-  end
-
-  def unlike(idea)
-    like_ideas.destroy(idea)
-    idea.count_likes
+  def like?(item)
+    likes.includes(:likable).map(&:likable).include?(item)
   end
 
   def voted?(idea)
@@ -140,25 +130,29 @@ class User < ApplicationRecord
   end
 
   def create_comment(params)
-    comments.create(idea_id: params[:idea_id], description: params[:description])
-    Idea.find_by!(id: params[:idea_id]).count_comments if params[:idea_id].present?
+    comment_params = { idea_id: params[:idea_id], description: params[:description] }
+    return if comments.find_by(comment_params).present?
+
+    comment = comments.create(comment_params)
+    comment.idea.count_comments if comment.valid?
+    comment
   end
 
-  def cooperation_joined?(idea)
-    cooperation_ideas.include?(idea)
+  def team_joined?(idea)
+    idea.team.members.include?(self)
   end
 
   # Contributionの計算
   def point_update
     idea_num = ideas.length
-    idea_like_num = ideas.sum{|n| n.likes.length }
+    idea_like_num = ideas.sum { |n| n.likes.length }
     comment_point = comments.length
     like_num = likes.length
-    sum_points = 2*idea_num + 0.5*like_num + idea_like_num + comment_point
-    update(point: sum_points)
+    sum_points = (2 * idea_num) + (0.5 * like_num) + idea_like_num + comment_point
+    update_column(:point, sum_points)
   end
 
   def twitter_id_fix
-    self.twitter_id = twitter_id.gsub(/https:\/\/twitter.com\/|@/, "") if twitter_id.present?
+    self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
   end
 end

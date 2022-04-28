@@ -67,6 +67,20 @@
       margin-top: 7px;
     }
   }
+
+  .index-rank {
+    margin: 0 4rem;
+
+    @media screen and (max-width: 1200px) {
+      margin: 0 3rem;
+    }
+    @media screen and (max-width: 600px) {
+      margin: 0 2rem;
+    }
+    @media screen and (max-width: 400px) {
+      margin: 0;
+    }
+  }
 }
 
 .idea {
@@ -177,9 +191,14 @@
     }
   }
 
-  &__eyes {
+  &__item {
     display: flex;
     margin-left: 22px;
+    color: #a7a7a7;
+
+    p {
+      margin-left: 5px;
+    }
   }
 
   &__time {
@@ -192,7 +211,7 @@
 
   &__comments {
     display: flex;
-    margin-left: 22px;
+    margin-left: 20px;
     color: #a7a7a7;
   }
 

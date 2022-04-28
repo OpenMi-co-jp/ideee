@@ -1,0 +1,23 @@
+<div class='c-suggest-ideas'>
+  <h5 class='board-title mb-3'><%= title %></h5>
+  <div class='row'>
+    <% suggest_ideas.each do |idea| %>
+      <div class='col s12 m6 l4'>
+        <div class='c-suggest-ideas--box'>
+          <%= link_to idea_path(idea.id) do %>
+            <div class='c-suggest-ideas--box__img'>
+              <%= image_set(idea) %>
+              <div class='c-suggest-ideas--box__time'>
+                <%= idea.published_time %>
+              </div>
+            </div>
+          <% end %>
+          <%= link_to idea_path(idea.id) do %>
+            <p class='c-suggest-ideas--box__name'><%= idea.name %></p>
+          <% end %>
+          <%= render 'tags/links', object: idea %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

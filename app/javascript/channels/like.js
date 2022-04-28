@@ -1,25 +1,24 @@
 $(document).on ('turbolinks:load', function(){
-  // こちらlikeをidea-showページだけでできるように変更後取り込み
-  // if ($('body').data('page') != "ideas-show") { return }
+  if ($('body').data('page') != "ideas-show") { return }
 
   $('.like-click').on('click', function() {
     const element = $(this)
-    like_num = Number(element.find($('.likes-count')).html())
+    like_num = Number(element.find($('.js-like-count')).html())
     if(element.hasClass('clicked')){
       element.toggleClass('clicked')
-      element.find($('.likes-count')).html(--like_num)
+      element.find($('.js-like-count')).html(--like_num)
       unlike(element)
       .fail(function() {
         element.toggleClass('clicked')
-        element.find($('.likes-count')).html(++like_num)
+        element.find($('.js-like-count')).html(++like_num)
       })
     } else {
       element.toggleClass('clicked')
-      element.find($('.likes-count')).html(++like_num)
+      element.find($('.js-like-count')).html(++like_num)
       like(element)
       .fail(function() {
         element.toggleClass('clicked')
-        element.find($('.likes-count')).html(--like_num)
+        element.find($('.js-like-count')).html(--like_num)
       })
     }
   });
@@ -28,7 +27,7 @@ $(document).on ('turbolinks:load', function(){
     return $.ajax({
       url: '/likes/' + element.data('id'),
       type: 'DELETE',
-      data: { id: element.data('id') },
+      data: { id: element.data('id'), type: element.data('type') },
       dataType: 'json'
     })
   }
@@ -37,7 +36,7 @@ $(document).on ('turbolinks:load', function(){
     return $.ajax({
       url: '/likes',
       type: 'POST',
-      data: { id: element.data('id') },
+      data: { id: element.data('id'), type: element.data('type') },
       dataType: 'json'
     })
   }

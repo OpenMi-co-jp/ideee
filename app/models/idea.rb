@@ -66,7 +66,7 @@ class Idea < ApplicationRecord
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
-  scope :commented_others_ideas, ->(own_user) { includes([:idea_tags]).uniq.select{ |i| i.user_id != own_user.id} }
+  scope :commented_others_ideas, ->(own_user) { includes([:idea_tags]).uniq.reject { |i| i.user_id == own_user.id } }
 
   def published_time
     published_at&.strftime('%Y.%m.%d')

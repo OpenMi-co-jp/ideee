@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   before_action :idea_id
+  after_action :update_user_point, only: %i[create]
 
   def create
     like = current_user.like(@idea)

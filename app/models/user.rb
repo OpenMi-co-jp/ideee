@@ -43,8 +43,6 @@ class User < ApplicationRecord
   has_many :comment_ideas, through: :comments, source: :idea
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_ideas, through: :difficultys, source: :idea
-  has_many :cooperations, dependent: :destroy
-  has_many :cooperation_ideas, through: :cooperations, source: :idea
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
@@ -118,7 +116,7 @@ class User < ApplicationRecord
 
   # ユーザーに紐づいたobjectの所有者を判断
   def own?(object)
-    id == object.user_id
+    id == object.user.id
   end
 
   def like(idea)
@@ -141,13 +139,16 @@ class User < ApplicationRecord
   end
 
   def create_comment(params)
-    comment = comments.create(idea_id: params[:idea_id], description: params[:description])
+    comment_params = { idea_id: params[:idea_id], description: params[:description] }
+    return if comments.find_by(comment_params).present?
+
+    comment = comments.create(comment_params)
     comment.idea.count_comments if comment.valid?
     comment
   end
 
-  def cooperation_joined?(idea)
-    cooperation_ideas.include?(idea)
+  def team_joined?(idea)
+    idea.team.members.include?(self)
   end
 
   # Contributionの計算
@@ -157,7 +158,7 @@ class User < ApplicationRecord
     comment_point = comments.length
     like_num = likes.length
     sum_points = (2 * idea_num) + (0.5 * like_num) + idea_like_num + comment_point
-    update(point: sum_points)
+    update_column(:point, sum_points)
   end
 
   def twitter_id_fix

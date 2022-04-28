@@ -1,0 +1,45 @@
+.c-team-form {
+  padding: 1rem 2rem 3rem;
+
+  &__idea_img {
+    width: 100%;
+
+    img {
+      min-width: 300px;
+      max-height: 151px;
+      object-fit: contain;
+      margin: 0 auto;
+
+      &:hover {
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+        transform: translateY(-0.1875em);
+      }
+    }
+  }
+
+  &__idea_info {
+    text-align: center;
+
+    &--name {
+      font-size: x-large;
+      font-weight: bold;
+      color: #FF862E;
+    }
+
+    &--time {
+      color: #C4C4C4;
+      margin: 0.5rem 0;
+    }
+  }
+
+  &__idea-content {
+    background-color: #fff3e0;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem;
+  }
+
+  &__btns {
+    text-align: center;
+  }
+}

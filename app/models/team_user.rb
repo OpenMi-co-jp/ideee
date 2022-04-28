@@ -17,4 +17,5 @@
 class TeamUser < ApplicationRecord
   belongs_to :user
   belongs_to :team
+  has_many :notifications, dependent: :destroy, as: :notificatable
 end

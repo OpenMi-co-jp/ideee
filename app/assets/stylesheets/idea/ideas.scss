@@ -67,6 +67,20 @@
       margin-top: 7px;
     }
   }
+
+  .index-rank {
+    margin: 0 4rem;
+
+    @media screen and (max-width: 1200px) {
+      margin: 0 3rem;
+    }
+    @media screen and (max-width: 600px) {
+      margin: 0 2rem;
+    }
+    @media screen and (max-width: 400px) {
+      margin: 0;
+    }
+  }
 }
 
 .idea {

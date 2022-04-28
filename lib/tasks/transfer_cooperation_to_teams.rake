@@ -2,10 +2,10 @@ namespace :transfer_cooperation_to_teams do
   desc '既存のcooperationをteamに移行する'
   task migrate: :environment do
     Idea.where.not(cooperation: :completed).map do |idea|
-      if idea.cooperation_ongoing?
+      if idea.team&.status_active?
         team = Team.create(owner: idea.user, idea: idea, status: 0, offer: '-', requirement: '-')
-        if idea.cooperation_users.count.positive?
-          idea.cooperation_users.each do |user|
+        if idea.team.members.count.positive?
+          idea.team.members.each do |user|
             TeamUser.create(team_id: team.id, user: user)
           end
         end

@@ -5,7 +5,6 @@
 #  id                                                       :bigint           not null, primary key
 #  background                                               :string(255)
 #  comments_num                                             :integer          default(0)
-#  cooperation                                              :integer          default("not_started")
 #  difficulty                                               :integer          default("not_yet")
 #  draft                                                    :boolean          default(FALSE)
 #  emailed_at(weeklyメールで新規アイデアとして送られた日時) :datetime
@@ -44,8 +43,6 @@ class Idea < ApplicationRecord
   has_many :idea_tags, through: :taggings, source: :tag
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_users, through: :difficultys, source: :user
-  has_many :cooperations, dependent: :destroy
-  has_many :cooperation_users, through: :cooperations, source: :user
   has_many :notifications, dependent: :destroy
   has_one :team, dependent: :destroy
   has_rich_text :note
@@ -59,12 +56,11 @@ class Idea < ApplicationRecord
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
-  enum cooperation: %i[not_started ongoing completed], _prefix: true
 
   scope :with_tag, ->(tag_name) { joins(:idea_tags).where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC').first(5) }
+  scope :most_liked, -> { includes([:idea_tags]).order(likes_num: 'DESC') }
   scope :most_commented, -> { includes([:idea_tags]).order(comments_num: 'DESC') }
   scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }
@@ -164,6 +160,10 @@ class Idea < ApplicationRecord
     notification.update_column(:notificatable_type, 'product_apply')
   end
 
+  def create_notification_team(current_user, team_user)
+    create_notification(current_user, user_id, team_user)
+  end
+
   def select_notify_commenter(current_user)
     # アイデア作成者も含めたuser_id取得
     user_ids = comments.pluck(:user_id).push(user_id).uniq
@@ -178,5 +178,21 @@ class Idea < ApplicationRecord
       idea: self,
       notificatable: notificatable
     )
+  end
+
+  def same_tag_ideas
+    return [] if idea_tags.empty?
+
+    # TODO: リファクタしたい
+    idea_ids = []
+    idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
+    idea_ids.flatten!.uniq
+    Idea.published.where(id: idea_ids).where.not(id: id)
+  end
+
+  def same_user_other_ideas
+    return [] if user.ideas.published.length == 1
+
+    user.ideas.published.where.not(id: id)
   end
 end

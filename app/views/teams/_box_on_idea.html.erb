@@ -1,0 +1,18 @@
+<div class='center'>
+  <% if idea.team&.status_active? || idea.team&.status_stop? %>
+    <div class='c-team-box__status'>
+      <%= I18n.t("enums.team.status.#{idea.team&.status}") %>
+    </div>
+  <% end %>
+  <% unless idea.draft %>
+    <div class='c-team-box__apply'>
+      <% if current_user&.own?(idea) && idea.team.nil? %>
+        <%= link_to t('default.team.start'), new_team_path(idea_id: idea), class: 'btn orange-action-back'%>
+      <% elsif idea.team&.status_active? || current_user&.own?(idea) %>
+        <%= link_to t('default.team.check'), team_path(idea.team), class: 'btn orange-action-back' %>
+      <% elsif idea.team&.status_stop? %>
+        <%= link_to t('default.team.check'), team_path(idea.team), class: 'btn gray-3-back' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

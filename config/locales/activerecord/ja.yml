@@ -36,7 +36,11 @@ ja:
         view: ビュー数
         tag_list: タグ
         tags_up_to_three: タグ（3つまで入力できます）
-        cooperation: 開発者を募集
         product_url: 作っているアプリ
+        team: チーム開発
       comment:
         description: コメント
+      team:
+        offer: 得られること
+        requirement: お願いしたいこと
+        status: ステータス

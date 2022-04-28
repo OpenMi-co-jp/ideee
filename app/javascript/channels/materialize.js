@@ -13,9 +13,9 @@ $(document).on ('turbolinks:load', function(){
     draggable: true
   });
 
-  // 開発者募集をrailsに渡す
-  $('#cooperation_switch').on('click', function () {
-    $('#idea_cooperation_switch').val($(this).prop('checked'))
+  // チーム開発募集をrailsに渡す
+  $('#team_switch').on('click', function () {
+    $('#idea_team_switch').val($(this).prop('checked'))
   });
 
   // 選択必須のバリデーション

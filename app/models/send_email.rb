@@ -41,21 +41,21 @@ class SendEmail
     end
   end
 
-  def join_cooperation(user, idea)
+  def join_team(user, idea)
     body = "
-            <p>協働開発の希望者がいます。さっそく連絡してみましょう！</p>
+            <p>チーム開発の希望者がいます。さっそく連絡してみましょう！</p>
             <hr>
             <b>応募者情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               名前: #{user.name}<br>
-              URL: #{analytics_url('users/' + user.id.to_s, 'join_cooperation',
+              URL: #{analytics_url('users/' + user.id.to_s, 'join_team',
                                    'https://www.ideee.tech/users/' + user.id.to_s)}
             </div>
-            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'join_cooperation',
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'join_team',
                                                      'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
           "
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
-    content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
+    content = Content.new(type: 'text/html', value: html_frame(body, 'join_team'))
 
     to = Email.new(email: idea.user.email)
     mail = Mail.new(@from, subject, to, content)
@@ -76,7 +76,7 @@ class SendEmail
                                                      'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
           "
     subject = "【ideee】【#{idea.name}】のURL承認申請を受信しました🙇‍♂️"
-    content = Content.new(type: 'text/html', value: html_frame(body, 'join_cooperation'))
+    content = Content.new(type: 'text/html', value: html_frame(body, 'join_team'))
 
     to = Email.new(email: idea.user.email)
     mail = Mail.new(@from, subject, to, content)

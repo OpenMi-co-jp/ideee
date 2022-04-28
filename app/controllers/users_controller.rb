@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search]
+  before_action :authenticate_user!, except: %i[index show search commenter idea_man]
   prepend_before_action :page_user, only: %i[show]
-  before_action :defined_check, except: %i[index search], if: :own_user?
+  before_action :defined_check, except: %i[index search commenter idea_man], if: :own_user?
 
   def index
     @users = Kaminari.paginate_array(User.defined_user.order(point: 'DESC'))
@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     # 自分のアイデア以外でコメントしたアイデアを表示
     comment_idea_list = @user.comment_ideas.includes([:idea_tags]).uniq.select { |i| i.user_id != @user.id }
     @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
-    UserJob::UpdatePointJob.perform_later(@user) # Contributionの計算/更新
   end
 
   def search
@@ -33,6 +32,20 @@ class UsersController < ApplicationController
       list = User.defined_user.search(params[:key]).order(point: 'DESC')
     end
     @searched_users = Kaminari.paginate_array(list).page(params[:page])
+  end
+
+  def commenter
+    # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
+    user_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
+    user_list = user_array.map { |u| User.find_by!(id: u[0]) }
+    render partial: 'users/user_list', locals: { users: user_list, user_array: user_array, icon: '💬' }
+  end
+
+  def idea_man
+    # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
+    user_array = Idea.published.recent_select.pickup_user_nums(t('default.users.monthly_publisher_num'))
+    user_list = user_array.map { |u| User.find_by!(id: u[0]) }
+    render partial: 'users/user_list', locals: { users: user_list, user_array: user_array, icon: '💬' }
   end
 
   private

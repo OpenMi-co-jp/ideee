@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_27_044231) do
+ActiveRecord::Schema.define(version: 2022_04_01_180508) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -65,16 +65,6 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "cooperations", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "idea_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["idea_id", "user_id"], name: "index_cooperations_on_idea_id_and_user_id", unique: true
-    t.index ["idea_id"], name: "index_cooperations_on_idea_id"
-    t.index ["user_id"], name: "index_cooperations_on_user_id"
-  end
-
   create_table "difficulties", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "idea_id", null: false
@@ -98,7 +88,6 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
     t.integer "difficulty", default: 0
     t.boolean "draft", default: false
     t.integer "comments_num", default: 0
-    t.integer "cooperation", default: 0
     t.string "product_url"
     t.integer "product_apply", default: 0
     t.datetime "published_at"
@@ -163,7 +152,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
   end
 
   create_table "teams", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "owner_id", null: false
+    t.bigint "owner_id", null: false
     t.bigint "idea_id", null: false
     t.integer "status", default: 0, null: false
     t.string "requirement", null: false
@@ -171,6 +160,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["idea_id"], name: "index_teams_on_idea_id"
+    t.index ["owner_id"], name: "index_teams_on_owner_id"
     t.index ["status", "owner_id"], name: "index_teams_on_status_and_owner_id"
   end
 
@@ -205,11 +195,10 @@ ActiveRecord::Schema.define(version: 2022_03_27_044231) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
-  add_foreign_key "cooperations", "ideas"
-  add_foreign_key "cooperations", "users"
   add_foreign_key "difficulties", "ideas"
   add_foreign_key "difficulties", "users"
   add_foreign_key "taggings", "ideas"
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "ideas"
+  add_foreign_key "teams", "users", column: "owner_id"
 end

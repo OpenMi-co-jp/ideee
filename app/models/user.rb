@@ -38,7 +38,6 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :like_ideas, through: :likes, source: :idea
   has_many :comments, dependent: :destroy
   has_many :comment_ideas, through: :comments, source: :idea
   has_many :difficultys, dependent: :destroy
@@ -57,6 +56,9 @@ class User < ApplicationRecord
   validates :site_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   scope :defined_user, -> { where defined: true }
+
+  # 通知を作成する
+  include CreateNotification
 
   class << self
     # omniauthを使ったSNSログイン機能
@@ -119,19 +121,8 @@ class User < ApplicationRecord
     id == object.user.id
   end
 
-  def like(idea)
-    like = likes.find_or_create_by(idea: idea)
-    idea.count_likes if like.valid?
-    like
-  end
-
-  def like?(idea)
-    like_ideas.include?(idea)
-  end
-
-  def unlike(idea)
-    like_ideas.destroy(idea)
-    idea.count_likes
+  def like?(item)
+    likes.includes(:likable).map(&:likable).include?(item)
   end
 
   def voted?(idea)

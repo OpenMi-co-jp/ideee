@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_01_180508) do
+ActiveRecord::Schema.define(version: 2022_04_23_072228) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -107,7 +107,10 @@ ActiveRecord::Schema.define(version: 2022_04_01_180508) do
     t.bigint "idea_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "likable_type", null: false
+    t.bigint "likable_id", null: false
     t.index ["idea_id"], name: "index_likes_on_idea_id"
+    t.index ["likable_type", "likable_id"], name: "index_likes_on_likable"
     t.index ["user_id", "idea_id"], name: "index_likes_on_user_id_and_idea_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end

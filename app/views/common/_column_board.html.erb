@@ -20,13 +20,17 @@
               <%= embedded_svg 'icons/clock.svg', class: 'icon-size gray-4 idea__time--clock' %>
               <p><%= idea.published_time %></p>
             </div>
-            <div class='idea__comments'>
-              <%= image_tag 'icons/comment.svg', class: 'icon-size gray-4', loading: "lazy" %>
-              <p class='gray-5 ml-2'><%= idea.comments_num %></p>
+            <div class='idea__item'>
+              <%= image_tag 'icons/comment.svg', class: 'icon-size', loading: "lazy" %>
+              <p><%= idea.comments_num %></p>
             </div>
-            <div class='idea__eyes'>
-              <%= image_tag 'icons/eye.svg', class: 'icon-size gray-4', loading: "lazy" %>
-              <p class=' gray-5 ml-1'><%= idea.view %></p>
+            <div class='idea__item'>
+              <%= image_tag 'icons/eye.svg', class: 'icon-size', loading: "lazy" %>
+              <p><%= idea.view %></p>
+            </div>
+            <div class='idea__item'>
+              <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy" %>
+              <p><%= idea.likes_num %></p>
             </div>
             <div class="idea__detail pc">
               <div class="idea__detail--vote <%= idea.difficulty %>">
@@ -53,9 +57,6 @@
             <p class='idea__detail--def'>
               <%= user_definiton(idea.user, ver = 'short') %>
             </p>
-          </div>
-          <div class='idea__like'>
-            <%= render "common/like", object: idea %>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@
     <h2><%= t '.title' %></h2>
 
     <%= render "devise/shared/omniauth_links" %>
-    <%= form_with(model: @user, url: user_registration_path, id: 'new_user') do |f| %>
+    <%= form_with(model: resource, url: user_registration_path, id: 'new_user') do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">

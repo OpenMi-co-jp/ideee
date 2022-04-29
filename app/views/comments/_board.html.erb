@@ -1,7 +1,7 @@
 <div class="p-comment-board yellow-soft-back ph-1">
   <h4 class='p-comment-board__title'>コメント</h4>
   <% if object.comments_num > 0 %>
-    <% object.comments.includes(:user).each do |comment| %>
+    <% object.comments.includes([:user, :likes]).each do |comment| %>
       <div class="p-comment-board__item <%= 'own-comment' if current_user&.own?(comment) %>" id="comment-<%= comment.id %>">
         <%= render 'comments/unit_comment', owned: current_user&.own?(comment), comment: comment %>
       </div>

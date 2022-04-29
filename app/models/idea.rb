@@ -34,9 +34,8 @@ class Idea < ApplicationRecord
   MAX_TAGS_COUNT = 3
 
   belongs_to :user
-  has_many :likes, dependent: :destroy
+  has_many :likes, dependent: :destroy, as: :likable
   has_many :users, through: :likes
-  has_many :like_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
   has_many :comment_users, through: :comments, source: :user
   has_many :taggings, dependent: :destroy
@@ -67,6 +66,7 @@ class Idea < ApplicationRecord
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
+  scope :commented_others_ideas, ->(own_user) { includes([:idea_tags]).uniq.select{ |i| i.user_id != own_user.id} }
 
   def published_time
     published_at&.strftime('%Y.%m.%d')
@@ -90,7 +90,7 @@ class Idea < ApplicationRecord
   end
 
   def count_likes
-    update(likes_num: like_users.size)
+    update_column(:likes_num, likes.size)
   end
 
   def count_comments
@@ -137,47 +137,6 @@ class Idea < ApplicationRecord
 
   def validate_tags_num
     errors.add(:base, "タグは#{MAX_TAGS_COUNT}つまでしか入力できません") if idea_tags.length > MAX_TAGS_COUNT
-  end
-
-  def create_notification_like(current_user, like)
-    create_notification(current_user, user_id, like)
-  end
-
-  def create_notification_comment(current_user, comment)
-    user_ids = select_notify_commenter(current_user)
-    user_ids.each do |user_id|
-      create_notification(current_user, user_id, comment)
-    end
-  end
-
-  def create_notification_difficulty(current_user, difficulty)
-    create_notification(current_user, user_id, difficulty)
-  end
-
-  def create_notification_product_apply
-    admin_user = User.first
-    notification = create_notification(admin_user, user_id, nil)
-    notification.update_column(:notificatable_type, 'product_apply')
-  end
-
-  def create_notification_team(current_user, team_user)
-    create_notification(current_user, user_id, team_user)
-  end
-
-  def select_notify_commenter(current_user)
-    # アイデア作成者も含めたuser_id取得
-    user_ids = comments.pluck(:user_id).push(user_id).uniq
-    user_ids.delete(current_user.id)
-    user_ids
-  end
-
-  def create_notification(current_user, visited_id, notificatable)
-    current_user.active_notifications.find_or_create_by!(
-      visitor: current_user,
-      visited_id: visited_id,
-      idea: self,
-      notificatable: notificatable
-    )
   end
 
   def same_tag_ideas

@@ -41,14 +41,15 @@
       margin-right: calc(50% - 50vw);
     }
 
-    .main-board {
+    .latest-board {
       position: absolute;
       top: -1rem;
       min-width: 24rem;
-      margin: 2rem;
+      margin: 2rem 0 0 0.8rem;
 
       @media screen and (min-width: 601px) {
         min-width: 100%;
+        margin: 2rem;
       }
     }
   }
@@ -84,7 +85,7 @@
 }
 
 .idea {
-  margin-bottom: 3rem;
+  margin-bottom: 8rem;
 
   &__list {
     margin-top: 24px;
@@ -191,9 +192,14 @@
     }
   }
 
-  &__eyes {
+  &__item {
     display: flex;
     margin-left: 22px;
+    color: #a7a7a7;
+
+    p {
+      margin-left: 5px;
+    }
   }
 
   &__time {
@@ -206,7 +212,7 @@
 
   &__comments {
     display: flex;
-    margin-left: 22px;
+    margin-left: 20px;
     color: #a7a7a7;
   }
 

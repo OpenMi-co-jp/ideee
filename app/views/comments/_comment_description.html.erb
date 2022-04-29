@@ -1,9 +1,9 @@
 <div class='c-unit-comment__info--description'>
-  <% if comment.description.length <= 200 %>
+  <% if comment.description.length <= comment_contract_len %>
     <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
   <% else %>
     <div id='desc_contract_<%= comment.id %>' class="c-comment-description__contract">
-      <%= simple_format(text_url_to_link(comment.description.slice(0,200)+ "…"), {}, sanitize: false) %>
+      <%= simple_format(text_url_to_link(comment.description.slice(0, comment_contract_len)+ "…"), {}, sanitize: false) %>
       <a href='<%= comment.id %>' class='c-comment-description__prompt contract'>続きを読む</a>
     </div>
     <div id='desc_expand_<%= comment.id %>' class="c-comment-description__expand">

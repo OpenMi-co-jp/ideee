@@ -15,5 +15,4 @@ $(document).on ('turbolinks:load', function(){
 
   // select用のバリデーション
   M.validation_select_set('#user_definition');
-
 })

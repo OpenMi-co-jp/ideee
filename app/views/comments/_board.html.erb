@@ -3,7 +3,7 @@
   <% if object.comments_num > 0 %>
     <% object.comments.includes([:user, :likes]).each do |comment| %>
       <div class="p-comment-board__item <%= 'own-comment' if current_user&.own?(comment) %>" id="comment-<%= comment.id %>">
-        <%= render 'comments/unit_comment', owned: current_user&.own?(comment), comment: comment %>
+        <%= render 'comments/unit_comment', owned: current_user&.own?(comment), comment: comment, comment_contract_len: 200 %>
       </div>
     <% end %>
   <% else %>

@@ -3,7 +3,7 @@ class DifficultysController < ApplicationController
 
   def create
     difficulty = Difficulty.create!(level_params)
-    IdeaJob.UpdateDifficultyJob.perform_later(@idea.id)
+    IdeaJob::UpdateDifficultyJob.perform_later(@idea.id)
     Notifications::UpdateDifficultyJob.perform_later(current_user, difficulty) unless current_user == @idea.user
     redirect_to @idea
   end

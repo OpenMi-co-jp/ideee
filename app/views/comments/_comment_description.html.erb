@@ -2,7 +2,7 @@
   <% if comment.description.length <= comment_contract_len %>
     <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
   <% else %>
-    <div id='desc_contract_<%= comment.id %>' class="c-comment-description__contract">
+    <div id='desc_contract_<%= comment.id %>' class="c-comment-description__compact">
       <%= simple_format(text_url_to_link(comment.description.slice(0, comment_contract_len)+ "…"), {}, sanitize: false) %>
       <span data-comment-id='<%= comment.id %>' data-mode="compact" class="c-comment-description__prompt">続きを読む</span>
     </div>

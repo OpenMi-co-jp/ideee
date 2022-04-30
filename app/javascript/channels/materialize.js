@@ -59,10 +59,9 @@ $(document).on ('turbolinks:load', function(){
   // 選択必須の時に必要な機能セット
   M.validation_min_len_set = function (input_id) {
     // inputセレクタが変更されたら、data-min-lengthサイズよりも文字数が少ない場合に発火
-    $(input_id).on('blur', function () {
-      var element = $(input_id + '.validate');
-      var input_len = element[0].value.length;
-      var min_len = element.attr('data-min-length');
+    $(input_id + '.validate').on('blur', function () {
+      var input_len = $(this)[0].value.length;
+      var min_len = $(this).attr('data-min-length');
       if(input_len < min_len){
         $(input_id).addClass('invalid');
       }else{

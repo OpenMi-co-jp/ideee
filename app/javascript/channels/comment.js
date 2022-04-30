@@ -47,15 +47,11 @@ $(document).on ('turbolinks:load', function(){
     var mode = $(this).attr('data-mode');
 
     if(mode=="compact"){
-      $('#desc_compact_' + comment_id).removeClass('c-comment-description__compact');
-      $('#desc_compact_' + comment_id).addClass('c-comment-description__expand');
-      $('#desc_expand_' + comment_id).addClass('c-comment-description__compact');
-      $('#desc_expand_' + comment_id).removeClass('c-comment-description__expand');
+      $('#desc_compact_' + comment_id).hide();
+      $('#desc_expand_' + comment_id).show();
     }else{
-      $('#desc_compact_' + comment_id).addClass('c-comment-description__compact');
-      $('#desc_compact_' + comment_id).removeClass('c-comment-description__expand');
-      $('#desc_expand_' + comment_id).removeClass('c-comment-description__compact');
-      $('#desc_expand_' + comment_id).addClass('c-comment-description__expand');
+      $('#desc_compact_' + comment_id).show();
+      $('#desc_expand_' + comment_id).hide();
     }
   });
 

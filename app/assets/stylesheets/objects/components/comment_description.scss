@@ -1,4 +1,10 @@
 .c-comment-description {
+    &__prompt {
+        cursor: pointer;
+        text-decoration: underline;
+        color:blue;
+    }
+
     &__contract {
         display:block;
     }

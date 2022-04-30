@@ -44,11 +44,9 @@ $(document).on ('turbolinks:load', function(){
 
   $('.c-comment-description__prompt').on('click', function(e) {
     var comment_id = $(this).attr('data-comment-id');
-    var prompt_class = $(this).attr('class');
-    var prompt_class_array = prompt_class.split(" ");
-    var mode = prompt_class_array[1];
+    var mode = $(this).attr('data-mode');
 
-    if(mode=="contract"){
+    if(mode=="compact"){
       $('#desc_contract_' + comment_id).removeClass('c-comment-description__contract');
       $('#desc_contract_' + comment_id).addClass('c-comment-description__expand');
       $('#desc_expand_' + comment_id).addClass('c-comment-description__contract');

@@ -26,13 +26,13 @@
         <% end %><br />
         <%= f.password_field :password, autocomplete: "new-password", placeholder: 'password', class: 'validate', data: { 'min-length': @minimum_password_length } %>
         <%= f.label :password, class: 'active' %>
-        <span class="helper-text" data-error="<%= @minimum_password_length %>文字以上のパスワードを入力してください。"></span>
+        <%= password_helper_text %>
       </div>
 
       <div class="field input-field">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password', class: 'validate', data:{ 'min-length': @minimum_password_length } %>
         <%= f.label :password_confirmation, class: 'active' %><br />
-        <span class="helper-text" data-error="<%= @minimum_password_length %>文字以上のパスワードを入力してください。"></span>
+        <%= password_helper_text %>
       </div>
 
       <%= f.submit t('.submit'), class: 'btn orange-action-back mh-1' %>

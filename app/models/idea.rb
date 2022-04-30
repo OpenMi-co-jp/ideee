@@ -66,7 +66,7 @@ class Idea < ApplicationRecord
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
-  scope :commented_others_ideas, ->(own_user) { includes([:idea_tags]).uniq.select{ |i| i.user_id != own_user.id} }
+  scope :commented_others_ideas, ->(own_user) { includes([:idea_tags]).uniq.reject { |i| i.user_id == own_user.id } }
 
   def published_time
     published_at&.strftime('%Y.%m.%d')
@@ -114,25 +114,6 @@ class Idea < ApplicationRecord
 
   def tag_list
     idea_tags.pluck(:name).join(',')
-  end
-
-  def update_difficulty
-    # difficultyが一つしかなければ現在の値を代入
-    level = if difficultys.size == 1
-              difficultys[0].level
-            else
-              # 2つ以上であればgroup化して計算開始
-              levels_hash = difficultys.group(:level).size
-              if levels_hash.map { |n| n[1] }.max(2).uniq.length == 1
-                # もし最も多く使われる値が2つ以上ある場合
-                'middle'
-              else
-                # 最も多く使われる値が１つしかない場合
-                levels_hash.max_by { |x| x[1] }[0]
-              end
-            end
-    # ideaを出力されたlevelでupdate
-    update(difficulty: level)
   end
 
   def validate_tags_num

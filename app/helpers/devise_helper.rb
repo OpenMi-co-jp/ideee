@@ -9,4 +9,8 @@ module DeviseHelper
     submit = controller_name == 'sessions' ? 'ログイン' : 'ユーザー登録'
     tag.p "＼ #{submit} ／", class: 'omniauth-sign-up'
   end
+
+  def password_helper_text
+    tag.span '', class: 'helper-text', data: { error: "#{ @minimum_password_length }文字以上のパスワードを入力してください。" }
+  end
 end

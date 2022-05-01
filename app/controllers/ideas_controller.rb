@@ -1,26 +1,14 @@
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[show edit update destroy publish]
-  before_action :authenticate_user!, except: %i[index show search tags]
+  prepend_before_action :set_idea, only: %i[show edit update destroy publish suggest]
+  before_action :authenticate_user!, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
   before_action :own_user_check, only: %i[edit update destroy]
-  before_action :defined_check, except: %i[index show search tags]
+  before_action :defined_check, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
   before_action :own_draft_check, only: %i[show]
+  after_action :update_user_point, only: %i[create]
 
   def index
-    ideas = Idea.published # 一度定義することで何度もDBに値を取りに行くことを阻止
-    recent_ideas = ideas.recent_select.includes([:user])
+    recent_ideas = Idea.published.recent_select.includes([:user])
     @latest_ideas = recent_ideas.order(published_at: 'DESC').first(10)
-    @liked_ideas = recent_ideas.most_liked
-    @most_commented_ideas = recent_ideas.most_commented.first(10)
-    @featured_users = User.where(defined: true).order(point: 'DESC').first(10) # 定義がされているユーザーだけをポイントが高い準に5名
-    @on_board_ideas = ideas.includes([:user]).where(cooperation: :ongoing).most_commented.order(updated_at: 'DESC').first(5)
-    @deployed_ideas = ideas.includes([:user]).deployed.order(updated_at: 'DESC').first(5)
-    # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
-    @commented_users_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
-    @weekly_commented_users = @commented_users_array.map { |u| User.find_by!(id: u[0]) }
-    # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
-    @idea_publisher_array = ideas.recent_select.pickup_user_nums(t('default.users.monthly_publisher_num'))
-    @monthly_published_users = @idea_publisher_array.map { |u| User.find_by!(id: u[0]) }
-    @popular_tags = Tag.recent_tags.popular_tags
   end
 
   def show
@@ -43,13 +31,13 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
-      @idea.cooperation_ongoing! if params.dig(:idea, :cooperation_switch) == 'true'
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
       if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
+        redirect_to destination, notice: t('.draft_save')
       else
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.now)
-        redirect_to @idea, notice: t('.success')
+        redirect_to destination, notice: t('.success')
       end
     else
       flash.now[:alert] = t('.fail')
@@ -60,15 +48,15 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
-      params.dig(:idea, :cooperation_switch) == 'true' ? @idea.cooperation_ongoing! : @idea.cooperation_not_started!
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
       if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
+        redirect_to destination, notice: t('.draft_save')
       else
         if params[:commit] == t('default.publish')
           sidekiq_jobs
           @idea.update_attribute(:published_at, Time.now)
         end
-        redirect_to @idea, notice: t('.success')
+        redirect_to destination, notice: t('.success')
       end
     else
       flash.now[:alert] = t('.fail')
@@ -112,6 +100,42 @@ class IdeasController < ApplicationController
     @idea.update!(draft: false, published_at: Time.now)
     sidekiq_jobs
     redirect_to @idea, notice: t('.success')
+  end
+
+  def suggest
+    if @idea.same_tag_ideas.length.positive? # タグがあり、かつ同じタグのアイデアがある場合
+      title = '同じタグのアイデア'
+      suggest_ideas = @idea.same_tag_ideas.sample(3)
+    elsif @idea.same_user_other_ideas.length.positive? # 自分が作成したアイデアが1つ以上ある場合
+      title = '投稿者の他アイデア'
+      suggest_ideas = @idea.same_user_other_ideas.sample(3)
+    end
+    if title.nil?
+      title = '他アイデアをのぞいてみる'
+      suggest_ideas = Idea.published.sample(3)
+    end
+    render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
+  end
+
+  def most_comment
+    idea_list = Idea.published.recent_select.includes([:user]).most_commented.first(10)
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
+  end
+
+  def most_liked
+    idea_list = Idea.published.recent_select.includes([:user]).most_liked.first(5)
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
+  end
+
+  def team_active
+    team_active_ids = Team.where(status: :active).sample(5).pluck(:idea_id)
+    idea_list = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
+  end
+
+  def deployed
+    idea_list = Idea.published.includes([:user]).deployed.sample(5)
+    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   private

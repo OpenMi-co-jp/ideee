@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     return if resource.defined
 
     bool = resource.name.present? && resource.confirmed_at.present? && resource.definition.present?
-    resource.update!(defined: bool)
+    resource.update_column(:defined, bool)
   end
 
   # DELETE /resource

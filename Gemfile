@@ -18,9 +18,9 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.6'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
 
@@ -58,8 +58,9 @@ gem 'gon'
 
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 gem 'slack-notifier'
-# メール送信
-gem 'sendgrid-ruby'
+
+gem 'render_async' # 遅延読み込み
+gem 'sendgrid-ruby' # メール送信
 
 # uncomment out when you need
 # gem 'stripe'

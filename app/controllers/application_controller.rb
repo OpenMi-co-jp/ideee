@@ -59,4 +59,8 @@ class ApplicationController < ActionController::Base
   def defined_user?
     current_user&.defined
   end
+
+  def update_user_point
+    UserJob::UpdatePointJob.perform_later(current_user) # Contributionの計算/更新
+  end
 end

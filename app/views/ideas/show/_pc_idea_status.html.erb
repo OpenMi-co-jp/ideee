@@ -33,5 +33,8 @@
       </div>
       <%= render 'tags/links', object: idea %>
     </div>
+    <div class='col l2 flex-end'>
+      <%= render "common/like", object: idea, render_to: 'common/like_link' %>
+    </div>
   </div>
 </div>

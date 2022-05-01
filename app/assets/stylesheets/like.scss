@@ -9,10 +9,8 @@
     }
 
     &:not(.clicked)::before {
-      content: "ほしい！";
       position: absolute;
       padding: 4px 8px;
-      width: 70px;
       text-align: center;
       border: 1px solid #f2f2f2;
       border-radius: 0.5rem;
@@ -24,6 +22,16 @@
       background-color: #FFBF85;
       @media screen and (max-width: 768px) {
         content: none;
+      }
+
+      &.comment {
+        content: "ハートを送る";
+        width: 90px;
+      }
+
+      &.idea {
+        content: "ほしい！";
+        width: 70px;
       }
     }
   }

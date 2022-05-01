@@ -42,7 +42,7 @@ $(document).on ('turbolinks:load', function(){
     })
   });
 
-  $('.c-comment-description__prompt').on('click', function(e) {
+  $('.c-comment-description').on('click', function(e) {
     var comment_id = $(this).attr('data-comment-id');
     var mode = $(this).attr('data-mode');
 

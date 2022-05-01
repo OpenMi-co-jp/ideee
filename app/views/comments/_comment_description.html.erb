@@ -1,9 +1,9 @@
 <div class='c-unit-comment__info--description'>
-  <% if comment.description.length <= comment_compact_len %>
+  <% if comment.description.length <= comment_min_len %>
     <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
   <% else %>
     <div id='comment_compact_<%= comment.id %>'>
-      <%= simple_format(text_url_to_link(comment.description.slice(0, comment_compact_len)+ "…"), {}, sanitize: false) %>
+      <%= simple_format(text_url_to_link(comment.description.slice(0, comment_min_len)+ "…"), {}, sanitize: false) %>
       <span data-comment-id='<%= comment.id %>' data-mode="compact" class="c-comment-description">続きを読む</span>
     </div>
     <div id='comment_expand_<%= comment.id %>' style="display:none;">

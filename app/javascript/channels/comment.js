@@ -47,11 +47,11 @@ $(document).on ('turbolinks:load', function(){
     var mode = $(this).attr('data-mode');
 
     if(mode=="compact"){
-      $('#desc_compact_' + comment_id).hide();
-      $('#desc_expand_' + comment_id).show();
+      $('#comment_compact_' + comment_id).hide();
+      $('#comment_expand_' + comment_id).show();
     }else{
-      $('#desc_compact_' + comment_id).show();
-      $('#desc_expand_' + comment_id).hide();
+      $('#comment_compact_' + comment_id).show();
+      $('#comment_expand_' + comment_id).hide();
     }
   });
 

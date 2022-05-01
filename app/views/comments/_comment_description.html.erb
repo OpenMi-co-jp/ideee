@@ -2,11 +2,11 @@
   <% if comment.description.length <= comment_contract_len %>
     <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
   <% else %>
-    <div id='desc_compact_<%= comment.id %>'>
+    <div id='comment_compact_<%= comment.id %>'>
       <%= simple_format(text_url_to_link(comment.description.slice(0, comment_contract_len)+ "…"), {}, sanitize: false) %>
       <span data-comment-id='<%= comment.id %>' data-mode="compact" class="c-comment-description__prompt">続きを読む</span>
     </div>
-    <div id='desc_expand_<%= comment.id %>' style="display:none;">
+    <div id='comment_expand_<%= comment.id %>' style="display:none;">
       <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
       <span data-comment-id='<%= comment.id %>' data-mode="expand" class="c-comment-description__prompt">少なく読む</span>
     </div>

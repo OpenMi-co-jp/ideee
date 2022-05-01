@@ -9,10 +9,9 @@ class SendWeeklyMailJob < ApplicationJob
     # 新しいアイデアが10件無ければその週のメールはスキップ
     return if new_ideas.length < 10
 
-    users = User.all
-    liked_ideas = ideas.order(likes_num: 'DESC').first(10)
+    commented_ideas = ideas.order(comments_num: 'DESC').first(10)
     new_ideas = new_ideas.order(published_at: 'DESC').first(10)
-    SendEmail.new.send_heart_ranking_and_new_idea(users, liked_ideas, new_ideas)
+    SendEmail.new.send_heart_ranking_and_new_idea(commented_ideas, new_ideas)
     new_ideas.each do |idea|
       idea.update_column(:emailed_at, Time.now)
     end

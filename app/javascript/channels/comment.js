@@ -1,7 +1,7 @@
 $(document).on ('turbolinks:load', function(){
   if ($('body').data('page') != "ideas-show") { return }
 
-  $('#comment').on('click', function(e) {
+  $('#js-comment-send').on('click', function(e) {
     e.preventDefault()
     $('.submit-btn').addClass('disabled')
     const comment_input = $('#comment-form').val().replace(/^\s*(.*?)\s*$/, "$1");
@@ -9,12 +9,12 @@ $(document).on ('turbolinks:load', function(){
     if(comment_input.length > 0) {
       $('#comment-form_message').removeClass('c-comment-form__message');
       $("#comment-form_message").text('');
-      create_comment(comment_input)
+      create_comment(comment_input, $(this).data('id'))
       .done(function() {
         $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
         $('#comment.submit-btn').removeClass('disabled')
-        send_email(comment_input) // アイデアの持ち主や関わる人にメールを送る
+        send_email(comment_input, $(this).data('id')) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
         alert('コメントに失敗しました')
@@ -42,11 +42,11 @@ $(document).on ('turbolinks:load', function(){
     })
   });
 
-  function create_comment(comment){
+  function create_comment(comment, idea_id){
     return $.ajax({
       url: '/comments',
       type: 'POST',
-      data: { description: comment, idea_id: gon.idea_id},
+      data: { description: comment, idea_id: idea_id},
       dataType: 'json'
     })
   };
@@ -60,11 +60,11 @@ $(document).on ('turbolinks:load', function(){
     })
   };
 
-  function send_email(comment){
+  function send_email(comment, idea_id){
     return $.ajax({
       url: '/comments/send_email',
       type: 'POST',
-      data: { description: comment, idea_id: gon.idea_id},
+      data: { description: comment, idea_id: idea_id},
       dataType: 'json'
     })
   }

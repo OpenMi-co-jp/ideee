@@ -42,16 +42,13 @@ $(document).on ('turbolinks:load', function(){
     })
   });
 
-  $('.c-comment-description').on('click', function(e) {
-    var comment_id = $(this).attr('data-comment-id');
-    var mode = $(this).attr('data-mode');
-
-    if(mode=="compact"){
-      $('#comment_compact_' + comment_id).hide();
-      $('#comment_expand_' + comment_id).show();
-    }else{
-      $('#comment_compact_' + comment_id).show();
-      $('#comment_expand_' + comment_id).hide();
+  $('.js-comment-shorten-trigger').on('click', function() {
+    long_comment = $(this).prev('.c-comment-description__text');
+    long_comment.toggleClass('compact')
+    if (long_comment.hasClass('compact')) {
+      $(this).text('続きを読む');
+    } else {
+      $(this).text('小さく畳む');
     }
   });
 

@@ -9,6 +9,7 @@
     <p>Encourage(盛り上げる)</p>
     <%= render "devise/shared/twitter_share" %>
   </div>
+  <%= @minimum_password_length %>
   <div class="col s12 l6">
     <h2><%= t 'default.login' %></h2>
     <%= render "devise/shared/omniauth_links" %>
@@ -21,7 +22,8 @@
 
       <div class="field">
         <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password", placeholder: 'password'%>
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: 'password', class: 'validate', data: { 'min-length': @minimum_password_length } %>
+        <%= password_helper_text %>
       </div>
 
       <%# TODO: rememberableを設定 %>

@@ -42,6 +42,16 @@ $(document).on ('turbolinks:load', function(){
     })
   });
 
+  $('.js-comment-shorten-trigger').on('click', function() {
+    long_comment = $(this).prev('.c-comment-description__text');
+    long_comment.toggleClass('compact')
+    if (long_comment.hasClass('compact')) {
+      $(this).text('続きを読む');
+    } else {
+      $(this).text('小さく畳む');
+    }
+  });
+
   function create_comment(comment, idea_id){
     return $.ajax({
       url: '/comments',

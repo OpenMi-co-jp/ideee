@@ -17,7 +17,7 @@
         <div class='c-unit-comment__info'>
           <%= render 'comments/comment_description', comment: comment %>
           <div class='c-unit-comment__options'>
-            <%= render "common/like", object: comment, render_to: 'comments/comment_heart' %>
+            <%= render 'comments/comment_heart', object: comment %>
           </div>
         </div>
       </div>

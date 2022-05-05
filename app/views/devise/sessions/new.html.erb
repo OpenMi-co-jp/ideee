@@ -13,14 +13,16 @@
     <h2><%= t 'default.login' %></h2>
     <%= render "devise/shared/omniauth_links" %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'ideee@example.com' %>
+      <div class="field input-field">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'ideee@example.com', class: 'validate', required:'required' %>
+        <%= f.label :email, class: 'active' %><br />
+        <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
       </div>
 
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password", placeholder: 'password'%>
+      <div class="field input-field">
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: 'password', class: 'validate', data: { 'min-length': @minimum_password_length } %>
+        <%= f.label :password, class: 'active' %><br />
+        <%= password_helper_text %>
       </div>
 
       <%# TODO: rememberableを設定 %>

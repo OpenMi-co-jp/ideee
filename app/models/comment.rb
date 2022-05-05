@@ -29,4 +29,8 @@ class Comment < ApplicationRecord
 
   scope :weekly_comments, -> { where(created_at: 7.days.ago..Time.now) }
   scope :pickup_user_commets, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
+
+  def over_length?
+    description.length > 200 || description.count("\n") > 3
+  end
 end

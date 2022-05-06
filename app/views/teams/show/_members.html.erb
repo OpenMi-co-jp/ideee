@@ -7,11 +7,14 @@
       <li>
         <%= link_to user_path(user.id), target: :_blank do %>
             <div class='flex'>
+            <div class="user-definition">
+              <%= user_definiton(user, ver='short') %>
+            </div>
               <%= user_icon(user, size: 'smaller') %>
               <div class='user-column-body'>
                 <div class='user-name-point'>
                   <div class='pl-3'>
-                    <div class='user-name'><%= user.name %><%= user_definiton(user, ver='short') %></div>
+                    <div class='user-name'><%= user.name %></div>
                   </div>
                 </div>
             </div>

@@ -11,6 +11,6 @@ module DeviseHelper
   end
 
   def password_helper_text
-    tag.span '', class: 'helper-text', data: { error: "#{ @minimum_password_length }文字以上のパスワードを入力してください。" }
+    tag.span '', class: 'helper-text', data: { error: "#{@minimum_password_length}文字以上のパスワードを入力してください。" }
   end
 end

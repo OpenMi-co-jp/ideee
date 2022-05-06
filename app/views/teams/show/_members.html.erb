@@ -7,7 +7,9 @@
       <li>
         <%= link_to user_path(user.id), target: :_blank do %>
             <div class='flex'>
-            <%= user_definiton(user, ver='short') %>
+            <div class="text_icon">
+              <%= user_definiton(user, ver='short') %>
+            </div>
               <%= user_icon(user, size: 'smaller') %>
               <div class='user-column-body'>
                 <div class='user-name-point'>

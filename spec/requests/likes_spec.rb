@@ -6,7 +6,7 @@ RSpec.describe 'Likes', type: :request do
 
   before { sign_in user }
   describe 'POST #create' do
-    subject { post likes_path, params: { id: idea.id } }
+    subject { post likes_path, params: { id: idea.id, type: 'Idea' } }
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
         subject
@@ -22,9 +22,9 @@ RSpec.describe 'Likes', type: :request do
   end
 
   describe 'DELETE #destroy' do
-    let!(:like) { FactoryBot.create(:like) }
+    let!(:like_idea) { FactoryBot.create(:like, :idea, { user: user }) }
     it 'リクエストが成功すること' do
-      delete like_path(like.idea_id)
+      delete like_path(like_idea.likable_id, params: { id: like_idea.likable_id, type: 'Idea' })
       expect(response.status).to eq 204
     end
 

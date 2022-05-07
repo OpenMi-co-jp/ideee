@@ -24,5 +24,7 @@ module Ideee
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
   end
 end

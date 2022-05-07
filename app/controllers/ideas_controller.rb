@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[show edit update destroy publish suggest]
-  before_action :authenticate_user!, except: %i[index show search tags most_comment most_liked team_active deployed]
+  before_action :authenticate_user!, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
   before_action :own_user_check, only: %i[edit update destroy]
-  before_action :defined_check, except: %i[index show search tags most_comment most_liked team_active deployed]
+  before_action :defined_check, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
   before_action :own_draft_check, only: %i[show]
   after_action :update_user_point, only: %i[create]
 
@@ -19,7 +19,6 @@ class IdeasController < ApplicationController
     else
       @time_on_page = '-'
     end
-    gon.idea_id = @idea.id # JSにアイデアのIDを渡す
   end
 
   def new

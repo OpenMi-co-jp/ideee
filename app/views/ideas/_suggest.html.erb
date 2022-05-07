@@ -12,7 +12,9 @@
               </div>
             </div>
           <% end %>
-          <p class='c-suggest-ideas--box__name'><%= idea.name %></p>
+          <%= link_to idea_path(idea.id) do %>
+            <p class='c-suggest-ideas--box__name'><%= idea.name %></p>
+          <% end %>
           <%= render 'tags/links', object: idea %>
         </div>
       </div>

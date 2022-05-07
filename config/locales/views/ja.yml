@@ -109,7 +109,9 @@ ja:
         hatebu: "https://b.hatena.ne.jp/entry/https://www.ideee.tech"
   notifications:
     Comment: にコメントしました。
-    Like: にハートを送りました。
+    Like: にハートを送りました。 #移行後に削除予定
     Difficulty: に難易度の投票をしました。
-    product_apply: にプロダクトURLの承認を行いました。
+    product_apply: のプロダクトURLを承認しました。
     TeamUser: のチーム開発に参加しました。
+    LikeIdea: にハートを送りました。
+    LikeComment: のコメントにハートを送りました。

@@ -1,6 +1,6 @@
 <div class='idea-index'>
   <div class='search--sort'>
-    <h5 class='board-title'>タグ検索結果 <%= @tagged_ideas.size %>件</h5>
+    <h1 class='board-title'>タグ検索結果 <%= @tagged_ideas.size %>件</h1>
     <%= render 'common/sort_form', keyword: @tag_name, path: tags_ideas_path %>
   </div>
   <%= render 'common/column_board', ideas: @tagged_ideas %>

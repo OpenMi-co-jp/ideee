@@ -1,11 +1,12 @@
-<%# OGP %>
-<% unless @idea.draft %>
-  <% set_meta_tags og: {
+<%# mete_tags %>
+<% set_meta_tags title: @idea.name,
+  keywords: @idea.idea_tags.pluck(:name).join(','),
+  og: {
     title: @idea.name,
     image: return_ogp_url(@idea.name),
-    description: strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120)
-  } %>
-<% end %>
+    description: strip_tags(@idea.goal).gsub(/[\n]/, "").strip.truncate(120)
+  }
+%>
 
 <div class='idea-show'>
   <div class='row'>
@@ -29,9 +30,9 @@
       <%= render 'teams/box_on_idea', idea: @idea %>
     </div>
     <div class='idea-status-column col l9 s12'>
-      <div class='idea-name orange-action'>
+      <h1 class='idea-name orange-action'>
         <%= @idea.name %>
-      </div>
+      </h1>
       <div class='hide-on-small-only'>
         <%= render 'ideas/show/pc_idea_status', idea: @idea, time_on_page: @time_on_page %>
       </div>

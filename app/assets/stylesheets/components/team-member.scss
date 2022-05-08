@@ -1,0 +1,14 @@
+.c-team-member {
+  display: flex;
+
+  &__def {
+    width: 50px;
+    margin: auto 0;
+    text-align: center;
+  }
+
+  &__name {
+    padding: 0.5rem;
+    margin-right: auto;
+  }
+}

@@ -9,6 +9,8 @@ $(document).on ('turbolinks:load', function(){
     data: getChipsData($("#tag-hidden-field").val()),
     limit: 3
   });
+  // 自動入力用のタグをセット
+  setTags()
 
   // chipsの初期データを取得するメソッド
   function getChipsData(values) {
@@ -28,5 +30,28 @@ $(document).on ('turbolinks:load', function(){
     });
     $("#tag-hidden-field").val(tags);
   });
+
+  // タグを取得
+  function setTags() {
+    $.ajax({
+      url: '/tags_list',
+      type: 'GET',
+      dataType: 'json'
+    })
+    .done(function (data) {
+      setTagAutoComplete(data);
+    })
+  }
+
+  // タグを自動入力を設定する
+  function setTagAutoComplete(data_hash) {
+    $('.chips-autocomplete').chips({
+      autocompleteOptions: {
+        data: data_hash,
+        limit: Infinity,
+        minLength: 2
+      }
+    });
+  }
 
 });

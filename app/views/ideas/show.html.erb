@@ -1,11 +1,12 @@
-<%# OGP %>
-<% unless @idea.draft %>
-  <% set_meta_tags og: {
+<%# mete_tags %>
+<% set_meta_tags title: @idea.name,
+  keywords: @idea.idea_tags.pluck(:name).join(','),
+  og: {
     title: @idea.name,
     image: return_ogp_url(@idea.name),
-    description: strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120)
-  } %>
-<% end %>
+    description: strip_tags(@idea.goal).gsub(/[\n]/, "").strip.truncate(120)
+  }
+%>
 
 <div class='idea-show'>
   <div class='row'>

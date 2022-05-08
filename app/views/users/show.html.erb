@@ -1,3 +1,11 @@
+<%# mete_tags %>
+<% set_meta_tags title: "#{@user.name}のページ",
+  og: {
+    title: "#{@user.name}のページ",
+    description: strip_tags(@user.description).gsub(/[\n]/, "").strip.truncate(120)
+  }
+%>
+
 <div class='p-user-show'>
   <div class="row">
     <div class="col s12 l3">

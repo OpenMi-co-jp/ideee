@@ -30,6 +30,7 @@ require("channels/kaminari");
 require("channels/dev-mark");
 require("channels/user_registration_validation");
 require("channels/user_edit_validation");
+require("channels/user_sessions_validation");
 require("channels/carousel");
 require("channels/modal");
 require("channels/chips");

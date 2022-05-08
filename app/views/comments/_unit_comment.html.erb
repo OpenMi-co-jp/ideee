@@ -3,7 +3,7 @@
     <% if owned %>
       <%= render 'comments/comment_time', created_at: comment.created_at %>
       <div class='c-unit-comment__info'>
-        <%= render 'comments/comment_description', description: comment.description %>
+        <%= render 'comments/comment_description', comment: comment %>
         <%= render 'comments/option', comment: comment %>
       </div>
     <% else %>
@@ -15,9 +15,9 @@
       <div>
         <div class='c-unit-comment__user--name'><%= User.find(comment.user_id).name %></div>
         <div class='c-unit-comment__info'>
-          <%= render 'comments/comment_description', description: comment.description %>
+          <%= render 'comments/comment_description', comment: comment %>
           <div class='c-unit-comment__options'>
-            <%= render "common/like", object: comment, render_to: 'comments/comment_heart' %>
+            <%= render 'comments/comment_heart', object: comment %>
           </div>
         </div>
       </div>

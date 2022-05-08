@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
   before_action :item_id
   after_action :update_user_point, only: %i[create]
+  before_action :authenticate_user!
   after_action :count_idea_likes
 
   def create

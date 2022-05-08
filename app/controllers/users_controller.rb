@@ -32,6 +32,8 @@ class UsersController < ApplicationController
       list = User.defined_user.search(params[:key]).order(point: 'DESC')
     end
     @searched_users = Kaminari.paginate_array(list).page(params[:page])
+    current_page = params[:page].nil? ? 1 : params[:page].to_i
+    @rank_num = (current_page - 1) * @searched_users.limit_value
   end
 
   def commenter

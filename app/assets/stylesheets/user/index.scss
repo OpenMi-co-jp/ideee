@@ -37,10 +37,16 @@
   }
 }
 
+<<<<<<< HEAD
   .user-definition {
     width: 40px;
     text-align: right;
   }
+=======
+.text_icon {
+  width: 40px;
+}
+>>>>>>> f19ca57b1f38794607046301423d725c0eb13535
 
 .icon-circle {
   object-fit: cover;
@@ -51,6 +57,8 @@
   &.smaller {
     width: 20px;
     height: 20px;
+    margin-left: 20px;
+    text-align: left;
   }
 
   &.small {

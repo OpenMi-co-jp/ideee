@@ -29,9 +29,9 @@
       <%= render 'teams/box_on_idea', idea: @idea %>
     </div>
     <div class='idea-status-column col l9 s12'>
-      <div class='idea-name orange-action'>
+      <h1 class='idea-name orange-action'>
         <%= @idea.name %>
-      </div>
+      </h1>
       <div class='hide-on-small-only'>
         <%= render 'ideas/show/pc_idea_status', idea: @idea, time_on_page: @time_on_page %>
       </div>

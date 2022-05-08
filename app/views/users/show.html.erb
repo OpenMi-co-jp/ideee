@@ -3,7 +3,7 @@
     <div class="col s12 l3">
       <div class="c-user-icon-info">
         <div class='c-user-icon-info__icon'><%= user_icon(@user, size: 'large') %></div>
-        <h4 class='c-user-icon-info__name'><%= @user&.name %></h4>
+        <h1 class='c-user-icon-info__name'><%= @user&.name %></h1>
         <h5><%= @user&.point %></h5>
         <p class='c-user-icon-info__contributions'>Contributions</p>
         <p class='c-user-icon-info__created-date'><%= "作成日：#{l @user.created_at}" %></p>
@@ -36,9 +36,9 @@
         </div>
       </div>
       <% if @user.description.present? %>
-        <div class="c-user-content mb-2">
+        <h2 class="c-user-content">
           <%= simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
-        </div>
+        </h2>
       <% end %>
       <% if own_user_checked(@user) %>
         <%= link_to '編集', edit_user_registration_path(@user.id), class: 'mw-3' %>

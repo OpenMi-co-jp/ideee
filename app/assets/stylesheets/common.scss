@@ -109,6 +109,7 @@ hr {
 
 .board-title {
   font-weight: bold;
+  font-size: x-large;
   margin: auto 0.5rem;
 
   @media (max-width:992px) {
@@ -117,6 +118,12 @@ hr {
 
   @media (max-width:600px) {
     font-size: medium;
+  }
+}
+
+h2 {
+  &.board-title {
+    font-size: large;
   }
 }
 

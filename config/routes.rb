@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     end
   end
   get 'tags_popular', to: 'tags#popular'
+  get 'tags_list', to: 'tags#list'
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

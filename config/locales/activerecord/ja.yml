@@ -32,6 +32,7 @@ ja:
         hypothesis: 仮説（数値的）
         target: ターゲット（ペルソナ）
         similar: 類似サービス
+        github_url: GitHubのURL
         note: 補足
         view: ビュー数
         tag_list: タグ

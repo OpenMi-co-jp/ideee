@@ -17,12 +17,10 @@
       </span>
     </button>
   </div>
-<% elsif item == 'note' && @idea.note.to_s.length > 0 %>
+<% elsif item == 'note' && @idea.note.to_s != "<div class=\"trix-content\">\n  \n</div>\n" %>
   <div class="mh-3">
     <%# TODO:1ヶ月後に削除よてい %>
-    <% unless @idea.note.to_s.include?('補足') %>
-      <b><%= t("activerecord.attributes.idea.#{item}") %></b>
-    <% end %>
+    <b><%= t("activerecord.attributes.idea.#{item}") %></b>
     <%= @idea&.note %>
   </div>
 <% end %>

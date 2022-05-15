@@ -43,3 +43,6 @@ AWSCLIV2.pkg
 
 # ignore simplecov files
 /coverage/
+
+db/schema.rb
+dump.rdb

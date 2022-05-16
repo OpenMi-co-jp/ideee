@@ -1,19 +1,17 @@
 <% if @idea["#{item}"].present? && item == 'product_url' %>
-  <div class="mh-3">
-    <button class="btn orange-action-back mh-3" onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
-      <i class="material-icons">phonelink</i>
-      <span style="text-transform:none;">
-        アプリURL
+    <button class="btn gray-4-back mh-3" onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
+      <i class="material-icons idea-button--product-icon">phonelink</i>
+      <span class="idea-button--label">
+        アプリを確認
       </span>
     </button>
-  </div>
+    <br>
 <% elsif @idea["#{item}"].present? && item == 'github_url'%>
-  <div class="mh-3">
-    <button class="btn orange-action-back mh-3" onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
-      <%= embedded_svg 'icons/mark-github.svg', class: 'idea-date--clock' %>
-      <span style="text-transform:none;">
+    <button class="btn white black-text mh-3" onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
+      <%= embedded_svg 'icons/mark-github.svg', class: 'idea-button--github-icon' %>
+      <span class="idea-button--label">
         GitHubを確認
       </span>
     </button>
-  </div>
+    <br>
 <% end %>

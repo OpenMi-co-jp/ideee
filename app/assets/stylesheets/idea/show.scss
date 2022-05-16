@@ -88,3 +88,19 @@
     opacity: 0.5;
   }
 }
+
+.idea-button {
+  &--product-icon {
+    display:inline-block;
+    vertical-align:middle;
+  }
+
+  &--github-icon {
+    display:inline-block;
+    vertical-align:text-bottom;
+  }
+
+  &--label {
+    text-transform:none;
+  }
+}

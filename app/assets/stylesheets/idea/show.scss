@@ -90,12 +90,25 @@
 }
 
 .idea-button {
-  &--product-icon {
+  &--product_url {
+    display:inline-block;
+    vertical-align:middle;
+    background-color: #A7A7A7!important;
+  }
+
+  &--github_url {
+    display:inline-block;
+    vertical-align:text-bottom;
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+  &--icon-product_url {
     display:inline-block;
     vertical-align:middle;
   }
 
-  &--github-icon {
+  &--icon-github_url {
     display:inline-block;
     vertical-align:text-bottom;
   }

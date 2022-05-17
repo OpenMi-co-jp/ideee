@@ -39,6 +39,9 @@ ja:
         tags_up_to_three: タグ（3つまで入力できます）
         product_url: 作っているアプリ
         team: チーム開発
+        button:
+          product_url: アプリを確認
+          github_url: GitHubを確認
       comment:
         description: コメント
       team:

@@ -1,17 +1,13 @@
-<% if @idea["#{item}"].present? && item == 'product_url' %>
-    <button class="btn gray-4-back mh-3" onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
-      <i class="material-icons idea-button--product-icon">phonelink</i>
-      <span class="idea-button--label">
-        アプリを確認
-      </span>
-    </button>
-    <br>
-<% elsif @idea["#{item}"].present? && item == 'github_url'%>
-    <button class="btn white black-text mh-3" onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
-      <%= embedded_svg 'icons/mark-github.svg', class: 'idea-button--github-icon' %>
-      <span class="idea-button--label">
-        GitHubを確認
-      </span>
-    </button>
-    <br>
+<% if @idea["#{item}"].present? %>
+  <button class="btn <%= "idea-button--#{item}" %> mh-3" onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
+  <% if item == 'product_url' %>
+    <div class="material-icons <%= "idea-button--icon-#{item}" %>">phonelink</div>
+  <% else %>
+    <%= embedded_svg 'icons/mark-github.svg', class: "idea-button--icon-#{item}" %>
+  <% end %>
+    <span class="idea-button--label">
+      <%= t("activerecord.attributes.idea.button.#{item}") %>
+    </span>
+  </button>
+  <br>
 <% end %>

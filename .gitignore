@@ -43,3 +43,5 @@ AWSCLIV2.pkg
 
 # ignore simplecov files
 /coverage/
+
+dump.rdb

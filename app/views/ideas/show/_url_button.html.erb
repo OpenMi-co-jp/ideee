@@ -1,0 +1,14 @@
+<% if @idea["#{item}"].present? %>
+  <% if @idea.approved? || item == 'product_url' %>
+    <button class='btn c-idea-url__btn' onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
+      <% if item == 'product_url' %>
+        <i class="material-icons c-idea-url__icon product_url">phonelink</i>
+      <% else %>
+        <%= embedded_svg "icons/mark-github.svg", class: "c-idea-url__icon github_url" %>
+      <% end %>
+      <span class="c-idea-url__label">
+        <%= t(".button_txt.#{item}") %>
+      </span>
+    </button>
+  <% end %>
+<% end %>

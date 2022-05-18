@@ -39,15 +39,6 @@ ja:
         tags_up_to_three: タグ（3つまで入力できます）
         product_url: 作っているアプリ
         team: チーム開発
-        button:
-          product_url: アプリを確認
-          github_url: GitHubを確認
-        button_icon:
-            product_url: phonelink
-            github_url: ""
-        button_icon_file:
-            product_url: ""
-            github_url: icons/mark-github.svg
       comment:
         description: コメント
       team:

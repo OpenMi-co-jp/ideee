@@ -31,8 +31,4 @@ module IdeasHelper
       idea.published_time
     end
   end
-
-  def idea_note_init_value
-    "<div class=\"trix-content\">\n  \n</div>\n"
-  end
 end

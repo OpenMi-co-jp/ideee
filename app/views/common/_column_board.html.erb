@@ -36,12 +36,16 @@
               <div class="idea__detail--vote <%= idea.difficulty %>">
                 <%= difficulty_tag(idea) %>
               </div>
-              <%= link_to user_path(idea.user_id), class: '' do %>
-                <% user_icon(idea.user, size: 'small') %>
+              <% if current_page?(current_user) %>
+                <%= "" %>
+              <% else %>
+                <%= link_to user_path(idea.user_id), class: '' do %>
+                  <% user_icon(idea.user, size: 'small') %>
+                <% end %>
+                <p class='idea__detail--def'>
+                  <%= user_definiton(idea.user, ver = 'short') %>
+                </p>
               <% end %>
-              <p class='idea__detail--def'>
-                <%= user_definiton(idea.user, ver = 'short') %>
-              </p>
             </div>
           </div>
           <%= render 'tags/links', object: idea %>

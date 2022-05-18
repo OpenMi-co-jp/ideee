@@ -71,9 +71,6 @@
             </div>
           </div>
         <% end %>
-        <% if @idea.approved? %>
-          <%= render 'ideas/show/title_set', item: 'product_url' %>
-        <% end %>
       </div>
       <% if current_user&.own?(@idea) %>
         <% if @idea.draft %>

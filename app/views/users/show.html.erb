@@ -59,8 +59,8 @@
         <li class="tab c-nav-var__tab"><a class="active" href="#tab1" id="link1">アイデアリスト（<%= @user.ideas.published.size %>）</a></li>
         <li class="tab c-nav-var__tab"><a href="#tab2" id="link2">ハート（<%= @user.likes.where(likable_type: 'Idea').size %>）</a></li>
         <li class="tab c-nav-var__tab"><a href="#tab3" id="link3">コメント（<%= @user.comment_ideas.commented_others_ideas(@user).size %>）</a></li>
-        <li class="tab c-nav-var__tab"><a href="#tab4" id="link4">チーム開発参加数（<%= @user.comment_ideas.commented_others_ideas(@user).size %>）</a></li>
-        <li class="tab c-nav-var__tab"><a href="#tab5" id="link5">アイデア実現数（<%= @user.comment_ideas.commented_others_ideas(@user).size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab4" id="link4">チーム開発参加（<%= @user.comment_ideas.commented_others_ideas(@user).size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab5" id="link5">アイデア実現（<%= @user.comment_ideas.commented_others_ideas(@user).size %>）</a></li>
       </ul>
     </div>
   </nav>

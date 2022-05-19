@@ -108,7 +108,7 @@
       <%= render 'common/column_board', ideas: @commented_ideas %>
       <%= paginate @commented_ideas, param_name: :comment_page %>
     <% else %>
-      <h5>まだアイデアにコメントをしていません</h5>
+      <h5>まだチーム開発に参加をしていません</h5>
     <% end %>
   </div>
   <div id="tab5" class="col s12">
@@ -116,7 +116,7 @@
       <%= render 'common/column_board', ideas: @commented_ideas %>
       <%= paginate @commented_ideas, param_name: :comment_page %>
     <% else %>
-      <h5>まだアイデアにコメントをしていません</h5>
+      <h5>まだアイデアが実現がしていません</h5>
     <% end %>
   </div>
   <%= render 'common/fund_link', object: @user %>

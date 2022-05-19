@@ -111,6 +111,11 @@ class User < ApplicationRecord
     end
   end
 
+  # cookieを使ってログインを保持
+  def remember_me
+    true
+  end
+
   # twitterログインでもメールアドレスがあればメールアドレスを必須項目にする
   def email_required?
     provider == 'twitter' && !email.blank? && super

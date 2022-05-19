@@ -1,5 +1,5 @@
 <% if @idea["#{item}"].present? %>
-  <% if @idea.approved? || item == 'product_url' %>
+  <% if @idea.approved? || item == 'github_url' %>
     <button class='btn c-idea-url__btn' onClick="window.open('<%= @idea["#{item}"] %>','_blank')">
       <% if item == 'product_url' %>
         <i class="material-icons c-idea-url__icon product_url">phonelink</i>

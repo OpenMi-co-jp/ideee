@@ -5,7 +5,6 @@
   </div>
 <% elsif item == 'note' && !@idea.note.body.blank? %>
   <div class="mh-3">
-    <%# TODO:1ヶ月後に削除よてい %>
     <b><%= t("activerecord.attributes.idea.#{item}") %></b>
     <%= @idea&.note %>
   </div>

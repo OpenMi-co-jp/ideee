@@ -66,6 +66,9 @@
     <div class="row">
       <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
         <% if @published_ideas.present? %>
+          <% if current_page?(current_user) %>
+            <%= render 'common/board_no_icon', ideas: @published_ideas %>
+          <% end %>
           <%= render 'common/column_board', ideas: @published_ideas %>
           <%= paginate @published_ideas, param_name: :published_page %>
         <% else %>

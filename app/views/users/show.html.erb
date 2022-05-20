@@ -68,8 +68,10 @@
         <% if @published_ideas.present? %>
           <% if current_page?(current_user) %>
             <%= render 'common/board_no_icon', ideas: @published_ideas %>
+          <% else %>
+            <%= "" %>
+            <%= render 'common/column_board', ideas: @published_ideas %>
           <% end %>
-          <%= render 'common/column_board', ideas: @published_ideas %>
           <%= paginate @published_ideas, param_name: :published_page %>
         <% else %>
           <h5 class='no_idea_posted'>まだアイデアが投稿されていません</h5>

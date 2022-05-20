@@ -69,7 +69,6 @@
           <% if current_page?(current_user) %>
             <%= render 'common/board_no_icon', ideas: @published_ideas %>
           <% else %>
-            <%= "" %>
             <%= render 'common/column_board', ideas: @published_ideas %>
           <% end %>
           <%= paginate @published_ideas, param_name: :published_page %>

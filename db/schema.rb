@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_160512) do
     t.string "target"
     t.string "similar"
     t.datetime "emailed_at", comment: "weeklyメールで新規アイデアとして送られた日時"
+    t.string "github_url"
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

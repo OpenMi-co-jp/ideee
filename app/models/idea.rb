@@ -8,6 +8,7 @@
 #  difficulty                                               :integer          default("not_yet")
 #  draft                                                    :boolean          default(FALSE)
 #  emailed_at(weeklyメールで新規アイデアとして送られた日時) :datetime
+#  github_url                                               :string(255)
 #  goal                                                     :string(255)
 #  hypothesis                                               :string(255)
 #  icon                                                     :string(255)
@@ -52,6 +53,7 @@ class Idea < ApplicationRecord
   validates :goal, presence: true
   validate :validate_tags_num
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
+  validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }

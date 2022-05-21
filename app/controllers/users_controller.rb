@@ -17,6 +17,14 @@ class UsersController < ApplicationController
     # 自分のアイデア以外でコメントしたアイデアを表示
     comment_idea_list = @user.comment_ideas.commented_others_ideas(@user)
     @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
+
+    # チーム開発参加をしたアイデアを表示
+    joined_team_idea_list = Idea.where(id:Team.where(id:TeamUser.where(user_id:@user.id).select('team_id')).select('idea_id'))
+    @joined_team_ideas = Kaminari.paginate_array(joined_team_idea_list).page(params[:joined_team_page]).per(10)
+
+    # アイデア実現をしたアイデアを表示
+    approved_idea_list = @user.ideas.where(product_apply:2)
+    @approved_ideas = Kaminari.paginate_array(approved_idea_list).page(params[:approved_idea_page]).per(10)
   end
 
   def search

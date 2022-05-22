@@ -7,6 +7,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
+  private
+
   def callback_for(provider)
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
@@ -15,10 +17,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     rescue StandardError => e
       redirect_to new_user_session_path
-      return flash[:alert] = e.message
+      return set_flash_message(:notice, :failure, kind: provider.to_s.capitalize, reason: e.message)
     end
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication
+      cookies[:devise_provider] = provider
       set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
     else
       # session["devise.#{provider}_data"] = request.env["omniauth.auth"].except("extra")

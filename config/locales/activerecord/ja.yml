@@ -22,6 +22,10 @@ ja:
         twitter_id: TwitterID
         remote_url: リモート画像
         site_url: サイトURL
+        provider:
+          twitter: Twitter
+          google: Google
+          mail: メール
       idea:
         name: アイデア名
         icon: アイコン

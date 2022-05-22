@@ -137,6 +137,12 @@ class IdeasController < ApplicationController
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
+  def joined_team
+    idea_ids = Team.includes(:team_users).select{|t| t.members.pluck(:user_id).include?(params[:user_id].to_i)}.pluck(:idea_id)
+    idea_list = Idea.includes([:user]).where(id: idea_ids)
+    render partial: 'common/column_board', locals: { ideas: idea_list }
+  end
+
   private
 
   def set_idea

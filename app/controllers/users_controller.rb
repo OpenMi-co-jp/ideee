@@ -11,17 +11,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    published_list = @user.ideas.includes([:user]).published.includes([:idea_tags]).order(published_at: 'DESC')
+    published_list = @user.ideas.published.includes([:idea_tags, :user]).order(published_at: 'DESC')
     @published_ideas = Kaminari.paginate_array(published_list).page(params[:published_page]).per(10)
-    @like_ideas = Kaminari.paginate_array(Idea.includes([:user]).where(id: @user.likes.type_idea_ids).includes([:idea_tags])).page(params[:like_page]).per(10)
+    @like_ideas = Kaminari.paginate_array(Idea.where(id: @user.likes.type_idea_ids).includes([:idea_tags, :user])).page(params[:like_page]).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
     comment_idea_list = @user.comment_ideas.includes([:user]).commented_others_ideas(@user)
     @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
-
-    # チーム開発参加をしたアイデアを表示
-    idea_ids = Team.includes([:members]).select{|t| t.members.include?(@user)}.pluck(:idea_id)
-    joined_team_idea_list = Idea.includes([:user]).where(id: idea_ids)
-    @joined_team_ideas = Kaminari.paginate_array(joined_team_idea_list).page(params[:joined_team_page]).per(10)
   end
 
   def search

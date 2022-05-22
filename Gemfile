@@ -66,6 +66,8 @@ gem 'sendgrid-ruby' # メール送信
 gem 'sidekiq'
 gem 'twitter'
 
+gem 'gemoji'
+
 # エラー関係
 gem 'rack-timeout'
 gem 'rollbar' # 本番のみで運用

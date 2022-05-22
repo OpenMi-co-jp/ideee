@@ -96,7 +96,9 @@
         </div>
       <% end %>
       <div class="field input-field">
-        <%= form.label :product_url %><a class="help-tip product-url">?</a>
+        <div>
+          <%= form.label :product_url, class: 'active' %><a class="help-tip product-url">?</a>
+        </div>
         <%= form.url_field :product_url, placeholder: 'プロダクトのURL', class: 'validate' %>
         <span class="helper-text" data-error="正しい形式のURLを入力してください。"></span>
       </div>

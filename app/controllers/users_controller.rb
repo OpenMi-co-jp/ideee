@@ -17,6 +17,9 @@ class UsersController < ApplicationController
     # 自分のアイデア以外でコメントしたアイデアを表示
     comment_idea_list = @user.comment_ideas.includes([:user]).commented_others_ideas(@user)
     @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
+
+    # チーム開発参加数を取得
+    @joined_team_num = Team.includes(:team_users).select { |t| t.members.include?(@user) }.size
   end
 
   def search

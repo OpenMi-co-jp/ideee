@@ -32,7 +32,7 @@
       </div>
       <div class="field">
         <%= form.label :tags_up_to_three %><a class="help-tip tags">?</a>
-        <div class="chips chips-autocomplete"></div>
+        <div class="chips chips-initial chips-autocomplete"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
       <div class="field input-field">
@@ -69,6 +69,11 @@
               <%= form.text_area :similar, placeholder: '類似サービス・競合', class: 'materialize-textarea' %>
               <%= form.label :similar, class: 'active' %>
             </div>
+            <div class="field input-field">
+              <%= form.url_field :github_url, placeholder: 'GitHubのURL', class: 'validate' %>
+              <%= form.label :github_url, class: 'active' %>
+              <span class="helper-text" data-error="正しい形式のURLを入力してください。"></span>
+            </div>
           </div>
         </li>
       </ul>
@@ -90,9 +95,10 @@
           </div>
         </div>
       <% end %>
-      <div class="field">
+      <div class="field input-field">
         <%= form.label :product_url %><a class="help-tip product-url">?</a>
-        <%= form.text_field :product_url, placeholder: 'プロダクトのURL' %>
+        <%= form.url_field :product_url, placeholder: 'プロダクトのURL', class: 'validate' %>
+        <span class="helper-text" data-error="正しい形式のURLを入力してください。"></span>
       </div>
       <% if idea.draft || idea.id.nil? %>
         <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3 idea-btn' %>

@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    Slack::SendNewJob.perform_later(resource, user_url(resource&.id)) if Rails.env.production?
+    Slack::SendNewJob.perform_later(resource, user_url(resource.id)) if Rails.env.production? && resource.present?
   end
 
   # GET /resource/edit

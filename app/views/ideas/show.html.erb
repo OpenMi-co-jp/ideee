@@ -49,6 +49,8 @@
           <%= render 'ideas/show/title_set', item: 'target' %>
           <%= render 'ideas/show/title_set', item: 'similar' %>
           <%= render 'ideas/show/title_set', item: 'note' %>
+          <%= render 'ideas/show/url_button', item: 'product_url' %>
+          <%= render 'ideas/show/url_button', item: 'github_url' %>
         <% else %>
           <% if @idea&.background.length > 0 %>
             <%= strip_tags(@idea&.background).gsub(/[\n]/, "").strip.truncate(60) %>
@@ -68,9 +70,6 @@
               <p>
             </div>
           </div>
-        <% end %>
-        <% if @idea.approved? %>
-          <%= render 'ideas/show/title_set', item: 'product_url' %>
         <% end %>
       </div>
       <% if current_user&.own?(@idea) %>

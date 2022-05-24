@@ -139,7 +139,7 @@ class IdeasController < ApplicationController
 
   def joined_team
     idea_ids = Team.includes(:team_users).select { |t| t.members.pluck(:user_id).include?(params[:user_id].to_i) }
-    idea_list = Idea.includes([:user]).where(id: idea_ids)
+    idea_list = Idea.includes([:user]).where(id: idea_ids.pluck(:idea_id))
     render partial: 'common/column_board', locals: { ideas: idea_list }
   end
 

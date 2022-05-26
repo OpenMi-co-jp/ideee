@@ -59,6 +59,7 @@
         <li class="tab c-nav-var__tab"><a class="active" href="#tab1" id="link1">アイデアリスト（<%= @user.ideas.published.size %>）</a></li>
         <li class="tab c-nav-var__tab"><a href="#tab2" id="link2">ハート（<%= @user.likes.where(likable_type: 'Idea').size %>）</a></li>
         <li class="tab c-nav-var__tab"><a href="#tab3" id="link3">コメント（<%= @user.comment_ideas.commented_others_ideas(@user).size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab4" id="link4">チーム開発参加（<%= @joined_team_num %>）</a></li>
       </ul>
     </div>
   </nav>
@@ -99,6 +100,13 @@
       <%= paginate @commented_ideas, param_name: :comment_page %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
+    <% end %>
+  </div>
+  <div id="tab4" class="col s12">
+    <% if @joined_team_num.positive? %>
+      <%= render_async joined_team_idea_path(user_id: @user.id) %>
+    <% else %>
+      <h5>まだチーム開発に参加をしていません</h5>
     <% end %>
   </div>
   <%= render 'common/fund_link', object: @user %>

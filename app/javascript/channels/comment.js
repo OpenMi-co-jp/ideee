@@ -3,7 +3,7 @@ $(document).on ('turbolinks:load', function(){
 
   $('#js-comment-send').on('click', function(e) {
     e.preventDefault()
-    $('.submit-btn').addClass('disabled')
+    $('.c-comment-form__submit-btn').addClass('disabled')
     const comment_input = $('#comment-form').val().replace(/^\s*(.*?)\s*$/, "$1");
     // コメントが入力されていれば発火
     if(comment_input.length > 0) {
@@ -13,17 +13,17 @@ $(document).on ('turbolinks:load', function(){
       .done(function() {
         $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
-        $('#comment.submit-btn').removeClass('disabled')
+        $('.c-comment-form__submit-btn').removeClass('disabled')
         send_email(comment_input, $(this).data('id')) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
         alert('コメントに失敗しました')
       })
     } else {
-      $('.submit-btn').css('color', 'gray') //追記
-      //$('#comment-form_message').addClass('c-comment-form__message');
-      //$("#comment-form_message").text('コメントを入力してください。'); // ここを消す？
-      //$('#comment.submit-btn').removeClass('disabled')
+      //$('.c-comment-form__submit-btn').css('color', 'gray') //追記
+      $('#comment-form_message').addClass('c-comment-form__message');
+      $("#comment-form_message").text('コメントを入力してください。'); // ここを消す？
+      $('.c-comment-form__submit-btn').removeClass('disabled')
     }
   });
 

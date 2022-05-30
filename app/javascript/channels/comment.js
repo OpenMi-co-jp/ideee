@@ -20,11 +20,28 @@ $(document).on ('turbolinks:load', function(){
         alert('コメントに失敗しました')
       })
     } else {
-      $('#comment-form_message').addClass('c-comment-form__message');
-      $("#comment-form_message").text('コメントを入力してください。');
-      $('#comment.submit-btn').removeClass('disabled')
+      $('.submit-btn').css('color', 'gray') //追記
+      //$('#comment-form_message').addClass('c-comment-form__message');
+      //$("#comment-form_message").text('コメントを入力してください。'); // ここを消す？
+      //$('#comment.submit-btn').removeClass('disabled')
     }
   });
+
+  $("#comment-form").on("comment-form", function() {
+
+		var input = $(this).val(); //input に入力された文字を取得
+
+		if(input){ //もし文字が入っていれば
+
+			$("#js-comment-send").prop('disabled', false); //disabled を無効にする＝ボタンが押せる
+
+		}else{
+
+			$("#js-comment-send").prop('disabled', true); //disabled を有効にする＝ボタンが押せない
+		}
+
+});
+
 
   $('#comment-form').on('keyup', function(e) {
     if($(this).length > 0) {

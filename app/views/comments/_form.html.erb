@@ -10,7 +10,7 @@
         ## comment.jsを発火
         id: "js-comment-send",
         data: { id: @idea.id },
-        class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" do %>
+        class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link disabled" do %>
         <b class='white-text'><%= t('default.submit') %></b>
       <% end %>
     </div>
@@ -18,7 +18,7 @@
     <div class='c-comment-form__btn-area'>
       <%= link_to "#modal_before_login",
         data: { turbolinks: false },
-        class: "modal-trigger-login c-comment-form__submit-btn waves-effect btn orange-action-back nav-link" do %>
+        class: "modal-trigger-login c-comment-form__submit-btn waves-effect btn orange-action-back nav-link disabled" do %>
         <b class='white-text'><%= t('default.comment') %></b>
       <% end %>
     </div>

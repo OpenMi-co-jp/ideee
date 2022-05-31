@@ -13,7 +13,7 @@ $(document).on ('turbolinks:load', function(){
       .done(function() {
         $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
-        $('.c-comment-form__submit-btn').removeClass('disabled')
+        //$('.c-comment-form__submit-btn').removeClass('disabled')
         send_email(comment_input, $(this).data('id')) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
@@ -22,8 +22,8 @@ $(document).on ('turbolinks:load', function(){
     } else {
       //$('.c-comment-form__submit-btn').css('color', 'gray') //追記
       $('#comment-form_message').addClass('c-comment-form__message');
-      $("#comment-form_message").text('コメントを入力してください。'); // ここを消す？
-      $('.c-comment-form__submit-btn').removeClass('disabled')
+      //$("#comment-form_message").text('コメントを入力してください。'); // ここを消す？
+      //$('.c-comment-form__submit-btn').removeClass('disabled')
     }
   });
 
@@ -44,8 +44,11 @@ $(document).on ('turbolinks:load', function(){
 
 
   $('#comment-form').on('keyup', function(e) {
-    if($(this).length > 0) {
-      $("#comment-form_message").text('');
+    if($(this).val().length > 0) {
+      //$("#comment-form_message").text('');
+      $('.c-comment-form__submit-btn').removeClass('disabled')
+    } else {
+      $('.c-comment-form__submit-btn').addClass('disabled')
     }
   });
 

@@ -30,7 +30,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
-      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
       if draft_bool
         redirect_to destination, notice: t('.draft_save')
       else

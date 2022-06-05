@@ -98,7 +98,7 @@ class IdeasController < ApplicationController
   def publish
     @idea.update!(draft: false, published_at: Time.now)
     sidekiq_jobs
-    redirect_to @idea, notice: t('.success')
+    redirect_to idea_path(@idea, share: true), notice: t('.success')
   end
 
   def suggest

@@ -36,3 +36,4 @@ require("channels/modal");
 require("channels/chips");
 require("channels/idea_validation");
 require("channels/header_scroll");
+require("channels/footer_scroll");

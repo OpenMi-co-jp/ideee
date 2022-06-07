@@ -19,9 +19,12 @@
       </div>
       <%= image_set(@idea) %>
       <% unless @idea.draft %>
-        <div class='hide-on-med-and-up'>
-          <%= render 'ideas/show/mobile_idea_share' %>
-        </div>
+      <div class='hide-on-small-only'>
+        <%= render 'ideas/show/pc_idea_share' %>
+      </div>
+      <div class='hide-on-med-and-up'>
+        <%= render 'ideas/show/mobile_idea_share' %>
+      </div>
       <% end %>
       <%= render 'teams/box_on_idea', idea: @idea %>
     </div>
@@ -84,14 +87,14 @@
   <% unless @idea.draft %>
     <%= render 'comments/board', object: @idea %>
     <%= render 'comments/form' %>
-    <div id='scroll_items'>
-      <div><%= render "common/like", object: @idea %></div>
-      <div id='vote' class="c-pc-status-info__vote <%= @idea.difficulty %>">
-        <%= render 'difficultys/vote', object: @idea %>
-      </div>
-      <div class='hide-on-small-only'>
-        <%= render 'ideas/show/pc_idea_share' %>
-      </div>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li><div class='btn'><%= render "common/like", object: @idea %></div></li>
+        <li><div id='vote' class="btn c-pc-status-info__vote <%= @idea.difficulty %>"><%= render 'difficultys/vote', object: @idea %></div></li>
+      </ul>
     </div>
     <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>
     <%= render 'common/fund_link', object: @idea %>

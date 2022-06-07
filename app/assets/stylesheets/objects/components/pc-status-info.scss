@@ -26,6 +26,14 @@
     }
   }
 
+  &__heart {
+    display: flex;
+
+    img {
+      margin-right: 4px;
+    }
+  }
+
   &__vote {
     border-radius: 5px;
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, .2);

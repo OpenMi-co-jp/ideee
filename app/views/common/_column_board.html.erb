@@ -32,6 +32,9 @@
               <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy" %>
               <p><%= idea.likes_num %></p>
             </div>
+            <div class='idea__item'>
+              <i class="material-icons">check_circle</i>
+            </div>
             <div class="idea__detail pc">
               <div class="idea__detail--vote <%= idea.difficulty %>">
                 <%= difficulty_tag(idea) %>

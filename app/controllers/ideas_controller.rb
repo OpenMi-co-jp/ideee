@@ -111,7 +111,7 @@ class IdeasController < ApplicationController
     end
     if title.nil?
       title = '他アイデアをのぞいてみる'
-      suggest_ideas = Idea.published.sample(3)
+      suggest_ideas = Idea.published.sample(3).includes(:idea_tags)
     end
     render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
   end

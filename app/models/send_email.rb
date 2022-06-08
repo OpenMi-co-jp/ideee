@@ -8,7 +8,7 @@ class SendEmail
     @sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
   end
 
-  def comment(users, commenter, idea, comment)
+  def comment(users, commenter, idea, description)
     body = "
             <p>
               気になるコメントが来ました！さっそく反応してみましょう！
@@ -20,7 +20,7 @@ class SendEmail
             </div>
             <b>コメント内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{xss_support(comment)}
+              #{xss_support(description)}
             </div>
             <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'comment',
                                                      'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>

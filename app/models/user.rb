@@ -148,14 +148,14 @@ class User < ApplicationRecord
     comment
   end
 
-  def send_comment_email(idea, comment)
+  def send_comment_email(idea, description)
     return unless Rails.env.production?
 
     users = [idea.user].push(idea.comment_users.uniq).flatten
     users.delete(self)
     return if users.nil?
 
-    SendEmail.new.comment(users, self, idea, comment)
+    SendEmail.new.comment(users, self, idea, description)
   end
 
   def team_joined?(idea)

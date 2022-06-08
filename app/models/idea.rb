@@ -129,12 +129,12 @@ class Idea < ApplicationRecord
     idea_ids = []
     idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
     idea_ids.flatten!.uniq
-    Idea.published.where(id: idea_ids).where.not(id: id)
+    Idea.published.where(id: idea_ids).where.not(id: id).includes(:idea_tags)
   end
 
   def same_user_other_ideas
     return [] if user.ideas.published.length == 1
 
-    user.ideas.published.where.not(id: id)
+    user.ideas.published.where.not(id: id).includes(:idea_tags)
   end
 end

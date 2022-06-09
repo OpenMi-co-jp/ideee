@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
     if current_user == @team.owner
       @team.status = :active
       @team.save!
-      redirect_to @team, notice: t('.success')
+      redirect_to idea_path(@team.idea_id, share: true), notice: t('.success')
     else
       redirect_to @team, notice: t('.not_owner')
     end

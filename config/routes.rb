@@ -26,13 +26,10 @@ Rails.application.routes.draw do
     end
     member do
       post :publish
+      get :joined_team
     end
   end
-  resources :comments, only: %i[create edit update destroy] do
-    collection do
-      post :send_email
-    end
-  end
+  resources :comments, only: %i[create edit update destroy]
   resources :users, only: %i[index show] do
     collection do
       get :search

@@ -43,8 +43,10 @@
           <span class="helper-text" data-error="タイプを選択してください。"></span>
         </div>
 
-        <div class="field">
-          <%= f.label :twitter_id, class: 'active' %><a class="help-tip twitter-id">?</a>
+        <div class="field input-field">
+          <div>
+            <%= f.label :twitter_id, class: 'active' %><a class="help-tip twitter-id">?</a>
+          </div>
           <%= f.text_field :twitter_id, placeholder: 'Twitter ID' %>
         </div>
 
@@ -57,7 +59,7 @@
           <div>メールの確認待ち: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <%= f.button id: 'edit_user_submit', type:'button' ,class: 'btn orange-action-back mh-3' %>
+        <%= f.button id: 'edit_user_submit', type:'button', class: 'btn orange-action-back mh-3' %>
       </div>
     </div>
 

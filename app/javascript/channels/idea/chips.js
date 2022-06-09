@@ -26,8 +26,12 @@ $(document).on ('turbolinks:load', function(){
     const tags = M.Chips.getInstance($(".chips")).chipsData.map(function (value) {
       return value["tag"];
     });
-    const values = $("#tag-hidden-field").val()+ ',' + tags;
-    $("#tag-hidden-field").val(values);
+    if ($("#tag-hidden-field").val().length > 0) {
+      values = $("#tag-hidden-field").val()+ ',' + tags;
+      $("#tag-hidden-field").val(values);
+    } else {
+      $("#tag-hidden-field").val(tags);
+    }
   });
 
   // タグを取得

@@ -30,7 +30,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
-      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
       if draft_bool
         redirect_to destination, notice: t('.draft_save')
       else
@@ -98,7 +98,7 @@ class IdeasController < ApplicationController
   def publish
     @idea.update!(draft: false, published_at: Time.now)
     sidekiq_jobs
-    redirect_to @idea, notice: t('.success')
+    redirect_to idea_path(@idea, share: true), notice: t('.success')
   end
 
   def suggest
@@ -135,6 +135,12 @@ class IdeasController < ApplicationController
   def deployed
     idea_list = Idea.published.includes([:user]).deployed.sample(5)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
+  end
+
+  def joined_team
+    idea_ids = Team.includes(:team_users).select { |t| t.members.pluck(:user_id).include?(params[:user_id].to_i) }.pluck(:idea_id)
+    idea_list = Idea.includes([:user]).where(id: idea_ids)
+    render partial: 'common/column_board', locals: { ideas: idea_list }
   end
 
   private

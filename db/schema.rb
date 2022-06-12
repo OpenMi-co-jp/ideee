@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_19_160512) do
+ActiveRecord::Schema.define(version: 2022_06_12_123511) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -125,6 +125,17 @@ ActiveRecord::Schema.define(version: 2022_05_19_160512) do
     t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
+  create_table "reactions", charset: "utf8mb4", force: :cascade do |t|
+    t.text "emoji"
+    t.bigint "user_id", null: false
+    t.string "reactionable_type", null: false
+    t.bigint "reactionable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reactionable_type", "reactionable_id"], name: "index_reactions_on_reactionable"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
+  end
+
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "idea_id", null: false
     t.bigint "tag_id", null: false
@@ -203,6 +214,7 @@ ActiveRecord::Schema.define(version: 2022_05_19_160512) do
   add_foreign_key "comments", "users"
   add_foreign_key "difficulties", "ideas"
   add_foreign_key "difficulties", "users"
+  add_foreign_key "reactions", "users"
   add_foreign_key "taggings", "ideas"
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "ideas"

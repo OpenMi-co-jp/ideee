@@ -5,7 +5,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-VK0STD8YSK');
-  // if ( current_user.to_json ) {
-  //   gtag('set', {'user_id': current_user.to_json.id %>});
-  // }
+  <% if user_signed_in? %>
+    gtag('set', {'user_id': <%= current_user.id %>});
+  <% end %>
 </script>

@@ -3,7 +3,7 @@ $(document).on ('turbolinks:load', function(){
   if (!['ideas-edit', 'ideas-new'].includes($('body').data('page'))) { return }
 
   // タグの入力
-  $(".chips").chips({
+  $(".chips-initial").chips({
     placeholder: "Enterで入力",
     secondaryPlaceholder: "+Tag",
     data: getChipsData($("#tag-hidden-field").val()),
@@ -23,12 +23,15 @@ $(document).on ('turbolinks:load', function(){
 
   // 更新時にchipsの値をフォームに格納
   $(".idea-btn").on("click", function () {
-    const tags = M.Chips.getInstance($(".chips")).chipsData.map(function (
-      value
-    ) {
+    const tags = M.Chips.getInstance($(".chips")).chipsData.map(function (value) {
       return value["tag"];
     });
-    $("#tag-hidden-field").val(tags);
+    if ($("#tag-hidden-field").val().length > 0) {
+      values = $("#tag-hidden-field").val()+ ',' + tags;
+      $("#tag-hidden-field").val(values);
+    } else {
+      $("#tag-hidden-field").val(tags);
+    }
   });
 
   // タグを取得

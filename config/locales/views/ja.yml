@@ -62,6 +62,10 @@ ja:
   ideas:
     show:
       page: idea-show
+      url_button:
+        button_txt:
+          product_url: アプリを確認
+          github_url: GitHubを確認
     create:
       success: アイデアの登録が完了しました
       draft_save: アイデアの下書きが保存されました

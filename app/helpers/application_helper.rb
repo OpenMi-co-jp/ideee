@@ -32,7 +32,7 @@ module ApplicationHelper
     return {} if Rails.env.test?
 
     {
-      site: 'ideee.tech',
+      site: 'アイディー',
       title: 'ideee',
       reverse: true,
       charset: 'utf-8',

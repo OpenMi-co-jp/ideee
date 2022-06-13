@@ -6,12 +6,16 @@
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :string(255)
 #  defined                :boolean
 #  definition             :integer
 #  description            :string(200)
 #  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null
 #  icon                   :string(255)
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :string(255)
 #  name                   :string(30)       default("")
 #  point                  :integer          default(0)
 #  provider               :string(255)
@@ -19,6 +23,7 @@
 #  remote_url             :string(255)
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
+#  sign_in_count          :integer          default(0), not null
 #  site_url               :string(255)
 #  uid                    :string(255)
 #  unconfirmed_email      :string(255)
@@ -34,7 +39,7 @@
 class User < ApplicationRecord
   # :lockable, :timeoutable
   devise :confirmable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :recoverable, :rememberable, :validatable, :trackable,
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -111,6 +116,11 @@ class User < ApplicationRecord
     end
   end
 
+  # cookieを使ってログインを保持
+  def remember_me
+    true
+  end
+
   # twitterログインでもメールアドレスがあればメールアドレスを必須項目にする
   def email_required?
     provider == 'twitter' && !email.blank? && super
@@ -136,6 +146,16 @@ class User < ApplicationRecord
     comment = comments.create(comment_params)
     comment.idea.count_comments if comment.valid?
     comment
+  end
+
+  def send_comment_email(idea, comment)
+    return unless Rails.env.production?
+
+    users = [idea.user].push(idea.comment_users.uniq).flatten
+    users.delete(self)
+    return if users.nil?
+
+    SendEmail.new.comment(users, self, idea, comment)
   end
 
   def team_joined?(idea)

@@ -14,6 +14,7 @@ $(document).on ('turbolinks:load', function(){
         $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
         send_email(comment_input, $(this).data('id')) // アイデアの持ち主や関わる人にメールを送る
+        $('#comment.submit-btn').removeClass('disabled')
       })
       .fail(function() {
         alert('コメントに失敗しました')
@@ -69,15 +70,6 @@ $(document).on ('turbolinks:load', function(){
       dataType: 'json'
     })
   };
-
-  function send_email(comment, idea_id){
-    return $.ajax({
-      url: '/comments/send_email',
-      type: 'POST',
-      data: { description: comment, idea_id: idea_id},
-      dataType: 'json'
-    })
-  }
 
   function js_comments(comment){
     const now = new Date()

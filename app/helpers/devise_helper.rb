@@ -13,4 +13,12 @@ module DeviseHelper
   def password_helper_text
     tag.span '', class: 'helper-text', data: { error: "#{@minimum_password_length}文字以上のパスワードを入力してください。" }
   end
+
+  # 前回のログイン方法を出力
+  def previous_login
+    return if cookies[:devise_provider].blank?
+
+    provider_name = t("activerecord.attributes.user.provider.#{cookies[:devise_provider]}")
+    tag.p "前回は#{provider_name}でログインしました", class: 'previous-login'
+  end
 end

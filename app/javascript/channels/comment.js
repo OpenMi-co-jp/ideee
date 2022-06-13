@@ -13,7 +13,6 @@ $(document).on ('turbolinks:load', function(){
       .done(function() {
         $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
-        send_email(comment_input, $(this).data('id')) // アイデアの持ち主や関わる人にメールを送る
         $('#comment.submit-btn').removeClass('disabled')
       })
       .fail(function() {

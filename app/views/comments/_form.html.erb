@@ -5,9 +5,8 @@
       <div id="comment-form_message"></div>
     </div>
     <div class='c-comment-form__btn-area'>
-    <!---submitはlink_toにしている-->
       <%= link_to "#!",
-        ## comment.jsを発火
+        # comment.jsを発火
         id: "js-comment-send",
         data: { id: @idea.id },
         class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link disabled" do %>

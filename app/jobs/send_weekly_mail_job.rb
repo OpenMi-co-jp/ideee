@@ -2,6 +2,8 @@ class SendWeeklyMailJob < ApplicationJob
   queue_as :default
 
   def perform
+    return unless Rails.env.production?
+
     # 1週間後の同じ時間に実行
     SendWeeklyMailJob.delay_for(1.week).perform_now
     ideas = Idea.published.recent_select

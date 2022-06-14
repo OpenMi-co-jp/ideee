@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
   end
   resources :comments, only: %i[create edit update destroy]
+  resources :reactions, only: %i[create edit update destroy]
   resources :users, only: %i[index show] do
     collection do
       get :search

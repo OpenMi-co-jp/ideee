@@ -1,0 +1,20 @@
+<div class='c-comment-reaction'>
+  <% object.reactions.each do |reaction| %>
+    <%= Emoji.find_by_alias(reaction.emoji).raw %>
+  <% end %>
+  <%= link_to '#', data: { target: "dropdown_comment-insert_emoticon-#{object.id}" }, class:'dropdown-trigger' do %>
+    <%= Emoji.find_by_alias("heavy_plus_sign").raw %>リアクション
+  <% end %>
+  <ul id="dropdown_comment-insert_emoticon-<%= object.id %>" class='dropdown-content'>
+    <li>
+      <div class='js-reaction-click <%= 'clicked' if current_user && current_user&.like?(object) %>' data-id='<%= object.id %>' data-emoji='cat'>
+        <%= Emoji.find_by_alias("cat").raw %>
+      </div>
+    </li>
+    <li>
+      <div class='js-reaction-click <%= 'clicked' if current_user && current_user&.like?(object) %>' data-id='<%= object.id %>' data-emoji='star'>
+        <%= Emoji.find_by_alias("star").raw %>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -22,7 +22,7 @@ $(document).on ('turbolinks:load', function(){
       $('#js_notification_check').find('.js_header__bell').addClass('checked')
     })
     .fail(function() {
-      alert('新地通知は0件で')
+      alert('新地通知は0件です')
     })
   })
 });

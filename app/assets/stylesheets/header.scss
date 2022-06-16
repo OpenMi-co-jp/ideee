@@ -36,18 +36,15 @@ header {
         fill: #FFBF85;
       }
 
-      .header__bell {
+      .js_header__bell {
         position: relative;
-
-        &--color {
-          fill: #FFBF85;
-          stroke: #FFBF85;
+        fill: #FFBF85;
+        stroke: #FFBF85;
 
           &.checked {
             fill: #C4C4C4;
             stroke: #C4C4C4;
           }
-        }
 
         &:after {
           content: '●';

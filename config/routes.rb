@@ -46,6 +46,8 @@ Rails.application.routes.draw do
       post :finish
     end
   end
+  resources :rooms, only: %i[create show]
+  resources :messages, only: %i[create edit update destroy]
   resources :difficultys, only: %i[create]
   resources :notifications, only: %i[index] do
     collection do

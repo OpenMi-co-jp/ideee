@@ -14,8 +14,6 @@ class Room < ApplicationRecord
   before_create :set_uuid
 
   def set_uuid
-    while self.id.blank? || User.find_by(id: self.id).present? do
-      self.id = SecureRandom.uuid
-    end
+    self.id = SecureRandom.uuid while id.blank? || User.find_by(id: id).present?
   end
 end

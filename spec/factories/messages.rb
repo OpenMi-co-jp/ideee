@@ -15,6 +15,8 @@
 #
 FactoryBot.define do
   factory :message do
-    
+    user
+    room
+    content { Faker::Lorem.paragraph(sentence_count: 20) }
   end
 end

@@ -9,6 +9,6 @@
 #
 FactoryBot.define do
   factory :room do
-    
+    team
   end
 end

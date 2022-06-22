@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   def show
     @team = @room.team
     @message = Message.new
-    @messages = @room.messages.includes(:user)
+    @messages = @room.messages.includes(:user, :rich_text_content)
   end
 
   private

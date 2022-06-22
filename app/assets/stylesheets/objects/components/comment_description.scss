@@ -17,4 +17,10 @@
     color: blue;
     margin: 0.3rem 0 -0.5rem;
   }
+
+  &__action_text {
+    .trix-content {
+      background-color: white;
+    }
+  }
 }

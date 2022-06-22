@@ -58,16 +58,11 @@
       }
     }
   }
-}
 
-@media (max-width: 992px) {
-  .idea-show {
+  @media (max-width: 992px) {
     width: 90vw !important;
   }
-}
-
-@media (max-width: 600px) {
-  .idea-show {
+  @media (max-width: 600px) {
     width: 95vw !important;
   }
 }

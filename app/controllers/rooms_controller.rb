@@ -8,6 +8,8 @@ class RoomsController < ApplicationController
 
   def show
     @team = @room.team
+    redirect_to @team, notice: t('.not_joined') unless @team.joined?(current_user)
+
     @message = Message.new
     @messages = @room.messages.includes(:user, :rich_text_content)
   end

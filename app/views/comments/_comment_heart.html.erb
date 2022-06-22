@@ -1,3 +1,4 @@
+<%# メッセージにリアクション機能をつけるまでの暫定対応 %>
 <% if object.class.model_name.collection == 'comments' %>
   <div class='like-click comment <%= 'clicked' if current_user && current_user&.like?(object) %>' data-id='<%= object.id %>'>
     <div class='c-comment-heart'>

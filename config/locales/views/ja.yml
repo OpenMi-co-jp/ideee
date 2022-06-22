@@ -108,6 +108,8 @@ ja:
       success: コメントを更新しました
       fail: コメントの更新に失敗しました
   rooms:
+    show:
+      not_joined: チームに参加していません
     create:
       success: 会話ルームを開始しました
       fail: 会話ルームの開始に失敗しました

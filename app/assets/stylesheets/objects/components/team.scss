@@ -2,7 +2,8 @@
   padding: 1rem 2rem 3rem;
 
   &__idea_img {
-    width: 100%;
+    width: 300px;
+    margin: 0 auto;
 
     img {
       min-width: 300px;
@@ -29,6 +30,21 @@
     &--time {
       color: #C4C4C4;
       margin: 0.5rem 0;
+    }
+
+    &--message-btn {
+      margin-top: 0.5rem;
+      padding: 0.8rem 1.2rem;
+      color: #FF862E;
+      border-radius: 25px;
+      background: linear-gradient(145deg, #ffffff, #e6e6e6);
+      box-shadow:  0.3rem 0.3rem 0.6rem #d4d4d4,
+                   -0.3rem -0.3rem 0.6rem #ffffff;
+
+      i {
+        vertical-align: bottom;
+        margin-right: .5rem;
+      }
     }
   }
 

@@ -95,11 +95,30 @@ ja:
     finish:
       success: チーム開発を終了しました
   comments:
+    board:
+      comments:
+        title: コメント
+        no_item_message: 気になること/応援のコメントをしよう！
+      messages:
+        title: メッセージ
+        no_item_message: まずは話しかけてみましょう
     edit:
       title: コメント編集
     update:
       success: コメントを更新しました
       fail: コメントの更新に失敗しました
+  rooms:
+    show:
+      not_joined: チームに参加していません
+    create:
+      success: 会話ルームを開始しました
+      fail: 会話ルームの開始に失敗しました
+  messages:
+    create:
+      success: メッセージの投稿に成功しました
+    update:
+      success: メッセージの更新に成功しました
+      fail: メッセージの更新に失敗しました
   common:
     service_fund:
       use_for: ideeeの運営は皆様の寄付によって、無料で使うことができます 。

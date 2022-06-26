@@ -85,7 +85,7 @@
   <hr>
 
   <% unless @idea.draft %>
-    <%= render 'comments/board', object: @idea %>
+    <%= render 'comments/board', items: @comments, item_class: 'comments' %>
     <%= render 'comments/form' %>
     <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>
     <%= render 'common/fund_link', object: @idea %>

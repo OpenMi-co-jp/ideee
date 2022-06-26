@@ -1,7 +1,9 @@
 <div class='c-team-form'>
-  <%= link_to idea_path(@idea), class: 'c-team-form__idea_img center' do %>
-    <%= image_set(@idea) %>
-  <% end %>
+  <div class='c-team-form__idea_img'>
+    <%= link_to idea_path(@idea)do %>
+      <%= image_set(@idea) %>
+    <% end %>
+  </div>
   <div class='c-team-form__idea_info'>
     <%= link_to idea_path(@idea), class: 'c-team-form__idea_info--name' do %>
       <%= @idea.name %>
@@ -9,10 +11,25 @@
     <div class='c-team-form__idea_info--time'>
       <%= l @team.created_at %>
     </div>
-    <%= render 'teams/show/members', users: @team&.members %>
+    <% if @team.status_active? && @team.joined?(current_user) %>
+      <% if @team.room.present? %>
+        <div class="">
+          <%= link_to room_path(@team.room), class: 'c-team-form__idea_info--message-btn' do %>
+            <span><i class="material-icons">message</i></span>チームメッセージを確認
+          <% end %>
+        </div>
+      <% else %>
+        <%= link_to rooms_path(team_id: @team.id), method: :post, class: 'c-team-form__idea_info--message-btn' do %>
+          <i class="material-icons">message</i>チームミーティングを開始する
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
   <div class='c-team-form__idea-content'>
-    <div class='chip orange-soft-back'><%= I18n.t("enums.team.status.#{@team.status}") %></div>
+    <div class='flex'>
+      <div class='chip orange-soft-back mr-4'><%= I18n.t("enums.team.status.#{@team.status}") %></div>
+      <%= render 'teams/show/user_list', team: @team %>
+    </div>
     <%= render 'teams/show/title_set', item: 'offer' %>
     <%= render 'teams/show/title_set', item: 'requirement' %>
   </div>

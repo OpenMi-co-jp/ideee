@@ -26,6 +26,7 @@ require("channels/idea/copy");
 require("channels/idea/image_appear");
 require("channels/idea/chips");
 require("channels/comment");
+require("channels/message");
 require("channels/sort");
 require("channels/kaminari");
 require("channels/dev-mark");

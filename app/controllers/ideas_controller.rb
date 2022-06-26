@@ -19,6 +19,7 @@ class IdeasController < ApplicationController
     else
       @time_on_page = '-'
     end
+    @comments = @idea.comments.includes(%i[user likes])
   end
 
   def new

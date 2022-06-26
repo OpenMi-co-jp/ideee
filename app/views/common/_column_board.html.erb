@@ -33,7 +33,9 @@
               <p><%= idea.likes_num %></p>
             </div>
             <div class='idea__item'>
+            <% if idea.product_apply == 'approved' %>
               <i class="material-icons">check_circle</i>
+            <% end %>
             </div>
             <div class="idea__detail pc">
               <div class="idea__detail--vote <%= idea.difficulty %>">

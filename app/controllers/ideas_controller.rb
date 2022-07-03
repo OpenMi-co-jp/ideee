@@ -56,6 +56,7 @@ class IdeasController < ApplicationController
           sidekiq_jobs
           @idea.update_attribute(:published_at, Time.now)
         end
+        Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to destination, notice: t('.success')
       end
     else

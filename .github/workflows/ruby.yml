@@ -59,10 +59,9 @@ jobs:
         docker-compose build
         docker-compose run web rails action_text:install
         docker-compose run web rails db:create
-
-    env:
-      RAILS_ENV: test
-      DB_NAME: db
+      env:
+        RAILS_ENV: test
+        DB_NAME: db
 
     services:
       db:

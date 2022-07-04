@@ -59,7 +59,7 @@ jobs:
       db:
         image: mysql:5.7
         ports:
-          - 3306:3306
+          - 4306:3306
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     steps:

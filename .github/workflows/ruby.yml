@@ -47,7 +47,7 @@ jobs:
       env:
         RAILS_ENV: test
 
-jobs:
+  # ER図の自動作成
   create_er:
     runs-on: ubuntu-latest
 

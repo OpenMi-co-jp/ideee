@@ -63,21 +63,6 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.2
-          bundler-cache: true
-          cache-version: 1
-      - name: mysql set character_set
-        run: |
-          mysql -u root -h 127.0.0.1 -e "set global character_set_server='utf8mb4';"
-          mysql -u root -h 127.0.0.1 -e "set global collation_server='utf8mb4_unicode_ci';"
-      - name: db migrate
-        run: |
-          bundle exec rails action_text:install
-          bundle exec rails db:create
-          bundle exec rails db:migrate
       - name: make schemaspy.properties
         run: echo -e "
           schemaspy.t=mysql\n

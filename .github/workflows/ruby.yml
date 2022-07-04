@@ -51,6 +51,15 @@ jobs:
   create_er:
     runs-on: ubuntu-latest
 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup docker
+      shell: bash
+      run: |
+        docker-compose build
+        docker-compose run web rails action_text:install
+        docker-compose run web rails db:create
+
     env:
       RAILS_ENV: test
       DB_NAME: db

@@ -52,8 +52,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      RAILS_ENV: development
-      DB_NAME: ideee_development
+      RAILS_ENV: test
+      DB_NAME: ideee_test
 
     services:
       db:

@@ -10,7 +10,7 @@ on:
     paths:
       - "db/migrate/**"
 jobs:
-  run:
+  create_er:
     runs-on: ubuntu-latest
 
     env:

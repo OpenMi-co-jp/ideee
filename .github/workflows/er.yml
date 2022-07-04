@@ -38,6 +38,7 @@ jobs:
       - name: db migrate
         run: |
           cp config/database.ci.yml config/database.yml
+          bundle exec rails action_text:install
           bundle exec rails db:create
           bundle exec rails db:migrate
       - name: make schemaspy.properties

@@ -51,6 +51,14 @@ jobs:
   create_er:
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: mysql:5.7
+        ports:
+          - 4306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
     steps:
     - uses: actions/checkout@v2
     - name: Setup docker
@@ -63,13 +71,6 @@ jobs:
         RAILS_ENV: test
         DB_NAME: db
 
-    services:
-      db:
-        image: mysql:5.7
-        ports:
-          - 4306:3306
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     steps:
       - name: make schemaspy.properties
         run: echo -e "

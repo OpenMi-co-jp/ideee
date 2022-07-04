@@ -37,7 +37,6 @@ jobs:
           mysql -u root -h 127.0.0.1 -e "set global collation_server='utf8mb4_unicode_ci';"
       - name: db migrate
         run: |
-          cp config/database.ci.yml config/database.yml
           bundle exec rails action_text:install
           bundle exec rails db:create
           bundle exec rails db:migrate

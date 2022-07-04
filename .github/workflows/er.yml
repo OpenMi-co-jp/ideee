@@ -1,4 +1,4 @@
-name: er
+name: Er
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
     branches: [ dev ]
     paths:
       - "db/migrate/**"
+
 jobs:
   create_er:
     runs-on: ubuntu-latest

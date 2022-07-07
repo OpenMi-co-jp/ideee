@@ -2,7 +2,9 @@ name: Sider Scan Runner
 
 on:
   push:
-    branches: [ main dev ]
+    branches: [ main ]
+  pull_request:
+    branches: [ dev ]
 
 jobs:
   scan-job:

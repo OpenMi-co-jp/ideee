@@ -190,6 +190,23 @@ class SendEmail
     end
   end
 
+  # 下書きに対するリマインドメール
+  def draft_remind(user_id)
+    body = "
+            <p>下書きに残っているアイデアがあります💡</p>
+            <p>ずっと下書きに眠ったままだともったいないです！投稿してみませんか？</p>
+          "
+
+    subject = '【ideee】下書きのままでもったいないアイデアを助けて！'
+    content = Content.new(type: 'text/html', value: html_frame(body, 'draft_remind'))
+
+    user_email = 'bumpfuji10@gmail.com'
+    # user_email = User.find(user_id).email
+    to = Email.new(email: user_email)
+    mail = Mail.new(@from, subject, to, content)
+    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
   private
 
   def html_frame(body, source)

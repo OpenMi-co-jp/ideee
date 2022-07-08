@@ -47,6 +47,7 @@ class Idea < ApplicationRecord
   has_one :team, dependent: :destroy
   has_rich_text :note
   mount_uploader :icon, ImageUploader
+  after_create :send_draft_remind
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :background, presence: true
@@ -136,5 +137,12 @@ class Idea < ApplicationRecord
     return [] if user.ideas.published.length == 1
 
     user.ideas.published.where.not(id: id)
+  end
+
+  def send_draft_remind
+    # return unless Rails.env.production? || self.draft
+      # RemindDraftJob.delay_for(1.week).perform_later(self.id)
+      RemindDraftJob.perform_now(self.id)
+    # end
   end
 end

@@ -193,11 +193,13 @@ class SendEmail
   # 下書きに対するリマインドメール
   def draft_remind(user_id)
     body = "
-            <p>下書きに残っているアイデアがあります💡</p>
-            <p>ずっと下書きに眠ったままだともったいないです！投稿してみませんか？</p>
+            <b>下書きに残っているアイデアがあります！</b>
+            <p>下書きのままにせず、公開してみませんか？</p>
+            <h3 style='color: #FF862E;'>下書き保存されているアイデア💡</h3>
+            #{draft_colum}
           "
 
-    subject = '【ideee】下書きのままでもったいないアイデアを助けて！'
+    subject = '【ideee】下書きのままで眠っているアイデアを助けよう！'
     content = Content.new(type: 'text/html', value: html_frame(body, 'draft_remind'))
 
     user_email = 'bumpfuji10@gmail.com'
@@ -255,6 +257,23 @@ class SendEmail
         </div>
       </div>
     "
+  end
+
+  def draft_ideas_item(idea)
+    "
+      <div style='background-color: white; margin: 3px 0; padding: 5px;'>
+        <div style='display: inline;'>
+          #{analytics_url('ideas/' + idea.id.to_s, 'draft_ideas', idea.name)}
+        </div>
+      </div>
+    "
+  end
+
+  def draft_colum #draft_ideasの中身はjob内で作る
+    draft_ideas = Idea.where(draft: true)
+    draft_ideas.each do |draft_idea|
+      p draft_idea.name
+    end
   end
 
   def rank(i)

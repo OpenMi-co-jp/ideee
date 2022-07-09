@@ -68,7 +68,7 @@ class Idea < ApplicationRecord
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
-  scope :commented_others_ideas, ->(own_user) { preload(:idea_tags).uniq.reject { |i| i.user_id == own_user.id } }
+  scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id: user_id).uniq }
 
   def published_time
     published_at&.strftime('%Y.%m.%d')
@@ -81,7 +81,7 @@ class Idea < ApplicationRecord
   def self.search(name: nil, difficulty: nil, product_apply: nil)
     # TODO: クソコードをリファクタ
     if name.nil? && difficulty.nil? && product_apply.nil?
-      published
+      self
     elsif name.present?
       where(['name like?', "%#{name}%"])
     elsif difficulty.present?
@@ -125,16 +125,12 @@ class Idea < ApplicationRecord
   def same_tag_ideas
     return [] if idea_tags.empty?
 
-    # TODO: リファクタしたい
-    idea_ids = []
-    idea_tags.map { |t| idea_ids << t.tagged_ideas.pluck(:id) }
-    idea_ids.flatten!.uniq
-    Idea.published.where(id: idea_ids).where.not(id: id)
+    Idea.published.eager_load(:idea_tags).where(idea_tags: {name: idea_tags.pluck(:name)}).where.not(id: id)
   end
 
   def same_user_other_ideas
     return [] if user.ideas.published.length == 1
 
-    user.ideas.published.where.not(id: id)
+    user.ideas.published.eager_load(:idea_tags).where.not(id: id)
   end
 end

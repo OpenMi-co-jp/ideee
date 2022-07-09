@@ -25,7 +25,7 @@ namespace :auto_update_qiita_post do
     body += "## 👬 チーム開発募集中のアイデア\n" + \
             "`最近更新されたチーム開発を募集しているアイデア`\n"
     team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
-    team_items = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
+    team_items = Idea.where(id: team_active_ids).preload(:idea_tags).eager_load(:user)
     body += idea_columns(team_items)
 
     body += "\n```\n" + \

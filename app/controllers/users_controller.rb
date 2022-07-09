@@ -11,15 +11,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    published_list = @user.ideas.published.includes(%i[idea_tags user]).order(published_at: 'DESC')
+    published_list = @user.ideas.published.eager_load(:idea_tags).preload(:user).order(published_at: 'DESC')
     @published_ideas = Kaminari.paginate_array(published_list).page(params[:published_page]).per(10)
-    @like_ideas = Kaminari.paginate_array(Idea.where(id: @user.likes.type_idea_ids).includes(%i[idea_tags user])).page(params[:like_page]).per(10)
+    @like_ideas = Kaminari.paginate_array(Idea.where(id: @user.likes.type_idea_ids).eager_load(:idea_tags).preload(:user)).page(params[:like_page]).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
-    comment_idea_list = @user.comment_ideas.includes([:user]).commented_others_ideas(@user)
-    @commented_ideas = Kaminari.paginate_array(comment_idea_list).page(params[:comment_page]).per(10)
+    @commented_idea_list = @user.comment_ideas.preload(:user).commented_others_ideas(@user)
+    @commented_ideas = Kaminari.paginate_array(@commented_idea_list).page(params[:comment_page]).per(10)
 
     # チーム開発参加数を取得
-    @joined_team_num = Team.includes(:team_users).select { |t| t.members.include?(@user) }.size
+    @joined_team_num = Team.select { |t| t.members.pluck(:id).include?(@user.id) }.size
   end
 
   def search

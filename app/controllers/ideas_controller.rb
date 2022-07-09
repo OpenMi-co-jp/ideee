@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   after_action :update_user_point, only: %i[create]
 
   def index
-    recent_ideas = Idea.published.recent_select.includes([:user])
+    recent_ideas = Idea.published.recent_select.eager_load([:user])
     @latest_ideas = recent_ideas.order(published_at: 'DESC').first(10)
   end
 
@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
     else
       @time_on_page = '-'
     end
-    @comments = @idea.comments.includes(%i[user likes])
+    @comments = @idea.comments.eager_load(:user).preload(:likes)
   end
 
   def new
@@ -76,7 +76,7 @@ class IdeasController < ApplicationController
     @order = params[:order] || 'desc'
     @keyword = params[:keyword]
     # TODO: 検索結果が増えてきたらtag検索を分ける
-    base_ideas = Idea.includes(%i[idea_tags user]).published
+    base_ideas = Idea.published.preload(%i[idea_tags user])
     ideas = if @keyword.present?
               base_ideas.search(name: @keyword) | base_ideas.tag_name_like(@keyword)
             else
@@ -93,7 +93,7 @@ class IdeasController < ApplicationController
     @sort = params[:sort] || 'likes_num'
     @order = params[:order] || 'desc'
     @tag_name = params[:keyword]
-    list = Idea.includes(%i[idea_tags taggings]).with_tag(@tag_name).order("#{@sort}": @order)
+    list = Idea.eager_load(%i[idea_tags taggings]).with_tag(@tag_name).order("#{@sort}": @order)
     @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
@@ -119,29 +119,29 @@ class IdeasController < ApplicationController
   end
 
   def most_comment
-    idea_list = Idea.published.recent_select.includes([:user]).most_commented.first(10)
+    idea_list = Idea.published.recent_select.eager_load([:user]).most_commented.first(10)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def most_liked
-    idea_list = Idea.published.recent_select.includes([:user]).most_liked.first(5)
+    idea_list = Idea.published.recent_select.eager_load([:user]).most_liked.first(5)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def team_active
     team_active_ids = Team.where(status: :active).sample(5).pluck(:idea_id)
-    idea_list = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
+    idea_list = Idea.where(id: team_active_ids).preload(%i[idea_tags user])
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def deployed
-    idea_list = Idea.published.includes([:user]).deployed.sample(5)
+    idea_list = Idea.published.eager_load([:user]).deployed.sample(5)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def joined_team
-    idea_ids = Team.includes(:team_users).select { |t| t.members.pluck(:user_id).include?(params[:user_id].to_i) }.pluck(:idea_id)
-    idea_list = Idea.includes([:user]).where(id: idea_ids)
+    idea_ids = Team.preload(:team_users).select { |t| t.members.pluck(:user_id).include?(params[:user_id].to_i) }.pluck(:idea_id)
+    idea_list = Idea.eager_load([:user]).where(id: idea_ids)
     render partial: 'common/column_board', locals: { ideas: idea_list }
   end
 

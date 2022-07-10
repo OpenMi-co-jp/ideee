@@ -12,7 +12,7 @@ namespace :auto_update_qiita_post do
            "## 🏆 ランキング（コメント）\n" + \
            "`直近１ヶ月でコメントが盛り上がったアイデアをランキング化`\n"
 
-    ideas = Idea.all # アイデア一括取得
+    ideas = Idea.published # アイデア一括取得
     selected_items = ideas.recent_select.most_commented.first(10) # コメントランキングの作成
     body += idea_columns(selected_items, rank: true)
 

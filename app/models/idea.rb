@@ -125,7 +125,7 @@ class Idea < ApplicationRecord
   def same_tag_ideas
     return [] if idea_tags.empty?
 
-    Idea.published.eager_load(:idea_tags).where(idea_tags: {name: idea_tags.pluck(:name)}).where.not(id: id)
+    Idea.published.eager_load(:idea_tags).where(idea_tags: { name: idea_tags.pluck(:name) }).where.not(id: id)
   end
 
   def same_user_other_ideas

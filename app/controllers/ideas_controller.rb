@@ -71,10 +71,8 @@ class IdeasController < ApplicationController
   end
 
   def search
-    # アイデアに紐づくlikeの数を数えて、降順に並べる
-    @sort = params[:sort] || 'likes_num'
-    @order = params[:order] || 'desc'
-    # TODO: 検索結果が増えてきたらtag検索を分ける
+    @sort = params[:sort] || 'likes_num' # アイデアに紐づくlikeの数を数えて、降順に並べる
+    @order = params[:order] || 'desc' # TODO: 検索結果が増えてきたらtag検索を分ける
     base_ideas = Idea.published.preload(%i[idea_tags user]) # eager_loadでエラー発生
     ideas = if params[:keyword].present?
               base_ideas.search(name: params[:keyword]) | base_ideas.tag_name_like(params[:keyword])
@@ -128,7 +126,7 @@ class IdeasController < ApplicationController
   end
 
   def team_active
-    idea_list = Idea.eager_load(:team).where(team: {status: :active}).preload(:idea_tags).eager_load(:user).sample(5)
+    idea_list = Idea.eager_load(:team).where(team: { status: :active }).preload(:idea_tags).eager_load(:user).sample(5)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 

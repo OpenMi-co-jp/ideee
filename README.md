@@ -1,7 +1,7 @@
 # ideee
 アイデアとエンジニアのマッチングプラットフォーム
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=ideee-tech)]
+![Heroku](https://heroku-badge.herokuapp.com/?app=ideee-tech)
 
 <!-- TODO Readme書く -->
 

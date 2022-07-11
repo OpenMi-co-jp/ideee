@@ -37,7 +37,7 @@
               <div class="idea__detail--vote <%= idea.difficulty %>">
                 <%= difficulty_tag(idea) %>
               </div>
-              <%= link_to user_path(idea.user_id), class: '' do %>
+              <%= link_to user_path(idea.user_id) do %>
                 <% user_icon(idea.user, size: 'small') %>
               <% end %>
             </div>
@@ -49,7 +49,7 @@
             <div class="idea__detail--vote <%= idea.difficulty %>">
               <%= difficulty_tag(idea) %>
             </div>
-            <%= link_to user_path(idea.user_id), class: '' do %>
+            <%= link_to user_path(idea.user_id) do %>
               <% user_icon(idea.user, size: 'small') %>
             <% end %>
           </div>

@@ -6,7 +6,7 @@
           <h1 class='board-title'>検索結果 <%= @searched_ideas.size %>件</h1>
         </div>
         <div class='col s12 m6 l4'>
-          <%= render 'common/sort_form', keyword: @keyword, path: search_ideas_path %>
+          <%= render 'common/sort_form', keyword: params[:keyword], path: search_ideas_path %>
         </div>
       </div>
       <%= render 'common/column_board', ideas: @searched_ideas %>

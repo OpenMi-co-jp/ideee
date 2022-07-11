@@ -132,7 +132,7 @@ class User < ApplicationRecord
   end
 
   def like?(item)
-    likes.includes(:likable).map(&:likable).include?(item)
+    likes.preload(:likable).map(&:likable).include?(item)
   end
 
   def voted?(idea)

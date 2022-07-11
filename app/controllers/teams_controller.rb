@@ -7,7 +7,7 @@ class TeamsController < ApplicationController
 
   def index
     idea_list = Team.where(status: :active).pluck(:idea_id)
-    list = Idea.where(id: idea_list).includes(%i[idea_tags user])
+    list = Idea.where(id: idea_list).eager_load(:user).preload(:idea_tags)
     @active_team_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @active_team_ideas.limit_value

@@ -190,20 +190,17 @@ class SendEmail
     end
   end
 
-  # 下書きに対するリマインドメール
   def draft_remind(user_id)
     body = "
-            <b>下書きに残っているアイデアがあります！</b>
-            <p>下書きのままにせず、公開してみませんか？</p>
-            <h3 style='color: #FF862E;'>下書き保存されているアイデア💡</h3>
-            #{draft_colum}
+            <p>眠っているアイデアを編集・公開してみませんか？</p>
+            <p>あなたのアイデア一覧💡:#{analytics_url('users/' + user_id.to_s, 'draft_remind',
+            'https://www.ideee.tech/users/' + user_id.to_s)}</p>
           "
 
     subject = '【ideee】下書きのままで眠っているアイデアを助けよう！'
     content = Content.new(type: 'text/html', value: html_frame(body, 'draft_remind'))
 
-    user_email = 'bumpfuji10@gmail.com'
-    # user_email = User.find(user_id).email
+    user_email = User.find(user_id).email
     to = Email.new(email: user_email)
     mail = Mail.new(@from, subject, to, content)
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -257,23 +254,6 @@ class SendEmail
         </div>
       </div>
     "
-  end
-
-  def draft_ideas_item(idea)
-    "
-      <div style='background-color: white; margin: 3px 0; padding: 5px;'>
-        <div style='display: inline;'>
-          #{analytics_url('ideas/' + idea.id.to_s, 'draft_ideas', idea.name)}
-        </div>
-      </div>
-    "
-  end
-
-  def draft_colum #draft_ideasの中身はjob内で作る
-    draft_ideas = Idea.where(draft: true)
-    draft_ideas.each do |draft_idea|
-      p draft_idea.name
-    end
   end
 
   def rank(i)

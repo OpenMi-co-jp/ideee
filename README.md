@@ -3,6 +3,13 @@
 
 <!-- TODO Readme書く -->
 
+## アプリURL
+
+https://www.ideee.tech/
+
+## BIツールURL
+https://ideee-metabase.herokuapp.com/
+
 ## セットアップの情報
 
 全セットアップ方法

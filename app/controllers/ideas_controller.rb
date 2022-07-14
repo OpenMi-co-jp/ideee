@@ -110,7 +110,7 @@ class IdeasController < ApplicationController
       suggest_ideas = @idea.same_user_other_ideas.sample(3)
     else
       title = '他アイデアをのぞいてみる'
-      suggest_ideas = Idea.published.eager_load(:idea_tags).sample(3)
+      suggest_ideas = Idea.published.eager_load(%i(idea_tags taggings)).sample(3)
     end
     render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
   end

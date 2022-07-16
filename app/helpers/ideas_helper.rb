@@ -10,10 +10,10 @@ module IdeasHelper
 
   def idea_sort_hash
     {
-      ハート数: :likes_num,
-      コメント数: :comments_num,
-      ビュー数: :view,
-      公開日: :published_at
+      'ハート数': :likes_num,
+      'コメント数': :comments_num,
+      'ビュー数': :view,
+      '公開日': :published_at
     }
   end
 

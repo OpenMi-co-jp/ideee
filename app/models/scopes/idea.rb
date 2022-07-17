@@ -5,7 +5,7 @@ module Scopes::Idea
     # ransackのソートに対応したscope
     ['ASC', 'DESC'].each do |order|
       I18n.t('activerecord.sorts').keys.each do |item|
-        Idea.classs_eval { scope item, -> { order("#{item}": order) }
+        Idea.classs_eval { scope item, -> { order("#{item}": order) }}
       end
     end
   end

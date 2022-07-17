@@ -118,7 +118,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.9.1)
       msgpack (~> 1.0)
-    brakeman (5.2.1)
+    brakeman (5.2.3)
     buftok (0.2.0)
     builder (3.2.4)
     bullet (6.1.5)

@@ -71,18 +71,11 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @sort = params[:sort] || 'likes_num' # アイデアに紐づくlikeの数を数えて、降順に並べる
-    @order = params[:order] || 'desc' # TODO: 検索結果が増えてきたらtag検索を分ける
-    base_ideas = Idea.published.preload(%i[idea_tags user]) # eager_loadでエラー発生
-    ideas = if params[:keyword].present?
-              base_ideas.search(name: params[:keyword]) | base_ideas.tag_name_like(params[:keyword])
-            else
-              base_ideas.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
-            end
-    list = base_ideas.where(id: ideas.pluck(:id)).order("#{@sort}": @order)
-    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
+    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(search_condition)
+    @searched_ideas = @q.result(distinct: true)
+    @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
-    @rank_num = (current_page - 1) * @searched_ideas.limit_value
+    @rank_num = (current_page - 1) * @paged_ideas.limit_value
     @deployed_ideas = Idea.deployed.preload(:user).order(updated_at: 'DESC').first(10)
   end
 
@@ -110,7 +103,7 @@ class IdeasController < ApplicationController
       suggest_ideas = @idea.same_user_other_ideas.sample(3)
     else
       title = '他アイデアをのぞいてみる'
-      suggest_ideas = Idea.published.eager_load(:idea_tags).sample(3)
+      suggest_ideas = Idea.published.eager_load(%i[idea_tags taggings]).sample(3)
     end
     render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
   end
@@ -184,5 +177,17 @@ class IdeasController < ApplicationController
     TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
     Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
     Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
+  end
+
+  def search_condition
+    if params[:q].present?
+      params[:q]
+    elsif params[:difficulty].present?
+      { difficulty_eq: params[:difficulty] }
+    elsif params[:product_apply].present?
+      { product_apply_eq: params[:product_apply] }
+    elsif params[:keyword].present?
+      { name_or_idea_tags_name_cont: params[:keyword] }
+    end
   end
 end

@@ -43,9 +43,16 @@ ja:
         tags_up_to_three: タグ（3つまで入力できます）
         product_url: 作っているアプリ
         team: チーム開発
+        difficulty: 難易度
       comment:
         description: コメント
       team:
         offer: 得られること
         requirement: お願いしたいこと
         status: ステータス
+    sorts:
+      likes_num: ハート数
+      comments_num: コメント数
+      view: ビュー数
+      published_at: 公開日
+      updated_at: 更新日

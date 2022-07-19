@@ -1,17 +1,9 @@
 class TeamsController < ApplicationController
-  prepend_before_action :set_team, except: %i[index new create]
-  before_action :authenticate_user!, except: %i[index]
-  before_action :defined_check, except: %i[index show]
+  prepend_before_action :set_team, except: %i[new create]
+  before_action :authenticate_user!
+  before_action :defined_check, except: %i[show]
   before_action :set_idea, only: %i[new edit stop join activate finish]
   before_action :check_owner, only: %i[edit update stop activate finish]
-
-  def index
-    idea_list = Team.where(status: :active).pluck(:idea_id)
-    list = Idea.where(id: idea_list).eager_load(:user).preload(:idea_tags)
-    @active_team_ideas = Kaminari.paginate_array(list).page(params[:page])
-    current_page = params[:page].nil? ? 1 : params[:page].to_i
-    @rank_num = (current_page - 1) * @active_team_ideas.limit_value
-  end
 
   def show
     @idea = @team.idea

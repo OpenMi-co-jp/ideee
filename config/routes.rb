@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   resources :ideas do
     collection do
       get :search
-      get :tags
       get :suggest
       get :most_comment
       get :most_liked

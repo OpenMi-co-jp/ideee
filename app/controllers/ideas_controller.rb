@@ -79,14 +79,6 @@ class IdeasController < ApplicationController
     @deployed_ideas = Idea.deployed.preload(:user).order(updated_at: 'DESC').first(10)
   end
 
-  def tags
-    @sort = params[:sort] || 'likes_num'
-    @order = params[:order] || 'desc'
-    @tag_name = params[:keyword]
-    list = Idea.eager_load(%i[idea_tags taggings]).with_tag(@tag_name).order("#{@sort}": @order)
-    @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
-  end
-
   def publish
     @idea.update!(draft: false, published_at: Time.now)
     sidekiq_jobs

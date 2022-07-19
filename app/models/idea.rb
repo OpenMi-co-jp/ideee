@@ -58,7 +58,6 @@ class Idea < ApplicationRecord
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
 
-  scope :with_tag, ->(tag_name) { where(idea_tags: { name: tag_name }) }
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_liked, -> { preload(:idea_tags).order(likes_num: 'DESC') }

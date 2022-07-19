@@ -56,7 +56,8 @@
       <h5><%= link_to "あなたのアイデアを投稿しませんか？", new_idea_path %></h5>
     <% end %>
   </div>
-  <% unless params[:product_apply] == 'approved' %>
+  <%# 実現したアイデアを探している場合表示しない %>
+  <% if params[:q].nil? || params[:q][:product_apply_eq].nil? || params[:q][:product_apply_eq] =! '2' %>
     <%= render 'ideas/index/latest_boad', title: '最近実現したアイデア', ideas: @deployed_ideas %>
   <% end %>
 </div>

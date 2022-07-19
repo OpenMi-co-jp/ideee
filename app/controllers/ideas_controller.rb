@@ -72,6 +72,7 @@ class IdeasController < ApplicationController
 
   def search
     @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(search_condition)
+    @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
     @searched_ideas = @q.result(distinct: true)
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i

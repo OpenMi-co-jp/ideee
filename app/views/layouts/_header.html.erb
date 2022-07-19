@@ -24,18 +24,18 @@
           <% end %>
         </li>
         <li>
-          <%= link_to search_ideas_path(sort: :comments_num) do %>
+          <%= link_to search_ideas_path("q[s]": "comments_num desc") do %>
             <i class="material-icons">chat_bubble_outline</i>コメントランキング
           <% end %>
         </li>
         <li>
-          <%= link_to search_ideas_path(sort: :view) do %>
+          <%= link_to search_ideas_path("q[s]": "comments_num desc") do %>
             <i class="material-icons">visibility</i>View数ランキング
           <% end %>
         </li>
         <li class="divider" tabindex="-1"></li>
         <li>
-          <%= link_to teams_path do %>
+          <%= link_to search_ideas_path("q[team_status_eq]": 0) do %>
             <i class="material-icons">groups</i>チーム開発募集中💡
           <% end %>
         </li>
@@ -101,17 +101,17 @@
           <% end %>
         </li>
         <li>
-          <%= link_to search_ideas_path(sort: :comments_num) do %>
+          <%= link_to search_ideas_path("q[s]": "comments_num desc") do %>
             <i class="material-icons">chat_bubble_outline</i>コメントランキング
           <% end %>
         </li>
         <li>
-          <%= link_to search_ideas_path(sort: :view) do %>
+          <%= link_to search_ideas_path("q[s]": "comments_num desc") do %>
             <i class="material-icons">visibility</i>View数ランキング
           <% end %>
         </li>
         <li>
-          <%= link_to teams_path do %>
+          <%= link_to search_ideas_path("q[team_status_eq]": 0) do %>
             <i class="material-icons">groups</i>チーム開発募集中💡
           <% end %>
         </li>

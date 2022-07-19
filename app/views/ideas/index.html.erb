@@ -73,7 +73,7 @@
           <%= render 'ideas/index/ranking_head',
             icon_mark: tag.i('check_circle', class: 'material-icons'),
             board_title: '実現したアイデア',
-            path: search_ideas_path(product_apply: :approved) %>
+            path: search_ideas_path("q[product_apply_eq]": 2) %>
           <%= render_async deployed_ideas_path %>
         </div>
       </div>

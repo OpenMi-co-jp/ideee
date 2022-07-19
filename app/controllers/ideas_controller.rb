@@ -175,11 +175,8 @@ class IdeasController < ApplicationController
   def search_condition
     if params[:q].present?
       params[:q]
-    elsif params[:difficulty].present?
-      { difficulty_eq: params[:difficulty] }
-    elsif params[:product_apply].present?
-      { product_apply_eq: params[:product_apply] }
     elsif params[:keyword].present?
+      # keywordを使わないこともできるがheaderの検索にransackを使いたくないので使用する
       { name_or_idea_tags_name_cont: params[:keyword] }
     end
   end

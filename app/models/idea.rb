@@ -77,19 +77,6 @@ class Idea < ApplicationRecord
     created_at.strftime('%Y.%m.%d')
   end
 
-  def self.search(name: nil, difficulty: nil, product_apply: nil)
-    # TODO: クソコードをリファクタ
-    if name.nil? && difficulty.nil? && product_apply.nil?
-      self
-    elsif name.present?
-      where(['name like?', "%#{name}%"])
-    elsif difficulty.present?
-      where(difficulty: difficulty)
-    elsif product_apply.present?
-      where(product_apply: product_apply)
-    end
-  end
-
   def count_likes
     update_column(:likes_num, likes.size)
   end

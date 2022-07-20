@@ -31,10 +31,10 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
-      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
       if draft_bool
-        redirect_to destination, notice: t('.draft_save')
+        redirect_to @idea, notice: t('.draft_save')
       else
+        destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.now)
         redirect_to destination, notice: t('.success')
@@ -48,10 +48,10 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
-      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
       if draft_bool
-        redirect_to destination, notice: t('.draft_save')
+        redirect_to @idea, notice: t('.draft_save')
       else
+        destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         if params[:commit] == t('default.publish')
           sidekiq_jobs
           @idea.update_attribute(:published_at, Time.now)

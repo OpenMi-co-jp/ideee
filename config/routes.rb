@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   resources :ideas do
     collection do
       get :search
-      get :tags
       get :suggest
       get :most_comment
       get :most_liked
@@ -38,7 +37,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
-  resources :teams, except: %i[destroy] do
+  resources :teams, except: %i[index destroy] do
     member do
       post :join
       post :stop

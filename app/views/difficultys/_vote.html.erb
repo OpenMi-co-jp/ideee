@@ -1,7 +1,7 @@
 <% if current_user %>
   <% if current_user&.voted?(object) %>
     <%# すでに投票していたらそのタグの種類を検索する %>
-    <%= link_to difficulty_tag(object), search_ideas_path(difficulty: object.difficulty_before_type_cast) %>
+    <%= link_to difficulty_tag(object), search_ideas_path("q[difficulty_eq]": object.difficulty_before_type_cast) %>
   <% else %>
     <%# 投票のためのモーダル出現 %>
     <%= link_to difficulty_tag(object),

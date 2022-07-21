@@ -72,19 +72,12 @@ class IdeasController < ApplicationController
 
   def search
     @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(search_condition)
+    @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
     @searched_ideas = @q.result(distinct: true)
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @paged_ideas.limit_value
     @deployed_ideas = Idea.deployed.preload(:user).order(updated_at: 'DESC').first(10)
-  end
-
-  def tags
-    @sort = params[:sort] || 'likes_num'
-    @order = params[:order] || 'desc'
-    @tag_name = params[:keyword]
-    list = Idea.eager_load(%i[idea_tags taggings]).with_tag(@tag_name).order("#{@sort}": @order)
-    @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   def publish
@@ -182,11 +175,8 @@ class IdeasController < ApplicationController
   def search_condition
     if params[:q].present?
       params[:q]
-    elsif params[:difficulty].present?
-      { difficulty_eq: params[:difficulty] }
-    elsif params[:product_apply].present?
-      { product_apply_eq: params[:product_apply] }
     elsif params[:keyword].present?
+      # keywordを使わないこともできるがheaderの検索にransackを使いたくないので使用する
       { name_or_idea_tags_name_cont: params[:keyword] }
     end
   end

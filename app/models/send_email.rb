@@ -190,11 +190,20 @@ class SendEmail
     end
   end
 
-  def draft_remind(user_id)
+  def draft_remind(user_id, idea_id)
+    idea = Idea.find(idea_id)
     body = "
-            <p>眠っているアイデアを編集・公開してみませんか？</p>
-            <p>あなたのアイデア一覧💡:#{analytics_url('users/' + user_id.to_s, 'draft_remind',
-            'https://www.ideee.tech/users/' + user_id.to_s)}</p>
+            <p>
+              眠っているアイデアがあります。<br>
+              せっかくなので編集・公開してみませんか？
+            </p>
+            <b>あなたの下書き💡</b>
+            <p>名前: #{idea.name}</p>
+            <p>作成日: #{idea.created_month_day }</p>
+            <p>
+              URL: #{analytics_url('ideas/' + idea_id.to_s, 'draft_remind',
+              'https://www.ideee.tech/ideas/' + idea_id.to_s)}
+            </p>
           "
 
     subject = '【ideee】下書きのままで眠っているアイデアを助けよう！'

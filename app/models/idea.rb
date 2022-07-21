@@ -47,7 +47,7 @@ class Idea < ApplicationRecord
   has_one :team, dependent: :destroy
   has_rich_text :note
   mount_uploader :icon, ImageUploader
-  after_create :send_draft_remind
+  after_save :send_draft_remind
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :background, presence: true
@@ -77,6 +77,11 @@ class Idea < ApplicationRecord
 
   def created_time
     created_at.strftime('%Y.%m.%d')
+  end
+
+  # 月と日付だけの表示
+  def created_month_day
+    created_at.strftime('%m/%d')
   end
 
   def self.search(name: nil, difficulty: nil, product_apply: nil)
@@ -141,7 +146,7 @@ class Idea < ApplicationRecord
 
   def send_draft_remind
     return unless Rails.env.production? || self.draft
-      RemindDraftJob.delay_for(1.week).perform_later(self.id)
-    end
+
+    RemindDraftJob.delay_for(1.week).perform_later(self.id)
   end
 end

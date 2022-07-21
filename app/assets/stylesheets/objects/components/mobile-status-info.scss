@@ -1,6 +1,7 @@
 .c-mobile-status-info {
   display: flex;
   margin: 15px 0;
+  max-height: 50px;
 
   > div {
     margin-right: 16px;
@@ -34,6 +35,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, .2);
     transition-duration: .3s;
+    max-height: 41px;
 
     a {
       display: block;
@@ -65,33 +67,6 @@
 
       a {
         color: #856404;
-      }
-    }
-
-    &:hover {
-      transition-duration: .3s;
-      transform: scale(1.05);
-    }
-
-    #modal-trigger-difficulty {
-      position: relative;
-
-      &:hover {
-        &::before {
-          content: "難しさを投票";
-          position: absolute;
-          padding: 4px 8px;
-          width: 100%;
-          text-align: center;
-          border: 1px solid #f2f2f2;
-          border-radius: 0.5rem;
-          font-size: 12px;
-          top: -8px;
-          left: 50%;
-          transform: translateX(-50%) translateY(-100%);
-          color: #fff;
-          background-color: #FFBF85;
-        }
       }
     }
   }

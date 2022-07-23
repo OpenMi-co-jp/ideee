@@ -31,47 +31,8 @@
     }
   }
 
-  &__vote {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, .2);
-    transition-duration: .3s;
-    max-height: 41px;
-
-    a {
-      display: block;
-      padding: 10px 20px;
-      width: 100%;
-    }
-
-    &.easy {
-      background-color: #cce5ff;
-      border-color: #b8daff;
-
-      a {
-        color: #004085;
-      }
-    }
-
-    &.middle {
-      background-color: #d4edda;
-      border-color: #c3e6cb;
-
-      a {
-        color: #155724;
-      }
-    }
-
-    &.hard {
-      background-color: #fff3cd;
-      border-color: #ffeeba;
-
-      a {
-        color: #856404;
-      }
-    }
-  }
-
   &__time {
     margin-left: auto;
+    margin-bottom: 10px;
   }
 }

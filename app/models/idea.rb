@@ -121,7 +121,7 @@ class Idea < ApplicationRecord
   end
 
   def voted_percentage(level)
-    counted_num = difficultys.count{ |d| d.level == level }
-    "#{(counted_num.to_f / difficultys.length * 100 ).round(1)} %"
+    counted_num = difficultys.count { |d| d.level == level }
+    "#{(counted_num.to_f / difficultys.length * 100).round(1)} %"
   end
 end

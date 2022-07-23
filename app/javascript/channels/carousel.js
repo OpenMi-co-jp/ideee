@@ -1,5 +1,5 @@
 $(document).on ('turbolinks:load', function() {
-  if ($('body').data('page') != "ideas-index") { return }
+  if (!['ideas-index', 'ideas-search'].includes($('body').data('page'))) { return }
 
   $('.carousel').carousel({ // カルーセルの表示初期設定
     padding: 50,

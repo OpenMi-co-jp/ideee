@@ -90,8 +90,8 @@
     <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>
     <%= render 'common/fund_link', object: @idea %>
   <% end %>
-
-  <%# モーダルの設定 %>
-  <%= render 'ideas/show/vote_modal', object: @idea %>
-  <%= render 'ideas/show/share_modal' %>
 </div>
+
+<%# モーダルの設定 %>
+<%= render 'ideas/show/vote_modal', object: @idea %>
+<%= render 'ideas/show/share_modal' %>

@@ -125,4 +125,9 @@ class Idea < ApplicationRecord
     return unless Rails.env.production? || self.draft
       RemindDraftJob.delay_for(1.week).perform_later(self.id)
   end
+
+  def voted_percentage(level)
+    counted_num = difficultys.count { |d| d.level == level }
+    "#{(counted_num.to_f / difficultys.length * 100).round(1)} %"
+  end
 end

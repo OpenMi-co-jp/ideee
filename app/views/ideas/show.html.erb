@@ -91,6 +91,7 @@
     <%= render 'common/fund_link', object: @idea %>
   <% end %>
 
-  <%= render 'ideas/show/vote_modal' %>
+  <%# モーダルの設定 %>
+  <%= render 'ideas/show/vote_modal', object: @idea %>
   <%= render 'ideas/show/share_modal' %>
 </div>

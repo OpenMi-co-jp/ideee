@@ -38,9 +38,11 @@
               </div>
             <% end %>
             <div class="idea__detail pc">
-              <div class="idea__detail--vote <%= idea.difficulty %>">
-                <%= difficulty_tag(idea) %>
-              </div>
+              <% unless idea.not_yet? %>
+                <div class="idea__detail--vote c-vote-button <%= idea.difficulty %>">
+                  <%= idea.difficulty.capitalize %>
+                </div>
+              <% end %>
               <% user_icon_view ||= 'on' %>
               <% if user_icon_view == 'on' %>
                 <%= link_to user_path(idea.user_id) do %>
@@ -56,9 +58,11 @@
         </div>
         <div class='idea__info'>
           <div class="idea__detail sp">
-            <div class="idea__detail--vote <%= idea.difficulty %>">
-              <%= difficulty_tag(idea) %>
-            </div>
+            <% unless idea.not_yet? %>
+              <div class="idea__detail--vote c-vote-button <%= idea.difficulty %>">
+                <%= idea.difficulty.capitalize %>
+              </div>
+            <% end %>
             <%= link_to user_path(idea.user_id) do %>
               <% user_icon(idea.user, size: 'small') %>
             <% end %>

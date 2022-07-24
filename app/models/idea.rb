@@ -124,6 +124,5 @@ class Idea < ApplicationRecord
   def send_draft_remind
     return unless Rails.env.production? || self.draft
       RemindDraftJob.delay_for(1.week).perform_later(self.id)
-    end
   end
 end

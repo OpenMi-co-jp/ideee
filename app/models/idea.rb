@@ -119,4 +119,9 @@ class Idea < ApplicationRecord
 
     user.ideas.published.eager_load(:idea_tags).where.not(id: id)
   end
+
+  def voted_percentage(level)
+    counted_num = difficultys.count { |d| d.level == level }
+    "#{(counted_num.to_f / difficultys.length * 100).round(1)} %"
+  end
 end

@@ -1,5 +1,6 @@
-<% if object.idea_tags.present? %>
+<% idea_tags = object.idea_tags %>
+<% if idea_tags.present? %>
   <div class='mb-1'>
-    <%= render object.idea_tags %>
+    <%= render idea_tags %>
   </div>
 <% end %>

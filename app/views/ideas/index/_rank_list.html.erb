@@ -33,22 +33,26 @@
                 <i class="material-icons">phonelink</i>
               </div>
             <% end %>
-            <div class="idea__detail pc">
-              <div class="idea__detail--vote <%= idea.difficulty %>">
-                <%= difficulty_tag(idea) %>
+            <% unless idea.not_yet? %>
+              <div class="idea__detail pc">
+                <div class="idea__detail--vote <%= idea.difficulty %>">
+                  <%= idea.difficulty.capitalize %>
+                </div>
+                <%= link_to user_path(idea.user_id) do %>
+                  <% user_icon(idea.user, size: 'small') %>
+                <% end %>
               </div>
-              <%= link_to user_path(idea.user_id) do %>
-                <% user_icon(idea.user, size: 'small') %>
-              <% end %>
-            </div>
+            <% end %>
           </div>
           <%= render 'tags/links', object: idea %>
         </div>
         <div class='idea__info'>
           <div class="idea__detail sp">
-            <div class="idea__detail--vote <%= idea.difficulty %>">
-              <%= difficulty_tag(idea) %>
-            </div>
+            <% unless idea.not_yet? %>
+              <div class="idea__detail--vote <%= idea.difficulty %>">
+                <%= idea.difficulty.capitalize %>
+              </div>
+            <% end %>
             <%= link_to user_path(idea.user_id) do %>
               <% user_icon(idea.user, size: 'small') %>
             <% end %>

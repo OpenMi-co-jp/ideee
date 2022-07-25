@@ -1,11 +1,9 @@
 $(document).on ('turbolinks:load', function(){
   if ($('body').data('page') != "ideas-show") { return }
 
-  if(window.sessionStorage.getItem('show_count')){
+  if(window.sessionStorage.getItem('show_idea') == location.pathname){
     $('#modal_difficulty').modal('open');
   }
 
-  window.sessionStorage.setItem('show_count','1');
-
-  console.log(window.sessionStorage.getItem('show_count'));
+  window.sessionStorage.setItem('show_idea',location.pathname);
 })

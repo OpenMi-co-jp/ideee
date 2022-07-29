@@ -190,6 +190,31 @@ class SendEmail
     end
   end
 
+  def draft_remind(user_id, idea_id)
+    idea = Idea.find(idea_id)
+    body = "
+            <p>
+              眠っているアイデアがあります。<br>
+              せっかくなので編集・公開してみませんか？
+            </p>
+            <b>あなたの下書き💡</b>
+            <p>名前: #{idea.name}</p>
+            <p>作成日: #{idea.created_month_day}</p>
+            <p>
+              URL: #{analytics_url('ideas/' + idea_id.to_s, 'draft_remind',
+                                   'https://www.ideee.tech/ideas/' + idea_id.to_s)}
+            </p>
+          "
+
+    subject = '【ideee】下書きのままで眠っているアイデアを助けよう！'
+    content = Content.new(type: 'text/html', value: html_frame(body, 'draft_remind'))
+
+    user_email = User.find(user_id).email
+    to = Email.new(email: user_email)
+    mail = Mail.new(@from, subject, to, content)
+    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
   private
 
   def html_frame(body, source)

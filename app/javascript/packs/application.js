@@ -37,3 +37,4 @@ require("channels/carousel");
 require("channels/modal");
 require("channels/idea/validation");
 require("channels/header_scroll");
+require("channels/idea/modal_push");

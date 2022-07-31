@@ -3,6 +3,9 @@ class SendEmail
   require 'sendgrid-ruby'
   include SendGrid
 
+  # イベント用に作ったメールを待避
+  include EventEmail
+
   def initialize
     @from = Email.new(email: 'ideee.info@gmail.com') # SendGridの管理画面でSenderに登録したアドレス
     @sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
@@ -129,17 +132,17 @@ class SendEmail
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
-  def notification_message(team_members, message.user, message.room, message.content)
+  def notification_message(team_members, sender, room, content)
     body = "
             <p>
               チーム開発メンバーからメッセージが来ています！確認しましょう！
             </p>
             <hr>
-            <b>メッセージ送信者:#{user.name}</b>
+            <b>メッセージ送信者:#{sender.name}</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{analytics_url('users/' + message.user.id, 'notification_message', commenter.name)}
+              #{analytics_url('users/' + sender.id, 'notification_message', sender.name)}
             </div>
-            <b>メッセージ内容: #{message.content}</b>
+            <b>メッセージ内容: #{content}</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               #{xss_support(description)}
             </div>
@@ -158,6 +161,7 @@ class SendEmail
     to = Email.new(email: user_email)
     mail = Mail.new(@from, subject, to, content)
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
 
   private
 

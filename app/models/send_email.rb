@@ -129,6 +129,36 @@ class SendEmail
     response = @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
+  def notification_message(team_members, message.user, message.room, message.content)
+    body = "
+            <p>
+              チーム開発メンバーからメッセージが来ています！確認しましょう！
+            </p>
+            <hr>
+            <b>メッセージ送信者:#{user.name}</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              #{analytics_url('users/' + message.user.id, 'notification_message', commenter.name)}
+            </div>
+            <b>メッセージ内容: #{message.content}</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              #{xss_support(description)}
+            </div>
+            <p>メッセージページに飛ぶ: #{analytics_url('rooms/' + room.id.to_s, 'notification_message',
+                                                     'https://www.ideee.tech/rooms/' + room.id.to_s)}</p>
+          "
+
+    subject = '【ideee】チーム開発メンバーからメッセージが来ました！チーム開発しようぜ！'
+    content = Content.new(type: 'text/html', value: html_frame(body, 'notification_message'))
+
+
+    members = message.room.team.members
+    members.map do |member|
+      user_email = member.email
+    end
+    to = Email.new(email: user_email)
+    mail = Mail.new(@from, subject, to, content)
+    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+
   private
 
   def html_frame(body, source)

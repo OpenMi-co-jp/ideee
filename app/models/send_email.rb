@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/ClassLength
 class SendEmail
   require 'sendgrid-ruby'
   include SendGrid
@@ -35,12 +34,12 @@ class SendEmail
       users.map do |user|
         to = Email.new(email: user&.email)
         mail = Mail.new(@from, subject, to, content)
-        response = @sg.client.mail._('send').post(request_body: mail.to_json)
+        @sg.client.mail._('send').post(request_body: mail.to_json)
       end
     else # 送信したいアドレスが一つの時
       to = Email.new(email: users&.email)
       mail = Mail.new(@from, subject, to, content)
-      response = @sg.client.mail._('send').post(request_body: mail.to_json)
+      @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 
@@ -62,7 +61,7 @@ class SendEmail
 
     to = Email.new(email: idea.user.email)
     mail = Mail.new(@from, subject, to, content)
-    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+    @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
   def confirm_apply(idea)
@@ -83,7 +82,7 @@ class SendEmail
 
     to = Email.new(email: idea.user.email)
     mail = Mail.new(@from, subject, to, content)
-    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+    @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
   def send_heart_ranking_and_new_idea(commented_ideas, new_ideas)
@@ -103,7 +102,7 @@ class SendEmail
     User.all.map do |user|
       to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
-      response = @sg.client.mail._('send').post(request_body: mail.to_json)
+      @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 
@@ -129,38 +128,36 @@ class SendEmail
     user_email = User.find(user_id).email
     to = Email.new(email: user_email)
     mail = Mail.new(@from, subject, to, content)
-    response = @sg.client.mail._('send').post(request_body: mail.to_json)
+    @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
-  def notification_message(team_members, sender, room, content)
+  def notification_message(team_members, sender, message)
     body = "
             <p>
-              チーム開発メンバーからメッセージが来ています！確認しましょう！
+              チーム開発メンバーからメッセージが来ています。<br>
+              確認しましょう！
             </p>
             <hr>
-            <b>メッセージ送信者:#{sender.name}</b>
-            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{analytics_url('users/' + sender.id, 'notification_message', sender.name)}
+            <b>メッセージ送信者:</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px; margin-bottom: 20px'>
+              #{analytics_url('users/' + sender.id.to_s, 'notification_message', sender.name)}
             </div>
-            <b>メッセージ内容: #{content}</b>
+            <b>メッセージ内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{xss_support(description)}
+              #{message.content.body}
             </div>
-            <p>メッセージページに飛ぶ: #{analytics_url('rooms/' + room.id.to_s, 'notification_message',
-                                                     'https://www.ideee.tech/rooms/' + room.id.to_s)}</p>
+            <p>メッセージページに飛ぶ: #{analytics_url('rooms/' + message.room_id.to_s, 'notification_message',
+                                                       'https://www.ideee.tech/rooms/' + message.room_id.to_s)}</p>
           "
 
-    subject = '【ideee】チーム開発メンバーからメッセージが来ました！チーム開発しようぜ！'
+    subject = '【ideee】チーム開発メンバーからメッセージが来ました📮'
     content = Content.new(type: 'text/html', value: html_frame(body, 'notification_message'))
 
-
-    members = message.room.team.members
-    members.map do |member|
-      user_email = member.email
+    team_members.map do |member|
+      to = Email.new(email: member&.email)
+      mail = Mail.new(@from, subject, to, content)
+      @sg.client.mail._('send').post(request_body: mail.to_json)
     end
-    to = Email.new(email: user_email)
-    mail = Mail.new(@from, subject, to, content)
-    response = @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
   private
@@ -245,4 +242,3 @@ class SendEmail
         .gsub(/&lt;br&gt;/, '<br>') # 改行だけは反映されるように設定
   end
 end
-# rubocop:enable Metrics/ClassLength

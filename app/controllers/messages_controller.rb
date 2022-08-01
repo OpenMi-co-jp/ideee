@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.create!(room_id: params[:room_id], user: current_user, content: message_params[:content])
-    NotificationMessageJob.perform_now(message)
+    NotificationMessageJob.perform_later(message)
     redirect_to message.room, notice: t('.success')
   end
 

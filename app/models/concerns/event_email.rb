@@ -43,7 +43,7 @@ module EventEmail
     User.find_each.map do |user|
       to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
-      response = @sg.client.mail._('send').post(request_body: mail.to_json)
+      @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 
@@ -88,7 +88,7 @@ module EventEmail
     User.find_each.map do |user|
       to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
-      response = @sg.client.mail._('send').post(request_body: mail.to_json)
+      @sg.client.mail._('send').post(request_body: mail.to_json)
     end
   end
 end

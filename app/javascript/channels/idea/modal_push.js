@@ -2,9 +2,10 @@ $(document).on ('turbolinks:load', function(){
   if ($('body').data('page') != "ideas-show") { return }
 
   const has_session = 'modal_session_check' + $('#modal_difficulty').data('id')
+  const modal_check = $('#modal_difficulty').data('modal')
 
   // ideaのセッションがあればシェアモーダルを出現
-  if (window.sessionStorage.getItem(has_session)){
+  if (window.sessionStorage.getItem(has_session) && modal_check){
     $('#modal_difficulty').modal('open');
   } else {
     sessionStorage.removeItem(has_session);

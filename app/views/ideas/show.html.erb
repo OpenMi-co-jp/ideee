@@ -93,5 +93,7 @@
 </div>
 
 <%# モーダルの設定 %>
-<%= render 'ideas/show/vote_modal', object: @idea %>
+<% unless current_user&.voted?(@idea) %>
+  <%= render 'ideas/show/vote_modal', object: @idea %>
+<% end %>
 <%= render 'ideas/show/share_modal' %>

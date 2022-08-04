@@ -93,5 +93,10 @@
 </div>
 
 <%# モーダルの設定 %>
-<%= render 'ideas/show/vote_modal', object: @idea %>
-<%= render 'ideas/show/share_modal' %>
+<% unless current_user&.voted?(@idea) || @idea.draft %>
+  <%= render 'ideas/show/vote_modal', object: @idea %>
+<% end %>
+<%# パラメータshareがある時にモーダルを設定 %>
+<% if params[:share].present? %>
+  <%= render 'ideas/show/share_modal' %>
+<% end %>

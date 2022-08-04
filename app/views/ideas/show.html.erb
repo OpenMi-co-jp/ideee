@@ -93,7 +93,7 @@
 </div>
 
 <%# モーダルの設定 %>
-<% unless current_user&.voted?(@idea) || @idea.draft %>
+<% unless !current_user || current_user&.voted?(@idea) || @idea.draft %>
   <%= render 'ideas/show/vote_modal', object: @idea %>
 <% end %>
 <%# パラメータshareがある時にモーダルを設定 %>

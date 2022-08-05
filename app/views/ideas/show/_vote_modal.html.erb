@@ -1,5 +1,5 @@
 <div id="modal_difficulty" class="modal" data-id="<%= @idea.id %>">
-  <div class="modal-content">
+  <div class="modal-content" id="<%= 'js_voted_mark' if current_user&.voted?(object) %>">
     <div class="center">
       <%= render 'difficultys/vote_modal_titles', object: object %>
     </div>

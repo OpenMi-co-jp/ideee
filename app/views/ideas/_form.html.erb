@@ -72,6 +72,11 @@
               <%= length_invalid_text(255) %>
             </div>
             <div class="field input-field">
+              <%= form.text_area :monetize, placeholder: '収益化するならどうやるか', data: { length: 255 }, class: 'materialize-textarea validate' %>
+              <%= form.label :monetize, class: 'active' %>
+              <%= length_invalid_text(255) %>
+            </div>
+            <div class="field input-field">
               <%= form.text_area :similar, placeholder: '類似サービス・競合', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :similar, class: 'active' %>
               <%= length_invalid_text(255) %>

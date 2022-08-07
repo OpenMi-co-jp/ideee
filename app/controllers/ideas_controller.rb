@@ -137,7 +137,7 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea)
           .permit(
-            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :github_url, :note, :view, :user_id, :commit, :product_url
+            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :user_id, :commit, :product_url
           )
           .merge(user: current_user, draft: draft_bool)
   end

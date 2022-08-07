@@ -14,6 +14,7 @@
 #  icon                                                     :string(255)
 #  issue                                                    :string(255)
 #  likes_num                                                :integer          default(0)
+#  monetize                                                 :string(255)
 #  name                                                     :string(255)
 #  note                                                     :text(65535)
 #  product_apply                                            :integer          default("no_apply")

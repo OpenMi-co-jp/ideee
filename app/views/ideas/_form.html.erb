@@ -90,7 +90,7 @@
         </li>
       </ul>
       <div class="field">
-        <%= form.label :note %>
+        <%= form.label :note %><a class="help-tip note-guide">?</a>
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
       <% if idea.team.nil? || idea.id.nil? || idea.draft %>

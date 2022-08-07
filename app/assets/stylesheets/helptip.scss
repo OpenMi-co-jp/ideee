@@ -26,6 +26,11 @@
       background-color: #fff;
     }
 
+    &.note-guide::before {
+      content: "画像の挿入や制限に超過分の文字入力ができます。";
+      width: 190px;
+    }
+
     &.product-url::before {
       content: "プロダクトとして承認されるとログインなしでサイトが閲覧可能になります。";
       width: 260px;

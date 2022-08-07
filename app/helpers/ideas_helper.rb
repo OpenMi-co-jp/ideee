@@ -15,4 +15,12 @@ module IdeasHelper
       idea.published_time
     end
   end
+
+  def length_invalid_text(length)
+    tag.span '', class: 'helper-text', data: { error: "#{length}文字以内で入力してください。", success: 'OK' }
+  end
+
+  def between_length_invalid_text(length)
+    tag.span '', class: 'helper-text', data: { error: "1〜#{length}文字で入力してください。", success: 'OK' }
+  end
 end

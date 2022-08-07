@@ -28,7 +28,7 @@
       <div class="field input-field">
         <%= form.text_field :name, placeholder: 'アイデア名', data: { length: 50 }, class: 'validate', required:'required' %>
         <%= form.label :name, class: 'required active' %>
-        <span class="helper-text" data-error="アイデア名を入力してください。"></span>
+        <span class="helper-text" data-error="1~50文字で入力してください。" data-success="OK"></span>
       </div>
       <div class="field input-field">
         <div>
@@ -38,38 +38,43 @@
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
       <div class="field input-field">
-        <%= form.text_area :background, placeholder: '背景やストーリー', class: 'materialize-textarea validate', required:'required' %>
+        <%= form.text_area :background, placeholder: '背景やストーリー', data: { length: 255 }, class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :background, class: 'required active' %>
-        <span class="helper-text" data-error="背景を入力してください。"></span>
+        <span class="helper-text" data-error="1~255文字で入力してください。" data-success="OK"></span>
       </div>
       <div class="field input-field">
-        <%= form.text_area :goal, placeholder: 'どうなって欲しいか', class: 'materialize-textarea validate', required:'required' %>
+        <%= form.text_area :goal, placeholder: '提供されうる価値', data: { length: 255 }, class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :goal, class: 'required active' %>
-        <span class="helper-text" data-error="ゴールを入力してください。"></span>
+        <span class="helper-text" data-error="1~255文字で入力してください。" data-success="OK"></span>
       </div>
       <ul class="collapsible">
         <li>
           <div class="collapsible-header"><i class="material-icons">expand_more</i>さらにブラッシュアップ</div>
           <div class="collapsible-body">
             <div class="field input-field">
-              <%= form.text_area :issue, placeholder: '課題・困っていること', class: 'materialize-textarea' %>
+              <%= form.text_area :issue, placeholder: '課題・困っていること', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :issue, class: 'active' %>
+              <span class="helper-text" data-error="255文字以内で入力してください。" data-success="OK"></span>
             </div>
             <div class="field input-field">
-              <%= form.text_area :wish_function, placeholder: '欲しい機能', class: 'materialize-textarea' %>
+              <%= form.text_area :wish_function, placeholder: '欲しい機能', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :wish_function, class: 'active' %>
+              <span class="helper-text" data-error="255文字以内で入力してください。" data-success="OK"></span>
             </div>
             <div class="field input-field">
-              <%= form.text_area :hypothesis, placeholder: '検証のための仮説', class: 'materialize-textarea' %>
+              <%= form.text_area :hypothesis, placeholder: '検証のための仮説', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :hypothesis, class: 'active' %>
+              <span class="helper-text" data-error="255文字以内で入力してください。" data-success="OK"></span>
             </div>
             <div class="field input-field">
-              <%= form.text_area :target, placeholder: 'サービスを利用する典型的なユーザー像', class: 'materialize-textarea' %>
+              <%= form.text_area :target, placeholder: 'サービスを利用する典型的なユーザー像', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :target, class: 'active' %>
+              <span class="helper-text" data-error="255文字以内で入力してください。" data-success="OK"></span>
             </div>
             <div class="field input-field">
-              <%= form.text_area :similar, placeholder: '類似サービス・競合', class: 'materialize-textarea' %>
+              <%= form.text_area :similar, placeholder: '類似サービス・競合', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :similar, class: 'active' %>
+              <span class="helper-text" data-error="255文字以内で入力してください。" data-success="OK"></span>
             </div>
             <div class="field input-field">
               <%= form.url_field :github_url, placeholder: 'GitHubのURL', class: 'validate' %>

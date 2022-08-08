@@ -10,8 +10,12 @@ module DeviseHelper
     tag.p "＼ #{submit} ／", class: 'omniauth-sign-up'
   end
 
-  def password_helper_text
-    tag.span '', class: 'helper-text', data: { error: "#{@minimum_password_length}文字以上のパスワードを入力してください。" }
+  def email_valid_text
+    tag.span '', class: 'helper-text', data: { error: '正しい形式のメールアドレスを入力してください。', success: 'OK' }
+  end
+
+  def password_valid_text
+    tag.span '', class: 'helper-text', data: { error: "#{@minimum_password_length}文字以上のパスワードを入力してください。", success: 'OK' }
   end
 
   # 前回のログイン方法を出力

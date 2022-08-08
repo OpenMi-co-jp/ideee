@@ -21,15 +21,16 @@
 
       <div class="col s12 l8">
         <div class="field input-field">
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', class: 'validate', required:'required active' %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', data: { length: 30 }, class: 'validate', required:'required active' %>
           <%= f.label :name, class: 'required active' %>
-          <span class="helper-text" data-error="ユーザー名を入力してください。"></span>
+          <%= between_length_invalid_text(30) %>
+          <span class="helper-text" data-error="1~30文字で入力してください。" data-success="OK"></span>
         </div>
 
         <div class="field input-field">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com', class: 'validate', required:'required active' %>
           <%= f.label :email, class: 'required active' %>
-          <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
+          <%= email_valid_text %>
         </div>
 
         <div class="field input-field">

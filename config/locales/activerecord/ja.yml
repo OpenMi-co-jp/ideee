@@ -35,6 +35,7 @@ ja:
         wish_function: メイン機能
         hypothesis: 仮説（数値的）
         target: ターゲット（ペルソナ）
+        monetize: マネタイズ方法
         similar: 類似サービス
         github_url: GitHubのURL
         note: 補足

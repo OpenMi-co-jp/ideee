@@ -115,7 +115,7 @@ class SendEmail
             </p>
             <b>あなたの下書き💡</b>
             <p>名前: #{idea.name}</p>
-            <p>作成日: #{idea.created_month_day}</p>
+            <p>作成日: #{idea.created_time}</p>
             <p>
               URL: #{analytics_url('ideas/' + idea_id.to_s, 'draft_remind',
                                    'https://www.ideee.tech/ideas/' + idea_id.to_s)}

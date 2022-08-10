@@ -4,9 +4,10 @@ class SendCommentEmailJob < ApplicationJob
   def perform(current_user, idea, description)
     return unless Rails.env.production?
 
-    commented_users = idea.comment_users.where.not(id: current_user.id).distinct
-    return if commented_users.nil?
+    users = [idea.user].push(idea.comment_users.uniq).flatten
+    users.delete(self)
+    return if users.nil?
 
-    SendEmail.new.comment(commented_users, current_user, idea, description)
+    SendEmail.new.comment(users, current_user, idea, description)
   end
 end

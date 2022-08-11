@@ -20,6 +20,12 @@ module UsersHelper
     "https://twitter.com/#{id}"
   end
 
+  def github_url(id)
+    return if id.nil?
+
+    "https://github.com/#{id}"
+  end
+
   # ユーザーのタイプをアイコンで表示
   def user_definiton(user, ver = 'normal')
     case user.definition

@@ -52,6 +52,13 @@
         </div>
 
         <div class="field input-field">
+          <div>
+            <%= f.label :github_id, class: 'active' %>
+          </div>
+          <%= f.text_field :github_id, placeholder: 'Github ID' %>
+        </div>
+
+        <div class="field input-field">
           <%= f.text_field :site_url, placeholder: 'サイトURL' %>
           <%= f.label :site_url, class: 'active' %>
         </div>

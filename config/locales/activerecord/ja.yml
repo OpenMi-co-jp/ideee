@@ -19,7 +19,8 @@ ja:
         definition: タイプ
         point: コントリビュート数
         icon: プロフィール画像
-        twitter_id: TwitterID
+        twitter_id: Twitter ID
+        github_id: Github ID
         remote_url: リモート画像
         site_url: サイトURL
         provider:

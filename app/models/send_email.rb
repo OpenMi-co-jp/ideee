@@ -172,6 +172,30 @@ class SendEmail
     "
   end
 
+  def user_icon_link(user)
+    "
+      <div style='background-color: #F5F5F5; padding: 10px 5px; display: flex;'>
+        <a href='https://www.ideee.tech/users/#{user.id}?utm_source=notification_like&utm_medium=mail&utm_id=user_#{user.id}', target: '_blank'>
+          #{user_image(user)}
+        </a>
+        <div style='margin: 0 10px;'>
+          <a href='https://www.ideee.tech/users/#{user.id}?utm_source=notification_like&utm_medium=mail&utm_id=user_#{user.id}', target: '_blank'>
+            <b>#{user.name}</b>
+          </a>
+          <div>#{xss_support(user.description)}</div>
+        </div>
+      </div>
+      <hr>
+    "
+  end
+
+  def user_image(user)
+    url = user.icon.file.present? ? user.icon.url : user.remote_url
+    return if url.nil?
+
+    "<img src='#{url}' loading='lazy' width='60' height='60'>"
+  end
+
   def xss_support(text)
     text.gsub(/\R/, '<br>')
         .gsub(/&/, '&amp;')

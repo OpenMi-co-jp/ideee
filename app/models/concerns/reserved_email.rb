@@ -25,12 +25,29 @@ module ReservedEmail
     end
   end
 
+  def likes(email_to, notifications, action_users)
+    body = "
+        <b>アイデアに需要があるようです！</b>
+        <hr>
+        <h4>ハートを送られたアイデア</h4>
+        #{idea_list(notifications.map(&:idea))}
+        <h4>ハートを送ってくれた人</h4>
+        #{user_link_list(action_users)}
+      "
+    subject = "【ideee】ハートのお知らせ 💛"
+    content = Content.new(type: 'text/html', value: html_frame(body, 'likes'))
+
+    to = Email.new(email: email_to)
+    mail = Mail.new(@from, subject, to, content)
+    @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
   private
 
   def ranking_idea(commented_ideas)
     str = ''
     commented_ideas.each.with_index(1) do |idea, i|
-      str += idea_ranking_item(rank(i), idea)
+      str += idea_ranking_item(rank: rank(i), idea: idea)
     end
     str
   end
@@ -38,19 +55,35 @@ module ReservedEmail
   def new_idea_colum(new_ideas)
     str = ''
     new_ideas.each.with_index(1) do |idea, i|
-      str += idea_ranking_item(number_list(i), idea)
+      str += idea_ranking_item(rank: number_list(i), idea: idea)
     end
     str
   end
 
-  def idea_ranking_item(rank, idea)
+  def idea_list(ideas)
+    str = ''
+    ideas.each do |idea|
+      str += idea_item_with_like(idea)
+    end
+    str
+  end
+
+  def idea_item_with_like(idea)
     "
       <div style='background-color: white; margin: 3px 0; padding: 5px;'>
         <div style='display: inline;'>
-          <b>#{rank}</b>#{analytics_url('ideas/' + idea.id.to_s, 'ranking', idea.name)} (💬#{idea.comments_num}) by #{idea.user.name}
+          💛 #{idea.likes_num} 💬 #{idea.comments_num} #{analytics_url('ideas/' + idea.id.to_s, 'ranking', idea.name)}
         </div>
       </div>
     "
+  end
+
+  def user_link_list(users)
+    str = ''
+    users.each do |user|
+      str += user_icon_link(user)
+    end
+    str
   end
 
   def rank(i)

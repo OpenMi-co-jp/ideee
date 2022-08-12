@@ -24,7 +24,6 @@
           <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', data: { length: 30 }, class: 'validate', required:'required active' %>
           <%= f.label :name, class: 'required active' %>
           <%= between_length_invalid_text(30) %>
-          <span class="helper-text" data-error="1~30文字で入力してください。" data-success="OK"></span>
         </div>
 
         <div class="field input-field">
@@ -49,6 +48,13 @@
             <%= f.label :twitter_id, class: 'active' %><a class="help-tip twitter-id">?</a>
           </div>
           <%= f.text_field :twitter_id, placeholder: 'Twitter ID' %>
+        </div>
+
+        <div class="field input-field">
+          <div>
+            <%= f.label :github_id, class: 'active' %>
+          </div>
+          <%= f.text_field :github_id, placeholder: 'Github ID' %>
         </div>
 
         <div class="field input-field">

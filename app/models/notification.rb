@@ -24,5 +24,5 @@ class Notification < ApplicationRecord
   # visitedは活用事例が無ければ削除予定
   belongs_to :visited, class_name: 'User', foreign_key: 'visited_id', optional: true
 
-  scope :not_sent_likes, -> { where(notificatable_type: "LikeIdea").where(send_at: nil) }
+  scope :not_sent_likes, -> { where(notificatable_type: 'LikeIdea').where(send_at: nil) }
 end

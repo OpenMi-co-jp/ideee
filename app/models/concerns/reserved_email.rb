@@ -34,7 +34,7 @@ module ReservedEmail
         <h4>ハートを送ってくれた人</h4>
         #{user_link_list(action_users)}
       "
-    subject = "【ideee】ハートのお知らせ 💛"
+    subject = '【ideee】ハートのお知らせ 💛'
     content = Content.new(type: 'text/html', value: html_frame(body, 'likes'))
 
     to = Email.new(email: email_to)
@@ -46,8 +46,8 @@ module ReservedEmail
 
   def ranking_idea(commented_ideas)
     str = ''
-    commented_ideas.each.with_index(1) do |idea, i|
-      str += idea_ranking_item(rank: rank(i), idea: idea)
+    commented_ideas.each.with_index(1) do |idea, index|
+      str += idea_ranking_item(rank: rank(index), idea: idea)
     end
     str
   end
@@ -55,7 +55,7 @@ module ReservedEmail
   def new_idea_colum(new_ideas)
     str = ''
     new_ideas.each.with_index(1) do |idea, i|
-      str += idea_ranking_item(rank: number_list(i), idea: idea)
+      str += idea_ranking_item(rank: "#{i}💡", idea: idea)
     end
     str
   end
@@ -72,7 +72,7 @@ module ReservedEmail
     "
       <div style='background-color: white; margin: 3px 0; padding: 5px;'>
         <div style='display: inline;'>
-          💛 #{idea.likes_num} 💬 #{idea.comments_num} #{analytics_url('ideas/' + idea.id.to_s, 'ranking', idea.name)}
+          💛 #{idea.likes_num} 💬 #{idea.comments_num} #{analytics_url("ideas/#{idea.id}", 'ranking', idea.name)}
         </div>
       </div>
     "
@@ -86,19 +86,16 @@ module ReservedEmail
     str
   end
 
-  def rank(i)
-    if i == 1
-      "#{i}位👑"
-    elsif i == 2
-      "#{i}位🥈"
-    elsif i == 3
-      "#{i}位🥉"
+  def rank(index)
+    case index
+    when 1
+      "#{index}位👑"
+    when 2
+      "#{index}位🥈"
+    when 3
+      "#{index}位🥉"
     else
-      "#{i}位 "
+      "#{index}位 "
     end
-  end
-
-  def number_list(i)
-    "#{i}💡"
   end
 end

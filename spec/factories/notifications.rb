@@ -5,6 +5,7 @@
 #  id                 :bigint           not null, primary key
 #  checked            :boolean          default(FALSE), not null
 #  notificatable_type :string(255)
+#  send_at            :datetime
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  idea_id            :integer
@@ -23,6 +24,6 @@ FactoryBot.define do
     idea_id { 1 }
     checked { false }
     notificatable_id { 1 }
-    notificatable_type { 'Like' }
+    notificatable_type { 'LikeIdea' }
   end
 end

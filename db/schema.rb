@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_092844) do
+ActiveRecord::Schema.define(version: 2022_08_11_125845) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_092844) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "notificatable_id"
     t.string "notificatable_type"
+    t.datetime "send_at"
     t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 

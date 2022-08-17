@@ -193,7 +193,7 @@ class SendEmail
     url = user.icon.file.present? ? user.icon.url : user.remote_url
     return if url.nil?
 
-    "<img src='#{url}' loading='lazy' width='60' height='60'>"
+    "<img src='#{url}' loading='lazy' width='60' height='60' alt='#{user.name}のアイコン'>"
   end
 
   def xss_support(text)

@@ -175,9 +175,7 @@ class SendEmail
   def user_icon_link(user)
     "
       <div style='background-color: #F5F5F5; padding: 10px 5px; display: flex;'>
-        <a href='https://www.ideee.tech/users/#{user.id}?utm_source=notification_like&utm_medium=mail&utm_id=user_#{user.id}', target: '_blank'>
-          #{user_image(user)}
-        </a>
+        #{user_image(user)}
         <div style='margin: 0 10px;'>
           <a href='https://www.ideee.tech/users/#{user.id}?utm_source=notification_like&utm_medium=mail&utm_id=user_#{user.id}', target: '_blank'>
             <b>#{user.name}</b>
@@ -193,7 +191,7 @@ class SendEmail
     url = user.icon.file.present? ? user.icon.url : user.remote_url
     return if url.nil?
 
-    "<img src='#{url}' loading='lazy' width='60' height='60'>"
+    "<img src='#{url}' loading='lazy' width='60' height='60' alt='#{user.name}のアイコン'>"
   end
 
   def xss_support(text)

@@ -175,7 +175,9 @@ class SendEmail
   def user_icon_link(user)
     "
       <div style='background-color: #F5F5F5; padding: 10px 5px; display: flex;'>
-        #{user_image(user)}
+        <a href='https://www.ideee.tech/users/#{user.id}?utm_source=notification_like&utm_medium=mail&utm_id=user_#{user.id}', target: '_blank'>
+          #{user_image(user)}
+        </a>
         <div style='margin: 0 10px;'>
           <a href='https://www.ideee.tech/users/#{user.id}?utm_source=notification_like&utm_medium=mail&utm_id=user_#{user.id}', target: '_blank'>
             <b>#{user.name}</b>

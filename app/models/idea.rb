@@ -21,7 +21,7 @@
 #  product_url                                              :string(255)
 #  published_at                                             :datetime
 #  similar                                                  :string(255)
-#  stance                                                   :integer          default("free")
+#  stance                                                   :integer          default("free_right")
 #  target                                                   :string(255)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
@@ -60,7 +60,7 @@ class Idea < ApplicationRecord
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
-  enum stance: { free: 0, personal: 1, team: 2 }
+  enum stance: { free_right: 0, personal_project: 1, team_project: 2 }
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }

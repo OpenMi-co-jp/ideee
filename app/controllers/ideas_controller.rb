@@ -34,7 +34,7 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
+        destination = params.dig(:idea, :stance) == 'team_project' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.now)
         redirect_to destination, notice: t('.success')
@@ -56,7 +56,7 @@ class IdeasController < ApplicationController
           destination = idea_path(@idea, share: true)
           @idea.update_attribute(:published_at, Time.now)
         end
-        destination = new_team_path(idea_id: @idea) if params.dig(:idea, :team_switch) == 'true'
+        destination = new_team_path(idea_id: @idea) if params.dig(:idea, :stance) == 'team_project'
         destination ||= @idea
         Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to destination, notice: t('.success')
@@ -139,7 +139,7 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea)
           .permit(
-            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :user_id, :commit, :product_url
+            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :stance, :user_id, :commit, :product_url
           )
           .merge(user: current_user, draft: draft_bool)
   end

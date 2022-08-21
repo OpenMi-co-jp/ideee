@@ -8,7 +8,7 @@ module EventEmail
   def event_new_year
     body = "
             <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank'>
-              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;'>
+              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;' alt='お年玉キャンペーン'>
             </a>
             <h4 style='color: #FF862E;'>🎍ideeeお年玉キャンペーン🎍</h4>
             <hr>
@@ -51,7 +51,7 @@ module EventEmail
   def event_valentine
     body = "
             <a href='https://www.ideee.tech/events/valentine?utm_source=event_mail&utm_medium=mail&utm_id=valentine' target='_blank'>
-              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/valentine_event.png' style='max-height: 400px; margin: 0 auto;'>
+              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/valentine_event.png' style='max-height: 400px; margin: 0 auto;' alt='バレンタインキャンペーン'>
             </a>
             <h4 style='color: #FF862E;'>🍫ideeeバレンタイン1ヶ月キャンペーン🍫</h4>
             <hr>

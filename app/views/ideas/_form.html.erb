@@ -15,7 +15,7 @@
     <div class='idea-column-img col s12 l3'>
       <div class="field">
         <%= form.label :icon %>
-        <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy" %>
+        <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy", alt: "アイデアアイコン" %>
         <div class='present-img'>
           <% if idea.icon.file.present? %>
             <%= image_tag(idea.icon.to_s, loading: "lazy") %>

@@ -9,7 +9,7 @@
       <div class="c-user-icon-info col s12 l4">
         <div class="field">
           <%= f.label :icon %>
-          <%= image_tag '', id: "avatar_img_prev", class:"disabled user", loading: "lazy" %>
+          <%= image_tag '', id: "avatar_img_prev", class:"disabled user", loading: "lazy", alt: "ユーザーアイコン" %>
           <div class='present-img'>
             <% if resource.icon.file.present? || resource.remote_url.present? %>
               <%= user_icon(@user, size: 'large') %>

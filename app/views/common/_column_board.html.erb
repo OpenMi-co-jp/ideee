@@ -6,7 +6,7 @@
         <%= i + 1 %>
       </h5>
       <div class='idea__content'>
-        <%= link_to idea_path(idea.id), class: 'c-idea-img' do %>
+        <%= link_to idea_path(idea.id), class: 'c-idea-img', title: 'アイデア' do %>
           <figure class='c-idea-img__figure'>
             <%= image_set(idea) %>
           </figure>

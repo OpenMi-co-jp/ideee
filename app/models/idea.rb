@@ -21,6 +21,7 @@
 #  product_url                                              :string(255)
 #  published_at                                             :datetime
 #  similar                                                  :string(255)
+#  status                                                   :integer          default("free")
 #  target                                                   :string(255)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
@@ -59,6 +60,7 @@ class Idea < ApplicationRecord
 
   enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
   enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
+  enum status: { free: 0, personal: 1, team: 2 }
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }

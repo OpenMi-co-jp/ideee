@@ -21,6 +21,7 @@
 #  product_url                                              :string(255)
 #  published_at                                             :datetime
 #  similar                                                  :string(255)
+#  status                                                   :integer          default("free")
 #  target                                                   :string(255)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)

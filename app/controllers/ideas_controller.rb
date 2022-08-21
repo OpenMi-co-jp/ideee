@@ -51,11 +51,13 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         if params[:commit] == t('default.publish')
           sidekiq_jobs
+          destination = idea_path(@idea, share: true)
           @idea.update_attribute(:published_at, Time.now)
         end
+        destination = new_team_path(idea_id: @idea) if params.dig(:idea, :team_switch) == 'true'
+        destination ||= @idea
         Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to destination, notice: t('.success')
       end

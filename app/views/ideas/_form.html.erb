@@ -93,17 +93,23 @@
         <%= form.label :note %><a class="help-tip note-guide">?</a>
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
-      <% if idea.team.nil? || idea.id.nil? || idea.draft %>
-        <div class="field switch c-team-switch">
-          <%= form.label :team %><a class="help-tip team-guide">?</a>
-          <%= form.hidden_field :team_switch, value: params[:team_switch] %>
-          <div class="switch c-team-switch__btn">
-            <label class="c-team-switch__label">
-              募集しない
-              <input type="checkbox" id='team_switch' <%= 'checked' if idea.team&.status_active? %>>
-              <span class="lever"></span>
-              募集する
+      <% if idea.team.nil? || !idea.team.status_active? || idea.id.nil? || idea.draft %>
+        <div class="field">
+          <%= form.label :stance %>
+          <div>
+            <label>
+              <%= form.radio_button :stance, :free_right %>
+              <%= content_tag :span, 'free_right' %>
             </label>
+            <label>
+              <%= form.radio_button :stance, :personal_project %>
+              <%= content_tag :span, 'personal_project' %>
+            </label>
+            <label>
+              <%= form.radio_button :stance, :team_project %>
+              <%= content_tag :span, 'team_project' %>
+            </label>
+            <a class="help-tip team-guide">?</a>
           </div>
         </div>
       <% end %>

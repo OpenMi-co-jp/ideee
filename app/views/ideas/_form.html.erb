@@ -21,7 +21,7 @@
             <%= image_tag(idea.icon.to_s, loading: "lazy") %>
           <% end %>
         </div>
-        <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3' %>
+        <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3', alt: "アイデアアイコン" %>
       </div>
     </div>
     <div class='idea-status-column col s12 l9'>

@@ -1,7 +1,16 @@
 # ideee
 アイデアとエンジニアのマッチングプラットフォーム
 
+![Heroku](https://heroku-badge.herokuapp.com/?app=ideee-tech)
+
 <!-- TODO Readme書く -->
+
+## アプリURL
+
+https://www.ideee.tech/
+
+## BIツールURL
+https://ideee-metabase.herokuapp.com/
 
 ## セットアップの情報
 

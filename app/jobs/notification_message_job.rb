@@ -1,0 +1,16 @@
+class NotificationMessageJob < ApplicationJob
+  queue_as :default
+
+  def perform(message)
+    return unless Rails.env.production?
+
+    team = message.room.team
+    return if team.members.nil?
+
+    sender = message.user
+    team_members = [team.owner].push(team.members).flatten
+    team_members.delete(sender)
+
+    SendEmail.new.notification_message(team_members, sender, message)
+  end
+end

@@ -2,13 +2,15 @@ module UsersHelper
   # ユーザーのアイコンサイズをパラメーターで指定できるように設定
   # アイコンが無ければデフォルトの画像を表示
   def user_icon(user, size: 'normal')
-    if user.icon.present?
-      image_tag(user.icon.to_s, class: "icon-circle #{size}", loading: 'lazy')
-    elsif user.remote_url
-      image_tag(user.remote_url, class: "icon-circle #{size}", loading: 'lazy')
-    else
-      image_tag('undefined_user_icon', class: "icon-circle #{size}", loading: 'lazy')
-    end
+    icon_url =
+      if user.icon.present?
+        user.icon.to_s
+      elsif user.remote_url
+        user.remote_url
+      else
+        'undefined_user_icon'
+      end
+    image_tag(icon_url, class: "circle icon-circle #{size}", loading: 'lazy')
   end
 
   def twitter_url(id)
@@ -16,6 +18,12 @@ module UsersHelper
 
     # TODO: put twitter icon here
     "https://twitter.com/#{id}"
+  end
+
+  def github_url(id)
+    return if id.nil?
+
+    "https://github.com/#{id}"
   end
 
   # ユーザーのタイプをアイコンで表示

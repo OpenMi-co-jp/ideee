@@ -100,7 +100,7 @@ module ApplicationHelper
   def text_url_to_link(text)
     require 'uri'
     uri_reg = URI::DEFAULT_PARSER.make_regexp(%w[http https])
-    sanitize(text.gsub(uri_reg) { "<a href='#{Regexp.last_match(0)}' target='_blank'\>#{Regexp.last_match(0)}</a>" })
+    sanitize(text.gsub(uri_reg) { "<a href='#{Regexp.last_match(0)}' target='_blank'\>#{Regexp.last_match(0)} alt</a>" })
   end
 
   def data_page

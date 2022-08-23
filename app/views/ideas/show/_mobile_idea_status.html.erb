@@ -20,11 +20,11 @@
           <%= "更新日：#{l idea.updated_at}" %>
         </div>
         <div class="c-mobile-status-info__eye">
-          <%= image_tag 'icons/eye.svg', loading: "lazy" %>
+          <%= image_tag 'icons/eye.svg', loading: "lazy", alt: "ビュー数" %>
           <p><%= idea.view %></p>
         </div>
         <div class='c-mobile-status-info__comment', id="comments_count">
-          <%= image_tag 'icons/comment.svg', loading: "lazy" %>
+          <%= image_tag 'icons/comment.svg', loading: "lazy", alt: "コメント数" %>
           <p><%= idea.comments_num %></p>
         </div>
       </div>

@@ -4,7 +4,8 @@ module ShareHelper
       image_tag "sns-icons/#{media}_icon",
                 class: "c-share__icon #{'idea-show__share-icon' if t('.page') == 'idea-show'}",
                 alt: "#{media.capitalize} share",
-                loading: 'lazy'
+                loading: 'lazy',
+                alt: "SNSアイコン"
     end
   end
 

@@ -18,7 +18,7 @@
         <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy", alt: "アイデアアイコン" %>
         <div class='present-img'>
           <% if idea.icon.file.present? %>
-            <%= image_tag(idea.icon.to_s, loading: "lazy") %>
+            <%= image_tag(idea.icon.to_s, loading: "lazy", alt: "アイデアアイコン") %>
           <% end %>
         </div>
         <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3', alt: "アイデアアイコン" %>
@@ -32,7 +32,7 @@
       </div>
       <div class="field input-field">
         <div>
-          <%= form.label :tags_up_to_three %><a class="help-tip tags">?</a>
+          <%= form.label :tags_up_to_three %><a class="help-tip tags" title="フォーム">?</a>
         </div>
         <div class="chips chips-initial chips-autocomplete"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
@@ -90,12 +90,12 @@
         </li>
       </ul>
       <div class="field">
-        <%= form.label :note %><a class="help-tip note-guide">?</a>
+        <%= form.label :note %><a class="help-tip note-guide" title="補足">?</a>
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
       <% if idea.team.nil? || idea.id.nil? || idea.draft %>
         <div class="field switch c-team-switch">
-          <%= form.label :team %><a class="help-tip team-guide">?</a>
+          <%= form.label :team %><a class="help-tip team-guide" title="ヘルプ">?</a>
           <%= form.hidden_field :team_switch, value: params[:team_switch] %>
           <div class="switch c-team-switch__btn">
             <label class="c-team-switch__label">
@@ -109,7 +109,7 @@
       <% end %>
       <div class="field input-field">
         <div>
-          <%= form.label :product_url, class: 'active' %><a class="help-tip product-url">?</a>
+          <%= form.label :product_url, class: 'active' %><a class="help-tip product-url" title="ヘルプ">?</a>
         </div>
         <%= form.url_field :product_url, placeholder: 'プロダクトのURL', class: 'validate' %>
         <span class="helper-text" data-error="正しい形式のURLを入力してください。" data-success="OK"></span>

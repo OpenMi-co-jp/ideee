@@ -19,12 +19,12 @@
         <div class="c-pc-status-info__day">
           <%= "更新日：#{l idea.updated_at}" %>
         </div>
-        <div class="c-pc-status-info__eye">
-        <% if idea.view >= 10 %>
-          <%= image_tag 'icons/eye.svg', loading: "lazy" %>
-          <%= idea.view %>
+        <% if idea.enough_view? %>
+          <div class="c-pc-status-info__eye">
+            <%= image_tag 'icons/eye.svg', loading: "lazy" %>
+            <p><%= idea.view %></p>
+          </div>
         <% end %>
-        </div>
         <div class='c-pc-status-info__comment', id="comments_count">
           <%= image_tag 'icons/comment.svg', loading: "lazy" %>
           <p><%= idea.comments_num %></p>

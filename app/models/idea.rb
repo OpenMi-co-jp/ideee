@@ -132,4 +132,8 @@ class Idea < ApplicationRecord
     counted_num = difficultys.count { |d| d.level == level }
     "#{(counted_num.to_f / difficultys.length * 100).round(1)} %"
   end
+
+  def enough_view?
+    view >= 10
+  end
 end

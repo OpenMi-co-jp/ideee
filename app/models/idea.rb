@@ -134,6 +134,6 @@ class Idea < ApplicationRecord
   end
 
   def enough_view?
-    view >= 10
+    view > 10
   end
 end

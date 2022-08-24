@@ -21,7 +21,7 @@
             <%= image_tag(idea.icon.to_s, loading: "lazy", alt: "アイデアアイコン") %>
           <% end %>
         </div>
-        <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3', alt: "アイデアアイコン" %>
+        <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3' %>
       </div>
     </div>
     <div class='idea-status-column col s12 l9'>
@@ -32,7 +32,7 @@
       </div>
       <div class="field input-field">
         <div>
-          <%= form.label :tags_up_to_three %><a class="help-tip tags" title="フォーム">?</a>
+          <%= form.label :tags_up_to_three %><a class="help-tip tags" title="ヘルプ">?</a>
         </div>
         <div class="chips chips-initial chips-autocomplete"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>

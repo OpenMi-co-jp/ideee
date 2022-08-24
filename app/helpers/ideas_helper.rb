@@ -2,9 +2,9 @@ module IdeasHelper
   def image_set(idea)
     # アイデアの画像がなければ自動生成で設定
     if idea&.icon.file.nil?
-      image_tag(return_ogp_url(idea.name))
+      image_tag(return_ogp_url(idea.name), alt: "#{idea.name}の画像")
     else
-      image_tag(idea.icon.to_s)
+      image_tag(idea.icon.to_s, alt: "#{idea.name}の画像")
     end
   end
 

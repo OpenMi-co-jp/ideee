@@ -1,7 +1,7 @@
 module DeviseHelper
   # providerに合わせた画像名を選択
   def omni_sign_image(provider)
-    image_tag "#{provider}_icon", class: 'omniauth-sign-up', size: '32x32', loading: 'lazy', alt: "認証"
+    image_tag "#{provider}_icon", class: 'omniauth-sign-up', size: '32x32', loading: 'lazy', alt: '認証画像'
   end
 
   # ログインか登録のページかどうかで文言の分岐

@@ -20,14 +20,14 @@
               <%= image_tag 'icons/comment.svg', class: 'icon-size', loading: "lazy" %>
               <p><%= idea.comments_num %></p>
             </div>
-            <div class='idea__item'>
             <% if idea.enough_view? %>
-              <div class="c-pc-status-info__eye">
-                <%= image_tag 'icons/eye.svg', loading: "lazy" %>
-                <p><%= idea.view %></p>
+              <div class='idea__item'>
+                <div class="c-pc-status-info__eye">
+                  <%= image_tag 'icons/eye.svg', loading: "lazy" %>
+                  <p><%= idea.view %></p>
+                </div>
               </div>
             <% end %>
-            </div>
             <div class='idea__item'>
               <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy" %>
               <p><%= idea.likes_num %></p>

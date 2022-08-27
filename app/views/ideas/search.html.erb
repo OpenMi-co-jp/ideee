@@ -1,22 +1,63 @@
+<%# 最近実現したアイデアのためにidea-indexを使用 %>
 <div class='idea-index'>
-  <div class='seach-results'>
-    <% if @searched_ideas.present? %>
-      <div class='search--sort row'>
-        <div class='col s12 m6 l8'>
-          <h1 class='board-title'>検索結果 <%= @searched_ideas.size %>件</h1>
+  <div class='c-search'>
+    <%= search_form_for @q, url: search_ideas_path, method: :get, id: 'js-search-form' do |f| %>
+      <div class='c-search__condition'>
+        <div class='c-search__name'>
+          <%= f.search_field :name_or_idea_tags_name_cont, placeholder: 'アイデアを検索' %>
         </div>
-        <div class='col s12 m6 l4'>
-          <%= render 'common/sort_form', keyword: @keyword, path: search_ideas_path %>
+        <div class='row mt-3'>
+          <div class='col s3 m2 l2'>
+            <%= f.label :difficulty %>
+          </div>
+          <div class='col s9 m10 l6'>
+            <% Difficulty.levels.each do |(key, value)| %>
+              <label>
+                <%= f.radio_button :difficulty_eq, value, class: 'js-search-fire' %>
+                <span><%= key.capitalize %></span>
+              </label>
+            <% end %>
+          </div>
+        </div>
+        <div class='row mt-3'>
+          <div class='col s3 m2 l2'>
+            <%= f.label :team_status %>
+          </div>
+          <div class='col s9 m10 l6'>
+            <% Team.statuses.each do |(key, value)| %>
+              <label>
+                <%= f.radio_button :team_status_eq, value, class: 'js-search-fire' %>
+                <span><%= key.capitalize %></span>
+              </label>
+            <% end %>
+          </div>
         </div>
       </div>
-      <%= render 'common/column_board', ideas: @searched_ideas %>
-      <%= paginate @searched_ideas %>
+      <div class='c-search__result row'>
+        <div class='col s12 m3 l6'>
+          <h1 class='board-title mh-3'>検索結果 <%= @searched_ideas.size %>件</h1>
+        </div>
+        <div class='col s12 m9 l6 row'>
+          <span class='mr-3'>並び替え</span>
+          <% I18n.t('activerecord.sorts').each do |(key, value)| %>
+            <div class="chip">
+              <%= sort_link(@q, key, value) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @searched_ideas.present? %>
+      <%= render 'common/column_board', ideas: @paged_ideas %>
+      <%= paginate @paged_ideas %>
     <% else %>
       <h4>検索に合致するアイデアが⾒つかりませんでした</h4>
       <h5><%= link_to "あなたのアイデアを投稿しませんか？", new_idea_path %></h5>
     <% end %>
   </div>
-  <% unless params[:product_apply] == 'approved' %>
+  <%# 実現したアイデアを探している場合表示しない %>
+  <% if params[:q].nil? || params[:q][:product_apply_eq].nil? || params[:q][:product_apply_eq] =! '2' %>
     <%= render 'ideas/index/latest_boad', title: '最近実現したアイデア', ideas: @deployed_ideas %>
   <% end %>
 </div>

@@ -1,8 +1,0 @@
-<div class='idea-index'>
-  <div class='search--sort'>
-    <h1 class='board-title'>タグ検索結果 <%= @tagged_ideas.size %>件</h1>
-    <%= render 'common/sort_form', keyword: @tag_name, path: tags_ideas_path %>
-  </div>
-  <%= render 'common/column_board', ideas: @tagged_ideas %>
-  <%= paginate @tagged_ideas %>
-</div>

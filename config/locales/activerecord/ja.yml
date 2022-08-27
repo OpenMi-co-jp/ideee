@@ -19,7 +19,8 @@ ja:
         definition: タイプ
         point: コントリビュート数
         icon: プロフィール画像
-        twitter_id: TwitterID
+        twitter_id: Twitter ID
+        github_id: Github ID
         remote_url: リモート画像
         site_url: サイトURL
         provider:
@@ -35,6 +36,7 @@ ja:
         wish_function: メイン機能
         hypothesis: 仮説（数値的）
         target: ターゲット（ペルソナ）
+        monetize: マネタイズ方法
         similar: 類似サービス
         github_url: GitHubのURL
         note: 補足
@@ -43,9 +45,16 @@ ja:
         tags_up_to_three: タグ（3つまで入力できます）
         product_url: 作っているアプリ
         team: チーム開発
+        difficulty: 難易度
       comment:
         description: コメント
       team:
         offer: 得られること
         requirement: お願いしたいこと
         status: ステータス
+    sorts:
+      likes_num: ハート数
+      comments_num: コメント数
+      view: ビュー数
+      published_at: 公開日
+      updated_at: 更新日

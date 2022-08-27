@@ -29,6 +29,7 @@
 #  unconfirmed_email      :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  github_id              :string(255)
 #  twitter_id             :string(255)
 #
 # Indexes
@@ -54,7 +55,7 @@ class User < ApplicationRecord
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
-  before_update :twitter_id_fix
+  before_update :fix_ids
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
@@ -132,7 +133,7 @@ class User < ApplicationRecord
   end
 
   def like?(item)
-    likes.includes(:likable).map(&:likable).include?(item)
+    likes.preload(:likable).map(&:likable).include?(item)
   end
 
   def voted?(idea)
@@ -146,16 +147,6 @@ class User < ApplicationRecord
     comment = comments.create(comment_params)
     comment.idea.count_comments if comment.valid?
     comment
-  end
-
-  def send_comment_email(idea, comment)
-    return unless Rails.env.production?
-
-    users = [idea.user].push(idea.comment_users.uniq).flatten
-    users.delete(self)
-    return if users.nil?
-
-    SendEmail.new.comment(users, self, idea, comment)
   end
 
   def team_joined?(idea)
@@ -172,7 +163,8 @@ class User < ApplicationRecord
     update_column(:point, sum_points)
   end
 
-  def twitter_id_fix
+  def fix_ids
     self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
+    self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
   end
 end

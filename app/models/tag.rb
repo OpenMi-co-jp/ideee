@@ -19,7 +19,7 @@ class Tag < ApplicationRecord
 
   scope :recent_tags, -> { where created_at: 4.months.ago..Time.zone.now }
   scope :popular_tags, lambda {
-                         includes([:tagged_ideas]).max(10) do |x, y|
+                         preload(:tagged_ideas).max(10) do |x, y|
                            x.tagged_ideas.length <=> y.tagged_ideas.length
                          end
                        }

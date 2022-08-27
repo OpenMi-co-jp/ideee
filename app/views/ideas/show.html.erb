@@ -33,10 +33,8 @@
       <h1 class='idea-name orange-action'>
         <%= @idea.name %>
       </h1>
-      <p>テスト</p>
       <div class='hide-on-small-only'>
         <%= render 'ideas/show/pc_idea_status', idea: @idea, time_on_page: @time_on_page %>
-      <p>テスト2</p>
       </div>
       <div class='hide-on-med-and-up'>
         <%= render 'ideas/show/mobile_idea_status', idea: @idea, time_on_page: @time_on_page %>
@@ -86,6 +84,8 @@
   </div>
 
   <hr>
+
+  <%= render 'common/user_description', idea: @idea %>
 
   <% unless @idea.draft %>
     <%= render 'comments/board', items: @comments, item_class: 'comments' %>

@@ -1,0 +1,25 @@
+<div class="c-user-description ph-1">
+  <div class='row'>
+    <div class='col s12 l1'>
+      <%= link_to user_path(idea.user_id) do %>
+        <% user_icon(idea.user, size: 'middle') %>
+      <% end %>
+    </div>
+    <div class='col s12 l9'>
+      <div class='col s12 mb-1 c-user-description__name'>
+        <%= idea.user.name %>
+      </div>
+      <div class='col s12'>
+        <%= user_definiton(idea.user) %>
+      </div>
+    </div>
+    <div class='col s12 l9'>
+      <div class='col s12'>
+        <%= idea.user.description %>
+      </div>
+      <div class='col s3'>
+        <%= render 'common/user_url_list', user: idea.user %>
+      </div>
+    </div>
+  </div>
+</div>

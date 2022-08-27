@@ -16,13 +16,13 @@
       <div class="field input-field">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'ideee@example.com', class: 'validate', required:'required' %>
         <%= f.label :email, class: 'active' %><br />
-        <%= email_valid_text %>
+        <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
       </div>
 
       <div class="field input-field">
         <%= f.password_field :password, autocomplete: "current-password", placeholder: 'password', class: 'validate', data: { 'min-length': @minimum_password_length } %>
         <%= f.label :password, class: 'active' %><br />
-        <%= password_valid_text %>
+        <%= password_helper_text %>
       </div>
 
       <%# TODO: rememberableを設定 %>

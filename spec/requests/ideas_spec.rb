@@ -66,7 +66,7 @@ RSpec.describe 'Ideas', type: :request do
 
       it '詳細ページにリダイレクトすること' do
         subject
-        expect(response).to redirect_to("http://www.example.com/ideas/#{Idea.last.id}?share=true")
+        expect(response).to redirect_to Idea.last
       end
     end
 

@@ -1,15 +1,18 @@
-<div class="c-vote-button <%= object.difficulty %>">
-  <% if current_user %>
+<% if current_user %>
+  <% if current_user&.voted?(object) %>
+    <%# すでに投票していたらそのタグの種類を検索する %>
+    <%= link_to difficulty_tag(object), search_ideas_path(difficulty: object.difficulty) %>
+  <% else %>
     <%# 投票のためのモーダル出現 %>
     <%= link_to difficulty_tag(object),
       '#modal_difficulty',
       data: { turbolinks: false },
-      class: "modal-trigger c-vote-button__hover #{'voted' if current_user&.voted?(object) }",
+      class: 'modal-trigger',
       id: 'modal-trigger-difficulty' %>
-  <% else %>
-    <%# ログイン前はログインのためのモーダル出現 %>
-    <%= link_to '#modal_before_login', data: { turbolinks: false }, class: "modal-trigger-login" do %>
-      <%= difficulty_tag(object) %>
-    <% end %>
   <% end %>
-</div>
+<% else %>
+  <%# ログイン前はログインのためのモーダル出現 %>
+  <%= link_to '#modal_before_login', data: { turbolinks: false }, class: "modal-trigger-login" do %>
+    <%= difficulty_tag(object) %>
+  <% end %>
+<% end %>

@@ -7,7 +7,7 @@ class IdeasController < ApplicationController
   after_action :update_user_point, only: %i[create]
 
   def index
-    recent_ideas = Idea.published.recent_select.eager_load([:user])
+    recent_ideas = Idea.published.recent_select.includes([:user])
     @latest_ideas = recent_ideas.order(published_at: 'DESC').first(10)
   end
 
@@ -19,7 +19,6 @@ class IdeasController < ApplicationController
     else
       @time_on_page = '-'
     end
-    @comments = @idea.comments.eager_load(:user).preload(:likes)
   end
 
   def new
@@ -31,10 +30,10 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     if @idea.save_with_tags(tags_params)
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
       if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
+        redirect_to destination, notice: t('.draft_save')
       else
-        destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.now)
         redirect_to destination, notice: t('.success')
@@ -48,15 +47,14 @@ class IdeasController < ApplicationController
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
+      destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : @idea
       if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
+        redirect_to destination, notice: t('.draft_save')
       else
-        destination = params.dig(:idea, :team_switch) == 'true' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         if params[:commit] == t('default.publish')
           sidekiq_jobs
           @idea.update_attribute(:published_at, Time.now)
         end
-        Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
         redirect_to destination, notice: t('.success')
       end
     else
@@ -71,13 +69,30 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(search_condition)
-    @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
-    @searched_ideas = @q.result(distinct: true)
-    @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
+    # アイデアに紐づくlikeの数を数えて、降順に並べる
+    @sort = params[:sort] || 'likes_num'
+    @order = params[:order] || 'desc'
+    @keyword = params[:keyword]
+    # TODO: 検索結果が増えてきたらtag検索を分ける
+    base_ideas = Idea.includes(%i[idea_tags user]).published
+    ideas = if @keyword.present?
+              base_ideas.search(name: @keyword) | base_ideas.tag_name_like(@keyword)
+            else
+              base_ideas.search(difficulty: params[:difficulty], product_apply: params[:product_apply])
+            end
+    list = base_ideas.where(id: ideas.pluck(:id)).order("#{@sort}": @order)
+    @searched_ideas = Kaminari.paginate_array(list).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
-    @rank_num = (current_page - 1) * @paged_ideas.limit_value
-    @deployed_ideas = Idea.deployed.preload(:user).order(updated_at: 'DESC').first(10)
+    @rank_num = (current_page - 1) * @searched_ideas.limit_value
+    @deployed_ideas = Idea.deployed.order(updated_at: 'DESC').first(10)
+  end
+
+  def tags
+    @sort = params[:sort] || 'likes_num'
+    @order = params[:order] || 'desc'
+    @tag_name = params[:keyword]
+    list = Idea.includes(%i[idea_tags taggings]).with_tag(@tag_name).order("#{@sort}": @order)
+    @tagged_ideas = Kaminari.paginate_array(list).page(params[:page])
   end
 
   def publish
@@ -87,43 +102,44 @@ class IdeasController < ApplicationController
   end
 
   def suggest
-    same_tag_ideas = @idea.same_tag_ideas # 2度以上クエリを走らせないように設定
-    if same_tag_ideas.length.positive? # タグがあり、かつ同じタグのアイデアがある場合
+    if @idea.same_tag_ideas.length.positive? # タグがあり、かつ同じタグのアイデアがある場合
       title = '同じタグのアイデア'
-      suggest_ideas = same_tag_ideas.sample(3)
+      suggest_ideas = @idea.same_tag_ideas.sample(3)
     elsif @idea.same_user_other_ideas.length.positive? # 自分が作成したアイデアが1つ以上ある場合
       title = '投稿者の他アイデア'
       suggest_ideas = @idea.same_user_other_ideas.sample(3)
-    else
+    end
+    if title.nil?
       title = '他アイデアをのぞいてみる'
-      suggest_ideas = Idea.published.eager_load(%i[idea_tags taggings]).sample(3)
+      suggest_ideas = Idea.published.sample(3)
     end
     render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
   end
 
   def most_comment
-    idea_list = Idea.published.recent_select.eager_load([:user]).most_commented.first(10)
+    idea_list = Idea.published.recent_select.includes([:user]).most_commented.first(10)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def most_liked
-    idea_list = Idea.published.recent_select.eager_load([:user]).most_liked.first(5)
+    idea_list = Idea.published.recent_select.includes([:user]).most_liked.first(5)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def team_active
-    idea_list = Idea.eager_load(:team).where(team: { status: :active }).preload(:idea_tags).eager_load(:user).sample(5)
+    team_active_ids = Team.where(status: :active).sample(5).pluck(:idea_id)
+    idea_list = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def deployed
-    idea_list = Idea.published.eager_load(:user).preload(:idea_tags).deployed.sample(5)
+    idea_list = Idea.published.includes([:user]).deployed.sample(5)
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
   def joined_team
-    idea_ids = TeamUser.eager_load(:team).where(user_id: params[:user_id]).map(&:team).pluck(:idea_id)
-    idea_list = Idea.where(id: idea_ids).eager_load(:user).preload(:idea_tags)
+    idea_ids = Team.includes(:team_users).select { |t| t.members.pluck(:user_id).include?(params[:user_id].to_i) }.pluck(:idea_id)
+    idea_list = Idea.includes([:user]).where(id: idea_ids)
     render partial: 'common/column_board', locals: { ideas: idea_list }
   end
 
@@ -137,7 +153,7 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea)
           .permit(
-            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :user_id, :commit, :product_url
+            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :similar, :github_url, :note, :view, :user_id, :commit, :product_url
           )
           .merge(user: current_user, draft: draft_bool)
   end
@@ -170,14 +186,5 @@ class IdeasController < ApplicationController
     TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
     Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
     Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
-  end
-
-  def search_condition
-    if params[:q].present?
-      params[:q]
-    elsif params[:keyword].present?
-      # keywordを使わないこともできるがheaderの検索にransackを使いたくないので使用する
-      { name_or_idea_tags_name_cont: params[:keyword] }
-    end
   end
 end

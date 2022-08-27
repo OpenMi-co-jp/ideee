@@ -16,8 +16,8 @@
       <ul class='col l3 m6 s12'>
         <li class='footer-title'>Ranking</li>
         <li><%= link_to 'ハートランキング', search_ideas_path, class: "white-text" %></li>
-        <li><%= link_to 'コメントランキング', search_ideas_path("q[s]": "comments_num desc"), class: "white-text" %></li>
-        <li><%= link_to 'View数ランキング', search_ideas_path("q[s]": "view desc"), class: "white-text" %></li>
+        <li><%= link_to 'コメントランキング', search_ideas_path(sort: :comments_num), class: "white-text" %></li>
+        <li><%= link_to 'View数ランキング', search_ideas_path(sort: :view), class: "white-text" %></li>
       </ul>
       <ul class='col l3 m6 s12'>
         <li class='footer-title'>Legal</li>

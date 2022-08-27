@@ -7,7 +7,7 @@ if Rails.env.production?
       region: 'ap-northeast-1'
     }
 
-    config.fog_public = true
+    config.fog_public = false
     config.fog_directory = 'ideee-bucket'
     config.cache_storage = :fog
   end

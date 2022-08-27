@@ -36,7 +36,7 @@ $(document).on ('turbolinks:load', function(){
     comment_id = $(this).attr('id')
     delete_comment(comment_id)
     .done(function() {
-      $('#comments-' + comment_id).remove()
+      $('#comment-' + comment_id).remove()
       $comments_count = $('#comments_count').find('p')
       $comments_count.html(Number($comments_count[0].innerText) - 1)
     })

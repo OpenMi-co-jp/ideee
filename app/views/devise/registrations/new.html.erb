@@ -17,7 +17,7 @@
       <div class="field input-field">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'ideee@example.com', class: 'validate', required:'required' %>
         <%= f.label :email, class: 'active' %><br />
-        <%= email_valid_text %>
+        <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
       </div>
 
       <div class="field input-field">
@@ -26,13 +26,13 @@
         <% end %><br />
         <%= f.password_field :password, autocomplete: "new-password", placeholder: 'password', class: 'validate', data: { 'min-length': @minimum_password_length } %>
         <%= f.label :password, class: 'active' %>
-        <%= password_valid_text %>
+        <%= password_helper_text %>
       </div>
 
       <div class="field input-field">
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'confirm password', class: 'validate', data:{ 'min-length': @minimum_password_length } %>
         <%= f.label :password_confirmation, class: 'active' %><br />
-        <%= password_valid_text %>
+        <%= password_helper_text %>
       </div>
 
       <%= f.submit t('.submit'), class: 'btn orange-action-back mh-1' %>

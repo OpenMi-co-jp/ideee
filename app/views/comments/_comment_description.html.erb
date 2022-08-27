@@ -1,0 +1,8 @@
+<div class='c-comment-description'>
+  <div class="c-comment-description__text <%= 'compact' if comment.over_length? %>">
+    <%= simple_format(text_url_to_link(comment.description), {}, sanitize: false) %>
+  </div>
+  <% if comment.over_length? %>
+    <p class="c-comment-description__option js-comment-shorten-trigger">続きを読む</p>
+  <% end %>
+</div>

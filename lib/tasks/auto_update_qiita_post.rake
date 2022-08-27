@@ -12,7 +12,7 @@ namespace :auto_update_qiita_post do
            "## 🏆 ランキング（コメント）\n" + \
            "`直近１ヶ月でコメントが盛り上がったアイデアをランキング化`\n"
 
-    ideas = Idea.published # アイデア一括取得
+    ideas = Idea.all # アイデア一括取得
     selected_items = ideas.recent_select.most_commented.first(10) # コメントランキングの作成
     body += idea_columns(selected_items, rank: true)
 
@@ -25,7 +25,7 @@ namespace :auto_update_qiita_post do
     body += "## 👬 チーム開発募集中のアイデア\n" + \
             "`最近更新されたチーム開発を募集しているアイデア`\n"
     team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
-    team_items = Idea.where(id: team_active_ids).preload(:idea_tags).eager_load(:user)
+    team_items = Idea.where(id: team_active_ids).includes(%i[idea_tags user])
     body += idea_columns(team_items)
 
     body += "\n```\n" + \

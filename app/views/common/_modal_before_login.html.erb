@@ -1,12 +1,10 @@
-<% unless current_user %>
-  <div id="modal_before_login" class="modal">
-    <div class="modal-content">
-      <h4>ユーザー登録してideeeをもっと便利に使ってみませんか？</h4>
-      <p>この機能を利用するにはログインする必要があります。ログインしてさらに楽しくideeeを利用しましょう💡</p>
-      <div class='modal_links'>
-        <%= link_to '登録する', new_user_registration_path, class:'waves-effect waves-light orange-action-back btn-large' %>
-        <%= link_to 'ログイン', new_user_session_path, class:'waves-effect waves-orange btn white orange-action btn-large' %>
-      </div>
+<div id="modal_before_login" class="modal">
+  <div class="modal-content">
+    <h4>ユーザー登録してideeeをもっと便利に使ってみませんか？</h4>
+    <p>この機能を利用するにはログインする必要があります。ログインしてさらに楽しくideeeを利用しましょう💡</p>
+    <div class='modal_links'>
+      <%= link_to '登録する', new_user_registration_path, class:'waves-effect waves-light orange-action-back btn-large' %>
+      <%= link_to 'ログイン', new_user_session_path, class:'waves-effect waves-orange btn white orange-action btn-large' %>
     </div>
   </div>
-<% end %>
+</div>

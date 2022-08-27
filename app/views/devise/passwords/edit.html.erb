@@ -11,13 +11,13 @@
       <% end %>
       <%= f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: 'password', class: 'validate', data: { 'min-length': @minimum_password_length } %>
       <%= f.label :password, class: 'active' %>
-      <%= password_valid_text %>
+      <%= password_helper_text %>
     </div>
 
     <div class="field input-field">
       <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'password', class: 'validate', data: { 'min-length': @minimum_password_length } %>
       <%= f.label :password_confirmation, class: 'active' %>
-      <%= password_valid_text %>
+      <%= password_helper_text %>
     </div>
 
     <%= f.submit "パスワードを変更", class: 'btn orange-action-back mh-1' %>

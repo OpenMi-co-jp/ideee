@@ -47,7 +47,6 @@
           <%= render 'ideas/show/title_set', item: 'wish_function' %>
           <%= render 'ideas/show/title_set', item: 'hypothesis' %>
           <%= render 'ideas/show/title_set', item: 'target' %>
-          <%= render 'ideas/show/title_set', item: 'monetize' %>
           <%= render 'ideas/show/title_set', item: 'similar' %>
           <%= render 'ideas/show/title_set', item: 'note' %>
           <%= render 'ideas/show/url_button', item: 'product_url' %>
@@ -88,18 +87,12 @@
   <%= render 'common/user_description', idea: @idea %>
 
   <% unless @idea.draft %>
-    <%= render 'comments/board', items: @comments, item_class: 'comments' %>
+    <%= render 'comments/board', object: @idea %>
     <%= render 'comments/form' %>
     <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>
     <%= render 'common/fund_link', object: @idea %>
   <% end %>
-</div>
 
-<%# モーダルの設定 %>
-<% unless !current_user || @idea.draft %>
-  <%= render 'ideas/show/vote_modal', object: @idea %>
-<% end %>
-<%# パラメータshareがある時にモーダルを設定 %>
-<% if params[:share].present? %>
+  <%= render 'ideas/show/vote_modal' %>
   <%= render 'ideas/show/share_modal' %>
-<% end %>
+</div>

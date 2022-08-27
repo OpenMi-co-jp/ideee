@@ -1,27 +1,27 @@
 <div class='c-unit-comment'>
   <div class="flex">
-    <% if current_user&.own?(item) %>
-      <%= render 'comments/time', item: item %>
+    <% if owned %>
+      <%= render 'comments/comment_time', created_at: comment.created_at %>
       <div class='c-unit-comment__info'>
-        <%= render 'comments/body', item: item %>
-        <%= render 'comments/option', item: item %>
+        <%= render 'comments/comment_description', comment: comment %>
+        <%= render 'comments/option', comment: comment %>
       </div>
     <% else %>
       <div class='c-unit-comment__user'>
-        <%= link_to user_path(item.user_id) do %>
-          <%= user_icon(User.find(item.user_id), size: 'small') %>
+        <%= link_to user_path(comment.user_id) do %>
+          <%= user_icon(User.find(comment.user_id), size: 'small') %>
         <% end %>
       </div>
       <div>
-        <div class='c-unit-comment__user--name'><%= User.find(item.user_id).name %></div>
+        <div class='c-unit-comment__user--name'><%= User.find(comment.user_id).name %></div>
         <div class='c-unit-comment__info'>
-          <%= render 'comments/body', item: item %>
+          <%= render 'comments/comment_description', comment: comment %>
           <div class='c-unit-comment__options'>
-            <%= render 'comments/comment_heart', object: item %>
+            <%= render 'comments/comment_heart', object: comment %>
           </div>
         </div>
       </div>
-      <%= render 'comments/time', item: item %>
+      <%= render 'comments/comment_time', created_at: comment.created_at %>
     <% end %>
   </div>
 </div>

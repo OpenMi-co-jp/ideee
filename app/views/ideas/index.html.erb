@@ -39,7 +39,7 @@
           <%= render 'ideas/index/ranking_head',
             icon_mark: '💬',
             board_title: '今月のコメントが多いアイデア',
-            path: search_ideas_path("q[s]": "comments_num desc") %>
+            path: search_ideas_path(sort: :comments_num) %>
           <%= render_async most_comment_ideas_path %>
           <%= render 'ideas/index/ranking_head',
             icon_mark: '💛',
@@ -68,12 +68,12 @@
           <%= render 'ideas/index/ranking_head',
             icon_mark: tag.i('groups', class: 'material-icons'),
             board_title: 'チーム開発募集中のアイデア',
-            path: search_ideas_path("q[team_status_eq]": 0) %>
+            path: teams_path %>
           <%= render_async team_active_ideas_path %>
           <%= render 'ideas/index/ranking_head',
             icon_mark: tag.i('check_circle', class: 'material-icons'),
             board_title: '実現したアイデア',
-            path: search_ideas_path("q[product_apply_eq]": 2) %>
+            path: search_ideas_path(product_apply: :approved) %>
           <%= render_async deployed_ideas_path %>
         </div>
       </div>

@@ -3,14 +3,6 @@
   width:70vw;
   margin: 0 auto;
 
-  @media (max-width:992px) {
-    width: 90vw;
-  }
-
-  @media (max-width:600px) {
-    width: 95vw;
-  }
-
   h3 {
     margin: 2rem 0 1rem;
   }
@@ -44,17 +36,29 @@
   .questionnaire {
     width: 60vw;
     margin: 0 auto;
-
-    @media (max-width:992px) {
-      width: 90vw;
-    }
-
-    @media (max-width:600px) {
-      width: 95vw;
-    }
   }
 
   p {
     margin: 0.5rem 0 1.2rem;
+  }
+}
+
+@media (max-width:992px) {
+  .pages {
+    width: 90vw !important;
+  }
+
+  .questionnaire {
+    width: 90vw !important;
+  }
+}
+
+@media (max-width:600px) {
+  .pages {
+    width: 95vw !important;
+  }
+
+  .questionnaire {
+    width: 95vw !important;
   }
 }

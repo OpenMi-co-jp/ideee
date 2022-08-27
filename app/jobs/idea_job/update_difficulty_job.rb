@@ -11,7 +11,7 @@ module IdeaJob
         else
           # 2つ以上であればgroup化して計算開始
           levels_hash = idea.difficultys.group(:level).size
-          if levels_hash.length != 1 && levels_hash.values.max(2).uniq.length == 1
+          if levels_hash.map { |n| n[1] }.max(2).uniq.length == 1
             # もし最も多く使われる値が2つ以上ある場合
             'middle'
           else

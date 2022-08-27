@@ -7,7 +7,7 @@
     <div class="field input-field">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'ideee@example.com', class: 'validate', required:'required' %>
       <%= f.label :email, class: 'active' %><br />
-      <%= email_valid_text %>
+      <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
     </div>
 
     <%= f.submit class: 'btn orange-action-back mh-1' %>

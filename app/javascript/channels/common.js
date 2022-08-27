@@ -10,19 +10,14 @@ $(document).on ('turbolinks:load', function(){
     };
   })
 
-  // 通知クリックでアップデート
+  // 通知をクリックしたらアップデート
   $('#js_notification_check').on('click', function() {
-    // checkedが付いていたら既読でreturn
+    // checkedが付いていたら既読なのでreturn
     if ($(this).children('.checked').length != 0) { return }
 
     $.ajax({
       url: '/notifications/check',
       type: 'POST'
-    }).done(function() {
-      $(this).find('.js_header__bell').addClass('checked')
-    })
-    .fail(function() {
-      alert('既読に失敗しました')
     })
   })
 });

@@ -8,19 +8,27 @@ module IdeasHelper
     end
   end
 
+  def idea_sort_hash
+    {
+      ハート数: :likes_num,
+      コメント数: :comments_num,
+      ビュー数: :view,
+      公開日: :published_at
+    }
+  end
+
+  def idea_order_hash
+    {
+      '昇順 ▲': :asc,
+      '降順 ▼': :desc
+    }
+  end
+
   def idea_opened_date(idea)
     if idea.draft
       idea.created_time
     else
       idea.published_time
     end
-  end
-
-  def length_invalid_text(length)
-    tag.span '', class: 'helper-text', data: { error: "#{length}文字以内で入力してください。", success: 'OK' }
-  end
-
-  def between_length_invalid_text(length)
-    tag.span '', class: 'helper-text', data: { error: "1〜#{length}文字で入力してください。", success: 'OK' }
   end
 end

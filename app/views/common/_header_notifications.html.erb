@@ -1,7 +1,7 @@
 <li class='nav-link'>
   <%= link_to '#', data: { target: "dropdown_bell" }, class:'dropdown-trigger white', id: 'js_notification_check' do %>
-    <p class='header__bell js_header__bell <%= 'checked' if notifications&.all?(&:checked) || notifications.nil? %>'>
-      <%= embedded_svg 'icons/bell.svg', class: "header__bell--color js_header__bell #{'checked' if notifications&.all?(&:checked) || notifications.nil?}" %>
+    <p class='header__bell <%= 'checked' if notifications&.all?(&:checked) || notifications.nil? %>'>
+      <%= embedded_svg 'icons/bell.svg', class: "header__bell--color #{'checked' if notifications&.all?(&:checked) || notifications.nil?}" %>
     </p>
   <% end %>
 </li>

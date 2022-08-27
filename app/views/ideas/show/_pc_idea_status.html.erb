@@ -27,10 +27,12 @@
           <%= image_tag 'icons/comment.svg', loading: "lazy" %>
           <p><%= idea.comments_num %></p>
         </div>
-        <%= render 'difficultys/vote', object: idea %>
-      </div>
-      <div class='c-pc-status-info__time'>
-        <%= "平均滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%OM分%S秒')}" %>
+        <div class="c-pc-status-info__vote <%= idea.difficulty %>">
+          <%= render 'difficultys/vote', object: idea %>
+        </div>
+        <div class='c-pc-status-info__time'>
+          <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
+        </div>
       </div>
       <%= render 'tags/links', object: idea %>
     </div>

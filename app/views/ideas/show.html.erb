@@ -85,7 +85,7 @@
 
   <hr>
 
-  <%= render 'common/user_description', idea: @idea %>
+  <%= render 'common/user_description', user: @idea.user %>
 
   <% unless @idea.draft %>
     <%= render 'comments/board', items: @comments, item_class: 'comments' %>

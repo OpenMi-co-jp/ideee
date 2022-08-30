@@ -16,6 +16,10 @@ ja:
         active: チーム開発募集中
         stop: 募集停止中
         finished: チーム開発終了
+      stance:
+        team_project: チーム開発中
+        free_right: アイデア権フリー
+        personal_project: 個人開発中
   time:
     formats:
       default: "%Y.%m.%d"

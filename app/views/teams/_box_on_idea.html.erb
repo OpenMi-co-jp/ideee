@@ -1,6 +1,10 @@
 <div class='center'>
   <div class='c-team-box__status'>
-    <%= I18n.t("enums.team.stance.#{idea.stance}") %>
+    <% if idea.team_project? %>
+      <%= I18n.t("enums.team.status.#{idea.team&.status}") %>
+    <% else %>
+      <%= I18n.t("enums.idea.stance.#{idea.stance}") %>
+    <% end %>
   </div>
   <% unless idea.draft %>
     <div class='c-team-box__apply'>

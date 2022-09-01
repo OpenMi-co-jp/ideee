@@ -1,7 +1,7 @@
 <div class="c-user-description ph-1">
   <div class='row'>
     <div class='col s3 l2'>
-      <%= link_to user_path(user.id) do %>
+      <%= link_to user_path(user.id), title: 'ユーザーページリンク' do %>
         <% user_icon(user, size: 'middle') %>
       <% end %>
     </div>

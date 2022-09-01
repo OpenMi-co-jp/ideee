@@ -1,25 +1,25 @@
 <div class="c-user-description ph-1">
   <div class='row'>
-    <div class='col s12 l1'>
+    <div class='col s3 l2'>
       <%= link_to user_path(user.id) do %>
         <% user_icon(user, size: 'middle') %>
       <% end %>
     </div>
-    <div class='col s12 l9'>
+    <div class='col s9 l10'>
       <div class='col s12 mb-1 c-user-description__name'>
         <%= user.name %>
       </div>
-      <div class='col s12'>
+      <div class='col s12 l10'>
         <%= user_definiton(user) %>
       </div>
     </div>
-    <div class='col s12 l9'>
+    <div class='col s9 l10'>
       <% if user.description.present? %>
         <div class='col s12'>
           <%= user.description %>
         </div>
       <% end %>
-      <div class='col s3'>
+      <div class='col s6 l4'>
         <%= render 'common/user_url_list', user: user %>
       </div>
     </div>

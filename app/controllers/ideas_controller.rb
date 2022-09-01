@@ -45,6 +45,7 @@ class IdeasController < ApplicationController
     end
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
@@ -66,6 +67,7 @@ class IdeasController < ApplicationController
       render :edit
     end
   end
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def destroy
     @idea.destroy

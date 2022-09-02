@@ -3,7 +3,7 @@
   <div class='like-click comment <%= 'clicked' if current_user && current_user&.like?(object) %>' data-id='<%= object.id %>'>
     <div class='c-comment-heart'>
       <div class='c-comment-heart__image'>
-        <%= embedded_svg "like-heart.svg" %>
+        <%= embedded_svg "like-heart.svg", alt: 'いいね数' %>
       </div>
       <% if object.likes.length.positive? %>
         <div class='c-comment-heart__count js-like-count'>

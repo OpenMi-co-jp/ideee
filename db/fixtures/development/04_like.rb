@@ -2,7 +2,7 @@
   num = n + 1
   Like.seed(
     :id,
-    { id: num, user: User.all.sample, idea: Idea.all.sample }
+    { id: num, user: User.all.sample, likable: Idea.all.sample }
   )
   # 同一の組み合わせがあった場合はrescueでエラーハンドリング
 rescue ActiveRecord::RecordNotUnique

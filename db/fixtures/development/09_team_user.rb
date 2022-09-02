@@ -1,7 +1,13 @@
 50.times do |n|
   num = n + 1
-  Team.seed(
+  TeamUser.seed(
     :id,
-    { id: num, team: Team.all.sample, idea: Idea.select { |i| i.team.nil? }.sample }
+    {
+      id: num,
+      team: Team.all.sample,
+      user: User.all.sample
+    }
   )
+  # 同一の組み合わせがあった場合はrescueでエラーハンドリング
+  rescue ActiveRecord::RecordNotUnique
 end

@@ -46,6 +46,7 @@ ja:
         product_url: 作っているアプリ
         team: チーム開発
         difficulty: 難易度
+        stance: スタンス
       comment:
         description: コメント
       team:

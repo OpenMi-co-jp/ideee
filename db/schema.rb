@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_125845) do
+ActiveRecord::Schema.define(version: 2022_08_21_031144) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_125845) do
     t.datetime "emailed_at", comment: "weeklyメールで新規アイデアとして送られた日時"
     t.string "github_url"
     t.string "monetize"
+    t.integer "stance", default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

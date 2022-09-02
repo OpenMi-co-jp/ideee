@@ -1,25 +1,31 @@
-<div class="c-user-description ph-1">
+<div class="c-user-description">
   <div class='row'>
-    <div class='col s3 l2'>
-      <%= link_to user_path(user.id), title: 'ユーザーページリンク' do %>
-        <% user_icon(user, size: 'middle') %>
-      <% end %>
-    </div>
-    <div class='col s9 l10'>
-      <div class='col s12 mb-1 c-user-description__name'>
-        <%= user.name %>
-      </div>
-      <div class='col s12 l10'>
-        <%= user_definiton(user) %>
+    <div class='col s4 m3 l2'>
+      <div class='c-user-description__icon'>
+        <%= link_to user_path(user.id), title: 'ユーザーページリンク' do %>
+          <% user_icon(user) %>
+        <% end %>
       </div>
     </div>
-    <div class='col s9 l10'>
+    <div class='col s8 m9 l10'>
+      <div class='row'>
+        <div class='col s12 l4'>
+          <div class='c-user-description__name'>
+            <%= user.name %>
+          </div>
+        </div>
+        <div class='col s12 l8'>
+          <%= user_definiton(user) %>
+        </div>
+      </div>
+    </div>
+    <div class='col s12 l11'>
       <% if user.description.present? %>
-        <div class='col s12'>
-          <%= user.description %>
+        <div class="c-user-content">
+          <%= simple_format(text_url_to_link(user.description), {}, sanitize: false) %>
         </div>
       <% end %>
-      <div class='col s6 l4'>
+      <div class='c-user-description__links'>
         <%= render 'common/user_url_list', user: user %>
       </div>
     </div>

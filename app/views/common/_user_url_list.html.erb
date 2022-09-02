@@ -5,17 +5,17 @@
         <%= embedded_svg "twitter_icon.svg", class: "c-user-urls__item--icon twitter_color" %>
       <% end %>
     <% else %>
-      <%= embedded_svg "twitter_icon.svg", class: "c-user-urls__item--icon gray" %>
+      <%= embedded_svg "twitter_icon.svg", class: "c-user-urls__item--icon gray", alt: 'twiiter' %>
     <% end %>
   </div>
   <% if user.engineer? || user.idea_engineer? || user&.github_id.present? %>
     <div class="c-user-urls__item">
       <% if user&.github_id.present? %>
         <%= link_to github_url(user.github_id), target: '_blank', rel: 'nofollow noopener noreferrer', title: 'ユーザーのGitHubリンク' do %>
-          <%= embedded_svg "github_icon.svg", class: "c-user-urls__item--icon github_color" %>
+          <%= embedded_svg "github_icon.svg", class: "c-user-urls__item--icon github_color", alt: 'github' %>
         <% end %>
       <% else %>
-        <%= embedded_svg "github_icon.svg", class: "c-user-urls__item--icon gray" %>
+        <%= embedded_svg "github_icon.svg", class: "c-user-urls__item--icon gray", alt: 'github' %>
       <% end %>
     </div>
   <% end %>

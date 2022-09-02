@@ -1,8 +1,27 @@
 .c-user-description {
   min-height: 120px;
+  padding: 0.5em 0;
+
+  &__icon {
+    margin-bottom: 1rem;
+    img {
+      margin: 0 auto;
+    }
+  }
 
   &__name {
     font-weight: bold;
     font-size: large;
+    margin-bottom: 0.5rem;
+  }
+
+  &__links {
+    @media (min-width: 600px) {
+      width: 45%
+    }
+
+    @media (min-width: 992px) {
+      width: 30%
+    }
   }
 }

@@ -25,9 +25,9 @@
         </div>
       </div>
       <% if @user.description.present? %>
-        <h2 class="c-user-content">
+        <div class="c-user-content">
           <%= simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
-        </h2>
+        </div>
       <% end %>
       <% if own_user_checked(@user) %>
         <%= link_to '編集', edit_user_registration_path(@user.id), class: 'mw-3' %>

@@ -1,9 +1,11 @@
 <div class='center'>
-  <% if idea.team&.status_active? || idea.team&.status_stop? %>
-    <div class='c-team-box__status'>
+  <div class='c-team-box__status'>
+    <% if idea.team_project? %>
       <%= I18n.t("enums.team.status.#{idea.team&.status}") %>
-    </div>
-  <% end %>
+    <% else %>
+      <%= I18n.t("enums.idea.stance.#{idea.stance}") %>
+    <% end %>
+  </div>
   <% unless idea.draft %>
     <div class='c-team-box__apply'>
       <% if current_user&.own?(idea) && idea.team.nil? %>

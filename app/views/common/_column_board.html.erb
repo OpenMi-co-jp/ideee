@@ -24,10 +24,12 @@
               <%= image_tag 'icons/comment.svg', class: 'icon-size', loading: "lazy", alt: "コメント数" %>
               <p><%= idea.comments_num %></p>
             </div>
-            <div class='idea__item'>
-              <%= image_tag 'icons/eye.svg', class: 'icon-size', loading: "lazy", alt: "ビュー数" %>
-              <p><%= idea.view %></p>
-            </div>
+            <% if idea.enough_view? %>
+              <div class='idea__item'>
+                <%= image_tag 'icons/eye.svg', class: 'icon-size', loading: "lazy", alt: "ビュー数" %>
+                <p><%= idea.view %></p>
+              </div>
+            <% end %>
             <div class='idea__item'>
               <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy", alt: "ハート数" %>
               <p><%= idea.likes_num %></p>

@@ -15,7 +15,7 @@
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
       <div class='idea-date gray-3'>
-        <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock'%>
+        <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock', alt: '投稿日' %>
         <%= idea_opened_date(@idea) %>
       </div>
       <%= image_set(@idea) %>

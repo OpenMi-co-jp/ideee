@@ -4,7 +4,7 @@
       <% if item == 'product_url' %>
         <i class="material-icons c-idea-url__icon product_url">phonelink</i>
       <% else %>
-        <%= embedded_svg "icons/mark-github.svg", class: "c-idea-url__icon github_url" %>
+        <%= embedded_svg 'icons/mark-github.svg', class: 'c-idea-url__icon github_url', alt: 'github'%>
       <% end %>
       <span class="c-idea-url__label">
         <%= t(".button_txt.#{item}") %>

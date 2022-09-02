@@ -1,6 +1,6 @@
 <div class="p-room">
   <div class="p-room__head">
-    <%= link_to idea_path(@team.idea.id), class: 'c-idea-img' do %>
+    <%= link_to idea_path(@team.idea.id), class: 'c-idea-img', title: "チーム開発中のアイデア" do %>
       <figure class='c-idea-img__figure'>
         <%= image_set(@team.idea) %>
       </figure>

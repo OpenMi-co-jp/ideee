@@ -15,10 +15,10 @@
     <div class='idea-column-img col s12 l3'>
       <div class="field">
         <%= form.label :icon %>
-        <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy" %>
+        <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy", alt: "アイデア画像" %>
         <div class='present-img'>
           <% if idea.icon.file.present? %>
-            <%= image_tag(idea.icon.to_s, loading: "lazy") %>
+            <%= image_tag(idea.icon.to_s, loading: "lazy", alt: "#{idea.name}の画像") %>
           <% end %>
         </div>
         <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3' %>
@@ -32,7 +32,7 @@
       </div>
       <div class="field input-field">
         <div>
-          <%= form.label :tags_up_to_three %><a class="help-tip tags">?</a>
+          <%= form.label :tags_up_to_three %><a class="help-tip tags" title="タグのヘルプチップ">?</a>
         </div>
         <div class="chips chips-initial chips-autocomplete"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
@@ -90,26 +90,32 @@
         </li>
       </ul>
       <div class="field">
-        <%= form.label :note %><a class="help-tip note-guide">?</a>
+        <%= form.label :note %><a class="help-tip note-guide" title="補足ヘルプチップ">?</a>
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
-      <% if idea.team.nil? || idea.id.nil? || idea.draft %>
-        <div class="field switch c-team-switch">
-          <%= form.label :team %><a class="help-tip team-guide">?</a>
-          <%= form.hidden_field :team_switch, value: params[:team_switch] %>
-          <div class="switch c-team-switch__btn">
-            <label class="c-team-switch__label">
-              募集しない
-              <input type="checkbox" id='team_switch' <%= 'checked' if idea.team&.status_active? %>>
-              <span class="lever"></span>
-              募集する
+      <% if idea.team.nil? || !idea.team.status_active? || idea.id.nil? || idea.draft %>
+        <div class="field">
+          <%= form.label :stance %>
+          <div>
+            <label>
+              <%= form.radio_button :stance, :free_right %>
+              <%= content_tag :span, 'アイデア権フリー' %>
             </label>
+            <label>
+              <%= form.radio_button :stance, :personal_project %>
+              <%= content_tag :span, '個人開発中' %>
+            </label>
+            <label>
+              <%= form.radio_button :stance, :team_project %>
+              <%= content_tag :span, 'チーム開発募集' %>
+            </label>
+            <a class="help-tip team-guide" title="チーム開発ヘルプチップ">?</a>
           </div>
         </div>
       <% end %>
       <div class="field input-field">
         <div>
-          <%= form.label :product_url, class: 'active' %><a class="help-tip product-url">?</a>
+          <%= form.label :product_url, class: 'active' %><a class="help-tip product-url" title="アイデアURLヘルプチップ">?</a>
         </div>
         <%= form.url_field :product_url, placeholder: 'プロダクトのURL', class: 'validate' %>
         <span class="helper-text" data-error="正しい形式のURLを入力してください。" data-success="OK"></span>

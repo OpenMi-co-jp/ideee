@@ -10,7 +10,7 @@ module UsersHelper
       else
         'undefined_user_icon'
       end
-    image_tag(icon_url, class: "circle icon-circle #{size}", loading: 'lazy')
+    image_tag(icon_url, class: "circle icon-circle #{size}", loading: 'lazy', alt: "#{user.name}のアイコン")
   end
 
   def twitter_url(id)

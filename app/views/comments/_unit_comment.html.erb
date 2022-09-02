@@ -8,7 +8,7 @@
       </div>
     <% else %>
       <div class='c-unit-comment__user'>
-        <%= link_to user_path(item.user_id) do %>
+        <%= link_to user_path(item.user_id), title: 'ユーザーリンク' do %>
           <%= user_icon(User.find(item.user_id), size: 'small') %>
         <% end %>
       </div>

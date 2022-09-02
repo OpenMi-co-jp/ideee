@@ -12,8 +12,8 @@ class SendWeeklyMailJob < ApplicationJob
     return if new_ideas.length < 10
 
     commented_ideas = ideas.order(comments_num: 'DESC').first(10)
-    new_ideas = new_ideas.order(published_at: 'DESC').first(10)
-    SendEmail.new.send_heart_ranking_and_new_idea(commented_ideas, new_ideas)
+    selected_ideas = new_ideas.order(published_at: 'DESC').first(10)
+    SendEmail.new.send_heart_ranking_and_new_idea(commented_ideas, selected_ideas)
     new_ideas.each do |idea|
       idea.update_column(:emailed_at, Time.now)
     end

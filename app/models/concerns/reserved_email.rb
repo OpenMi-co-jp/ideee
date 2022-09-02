@@ -60,6 +60,16 @@ module ReservedEmail
     str
   end
 
+  def idea_ranking_item(rank:, idea:)
+    "
+      <div style='background-color: white; margin: 3px 0; padding: 5px;'>
+        <div style='display: inline;'>
+          <b>#{rank}</b>#{analytics_url('ideas/' + idea.id.to_s, 'ranking', idea.name)} (💬#{idea.comments_num}) by #{idea.user.name}
+        </div>
+      </div>
+    "
+  end
+
   def idea_list(ideas)
     str = ''
     ideas.each do |idea|

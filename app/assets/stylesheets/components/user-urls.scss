@@ -5,7 +5,7 @@
   &__item {
     margin: 0.5rem 0;
 
-    &--twitter {
+    &--icon {
       width: 36px;
 
       &:hover {
@@ -13,10 +13,6 @@
         transform: scale(1.1);
         pointer-events: auto;
         cursor: pointer;
-      }
-
-      .icon-padding-color {
-        fill: #1B9DF0;
       }
 
       .icon-body-color {
@@ -30,6 +26,18 @@
 
         .icon-padding-color {
           fill: #bfbfbf;
+        }
+      }
+
+      &.twitter_color {
+        .icon-padding-color {
+          fill: #1B9DF0;
+        }
+      }
+
+      &.github_color {
+        .icon-padding-color {
+          fill: #000;
         }
       }
     }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_01_042941) do
+ActiveRecord::Schema.define(version: 2022_08_21_031144) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -99,6 +99,9 @@ ActiveRecord::Schema.define(version: 2022_05_01_042941) do
     t.string "target"
     t.string "similar"
     t.datetime "emailed_at", comment: "weeklyメールで新規アイデアとして送られた日時"
+    t.string "github_url"
+    t.string "monetize"
+    t.integer "stance", default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 
@@ -112,6 +115,15 @@ ActiveRecord::Schema.define(version: 2022_05_01_042941) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "messages", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "room_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "notifications", charset: "utf8mb4", force: :cascade do |t|
     t.integer "visitor_id"
     t.integer "visited_id"
@@ -121,7 +133,14 @@ ActiveRecord::Schema.define(version: 2022_05_01_042941) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "notificatable_id"
     t.string "notificatable_type"
+    t.datetime "send_at"
     t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
+  end
+
+  create_table "rooms", id: :string, charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "team_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
@@ -187,6 +206,12 @@ ActiveRecord::Schema.define(version: 2022_05_01_042941) do
     t.string "remote_url"
     t.string "site_url"
     t.boolean "defined"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "github_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

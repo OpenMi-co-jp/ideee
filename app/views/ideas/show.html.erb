@@ -1,11 +1,12 @@
-<%# OGP %>
-<% unless @idea.draft %>
-  <% set_meta_tags og: {
+<%# mete_tags %>
+<% set_meta_tags title: @idea.name,
+  keywords: @idea.idea_tags.pluck(:name).join(','),
+  og: {
     title: @idea.name,
     image: return_ogp_url(@idea.name),
-    description: strip_tags(@idea.note.to_s).gsub(/[\n]/, "").strip.truncate(120)
-  } %>
-<% end %>
+    description: strip_tags(@idea.goal).gsub(/[\n]/, "").strip.truncate(120)
+  }
+%>
 
 <div class='idea-show'>
   <div class='row'>
@@ -14,7 +15,7 @@
         <div class='chip'><%= t('default.draft') %></div>
       <% end %>
       <div class='idea-date gray-3'>
-        <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock'%>
+        <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock', alt: '投稿日' %>
         <%= idea_opened_date(@idea) %>
       </div>
       <%= image_set(@idea) %>
@@ -29,9 +30,9 @@
       <%= render 'teams/box_on_idea', idea: @idea %>
     </div>
     <div class='idea-status-column col l9 s12'>
-      <div class='idea-name orange-action'>
+      <h1 class='idea-name orange-action'>
         <%= @idea.name %>
-      </div>
+      </h1>
       <div class='hide-on-small-only'>
         <%= render 'ideas/show/pc_idea_status', idea: @idea, time_on_page: @time_on_page %>
       </div>
@@ -46,8 +47,11 @@
           <%= render 'ideas/show/title_set', item: 'wish_function' %>
           <%= render 'ideas/show/title_set', item: 'hypothesis' %>
           <%= render 'ideas/show/title_set', item: 'target' %>
+          <%= render 'ideas/show/title_set', item: 'monetize' %>
           <%= render 'ideas/show/title_set', item: 'similar' %>
           <%= render 'ideas/show/title_set', item: 'note' %>
+          <%= render 'ideas/show/url_button', item: 'product_url' %>
+          <%= render 'ideas/show/url_button', item: 'github_url' %>
         <% else %>
           <% if @idea&.background.length > 0 %>
             <%= strip_tags(@idea&.background).gsub(/[\n]/, "").strip.truncate(60) %>
@@ -68,9 +72,6 @@
             </div>
           </div>
         <% end %>
-        <% if @idea.approved? %>
-          <%= render 'ideas/show/title_set', item: 'product_url' %>
-        <% end %>
       </div>
       <% if current_user&.own?(@idea) %>
         <% if @idea.draft %>
@@ -85,7 +86,7 @@
   <hr>
 
   <% unless @idea.draft %>
-    <%= render 'comments/board', object: @idea %>
+    <%= render 'comments/board', items: @comments, item_class: 'comments' %>
     <%= render 'comments/form' %>
     <div class="fixed-action-btn">
       <a class="btn-floating btn-large red">
@@ -97,8 +98,16 @@
       </ul>
     </div>
     <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>
+    <%= render 'common/user_description', user: @idea.user %>
     <%= render 'common/fund_link', object: @idea %>
   <% end %>
-
-  <%= render 'ideas/show/vote_modal' %>
 </div>
+
+<%# モーダルの設定 %>
+<% unless !current_user || @idea.draft %>
+  <%= render 'ideas/show/vote_modal', object: @idea %>
+<% end %>
+<%# パラメータshareがある時にモーダルを設定 %>
+<% if params[:share].present? %>
+  <%= render 'ideas/show/share_modal' %>
+<% end %>

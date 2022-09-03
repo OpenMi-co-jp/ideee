@@ -19,21 +19,20 @@
         <div class="c-pc-status-info__day">
           <%= "更新日：#{l idea.updated_at}" %>
         </div>
-        <div class="c-pc-status-info__eye">
-          <%= image_tag 'icons/eye.svg', loading: "lazy" %>
-          <%= idea.view %>
-        </div>
+        <% if idea.enough_view? %>
+          <div class="c-pc-status-info__eye">
+            <%= image_tag 'icons/eye.svg', loading: "lazy", alt: "ビュー数" %>
+            <%= idea.view %>
+          </div>
+        <% end %>
         <div class='c-pc-status-info__comment', id="comments_count">
-          <%= image_tag 'icons/comment.svg', loading: "lazy" %>
+          <%= image_tag 'icons/comment.svg', loading: "lazy", alt: "コメント数" %>
           <p><%= idea.comments_num %></p>
         </div>
-        <div class="c-pc-status-info__heart">
-          <%= image_tag 'like-heart.svg', loading: "lazy" %>
-          <p><%= idea.likes.length %></p>
-        </div>
-        <div class='c-pc-status-info__time'>
-          <%= "平均ページ滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%X')}" %>
-        </div>
+        <%= render 'difficultys/vote', object: idea %>
+      </div>
+      <div class='c-pc-status-info__time'>
+        <%= "平均滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%OM分%S秒')}" %>
       </div>
       <%= render 'tags/links', object: idea %>
     </div>

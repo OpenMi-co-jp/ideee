@@ -7,7 +7,7 @@
   <div class="p-notification__message">
     <%= link_to "#{truncate(notification.visitor.name)}", user_path(id: notification.visitor_id), class: "p-notification__message--link" %>
       さんが
-    <%= link_to "#{truncate(notification.idea.name)}", idea_path(id: notification.idea_id), class: "p-notification__message--link" %>
+    <%= link_to "#{truncate(notification.idea&.name)}", idea_path(id: notification.idea_id), class: "p-notification__message--link" %>
     <%= t("notifications.#{notification.notificatable_type}") %>
     <%= content_tag(:p, "#{l notification.created_at, format: :long }", class: "p-notification__message--date") %>
   </div>

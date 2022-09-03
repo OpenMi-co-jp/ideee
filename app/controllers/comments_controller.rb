@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
 
     idea = Idea.find_by!(id: comment_params[:idea_id])
     current_user.create_notification_comment(idea, comment)
+    SendCommentEmailJob.perform_later(current_user, idea, comment.description)
   end
 
   def edit; end
@@ -25,17 +26,6 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy!
     @comment.idea.count_comments
-  end
-
-  def send_email
-    return unless Rails.env.production?
-
-    @idea = Idea.find_by!(id: comment_params[:idea_id])
-    @users = [@idea.user].push(@idea.comment_users.uniq).flatten
-    @users.delete(current_user)
-    return if @users.nil?
-
-    SendEmail.new.comment(@users, current_user, @idea, comment_params[:description])
   end
 
   private

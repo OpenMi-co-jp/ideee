@@ -1,33 +1,22 @@
+<%# mete_tags %>
+<% set_meta_tags title: "#{@user.name}のページ",
+  og: {
+    title: "#{@user.name}のページ",
+    description: strip_tags(@user.description)&.gsub(/[\n]/, "")&.strip&.truncate(120)
+  }
+%>
+
 <div class='p-user-show'>
   <div class="row">
     <div class="col s12 l3">
       <div class="c-user-icon-info">
         <div class='c-user-icon-info__icon'><%= user_icon(@user, size: 'large') %></div>
-        <h4 class='c-user-icon-info__name'><%= @user&.name %></h4>
+        <h1 class='c-user-icon-info__name'><%= @user&.name %></h1>
         <h5><%= @user&.point %></h5>
         <p class='c-user-icon-info__contributions'>Contributions</p>
         <p class='c-user-icon-info__created-date'><%= "作成日：#{l @user.created_at}" %></p>
       </div>
-      <div class='c-user-urls'>
-        <div class="c-user-urls__item">
-          <% if @user&.twitter_id.present? %>
-            <%= link_to twitter_url(@user&.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer' do %>
-              <%= embedded_svg "twitter_icon.svg", class: "c-user-urls__item--twitter" %>
-            <% end %>
-          <% else %>
-            <%= embedded_svg "twitter_icon.svg", class: "c-user-urls__item--twitter gray" %>
-          <% end %>
-        </div>
-        <div class="c-user-urls__item">
-          <% if @user.site_url.present? %>
-            <%= link_to @user.site_url, target: '_blank', rel: 'nofollow noopener noreferrer' do %>
-              <i class="material-icons small orange-soft">link</i>
-            <% end %>
-          <% else %>
-            <i class="material-icons small gray-3">link</i>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'common/user_url_list', user: @user %>
     </div>
     <div class="col s12 l9">
       <div class="row">
@@ -36,7 +25,7 @@
         </div>
       </div>
       <% if @user.description.present? %>
-        <div class="c-user-content mb-2">
+        <div class="c-user-content">
           <%= simple_format(text_url_to_link(@user.description), {}, sanitize: false) %>
         </div>
       <% end %>
@@ -48,9 +37,10 @@
   <nav class="nav-extended c-nav-var">
     <div class="nav-content c-nav-var__content">
       <ul class="tabs tabs-transparent">
-        <li class="tab c-nav-var__tab"><a class="active" href="#tab1" id="link1">アイデアリスト（<%= @user.ideas.published.size %>）</a></li>
-        <li class="tab c-nav-var__tab"><a href="#tab2" id="link2">ハート（<%= @user.likes.where(likable_type: 'Idea').size %>）</a></li>
-        <li class="tab c-nav-var__tab"><a href="#tab3" id="link3">コメント（<%= @user.comment_ideas.commented_others_ideas(@user).size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a class="active" href="#tab1" id="link1" title="アイデアリスト">アイデアリスト（<%= @user_published_ideas.size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab2" id="link2" title="ハート">ハート（<%= @liked_idea_ids.size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab3" id="link3" title="コメント">コメント（<%= @commented_idea_list.size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab4" id="link4" title="チーム開発参加">チーム開発参加（<%= @joined_team_num %>）</a></li>
       </ul>
     </div>
   </nav>
@@ -58,7 +48,7 @@
     <div class="row">
       <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
         <% if @published_ideas.present? %>
-          <%= render 'common/column_board', ideas: @published_ideas %>
+          <%= render 'common/column_board', ideas: @published_ideas, user_icon_view: 'off' %>
           <%= paginate @published_ideas, param_name: :published_page %>
         <% else %>
           <h5 class='no_idea_posted'>まだアイデアが投稿されていません</h5>
@@ -91,6 +81,13 @@
       <%= paginate @commented_ideas, param_name: :comment_page %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
+    <% end %>
+  </div>
+  <div id="tab4" class="col s12">
+    <% if @joined_team_num.positive? %>
+      <%= render_async joined_team_idea_path(user_id: @user.id) %>
+    <% else %>
+      <h5>まだチーム開発に参加をしていません</h5>
     <% end %>
   </div>
   <%= render 'common/fund_link', object: @user %>

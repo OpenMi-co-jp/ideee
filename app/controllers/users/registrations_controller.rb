@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    Slack::SendNewJob.perform_later(resource, user_url(resource&.id)) if Rails.env.production?
+    Slack::SendNewJob.perform_later(resource, user_url(resource.id)) if Rails.env.production? && resource.present?
   end
 
   # GET /resource/edit
@@ -51,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update,
-                                      keys: %i[name email icon description definition twitter_id site_url])
+                                      keys: %i[name email icon description definition twitter_id github_id site_url])
   end
 
   # The path used after sign up for inactive accounts.

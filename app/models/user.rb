@@ -6,12 +6,16 @@
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :string(255)
 #  defined                :boolean
 #  definition             :integer
 #  description            :string(200)
 #  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null
 #  icon                   :string(255)
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :string(255)
 #  name                   :string(30)       default("")
 #  point                  :integer          default(0)
 #  provider               :string(255)
@@ -19,11 +23,13 @@
 #  remote_url             :string(255)
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
+#  sign_in_count          :integer          default(0), not null
 #  site_url               :string(255)
 #  uid                    :string(255)
 #  unconfirmed_email      :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  github_id              :string(255)
 #  twitter_id             :string(255)
 #
 # Indexes
@@ -34,7 +40,7 @@
 class User < ApplicationRecord
   # :lockable, :timeoutable
   devise :confirmable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :recoverable, :rememberable, :validatable, :trackable,
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -49,7 +55,7 @@ class User < ApplicationRecord
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
-  before_update :twitter_id_fix
+  before_update :fix_ids
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
@@ -111,6 +117,11 @@ class User < ApplicationRecord
     end
   end
 
+  # cookieを使ってログインを保持
+  def remember_me
+    true
+  end
+
   # twitterログインでもメールアドレスがあればメールアドレスを必須項目にする
   def email_required?
     provider == 'twitter' && !email.blank? && super
@@ -122,7 +133,7 @@ class User < ApplicationRecord
   end
 
   def like?(item)
-    likes.includes(:likable).map(&:likable).include?(item)
+    likes.preload(:likable).map(&:likable).include?(item)
   end
 
   def voted?(idea)
@@ -152,7 +163,8 @@ class User < ApplicationRecord
     update_column(:point, sum_points)
   end
 
-  def twitter_id_fix
+  def fix_ids
     self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
+    self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
   end
 end

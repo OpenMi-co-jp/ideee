@@ -1,13 +1,15 @@
 30.times do |n|
   num = n + 1
+  idea = Idea.select { |i| i.team.nil? }.sample
   Team.seed(
     :id,
     {
       id: num,
-      idea: Idea.select { |i| i.team.nil? }.sample,
+      idea: idea,
       offer: Faker::JapaneseMedia::StudioGhibli.character,
       requirement: Faker::JapaneseMedia::StudioGhibli.quote,
-      status: Faker::JapaneseMedia::StudioGhibli.movie
+      status: Faker::JapaneseMedia::StudioGhibli.movie,
+      owner_id: idea.user_id
     }
   )
   # 同一の組み合わせがあった場合はrescueでエラーハンドリング

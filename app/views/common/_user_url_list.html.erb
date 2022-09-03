@@ -1,0 +1,31 @@
+<div class='c-user-urls'>
+  <div class="c-user-urls__item">
+    <% if user&.twitter_id.present? %>
+      <%= link_to twitter_url(user.twitter_id), target: '_blank', rel: 'nofollow noopener noreferrer',  title: 'ユーザーのTwitterリンク' do %>
+        <%= embedded_svg "twitter_icon.svg", class: "c-user-urls__item--icon twitter_color" %>
+      <% end %>
+    <% else %>
+      <%= embedded_svg "twitter_icon.svg", class: "c-user-urls__item--icon gray", alt: 'twiiter' %>
+    <% end %>
+  </div>
+  <% if user.engineer? || user.idea_engineer? || user&.github_id.present? %>
+    <div class="c-user-urls__item">
+      <% if user&.github_id.present? %>
+        <%= link_to github_url(user.github_id), target: '_blank', rel: 'nofollow noopener noreferrer', title: 'ユーザーのGitHubリンク' do %>
+          <%= embedded_svg "github_icon.svg", class: "c-user-urls__item--icon github_color", alt: 'github' %>
+        <% end %>
+      <% else %>
+        <%= embedded_svg "github_icon.svg", class: "c-user-urls__item--icon gray", alt: 'github' %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="c-user-urls__item">
+    <% if user.site_url.present? %>
+      <%= link_to user.site_url, target: '_blank', rel: 'nofollow noopener noreferrer', title: 'ユーザーのサイトリンク' do %>
+        <i class="material-icons small orange-soft">link</i>
+      <% end %>
+    <% else %>
+      <i class="material-icons small gray-3">link</i>
+    <% end %>
+  </div>
+</div>

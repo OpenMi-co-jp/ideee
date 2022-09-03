@@ -9,7 +9,7 @@
       <div class="c-user-icon-info col s12 l4">
         <div class="field">
           <%= f.label :icon %>
-          <%= image_tag '', id: "avatar_img_prev", class:"disabled user", loading: "lazy" %>
+          <%= image_tag '', id: "avatar_img_prev", class:"disabled user", loading: "lazy", alt: "ユーザーアイコン" %>
           <div class='present-img'>
             <% if resource.icon.file.present? || resource.remote_url.present? %>
               <%= user_icon(@user, size: 'large') %>
@@ -21,15 +21,15 @@
 
       <div class="col s12 l8">
         <div class="field input-field">
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', class: 'validate', required:'required active' %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'お名前', data: { length: 30 }, class: 'validate', required:'required active' %>
           <%= f.label :name, class: 'required active' %>
-          <span class="helper-text" data-error="ユーザー名を入力してください。"></span>
+          <%= between_length_invalid_text(30) %>
         </div>
 
         <div class="field input-field">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'example@example.com', class: 'validate', required:'required active' %>
           <%= f.label :email, class: 'required active' %>
-          <span class="helper-text" data-error="正しい形式のメールアドレスを入力してください。"></span>
+          <%= email_valid_text %>
         </div>
 
         <div class="field input-field">
@@ -43,9 +43,18 @@
           <span class="helper-text" data-error="タイプを選択してください。"></span>
         </div>
 
-        <div class="field">
-          <%= f.label :twitter_id, class: 'active' %><a class="help-tip twitter-id">?</a>
+        <div class="field input-field">
+          <div>
+            <%= f.label :twitter_id, class: 'active' %><a class="help-tip twitter-id" title="ヘルプチップ">?</a>
+          </div>
           <%= f.text_field :twitter_id, placeholder: 'Twitter ID' %>
+        </div>
+
+        <div class="field input-field">
+          <div>
+            <%= f.label :github_id, class: 'active' %>
+          </div>
+          <%= f.text_field :github_id, placeholder: 'Github ID' %>
         </div>
 
         <div class="field input-field">
@@ -57,7 +66,7 @@
           <div>メールの確認待ち: <%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <%= f.button id: 'edit_user_submit', type:'button' ,class: 'btn orange-action-back mh-3' %>
+        <%= f.button id: 'edit_user_submit', type:'button', class: 'btn orange-action-back mh-3' %>
       </div>
     </div>
 

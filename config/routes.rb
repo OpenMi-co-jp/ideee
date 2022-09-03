@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   resources :ideas do
     collection do
       get :search
-      get :tags
       get :suggest
       get :most_comment
       get :most_liked
@@ -26,13 +25,10 @@ Rails.application.routes.draw do
     end
     member do
       post :publish
+      get :joined_team
     end
   end
-  resources :comments, only: %i[create edit update destroy] do
-    collection do
-      post :send_email
-    end
-  end
+  resources :comments, only: %i[create edit update destroy]
   resources :users, only: %i[index show] do
     collection do
       get :search
@@ -41,7 +37,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: %i[create destroy]
-  resources :teams, except: %i[destroy] do
+  resources :teams, except: %i[index destroy] do
     member do
       post :join
       post :stop
@@ -49,6 +45,8 @@ Rails.application.routes.draw do
       post :finish
     end
   end
+  resources :rooms, only: %i[create show]
+  resources :messages, only: %i[create edit update destroy]
   resources :difficultys, only: %i[create]
   resources :notifications, only: %i[index] do
     collection do
@@ -56,6 +54,7 @@ Rails.application.routes.draw do
     end
   end
   get 'tags_popular', to: 'tags#popular'
+  get 'tags_list', to: 'tags#list'
   get 'login', to: 'devise/sessions#new'
   post 'login', to: 'devise/sessions#create'
   get 'logout', to: 'devise/sessions#destroy'

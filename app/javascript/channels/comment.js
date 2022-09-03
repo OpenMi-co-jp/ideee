@@ -3,7 +3,7 @@ $(document).on ('turbolinks:load', function(){
 
   $('#js-comment-send').on('click', function(e) {
     e.preventDefault()
-    $('.submit-btn').addClass('disabled')
+    $('#js-comment-send').addClass('disabled')
     const comment_input = $('#comment-form').val().replace(/^\s*(.*?)\s*$/, "$1");
     // コメントが入力されていれば発火
     if(comment_input.length > 0) {
@@ -14,21 +14,21 @@ $(document).on ('turbolinks:load', function(){
         $('#js-comments').append(js_comments(comment_input)) // コメントをUIにセット
         $('#comment-form').val('') // コメントフォームを空にする
         $('#comment.submit-btn').removeClass('disabled')
-        send_email(comment_input, $(this).data('id')) // アイデアの持ち主や関わる人にメールを送る
       })
       .fail(function() {
         alert('コメントに失敗しました')
       })
     } else {
       $('#comment-form_message').addClass('c-comment-form__message');
-      $("#comment-form_message").text('コメントを入力してください。');
-      $('#comment.submit-btn').removeClass('disabled')
+      $("#comment-form_message").text('コメントを入力してください。'); //ユーザーによってdisabledが解除されることを考慮
     }
   });
 
   $('#comment-form').on('keyup', function(e) {
-    if($(this).length > 0) {
-      $("#comment-form_message").text('');
+    if($(this).val().length > 0) {
+      $('#js-comment-send').removeClass('disabled')
+    } else {
+      $('#js-comment-send').addClass('disabled')
     }
   });
 
@@ -36,7 +36,7 @@ $(document).on ('turbolinks:load', function(){
     comment_id = $(this).attr('id')
     delete_comment(comment_id)
     .done(function() {
-      $('#comment-' + comment_id).remove()
+      $('#comments-' + comment_id).remove()
       $comments_count = $('#comments_count').find('p')
       $comments_count.html(Number($comments_count[0].innerText) - 1)
     })
@@ -69,15 +69,6 @@ $(document).on ('turbolinks:load', function(){
       dataType: 'json'
     })
   };
-
-  function send_email(comment, idea_id){
-    return $.ajax({
-      url: '/comments/send_email',
-      type: 'POST',
-      data: { description: comment, idea_id: idea_id},
-      dataType: 'json'
-    })
-  }
 
   function js_comments(comment){
     const now = new Date()

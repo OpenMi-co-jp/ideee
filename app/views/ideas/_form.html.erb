@@ -15,10 +15,10 @@
     <div class='idea-column-img col s12 l3'>
       <div class="field">
         <%= form.label :icon %>
-        <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy" %>
+        <%= image_tag '', id: "avatar_img_prev", class:"disabled", loading: "lazy", alt: "アイデア画像" %>
         <div class='present-img'>
           <% if idea.icon.file.present? %>
-            <%= image_tag(idea.icon.to_s, loading: "lazy") %>
+            <%= image_tag(idea.icon.to_s, loading: "lazy", alt: "#{idea.name}の画像") %>
           <% end %>
         </div>
         <%= form.file_field :icon, accept: 'image/png,image/jpeg', id: "post-img", class: 'mh-3' %>
@@ -28,71 +28,97 @@
       <div class="field input-field">
         <%= form.text_field :name, placeholder: 'アイデア名', data: { length: 50 }, class: 'validate', required:'required' %>
         <%= form.label :name, class: 'required active' %>
-        <span class="helper-text" data-error="アイデア名を入力してください。"></span>
+        <span class="helper-text" data-error="1~50文字で入力してください。" data-success="OK"></span>
       </div>
-      <div class="field">
-        <%= form.label :tags_up_to_three %><a class="help-tip tags">?</a>
-        <div class="chips"></div>
+      <div class="field input-field">
+        <div>
+          <%= form.label :tags_up_to_three %><a class="help-tip tags" title="タグのヘルプチップ">?</a>
+        </div>
+        <div class="chips chips-initial chips-autocomplete"></div>
         <%= form.hidden_field :tag_list, id: 'tag-hidden-field' %>
       </div>
       <div class="field input-field">
-        <%= form.text_area :background, placeholder: '背景やストーリー', class: 'materialize-textarea validate', required:'required' %>
+        <%= form.text_area :background, placeholder: '背景やストーリー', data: { length: 255 }, class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :background, class: 'required active' %>
-        <span class="helper-text" data-error="背景を入力してください。"></span>
+        <%= between_length_invalid_text(255) %>
       </div>
       <div class="field input-field">
-        <%= form.text_area :goal, placeholder: 'どうなって欲しいか', class: 'materialize-textarea validate', required:'required' %>
+        <%= form.text_area :goal, placeholder: '提供されうる価値', data: { length: 255 }, class: 'materialize-textarea validate', required:'required' %>
         <%= form.label :goal, class: 'required active' %>
-        <span class="helper-text" data-error="ゴールを入力してください。"></span>
+        <%= between_length_invalid_text(255) %>
       </div>
       <ul class="collapsible">
         <li>
           <div class="collapsible-header"><i class="material-icons">expand_more</i>さらにブラッシュアップ</div>
           <div class="collapsible-body">
             <div class="field input-field">
-              <%= form.text_area :issue, placeholder: '課題・困っていること', class: 'materialize-textarea' %>
+              <%= form.text_area :issue, placeholder: '課題・困っていること', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :issue, class: 'active' %>
+              <%= length_invalid_text(255) %>
             </div>
             <div class="field input-field">
-              <%= form.text_area :wish_function, placeholder: '欲しい機能', class: 'materialize-textarea' %>
+              <%= form.text_area :wish_function, placeholder: '欲しい機能', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :wish_function, class: 'active' %>
+              <%= length_invalid_text(255) %>
             </div>
             <div class="field input-field">
-              <%= form.text_area :hypothesis, placeholder: '検証のための仮説', class: 'materialize-textarea' %>
+              <%= form.text_area :hypothesis, placeholder: '検証のための仮説', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :hypothesis, class: 'active' %>
+              <%= length_invalid_text(255) %>
             </div>
             <div class="field input-field">
-              <%= form.text_area :target, placeholder: 'サービスを利用する典型的なユーザー像', class: 'materialize-textarea' %>
+              <%= form.text_area :target, placeholder: 'サービスを利用する典型的なユーザー像', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :target, class: 'active' %>
+              <%= length_invalid_text(255) %>
             </div>
             <div class="field input-field">
-              <%= form.text_area :similar, placeholder: '類似サービス・競合', class: 'materialize-textarea' %>
+              <%= form.text_area :monetize, placeholder: '収益化するならどうやるか', data: { length: 255 }, class: 'materialize-textarea validate' %>
+              <%= form.label :monetize, class: 'active' %>
+              <%= length_invalid_text(255) %>
+            </div>
+            <div class="field input-field">
+              <%= form.text_area :similar, placeholder: '類似サービス・競合', data: { length: 255 }, class: 'materialize-textarea validate' %>
               <%= form.label :similar, class: 'active' %>
+              <%= length_invalid_text(255) %>
+            </div>
+            <div class="field input-field">
+              <%= form.url_field :github_url, placeholder: 'GitHubのURL', class: 'validate' %>
+              <%= form.label :github_url, class: 'active' %>
+              <span class="helper-text" data-error="正しい形式のURLを入力してください。" data-success="OK"></span>
             </div>
           </div>
         </li>
       </ul>
       <div class="field">
-        <%= form.label :note %>
+        <%= form.label :note %><a class="help-tip note-guide" title="補足ヘルプチップ">?</a>
         <%= form.rich_text_area :note, placeholder: '補足' %>
       </div>
-      <% if idea.team.nil? || idea.id.nil? || idea.draft %>
-        <div class="field switch c-team-switch">
-          <%= form.label :team %><a class="help-tip team-guide">?</a>
-          <%= form.hidden_field :team_switch, value: params[:team_switch] %>
-          <div class="switch c-team-switch__btn">
-            <label class="c-team-switch__label">
-              募集しない
-              <input type="checkbox" id='team_switch' <%= 'checked' if idea.team&.status_active? %>>
-              <span class="lever"></span>
-              募集する
+      <% if idea.team.nil? || !idea.team.status_active? || idea.id.nil? || idea.draft %>
+        <div class="field">
+          <%= form.label :stance %>
+          <div>
+            <label>
+              <%= form.radio_button :stance, :free_right %>
+              <%= content_tag :span, 'アイデア権フリー' %>
             </label>
+            <label>
+              <%= form.radio_button :stance, :personal_project %>
+              <%= content_tag :span, '個人開発中' %>
+            </label>
+            <label>
+              <%= form.radio_button :stance, :team_project %>
+              <%= content_tag :span, 'チーム開発募集' %>
+            </label>
+            <a class="help-tip team-guide" title="チーム開発ヘルプチップ">?</a>
           </div>
         </div>
       <% end %>
-      <div class="field">
-        <%= form.label :product_url %><a class="help-tip product-url">?</a>
-        <%= form.text_field :product_url, placeholder: 'プロダクトのURL' %>
+      <div class="field input-field">
+        <div>
+          <%= form.label :product_url, class: 'active' %><a class="help-tip product-url" title="アイデアURLヘルプチップ">?</a>
+        </div>
+        <%= form.url_field :product_url, placeholder: 'プロダクトのURL', class: 'validate' %>
+        <span class="helper-text" data-error="正しい形式のURLを入力してください。" data-success="OK"></span>
       </div>
       <% if idea.draft || idea.id.nil? %>
         <%= form.submit t('default.save_draft'), class: 'btn orange-soft-back mh-3 idea-btn' %>

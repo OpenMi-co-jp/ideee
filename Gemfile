@@ -8,7 +8,7 @@ gem 'rails', '~> 6.1.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -25,7 +25,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 
 gem 'aws-sdk-s3', require: false
 gem 'carrierwave'
@@ -69,6 +69,9 @@ gem 'twitter'
 # エラー関係
 gem 'rack-timeout'
 gem 'rollbar' # 本番のみで運用
+
+# 検索メソッド
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

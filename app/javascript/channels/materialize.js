@@ -13,11 +13,6 @@ $(document).on ('turbolinks:load', function(){
     draggable: true
   });
 
-  // チーム開発募集をrailsに渡す
-  $('#team_switch').on('click', function () {
-    $('#idea_team_switch').val($(this).prop('checked'))
-  });
-
   // 選択必須のバリデーション
   M.invalidate_selected_num = function (id) {
     const selected_field = $(id).val();

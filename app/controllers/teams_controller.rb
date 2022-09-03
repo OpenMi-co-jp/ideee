@@ -1,15 +1,9 @@
 class TeamsController < ApplicationController
-  prepend_before_action :set_team, except: %i[index new create]
-  before_action :authenticate_user!, except: %i[index]
-  before_action :defined_check, except: %i[index show]
+  prepend_before_action :set_team, except: %i[new create]
+  before_action :authenticate_user!
+  before_action :defined_check, except: %i[show]
   before_action :set_idea, only: %i[new edit stop join activate finish]
   before_action :check_owner, only: %i[edit update stop activate finish]
-
-  def index
-    idea_list = Team.where(status: :active).pluck(:idea_id)
-    list = Idea.where(id: idea_list).includes(%i[idea_tags user])
-    @active_team_ideas = Kaminari.paginate_array(list).page(params[:page])
-  end
 
   def show
     @idea = @team.idea
@@ -26,7 +20,7 @@ class TeamsController < ApplicationController
     if current_user == @team.owner
       @team.status = :active
       @team.save!
-      redirect_to @team, notice: t('.success')
+      redirect_to idea_path(@team.idea_id, share: true), notice: t('.success')
     else
       redirect_to @team, notice: t('.not_owner')
     end

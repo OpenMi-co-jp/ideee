@@ -5,10 +5,10 @@
   }
 
   &__box {
-    margin: 0 15px;
+    margin: 0 10px;
 
     &:hover {
-      transition-duration: .3s;
+      transition-duration: 0.3s;
       transform: scale(1.05);
       pointer-events: auto;
       cursor: pointer;
@@ -25,13 +25,13 @@
     margin: 0 auto;
     border-radius: 50%;
     width: 48px;
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       width: 28px;
     }
   }
 
   &__text {
     text-align: center;
-    color: #A7A7A7;
+    color: #a7a7a7;
   }
 }

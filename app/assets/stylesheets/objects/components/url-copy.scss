@@ -1,30 +1,22 @@
 .c-url-copy {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 1px solid #A7A7A7;
   border-radius: 20px;
-  max-width: 220px;
-  margin: 20px auto;
   cursor: pointer;
-
-  &__mobile {
-    border: 0;
-  }
+  border: none;
 
   &:hover {
     transition-duration: .3s;
     transform: scale(1.05);
   }
 
-  @media (max-width: 992px) {
-    margin-top: 20px;
-  }
-
   i {
-    margin: 8px 0;
-    @media (max-width: 992px) {
+    font-size: 30px;
+
+    @media (min-width: 600px) {
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 769px) {
       font-size: 28px;
     }
   }

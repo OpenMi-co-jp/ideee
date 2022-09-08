@@ -1,14 +1,18 @@
 .c-share {
+  max-width: 320px;
+  margin: 0 auto 2rem;
+
   &__flex {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
   }
 
   &__box {
-    margin: 0 15px;
+    margin: 0 auto;
+    padding: 0 .2rem;
 
     &:hover {
-      transition-duration: .3s;
+      transition-duration: 0.3s;
       transform: scale(1.05);
       pointer-events: auto;
       cursor: pointer;
@@ -25,13 +29,13 @@
     margin: 0 auto;
     border-radius: 50%;
     width: 48px;
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       width: 28px;
     }
   }
 
   &__text {
     text-align: center;
-    color: #A7A7A7;
+    color: #a7a7a7;
   }
 }

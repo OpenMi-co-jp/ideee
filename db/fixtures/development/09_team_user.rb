@@ -8,6 +8,4 @@
       user: User.all.sample
     }
   )
-  # 同一の組み合わせがあった場合はrescueでエラーハンドリング
-  rescue ActiveRecord::RecordNotUnique
 end

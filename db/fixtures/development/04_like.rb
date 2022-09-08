@@ -4,6 +4,4 @@
     :id,
     { id: num, user: User.all.sample, likable: Idea.all.sample }
   )
-  # 同一の組み合わせがあった場合はrescueでエラーハンドリング
-rescue ActiveRecord::RecordNotUnique
 end

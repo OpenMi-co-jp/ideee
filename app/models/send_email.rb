@@ -130,7 +130,7 @@ class SendEmail
     content = Content.new(type: 'text/html', value: html_frame(body, 'notification_message'))
 
     team_members.map do |member|
-      return unless member.team_message_email
+      next unless member.team_message_email
 
       to = Email.new(email: member&.email)
       mail = Mail.new(@from, subject, to, content)

@@ -67,12 +67,12 @@ class User < ApplicationRecord
   scope :defined_user, -> { where defined: true }
 
   # emailの送信設定
-  scope :comment_emailable, -> { joins(:notification_config).where('notification_configs.comment_email = ?', true) }
-  scope :draft_remind_emailable, -> { joins(:notification_config).where('notification_configs.draft_remind_email = ?', true) }
+  delegate :comment_email, to: :notification_config
+  delegate :draft_remind_email, to: :notification_config
+  delegate :team_join_email, to: :notification_config
+  delegate :team_message_email, to: :notification_config
   scope :event_emailable, -> { joins(:notification_config).where('notification_configs.event_email = ?', true) }
   scope :heart_emailable, -> { joins(:notification_config).where('notification_configs.heart_email = ?', true) }
-  scope :team_join_emailable, -> { joins(:notification_config).where('notification_configs.team_join_email = ?', true) }
-  scope :team_message_emailable, -> { joins(:notification_config).where('notification_configs.team_message_email = ?', true) }
   scope :weekly_emailable, -> { joins(:notification_config).where('notification_configs.weekly_email = ?', true) }
 
   # 通知を作成する

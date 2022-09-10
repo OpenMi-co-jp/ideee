@@ -33,14 +33,8 @@ class SendEmail
     subject = "【ideee】【#{idea.name}】にコメントがきました💡"
     content = Content.new(type: 'text/html', value: html_frame(body, 'comment'))
 
-    if users.instance_of?(Array) # 送信したいアドレスが複数の時
-      users.map do |user|
-        to = Email.new(email: user&.email)
-        mail = Mail.new(@from, subject, to, content)
-        @sg.client.mail._('send').post(request_body: mail.to_json)
-      end
-    else # 送信したいアドレスが一つの時
-      to = Email.new(email: users&.email)
+    users.map do |user|
+      to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       @sg.client.mail._('send').post(request_body: mail.to_json)
     end
@@ -136,6 +130,8 @@ class SendEmail
     content = Content.new(type: 'text/html', value: html_frame(body, 'notification_message'))
 
     team_members.map do |member|
+      return unless member.team_message_email
+
       to = Email.new(email: member&.email)
       mail = Mail.new(@from, subject, to, content)
       @sg.client.mail._('send').post(request_body: mail.to_json)

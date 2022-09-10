@@ -156,6 +156,9 @@ class SendEmail
               利用規約： #{analytics_url('terms_of_service', source, 'https://www.ideee.tech/terms_of_service')}<br>
               プライバシーポリシー： #{analytics_url('privacy_policy', source, 'https://www.ideee.tech/privacy_policy')}
             </p>
+            <p style='color: gray'>
+              メールを停止： #{analytics_url('settings', source, 'https://www.ideee.tech/settings')}
+            </p>
           </div>
         </body>
       </html>

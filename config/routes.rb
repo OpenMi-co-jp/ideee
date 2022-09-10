@@ -53,6 +53,11 @@ Rails.application.routes.draw do
       post :check
     end
   end
+  resources :settings, only: %i[index] do
+    collection do
+      patch :notification_config
+    end
+  end
   get 'tags_popular', to: 'tags#popular'
   get 'tags_list', to: 'tags#list'
   get 'login', to: 'devise/sessions#new'

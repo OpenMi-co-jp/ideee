@@ -79,6 +79,11 @@
           <% end %>
         </li>
         <li>
+          <%= link_to settings_path  do %>
+            <i class="material-icons">settings</i>設定
+          <% end %>
+        </li>
+        <li>
           <%= link_to destroy_user_session_path, method: :delete do %>
             <i class="material-icons">directions_walk</i>ログアウト
           <% end %>
@@ -141,6 +146,11 @@
         <li>
           <%= link_to edit_user_registration_path(id: current_user.id)  do %>
             <i class="material-icons">edit</i>ユーザー情報編集
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_user_registration_path(id: current_user.id)  do %>
+            <i class="material-icons">settings</i>設定
           <% end %>
         </li>
         <li>

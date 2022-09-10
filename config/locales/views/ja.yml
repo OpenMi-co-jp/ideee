@@ -119,6 +119,9 @@ ja:
     update:
       success: メッセージの更新に成功しました
       fail: メッセージの更新に失敗しました
+  settings:
+    notification_config:
+      success: 設定の更新に成功しました
   common:
     service_fund:
       use_for: ideeeの運営は皆様の寄付によって、無料で使うことができます 。

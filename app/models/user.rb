@@ -51,6 +51,9 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
+  # settings relation
+  has_one :notification_config, dependent: :destroy
+
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
@@ -62,6 +65,15 @@ class User < ApplicationRecord
   validates :site_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   scope :defined_user, -> { where defined: true }
+
+  # emailの送信設定
+  scope :comment_emailable, -> { joins(:notification_config).where('notification_configs.comment_email = ?', true) }
+  scope :draft_remind_emailable, -> { joins(:notification_config).where('notification_configs.draft_remind_email = ?', true) }
+  scope :event_emailable, -> { joins(:notification_config).where('notification_configs.event_email = ?', true) }
+  scope :heart_emailable, -> { joins(:notification_config).where('notification_configs.heart_email = ?', true) }
+  scope :team_join_emailable, -> { joins(:notification_config).where('notification_configs.team_join_email = ?', true) }
+  scope :team_message_emailable, -> { joins(:notification_config).where('notification_configs.team_message_email = ?', true) }
+  scope :weekly_emailable, -> { joins(:notification_config).where('notification_configs.weekly_email = ?', true) }
 
   # 通知を作成する
   include CreateNotification

@@ -19,8 +19,7 @@ module ShareHelper
         url: request.url,
         text: @idea.name,
         hashtags: hashtags,
-        twitter_id: @idea&.user.twitter_id
-      )
+        twitter_id: @idea&.user.twitter_id)
     else
       t("default.sns.share.#{media}", url: request.url)
     end

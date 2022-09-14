@@ -30,7 +30,7 @@ ja:
       monthly_publisher_num: 10
     sns:
       share:
-        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=ideee&via=%{twitter_id}&related=ideee_tech&url=%{url}"
+        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=%{hashtag}&via=%{twitter_id}&related=ideee_tech&url=%{url}"
         facebook: "https://www.facebook.com/share.php?u=%{url}"
         line: "https://timeline.line.me/social-plugin/share?url=%{url}"
         hatebu: "https://b.hatena.ne.jp/entry/%{url}"
@@ -126,7 +126,7 @@ ja:
     footer:
       page: footer
       share:
-        twitter: "https://twitter.com/intent/tweet?text=アイデアとエンジニアのマッチングサイトideee&hashtags=ideee&via=ideee_tech&related=ideee_tech&url=https://www.ideee.tech"
+        twitter: "https://twitter.com/intent/tweet?text=アイデアとエンジニアのマッチングサイトideee&hashtags=%{hashtag}&via=ideee_tech&related=ideee_tech&url=https://www.ideee.tech"
         facebook: "https://www.facebook.com/share.php?u=https://www.ideee.tech"
         line: "https://timeline.line.me/social-plugin/share?url=https://www.ideee.tech"
         hatebu: "https://b.hatena.ne.jp/entry/https://www.ideee.tech"

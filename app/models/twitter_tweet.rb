@@ -11,6 +11,9 @@ class TwitterTweet
   def tweet(idea, url)
     user = User.find_by!(id: idea.user_id)
     twitter_user = user&.twitter_id.present? ? "@#{user.twitter_id} " : ''
-    @client.update("【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#ideee\n#{url}")
+    hashtags = '#ideee'
+    hashtags = [hashtags, idea.idea_tags.pluck(:name)].flatten.join(' #') if idea.idea_tags.length.positive?
+
+    @client.update("【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#{hashtags}\n#{url}")
   end
 end

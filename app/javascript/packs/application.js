@@ -25,6 +25,7 @@ require("channels/like");
 require("channels/idea/copy");
 require("channels/idea/image_appear");
 require("channels/idea/chips");
+require("channels/idea/search");
 require("channels/comment");
 require("channels/message");
 require("channels/sort");

@@ -12,17 +12,13 @@ module ShareHelper
     if t('.page') == 'footer'
       t(".share.#{media}")
     elsif media == 'twitter'
-      keyword = "#"
-      if @idea.name.include?(keyword) then
-        tags = @idea.name.scan(/[#][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー]+/).map{|t| t.delete_prefix(keyword)}
-        hashtag = ["ideee",tags].join(',')
-      else
-        hashtag = "ideee"
-      end
-      t('default.sns.share.twitter', 
+      hashtags = 'ideee'
+      hashtags += ",#{@idea.idea_tags.pluck(:name).join(',')}" if @idea.idea_tags.length.positive?
+
+      t('default.sns.share.twitter',
         url: request.url,
         text: @idea.name,
-        hashtags:hashtag,
+        hashtags: hashtags,
         twitter_id: @idea&.user.twitter_id)
     else
       t("default.sns.share.#{media}", url: request.url)

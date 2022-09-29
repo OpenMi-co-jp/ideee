@@ -197,6 +197,8 @@ class SendEmail
   end
 
   def xss_support(text)
+    return if text.nil?
+
     text.gsub(/\R/, '<br>')
         .gsub(/&/, '&amp;')
         .gsub(/</, '&lt;')

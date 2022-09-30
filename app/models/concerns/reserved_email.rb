@@ -18,7 +18,7 @@ module ReservedEmail
            "
     subject = '【ideee】新着アイデア💡&最近コメントが多かったアイデアベスト10💬'
     content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
-    User.all.map do |user|
+    User.weekly_emailable.map do |user|
       to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       @sg.client.mail._('send').post(request_body: mail.to_json)

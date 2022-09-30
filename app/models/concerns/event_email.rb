@@ -40,7 +40,7 @@ module EventEmail
     subject = 'ideee初のお年玉キャンペーン🎍10日間の盛り上がり'
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
-    User.find_each.map do |user|
+    User.event_emailable.map do |user|
       to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -85,7 +85,7 @@ module EventEmail
     subject = '🍫ideeeバレンタインキャンペーン🍫'
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
-    User.find_each.map do |user|
+    User.event_emailable.map do |user|
       to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       @sg.client.mail._('send').post(request_body: mail.to_json)

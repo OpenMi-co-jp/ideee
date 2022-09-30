@@ -1,0 +1,128 @@
+<%= form_with(model: @notification_config, url: notification_config_settings_path, remote: true, multipart: true, local: false) do |form| %>
+  <% if @notification_config.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @notification_config.errors.each do |error| %>
+          <h4>
+            <li><%= error.full_message %></li>
+          </h4>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h2>ユーザー設定</h2>
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">expand_more</i>メール設定</div>
+      <div class="collapsible-body">
+        <div class="field row">
+          <div class='col s12 l3'>
+            <%= form.label :comment_email %>
+          </div>
+          <div class='col s12 l9 mt-2'>
+            <label>
+              <%= form.radio_button :comment_email, true %>
+              <%= content_tag :span, 'on' %>
+            </label>
+            <label>
+              <%= form.radio_button :comment_email, false %>
+              <%= content_tag :span, 'off' %>
+            </label>
+          </div>
+        </div>
+        <div class="field row">
+          <div class='col s12 l3'>
+            <%= form.label :draft_remind_email %>
+          </div>
+          <div class='col s12 l9 mt-2'>
+            <label>
+              <%= form.radio_button :draft_remind_email, true %>
+              <%= content_tag :span, 'on' %>
+            </label>
+            <label>
+              <%= form.radio_button :draft_remind_email, false %>
+              <%= content_tag :span, 'off' %>
+            </label>
+          </div>
+        </div>
+        <div class="field row">
+          <div class='col s12 l3'>
+            <%= form.label :event_email %>
+          </div>
+          <div class='col s12 l9 mt-2'>
+            <label>
+              <%= form.radio_button :event_email, true %>
+              <%= content_tag :span, 'on' %>
+            </label>
+            <label>
+              <%= form.radio_button :event_email, false %>
+              <%= content_tag :span, 'off' %>
+            </label>
+          </div>
+        </div>
+        <div class="field row">
+          <div class='col s12 l3'>
+            <%= form.label :heart_email %>
+          </div>
+          <div class='col s12 l9 mt-2'>
+            <label>
+              <%= form.radio_button :heart_email, true %>
+              <%= content_tag :span, 'on' %>
+            </label>
+            <label>
+              <%= form.radio_button :heart_email, false %>
+              <%= content_tag :span, 'off' %>
+            </label>
+          </div>
+        </div>
+        <div class="field row">
+          <div class='col s12 l3'>
+            <%= form.label :team_join_email %>
+          </div>
+          <div class='col s12 l9 mt-2'>
+            <label>
+              <%= form.radio_button :team_join_email, true %>
+              <%= content_tag :span, 'on' %>
+            </label>
+            <label>
+              <%= form.radio_button :team_join_email, false %>
+              <%= content_tag :span, 'off' %>
+            </label>
+          </div>
+        </div>
+        <div class="field row">
+          <div class='col s12 l3'>
+            <%= form.label :team_message_email %>
+          </div>
+          <div class='col s12 l9 mt-2'>
+            <label>
+              <%= form.radio_button :team_message_email, true %>
+              <%= content_tag :span, 'on' %>
+            </label>
+            <label>
+              <%= form.radio_button :team_message_email, false %>
+              <%= content_tag :span, 'off' %>
+            </label>
+          </div>
+        </div>
+        <div class="field row">
+          <div class='col s12 l3'>
+            <%= form.label :weekly_email %>
+          </div>
+          <div class='col s12 l9 mt-2'>
+            <label>
+              <%= form.radio_button :weekly_email, true %>
+              <%= content_tag :span, 'on' %>
+            </label>
+            <label>
+              <%= form.radio_button :weekly_email, false %>
+              <%= content_tag :span, 'off' %>
+            </label>
+          </div>
+        </div>
+        <%= form.submit class: 'btn orange-action-back mh-3 idea-btn' %>
+      </div>
+    </li>
+  </ul>
+<% end %>

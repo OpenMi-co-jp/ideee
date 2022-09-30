@@ -69,4 +69,5 @@ https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 |discussion_id|string|
 
 # ER図
-![](./er.drawio.png)
+
+![](./erd_sample.png)

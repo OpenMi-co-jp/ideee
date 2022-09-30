@@ -111,6 +111,9 @@ group :development do
   gem 'bullet'
   gem 'letter_opener_web'
   gem 'seed-fu'
+
+  # ER図の自動生成
+  gem 'rails-erd'
 end
 
 group :test do

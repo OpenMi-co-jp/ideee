@@ -8,7 +8,7 @@
       idea: idea,
       offer: Faker::JapaneseMedia::StudioGhibli.character,
       requirement: Faker::JapaneseMedia::StudioGhibli.quote,
-      status: Faker::JapaneseMedia::StudioGhibli.movie,
+      status: [0, 1, 2].sample,
       owner_id: idea.user_id
     }
   )

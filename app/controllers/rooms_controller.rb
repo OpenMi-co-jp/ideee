@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!
   prepend_before_action :set_room, only: %i[show]
 
   def create

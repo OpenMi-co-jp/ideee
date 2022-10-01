@@ -12,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    NotificationConfig.create!(user: resource)
     Slack::SendNewJob.perform_later(resource, user_url(resource.id)) if Rails.env.production? && resource.present?
   end
 

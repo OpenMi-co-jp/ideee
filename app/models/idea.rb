@@ -145,6 +145,6 @@ class Idea < ApplicationRecord
   end
 
   def displayable_team_member_count
-    team_members_num.present? && team_members_num.positive?
+    team_project? && team_members_num.positive?
   end
 end

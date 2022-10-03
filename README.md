@@ -25,11 +25,8 @@ https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 
 * System dependencies
 
-## ER図の作成方法
-
-`bundle exec erd --attributes=foreign_keys,primary_keys,content --filename=erd_sample --filetype=png`
-（dbを修正した場合にコマンドを流す）
-
 # ER図
 
-![](./erd_sample.png)
+`migrate時にER図を自動生成する`
+
+![](./ideee_erd.png)

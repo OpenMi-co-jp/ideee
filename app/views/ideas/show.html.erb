@@ -93,7 +93,7 @@
         <i class="large material-icons">mode_edit</i>
       </a>
       <ul>
-        <li><div class='btn'><%= render "common/like", object: @idea %></div></li>
+        <li><%= render "common/like", object: @idea %></li>
         <li><div id='vote' class="btn c-pc-status-info__vote <%= @idea.difficulty %>"><%= render 'difficultys/vote', object: @idea %></div></li>
       </ul>
     </div>

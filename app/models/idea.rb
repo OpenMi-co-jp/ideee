@@ -23,6 +23,7 @@
 #  similar                                                  :string(255)
 #  stance                                                   :integer          default("free_right")
 #  target                                                   :string(255)
+#  team_members_num                                         :integer          default(0)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
 #  created_at                                               :datetime         not null
@@ -137,5 +138,13 @@ class Idea < ApplicationRecord
 
   def enough_view?
     view > 10
+  end
+
+  def count_team_members
+    update(team_members_num: team.members.size)
+  end
+
+  def displayable_team_member_count
+    team_project? && team_members_num.positive?
   end
 end

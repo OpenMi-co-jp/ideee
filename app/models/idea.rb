@@ -144,7 +144,7 @@ class Idea < ApplicationRecord
     update(team_members_num: team.members.size)
   end
 
-  def displayable_team_member_count
+  def enough_team_member?
     team_project? && team_members_num.positive?
   end
 end

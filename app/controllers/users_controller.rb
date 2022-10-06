@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def search
     @q = User.defined_user.ransack(params[:q])
-    @q.sorts = 'point desc' if @q.sorts.empty?  # 初期はコントリビュート数を降順に設定
+    @q.sorts = 'point desc' if @q.sorts.empty? # 初期はコントリビュート数を降順に設定
     @searched_users = @q.result(distinct: true)
     @paged_users = Kaminari.paginate_array(@searched_users).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i

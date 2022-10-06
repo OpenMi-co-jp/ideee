@@ -175,5 +175,4 @@ class IdeasController < ApplicationController
     Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
     Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
   end
-
 end

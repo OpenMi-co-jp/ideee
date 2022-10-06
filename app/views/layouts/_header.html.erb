@@ -10,7 +10,7 @@
         <i class="material-icons">search</i>
       </p>
       <%= form_tag(search_ideas_path, method: :get) do %>
-        <%= text_field_tag :keyword, '', placeholder: 'アイデアを検索' %>
+        <%= text_field_tag "q[name_or_idea_tags_name_cont]", '', placeholder: 'アイデアを検索' %>
       <% end %>
     </li>
     <li class='hide-on-med-and-down'>
@@ -41,12 +41,12 @@
         </li>
         <li class="divider" tabindex="-1"></li>
         <li>
-          <%= link_to search_users_path(key: 'idea_man') do %>
+          <%= link_to search_users_path("q[definition_eq_any]": [1,2]) do %>
             <i class="material-icons">lightbulb_outline</i>アイデアマン
           <% end %>
         </li>
         <li>
-          <%= link_to search_users_path(key: 'engineer') do %>
+          <%= link_to search_users_path("q[definition_eq_any]": [0,2]) do %>
             <i class="material-icons">computer</i>エンジニア
           <% end %>
         </li>
@@ -121,12 +121,12 @@
           <% end %>
         </li>
         <li>
-          <%= link_to search_users_path(key: 'idea_man') do %>
+          <%= link_to search_users_path("q[definition_eq_any]": [1,2]) do %>
             <i class="material-icons">lightbulb_outline</i>アイデアマン
           <% end %>
         </li>
         <li>
-          <%= link_to search_users_path(key: 'engineer') do %>
+          <%= link_to search_users_path("q[definition_eq_any]": [0,2]) do %>
             <i class="material-icons">computer</i>エンジニア
           <% end %>
         </li>

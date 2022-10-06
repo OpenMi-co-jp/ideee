@@ -25,20 +25,12 @@ class UsersController < ApplicationController
   end
 
   def search
-    if params[:sort] == 'weekly_comments'
-      comments = Comment.weekly_comments
-      users_array = comments.pickup_user_commets(comments.length)
-      list = users_array.map { |u| User.find_by!(id: u[0]) }
-    elsif params[:sort] == 'monthly_published'
-      ideas = Idea.published.recent_select
-      users_array = ideas.pickup_user_nums(ideas.length)
-      list = users_array.map { |u| User.find_by!(id: u[0]) }
-    else
-      list = User.defined_user.search(params[:key]).order(point: 'DESC')
-    end
-    @searched_users = Kaminari.paginate_array(list).page(params[:page])
+    @q = User.defined_user.ransack(params[:q])
+    @q.sorts = 'point desc' if @q.sorts.empty?  # 初期はコントリビュート数を降順に設定
+    @searched_users = @q.result(distinct: true)
+    @paged_users = Kaminari.paginate_array(@searched_users).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
-    @rank_num = (current_page - 1) * @searched_users.limit_value
+    @rank_num = (current_page - 1) * @paged_users.limit_value
   end
 
   def commenter

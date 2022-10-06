@@ -51,6 +51,7 @@ class Idea < ApplicationRecord
   has_rich_text :note
   mount_uploader :icon, ImageUploader
   after_create :send_draft_remind
+  after_commit :count_user_ideas # draftとideaを切り離したら作成と削除時に限定する
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :background, presence: true
@@ -120,7 +121,7 @@ class Idea < ApplicationRecord
   end
 
   def same_user_other_ideas
-    return [] if user.ideas.published.length == 1
+    return [] if user.ideas_num == 1
 
     user.ideas.published.eager_load(:idea_tags).where.not(id: id)
   end
@@ -146,5 +147,9 @@ class Idea < ApplicationRecord
 
   def enough_team_member?
     team_project? && team_members_num.positive?
+  end
+
+  def count_user_ideas
+    CountUserIdeasJob.perform_later(user_id)
   end
 end

@@ -41,12 +41,12 @@
         </li>
         <li class="divider" tabindex="-1"></li>
         <li>
-          <%= link_to search_users_path("q[definition_eq_any]": [1,2]) do %>
+          <%= link_to search_users_path("q[definition_eq_any]": [0,2]) do %>
             <i class="material-icons">lightbulb_outline</i>アイデアマン
           <% end %>
         </li>
         <li>
-          <%= link_to search_users_path("q[definition_eq_any]": [0,2]) do %>
+          <%= link_to search_users_path("q[definition_eq_any]": [1,2]) do %>
             <i class="material-icons">computer</i>エンジニア
           <% end %>
         </li>

@@ -46,6 +46,7 @@ FactoryBot.define do
     defined { true }
     confirmed_at { Time.now }
     password { 'password' }
+    ideas_num { 0 }
 
     trait :idea_man do
       definition { 0 }

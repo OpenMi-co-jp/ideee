@@ -150,6 +150,8 @@ class Idea < ApplicationRecord
   end
 
   def count_user_ideas
+    return unless Rails.env.production?
+
     CountUserIdeasJob.perform_later(user_id)
   end
 end

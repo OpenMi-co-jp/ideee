@@ -53,6 +53,14 @@ ja:
         offer: 得られること
         requirement: お願いしたいこと
         status: ステータス
+      notification_config:
+        comment_email: アイデアへのコメント
+        draft_remind_email: 下書きへのリマインド
+        event_email: イベントのお知らせ
+        heart_email: ハートのお知らせ
+        team_join_email: チーム開発参加のお知らせ
+        team_message_email: チーム開発のメッセージ
+        weekly_email: 週間ランキング
     sorts:
       likes_num: ハート数
       comments_num: コメント数

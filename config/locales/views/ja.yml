@@ -30,7 +30,7 @@ ja:
       monthly_publisher_num: 10
     sns:
       share:
-        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=ideee&via=%{twitter_id}&related=ideee_tech&url=%{url}"
+        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=%{hashtags}&via=%{twitter_id}&related=ideee_tech&url=%{url}"
         facebook: "https://www.facebook.com/share.php?u=%{url}"
         line: "https://timeline.line.me/social-plugin/share?url=%{url}"
         hatebu: "https://b.hatena.ne.jp/entry/%{url}"
@@ -119,6 +119,9 @@ ja:
     update:
       success: メッセージの更新に成功しました
       fail: メッセージの更新に失敗しました
+  settings:
+    notification_config:
+      success: 設定の更新に成功しました
   common:
     service_fund:
       use_for: ideeeの運営は皆様の寄付によって、無料で使うことができます 。

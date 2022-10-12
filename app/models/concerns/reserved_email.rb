@@ -18,7 +18,7 @@ module ReservedEmail
            "
     subject = '【ideee】新着アイデア💡&最近コメントが多かったアイデアベスト10💬'
     content = Content.new(type: 'text/html', value: html_frame(body, 'ranking'))
-    User.all.map do |user|
+    User.weekly_emailable.map do |user|
       to = Email.new(email: user&.email)
       mail = Mail.new(@from, subject, to, content)
       @sg.client.mail._('send').post(request_body: mail.to_json)
@@ -64,7 +64,7 @@ module ReservedEmail
     "
       <div style='background-color: white; margin: 3px 0; padding: 5px;'>
         <div style='display: inline;'>
-          <b>#{rank}</b>#{analytics_url('ideas/' + idea.id.to_s, 'ranking', idea.name)} (💬#{idea.comments_num}) by #{idea.user.name}
+          <b>#{rank}</b>#{analytics_url("ideas/#{idea.id}", 'ranking', idea.name)} (💬#{idea.comments_num}) by #{idea.user.name}
         </div>
       </div>
     "

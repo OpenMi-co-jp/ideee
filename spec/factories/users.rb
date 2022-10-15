@@ -14,6 +14,7 @@
 #  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null
 #  icon                   :string(255)
+#  ideas_num              :integer          default(0)
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string(255)
 #  name                   :string(30)       default("")
@@ -45,6 +46,7 @@ FactoryBot.define do
     defined { true }
     confirmed_at { Time.now }
     password { 'password' }
+    ideas_num { 0 }
 
     trait :idea_man do
       definition { 0 }

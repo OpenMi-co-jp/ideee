@@ -62,8 +62,13 @@ ja:
         team_message_email: チーム開発のメッセージ
         weekly_email: 週間ランキング
     sorts:
-      likes_num: ハート数
-      comments_num: コメント数
-      view: ビュー数
-      published_at: 公開日
-      updated_at: 更新日
+      ideas:
+        likes_num: ハート数
+        comments_num: コメント数
+        view: ビュー数
+        published_at: 公開日
+        updated_at: 更新日
+      users:
+        created_at: 参加日
+        point: コントリビュート数
+        ideas_num: アイデア数

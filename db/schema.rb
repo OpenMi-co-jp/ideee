@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_19_005804) do
+ActiveRecord::Schema.define(version: 2022_10_06_100229) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_005804) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "github_id"
+    t.integer "ideas_num", limit: 2, default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

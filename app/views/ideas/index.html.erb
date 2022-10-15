@@ -53,12 +53,12 @@
         <%= render 'ideas/index/featured_users',
           icon: '🚀',
           title: '今週の注目コメンテーター',
-          path: search_users_path(sort: :weekly_comments),
+          path: search_users_path("q[s]": "point desc"),
           users_url: commenter_users_path %>
         <%= render 'ideas/index/featured_users',
           icon: '💡',
           title: '今月の注目アイデアマン',
-          path: search_users_path(sort: :monthly_published),
+          path: search_users_path("q[s]": "ideas_num desc"),
           users_url: idea_man_users_path %>
       </div>
     </div>

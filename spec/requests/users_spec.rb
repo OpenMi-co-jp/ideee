@@ -53,7 +53,7 @@ RSpec.describe 'Users', type: :request do
 
     describe 'ユーザー項目を指定する場合(アイデア/エンジニアは常に表示される)' do
       context 'アイデアマンを検索する場合' do
-        let(:params) { { key: 'idea_man' } }
+        let(:params) { { "q[definition_eq_any][]": [0,2] } }
         it 'ユーザーが表示されていること' do
           subject
           expect(response.body).to include idea_man.name
@@ -63,7 +63,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       context 'エンジニアを検索する場合' do
-        let(:params) { { key: 'engineer' } }
+        let(:params) { { "q[definition_eq_any][]": [1,2] } }
         it 'ユーザーが表示されていること' do
           subject
           expect(response.body).not_to include idea_man.name
@@ -73,7 +73,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       context 'アイデアマン/エンジニアを検索する場合' do
-        let(:params) { { key: 'idea_engineer' } }
+        let(:params) { { "q[definition_eq_any]": 2 } }
         it 'ユーザーが表示されていること' do
           subject
           expect(response.body).not_to include idea_man.name

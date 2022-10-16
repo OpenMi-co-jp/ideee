@@ -16,10 +16,6 @@
             <b class='idea__name orange-action'><%= idea.name %></b>
           <% end %>
           <div class='idea__status gray-3'>
-            <div class='idea__time'>
-              <%= embedded_svg 'icons/clock.svg', class: 'icon-size gray-4 idea__time--clock', alt: '投稿日' %>
-              <p><%= idea.published_time %></p>
-            </div>
             <div class='idea__item'>
               <%= image_tag 'icons/comment.svg', class: 'icon-size', loading: "lazy", alt: "コメント数" %>
               <p><%= idea.comments_num %></p>

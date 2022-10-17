@@ -43,7 +43,7 @@
                   <%= idea.difficulty.capitalize %>
                 </div>
               <% end %>
-              <%= link_to user_path(idea.user_id) do %>
+              <%= link_to user_path(idea.user_id), title: 'ユーザーリンク' do %>
                 <% user_icon(idea.user, size: 'small') %>
               <% end %>
             </div>

@@ -7,9 +7,12 @@
       </h5>
       <div class='idea__content'>
         <%= link_to idea_path(idea.id), class: 'c-idea-img', title: 'アイデアのリンク' do %>
-          <figure class='c-idea-img__figure'>
+          <div class='c-idea-img__figure'>
             <%= image_set(idea) %>
-          </figure>
+            <div class='time-label'>
+              <%= idea.published_time %>
+            </div>
+          </div>
         <% end %>
         <div class='idea__box'>
           <%= link_to idea_path(idea.id), class: 'idea__name_link', title: 'アイデアのリンク' do %>

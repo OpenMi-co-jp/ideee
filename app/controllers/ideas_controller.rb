@@ -75,7 +75,7 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(search_condition)
+    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(params[:q])
     @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
     @searched_ideas = @q.result(distinct: true)
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
@@ -174,14 +174,5 @@ class IdeasController < ApplicationController
     TwitterJob::Tweet.perform_later(@idea, idea_url(@idea.id))
     Slack::SendNewJob.perform_later(@idea, idea_url(@idea.id))
     Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id))
-  end
-
-  def search_condition
-    if params[:q].present?
-      params[:q]
-    elsif params[:keyword].present?
-      # keywordを使わないこともできるがheaderの検索にransackを使いたくないので使用する
-      { name_or_idea_tags_name_cont: params[:keyword] }
-    end
   end
 end

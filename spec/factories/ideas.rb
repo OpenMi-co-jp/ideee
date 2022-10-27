@@ -47,12 +47,5 @@ FactoryBot.define do
     view { (0..200).to_a.sample }
     user
 
-    trait :empty_name do
-      name { '' }
-    end
-
-    trait :updated_idea do
-      name { 'updated idea' }
-    end
   end
 end

@@ -45,7 +45,8 @@ FactoryBot.define do
     goal { Faker::Fantasy::Tolkien.character }
     note { Faker::Lorem.paragraph(sentence_count: 20) }
     view { (0..200).to_a.sample }
+    product_url { Faker::Internet.url }
+    github_url { Faker::Internet.url }
     user
-
   end
 end

@@ -54,8 +54,8 @@ class Idea < ApplicationRecord
   after_commit :count_user_ideas # draftとideaを切り離したら作成と削除時に限定する
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :background, presence: true
-  validates :goal, presence: true
+  validates :background, presence: true, length: { maximum: 255 }
+  validates :goal, presence: true, length: { maximum: 255 }
   validate :validate_tags_num
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
@@ -88,8 +88,7 @@ class Idea < ApplicationRecord
   end
 
   def count_comments
-    self.comments_num = comments.size
-    save!
+    update_column(:comments_num, comments.size)
   end
 
   def save_with_tags(tag_list)

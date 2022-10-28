@@ -20,12 +20,7 @@
       </div>
       <%= image_set(@idea) %>
       <% unless @idea.draft %>
-      <div class='hide-on-small-only'>
-        <%= render 'ideas/show/pc_idea_share' %>
-      </div>
-      <div class='hide-on-med-and-up'>
-        <%= render 'ideas/show/mobile_idea_share' %>
-      </div>
+        <%= render 'ideas/show/idea_share' %>
       <% end %>
       <%= render 'teams/box_on_idea', idea: @idea %>
     </div>
@@ -94,7 +89,7 @@
       </a>
       <ul>
         <li><%= render "common/like", object: @idea %></li>
-        <li><div id='vote' class="btn c-pc-status-info__vote <%= @idea.difficulty %>"><%= render 'difficultys/vote', object: @idea %></div></li>
+        <li><div id='vote' class="btn orange c-pc-status-info__vote <%= @idea.difficulty %>"><%= render 'difficultys/vote', object: @idea %></div></li>
       </ul>
     </div>
     <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>

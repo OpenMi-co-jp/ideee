@@ -38,11 +38,19 @@
           <h1 class='board-title mh-3'>検索結果 <%= @searched_ideas.size %>件</h1>
         </div>
         <div class='col s12 m9 l6 row'>
+        <% parameter_exists = params[:q].present? %>
           <span class='mr-3'>並び替え</span>
           <% I18n.t('activerecord.sorts.ideas').each do |(key, value)| %>
-            <div class="chip">
-              <%= sort_link(@q, key, value) %>
-            </div>
+            <% is_key_team_member_num = key.eql?(:team_members_num) %>
+            <% if !(is_key_team_member_num) %>
+              <div class="chip">
+                <%= sort_link(@q, key, value) %>
+              </div>
+            <% elsif parameter_exists && is_key_team_member_num && params[:q][:s].eql?("team_members_num desc") %>
+              <div class="chip">
+                <%= sort_link(@q, key, value) %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

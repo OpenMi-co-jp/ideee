@@ -1,6 +1,6 @@
 <div class='center'>
   <div class='c-team-box__status'>
-    <% if idea.team_project? %>
+    <% if idea.team_project? && idea.team&.present? %>
       <%= I18n.t("enums.team.status.#{idea.team&.status}") %>
     <% else %>
       <%= I18n.t("enums.idea.stance.#{idea.stance}") %>

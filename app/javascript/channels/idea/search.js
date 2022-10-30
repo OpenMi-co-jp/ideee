@@ -9,7 +9,7 @@ $(document).on ('turbolinks:load', function(){
 
   // 選択する日付の終わり
   $('.datepicker-end').datepicker({
-    defaultDate: new Date(),
+    format: 'yyyy/mm/dd 00:00:00',
     // setDefaultDate: true,
   });
 })

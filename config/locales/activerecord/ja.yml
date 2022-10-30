@@ -47,6 +47,7 @@ ja:
         team: チーム開発
         difficulty: 難易度
         stance: スタンス
+        published_at: 公開日
       comment:
         description: コメント
       team:

@@ -40,7 +40,7 @@
         <div class='col s12 m9 l8 row'>
           <span class='mr-3'>並び替え</span>
           <% I18n.t('activerecord.sorts.ideas').each do |(key, value)| %>
-          　<% next if key == :team_members_num && params.dig(:q, :s) != "team_members_num desc" %>
+            <% next if key == :team_members_num && !params[:q]&.include?('team_status_eq') %>
             <div class="chip">
               <%= sort_link(@q, key, value) %>
             </div>

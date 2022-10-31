@@ -34,7 +34,7 @@
               <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy", alt: "ハート数" %>
               <p><%= idea.likes_num %></p>
             </div>
-            <% if idea.enough_team_member? %>
+            <% if idea.enough_team_member? && params[:q]&.include?('team_status_eq') %>
               <div class='idea__item'>
                 <i class="material-icons">groups</i>
                 <p><%= idea.team_members_num %></p>

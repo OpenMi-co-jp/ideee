@@ -16,7 +16,7 @@ RSpec.describe Comment, type: :model do
         end
       end
 
-      context "コメントに\nが3の時" do
+      context "コメントに \n が3つ含まれるとき" do
         it "falseが返ってくること" do
           comment.description = "\n\n\n"
           expect(comment.over_length?).to eq false
@@ -48,7 +48,7 @@ RSpec.describe Comment, type: :model do
         end
       end
 
-      context "コメントに\nが4の時" do
+      context "コメントに \n が4つ含まれるとき" do
         it "trueが返ってくること" do
           comment.description = "\n\n\n\n"
           expect(comment.over_length?).to eq true

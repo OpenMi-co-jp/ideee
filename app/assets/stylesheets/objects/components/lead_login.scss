@@ -1,0 +1,15 @@
+.c-login-lead {
+  padding: 0.75rem;
+  background-color: #F5F5F5;
+  font-size: 1.35rem;
+
+  &__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6.5rem;
+    padding: auto 0;
+    background-color: white;
+  }
+}
+

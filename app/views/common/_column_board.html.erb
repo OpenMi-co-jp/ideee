@@ -34,7 +34,7 @@
               <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy", alt: "ハート数" %>
               <p><%= idea.likes_num %></p>
             </div>
-            <!-- チーム開発メンバー数はアイデア検索ページかつチーム開発中のソートの場合のみ表示させる -->
+            <!-- チーム開発募集中の検索ページ限りteam_members_numの数をアイデア表示に加える -->
             <% if request.path == search_ideas_path && params[:q]&.include?('team_status_eq') && idea.enough_team_member? %>
               <div class='idea__item'>
                 <i class="material-icons">groups</i>

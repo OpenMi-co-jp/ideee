@@ -21,19 +21,17 @@
 #  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
-    factory :difficulty do
-      trait :easy do
-        level { 1 }
-      end
-
-      trait :middle do
-        level { 2 }
-      end
-
-      trait :hard do
-        level { 3 }
-      end
-      user
-      idea
+  factory :difficulty do
+    trait :easy do
+      level { 1 }
     end
+    trait :middle do
+      level { 2 }
+    end
+    trait :hard do
+      level { 3 }
+    end
+    user
+    idea
+  end
 end

@@ -48,10 +48,9 @@ jobs:
         RAILS_ENV: test
 
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        version: "v0.1.15"
         files: ./coverage/coverage.xml
         flags: unittests
         name: ruby-sample-for-codecov

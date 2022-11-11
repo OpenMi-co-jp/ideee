@@ -48,10 +48,7 @@ jobs:
         RAILS_ENV: test
 
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./coverage/coverage.xml
-        flags: unittests
-        name: ruby-sample-for-codecov
-        fail_ci_if_error: true
+      run: |
+        curl -Os https://uploader.codecov.io/latest/linux/codecov
+        chmod +x codecov
+        ./codecov -t ${{ secrets.CODECOV_TOKEN }}

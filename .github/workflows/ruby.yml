@@ -29,12 +29,6 @@ jobs:
         RAILS_ENV: test
         MYSQL_HOST: db
 
-    - name: Rspec
-      run:  |
-        docker-compose run web bundle exec rspec --exclude-pattern "spec/requests/*_spec.rb"
-      env:
-        RAILS_ENV: test
-
     - name: Brakeman
       run:  |
         docker-compose run web bundle exec brakeman
@@ -46,3 +40,18 @@ jobs:
         docker-compose run web bundle exec rubocop -a
       env:
         RAILS_ENV: test
+
+    - name: Rspec
+      run:  |
+        docker-compose run web bundle exec rspec --exclude-pattern "spec/requests/*_spec.rb"
+      env:
+        RAILS_ENV: test
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage/coverage.xml
+        flags: unittests
+        name: ruby-sample-for-codecov
+        fail_ci_if_error: true

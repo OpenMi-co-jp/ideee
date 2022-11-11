@@ -47,11 +47,14 @@ jobs:
       env:
         RAILS_ENV: test
 
-    - name: Upload coverage reports
+    - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./coverage/coverage.xml
-        flags: unittests
-        name: ruby-sample-for-codecov
+        directory: ./coverage/reports/
         fail_ci_if_error: true
+        files: ./coverage1.xml,./coverage2.xml
+        flags: unittests
+        name: codecov-umbrella
+        path_to_write_report: ./coverage/codecov_report.txt
+        verbose: true

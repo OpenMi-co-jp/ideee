@@ -59,5 +59,18 @@ FactoryBot.define do
     trait :idea_engineer do
       definition { 2 }
     end
+
+  end
+
+  trait :idea do
+    ideas { [ build(:idea, :like) ] }
+  end
+
+  trait :like do
+    likes { [ build(:like, :idea), build(:like, :comment) ] }
+  end
+
+  trait :comment do
+    comments { [ build(:comment) ] }
   end
 end

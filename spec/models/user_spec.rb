@@ -45,4 +45,164 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'like?' do
+    context 'アイデアに対するlike' do
+      subject { user.like?(idea) }
+
+      context '存在する場合' do
+        let(:like){ create(:like, :idea) }
+        let(:idea){ like.likable }
+        let(:user){ like.user }
+        it { is_expected.to eq true }
+      end
+
+      context '存在しない場合' do
+        let(:idea){ create(:idea) }
+        let(:user){ idea.user }
+        it { is_expected.to eq false }
+      end
+
+    end
+
+    context 'コメントに対するlike' do
+      subject { user.like?(comment) }
+
+      context '存在する場合' do
+        let(:like){ create(:like, :comment) }
+        let(:comment){ like.likable }
+        let(:user) { like.user }
+        it { is_expected.to eq true }
+      end
+
+      context '存在しない場合' do
+        let(:comment){ create(:comment) }
+        let(:user){ comment.user }
+        it { is_expected.to eq false }
+      end
+    end
+  end
+
+  describe 'voted?' do
+    subject { user.voted?(idea) }
+
+    context 'アイデアの難易度を投稿済みの場合' do
+      let(:difficulty){ create(:difficulty, :middle) }
+      let(:user){ difficulty.user }
+      let(:idea){ difficulty.idea }
+      it { is_expected.to eq true }
+    end
+
+    context 'アイデアの難易度を投稿していない場合' do
+      let(:user){ create(:user) }
+      let(:idea){ create(:idea) }
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe 'create_comment' do
+    let(:idea){ create(:idea) }
+    let(:user){ idea.user }
+    subject { user.create_comment(comment_params) }
+
+    context 'アイデアに初めてコメントするユーザーの場合' do
+      let(:comment_params){ { idea_id: idea.id, description: "hoge" } }
+
+      it 'コメントが作成される' do
+        subject
+        expect(user.comments.where(idea_id: idea.id, description: "hoge" )).to exist
+      end
+    end
+
+    context 'アイデアに既にコメントしているユーザー' do
+      before { create(:comment, user_id: user.id, idea_id: idea.id, description: "hoge") }
+
+      context '投稿したコメントが重複していない場合' do
+        let(:comment_params){ { idea_id: idea.id, description: "fuga" } }
+
+        it 'コメントが作成される' do
+          subject
+          expect(user.comments.where(idea_id: idea.id, description: "fuga" )).to exist
+        end
+      end
+
+      context '同一内容のコメントが存在する場合' do
+        let(:comment_params){ { idea_id: idea.id, description: "hoge" } }
+        it { is_expected.to eq nil }
+      end
+    end
+  end
+
+  describe 'point_update' do
+    subject { user.point_update }
+
+    context 'アイデア投稿、コメント投稿、いいね何もしていない場合' do
+      let(:user){ create(:user) }
+
+      it 'pointは0' do
+        subject
+        expect(user.point).to eq 0
+      end
+    end
+
+    context 'アイデア投稿1件、アイデアのいいね1件の場合' do
+      let(:user){ create(:user, :idea) }
+
+      it 'pointは3' do
+        subject
+        expect(user.point).to eq 3
+      end
+    end
+
+    context 'アイデア投稿1件、アイデアのいいね1件、いいね2件の場合' do
+      let(:user){ create(:user, :idea, :like) }
+
+      it 'pointは4' do
+        subject
+        expect(user.point).to eq 4
+      end
+    end
+
+    context 'アイデア投稿1件、アイデアのいいね1件、いいね2件、コメント1件の場合' do
+      let(:user){ create(:user, :idea, :like, :comment) }
+
+      it 'pointは5' do
+        subject
+        expect(user.point).to eq 5
+      end
+    end
+  end
+
+  describe 'fix_ids' do
+    subject { user.fix_ids }
+
+    context 'twitter_id' do
+      context 'urlが含まれたtwitter_idで更新しようとした場合' do
+        let(:user){ create(:user, twitter_id: "https://twitter.com/hoge")}
+
+        it 'id部分のみが抽出される' do
+          subject
+          expect(user.twitter_id).to eq "hoge"
+        end
+      end
+
+      context '@が含まれたtwitter_idで更新しようとした場合' do
+        let(:user){ create(:user, twitter_id: "@fuga")}
+
+        it 'id部分のみが抽出される' do
+          subject
+          expect(user.twitter_id).to eq "fuga"
+        end
+      end
+    end
+
+    context 'urlが含まれたgithub_idで更新しようとした場合' do
+      let(:user){ create(:user, github_id: "https://github.com/hogefuga")}
+
+      it 'id部分のみが抽出される' do
+        subject
+        expect(user.github_id).to eq "hogefuga"
+      end
+    end
+  end
 end

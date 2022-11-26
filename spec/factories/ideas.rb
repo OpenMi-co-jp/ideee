@@ -50,7 +50,7 @@ FactoryBot.define do
     user
 
     trait :like do
-      likes { [ build(:like) ] }
+      likes { [ FactoryBot.build(:like) ] }
     end
   end
 end

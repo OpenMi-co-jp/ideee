@@ -63,14 +63,14 @@ FactoryBot.define do
   end
 
   trait :idea do
-    ideas { [ build(:idea, :like) ] }
+    ideas { [ FactoryBot.build(:idea, :like) ] }
   end
 
   trait :like do
-    likes { [ build(:like, :idea), build(:like, :comment) ] }
+    likes { [ FactoryBot.build(:like, :idea), FactoryBot.build(:like, :comment) ] }
   end
 
   trait :comment do
-    comments { [ build(:comment) ] }
+    comments { [ FactoryBot.build(:comment) ] }
   end
 end

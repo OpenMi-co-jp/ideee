@@ -66,8 +66,9 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # settings to let developers use FactoryBot without writing "FactoryBot"
+  config.include FactoryBot::Syntax::Methods
+
   # settings for Devise's helper to be called when spec is executed
   config.include Devise::Test::IntegrationHelpers, type: :request
-
-  config.include FactoryBot::Syntax::Methods
 end

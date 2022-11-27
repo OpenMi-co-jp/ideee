@@ -37,13 +37,13 @@
             <%= f.label :published_at %>
           </div>
           <div class='col l2'>
-            <%= f.text_field :published_at_gteq, class: 'datepicker-start' %>
+            <%= f.date_field :published_at_gteq, class: 'js-search-fire' %>
           </div>
           <h4 class='col'>
             〜
           </h4>
           <div class='col l2'>
-            <%= f.text_field :published_at_lteq, class: 'datepicker-end js-search-fire' %>
+            <%= f.date_field :published_at_lteq, class: 'js-search-fire' %>
           </div>
         </div>
       </div>

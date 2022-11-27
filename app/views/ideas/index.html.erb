@@ -39,12 +39,12 @@
           <%= render 'ideas/index/ranking_head',
             icon_mark: '💬',
             board_title: '今月のコメントが多いアイデア',
-            path: search_ideas_path("q[s]": "comments_num desc") %>
+            path: search_ideas_path("q[s]": "comments_num desc", "q[published_at_gteq]": Date.today.prev_month) %>
           <%= render_async most_comment_ideas_path %>
           <%= render 'ideas/index/ranking_head',
             icon_mark: '💛',
             board_title: '今月のハートが多いアイデア',
-            path: search_ideas_path %>
+            path: search_ideas_path("q[published_at_gteq]": Date.today.prev_month) %>
           <%= render_async most_liked_ideas_path %>
         </div>
       </div>

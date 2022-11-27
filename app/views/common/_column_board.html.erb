@@ -34,6 +34,12 @@
               <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy", alt: "ハート数" %>
               <p><%= idea.likes_num %></p>
             </div>
+            <% if idea.enough_team_member? %>
+              <div class='idea__item'>
+                <i class="material-icons">groups</i>
+                <p><%= idea.team_members_num %></p>
+              </div>
+            <% end %>
             <% if idea.approved? %>
               <div class='idea__item'>
                 <i class="material-icons">phonelink</i>
@@ -47,7 +53,7 @@
               <% end %>
               <% user_icon_view ||= 'on' %>
               <% if user_icon_view == 'on' %>
-                <%= link_to user_path(idea.user_id) do %>
+                <%= link_to user_path(idea.user_id), title: 'ユーザーリンク' do %>
                   <% user_icon(idea.user, size: 'small') %>
                 <% end %>
                 <p class='idea__detail--def'>
@@ -65,7 +71,7 @@
                 <%= idea.difficulty.capitalize %>
               </div>
             <% end %>
-            <%= link_to user_path(idea.user_id) do %>
+            <%= link_to user_path(idea.user_id), title: 'ユーザーリンク' do %>
               <% user_icon(idea.user, size: 'small') %>
             <% end %>
             <p class='idea__detail--def'>

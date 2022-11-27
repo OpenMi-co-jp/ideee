@@ -14,6 +14,7 @@
 #  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null
 #  icon                   :string(255)
+#  ideas_num              :integer          default(0)
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string(255)
 #  name                   :string(30)       default("")
@@ -51,6 +52,9 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
+  # settings relation
+  has_one :notification_config, dependent: :destroy
+
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
@@ -62,6 +66,15 @@ class User < ApplicationRecord
   validates :site_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
   scope :defined_user, -> { where defined: true }
+
+  # emailの送信設定
+  delegate :comment_email, to: :notification_config
+  delegate :draft_remind_email, to: :notification_config
+  delegate :team_join_email, to: :notification_config
+  delegate :team_message_email, to: :notification_config
+  scope :event_emailable, -> { joins(:notification_config).where('notification_configs.event_email = ?', true) }
+  scope :heart_emailable, -> { joins(:notification_config).where('notification_configs.heart_email = ?', true) }
+  scope :weekly_emailable, -> { joins(:notification_config).where('notification_configs.weekly_email = ?', true) }
 
   # 通知を作成する
   include CreateNotification

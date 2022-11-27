@@ -23,6 +23,7 @@
 #  similar                                                  :string(255)
 #  stance                                                   :integer          default("free_right")
 #  target                                                   :string(255)
+#  team_members_num                                         :integer          default(0)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
 #  created_at                                               :datetime         not null
@@ -44,14 +45,8 @@ FactoryBot.define do
     goal { Faker::Fantasy::Tolkien.character }
     note { Faker::Lorem.paragraph(sentence_count: 20) }
     view { (0..200).to_a.sample }
+    product_url { Faker::Internet.url }
+    github_url { Faker::Internet.url }
     user
-
-    trait :empty_name do
-      name { '' }
-    end
-
-    trait :updated_idea do
-      name { 'updated idea' }
-    end
   end
 end

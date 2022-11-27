@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_21_031144) do
+ActiveRecord::Schema.define(version: 2022_10_06_100229) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2022_08_21_031144) do
     t.string "github_url"
     t.string "monetize"
     t.integer "stance", default: 0
+    t.integer "team_members_num", limit: 2, default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 
@@ -122,6 +123,25 @@ ActiveRecord::Schema.define(version: 2022_08_21_031144) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notification_configs", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "heart_email", default: true, null: false
+    t.boolean "comment_email", default: true, null: false
+    t.boolean "draft_remind_email", default: true, null: false
+    t.boolean "team_join_email", default: true, null: false
+    t.boolean "team_message_email", default: true, null: false
+    t.boolean "weekly_email", default: true, null: false
+    t.boolean "event_email", default: true, null: false
+    t.boolean "heart_web", default: true, null: false
+    t.boolean "comment_web", default: true, null: false
+    t.boolean "heart_to_comment_web", default: true, null: false
+    t.boolean "vote_web", default: true, null: false
+    t.boolean "team_join_web", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notification_configs_on_user_id"
   end
 
   create_table "notifications", charset: "utf8mb4", force: :cascade do |t|
@@ -212,6 +232,7 @@ ActiveRecord::Schema.define(version: 2022_08_21_031144) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "github_id"
+    t.integer "ideas_num", limit: 2, default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -222,6 +243,7 @@ ActiveRecord::Schema.define(version: 2022_08_21_031144) do
   add_foreign_key "comments", "users"
   add_foreign_key "difficulties", "ideas"
   add_foreign_key "difficulties", "users"
+  add_foreign_key "notification_configs", "users"
   add_foreign_key "taggings", "ideas"
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "ideas"

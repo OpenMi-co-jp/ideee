@@ -23,6 +23,7 @@
 #  similar                                                  :string(255)
 #  stance                                                   :integer          default("free_right")
 #  target                                                   :string(255)
+#  team_members_num                                         :integer          default(0)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
 #  created_at                                               :datetime         not null
@@ -50,10 +51,11 @@ class Idea < ApplicationRecord
   has_rich_text :note
   mount_uploader :icon, ImageUploader
   after_create :send_draft_remind
+  after_commit :count_user_ideas # draftとideaを切り離したら作成と削除時に限定する
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :background, presence: true
-  validates :goal, presence: true
+  validates :background, presence: true, length: { maximum: 255 }
+  validates :goal, presence: true, length: { maximum: 255 }
   validate :validate_tags_num
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
@@ -86,8 +88,7 @@ class Idea < ApplicationRecord
   end
 
   def count_comments
-    self.comments_num = comments.size
-    save!
+    update_column(:comments_num, comments.size)
   end
 
   def save_with_tags(tag_list)
@@ -119,7 +120,7 @@ class Idea < ApplicationRecord
   end
 
   def same_user_other_ideas
-    return [] if user.ideas.published.length == 1
+    return [] if user.ideas_num == 1
 
     user.ideas.published.eager_load(:idea_tags).where.not(id: id)
   end
@@ -137,5 +138,19 @@ class Idea < ApplicationRecord
 
   def enough_view?
     view > 10
+  end
+
+  def count_team_members
+    update(team_members_num: team.members.size)
+  end
+
+  def enough_team_member?
+    team_project? && team_members_num.positive?
+  end
+
+  def count_user_ideas
+    return unless Rails.env.production?
+
+    CountUserIdeasJob.perform_later(user_id)
   end
 end

@@ -71,7 +71,7 @@ RSpec.describe 'Ideas', type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      let(:params) { { idea: attributes_for(:idea, :empty_name) } }
+      let(:params) { { idea: attributes_for(:idea, name: '') } }
       it 'アイデアが登録されないこと' do
         expect do
           subject
@@ -89,7 +89,7 @@ RSpec.describe 'Ideas', type: :request do
   describe 'PUT #update' do
     subject { put idea_path(idea), params: params }
     context 'パラメータが妥当な場合' do
-      let(:params) { { idea: attributes_for(:idea, :updated_idea) } }
+      let(:params) { { idea: attributes_for(:idea, name: 'updated idea') } }
       it 'リクエストが成功すること' do
         subject
         expect(response.status).to eq 302
@@ -108,7 +108,7 @@ RSpec.describe 'Ideas', type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      let(:params) { { idea: attributes_for(:idea, :empty_name) } }
+      let(:params) { { idea: attributes_for(:idea, name: '') } }
       it 'アイデア名が変更されないこと' do
         expect do
           subject

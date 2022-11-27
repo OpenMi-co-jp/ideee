@@ -53,7 +53,7 @@
         </div>
         <div class='col s12 m9 l6 row'>
           <span class='mr-3'>並び替え</span>
-          <% I18n.t('activerecord.sorts').each do |(key, value)| %>
+          <% I18n.t('activerecord.sorts.ideas').each do |(key, value)| %>
             <div class="chip">
               <%= sort_link(@q, key, value) %>
             </div>
@@ -62,13 +62,15 @@
       </div>
     <% end %>
 
-    <% if @searched_ideas.present? %>
-      <%= render 'common/column_board', ideas: @paged_ideas %>
-      <%= paginate @paged_ideas %>
-    <% else %>
-      <h4>検索に合致するアイデアが⾒つかりませんでした</h4>
-      <h5><%= link_to "あなたのアイデアを投稿しませんか？", new_idea_path %></h5>
-    <% end %>
+    <div class='c-search__items'>
+      <% if @searched_ideas.present? %>
+        <%= render 'common/column_board', ideas: @paged_ideas %>
+        <%= paginate @paged_ideas %>
+      <% else %>
+        <h4>検索に合致するアイデアが⾒つかりませんでした</h4>
+        <h5><%= link_to "あなたのアイデアを投稿しませんか？", new_idea_path %></h5>
+      <% end %>
+    </div>
   </div>
   <%# 実現したアイデアを探している場合表示しない %>
   <% if params[:q].nil? || params[:q][:product_apply_eq].nil? || params[:q][:product_apply_eq] =! '2' %>

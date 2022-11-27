@@ -147,31 +147,30 @@ RSpec.describe User, type: :model do
   describe 'create_comment' do
     let(:idea) { FactoryBot.create(:idea) }
     let(:user) { idea.user }
+    let(:description) { 'hoge' }
+    let(:comment_params) { { idea_id: idea.id, description: description } }
     subject { user.create_comment(comment_params) }
 
     context 'アイデアに初めてコメントするユーザーの場合' do
-      let(:comment_params) { { idea_id: idea.id, description: 'hoge' } }
-
       it 'コメントが作成される' do
         subject
-        expect(user.comments.where(idea_id: idea.id, description: 'hoge')).to exist
+        expect(user.comments.where(**comment_params)).to exist
       end
     end
 
     context 'アイデアに既にコメントしているユーザー' do
-      before { FactoryBot.create(:comment, user_id: user.id, idea_id: idea.id, description: 'hoge') }
+      before { FactoryBot.create(:comment, user_id: user.id, idea_id: idea.id, description: description) }
 
       context '投稿したコメントが重複していない場合' do
         let(:comment_params) { { idea_id: idea.id, description: 'fuga' } }
 
         it 'コメントが作成される' do
           subject
-          expect(user.comments.where(idea_id: idea.id, description: 'fuga')).to exist
+          expect(user.comments.where(**comment_params)).to exist
         end
       end
 
       context '同一内容のコメントが存在する場合' do
-        let(:comment_params) { { idea_id: idea.id, description: 'hoge' } }
         it { is_expected.to eq nil }
       end
     end
@@ -222,30 +221,33 @@ RSpec.describe User, type: :model do
 
     context 'twitter_id' do
       context 'urlが含まれたtwitter_idで更新しようとした場合' do
-        let(:user) { FactoryBot.create(:user, twitter_id: 'https://twitter.com/hoge') }
+        let(:twitter_id) { 'hoge' }
+        let(:user) { FactoryBot.create(:user, twitter_id: "https://twitter.com/#{twitter_id}") }
 
         it 'id部分のみが抽出される' do
           subject
-          expect(user.twitter_id).to eq 'hoge'
+          expect(user.twitter_id).to eq twitter_id
         end
       end
 
       context '@が含まれたtwitter_idで更新しようとした場合' do
-        let(:user) { FactoryBot.create(:user, twitter_id: '@fuga') }
+        let(:twitter_id) { 'fuga' }
+        let(:user) { FactoryBot.create(:user, twitter_id: "@#{twitter_id}") }
 
         it 'id部分のみが抽出される' do
           subject
-          expect(user.twitter_id).to eq 'fuga'
+          expect(user.twitter_id).to eq twitter_id
         end
       end
     end
 
     context 'urlが含まれたgithub_idで更新しようとした場合' do
-      let(:user) { FactoryBot.create(:user, github_id: 'https://github.com/hogefuga') }
+      let(:github_id) { 'hogefuga' }
+      let(:user) { FactoryBot.create(:user, github_id: "https://github.com/#{github_id}") }
 
       it 'id部分のみが抽出される' do
         subject
-        expect(user.github_id).to eq 'hogefuga'
+        expect(user.github_id).to eq github_id
       end
     end
   end

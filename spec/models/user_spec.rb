@@ -47,6 +47,50 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'own?' do
+    let(:user) { FactoryBot.create(:user) }
+    subject { user.own?(object) }
+
+    context 'ユーザーに紐づいたideaかどうかの判定' do
+      let(:object) { FactoryBot.create(:idea) }
+
+      context '紐づいたideaの場合' do
+        let(:user) { object.user }
+        it { is_expected.to eq true }
+      end
+
+      context '紐づかないideaの場合' do
+        it { is_expected.to eq false }
+      end
+    end
+
+    context 'ユーザーに紐づいたlikeかどうかの判定' do
+      let(:object) { FactoryBot.create(:like, :idea) }
+
+      context '紐づいたlikeの場合' do
+        let(:user) { object.user }
+        it { is_expected.to eq true }
+      end
+
+      context '紐づかないlikeの場合' do
+        it { is_expected.to eq false }
+      end
+    end
+
+    context 'ユーザーに紐づいたteamかどうかの判定' do
+      let(:object) { FactoryBot.create(:team) }
+
+      context '紐づいたteamの場合' do
+        let(:user) { object.user }
+        it { is_expected.to eq true }
+      end
+
+      context '紐づかないteamの場合' do
+        it { is_expected.to eq false }
+      end
+    end
+  end
+
   describe 'like?' do
     context 'アイデアに対するlike' do
       subject { user.like?(idea) }

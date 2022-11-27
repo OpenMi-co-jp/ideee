@@ -28,5 +28,6 @@ FactoryBot.define do
     requirement { 'test_requirement' }
     status { 'active' }
     idea
+    owner_id { idea.user.id }
   end
 end

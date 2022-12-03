@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  let(:team) { FactoryBot.create(:team) }
+  let!(:team) { FactoryBot.create(:team) }
   let(:user) { FactoryBot.create(:user) }
 
   describe "teamが有効になること" do
@@ -10,7 +10,6 @@ RSpec.describe Team, type: :model do
     end
 
     it "test_offerが返ってくること" do
-      team
       expect(Team.last.offer).to eq team.offer
     end
 

@@ -59,7 +59,7 @@ class User < ApplicationRecord
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
-  before_update :fix_ids
+  before_save :fix_ids
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
@@ -124,20 +124,11 @@ class User < ApplicationRecord
         'Google'
       end
     end
-
-    def search(key)
-      where(definition: key).or(where(definition: :idea_engineer))
-    end
   end
 
   # cookieを使ってログインを保持
   def remember_me
     true
-  end
-
-  # twitterログインでもメールアドレスがあればメールアドレスを必須項目にする
-  def email_required?
-    provider == 'twitter' && !email.blank? && super
   end
 
   # ユーザーに紐づいたobjectの所有者を判断
@@ -160,10 +151,6 @@ class User < ApplicationRecord
     comment = comments.create(comment_params)
     comment.idea.count_comments if comment.valid?
     comment
-  end
-
-  def team_joined?(idea)
-    idea.team.members.include?(self)
   end
 
   # Contributionの計算

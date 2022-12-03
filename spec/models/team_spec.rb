@@ -10,7 +10,8 @@ RSpec.describe Team, type: :model do
     end
 
     it "test_offerが返ってくること" do
-      expect(team.offer).to eq 'test_offer'
+      team_test = team
+      expect(Team.last.offer).to eq team_test.offer
     end
 
     it "test_requirementが返ってくること" do
@@ -35,7 +36,8 @@ RSpec.describe Team, type: :model do
   describe "joined?(user)メソッドの有効性" do
     context "メンバーになっている時" do
       it "trueが返ってくること" do
-        expect(team.joined?(team.user)).to eq true
+        TeamUser.create(user_id: user.id, team_id: team.id)
+        expect(team.joined?(user)).to eq true
       end
     end
 

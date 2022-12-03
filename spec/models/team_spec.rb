@@ -10,8 +10,8 @@ RSpec.describe Team, type: :model do
     end
 
     it "test_offerが返ってくること" do
-      team_test = team
-      expect(Team.last.offer).to eq team_test.offer
+      team
+      expect(Team.last.offer).to eq team.offer
     end
 
     it "test_requirementが返ってくること" do

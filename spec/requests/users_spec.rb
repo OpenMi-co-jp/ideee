@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:user) { create(:user) }
 
   describe 'GET #index' do
     subject { get users_path }
@@ -42,10 +42,10 @@ RSpec.describe 'Users', type: :request do
   describe 'GET #search' do
     subject { get search_users_path, params: params }
 
-    let!(:idea_man) { FactoryBot.create(:user, :idea_man) }
+    let!(:idea_man) { create(:user, :idea_man) }
     let(:params) { {} }
-    let!(:engineer) { FactoryBot.create(:user, :engineer) }
-    let!(:idea_engineer) { FactoryBot.create(:user, :idea_engineer) }
+    let!(:engineer) { create(:user, :engineer) }
+    let!(:idea_engineer) { create(:user, :idea_engineer) }
 
     describe '検索項目を指定しない場合' do
       it 'リクエストが成功すること' do

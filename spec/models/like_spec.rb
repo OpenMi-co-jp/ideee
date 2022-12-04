@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  let(:like_idea) { FactoryBot.create(:like, :idea) }
-  let(:like_comment) { FactoryBot.create(:like, :comment) }
+  let(:like_idea) { create(:like, :idea) }
+  let(:like_comment) { create(:like, :comment) }
 
   describe 'アイデアのいいねが有効になること' do
     it 'いいねが有効であること' do

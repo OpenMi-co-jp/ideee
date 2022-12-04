@@ -26,8 +26,11 @@ class Team < ApplicationRecord
   validates :offer, presence: true
   validates :requirement, presence: true
   validates :status, presence: true
+  validates :owner_id, presence: true
+
   belongs_to :owner, class_name: 'User'
   belongs_to :idea
+
   has_many :team_users, dependent: :destroy
   has_many :members, through: :team_users, source: :user
   has_one :room, dependent: :destroy

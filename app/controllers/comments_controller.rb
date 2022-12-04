@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     comment = current_user.create_comment(comment_params)
     return if comment.nil?
 
-    idea = Idea.find_by!(id: comment_params[:idea_id])
+    idea = Idea.find(comment_params[:idea_id])
     current_user.create_notification_comment(idea, comment)
     SendCommentEmailJob.perform_later(current_user, idea, comment.description)
   end
@@ -39,6 +39,6 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find_by!(id: comment_params[:id])
+    @comment = Comment.find(comment_params[:id])
   end
 end

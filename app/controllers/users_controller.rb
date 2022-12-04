@@ -36,21 +36,21 @@ class UsersController < ApplicationController
   def commenter
     # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
     user_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
-    user_list = user_array.map { |u| User.find_by!(id: u[0]) }
+    user_list = user_array.map { |u| User.find(u[0]) }
     render partial: 'users/user_list', locals: { users: user_list, user_array: user_array, icon: '💬' }
   end
 
   def idea_man
     # 1ヶ月以内にアイデアを公開したユーザーのIDとアイデア数をピックアップ
     user_array = Idea.published.recent_select.pickup_user_nums(t('default.users.monthly_publisher_num'))
-    user_list = user_array.map { |u| User.find_by!(id: u[0]) }
+    user_list = user_array.map { |u| User.find(u[0]) }
     render partial: 'users/user_list', locals: { users: user_list, user_array: user_array, icon: '💬' }
   end
 
   private
 
   def page_user
-    @user = User.find_by!(id: params[:id])
+    @user = User.find(params[:id])
   end
 
   def own_user?

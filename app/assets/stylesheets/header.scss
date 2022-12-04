@@ -89,6 +89,13 @@ header {
       transform: scale(1.1);
     }
   }
+
+  .button_off {
+    border: none;
+    background-color: white;
+    color: #C4C4C4;
+    cursor: pointer;
+  }
 }
 
 /* 上に上がる動き */

@@ -18,9 +18,9 @@ class LikesController < ApplicationController
   def item_id
     @item =
       if params[:type] == 'Idea'
-        Idea.find_by!(id: params[:id])
+        Idea.find(params[:id])
       else
-        Comment.find_by!(id: params[:id])
+        Comment.find(params[:id])
       end
   end
 

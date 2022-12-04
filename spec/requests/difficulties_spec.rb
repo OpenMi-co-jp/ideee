@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Difficulties', type: :request do
-  let!(:user) { create(:user) }
-  let(:idea) { create(:idea) }
+  let!(:user) { FactoryBot.create(:user) }
+  let(:idea) { FactoryBot.create(:idea) }
 
   before { sign_in user }
 

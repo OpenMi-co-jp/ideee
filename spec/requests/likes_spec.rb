@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Likes', type: :request do
-  let!(:user) { create(:user) }
-  let(:idea) { create(:idea) }
+  let!(:user) { FactoryBot.create(:user) }
+  let(:idea) { FactoryBot.create(:idea) }
 
   before { sign_in user }
 
@@ -24,7 +24,7 @@ RSpec.describe 'Likes', type: :request do
   end
 
   describe 'DELETE #destroy' do
-    let!(:like_idea) { create(:like, :idea, { user: user }) }
+    let!(:like_idea) { FactoryBot.create(:like, :idea, { user: user }) }
 
     it 'リクエストが成功すること' do
       delete like_path(like_idea.likable_id, params: { id: like_idea.likable_id, type: 'Idea' })

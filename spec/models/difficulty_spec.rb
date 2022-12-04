@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Difficulty, type: :model do
-  let(:difficulty_easy) { create(:difficulty, :easy) }
-  let(:difficulty_middle) { create(:difficulty, :middle) }
-  let(:difficulty_hard) { create(:difficulty, :hard) }
+  let(:difficulty_easy) { FactoryBot.create(:difficulty, :easy) }
+  let(:difficulty_middle) { FactoryBot.create(:difficulty, :middle) }
+  let(:difficulty_hard) { FactoryBot.create(:difficulty, :hard) }
 
   describe 'Difficultyが有効になること' do
     context 'difficultyのレベルがEasyの時' do

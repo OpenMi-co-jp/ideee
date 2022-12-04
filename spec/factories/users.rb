@@ -44,7 +44,7 @@ FactoryBot.define do
     sequence(:email) { |n| "sample#{n}@example.com" }
     definition { User.definitions.values.sample }
     defined { true }
-    confirmed_at { Time.zone.now }
+    confirmed_at { Time.now }
     password { 'password' }
     ideas_num { 0 }
 

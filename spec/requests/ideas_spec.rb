@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Ideas', type: :request do
-  let!(:idea) { create(:idea) }
+  let!(:idea) { FactoryBot.create(:idea) }
 
   before { sign_in idea.user }
 

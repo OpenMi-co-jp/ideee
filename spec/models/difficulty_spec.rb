@@ -11,7 +11,7 @@ RSpec.describe Difficulty, type: :model do
         expect(difficulty_easy).to be_valid
       end
 
-      it 'easyが返ってくること ' do
+      it 'easyが返ってくること' do
         expect(difficulty_easy.level).to eq 'easy'
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe Difficulty, type: :model do
         expect(difficulty_middle).to be_valid
       end
 
-      it 'middleが返ってくること ' do
+      it 'middleが返ってくること' do
         expect(difficulty_middle.level).to eq 'middle'
       end
     end
@@ -31,7 +31,7 @@ RSpec.describe Difficulty, type: :model do
         expect(difficulty_hard).to be_valid
       end
 
-      it 'hardが返ってくること ' do
+      it 'hardが返ってくること' do
         expect(difficulty_hard.level).to eq 'hard'
       end
     end

@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
   private
 
   def set_room
-    @room = Room.find_by!(id: params[:id])
+    @room = Room.find(params[:id])
   end
 
   def room_params

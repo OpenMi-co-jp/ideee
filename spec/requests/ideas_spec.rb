@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Ideas', type: :request do
   let!(:idea) { FactoryBot.create(:idea) }
+
   before { sign_in idea.user }
 
   describe 'GET #index' do
@@ -26,6 +27,7 @@ RSpec.describe 'Ideas', type: :request do
 
     context 'アイデアが存在しない場合' do
       subject { -> { get idea_path(idea.id + 100) } }
+
       it { is_expected.to raise_error ActiveRecord::RecordNotFound }
     end
   end
@@ -51,8 +53,10 @@ RSpec.describe 'Ideas', type: :request do
 
   describe 'POST #create' do
     subject { post ideas_path, params: params }
+
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea) } }
+
       it 'リクエストが成功すること' do
         subject
         expect(response.status).to eq 302
@@ -72,10 +76,11 @@ RSpec.describe 'Ideas', type: :request do
 
     context 'パラメータが不正な場合' do
       let(:params) { { idea: attributes_for(:idea, name: '') } }
+
       it 'アイデアが登録されないこと' do
         expect do
           subject
-        end.to_not change(Idea, :count)
+        end.not_to change(Idea, :count)
       end
 
       it 'エラーが表示されること' do
@@ -88,8 +93,10 @@ RSpec.describe 'Ideas', type: :request do
 
   describe 'PUT #update' do
     subject { put idea_path(idea), params: params }
+
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea, name: 'updated idea') } }
+
       it 'リクエストが成功すること' do
         subject
         expect(response.status).to eq 302
@@ -109,10 +116,11 @@ RSpec.describe 'Ideas', type: :request do
 
     context 'パラメータが不正な場合' do
       let(:params) { { idea: attributes_for(:idea, name: '') } }
+
       it 'アイデア名が変更されないこと' do
         expect do
           subject
-        end.to_not change(Idea.find(idea.id), :name)
+        end.not_to change(Idea.find(idea.id), :name)
       end
 
       it 'エラーが表示されること' do
@@ -125,6 +133,7 @@ RSpec.describe 'Ideas', type: :request do
 
   describe 'DELETE #destroy' do
     subject { delete idea_path(idea) }
+
     it 'リクエストが成功すること' do
       subject
       expect(response.status).to eq 302
@@ -144,7 +153,9 @@ RSpec.describe 'Ideas', type: :request do
 
   describe 'GET #search' do
     subject { get search_ideas_path, params: params }
+
     let(:params) { { keyword: idea.name } }
+
     it 'リクエストが成功すること' do
       subject
       expect(response.status).to eq 200

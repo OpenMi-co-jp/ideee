@@ -48,14 +48,16 @@ RSpec.describe User, type: :model do
   end
 
   describe 'own?' do
-    let(:user) { FactoryBot.create(:user) }
     subject { user.own?(object) }
+
+    let(:user) { FactoryBot.create(:user) }
 
     context 'ユーザーに紐づいたideaかどうかの判定' do
       let(:object) { FactoryBot.create(:idea) }
 
       context '紐づいたideaの場合' do
         let(:user) { object.user }
+
         it { is_expected.to eq true }
       end
 
@@ -69,6 +71,7 @@ RSpec.describe User, type: :model do
 
       context '紐づいたlikeの場合' do
         let(:user) { object.user }
+
         it { is_expected.to eq true }
       end
 
@@ -82,6 +85,7 @@ RSpec.describe User, type: :model do
 
       context '紐づいたteamの場合' do
         let(:user) { object.user }
+
         it { is_expected.to eq true }
       end
 
@@ -99,12 +103,14 @@ RSpec.describe User, type: :model do
         let(:like) { FactoryBot.create(:like, :idea) }
         let(:idea) { like.likable }
         let(:user) { like.user }
+
         it { is_expected.to eq true }
       end
 
       context '存在しない場合' do
         let(:idea) { FactoryBot.create(:idea) }
         let(:user) { idea.user }
+
         it { is_expected.to eq false }
       end
     end
@@ -116,12 +122,14 @@ RSpec.describe User, type: :model do
         let(:like) { FactoryBot.create(:like, :comment) }
         let(:comment) { like.likable }
         let(:user) { like.user }
+
         it { is_expected.to eq true }
       end
 
       context '存在しない場合' do
         let(:comment) { FactoryBot.create(:comment) }
         let(:user) { comment.user }
+
         it { is_expected.to eq false }
       end
     end
@@ -134,22 +142,25 @@ RSpec.describe User, type: :model do
       let(:difficulty) { FactoryBot.create(:difficulty, :middle) }
       let(:user) { difficulty.user }
       let(:idea) { difficulty.idea }
+
       it { is_expected.to eq true }
     end
 
     context 'アイデアの難易度を投稿していない場合' do
       let(:user) { FactoryBot.create(:user) }
       let(:idea) { FactoryBot.create(:idea) }
+
       it { is_expected.to eq false }
     end
   end
 
   describe 'create_comment' do
+    subject { user.create_comment(comment_params) }
+
     let(:idea) { FactoryBot.create(:idea) }
     let(:user) { idea.user }
     let(:description) { 'hoge' }
     let(:comment_params) { { idea_id: idea.id, description: description } }
-    subject { user.create_comment(comment_params) }
 
     context 'アイデアに初めてコメントするユーザーの場合' do
       it 'コメントが作成される' do

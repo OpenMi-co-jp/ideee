@@ -4,7 +4,7 @@ module AnalyticsJob
 
     def perform(id)
       idea_view = Analytics.new.idea_report('pageviews', id)
-      Idea.find_by!(id: id).update_column(:view, idea_view.to_i)
+      Idea.find(id).update_column(:view, idea_view.to_i)
     end
   end
 end

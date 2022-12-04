@@ -134,7 +134,7 @@ class IdeasController < ApplicationController
   private
 
   def set_idea
-    @idea = Idea.find_by!(id: params[:id])
+    @idea = Idea.find(params[:id])
   end
 
   # ストロングパラメーターを設定

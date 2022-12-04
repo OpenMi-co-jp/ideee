@@ -81,7 +81,7 @@ class IdeasController < ApplicationController
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @paged_ideas.limit_value
-    @deployed_ideas = Idea.deployed.preload(:user).order(updated_at: 'DESC').first(10)
+    @deployed_ideas = Idea.deployed.preload(:user).order(published_at: 'DESC').first(10)
   end
 
   def publish
@@ -148,10 +148,10 @@ class IdeasController < ApplicationController
 
   def ransack_params
     day_from = params[:q][:published_at_gteq]
-    day_from = day_from.to_date.beginning_of_day if day_from.present?
+    params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
 
     day_to = params[:q][:published_at_lteq]
-    day_to = day_to.to_date.end_of_day if day_to.present?
+    params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
 
     params[:q]
   end

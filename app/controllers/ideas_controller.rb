@@ -75,13 +75,13 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(params[:q])
+    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)
     @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
     @searched_ideas = @q.result(distinct: true)
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @paged_ideas.limit_value
-    @deployed_ideas = Idea.deployed.preload(:user).order(updated_at: 'DESC').first(10)
+    @deployed_ideas = Idea.deployed.preload(:user).order(published_at: 'DESC').first(10)
   end
 
   def publish
@@ -144,6 +144,16 @@ class IdeasController < ApplicationController
             :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :stance, :user_id, :commit, :product_url
           )
           .merge(user: current_user, draft: draft_bool)
+  end
+
+  def ransack_params
+    day_from = params[:q][:published_at_gteq]
+    params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
+
+    day_to = params[:q][:published_at_lteq]
+    params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
+
+    params[:q]
   end
 
   def own_user_check

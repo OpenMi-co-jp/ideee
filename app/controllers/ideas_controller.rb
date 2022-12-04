@@ -36,7 +36,7 @@ class IdeasController < ApplicationController
       else
         destination = params.dig(:idea, :stance) == 'team_project' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         sidekiq_jobs
-        @idea.update_attribute(:published_at, Time.now)
+        @idea.update_attribute(:published_at, Time.zone.now)
         redirect_to destination, notice: t('.success')
       end
     else
@@ -55,7 +55,7 @@ class IdeasController < ApplicationController
         if params[:commit] == t('default.publish')
           sidekiq_jobs
           destination = idea_path(@idea, share: true)
-          @idea.update_attribute(:published_at, Time.now)
+          @idea.update_attribute(:published_at, Time.zone.now)
         end
         destination = new_team_path(idea_id: @idea) if params.dig(:idea, :stance) == 'team_project'
         destination ||= @idea
@@ -85,7 +85,7 @@ class IdeasController < ApplicationController
   end
 
   def publish
-    @idea.update!(draft: false, published_at: Time.now)
+    @idea.update!(draft: false, published_at: Time.zone.now)
     sidekiq_jobs
     redirect_to idea_path(@idea, share: true), notice: t('.success')
   end

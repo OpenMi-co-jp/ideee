@@ -7,3 +7,7 @@ require:
 
 AllCops:
   NewCops: enable
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes

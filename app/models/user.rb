@@ -72,9 +72,9 @@ class User < ApplicationRecord
   delegate :draft_remind_email, to: :notification_config
   delegate :team_join_email, to: :notification_config
   delegate :team_message_email, to: :notification_config
-  scope :event_emailable, -> { joins(:notification_config).where('notification_configs.event_email = ?', true) }
-  scope :heart_emailable, -> { joins(:notification_config).where('notification_configs.heart_email = ?', true) }
-  scope :weekly_emailable, -> { joins(:notification_config).where('notification_configs.weekly_email = ?', true) }
+  scope :event_emailable, -> { joins(:notification_config).where(notification_configs: { event_email: true }) }
+  scope :heart_emailable, -> { joins(:notification_config).where(notification_configs: { heart_email: true }) }
+  scope :weekly_emailable, -> { joins(:notification_config).where(notification_configs: { weekly_email: true }) }
 
   # 通知を作成する
   include CreateNotification

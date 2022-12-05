@@ -48,12 +48,13 @@
         </div>
       </div>
       <div class='c-search__result row'>
-        <div class='col s12 m3 l6'>
+        <div class='col s12 m3 l4'>
           <h1 class='board-title mh-3'>検索結果 <%= @searched_ideas.size %>件</h1>
         </div>
-        <div class='col s12 m9 l6 row'>
+        <div class='col s12 m9 l8 row'>
           <span class='mr-3'>並び替え</span>
           <% I18n.t('activerecord.sorts.ideas').each do |(key, value)| %>
+            <% next if key == :team_members_num && !params[:q]&.include?('team_status_eq') %>
             <div class="chip">
               <%= sort_link(@q, key, value) %>
             </div>

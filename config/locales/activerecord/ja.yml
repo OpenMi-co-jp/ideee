@@ -69,6 +69,7 @@ ja:
         view: ビュー数
         published_at: 公開日
         updated_at: 更新日
+        team_members_num: チームメンバー数
       users:
         created_at: 参加日
         point: コントリビュート数

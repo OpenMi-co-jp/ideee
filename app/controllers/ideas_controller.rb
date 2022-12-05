@@ -36,7 +36,7 @@ class IdeasController < ApplicationController
       else
         destination = params.dig(:idea, :stance) == 'team_project' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
         sidekiq_jobs
-        @idea.update_attribute(:published_at, Time.now)
+        @idea.update_attribute(:published_at, Time.zone.now)
         redirect_to destination, notice: t('.success')
       end
     else
@@ -55,7 +55,7 @@ class IdeasController < ApplicationController
         if params[:commit] == t('default.publish')
           sidekiq_jobs
           destination = idea_path(@idea, share: true)
-          @idea.update_attribute(:published_at, Time.now)
+          @idea.update_attribute(:published_at, Time.zone.now)
         end
         destination = new_team_path(idea_id: @idea) if params.dig(:idea, :stance) == 'team_project'
         destination ||= @idea
@@ -75,17 +75,17 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(params[:q])
+    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)
     @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
     @searched_ideas = @q.result(distinct: true)
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @paged_ideas.limit_value
-    @deployed_ideas = Idea.deployed.preload(:user).order(updated_at: 'DESC').first(10)
+    @deployed_ideas = Idea.deployed.preload(:user).order(published_at: 'DESC').first(10)
   end
 
   def publish
-    @idea.update!(draft: false, published_at: Time.now)
+    @idea.update!(draft: false, published_at: Time.zone.now)
     sidekiq_jobs
     redirect_to idea_path(@idea, share: true), notice: t('.success')
   end
@@ -134,7 +134,7 @@ class IdeasController < ApplicationController
   private
 
   def set_idea
-    @idea = Idea.find_by!(id: params[:id])
+    @idea = Idea.find(params[:id])
   end
 
   # ストロングパラメーターを設定
@@ -144,6 +144,16 @@ class IdeasController < ApplicationController
             :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :stance, :user_id, :commit, :product_url
           )
           .merge(user: current_user, draft: draft_bool)
+  end
+
+  def ransack_params
+    day_from = params[:q][:published_at_gteq]
+    params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
+
+    day_to = params[:q][:published_at_lteq]
+    params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
+
+    params[:q]
   end
 
   def own_user_check

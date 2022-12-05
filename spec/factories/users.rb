@@ -60,4 +60,16 @@ FactoryBot.define do
       definition { 2 }
     end
   end
+
+  trait :idea do
+    ideas { [FactoryBot.build(:idea, :like)] }
+  end
+
+  trait :like do
+    likes { [FactoryBot.build(:like, :idea), FactoryBot.build(:like, :comment)] }
+  end
+
+  trait :comment do
+    comments { [FactoryBot.build(:comment)] }
+  end
 end

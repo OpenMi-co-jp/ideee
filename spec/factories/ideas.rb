@@ -48,5 +48,9 @@ FactoryBot.define do
     product_url { Faker::Internet.url }
     github_url { Faker::Internet.url }
     user
+
+    trait :like do
+      likes { [FactoryBot.build(:like)] }
+    end
   end
 end

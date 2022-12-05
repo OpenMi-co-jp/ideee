@@ -3,7 +3,7 @@ module IdeaJob
     queue_as :default
 
     def perform(id)
-      idea = Idea.find_by!(id: id)
+      idea = Idea.find(id)
       # difficultyが一つしかなければ現在の値を代入
       level =
         if idea.difficultys.size == 1

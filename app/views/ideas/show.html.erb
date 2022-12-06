@@ -83,13 +83,13 @@
   <% unless @idea.draft %>
     <%= render 'comments/board', items: @comments, item_class: 'comments' %>
     <%= render 'comments/form' %>
-    <div class="fixed-action-btn">
-      <a class="btn-floating btn-large red">
-        <i class="large material-icons">mode_edit</i>
+    <div class="fixed-action-btn toolbar direction-top hide-on-med-and-up">
+      <a class="btn-floating btn-large floating-btn-color orange">
+        <i class="large material-icons">chevron_right</i>
       </a>
       <ul>
-        <li><%= render "common/like", object: @idea %></li>
-        <li><div id='vote' class="btn orange c-pc-status-info__vote <%= @idea.difficulty %>"><%= render 'difficultys/vote', object: @idea %></div></li>
+        <li class="waves-effect waves-light"><%= render "common/mobile_like", object: @idea %></li>
+        <li id='vote' class="waves-effect waves-light c-pc-status-info__vote <%= @idea.difficulty %>"><%= render 'difficultys/mobile_vote', object: @idea %></li>
       </ul>
     </div>
     <%= render_async suggest_ideas_path(id: @idea.id), html_options: { 'data-turbolinks-track': 'reload' } %>

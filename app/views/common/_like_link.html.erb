@@ -1,10 +1,10 @@
 <div class='like-click idea <%= 'clicked' if current_user&.like?(object) %>' data-id='<%= object.id %>' data-type='<%= object.model_name %>'>
-  <div class='likes-column btn orange'>
-    <span id='like-heart'>
+  <div class='likes-column'>
+    <div class='like-image'>
       <%= embedded_svg "like-heart.svg", alt: 'いいね数' %>
-    </span>
-    <span class='likes-count js-like-count'>
+    </div>
+    <div class='likes-count js-like-count'>
       <%= object.likes.length %>
-    </span>
+    </div>
   </div>
 </div>

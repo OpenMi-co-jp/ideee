@@ -1,0 +1,13 @@
+<% if current_user %>
+  <%# 投票のためのモーダル出現 %>
+  <%= link_to difficulty_tag(object),
+    '#modal_difficulty',
+    data: { turbolinks: false },
+    class: "modal-trigger c-vote-button__hover #{'voted' if current_user&.voted?(object) }",
+    id: 'modal-trigger-difficulty' %>
+<% else %>
+  <%# ログイン前はログインのためのモーダル出現 %>
+  <%= link_to '#modal_before_login', data: { turbolinks: false }, class: "modal-trigger-login" do %>
+    <%= difficulty_tag(object) %>
+  <% end %>
+<% end %>

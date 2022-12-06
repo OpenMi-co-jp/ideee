@@ -33,9 +33,6 @@
       <div class='c-mobile-status-info__time'>
         <%= "平均滞在時間: #{Time.at(time_on_page.to_i).utc.strftime('%OM分%S秒')}" %>
       </div>
-      <div class='c-mobile-status-info'>
-        <%= render "common/like", object: idea %>
-      </div>
       <%= render 'tags/links', object: idea %>
     </div>
   </div>

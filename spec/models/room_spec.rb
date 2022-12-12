@@ -14,7 +14,7 @@ RSpec.describe Room, type: :model do
   end
 
   describe 'Roomが無効になること' do
-    context 'team_idがない時' do
+    context 'team_idがないとき' do
       it '無効であること' do
         room.team_id = nil
         expect(room).to be_invalid

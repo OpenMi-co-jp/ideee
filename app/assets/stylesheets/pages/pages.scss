@@ -11,7 +11,17 @@
     width: 95vw;
   }
 
+  h1 {
+    font-size: 3.3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+
   h3 {
+    font-size: 1.8rem;
     margin: 2rem 0 1rem;
   }
 
@@ -36,8 +46,23 @@
     padding: 1rem 1.25rem;
   }
 
+  &__article {
+    background-color: #f7f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 3px 2px rgb(204, 204, 204);
+
+    &--body {
+      background-color: #fff;
+      margin-top: 4rem;
+      padding: 0.5rem 2rem;
+      border-radius: 1.5rem;
+    }
+  }
+
   &__image {
-    max-width: 400px;
+    min-width: 300px;
+    max-height: 320px;
     margin: 4rem auto 0;
   }
 

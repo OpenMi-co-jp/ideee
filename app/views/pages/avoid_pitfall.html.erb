@@ -1,0 +1,549 @@
+<div class='pages p-1 mb-5'>
+  <div class='pages__article'>
+    <h1 class='pw-3'>個人開発のよくある落とし穴20選まとめ</h1>
+
+    <img src="https://1.bp.blogspot.com/-d0N-Zm70iVk/VahRrEdfocI/AAAAAAAAvu4/h0jXKVguhOQ/s800/otoshiana.png" alt="落とし穴" loading="lazy" class="pages__image">
+
+    <div class='pages__article--body'>
+
+      <h2>まとめ</h2>
+      <p class='pages__body'>
+        個人開発で「これをやれば成功する！」というのは無い<br>
+        しかし、体系だったフレームワークや正攻法は存在する<br>
+        よくある落とし穴を先に学んで避けるべき！
+      </p>
+
+      <h2>ターゲット</h2>
+      <p class='pages__body'>
+        ⚪︎ 個人開発を今からする方<br>
+        <br>
+        ⚪︎ 個人開発で成功体験がまだない方<br>
+        <br>
+        ⚪︎ 失敗を恐れているあなた
+      </p>
+
+      <hr>
+
+      <h3>記事を書いた背景</h3>
+
+      <p class="pages__body">
+        <b>起業や新規事業開発の落とし穴</b>と個人開発の落とし穴で共通点が多い<br>
+        スタートアップの記事や個人開発者へのインタビューを通して気づいた落とし穴を11選まとめてみた
+      </p>
+
+      <hr>
+
+      <h2>よくある落とし穴</h2>
+
+      <% unless current_user %>
+        <%= render 'common/login_lead_links' %>
+      <% else %>
+        <hr>
+
+        <h4>1. 目的がはっきりしていない</h4>
+
+        <a href="https://camo.qiitausercontent.com/415f039b294dde4545faf55e274a5b314c7ecbf0/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3439383730312f65613039356533322d653139322d336363642d626562642d6432633565373261366365372e6a706567" target="_blank" rel="nofollow noopener">
+          <img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2Fea095e32-e192-3ccd-bebd-d2c5e72a6ce7.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=47d5561ad23f20c2ce260279767d5e3f" alt="個人開発の目的マップ.jpg" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/ea095e32-e192-3ccd-bebd-d2c5e72a6ce7.jpeg" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2Fea095e32-e192-3ccd-bebd-d2c5e72a6ce7.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=90c9dca289c2c2ea514885a6d058ff04 1x" loading="lazy" class="pages__image">
+        </a>
+        <hr>
+
+        <div>
+          <b>最大にして一番多い落とし穴！</b><br />
+          スタートアップと個人開発で異なる点は、「マネタイズが絶対条件ではない点」である<br />
+          個人開発では個人が自分で開発をしたいと思う理由は千差万別<br />
+          目的を見失わないだけで成功体験は得やすくなる<br />
+        </div>
+
+        <hr>
+
+        <h4>よくある例</h4>
+
+        <p class="pages__body">
+          ⚪︎ お金儲けしたい目的のアプリに<b>勉強の要素も追加</b>、使ったことの無い言語の多用で工数の増加<br /><br />
+          ⚪︎ 結果、ローンチ前にやる気がなくなり、<b>時間経過によるアイデアの頓挫</b><br /><br />
+          ⚪︎ 技術力をアピールする目的で始めたが、どうせ作るならとバズりたい欲が高まる<br /><br />
+          ⚪︎ おもしろAPIを使用した簡易的なアプリでバズりを狙いにいってしまう（目的がずれる）<br />
+        </p>
+
+        <h4>対応</h4>
+
+        <blockquote>
+            <p class='pages__body'>
+            <b>目的は最初に明確化 / 常に確認</b>しながら目的ベースで開発することをおすすめします<br>
+            一つの目的を完遂することですら<b>難易度は高い</b>ことを理解する
+          </p>
+        </blockquote>
+
+        <p>例） 自分の学習のためのアプリ</p>
+
+        <p class="pages__body">
+          ⚪︎ 作ったアプリを長くメンテナンスをすることが一番の学び<br /><br />
+          ⚪︎ 一定数ユーザーがいて<b>ロングラン</b>できることが必要<br /><br />
+          ⚪︎ お金をたくさんかけられないが、<b>UXを下げられない</b><br />
+        </p>
+
+        <hr>
+
+        <h4>自己成長が目的の場合</h4>
+
+        <p class="pages__body">
+          ⚪︎ 成長のための戦略を立てる<br /><br />
+          ⚪︎ 時間や労力をかけて何を得て、どんな道が広がるか、どうなりたいかまで見据えておきたい<br />
+        </p>
+
+        <h5>戦略があればムリ・ムラ・ムダが減る</h5>
+
+        <hr>
+
+        <b>※これ以降は「売上を作りたい」や「人気になりたい」などの目的を前提にします</b>
+
+        <hr>
+
+        <h3>2. 車輪の再発明(類似サービス)</h3>
+
+        <p>大きく2つ</p>
+
+        <div class="code-copy">
+          ⚪︎ 市場調査をせずコンセプトが同じサービスを作る<br /><br />
+          ⚪︎ 類似サービスを気にし過ぎて作らない
+        </div>
+
+        <h4>対応</h4>
+
+        <blockquote>
+          <p class='pages__body'>
+            サービスのペルソナを設定<br>
+            課題に対して現在どんな代替対応をしているかを調査<br>
+            ユーザーストーリーの仮説を立てる中で既存のサービスなどで対応できていない点があれば、サービスとしての差分になることを理解する
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>3. いつの間にか「高機能なもの」を作ることが目的になる</h3>
+
+        <p class="pages__body">
+          ユーザーが欲しいものでなく、自分が作れるものや作りたいものに焦点が当たってしまう<br>
+          フォーカスがずれてしまう状態
+          技術力のある人などを陥りやすい落とし穴<br>
+          高機能は既存の顕在化された軸における延長戦でしかない
+        </p>
+
+        <hr>
+
+        <p><a href="https://camo.qiitausercontent.com/8a49b78199c1a866dd8f710175d38304eabe21ba/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3439383730312f30373336616537392d633838332d663736642d343065372d3861623034646139353465642e6a706567" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F0736ae79-c883-f76d-40e7-8ab04da954ed.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f40c8e23f2607f7b7b89a93c081899db" alt="wooden-board-ge49422b2d_1280.jpg" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/0736ae79-c883-f76d-40e7-8ab04da954ed.jpeg" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F0736ae79-c883-f76d-40e7-8ab04da954ed.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=2776860af461239cda273b707b275c6a 1x" loading="lazy" class="pages__image"></a></p>
+
+        <h4>対応</h4>
+
+        <blockquote>
+          <p class='pages__body'>
+            ユーザーが求めているのは高機能なものではなく、需要にあった<b>「ドリルの穴」</b>であることを忘れない<br>
+            サービスができてからはユーザーインタビューなどを繰り返し、本当に欲しいものは何かを検証したり、インサイトを獲得する
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>4. アプリの完成度が高ければユーザーがつくと思いこむ</h3>
+
+        <p class="pages__body">
+          すでに成功している完成度の高いサイトを触っているとUXが良く<br>
+          「UXの良さが売れるアプリだ」というバイアスが生まれる
+        </p>
+
+        <h4>対応</h4>
+
+        <blockquote>
+          <p class='pages__body'>
+            完成度は「ブランド力」という要素の一部<br>
+            <b>サービスの価値を高めるための一部</b>でしか無いことを理解する<br>
+            何度も修正が入り、アイデアが思い付いた時から大きく違うサービスが変化していくことを心得ておく
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>5. アイデアの閃きが全てと思い込む</h3>
+
+        <p class="pages__body">
+          時間をかけてやっと出てきたアイデアだからこそ価値があると思い込みやすい<br>
+          自分の中で「欲しい！」という感情が湧き上がり、周りが見えなくなる場合が多い
+        </p>
+
+        <h4>対応</h4>
+
+        <blockquote>
+          <p class='pages__body'>
+            残念ながら、まだ自分の頭の中の妄想であることを理解する<br>
+            <b>最初に出たアイデアは仮説に過ぎない</b><br>
+            検証をする中で、自らの思考の漏れを見つけながら思索を繰り返していく
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>6. バイアスのかかったユーザーインタビューを無自覚にする</h3>
+
+        <p class="pages__body">
+          自分が良いと思って組み入れた仕組みやサービス
+          認めてほしいという思いが強いあまり、無意識に「Yes」を引き出すための説明と質問をしてしまう
+          知り合いや面と向かって行うインタビュー、利害関係もない状態でやることが多い
+          よっぽどのことが無い限り「No」とは言わない
+        </p>
+
+        <h4>対応①</h4>
+
+        <blockquote>
+          <p class='pages__body'>
+            聞くべき内容を<b>あらかじめ文章化</b>してブラッシュアップしておく<br />
+            自分よがりの質問になっていないか<br>
+            <b>オーブンクエッション</b>、もしくは、良いところも改善点も取り込めるようにする<br />
+            「AってBですよね？」という質問はせずに、「Aについて良かった点、改善点を教えてください」といった質問にする<br />
+          </p>
+        </blockquote>
+
+        <h4>対応②</h4>
+
+        <blockquote>
+          <p class='pages__body'>
+            多くの一時情報を手に入れる<br>
+            例）学校の先生に対してのアプリケーションを作ろうとしていて、エンジニアにインタビューをしても意味がない<br>
+            課題に対してのストーリーを伺う<br>
+            <br>
+            現状はどのような<b>代替案を活用</b>しているかを確認する！
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>7. 多くの人に気に入られようとする</h3>
+
+        <p class="pages__body">
+          「自分が欲しい！」と思ったアイデアを大衆にフィットさせようとする<br>
+          大衆に向けにサービスを作るのはそれだけ対市場規模を大きくしたいからです<br>
+          けどそんな市場はどの会社もたくさんの資金を投下してくるはず<br>
+          企業として動いている訳ではないので、個人リソースの限界を理解しましょう
+        </p>
+
+        <h4>対応</h4>
+
+        <p class="pages__body">
+          ⚪︎ ニッチだけども彼らが本当に欲しいものを目指す<br /><br />
+          ⚪︎ <b>Burning Needs</b>（今すぐにでもお金を払うほど欲しいもの）<br /><br />
+          ⚪︎ ペルソナを細かく設定<br /><br />
+          ⚪︎ ペルソナが設定されることで<b>デザインや機能に一貫性</b>ができる<br /><br />
+          ⚪︎ 結果としてUXを高められる
+        </p>
+
+        <hr>
+
+        <h3>8. ペルソナ(自分)に固執しすぎる</h3>
+
+        <p class="pages__body">
+          多くの人がペルソナを自分に設定しがち<br>
+          簡単であり、自分が欲しいものに設定できるが故に、最適とされている<br>
+          自分の感情に固執することにより、自分しか欲しくないものになってしまうのは問題
+        </p>
+
+        <h4>対応</h4>
+
+        <p class="pages__body">
+          ⚪︎ 早い段階でユーザーをつけよう<br /><br />
+          ⚪︎ 最初はペルソナが自分でも構わないなるべく早い段階でペルソナ設定をユーザーにずらす必要がある<br /><br />
+          ⚪︎ カスタマー視点に立ち、痛みやニーズに関して深い理解があることが前提条件<br />
+        </p>
+
+        <hr>
+
+        <h3>9. 完成させてからローンチしようとする</h3>
+
+        <p class="pages__body">
+          人様に見せるものなら未完成のものを出したくないというプライドが邪魔をする<br>
+          日頃から仕事で質の高い完成品を求められている人にありがち
+        </p>
+
+        <h4>対応</h4>
+
+        <p class="pages__body">
+          <b>⚪︎ 常に仮説検証をしていることを忘れない</b><br><br>
+          ⚪︎ まずは<a href="https://www.sansokan.jp/akinai/faq/detail.san?H_FAQ_CL=0&amp;H_FAQ_NO=1468" rel="nofollow noopener" target="_blank">MVP(ユーザーに価値を提供できる最小限のプロダクト)</a>を作って検証を始める<br><br>
+          ⚪︎ Mock(実際の機能がない状態)でもローンチして需要があるかを測っても良い
+        </p>
+        <hr>
+
+        <h3>Mockの例</h3>
+
+        <p>
+          <a href="https://camo.qiitausercontent.com/26eca1dda580a46a7a85b41c2786010eedd472a0/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3439383730312f33653633303935662d656262642d386232302d343132332d3433333962626630613137362e6a706567" target="_blank" rel="nofollow noopener"><img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F3e63095f-ebbd-8b20-4123-4339bbf0a176.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f8076e476459c60af3c866c8df03c441" alt="ibg_mock.jpg" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/3e63095f-ebbd-8b20-4123-4339bbf0a176.jpeg" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F3e63095f-ebbd-8b20-4123-4339bbf0a176.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=e484f5c1645a3aa6304258f4f3bec6d5 1x" loading="lazy" class="pages__image"></a>
+        </p>
+
+        <p>
+          かつて、IBMが自動タイピング器を開発したとして実験した<br>
+          マイクに声を入力するだけで画面上に文字がタイプされていくもので、当時は画期的であった<br>
+          しかし、実際はマイクの先に手動でタイピングをする人がいて、打ち込んだ文字を画面に出力させていただけだった
+        </p>
+
+        <p><qiita-embed-ogp src="https://www.seleqt.net/design/pretotyping-and-prototyping/"></qiita-embed-ogp></p>
+
+        <h3>代替サービスでも良い</h3>
+
+        <p>
+          現在は、ノーコードやGoogleのフォームやスプレッドシートなど寄せ合わせるだけで多くの<b>サービスが簡易的に代替</b>できる<br>
+          大事なのは、ユーザーに届けるコアサービスにどれだけの<b>価値があるかを測る</b>ことである<br>
+          まずは、簡易版でアイデアが<b>失敗に終わらないことを確認する</b>事が重要
+        </p>
+
+        <hr>
+
+        <h3>10. インタビューをして満足する</h3>
+
+        <p class="pages__body">
+          5人以上にインタビューができて、指摘にも対応ができたので満足をしてしまう<br>
+          ユーザーの声をそのまま受け止めて対応しようと考えてしまう
+        </p>
+
+        <h4>対応</h4>
+
+        <p class="pages__body">
+          ⚪︎ インタビューで重要な点がユーザーの<b>深層心理を言語化</b>してあげること<br /><br />
+          ⚪︎ 表面的な不満や需要ではなく、そのストーリーに着目して言語化をする<br /><br />
+          ⚪︎ 深層の本音を受け止めた上で仮説を立てる<br /><br />
+          ⚪︎ インタビューは仮説を試す場所でもあるが、仮説検証を立てるタイミングであることも理解する<br /><br />
+          ⚪︎ サービスに変更を加えたのちにも、インタビューを繰り返し仮説検証をしていく（PDCA）<br />
+        </p>
+
+        <hr>
+
+        <h3>11. すぐにマネタイズをしようとする</h3>
+
+        <p class="pages__body">
+          最初のローンチのタイミングでトランザクションが多くなったことに味を占めてマネタイズを急ぐ<br>
+          すぐに広告を付けたり、制限をかけたりすることによってUXが低下<br>
+          コアユーザーも離れていくような事態になる
+        </p>
+
+        <p>
+          <a href="https://camo.qiitausercontent.com/7456a92a88666d19e06e5fafccb518fc01e8d103/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3439383730312f35643035386264302d336364342d303934612d623766332d3630656265356365313330322e706e67" target="_blank" rel="nofollow noopener">
+            <img src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F5d058bd0-3cd4-094a-b7f3-60ebe5ce1302.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=0dcfa86a0783dbcc4f2abffd1e35e511" alt="スクリーンショット 2022-01-30 18.15.28.png" data-canonical-src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/5d058bd0-3cd4-094a-b7f3-60ebe5ce1302.png" srcset="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F5d058bd0-3cd4-094a-b7f3-60ebe5ce1302.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;w=1400&amp;fit=max&amp;s=788b32bb0fb43278db9e80c02a55f503 1x" loading="lazy" class="pages__image">
+          </a>
+        </p>
+
+        <h4>対応</h4>
+
+        <p class="pages__body">
+          ⚪︎ 中長期的なファイナンス思考が必要<br /><br />
+          ⚪︎ BS思考を中心に目標を作ってサービスの価値を高めていく<br /><br />
+          ⚪︎ 注意※ 利用回数が一回でお金を産むビジネスや、時間単価が見合わなかったり、広告費などの費用を度外視している場合もある<br />
+        </p>
+
+        <hr>
+
+        <h2>よくある落とし穴</h2>
+        <p><img src="https://chojugiga.com/c/choju27_0001/s512_choju27_0001_11.png" alt="" loading="lazy" class="pages__image" loading="lazy" class="pages__image"></p>
+
+        <hr>
+
+        <h3>12. モチベーションがなくなる</h3>
+        <p><img src="https://1.bp.blogspot.com/-0TnUogDJ-r4/Xbo7r6-I-KI/AAAAAAABV5k/8f3ovw59EWkM9gHJaC1w-UBT6Yc5eMQ2gCNcBGAsYHQ/s1600/yaruki_nai_casual_man.png" alt="" loading="lazy" class="pages__image"></p>
+
+        <p class="pages__body">
+          <b>最大の大敵</b><br>
+          儲かるのも自分一人だけど困るのも自分一人<br>
+          つまり、全て自分次第でモチベーションが変わり、責任感が薄くなり長期間化で希薄になりがち
+        </p>
+
+        <h4>対応</h4>
+
+        <blockquote>
+          <p class="pages__body">
+            <b>何よりユーザーをつける</b><br>
+            まずはデプロイをしたり人目につく環境を作ること<br>
+            反響が帰ってきたり、使用者の顔が浮かぶようになると自ずとモチベが保たれます
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>13. 面白そうドリブンで進める</h3>
+        <p><img src="https://3.bp.blogspot.com/-MwH_qnvHWeI/VZ-POIV7f8I/AAAAAAAAvDI/NdbkJRU5mZM/s800/girl_idea.png" alt="" loading="lazy" class="pages__image"></p>
+
+        <p class="pages__body">
+          「誰」の「どんな」課題を「どうやって」解決するが決まってないままに<br>
+          「ワクワクした」という感情的な理由だけで開発を進めるのはリスクです
+        </p>
+
+        <h4>対応</h4>
+        <blockquote>
+          <p class='pages__body'>
+            誰がどうやって喜ぶかまでを描けるほど課題からソリューションまでの流れを想定<br>
+            何を解決しているサービスなのかを１文で明文化する<br>
+            （やりたいことが増えすぎて一言で言えないサービスになりがちです、ユーザーに伝わるように極力短文で表現しましょう）
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>14. すぐに作ろうとしてしまう</h3>
+        <p><img src="https://chojugiga.com/c/choju48_0035/s512_choju48_0035_11.png" alt="" loading="lazy" class="pages__image"></p>
+
+        <p class='pages__body'>
+          すぐに作ることも対応方法の一つと前述しました<br>
+          それはアイデアが固まってからの話<br>
+          開発工数が大きくかかる場合、最初からWBSを引いて開発を進めるのはリスクです<br>
+          仮説検証を必ず行い、ミニマルバリュープロダクトを作成して需要を確かめる手順を踏みましょう
+        </p>
+
+        <h4>例外もある</h4>
+        <img src="//images.ctfassets.net/21j88hnww0mj/6gpl7vmvXaIZdGpja4aHbd/5420c0deb98aab76b8076126a769ed1f/____________________________2022-10-30_16.03.35.png" alt="スクリーンショット 2022-10-30 16.03.35" loading="lazy" class="pages__image">
+        <a href="https://page.line.me/877ieiqs" target="_blank" rel="noopener">https://page.line.me/877ieiqs</a>
+        <p>AI画像アプリがAPIを発表し、どのサービスがLINEなどのサービスに組み込むかのイス取り合戦が起きました</p>
+
+        <hr>
+
+        <h3>15. 最初に想定したビジネスモデルに執着する</h3>
+        <p><img src="https://2.bp.blogspot.com/-p-lGxxSkpqk/WlGpTA4sLII/AAAAAAABJmI/4XHELelyOOcw3MMuyNeqBI_Q_kaso3lRQCLcBGAs/s800/gaman_smartphone_man.png" alt="" loading="lazy" class="pages__image"></p>
+
+        <p class="pages__body">
+          最初に「これだ！」と閃いたアイデア<br>
+          周りにも発表して口外したものを変えるのは簡単ではありません<br>
+          関わる人が多くなればなるほどピボットが難しくなります<br>
+          <br>
+          （過去にビジネスの成功体験がある人にありがち）
+        </p>
+
+        <h4>対応</h4>
+        <blockquote>
+          <p class='pages__body'>
+            常に「仮説・検証」という言葉を使う<br>
+            確認作業をしているという認識を自他ともに持ちサンクコストを下げる
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>16. 差別化を意識しすぎる</h3>
+        <p><img src="https://1.bp.blogspot.com/-dlsSkYpsoBo/VdLrnS-H5zI/AAAAAAAAwug/QLdHHxb6TMM/s800/business_senryaku_sakuryaku_woman.png" alt="" loading="lazy" class="pages__image"></p>
+
+        <p class="pages__body">
+          ライバルがまだ囲えていない需要を取りに行きたいと思うばかりに<br>
+          既存との差分を出すことにフォーカスしがちになる<br>
+          <br>
+          （マーケティング経験者にありがち）<br>
+        </p>
+
+        <h4>対応</h4>
+        <blockquote>
+          <p class='pages__body'>
+            <b>カスタマーがすべて</b><br>
+            カスタマーの需要の仮説を立てる<br>
+            カスタマーに結びつかないことを積極的にすべきではない
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>17. Nice-to-haveな機能をプロダクトに追加する</h3>
+        <p><img src="https://3.bp.blogspot.com/-pDy8koVTcus/WOdDoUiAAqI/AAAAAAABDk0/nPmD7NNvb0MTXhhepzZ5525nzXFnPo_vQCLcB/s800/foodfighter_ramen.png" alt="" loading="lazy" class="pages__image"></p>
+
+        <p class="pages__body">
+          インタビューでカスタマーの意見に翻弄されがちになる<br>
+          全ての要望を叶えようとするとターゲットやサービスの方向性がぶれがちになる
+
+        （エンジニア経験者にありがち）
+        </p>
+
+        <h4>対応</h4>
+        <blockquote>
+          <p class='pages__body'>
+            バーニングニーズに当てはめられているかを基準にする<br>
+            チケットとしてもMVPを作成した後に追加チケットではなく改善チケットに取り掛かる
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>18. 最初からプロダクトデザインやユーザビリティーの高さにこだわる</h3>
+        <p><img src="https://4.bp.blogspot.com/-3ShSfgxoPsU/UnyHW6sfF8I/AAAAAAAAaic/qVLrZIciaUE/s800/illustrator.png" alt="" loading="lazy" class="pages__image"></p>
+        <hr>
+        <p class="pages__body">
+          世の中の使われるサイトはUXが良いので安易な考えに陥り<br>
+          <b>UXが良い = 売れるサービス</b> と勘違いしがち<br>
+          <br>
+          （デザイナーよりの方にありがち）
+        </p>
+
+        <h4>対応</h4>
+        <blockquote>
+          <p class='pages__body'>
+            優先順位を仕組みで分ける<br>
+            <b>UXを高める ＜ 素早い検証 </b><br>
+            いくら使いやすものを作ってもユーザーに刺さり、価値を産んでいなければ意味がない<br>
+            サービスの根幹となるチケットとUX改善チケットは別で管理する
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>19. 最初からシステムの自動化・最適化を行う</h3>
+        <p><img src="https://3.bp.blogspot.com/-fAuLzlXyN-0/VfS6aQwIYMI/AAAAAAAAxQI/AJyYokpkHEI/s800/machine_jidou_seisan_line.png" alt="" loading="lazy" class="pages__image"></p>
+        <hr>
+        <p class="pages__body">
+          エンジニアなら難しいシステムでも自動化を急ぎたくなる<br>
+          しかし、サービスに需要があると予測がついてからにする<br>
+          <br>
+          開発の期間が伸びるとユーザーに届くまでの時間が延びるので危険<br>
+          <br>
+          （バックエンドエンジニアにありがち）
+        </p>
+
+        <h4>対応</h4>
+        <blockquote>
+          <p class='pages__body'>
+            MVPはアナログや手作業でOK<br>
+            機能やコンセプトに需要があるかを確かめる<br>
+            むしろ、その自動化にかけた時間が無駄になる可能性を加味してタイムマネジメントを行うべし
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h3>20. 稼働を少なくして個人開発を行う</h3>
+        <p><img src="https://4.bp.blogspot.com/-uFNtY60xlYo/VCOJrfr0JwI/AAAAAAAAm08/nKfcY0YzpfQ/s800/gorogoro_neet.png" alt="" loading="lazy" class="pages__image"></p>
+
+        <p class='pages__body'>
+          売上も減り、心に余裕が持てなくなり、毎日のタスクが自分のモチベーションに左右される<br>
+          時間がありすぎて、非効率になりがち（経験済み）<br>
+          自分で全てやろうとしてしまって詰まりがち
+        </p>
+
+        <h4>対応</h4>
+        <blockquote>
+          <p class='pages__body'>
+            コミュニティの力を使いましょう</p>
+            <a href='https://qiita.com/organizations/admin-guild' target='_blank'>運営者ギルド</a> など個人開発者コミュニティで質問できたりする<br>
+            （インタビューをさせて頂き）
+            チーム開発や個人開発者コミュニティに入る
+          </p>
+        </blockquote>
+
+        <hr>
+
+        <h2>まとめ</h2>
+
+        <p class='pages__body'>
+          サービス開発を成功させるためには考えることが多い<br>
+          しかし、確実に成功に近づける方法はあるので<br>
+          試行錯誤しながら検証を繰り返していくのは楽しい！!!
+        </p>
+
+        <hr>
+
+        <p>
+          以上、20個の落とし穴を紹介致しました！<br>
+          まだまだたくさんあるのであるので需要がありそうであれば追加していこうと思います！<br>
+          それでは、<b>Happy個人開発！</b>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

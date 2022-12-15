@@ -154,7 +154,7 @@ RSpec.describe 'Ideas', type: :request do
   describe 'GET #search' do
     subject { get search_ideas_path, params: params }
 
-    let(:params) { { keyword: idea.name } }
+    let(:params) { { q: {name_or_idea_tags_name_cont: idea.name } } }
 
     it 'リクエストが成功すること' do
       subject

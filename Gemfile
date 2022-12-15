@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.2'
+ruby '3.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
@@ -72,6 +72,13 @@ gem 'rollbar' # 本番のみで運用
 
 # 検索メソッド
 gem 'ransack'
+
+# Rubyバージョンアップで対応
+
+# Psych 4.0以降の破壊的変更に対処
+gem 'psych', '~> 3.1'
+gem 'net-smtp', require: false
+gem "matrix", "~> 0.4.2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

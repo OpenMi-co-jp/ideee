@@ -80,8 +80,8 @@ group :development, :test do
   # Test
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'spring-commands-rspec'
   gem 'simplecov', require: false
+  gem 'spring-commands-rspec'
 
   # Debug
   gem 'pry-byebug'

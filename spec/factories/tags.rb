@@ -14,5 +14,7 @@
 FactoryBot.define do
   factory :tag do
     name { Faker::App.unique.name }
+    created_at { Time.zone.now }
+    updated_at { Time.zone.now }
   end
 end

@@ -175,7 +175,7 @@ class IdeasController < ApplicationController
     return if !@idea.draft || current_user.own?(@idea)
 
     redirect_to root_path
-    flash[:alert] = t('default.message.unauthorized')
+    flash.now[:alert] = t('default.message.unauthorized')
   end
 
   def sidekiq_jobs

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Team, type: :model do
+RSpec.describe Team do
   let!(:team) { FactoryBot.create(:team) }
   let(:user) { FactoryBot.create(:user) }
 
@@ -36,13 +36,13 @@ RSpec.describe Team, type: :model do
     context 'メンバーになっている時' do
       it 'trueが返ってくること' do
         TeamUser.create(user_id: user.id, team_id: team.id)
-        expect(team.joined?(user)).to eq true
+        expect(team.joined?(user)).to be true
       end
     end
 
     context 'メンバーになっていない時' do
       it 'falseが返ってくること' do
-        expect(team.joined?(user)).to eq false
+        expect(team.joined?(user)).to be false
       end
     end
   end

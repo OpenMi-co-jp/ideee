@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Ideas', type: :request do
+RSpec.describe 'Ideas' do
   let!(:idea) { FactoryBot.create(:idea) }
 
   before { sign_in idea.user }
@@ -8,7 +8,7 @@ RSpec.describe 'Ideas', type: :request do
   describe 'GET #index' do
     it 'リクエストが成功すること' do
       get ideas_path
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
   end
 
@@ -16,7 +16,7 @@ RSpec.describe 'Ideas', type: :request do
     context 'アイデアが存在する場合' do
       it 'リクエストが成功すること' do
         get idea_path(idea)
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
       end
 
       it 'アイデアの名前が表示されていること' do
@@ -35,14 +35,14 @@ RSpec.describe 'Ideas', type: :request do
   describe 'GET #new' do
     it 'リクエストが成功すること' do
       get new_idea_path
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
   end
 
   describe 'GET #edit' do
     it 'リクエストが成功すること' do
       get edit_idea_path(idea)
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
 
     it 'アイデアの名前が表示されていること' do
@@ -59,7 +59,7 @@ RSpec.describe 'Ideas', type: :request do
 
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 302
+        expect(response).to have_http_status :found
       end
 
       it 'アイデアが登録されること' do
@@ -99,7 +99,7 @@ RSpec.describe 'Ideas', type: :request do
 
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 302
+        expect(response).to have_http_status :found
       end
 
       it 'アイデア名が更新されること' do
@@ -136,7 +136,7 @@ RSpec.describe 'Ideas', type: :request do
 
     it 'リクエストが成功すること' do
       subject
-      expect(response.status).to eq 302
+      expect(response).to have_http_status :found
     end
 
     it 'アイデアが削除されること' do
@@ -158,7 +158,7 @@ RSpec.describe 'Ideas', type: :request do
 
     it 'リクエストが成功すること' do
       subject
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
 
     it '検索したアイデアが表示されていること' do

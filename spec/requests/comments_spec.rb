@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Comments', type: :request do
+RSpec.describe 'Comments' do
   let!(:user) { FactoryBot.create(:user) }
   let!(:comment) { FactoryBot.create(:comment) }
 
@@ -14,7 +14,7 @@ RSpec.describe 'Comments', type: :request do
 
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 204
+        expect(response).to have_http_status :no_content
       end
 
       it 'コメントが登録されること' do
@@ -40,7 +40,7 @@ RSpec.describe 'Comments', type: :request do
 
     it 'リクエストが成功すること' do
       subject
-      expect(response.status).to eq 204
+      expect(response).to have_http_status :no_content
     end
 
     it 'コメントが削除されること' do

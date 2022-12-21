@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Likes', type: :request do
+RSpec.describe 'Likes' do
   let!(:user) { FactoryBot.create(:user) }
   let(:idea) { FactoryBot.create(:idea) }
 
@@ -12,7 +12,7 @@ RSpec.describe 'Likes', type: :request do
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 204
+        expect(response).to have_http_status :no_content
       end
 
       it 'ハートが送られること' do
@@ -28,7 +28,7 @@ RSpec.describe 'Likes', type: :request do
 
     it 'リクエストが成功すること' do
       delete like_path(like_idea.likable_id, params: { id: like_idea.likable_id, type: 'Idea' })
-      expect(response.status).to eq 204
+      expect(response).to have_http_status :no_content
     end
 
     # Likeの総数は減っているがdeleteメソッドでlikeを削除しているためActive Recordが反映されずテストが成功しない

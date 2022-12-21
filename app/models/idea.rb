@@ -73,7 +73,7 @@ class Idea < ApplicationRecord
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
-  scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id: user_id).uniq }
+  scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id:).uniq }
 
   def published_time
     published_at&.strftime('%Y.%m.%d')
@@ -116,13 +116,13 @@ class Idea < ApplicationRecord
   def same_tag_ideas
     return [] if idea_tags.empty?
 
-    Idea.published.where(idea_tags: { name: idea_tags.pluck(:name) }).where.not(id: id).eager_load(%i[idea_tags taggings])
+    Idea.published.where(idea_tags: { name: idea_tags.pluck(:name) }).where.not(id:).eager_load(%i[idea_tags taggings])
   end
 
   def same_user_other_ideas
     return [] if user.ideas_num == 1
 
-    user.ideas.published.eager_load(:idea_tags).where.not(id: id)
+    user.ideas.published.eager_load(:idea_tags).where.not(id:)
   end
 
   def send_draft_remind

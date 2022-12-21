@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe User, type: :model do
   it 'モデルの作成が有効であること' do
     expect(FactoryBot.build(:user)).to be_valid
@@ -160,7 +159,7 @@ RSpec.describe User, type: :model do
     let(:idea) { FactoryBot.create(:idea) }
     let(:user) { idea.user }
     let(:description) { 'hoge' }
-    let(:comment_params) { { idea_id: idea.id, description: description } }
+    let(:comment_params) { { idea_id: idea.id, description: } }
 
     context 'アイデアに初めてコメントするユーザーの場合' do
       it 'コメントが作成される' do
@@ -170,7 +169,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'アイデアに既にコメントしているユーザー' do
-      before { FactoryBot.create(:comment, user_id: user.id, idea_id: idea.id, description: description) }
+      before { FactoryBot.create(:comment, user_id: user.id, idea_id: idea.id, description:) }
 
       context '投稿したコメントが重複していない場合' do
         let(:comment_params) { { idea_id: idea.id, description: 'fuga' } }
@@ -263,4 +262,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

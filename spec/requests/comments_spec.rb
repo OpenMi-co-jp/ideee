@@ -7,7 +7,7 @@ RSpec.describe 'Comments', type: :request do
   before { sign_in user }
 
   describe 'POST #create' do
-    subject { post comments_path, params: params }
+    subject { post comments_path, params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { description: comment.description, idea_id: comment.idea_id } }

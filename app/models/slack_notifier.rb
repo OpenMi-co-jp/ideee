@@ -24,7 +24,7 @@ class SlackNotifier
     article = "🎉 アイデアが完成したようです！🎉\nURL: #{url}\nプロダクトのあるアイデア数: #{Idea.deployed.length}\n" +
               "承認待ちURL: #{object.product_url}\n承認する時のコマンド：\n```heroku run rake product_apply:send_approve[#{object.id}]```"
     channel = '#ideee_user_apply'
-    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+    Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
     object.update!(product_apply: :applying)
   end
 
@@ -36,19 +36,19 @@ class SlackNotifier
     article = "データ【#{Time.current.yesterday.strftime('%Y / %m/ %d')}】\n新しいユーザーセッション：#{new_users}👏 セッション数: #{sessions} 👀\n" +
               "40日以内のアイデア： #{recent_ideas}💡 今週のコメンテーター数： #{recent_comment_users}💬\n" +
               "今月のアイデア数に対してのコメント数値：  🔥#{(monthly_comments / recent_ideas.to_f).round(2)}🔥 = (#{monthly_comments} / #{recent_ideas})"
-    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+    Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
   end
 
   def send_error_report(title, error)
     channel = '#エラー報告channel'
     article = "タイトル： #{title}\n--------------------\n#{error}"
-    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+    Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
   end
 
   def trial
     channel = '#times_なる'
     article = 'テストデータ'
-    Slack::Notifier.new(WEBHOOK_URL, channel: channel).ping(article)
+    Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
     Slack::IdeaSendJob.set(wait: 5.minutes).perform_now
   end
 end

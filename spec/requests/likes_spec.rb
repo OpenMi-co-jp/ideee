@@ -24,7 +24,7 @@ RSpec.describe 'Likes', type: :request do
   end
 
   describe 'DELETE #destroy' do
-    let!(:like_idea) { FactoryBot.create(:like, :idea, { user: user }) }
+    let!(:like_idea) { FactoryBot.create(:like, :idea, { user: }) }
 
     it 'リクエストが成功すること' do
       delete like_path(like_idea.likable_id, params: { id: like_idea.likable_id, type: 'Idea' })

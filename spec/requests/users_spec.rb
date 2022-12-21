@@ -40,7 +40,7 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'GET #search' do
-    subject { get search_users_path, params: params }
+    subject { get search_users_path, params: }
 
     let!(:idea_man) { FactoryBot.create(:user, :idea_man) }
     let(:params) { {} }

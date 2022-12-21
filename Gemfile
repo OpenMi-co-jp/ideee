@@ -76,9 +76,9 @@ gem 'ransack'
 # Rubyバージョンアップで対応
 
 # Psych 4.0以降の破壊的変更に対処
-gem 'psych', '~> 3.1'
+gem 'matrix', '~> 0.4.2'
 gem 'net-smtp', require: false
-gem "matrix", "~> 0.4.2"
+gem 'psych', '~> 3.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -87,8 +87,8 @@ group :development, :test do
   # Test
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'spring-commands-rspec'
   gem 'simplecov', require: false
+  gem 'spring-commands-rspec'
 
   # Debug
   gem 'pry-byebug'

@@ -102,7 +102,7 @@ class IdeasController < ApplicationController
       title = '他アイデアをのぞいてみる'
       suggest_ideas = Idea.published.eager_load(%i[idea_tags taggings]).sample(3)
     end
-    render partial: 'suggest', locals: { suggest_ideas: suggest_ideas, title: title }
+    render partial: 'suggest', locals: { suggest_ideas:, title: }
   end
 
   def most_comment

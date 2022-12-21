@@ -73,7 +73,7 @@ module ApplicationHelper
         }, crop: 'fit'
       }
     ]
-    cloudinary_url('ideee_ogp_back.webp', sign_url: true, type: 'authenticated', transformation: transformation)
+    cloudinary_url('ideee_ogp_back.webp', sign_url: true, type: 'authenticated', transformation:)
   end
 
   def get_ogp_font_size(title_len)
@@ -100,7 +100,7 @@ module ApplicationHelper
   def text_url_to_link(text)
     require 'uri'
     uri_reg = URI::DEFAULT_PARSER.make_regexp(%w[http https])
-    sanitize(text.gsub(uri_reg) { "<a href='#{Regexp.last_match(0)}' target='_blank'\>#{Regexp.last_match(0)}</a>" })
+    sanitize(text.gsub(uri_reg) { "<a href='#{Regexp.last_match(0)}' target='_blank'>#{Regexp.last_match(0)}</a>" })
   end
 
   def data_page

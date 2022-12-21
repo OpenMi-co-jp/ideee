@@ -52,7 +52,7 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'POST #create' do
-    subject { post ideas_path, params: params }
+    subject { post ideas_path, params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea) } }
@@ -92,7 +92,7 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'PUT #update' do
-    subject { put idea_path(idea), params: params }
+    subject { put idea_path(idea), params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea, name: 'updated idea') } }
@@ -152,9 +152,9 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'GET #search' do
-    subject { get search_ideas_path, params: params }
+    subject { get search_ideas_path, params: }
 
-    let(:params) { { q: {name_or_idea_tags_name_cont: idea.name } } }
+    let(:params) { { q: { name_or_idea_tags_name_cont: idea.name } } }
 
     it 'リクエストが成功すること' do
       subject

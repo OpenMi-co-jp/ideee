@@ -11,6 +11,8 @@ class Room < ApplicationRecord
   has_many :messages, dependent: :destroy
   belongs_to :team, optional: true
 
+  validates :team_id, presence: true
+
   before_create :set_uuid
 
   def set_uuid

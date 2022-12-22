@@ -94,6 +94,7 @@ RSpec/FactoryBot/SyntaxMethods:
     - 'spec/models/tag_spec.rb'
     - 'spec/models/tagging_spec.rb'
     - 'spec/models/team_spec.rb'
+    - 'spec/models/room_spec.rb'
     - 'spec/models/user_spec.rb'
     - 'spec/requests/comments_spec.rb'
     - 'spec/requests/difficulties_spec.rb'

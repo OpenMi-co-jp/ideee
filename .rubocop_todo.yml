@@ -69,6 +69,7 @@ RSpec/ContextWording:
     - 'spec/models/like_spec.rb'
     - 'spec/models/team_spec.rb'
     - 'spec/models/user_spec.rb'
+    - 'spec/models/notification_spec.rb'
     - 'spec/requests/comments_spec.rb'
     - 'spec/requests/difficulties_spec.rb'
     - 'spec/requests/ideas_spec.rb'

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :request do
+RSpec.describe 'Users' do
   let!(:user) { FactoryBot.create(:user) }
 
   describe 'GET #index' do
@@ -8,7 +8,7 @@ RSpec.describe 'Users', type: :request do
 
     it 'リクエストが成功すること' do
       subject
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
 
     it 'ユーザーの名前が表示されていること' do
@@ -23,7 +23,7 @@ RSpec.describe 'Users', type: :request do
     context 'ユーザーが存在する場合' do
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
       end
 
       it 'ユーザーの名前が表示されていること' do
@@ -40,7 +40,7 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'GET #search' do
-    subject { get search_users_path, params: params }
+    subject { get search_users_path, params: }
 
     let!(:idea_man) { FactoryBot.create(:user, :idea_man) }
     let(:params) { {} }
@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :request do
     describe '検索項目を指定しない場合' do
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
       end
     end
 

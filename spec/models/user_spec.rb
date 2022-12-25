@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
-RSpec.describe User, type: :model do
+RSpec.describe User do
   it 'モデルの作成が有効であること' do
     expect(FactoryBot.build(:user)).to be_valid
   end
@@ -58,11 +57,11 @@ RSpec.describe User, type: :model do
       context '紐づいたideaの場合' do
         let(:user) { object.user }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context '紐づかないideaの場合' do
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
 
@@ -72,11 +71,11 @@ RSpec.describe User, type: :model do
       context '紐づいたlikeの場合' do
         let(:user) { object.user }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context '紐づかないlikeの場合' do
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
 
@@ -86,11 +85,11 @@ RSpec.describe User, type: :model do
       context '紐づいたteamの場合' do
         let(:user) { object.user }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context '紐づかないteamの場合' do
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
   end
@@ -104,14 +103,14 @@ RSpec.describe User, type: :model do
         let(:idea) { like.likable }
         let(:user) { like.user }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context '存在しない場合' do
         let(:idea) { FactoryBot.create(:idea) }
         let(:user) { idea.user }
 
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
 
@@ -123,14 +122,14 @@ RSpec.describe User, type: :model do
         let(:comment) { like.likable }
         let(:user) { like.user }
 
-        it { is_expected.to eq true }
+        it { is_expected.to be true }
       end
 
       context '存在しない場合' do
         let(:comment) { FactoryBot.create(:comment) }
         let(:user) { comment.user }
 
-        it { is_expected.to eq false }
+        it { is_expected.to be false }
       end
     end
   end
@@ -143,14 +142,14 @@ RSpec.describe User, type: :model do
       let(:user) { difficulty.user }
       let(:idea) { difficulty.idea }
 
-      it { is_expected.to eq true }
+      it { is_expected.to be true }
     end
 
     context 'アイデアの難易度を投稿していない場合' do
       let(:user) { FactoryBot.create(:user) }
       let(:idea) { FactoryBot.create(:idea) }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
   end
 
@@ -160,7 +159,7 @@ RSpec.describe User, type: :model do
     let(:idea) { FactoryBot.create(:idea) }
     let(:user) { idea.user }
     let(:description) { 'hoge' }
-    let(:comment_params) { { idea_id: idea.id, description: description } }
+    let(:comment_params) { { idea_id: idea.id, description: } }
 
     context 'アイデアに初めてコメントするユーザーの場合' do
       it 'コメントが作成される' do
@@ -170,7 +169,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'アイデアに既にコメントしているユーザー' do
-      before { FactoryBot.create(:comment, user_id: user.id, idea_id: idea.id, description: description) }
+      before { FactoryBot.create(:comment, user_id: user.id, idea_id: idea.id, description:) }
 
       context '投稿したコメントが重複していない場合' do
         let(:comment_params) { { idea_id: idea.id, description: 'fuga' } }
@@ -182,7 +181,7 @@ RSpec.describe User, type: :model do
       end
 
       context '同一内容のコメントが存在する場合' do
-        it { is_expected.to eq nil }
+        it { is_expected.to be_nil }
       end
     end
   end
@@ -263,4 +262,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

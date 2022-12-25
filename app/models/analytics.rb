@@ -39,7 +39,7 @@ class Analytics
     @client = @analytics::AnalyticsReportingService.new
     @client.authorization = Google::Auth::ServiceAccountCredentials.make_creds(
       json_key_io: File.open('analytics-auth.json'),
-      scope: scope
+      scope:
     )
   end
 end

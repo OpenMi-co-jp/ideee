@@ -15,6 +15,8 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
+  def edit; end
+
   def create
     @team = Team.new(team_params)
     if current_user == @team.owner
@@ -25,8 +27,6 @@ class TeamsController < ApplicationController
       redirect_to @team, notice: t('.not_owner')
     end
   end
-
-  def edit; end
 
   def update
     @team.update(team_params)

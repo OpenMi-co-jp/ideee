@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Idea, type: :model do
+RSpec.describe Idea do
   let(:idea) { FactoryBot.build(:idea) }
 
   it 'モデルの作成が有効である' do

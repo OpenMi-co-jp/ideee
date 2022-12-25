@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   get 'avoid_pitfall' => 'high_voltage/pages#show', id: 'avoid_pitfall'
   get 'new_year_event' => 'high_voltage/pages#show', id: 'new_year_event'
   get 'events/valentine' => 'high_voltage/pages#show', id: 'events/valentine'
+  get 'events/new_year_2023' => 'high_voltage/pages#show', id: 'events/new_year_2023'
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount Sidekiq::Web => '/sidekiq'
 end

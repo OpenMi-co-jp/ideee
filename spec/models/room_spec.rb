@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Room, type: :model do
+RSpec.describe Room do
   let(:room) { FactoryBot.create(:room) }
 
   describe 'Roomが有効になること' do

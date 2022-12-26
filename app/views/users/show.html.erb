@@ -49,7 +49,7 @@
       <div class="col s12 <%= own_user_checked(@user) ? 'l8' : 'l12' %>">
         <% if @published_ideas.present? %>
           <%= render 'common/column_board', ideas: @published_ideas, user_icon_view: 'off' %>
-          <%= paginate @published_ideas, param_name: :published_page %>
+          <%= paginate @published_ideas, param_name: "published_page" %>
         <% else %>
           <h5 class='no_idea_posted'>まだアイデアが投稿されていません</h5>
         <% end %>
@@ -70,7 +70,7 @@
   <div id="tab2" class="col s12">
     <% if @user.likes.present? %>
       <%= render 'common/column_board', ideas: @like_ideas %>
-      <%= paginate @like_ideas, param_name: :like_page %>
+      <%= paginate @like_ideas, param_name: "like_page" %>
     <% else %>
       <h5>まだアイデアにハートを送っていません</h5>
     <% end %>
@@ -78,7 +78,7 @@
   <div id="tab3" class="col s12">
     <% if @user.comments.present? %>
       <%= render 'common/column_board', ideas: @commented_ideas %>
-      <%= paginate @commented_ideas, param_name: :comment_page %>
+      <%= paginate @commented_ideas, param_name: "comment_page" %>
     <% else %>
       <h5>まだアイデアにコメントをしていません</h5>
     <% end %>

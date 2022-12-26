@@ -128,7 +128,7 @@ class Idea < ApplicationRecord
   def send_draft_remind
     return unless Rails.env.production? || draft
 
-    RemindDraftJob.set(wait: 1.week).perform_later(id)
+    RemindDraftJob.perform_in(1.week, id)
   end
 
   def voted_percentage(level)

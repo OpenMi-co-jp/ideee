@@ -20,9 +20,9 @@ module CreateNotification
   def create_notification(idea:, visited_id:, notificatable:)
     active_notifications.find_or_create_by!(
       visitor: self,
-      visited_id: visited_id,
-      idea: idea,
-      notificatable: notificatable
+      visited_id:,
+      idea:,
+      notificatable:
     )
   end
 

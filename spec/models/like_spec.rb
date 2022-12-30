@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Like, type: :model do
+RSpec.describe Like do
   let(:like_idea) { FactoryBot.create(:like, :idea) }
   let(:like_comment) { FactoryBot.create(:like, :comment) }
 

@@ -47,7 +47,7 @@ module ReservedEmail
   def ranking_idea(commented_ideas)
     str = ''
     commented_ideas.each.with_index(1) do |idea, index|
-      str += idea_ranking_item(rank: rank(index), idea: idea)
+      str += idea_ranking_item(rank: rank(index), idea:)
     end
     str
   end
@@ -55,7 +55,7 @@ module ReservedEmail
   def new_idea_colum(new_ideas)
     str = ''
     new_ideas.each.with_index(1) do |idea, i|
-      str += idea_ranking_item(rank: "#{i}💡", idea: idea)
+      str += idea_ranking_item(rank: "#{i}💡", idea:)
     end
     str
   end

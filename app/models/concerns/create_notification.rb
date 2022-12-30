@@ -13,7 +13,7 @@ module CreateNotification
   def create_notification_comment(idea, comment)
     user_ids = select_notify_commenters(idea)
     user_ids.each do |user_id|
-      create_notification(idea: idea, visited_id: user_id, notificatable: comment)
+      create_notification(idea:, visited_id: user_id, notificatable: comment)
     end
   end
 

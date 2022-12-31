@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Difficulty, type: :model do
+RSpec.describe Difficulty do
   let(:difficulty_easy) { FactoryBot.create(:difficulty, :easy) }
   let(:difficulty_middle) { FactoryBot.create(:difficulty, :middle) }
   let(:difficulty_hard) { FactoryBot.create(:difficulty, :hard) }

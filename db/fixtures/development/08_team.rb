@@ -5,7 +5,7 @@
     :id,
     {
       id: num,
-      idea: idea,
+      idea:,
       offer: Faker::JapaneseMedia::StudioGhibli.character,
       requirement: Faker::JapaneseMedia::StudioGhibli.quote,
       status: (0..2).to_a.sample,

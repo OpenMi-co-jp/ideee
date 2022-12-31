@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Tag, type: :model do
+RSpec.describe Tag do
   let!(:tag) { FactoryBot.create(:tag) }
 
   describe 'タグを設定' do
@@ -37,8 +37,8 @@ RSpec.describe Tag, type: :model do
       let(:idea2) { FactoryBot.create(:idea) }
 
       before do
-        tag.taggings.create(idea: idea)
-        tag2.taggings.create(idea: idea)
+        tag.taggings.create(idea:)
+        tag2.taggings.create(idea:)
         tag2.taggings.create(idea: idea2)
       end
 

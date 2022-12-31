@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Difficulties', type: :request do
+RSpec.describe 'Difficulties' do
   let!(:user) { FactoryBot.create(:user) }
   let(:idea) { FactoryBot.create(:idea) }
 
@@ -12,7 +12,7 @@ RSpec.describe 'Difficulties', type: :request do
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 302
+        expect(response).to have_http_status :found
       end
 
       it 'ハートが送られること' do

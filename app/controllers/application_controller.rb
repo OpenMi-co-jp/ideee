@@ -18,11 +18,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render404
-    render file: Rails.root.join('public', '404.html'), status: :not_found, layout: false, content_type: 'text/html'
+    render file: Rails.public_path.join('404.html'), status: :not_found, layout: false, content_type: 'text/html'
   end
 
   def render500
-    render file: Rails.root.join('public', '500.html'), status: :internal_server_error, layout: false,
+    render file: Rails.public_path.join('500.html'), status: :internal_server_error, layout: false,
            content_type: 'text/html'
   end
 

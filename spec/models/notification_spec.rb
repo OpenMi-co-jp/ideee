@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Notification, type: :model do
+RSpec.describe Notification do
   it 'モデルの作成が有効であること' do
     expect(FactoryBot.build(:notification)).to be_valid
   end

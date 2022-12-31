@@ -70,6 +70,7 @@ RSpec/ContextWording:
     - 'spec/models/like_spec.rb'
     - 'spec/models/team_spec.rb'
     - 'spec/models/user_spec.rb'
+    - 'spec/models/notification_spec.rb'
     - 'spec/requests/comments_spec.rb'
     - 'spec/requests/difficulties_spec.rb'
     - 'spec/requests/ideas_spec.rb'
@@ -347,3 +348,19 @@ Style/ZeroLengthPredicate:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 186
+
+RSpec/FactoryBot/SyntaxMethods:
+  Enabled: false
+
+Style/StringLiterals:
+  Exclude:
+    - 'spec/rails_helper.rb'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Layout/CommentIndentation:
+  Exclude:
+    - 'spec/spec_helper.rb'
+

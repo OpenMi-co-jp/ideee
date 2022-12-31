@@ -30,7 +30,7 @@ module CreateNotification
 
   def select_notify_commenters(idea)
     # アイデア作成者も含めたuser_id取得
-    user_ids = comments.pluck(:user_id).push(idea.user_id).uniq
+    user_ids = idea.comments.pluck(:user_id).push(idea.user_id).uniq
     user_ids.delete(id)
     user_ids
   end

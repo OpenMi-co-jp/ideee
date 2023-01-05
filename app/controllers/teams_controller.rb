@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
 
   def withdraw
     join_user = @team.team_users.find_by(user_id: current_user.id)
-    join_user.destroy
+    join_user.destroy!
     @idea.count_team_members
     redirect_to @idea, notice: t('.success')
   end

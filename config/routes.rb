@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       post :stop
       post :activate
       post :finish
+      delete :withdraw
     end
   end
   resources :rooms, only: %i[create show]

@@ -11,3 +11,7 @@ AllCops:
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
+
+RSpec/ContextWording:
+  AllowedPatterns:
+  - とき$

@@ -141,6 +141,7 @@ ja:
     Like: にハートを送りました。 #移行後に削除予定
     Difficulty: に難易度の投票をしました。
     product_apply: のプロダクトURLを承認しました。
-    TeamUser: のチーム開発に参加しました。
+    join_team_user: のチーム開発に参加しました。
+    withdraw_team_user: のチーム開発から脱退しました。
     LikeIdea: にハートを送りました。
     LikeComment: のコメントにハートを送りました。

@@ -55,6 +55,8 @@ class User < ApplicationRecord
   # settings relation
   has_one :notification_config, dependent: :destroy
 
+  after_create :create_notification_config
+
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
@@ -166,5 +168,11 @@ class User < ApplicationRecord
   def fix_ids
     self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
     self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
+  end
+
+  private
+
+  def create_notification_config
+    NotificationConfig.create!(user: self)
   end
 end

@@ -61,6 +61,27 @@ class SendEmail
     @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
+  def withdraw_team(user, idea)
+    body = "
+            <p>チーム開発の脱退者がいます。</p>
+            <hr>
+            <b>脱退者情報</b>
+            <div style='background-color: #F5F5F5; padding: 10px 5px;'>
+              名前: #{user.name}<br>
+              URL: #{analytics_url('users/' + user.id.to_s, 'join_team',
+                                   'https://www.ideee.tech/users/' + user.id.to_s)}
+            </div>
+            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'join_team',
+                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+          "
+    subject = "【ideee】【#{idea.name}】の開発から脱退者がいます"
+    content = Content.new(type: 'text/html', value: html_frame(body, 'join_team'))
+
+    to = Email.new(email: idea.user.email)
+    mail = Mail.new(@from, subject, to, content)
+    @sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
   def confirm_apply(idea)
     body = "
             <p>プロダクトのURL承認申請をお受け取り致しました。</p>

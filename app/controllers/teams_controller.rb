@@ -41,9 +41,10 @@ class TeamsController < ApplicationController
   end
 
   def withdraw
-    join_user = @team.team_users.find_by(user_id: current_user.id)
-    join_user.destroy!
+    team_user = @team.team_users.find_by!(user_id: current_user.id)
+    team_user.destroy!
     @idea.count_team_members
+    Notifications::WithdrawTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end
 

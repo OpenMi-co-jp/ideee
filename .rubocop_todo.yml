@@ -365,3 +365,8 @@ Layout/CommentIndentation:
   Exclude:
     - 'spec/spec_helper.rb'
 
+Metrics/ClassLength:
+  Exclude:
+    - 'app/models/send_email.rb'
+    - 'app/controllers/ideas_controller.rb'
+    - 'app/models/user.rb'

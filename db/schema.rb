@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_100229) do
+ActiveRecord::Schema.define(version: 2023_01_11_063827) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.boolean "team_join_web", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "team_leave_email", default: true, null: false
     t.index ["user_id"], name: "index_notification_configs_on_user_id"
   end
 

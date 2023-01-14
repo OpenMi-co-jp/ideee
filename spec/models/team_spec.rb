@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Team do
-  let!(:team) { create(:team) }
-  let(:user) { create(:user) }
+  let!(:team) { FactoryBot.create(:team) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe 'teamが有効になること' do
     it '有効であること' do

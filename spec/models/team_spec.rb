@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Team do
-  let!(:team) { FactoryBot.create(:team) }
-  let(:user) { FactoryBot.create(:user) }
+  let!(:team) { create(:team) }
+  let(:user) { create(:user) }
 
   describe 'teamが有効になること' do
     it '有効であること' do
@@ -44,6 +44,19 @@ RSpec.describe Team do
       it 'falseが返ってくること' do
         expect(team.joined?(user)).to be false
       end
+    end
+  end
+
+  describe 'membersメソッドの有効性' do
+    subject { team.members }
+
+    context 'メンバーが存在する' do
+      before { TeamUser.create(user_id: user.id, team_id: team.id) }
+      it { is_expected.to include(user) }
+    end
+
+    context 'メンバーが存在しない' do
+      it { is_expected.not_to include(user) }
     end
   end
 

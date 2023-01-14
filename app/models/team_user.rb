@@ -3,6 +3,7 @@
 # Table name: team_users
 #
 #  id         :bigint           not null, primary key
+#  leave      :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  team_id    :bigint
@@ -18,4 +19,6 @@ class TeamUser < ApplicationRecord
   belongs_to :user
   belongs_to :team
   has_many :notifications, dependent: :destroy, as: :notificatable
+
+  scope :yet_join, -> { where(leave: false) }
 end

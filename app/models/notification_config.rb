@@ -12,6 +12,7 @@
 #  heart_web            :boolean          default(TRUE), not null
 #  team_join_email      :boolean          default(TRUE), not null
 #  team_join_web        :boolean          default(TRUE), not null
+#  team_leave_email     :boolean          default(TRUE), not null
 #  team_message_email   :boolean          default(TRUE), not null
 #  vote_web             :boolean          default(TRUE), not null
 #  weekly_email         :boolean          default(TRUE), not null

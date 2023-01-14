@@ -71,6 +71,7 @@ class User < ApplicationRecord
   delegate :comment_email, to: :notification_config
   delegate :draft_remind_email, to: :notification_config
   delegate :team_join_email, to: :notification_config
+  delegate :team_leave_email, to: :notification_config
   delegate :team_message_email, to: :notification_config
   scope :event_emailable, -> { joins(:notification_config).where(notification_configs: { event_email: true }) }
   scope :heart_emailable, -> { joins(:notification_config).where(notification_configs: { heart_email: true }) }

@@ -59,7 +59,8 @@ ja:
         draft_remind_email: 下書きへのリマインド
         event_email: イベントのお知らせ
         heart_email: ハートのお知らせ
-        team_join_email: チーム開発参加・脱退のお知らせ
+        team_join_email: チーム開発参加のお知らせ
+        team_leave_email: チーム開発脱退のお知らせ
         team_message_email: チーム開発のメッセージ
         weekly_email: 週間ランキング
     sorts:

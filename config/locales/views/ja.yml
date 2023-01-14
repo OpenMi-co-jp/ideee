@@ -17,7 +17,7 @@ ja:
       start: チーム開発を募集
       check: チーム開発をチェック
       join: 参加
-      withdraw: チーム開発から脱退する
+      leave: チーム開発から脱退する
       cancel: 参加を辞退
       edit: 募集を編集
       stop: 募集を停止
@@ -89,7 +89,7 @@ ja:
       success: チーム開発を更新しました
     join:
       success: チーム開発に参加しました！オーナーにメッセージしましょう！
-    withdraw:
+    leave:
       success: チーム開発から脱退しました
     stop:
       success: チーム開発の募集を停止しました
@@ -142,6 +142,6 @@ ja:
     Difficulty: に難易度の投票をしました。
     product_apply: のプロダクトURLを承認しました。
     join_team_user: のチーム開発に参加しました。
-    withdraw_team_user: のチーム開発から脱退しました。
+    leave_team_user: のチーム開発から脱退しました。
     LikeIdea: にハートを送りました。
     LikeComment: のコメントにハートを送りました。

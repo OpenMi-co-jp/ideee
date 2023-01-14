@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   prepend_before_action :set_team, except: %i[new create]
   before_action :authenticate_user!
   before_action :defined_check, except: %i[show]
-  before_action :set_idea, only: %i[new edit stop join withdraw activate finish]
+  before_action :set_idea, only: %i[new edit stop join leave activate finish]
   before_action :check_owner, only: %i[edit update stop activate finish]
 
   def show
@@ -34,17 +34,19 @@ class TeamsController < ApplicationController
   end
 
   def join
-    @team.team_users.create(user: current_user)
+    team_user = @team.team_users.find_by(user_id: current_user.id)
+    # 以前に一度チーム開発に参加していた場合はleave(脱退しているかどうか)のフラグを変更する
+    team_user.present? ? team_user.update(leave: false) : @team.team_users.create(user: current_user)
     @idea.count_team_members
-    Notifications::JoinTeamJob.perform_later(current_user, @idea)
+    Notifications::JoinTeamJob.perform_now(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end
 
-  def withdraw
+  def leave
     team_user = @team.team_users.find_by!(user_id: current_user.id)
-    team_user.destroy!
+    team_user.update(leave: true)
     @idea.count_team_members
-    Notifications::WithdrawTeamJob.perform_later(current_user, @idea)
+    Notifications::LeaveTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end
 

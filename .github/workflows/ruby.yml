@@ -21,6 +21,7 @@ jobs:
       RAILS_ENV: test
       DATABASE_USER: root
       DATABASE_HOST: 127.0.0.1
+      MYSQL_HOST: 127.0.0.1
     services:
       mysql:
         image: mysql:5.7

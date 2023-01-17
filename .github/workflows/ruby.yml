@@ -33,6 +33,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: ideee_test
           MYSQL_USER: root
+          MYSQL_PASSWORD: password
         ports:
           - 4306:3306
 

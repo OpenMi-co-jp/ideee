@@ -21,7 +21,6 @@ jobs:
       RAILS_ENV: test
       DATABASE_USER: root
       DATABASE_HOST: 127.0.0.1
-      MYSQL_HOST: 127.0.0.1
     services:
       mysql:
         image: mysql:5.7
@@ -33,7 +32,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: "password"
           MYSQL_DATABASE: ideee_test
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
         ports:
           - 4306:3306
 

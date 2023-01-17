@@ -32,6 +32,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: ideee_test
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
         ports:
           - 4306:3306
 

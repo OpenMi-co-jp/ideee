@@ -43,6 +43,7 @@ jobs:
     - name: Setup mysql
       run: |
         sudo /etc/init.d/mysql start
+        sudo mysql -h 127.0.0.1 --port 4306 -u root -ppassword
       env:
         RAILS_ENV: test
 

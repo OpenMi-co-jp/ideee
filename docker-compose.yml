@@ -22,6 +22,7 @@ services:
       - web-variables.env
     environment:
       REDIS_URL: redis://redis:6379
+      MYSQL_HOST: localhost
     entrypoint:
       - dockerize
       - -timeout

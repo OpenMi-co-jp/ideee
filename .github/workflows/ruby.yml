@@ -22,7 +22,7 @@ jobs:
       DATABASE_USER: root
       DATABASE_HOST: 127.0.0.1
     services:
-      db:
+      mysql:
         image: mysql:5.7
         options: >-
           --health-cmd "mysqladmin ping"

@@ -18,7 +18,7 @@ module CreateNotification
   end
 
   def create_notification_team(idea:, visited_id:, notificatable_type:, notificatable_id:)
-    active_notifications.find_or_create_by!(
+    active_notifications.create(
       visitor: self,
       visited_id:,
       idea:,

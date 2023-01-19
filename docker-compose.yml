@@ -21,10 +21,7 @@ services:
     env_file:
       - web-variables.env
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
       REDIS_URL: redis://redis:6379
-      MYSQL_HOST: localhost
     entrypoint:
       - dockerize
       - -timeout

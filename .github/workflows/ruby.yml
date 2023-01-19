@@ -23,7 +23,7 @@ jobs:
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
       DATABASE_USER: root
-      MYSQL_HOST: localhost
+      MYSQL_HOST: db
     services:
       mysql:
         image: mysql:5.7

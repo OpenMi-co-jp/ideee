@@ -14,6 +14,7 @@ default: &default
 development:
   <<: *default
   database: ideee_development
+  host: <%= ENV["MYSQL_HOST"] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,6 +22,7 @@ development:
 test:
   <<: *default
   database: ideee_test
+  host: <%= ENV["MYSQL_HOST"] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

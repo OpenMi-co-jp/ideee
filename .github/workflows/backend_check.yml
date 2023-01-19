@@ -33,7 +33,6 @@ jobs:
           --health-retries 5
         env:
           MYSQL_DATABASE: ideee_test
-          MYSQL_PASSWORD: 'password'
           MYSQL_ROOT_PASSWORD: 'password'
 
     steps:

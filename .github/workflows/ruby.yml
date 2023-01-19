@@ -20,6 +20,7 @@ jobs:
     env:
       RAILS_ENV: test
       MYSQL_USER: root
+      MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
       DATABASE_USER: root
       MYSQL_HOST: localhost
@@ -32,6 +33,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         env:
+          MYSQL_ROOT_PASSWORD: "password"
           MYSQL_DATABASE: ideee_test
         ports:
           - 4306:3306

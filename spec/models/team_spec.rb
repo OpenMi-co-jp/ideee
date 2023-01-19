@@ -52,6 +52,7 @@ RSpec.describe Team do
 
     context 'メンバーが存在する' do
       before { TeamUser.create(user_id: user.id, team_id: team.id) }
+
       it { is_expected.to include(user) }
     end
 

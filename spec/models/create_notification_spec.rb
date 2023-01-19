@@ -124,9 +124,12 @@ RSpec.describe CreateNotification, type: :helper do
       let(:current_user) { FactoryBot.create(:user) }
       let(:team_user_id) { FactoryBot.create(:team_user).id }
 
-      context 'チーム開発参加の時' do
+      context 'チーム開発参加のとき' do
+        subject(:join_team_user_notification) do
+          current_user.create_notification_team(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type:)
+        end
+
         let(:notificatable_type) { 'join_team_user' }
-        subject(:join_team_user_notification) { current_user.create_notification_team(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type: notificatable_type) }
 
         it '通知を作成する' do
           expect do
@@ -140,9 +143,12 @@ RSpec.describe CreateNotification, type: :helper do
         end
       end
 
-      context 'チーム開発脱退の時' do
+      context 'チーム開発脱退のとき' do
+        subject(:leave_team_user_notification) do
+          current_user.create_notification_team(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type:)
+        end
+
         let(:notificatable_type) { 'leave_team_user' }
-        subject(:leave_team_user_notification) { current_user.create_notification_team(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type: notificatable_type) }
 
         it '通知を作成する' do
           expect do

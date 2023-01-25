@@ -55,13 +55,13 @@ class User < ApplicationRecord
   # settings relation
   has_one :notification_config, dependent: :destroy
 
+  before_save :fix_ids
   after_create :create_notification_config
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
-  before_save :fix_ids
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }

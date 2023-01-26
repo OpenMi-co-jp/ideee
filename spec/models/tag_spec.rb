@@ -33,7 +33,7 @@ RSpec.describe Tag do
       subject(:popular_tags) { described_class.popular_tags }
 
       let(:tag2) { FactoryBot.create(:tag) }
-      let(:idea) { FactoryBot.create(:idea) }
+      let(:idea)  { FactoryBot.create(:idea) }
       let(:idea2) { FactoryBot.create(:idea) }
 
       before do

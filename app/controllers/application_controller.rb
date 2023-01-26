@@ -30,12 +30,12 @@ class ApplicationController < ActionController::Base
 
   # ユーザー情報が登録されているか確認し、アラートで登録必須項目を表示
   def defined_check
-    unless defined_user?
-      redirect_to edit_user_registration_path(params[:id])
-      flash[:alert] = 'ユーザーの名前を登録してください。' if current_user.name.blank?
-      flash[:alert] = 'ユーザーのメールアドレスを確認が完了していません。' if current_user.confirmed_at.blank?
-      flash[:alert] = 'ユーザーのタイプを登録してください。' if current_user.definition.blank?
-    end
+    return if defined_user?
+
+    redirect_to edit_user_registration_path(params[:id])
+    flash[:alert] = 'ユーザーの名前を登録してください。' if current_user.name.blank?
+    flash[:alert] = 'ユーザーのメールアドレスを確認が完了していません。' if current_user.confirmed_at.blank?
+    flash[:alert] = 'ユーザーのタイプを登録してください。' if current_user.definition.blank?
   end
 
   def store_user_location!

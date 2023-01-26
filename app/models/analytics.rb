@@ -24,9 +24,11 @@ class Analytics
     metric = @analytics::Metric.new(expression: "ga:#{demention}", alias: demention) # dementionは確認したい項目
     dimension = @analytics::Dimension.new(name: 'ga:pagePath')
     request = @analytics::GetReportsRequest.new(
-      report_requests: [@analytics::ReportRequest.new(
-        view_id: @view_id, metrics: [metric], dimensions: [dimension], date_ranges: [date_range]
-      )]
+      report_requests: [
+        @analytics::ReportRequest.new(
+          view_id: @view_id, metrics: [metric], dimensions: [dimension], date_ranges: [date_range]
+        )
+      ]
     )
     response = @client.batch_get_reports(request)
     response.reports.first.data

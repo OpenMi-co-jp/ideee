@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments' do
-  let!(:user) { FactoryBot.create(:user) }
+  let!(:user)    { FactoryBot.create(:user)    }
   let!(:comment) { FactoryBot.create(:comment) }
 
   before { sign_in user }

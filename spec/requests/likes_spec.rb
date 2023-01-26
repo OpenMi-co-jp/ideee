@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Likes' do
   let!(:user) { FactoryBot.create(:user) }
-  let(:idea) { FactoryBot.create(:idea) }
+  let(:idea)  { FactoryBot.create(:idea) }
 
   before { sign_in user }
 

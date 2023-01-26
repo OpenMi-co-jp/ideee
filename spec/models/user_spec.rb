@@ -101,7 +101,7 @@ RSpec.describe User do
       context '存在する場合' do
         let(:like) { FactoryBot.create(:like, :idea) }
         let(:idea) { like.likable }
-        let(:user) { like.user }
+        let(:user) { like.user    }
 
         it { is_expected.to be true }
       end
@@ -120,7 +120,7 @@ RSpec.describe User do
       context '存在する場合' do
         let(:like) { FactoryBot.create(:like, :comment) }
         let(:comment) { like.likable }
-        let(:user) { like.user }
+        let(:user)    { like.user    }
 
         it { is_expected.to be true }
       end
@@ -157,8 +157,8 @@ RSpec.describe User do
     subject { user.create_comment(comment_params) }
 
     let(:idea) { FactoryBot.create(:idea) }
-    let(:user) { idea.user }
-    let(:description) { 'hoge' }
+    let(:user)           { idea.user                          }
+    let(:description)    { 'hoge'                             }
     let(:comment_params) { { idea_id: idea.id, description: } }
 
     context 'アイデアに初めてコメントするユーザーの場合' do
@@ -231,8 +231,8 @@ RSpec.describe User do
 
     context 'twitter_id' do
       context 'urlが含まれたtwitter_idで更新しようとした場合' do
-        let(:twitter_id) { 'hoge' }
-        let(:user) { FactoryBot.create(:user, twitter_id: "https://twitter.com/#{twitter_id}") }
+        let(:twitter_id) { 'hoge'                                                                    }
+        let(:user)       { FactoryBot.create(:user, twitter_id: "https://twitter.com/#{twitter_id}") }
 
         it 'id部分のみが抽出される' do
           subject

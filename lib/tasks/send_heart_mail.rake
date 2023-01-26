@@ -10,7 +10,7 @@ namespace :send_heart_mail do
     return if users_ids.nil?
 
     users_ids.each do |user_id|
-      notification_ids = notifications.where(visited_id: user_id).pluck(:id)
+      notification_ids = notifications.where(visited_id: user_id).ids
       Notifications::SendHeartMail.perform_later(user_id, notification_ids)
     end
   end

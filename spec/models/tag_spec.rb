@@ -39,9 +39,9 @@ RSpec.describe Tag do
       let(:idea2) { FactoryBot.create(:idea) }
 
       before do
-        tag.taggings.create(idea:)
-        tag2.taggings.create(idea:)
-        tag2.taggings.create(idea: idea2)
+        tag.taggings.create!(idea:)
+        tag2.taggings.create!(idea:)
+        tag2.taggings.create!(idea: idea2)
       end
 
       it 'タグ付けが多い準に並ぶ' do

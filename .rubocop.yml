@@ -194,3 +194,8 @@ Lint/ConstantResolution:
 # if文にelse文を必要としない
 Style/MissingElse:
   Enabled: false
+
+# FactoryBotの省略をさせない
+RSpec/FactoryBot/SyntaxMethods:
+  Enabled: false
+

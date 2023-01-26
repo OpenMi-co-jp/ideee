@@ -30,9 +30,7 @@ RSpec.describe 'Comments' do
       let(:params) { { description: '', idea_id: comment.idea_id } }
 
       it 'コメントが登録されないこと' do
-        expect do
-          subject
-        end.not_to change(Comment, :count)
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid, "バリデーションに失敗しました: コメントを入力してください")
       end
     end
   end

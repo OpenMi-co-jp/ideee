@@ -31,12 +31,12 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team.update(team_params)
+    @team.update!(team_params)
     redirect_to @team, notice: t('.success')
   end
 
   def join
-    @team.team_users.create(user: current_user)
+    @team.team_users.create!(user: current_user)
     @idea.count_team_members
     Notifications::JoinTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')

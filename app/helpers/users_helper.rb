@@ -38,9 +38,10 @@ module UsersHelper
     when 'idea_engineer'
       icon = '💡 🛠　'
     end
-    if ver == 'normal'
+    case ver
+    when 'normal'
       "#{icon} #{I18n.t("enums.user.definition.#{user.definition}")}" if user.definition
-    elsif ver == 'short'
+    when 'short'
       icon if user.definition
     end
   end

@@ -13,7 +13,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.create(team_id: room_params[:team_id])
+    @room = Room.create!(team_id: room_params[:team_id])
     redirect_to @room, notice: t('.success')
   end
 

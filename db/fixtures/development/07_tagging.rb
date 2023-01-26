@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 20.times do |m|
   outer_num = 3 * m
   idea_num = 1 + m

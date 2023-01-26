@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AnalyticsJob
   class UpdateViewsJob < ApplicationJob
     queue_as :default

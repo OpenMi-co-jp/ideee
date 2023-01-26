@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :auto_update_qiita_post do
   def make_body
     body = "## 今月の個人開発に使えるアイデアを人気順に抽出！\n" + \

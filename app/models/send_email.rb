@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendEmail
   require 'sendgrid-ruby'
   include SendGrid

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :send_heart_mail do
   desc 'ハートが送られたアイデアに対してメールを送る'
   task heart_remind: :environment do

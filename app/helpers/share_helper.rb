@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShareHelper
   def sns_share_icon(media)
     link_to link_url(media), target: '_blank', rel: 'noopener' do

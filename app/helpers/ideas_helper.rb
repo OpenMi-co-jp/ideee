@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module IdeasHelper
   def image_set(idea)
     # アイデアの画像がなければ自動生成で設定

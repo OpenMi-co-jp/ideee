@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CountUserIdeasJob < ApplicationJob
   queue_as :default
 

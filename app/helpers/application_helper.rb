@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   # OGPで使われるタイトルの設定
   def full_title(page_title = '')

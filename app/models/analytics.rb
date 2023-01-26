@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'google/apis/analyticsreporting_v4'
 
 class Analytics

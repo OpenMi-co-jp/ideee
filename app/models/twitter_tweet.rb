@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TwitterTweet
   def initialize
     @client = Twitter::REST::Client.new do |config|

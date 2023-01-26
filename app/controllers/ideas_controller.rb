@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[show edit update destroy publish suggest]
   before_action :authenticate_user!, except: %i[index show search tags most_comment most_liked team_active deployed suggest]

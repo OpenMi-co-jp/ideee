@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   prepend_before_action :set_team, except: %i[new create]
   before_action :authenticate_user!

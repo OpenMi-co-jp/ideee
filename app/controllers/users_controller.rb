@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: %i[index show search commenter idea_man]
   prepend_before_action :page_user, only: %i[show]

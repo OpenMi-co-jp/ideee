@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :product_apply do
   desc 'product_urlの承認許可コマンド'
   task :send_approve, ['id'] => :environment do |_task, args|

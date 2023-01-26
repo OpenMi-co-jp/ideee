@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :transfer_cooperation_to_teams do
   desc '既存のcooperationをteamに移行する'
   task migrate: :environment do

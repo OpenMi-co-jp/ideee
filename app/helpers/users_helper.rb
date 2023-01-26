@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   # ユーザーのアイコンサイズをパラメーターで指定できるように設定
   # アイコンが無ければデフォルトの画像を表示

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStanceToIdea < ActiveRecord::Migration[6.1]
   def change
     add_column :ideas, :stance, :integer, default: 0

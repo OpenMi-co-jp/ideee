@@ -1,1 +1,17 @@
 inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+RSpec/ContextWording:
+  AllowedPatterns:
+  - とき$

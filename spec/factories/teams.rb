@@ -27,6 +27,8 @@ FactoryBot.define do
     offer { 'test_offer' }
     requirement { 'test_requirement' }
     status { 'active' }
+    association :owner, factory: :user
     idea
+    owner_id { idea.user.id }
   end
 end

@@ -1,6 +1,6 @@
 module ShareHelper
   def sns_share_icon(media)
-    link_to link_url(media), target: '_blank' do
+    link_to link_url(media), target: '_blank', rel: 'noopener' do
       image_tag "sns-icons/#{media}_icon",
                 class: "c-share__icon #{'idea-show__share-icon' if t('.page') == 'idea-show'}",
                 alt: "#{media.capitalize} share",
@@ -18,7 +18,7 @@ module ShareHelper
       t('default.sns.share.twitter',
         url: request.url,
         text: @idea.name,
-        hashtags: hashtags,
+        hashtags:,
         twitter_id: @idea&.user.twitter_id)
     else
       t("default.sns.share.#{media}", url: request.url)

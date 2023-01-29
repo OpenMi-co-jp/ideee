@@ -6,7 +6,7 @@ class LikesController < ApplicationController
 
   def create
     like = Like.find_or_create_by!(likable: @item, user: current_user)
-    current_user.create_notification_like(@item, like)
+    current_user.create_notification_with_notificationable_type(@item, "Like#{like.likable_type}")
   end
 
   def destroy
@@ -18,9 +18,9 @@ class LikesController < ApplicationController
   def item_id
     @item =
       if params[:type] == 'Idea'
-        Idea.find_by!(id: params[:id])
+        Idea.find(params[:id])
       else
-        Comment.find_by!(id: params[:id])
+        Comment.find(params[:id])
       end
   end
 

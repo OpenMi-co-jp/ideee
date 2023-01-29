@@ -15,6 +15,8 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
+  def edit; end
+
   def create
     @team = Team.new(team_params)
     if current_user == @team.owner
@@ -25,8 +27,6 @@ class TeamsController < ApplicationController
       redirect_to @team, notice: t('.not_owner')
     end
   end
-
-  def edit; end
 
   def update
     @team.update(team_params)
@@ -58,13 +58,13 @@ class TeamsController < ApplicationController
   private
 
   def set_team
-    @team = Team.find_by!(id: params[:id])
+    @team = Team.find(params[:id])
   end
 
   def set_idea
     @idea =
       if params[:idea_id].present?
-        Idea.find_by!(id: params[:idea_id])
+        Idea.find(params[:idea_id])
       else
         @team.idea
       end

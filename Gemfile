@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.2'
+ruby '3.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
@@ -52,7 +52,7 @@ gem 'rails-i18n'
 gem 'high_voltage'
 
 gem 'enum_help'
-gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
 
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 gem 'slack-notifier'
@@ -73,6 +73,13 @@ gem 'rollbar' # 本番のみで運用
 # 検索メソッド
 gem 'ransack'
 
+# Rubyバージョンアップで対応
+
+# Psych 4.0以降の破壊的変更に対処
+gem 'matrix', '~> 0.4.2'
+gem 'net-smtp', require: false
+gem 'psych', '~> 3.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -82,6 +89,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'simplecov-cobertura'
+  # rspecの高速化
+  gem 'spring-commands-rspec'
 
   # Debug
   gem 'pry-byebug'

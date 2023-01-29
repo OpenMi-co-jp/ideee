@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Idea, type: :model do
+RSpec.describe Idea do
   let(:idea) { FactoryBot.build(:idea) }
 
   it 'モデルの作成が有効である' do
@@ -57,7 +57,7 @@ RSpec.describe Idea, type: :model do
     end
 
     it 'idea_tagsが3つ以上の登録があればアイデア登録に失敗する' do
-      tag_list = ['tag1', 'tag2', 'tag3', 'tag4']
+      tag_list = %w[tag1 tag2 tag3 tag4]
       idea.save_with_tags(tag_list)
       expect(idea.errors[:base]).to include('タグは3つまでしか入力できません')
     end

@@ -15,3 +15,7 @@ Style/StringLiterals:
 RSpec/ContextWording:
   AllowedPatterns:
   - とき$
+
+# :: の重複使用を許可
+Style/RedundantConstantBase:
+  Enabled: false

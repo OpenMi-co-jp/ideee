@@ -80,21 +80,17 @@ module ApplicationHelper
     image_width = 480
     max_font_size = 100
 
-    size =  if title_len <= 9
-              (image_width / title_len).floor
-            elsif title_len <= 20
-              (image_width / (title_len / 2.0).ceil).floor
-            elsif title_len <= 36
-              (image_width / (title_len / 3.0).ceil).floor
-            else
-              (image_width / (title_len / 4.0).ceil).floor
-            end
+    size = if title_len <= 9
+             (image_width / title_len).floor
+           elsif title_len <= 20
+             (image_width / (title_len / 2.0).ceil).floor
+           elsif title_len <= 36
+             (image_width / (title_len / 3.0).ceil).floor
+           else
+             (image_width / (title_len / 4.0).ceil).floor
+           end
 
-    if size > max_font_size
-      max_font_size
-    else
-      size
-    end
+    [size, max_font_size].min
   end
 
   def text_url_to_link(text)

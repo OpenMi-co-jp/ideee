@@ -27,7 +27,7 @@ module CreateNotification
   #   )
   # end
 
-  def create_notification(idea:, visited_id:, notificatable: "", notificatable_type: "", notificatable_id: "")
+  def create_notification(idea:, visited_id:, notificatable: '', notificatable_type: '', notificatable_id: '')
     notificatable_detail =
       if notificatable.present?
         { notificatable: }

@@ -47,8 +47,8 @@ RSpec.describe Team do
     end
   end
 
-  describe 'membersメソッドの有効性' do
-    subject { team.members }
+  describe 'current_memberメソッドの有効性' do
+    subject { team.current_member }
 
     context 'メンバーが存在する' do
       before { TeamUser.create(user_id: user.id, team_id: team.id) }

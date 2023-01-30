@@ -32,18 +32,18 @@ class Team < ApplicationRecord
   belongs_to :idea
 
   has_many :team_users, dependent: :destroy
+  has_many :members, through: :team_users, source: :user
   has_one :room, dependent: :destroy
 
   enum status: { active: 0, stop: 1, finished: 2 }, _prefix: true
   alias user owner # owner?メソッドを使うために設定
 
-  def members
-    user_ids = team_users.where(leave: false).pluck(:user_id)
-    User.where(id: user_ids)
+  def current_member
+    team_users.preload(:user).where(left: false).map(&:user)
   end
 
   def member?(user)
-    members.include?(user)
+    current_member.include?(user)
   end
 
   def joined?(user)

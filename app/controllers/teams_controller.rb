@@ -34,9 +34,7 @@ class TeamsController < ApplicationController
   end
 
   def join
-    team_user = @team.team_users.find_by(user_id: current_user.id)
-    # 以前に一度チーム開発に参加していた場合はleave(脱退しているかどうか)のフラグを変更する
-    team_user.present? ? team_user.update(leave: false) : @team.team_users.create(user: current_user)
+    @team.team_users.create(user: current_user)
     @idea.count_team_members
     Notifications::JoinTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
@@ -44,7 +42,7 @@ class TeamsController < ApplicationController
 
   def leave
     team_user = @team.team_users.find_by!(user_id: current_user.id)
-    team_user.update(leave: true)
+    team_user.update(left: true)
     @idea.count_team_members
     Notifications::LeaveTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')

@@ -61,7 +61,7 @@ class SendEmail
     @sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
-  def withdraw_team(user, idea)
+  def leave_team(user, idea)
     body = "
             <p>チーム開発の脱退者がいます。</p>
             <hr>

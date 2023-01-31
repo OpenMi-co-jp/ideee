@@ -17,16 +17,6 @@ module CreateNotification
     end
   end
 
-  # def create_notification_team(idea:, visited_id:, notificatable_type:, notificatable_id:)
-  #   active_notifications.create(
-  #     visitor: self,
-  #     visited_id:,
-  #     idea:,
-  #     notificatable_id:,
-  #     notificatable_type:
-  #   )
-  # end
-
   def create_notification(idea:, visited_id:, notificatable: '', notificatable_type: '', notificatable_id: '')
     notificatable_detail =
       if notificatable.present?

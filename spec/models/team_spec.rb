@@ -50,13 +50,13 @@ RSpec.describe Team do
   describe 'current_memberメソッドの有効性' do
     subject { team.current_member }
 
-    context 'メンバーが存在する' do
+    context 'メンバーが存在する時' do
       before { TeamUser.create(user_id: user.id, team_id: team.id) }
 
       it { is_expected.to include(user) }
     end
 
-    context 'メンバーが存在しない' do
+    context 'メンバーが存在しない時' do
       it { is_expected.not_to include(user) }
     end
   end

@@ -155,11 +155,13 @@ class IdeasController < ApplicationController
   end
 
   def ransack_params
-    day_from = params[:q][:published_at_gteq]
-    params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
+    if params[:q]
+      day_from = params[:q][:published_at_gteq]
+      params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
 
-    day_to = params[:q][:published_at_lteq]
-    params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
+      day_to = params[:q][:published_at_lteq]
+      params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
+    end
 
     params[:q]
   end

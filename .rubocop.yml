@@ -25,6 +25,11 @@ RSpec/ContextWording:
   - 時$
   - 場合$
 
+# :: の重複使用を許可
+Style/RedundantConstantBase:
+  Enabled: false
+
+
 # ネストの深さ
 Metrics/BlockNesting:
   Max: 5

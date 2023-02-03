@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_100229) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_01_29_082846) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -27,7 +26,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -39,8 +38,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -51,16 +50,16 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
   end
 
   create_table "analytics", charset: "utf8mb4", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.text "description", null: false
     t.bigint "user_id", null: false
     t.bigint "idea_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["idea_id"], name: "index_comments_on_idea_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -69,8 +68,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.bigint "user_id", null: false
     t.bigint "idea_id", null: false
     t.integer "level", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["idea_id"], name: "index_difficulties_on_idea_id"
     t.index ["user_id", "idea_id"], name: "index_difficulties_on_user_id_and_idea_id", unique: true
     t.index ["user_id"], name: "index_difficulties_on_user_id"
@@ -81,8 +80,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.string "icon"
     t.text "note"
     t.integer "view", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.integer "likes_num", default: 0
     t.integer "difficulty", default: 0
@@ -90,7 +89,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.integer "comments_num", default: 0
     t.string "product_url"
     t.integer "product_apply", default: 0
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.string "background"
     t.string "goal"
     t.string "issue"
@@ -98,7 +97,7 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.string "hypothesis"
     t.string "target"
     t.string "similar"
-    t.datetime "emailed_at", comment: "weeklyメールで新規アイデアとして送られた日時"
+    t.datetime "emailed_at", precision: nil, comment: "weeklyメールで新規アイデアとして送られた日時"
     t.string "github_url"
     t.string "monetize"
     t.integer "stance", default: 0
@@ -108,8 +107,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
 
   create_table "likes", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "likable_type", null: false
     t.bigint "likable_id", null: false
     t.index ["likable_type", "likable_id"], name: "index_likes_on_likable"
@@ -120,8 +119,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.bigint "user_id", null: false
     t.string "room_id", null: false
     t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -139,8 +138,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.boolean "heart_to_comment_web", default: true, null: false
     t.boolean "vote_web", default: true, null: false
     t.boolean "team_join_web", default: true, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notification_configs_on_user_id"
   end
 
@@ -149,25 +148,25 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.integer "visited_id"
     t.integer "idea_id"
     t.boolean "checked", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "notificatable_id"
     t.string "notificatable_type"
-    t.datetime "send_at"
+    t.datetime "send_at", precision: nil
     t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
   create_table "rooms", id: :string, charset: "utf8mb4", force: :cascade do |t|
     t.bigint "team_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "idea_id", null: false
     t.bigint "tag_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["idea_id", "tag_id"], name: "index_taggings_on_idea_id_and_tag_id", unique: true
     t.index ["idea_id"], name: "index_taggings_on_idea_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
@@ -175,16 +174,16 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
 
   create_table "tags", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "team_users", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "team_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_team_users_on_team_id"
     t.index ["user_id", "team_id"], name: "index_team_users_on_user_id_and_team_id", unique: true
     t.index ["user_id"], name: "index_team_users_on_user_id"
@@ -196,8 +195,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.integer "status", default: 0, null: false
     t.string "requirement", null: false
     t.string "offer", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["idea_id"], name: "index_teams_on_idea_id"
     t.index ["owner_id"], name: "index_teams_on_owner_id"
     t.index ["status", "owner_id"], name: "index_teams_on_status_and_owner_id"
@@ -207,14 +206,14 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.string "email"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name", limit: 30, default: ""
     t.string "description", limit: 200
     t.integer "point", default: 0
@@ -227,8 +226,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.string "site_url"
     t.boolean "defined"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "github_id"

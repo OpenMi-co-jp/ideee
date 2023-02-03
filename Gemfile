@@ -14,7 +14,7 @@ gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.0'
+gem 'webpacker'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -80,7 +80,7 @@ gem 'ransack'
 # Psych 4.0以降の破壊的変更に対処
 gem 'matrix', '~> 0.4.2'
 gem 'net-smtp', require: false
-gem 'psych', '~> 3.1'
+gem 'psych'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

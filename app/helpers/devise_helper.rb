@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseHelper
   # providerに合わせた画像名を選択
   def omni_sign_image(provider)

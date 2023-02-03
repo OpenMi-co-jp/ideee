@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Difficulty do
-  let(:difficulty_easy) { FactoryBot.create(:difficulty, :easy) }
+  let(:difficulty_easy)   { FactoryBot.create(:difficulty, :easy)   }
   let(:difficulty_middle) { FactoryBot.create(:difficulty, :middle) }
-  let(:difficulty_hard) { FactoryBot.create(:difficulty, :hard) }
+  let(:difficulty_hard)   { FactoryBot.create(:difficulty, :hard)   }
 
   describe 'Difficultyが有効になること' do
     context 'difficultyのレベルがEasyの時' do

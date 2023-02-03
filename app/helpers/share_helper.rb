@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShareHelper
   def sns_share_icon(media)
     link_to link_url(media), target: '_blank', rel: 'noopener' do
@@ -15,11 +17,13 @@ module ShareHelper
       hashtags = 'ideee'
       hashtags += ",#{@idea.idea_tags.pluck(:name).join(',')}" if @idea.idea_tags.length.positive?
 
-      t('default.sns.share.twitter',
+      t(
+        'default.sns.share.twitter',
         url: request.url,
         text: @idea.name,
         hashtags:,
-        twitter_id: @idea&.user.twitter_id)
+        twitter_id: @idea&.user.twitter_id
+      )
     else
       t("default.sns.share.#{media}", url: request.url)
     end

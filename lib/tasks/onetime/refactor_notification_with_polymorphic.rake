@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :refactor_notification_with_polymorphic do
   desc '既存のactionとlike_idとcomment_idを移行する'
   task transfer_notification_data: :environment do

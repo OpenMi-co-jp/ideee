@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DifficultysController < ApplicationController
   before_action :set_idea
 

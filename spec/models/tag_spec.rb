@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Tag do
@@ -33,13 +35,13 @@ RSpec.describe Tag do
       subject(:popular_tags) { described_class.popular_tags }
 
       let(:tag2) { FactoryBot.create(:tag) }
-      let(:idea) { FactoryBot.create(:idea) }
+      let(:idea)  { FactoryBot.create(:idea) }
       let(:idea2) { FactoryBot.create(:idea) }
 
       before do
-        tag.taggings.create(idea:)
-        tag2.taggings.create(idea:)
-        tag2.taggings.create(idea: idea2)
+        tag.taggings.create!(idea:)
+        tag2.taggings.create!(idea:)
+        tag2.taggings.create!(idea: idea2)
       end
 
       it 'タグ付けが多い準に並ぶ' do

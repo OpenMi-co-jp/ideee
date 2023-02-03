@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Notification do
@@ -22,7 +24,7 @@ RSpec.describe Notification do
       end
 
       context 'send_atが設定されている場合' do
-        let(:notification) { FactoryBot.create(:notification, send_at: DateTime.now) }
+        let(:notification) { FactoryBot.create(:notification, send_at: Time.zone.now) }
 
         it { is_expected.not_to include notification }
       end

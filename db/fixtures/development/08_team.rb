@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 30.times do |n|
   num = n + 1
   idea = Idea.select { |i| i.team.nil? }.sample

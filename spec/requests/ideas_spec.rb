@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Ideas' do
@@ -163,7 +165,7 @@ RSpec.describe 'Ideas' do
 
     it '検索したアイデアが表示されていること' do
       subject
-      expect(response.body).to include idea.name
+      expect(response.body.encode!).to include idea.name
     end
   end
 end

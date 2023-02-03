@@ -82,6 +82,9 @@ gem 'matrix', '~> 0.4.2'
 gem 'net-smtp', require: false
 gem 'psych'
 
+# js-compile用のSprocketのために設定
+gem 'uglifier'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

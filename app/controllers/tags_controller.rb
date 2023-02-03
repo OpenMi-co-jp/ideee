@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TagsController < ApplicationController
   def popular
     tag_list = Tag.recent_tags.popular_tags

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[show edit update destroy publish suggest]
   before_action :authenticate_user!, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
@@ -34,7 +36,15 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        destination = params.dig(:idea, :stance) == 'team_project' ? new_team_path(idea_id: @idea) : idea_path(@idea, share: true)
+        destination = if params.dig(
+                          :idea,
+                          :stance
+                         ) == 'team_project'
+
+                        new_team_path(idea_id: @idea)
+                      else
+                        idea_path(@idea, share: true)
+                      end
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.zone.now)
         redirect_to destination, notice: t('.success')
@@ -45,7 +55,6 @@ class IdeasController < ApplicationController
     end
   end
 
-  # rubocop:disable Metrics/PerceivedComplexity
   def update
     @idea.assign_attributes(idea_params)
     if @idea.save_with_tags(tags_params)
@@ -67,7 +76,6 @@ class IdeasController < ApplicationController
       render :edit
     end
   end
-  # rubocop:enable Metrics/PerceivedComplexity
 
   def destroy
     @idea.destroy
@@ -159,10 +167,10 @@ class IdeasController < ApplicationController
   end
 
   def own_user_check
-    unless current_user.own?(@idea)
-      redirect_to root_path
-      flash[:alert] = t('default.message.unauthorized')
-    end
+    return if current_user.own?(@idea)
+
+    redirect_to root_path
+    flash[:alert] = t('default.message.unauthorized')
   end
 
   def tags_params

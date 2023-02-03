@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   # OGPで使われるタイトルの設定
   def full_title(page_title = '')
@@ -64,13 +66,19 @@ module ApplicationHelper
     size = get_ogp_font_size(title_len)
     transformation = [
       {
-        x: 0, y: 0, gravity: 'center', color: '#202124', width: '500', overlay: {
+        x: 0,
+        y: 0,
+        gravity: 'center',
+        color: '#202124',
+        width: '500',
+        overlay: {
           font_size: size,
           font_weight: 'bold',
           text_align: 'center',
           text: title,
           font_family: 'TakaoExGothic'
-        }, crop: 'fit'
+        },
+        crop: 'fit'
       }
     ]
     cloudinary_url('ideee_ogp_back.webp', sign_url: true, type: 'authenticated', transformation:)

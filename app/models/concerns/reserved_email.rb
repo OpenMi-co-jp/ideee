@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReservedEmail
   extend ActiveSupport::Concern
 
@@ -64,7 +66,9 @@ module ReservedEmail
     "
       <div style='background-color: white; margin: 3px 0; padding: 5px;'>
         <div style='display: inline;'>
-          <b>#{rank}</b>#{analytics_url("ideas/#{idea.id}", 'ranking', idea.name)} (💬#{idea.comments_num}) by #{idea.user.name}
+          <b>#{rank}</b>#{analytics_url(
+            "ideas/#{idea.id}", 'ranking', idea.name
+          )} (💬#{idea.comments_num}) by #{idea.user.name}
         </div>
       </div>
     "

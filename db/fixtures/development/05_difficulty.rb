@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 200.times do |n|
   num = n + 1
   Difficulty.seed(

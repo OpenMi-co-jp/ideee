@@ -180,6 +180,7 @@ GEM
     equalizer (0.0.11)
     erubi (1.12.0)
     excon (0.98.0)
+    execjs (2.8.1)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -573,6 +574,8 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
@@ -675,6 +678,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   twitter
   tzinfo-data
+  uglifier
   web-console (>= 4.1.0)
   webdrivers
   webpacker

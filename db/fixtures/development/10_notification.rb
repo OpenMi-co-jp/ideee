@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 100.times do |n|
   num = n + 1
   visitor = User.all.sample

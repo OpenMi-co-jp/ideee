@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :item_id
   after_action :update_user_point, only: %i[create]

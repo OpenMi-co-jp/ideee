@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
   after_action :update_user_point, only: %i[create]

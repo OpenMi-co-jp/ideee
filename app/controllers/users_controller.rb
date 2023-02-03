@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: %i[index show search commenter idea_man]
   prepend_before_action :page_user, only: %i[show]
@@ -15,7 +17,11 @@ class UsersController < ApplicationController
     @published_list = @user_published_ideas.eager_load(:idea_tags).order(published_at: 'DESC')
     @published_ideas = Kaminari.paginate_array(@published_list).page(params[:published].try(:[], :page)).per(10)
     @liked_idea_ids = @user.likes.type_idea_ids
-    @like_ideas = Kaminari.paginate_array(Idea.where(id: @liked_idea_ids).eager_load(:idea_tags).preload(:user)).page(params[:like].try(:[], :page)).per(10)
+    @like_ideas = Kaminari.paginate_array(Idea.where(id: @liked_idea_ids).eager_load(:idea_tags).preload(:user)).page(
+      params[:like].try(
+        :[], :page
+      )
+    ).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
     @commented_idea_list = @user.comment_ideas.preload(:user).others_ideas(@user)
     @commented_ideas = Kaminari.paginate_array(@commented_idea_list).page(params[:comment].try(:[], :page)).per(10)

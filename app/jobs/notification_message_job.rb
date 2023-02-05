@@ -5,10 +5,10 @@ class NotificationMessageJob < ApplicationJob
     return unless Rails.env.production?
 
     team = message.room.team
-    return if team.members.nil?
+    return if team.current_member.nil?
 
     sender = message.user
-    team_members = [team.owner].push(team.members).flatten
+    team_members = [team.owner].push(team.current_member).flatten
     team_members.delete(sender)
 
     SendEmail.new.notification_message(team_members, sender, message)

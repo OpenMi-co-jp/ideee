@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendWeeklyMailJob < ApplicationJob
   queue_as :default
 
@@ -5,7 +7,7 @@ class SendWeeklyMailJob < ApplicationJob
     return unless Rails.env.production?
 
     # 1週間後の同じ時間に実行
-    SendWeeklyMailJob.set(wait: 1.week).perform_later
+    SendWeeklyMailJob.set(wait: 1.week).perform_now
     ideas = Idea.published.recent_select
     new_ideas = ideas.not_emailed
     # 新しいアイデアが10件無ければその週のメールはスキップ

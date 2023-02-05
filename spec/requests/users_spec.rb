@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Users' do
@@ -43,8 +45,8 @@ RSpec.describe 'Users' do
     subject { get search_users_path, params: }
 
     let!(:idea_man) { FactoryBot.create(:user, :idea_man) }
-    let(:params) { {} }
-    let!(:engineer) { FactoryBot.create(:user, :engineer) }
+    let(:params)         { {}                                       }
+    let!(:engineer)      { FactoryBot.create(:user, :engineer)      }
     let!(:idea_engineer) { FactoryBot.create(:user, :idea_engineer) }
 
     describe '検索項目を指定しない場合' do

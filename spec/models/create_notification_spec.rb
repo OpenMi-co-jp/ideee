@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CreateNotification, type: :helper do
@@ -7,7 +9,9 @@ RSpec.describe CreateNotification, type: :helper do
 
     describe 'create_notification_with_notificationable_type' do
       context 'Likeideaのとき' do
-        subject(:idea_like_notification) { user.create_notification_with_notificationable_type(idea, "Like#{like.likable_type}") }
+        subject(:idea_like_notification) do
+          user.create_notification_with_notificationable_type(idea, "Like#{like.likable_type}")
+        end
 
         let(:like) { FactoryBot.create(:like, :idea) }
 
@@ -23,7 +27,9 @@ RSpec.describe CreateNotification, type: :helper do
       end
 
       context 'product_applyのとき' do
-        subject(:product_apply_notification) { user.create_notification_with_notificationable_type(idea, 'product_apply') }
+        subject(:product_apply_notification) do
+          user.create_notification_with_notificationable_type(idea, 'product_apply')
+        end
 
         it '通知を作成する' do
           expect do
@@ -85,7 +91,9 @@ RSpec.describe CreateNotification, type: :helper do
       end
 
       context 'team_userのとき' do
-        subject(:team_user_notification) { user.create_notification(idea:, visited_id: user.id, notificatable: team_user) }
+        subject(:team_user_notification) do
+          user.create_notification(idea:, visited_id: user.id, notificatable: team_user)
+        end
 
         let(:team) { FactoryBot.create(:team) }
         let(:team_user) { TeamUser.create(team:, user:) }
@@ -103,7 +111,12 @@ RSpec.describe CreateNotification, type: :helper do
       end
 
       context 'difficultyのとき' do
-        subject(:difficulty_notification) { user.create_notification(idea: difficulty.idea, visited_id: difficulty.idea.user.id, notificatable: difficulty) }
+        subject(:difficulty_notification) do
+          user.create_notification(
+            idea: difficulty.idea, visited_id: difficulty.idea.user.id,
+            notificatable: difficulty
+          )
+        end
 
         let(:difficulty) { FactoryBot.create(:difficulty, :easy) }
 

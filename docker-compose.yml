@@ -49,3 +49,4 @@ services:
 volumes:
   bundle_data:
   redis:
+  rails_tmp_cache:

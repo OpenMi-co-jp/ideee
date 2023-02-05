@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Team do
   let!(:team) { FactoryBot.create(:team) }
-  let(:user) { FactoryBot.create(:user) }
+  let(:user)  { FactoryBot.create(:user) }
 
   describe 'teamが有効になること' do
     it '有効であること' do
@@ -10,7 +12,7 @@ RSpec.describe Team do
     end
 
     it 'test_offerが返ってくること' do
-      expect(Team.last.offer).to eq team.offer
+      expect(described_class.last.offer).to eq team.offer
     end
 
     it 'test_requirementが返ってくること' do
@@ -35,7 +37,7 @@ RSpec.describe Team do
   describe 'joined?(user)メソッドの有効性' do
     context 'メンバーになっている時' do
       it 'trueが返ってくること' do
-        TeamUser.create(user_id: user.id, team_id: team.id)
+        TeamUser.create!(user_id: user.id, team_id: team.id)
         expect(team.joined?(user)).to be true
       end
     end

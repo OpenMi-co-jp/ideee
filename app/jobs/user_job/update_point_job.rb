@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UserJob
   class UpdatePointJob < ApplicationJob
     queue_as :default

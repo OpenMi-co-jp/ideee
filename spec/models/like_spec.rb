@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Like do
-  let(:like_idea) { FactoryBot.create(:like, :idea) }
+  let(:like_idea)    { FactoryBot.create(:like, :idea)    }
   let(:like_comment) { FactoryBot.create(:like, :comment) }
 
   describe 'アイデアのいいねが有効になること' do

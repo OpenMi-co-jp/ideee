@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoomsController < ApplicationController
   before_action :authenticate_user!
   prepend_before_action :set_room, only: %i[show]
@@ -11,7 +13,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.create(team_id: room_params[:team_id])
+    @room = Room.create!(team_id: room_params[:team_id])
     redirect_to @room, notice: t('.success')
   end
 

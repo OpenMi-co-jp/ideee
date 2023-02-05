@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :report_analytics do
   desc '前日のアナリティクス情報をSlackに送る'
   task send_to_slack: :environment do

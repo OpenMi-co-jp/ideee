@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EventEmail
   extend ActiveSupport::Concern
 
@@ -23,7 +25,7 @@ module EventEmail
             </ul>
             <h3>キャンペーン期間</h3>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              2022年12月26日(月)〜2023年1月8日(日)
+              2022年12月26日(月)〜2023年1月9日(月)
             </div>
             <h3>キャンペーン対象の条件</h3>
             <ul style='margin-bottom: 40px;'>

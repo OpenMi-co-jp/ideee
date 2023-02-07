@@ -27,7 +27,7 @@ module CreateNotification
         { notificatable_type:, notificatable_id: }
       end
 
-    active_notifications.create(
+    active_notifications.create!(
       visitor: self,
       visited_id:,
       idea:,

@@ -21,7 +21,7 @@
     "webpack-dev-server": "^3"
   },
   "engines": {
-    "node": "12.22.12"
+    "node": "18.14.1"
   },
   "scripts": {
     "setup": "yarn"

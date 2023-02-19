@@ -22,5 +22,8 @@
   },
   "engines": {
     "node": "12.22.12"
+  },
+  "scripts": {
+    "setup": "yarn"
   }
 }

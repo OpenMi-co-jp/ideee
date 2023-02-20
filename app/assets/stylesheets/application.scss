@@ -1,6 +1,6 @@
 /*
  *= require_tree .
- *= require trix/dist/trix
+ *= require actiontext
  *= require_self
  */
 
@@ -11,5 +11,5 @@
 @import "footer";
 @import "idea/ideas";
 @import "idea/show";
-@import "actiontext/actiontext";
+@import "actiontext";
 @import "pages/*";

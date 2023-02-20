@@ -282,9 +282,6 @@ Style/YodaExpression:
 Layout/LineLength:
   Max: 186
 
-RSpec/FactoryBot/SyntaxMethods:
-  Enabled: false
-
 Style/StringLiterals:
   Exclude:
     - 'spec/rails_helper.rb'

@@ -73,21 +73,21 @@ class SendEmail
     body = "
             <p>チーム開発の脱退者がいます。</p>
             <hr>
-            <b>脱退者情報</b>
+            <b>ユーザー情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               名前: #{user.name}<br>
               URL: #{analytics_url(
-                "users/#{user.id}", 'join_team',
+                "users/#{user.id}", 'leave_team',
                                    "https://www.ideee.tech/users/#{user.id}"
               )}
             </div>
             <p>アイデアページに飛ぶ: #{analytics_url(
-              "ideas/#{idea.id}", 'join_team',
+              "ideas/#{idea.id}", 'leave_team',
                                                      "https://www.ideee.tech/ideas/#{idea.id}"
             )}</p>
           "
     subject = "【ideee】【#{idea.name}】の開発から脱退者がいます"
-    content = Content.new(type: 'text/html', value: html_frame(body, 'join_team'))
+    content = Content.new(type: 'text/html', value: html_frame(body, 'leave_team'))
 
     to = Email.new(email: idea.user.email)
     mail = Mail.new(@from, subject, to, content)

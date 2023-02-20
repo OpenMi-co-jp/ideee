@@ -212,6 +212,3 @@ Style/FrozenStringLiteralComment:
 RSpec/AlignRightLetBrace:
   Enabled: false
 
-# specで()を強制させない
-RSpec/FactoryBot/SyntaxMethods:
-  Enabled: false

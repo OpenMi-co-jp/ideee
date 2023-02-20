@@ -67,7 +67,7 @@ RSpec.describe 'Ideas' do
       it 'アイデアが登録されること' do
         expect do
           subject
-        end.to change(Idea, :count).by(1)
+        end.to change(Idea, :count).by(+1)
       end
 
       it '詳細ページにリダイレクトすること' do

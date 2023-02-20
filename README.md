@@ -19,7 +19,7 @@ https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 
 ## versions
 
-- Rails (6.1.4)
+- Rails (7.0.4)
 - Ruby 3.0.2p107
 - mysql2 (0.5.3)
 

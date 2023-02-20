@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReservedEmail
   extend ActiveSupport::Concern
 
@@ -47,7 +49,7 @@ module ReservedEmail
   def ranking_idea(commented_ideas)
     str = ''
     commented_ideas.each.with_index(1) do |idea, index|
-      str += idea_ranking_item(rank: rank(index), idea: idea)
+      str += idea_ranking_item(rank: rank(index), idea:)
     end
     str
   end
@@ -55,7 +57,7 @@ module ReservedEmail
   def new_idea_colum(new_ideas)
     str = ''
     new_ideas.each.with_index(1) do |idea, i|
-      str += idea_ranking_item(rank: "#{i}💡", idea: idea)
+      str += idea_ranking_item(rank: "#{i}💡", idea:)
     end
     str
   end
@@ -64,7 +66,9 @@ module ReservedEmail
     "
       <div style='background-color: white; margin: 3px 0; padding: 5px;'>
         <div style='display: inline;'>
-          <b>#{rank}</b>#{analytics_url("ideas/#{idea.id}", 'ranking', idea.name)} (💬#{idea.comments_num}) by #{idea.user.name}
+          <b>#{rank}</b>#{analytics_url(
+            "ideas/#{idea.id}", 'ranking', idea.name
+          )} (💬#{idea.comments_num}) by #{idea.user.name}
         </div>
       </div>
     "

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendEmail
   require 'sendgrid-ruby'
   include SendGrid
@@ -21,14 +23,16 @@ class SendEmail
             <hr>
             <b>コメンター名:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{analytics_url('users/' + commenter.id.to_s, 'comment', commenter.name)}
+              #{analytics_url("users/#{commenter.id}", 'comment', commenter.name)}
             </div>
             <b>コメント内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               #{xss_support(description)}
             </div>
-            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'comment',
-                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+            <p>アイデアページに飛ぶ: #{analytics_url(
+              "ideas/#{idea.id}", 'comment',
+              "https://www.ideee.tech/ideas/#{idea.id}"
+            )}</p>
           "
     subject = "【ideee】【#{idea.name}】にコメントがきました💡"
     content = Content.new(type: 'text/html', value: html_frame(body, 'comment'))
@@ -47,11 +51,15 @@ class SendEmail
             <b>応募者情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               名前: #{user.name}<br>
-              URL: #{analytics_url('users/' + user.id.to_s, 'join_team',
-                                   'https://www.ideee.tech/users/' + user.id.to_s)}
+              URL: #{analytics_url(
+                "users/#{user.id}", 'join_team',
+                "https://www.ideee.tech/users/#{user.id}"
+              )}
             </div>
-            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'join_team',
-                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+            <p>アイデアページに飛ぶ: #{analytics_url(
+              "ideas/#{idea.id}", 'join_team',
+              "https://www.ideee.tech/ideas/#{idea.id}"
+            )}</p>
           "
     subject = "【ideee】【#{idea.name}】に開発参加希望者がいます🚀"
     content = Content.new(type: 'text/html', value: html_frame(body, 'join_team'))
@@ -71,8 +79,10 @@ class SendEmail
               アイデア名: #{idea.name}<br>
               承認待ちURL: #{idea.product_url}
             </div>
-            <p>アイデアページに飛ぶ: #{analytics_url('ideas/' + idea.id.to_s, 'confirm_apply',
-                                                     'https://www.ideee.tech/ideas/' + idea.id.to_s)}</p>
+            <p>アイデアページに飛ぶ: #{analytics_url(
+              "ideas/#{idea.id}", 'confirm_apply',
+              "https://www.ideee.tech/ideas/#{idea.id}"
+            )}</p>
           "
     subject = "【ideee】【#{idea.name}】のURL承認申請を受信しました🙇‍♂️"
     content = Content.new(type: 'text/html', value: html_frame(body, 'join_team'))
@@ -93,8 +103,10 @@ class SendEmail
             <p>名前: #{idea.name}</p>
             <p>作成日: #{idea.created_time}</p>
             <p>
-              URL: #{analytics_url('ideas/' + idea_id.to_s, 'draft_remind',
-                                   'https://www.ideee.tech/ideas/' + idea_id.to_s)}
+              URL: #{analytics_url(
+                "ideas/#{idea_id}", 'draft_remind',
+                "https://www.ideee.tech/ideas/#{idea_id}"
+              )}
             </p>
           "
 
@@ -116,14 +128,16 @@ class SendEmail
             <hr>
             <b>メッセージ送信者:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px; margin-bottom: 20px'>
-              #{analytics_url('users/' + sender.id.to_s, 'notification_message', sender.name)}
+              #{analytics_url("users/#{sender.id}", 'notification_message', sender.name)}
             </div>
             <b>メッセージ内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
               #{message.content.body}
             </div>
-            <p>メッセージページに飛ぶ: #{analytics_url('rooms/' + message.room_id.to_s, 'notification_message',
-                                                       'https://www.ideee.tech/rooms/' + message.room_id.to_s)}</p>
+            <p>メッセージページに飛ぶ: #{analytics_url(
+              "rooms/#{message.room_id}", 'notification_message',
+              "https://www.ideee.tech/rooms/#{message.room_id}"
+            )}</p>
           "
 
     subject = '【ideee】チーム開発メンバーからメッセージが来ました📮'

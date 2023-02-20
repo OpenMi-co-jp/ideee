@@ -1,1 +1,206 @@
 inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  EnabledByDefault: true
+  # 除外
+  Exclude:
+    - db/schema.rb
+    - tmp/**/*
+    - bin/**/*
+    - vendor/**/*
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+RSpec/ContextWording:
+  AllowedPatterns:
+  - とき$
+  - 時$
+  - 場合$
+
+# :: の重複使用を許可
+Style/RedundantConstantBase:
+  Enabled: false
+
+
+# ネストの深さ
+Metrics/BlockNesting:
+  Max: 5
+
+# メソッドの行数
+Metrics/MethodLength:
+  Max: 70
+
+Metrics/AbcSize:
+  Max: 100
+
+# TODO: rubocop todoを対応後後コメントアウトを解除
+# Metrics/ClassLength:
+#   Max: 150
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+# TODO: rubocop todoを対応後後コメントアウトを解除
+# 1行の長さ
+# Layout/LineLength:
+#   Max: 180
+
+Metrics/PerceivedComplexity:
+  Max: 15
+
+# 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
+
+# ドキュメントの無い public class を許可する
+Style/Documentation:
+  Enabled: false
+
+# ケツカンマをつける
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+# ケツカンマをつける
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Style/Copyright:
+  Enabled: false
+
+# stringのhashをKeysに変換を無効化
+Style/StringHashKeys:
+  Exclude:
+    - 'spec/**/**/*'
+    - 'lib/**/*'
+    - 'config/**/*'
+    - 'app/**/**/*'
+
+# letの順番を気にしない
+RSpec/ScatteredLet:
+  Enabled: false
+
+# beforeをまとめさせない
+RSpec/ScatteredSetup:
+  Enabled: false
+
+# 丸かっこ（）の省略を許可
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+# コメントの強制を無効化
+Style/DocumentationMethod:
+  Enabled: false
+
+# Classとモジュールのネスト強制を無効化
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# {}の前にスペースの設定を無効化
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+
+# コードの極力一行化を無効化（リダーブルにするため）
+Layout/RedundantLineBreak:
+  Enabled: false
+
+# RspecのSharedExamplesを文字列にさせない
+RSpec/SharedExamples:
+  Enabled: false
+
+# hashの改行を読みやすさ重視に変更
+Layout/HashAlignment:
+  Enabled: false
+
+# データのアサイン時に改行しないようにする
+Layout/MultilineAssignmentLayout:
+  Enabled: false
+
+# ハッシュ内のブロックのレイアウトを変更させない
+Layout/MultilineBlockLayout:
+  Enabled: false
+
+# メソッドチェーンの改行を無効化
+Layout/SingleLineBlockChain:
+  Enabled: false
+
+# コンマの切間で改行を強要するのを無効化
+Layout/ArgumentAlignment:
+  Enabled: false
+
+# 引数の続きで改行させない
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: false
+
+# to_iメソッドを許可
+Lint/NumberConversion:
+  Enabled: false
+
+# セーフナビゲーションを無効化
+Lint/SafeNavigationChain:
+  Enabled: false
+
+# シンボルへの変更を無効化
+Lint/SymbolConversion:
+  Enabled: false
+
+# if分のワンライン化を無効化
+Style/IfUnlessModifier:
+  Enabled: false
+
+# パラレルアサインメントを許可
+Style/NumericLiterals:
+  Enabled: false
+
+# ここでクォーテーションの設定をしない
+Style/QuotedSymbols:
+  Enabled: false
+
+# selfの記述を許可
+Style/RedundantSelf:
+  Enabled: false
+
+# attr_reader等を分けて表示
+Style/AccessorGrouping:
+  Enabled: false
+
+# =begin =end の使用をspec_helperで許可
+Style/BlockComments:
+  Exclude:
+    - 'spec/**'
+
+# class << selfを使用可に設定
+Style/ClassMethodsDefinitions:
+  Enabled: false
+
+# specを change.by(0)での表現を許可
+RSpec/ChangeByZero:
+  Enabled: false
+
+# requiredの並び替えを無効化
+Style/RequireOrder:
+  Enabled: false
+
+# 定数の指定を強制しない
+Lint/ConstantResolution:
+  Enabled: false
+
+# if文にelse文を必要としない
+Style/MissingElse:
+  Enabled: false
+
+# FactoryBotの省略をさせない
+RSpec/FactoryBot/SyntaxMethods:
+  Enabled: false
+

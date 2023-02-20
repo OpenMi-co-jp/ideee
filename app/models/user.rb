@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -55,11 +57,13 @@ class User < ApplicationRecord
   # settings relation
   has_one :notification_config, dependent: :destroy
 
+  before_save :fix_ids
+  after_create :create_notification_config
+
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_uploader :icon, ImageUploader
-  before_update :fix_ids
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
@@ -72,9 +76,9 @@ class User < ApplicationRecord
   delegate :draft_remind_email, to: :notification_config
   delegate :team_join_email, to: :notification_config
   delegate :team_message_email, to: :notification_config
-  scope :event_emailable, -> { joins(:notification_config).where('notification_configs.event_email = ?', true) }
-  scope :heart_emailable, -> { joins(:notification_config).where('notification_configs.heart_email = ?', true) }
-  scope :weekly_emailable, -> { joins(:notification_config).where('notification_configs.weekly_email = ?', true) }
+  scope :event_emailable, -> { joins(:notification_config).where(notification_configs: { event_email: true }) }
+  scope :heart_emailable, -> { joins(:notification_config).where(notification_configs: { heart_email: true }) }
+  scope :weekly_emailable, -> { joins(:notification_config).where(notification_configs: { weekly_email: true }) }
 
   # 通知を作成する
   include CreateNotification
@@ -115,7 +119,7 @@ class User < ApplicationRecord
     end
 
     def signin_how(email)
-      case find_by!(email: email).provider
+      case find_by!(email:).provider
       when nil
         'メール'
       when 'twitter'
@@ -124,20 +128,11 @@ class User < ApplicationRecord
         'Google'
       end
     end
-
-    def search(key)
-      where(definition: key).or(where(definition: :idea_engineer))
-    end
   end
 
   # cookieを使ってログインを保持
   def remember_me
     true
-  end
-
-  # twitterログインでもメールアドレスがあればメールアドレスを必須項目にする
-  def email_required?
-    provider == 'twitter' && !email.blank? && super
   end
 
   # ユーザーに紐づいたobjectの所有者を判断
@@ -157,13 +152,9 @@ class User < ApplicationRecord
     comment_params = { idea_id: params[:idea_id], description: params[:description] }
     return if comments.find_by(comment_params).present?
 
-    comment = comments.create(comment_params)
+    comment = comments.create!(comment_params)
     comment.idea.count_comments if comment.valid?
     comment
-  end
-
-  def team_joined?(idea)
-    idea.team.members.include?(self)
   end
 
   # Contributionの計算
@@ -179,5 +170,11 @@ class User < ApplicationRecord
   def fix_ids
     self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
     self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
+  end
+
+  private
+
+  def create_notification_config
+    NotificationConfig.create!(user: self)
   end
 end

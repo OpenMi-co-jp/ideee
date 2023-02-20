@@ -5,16 +5,18 @@
         <%= image_tag 'ideee-tech-logo', alt: "ideee", loading: "lazy" %>
       <% end %>
     </li>
-    <li class='serch_column flex'>
-      <p class='grid-middle gray-3'>
-        <i class="material-icons">search</i>
-      </p>
+    <li class='serch_column'>
       <%= form_tag(search_ideas_path, method: :get) do %>
-        <%= text_field_tag "q[name_or_idea_tags_name_cont]", '', placeholder: 'アイデアを検索' %>
+        <div class='flex'>
+          <button class='grid-middle button_off' type="submit">
+            <i class="material-icons">search</i>
+          </button>
+          <%= text_field_tag "q[name_or_idea_tags_name_cont]", '', placeholder: 'アイデアを検索' %>
+        </div>
       <% end %>
     </li>
     <li class='hide-on-med-and-down'>
-      <%= link_to '#', data: { target: "dropdown_rank" }, class:'dropdown-trigger white' do %>
+      <%= link_to '#', data: { target: "dropdown_rank" }, class:'dropdown-trigger white', title: 'ランキングドロップダウン' do %>
         <p><%= embedded_svg 'icons/rank.svg', class: 'header__rank', alt: 'ランキング'%></p>
       <% end %>
       <ul id='dropdown_rank' class='dropdown-content'>

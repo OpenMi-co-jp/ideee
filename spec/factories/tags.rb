@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tags
@@ -14,5 +16,7 @@
 FactoryBot.define do
   factory :tag do
     name { Faker::App.unique.name }
+    created_at { Time.zone.now }
+    updated_at { Time.zone.now }
   end
 end

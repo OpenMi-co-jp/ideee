@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'Notifications', type: :request do
+RSpec.describe 'Notifications' do
   describe 'GET /index' do
     pending "add some examples (or delete) #{__FILE__}"
   end

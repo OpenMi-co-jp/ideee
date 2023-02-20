@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -44,7 +46,7 @@ FactoryBot.define do
     sequence(:email) { |n| "sample#{n}@example.com" }
     definition { User.definitions.values.sample }
     defined { true }
-    confirmed_at { Time.now }
+    confirmed_at { Time.zone.now }
     password { 'password' }
     ideas_num { 0 }
 
@@ -59,5 +61,17 @@ FactoryBot.define do
     trait :idea_engineer do
       definition { 2 }
     end
+  end
+
+  trait :idea do
+    ideas { [FactoryBot.build(:idea, :like)] }
+  end
+
+  trait :like do
+    likes { [FactoryBot.build(:like, :idea), FactoryBot.build(:like, :comment)] }
+  end
+
+  trait :comment do
+    comments { [FactoryBot.build(:comment)] }
   end
 end

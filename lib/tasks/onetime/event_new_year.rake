@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :event_new_year do
   desc 'お年玉企画のメール'
   task send_event_email: :environment do

@@ -53,19 +53,7 @@
           <% else %>
             <%= strip_tags(@idea&.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
           <% end %>
-          <div class='white p-3'>
-            <div class='flex login-guidance'>
-              <div class='nav-item'>
-                <%= link_to 'ユーザー登録', new_user_registration_path, class: 'waves-effect btn orange-action-back' %>
-              </div>
-              <div class='flex'>
-                <p class='grid-middle'>or</p>
-                <%= link_to 'ログイン', new_user_session_path, class: 'grid-middle' %>
-                <p class='grid-middle p-0'>して確認</p>
-              </div>
-              <p>
-            </div>
-          </div>
+          <%= render 'common/login_lead_links' %>
         <% end %>
       </div>
       <% if current_user&.own?(@idea) %>

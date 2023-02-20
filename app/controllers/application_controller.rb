@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
   before_action :get_notifications, if: :defined_user?
@@ -18,11 +20,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render404
-    render file: Rails.root.join('public', '404.html'), status: :not_found, layout: false, content_type: 'text/html'
+    render file: Rails.public_path.join('404.html'), status: :not_found, layout: false, content_type: 'text/html'
   end
 
   def render500
-    render file: Rails.root.join('public', '500.html'), status: :internal_server_error, layout: false,
+    render file: Rails.public_path.join('500.html'), status: :internal_server_error, layout: false,
            content_type: 'text/html'
   end
 
@@ -30,12 +32,12 @@ class ApplicationController < ActionController::Base
 
   # ユーザー情報が登録されているか確認し、アラートで登録必須項目を表示
   def defined_check
-    unless defined_user?
-      redirect_to edit_user_registration_path(params[:id])
-      flash[:alert] = 'ユーザーの名前を登録してください。' if current_user.name.blank?
-      flash[:alert] = 'ユーザーのメールアドレスを確認が完了していません。' if current_user.confirmed_at.blank?
-      flash[:alert] = 'ユーザーのタイプを登録してください。' if current_user.definition.blank?
-    end
+    return if defined_user?
+
+    redirect_to edit_user_registration_path(params[:id])
+    flash[:alert] = 'ユーザーの名前を登録してください。' if current_user.name.blank?
+    flash[:alert] = 'ユーザーのメールアドレスを確認が完了していません。' if current_user.confirmed_at.blank?
+    flash[:alert] = 'ユーザーのタイプを登録してください。' if current_user.definition.blank?
   end
 
   def store_user_location!

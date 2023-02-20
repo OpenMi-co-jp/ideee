@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
@@ -68,8 +70,10 @@ Rails.application.routes.draw do
   get 'terms_of_service' => 'high_voltage/pages#show', id: 'terms_of_service'
   get 'frequent_questions' => 'high_voltage/pages#show', id: 'frequent_questions'
   get 'how_to_find_idea' => 'high_voltage/pages#show', id: 'how_to_find_idea'
+  get 'avoid_pitfall' => 'high_voltage/pages#show', id: 'avoid_pitfall'
   get 'new_year_event' => 'high_voltage/pages#show', id: 'new_year_event'
   get 'events/valentine' => 'high_voltage/pages#show', id: 'events/valentine'
+  get 'events/new_year_2023' => 'high_voltage/pages#show', id: 'events/new_year_2023'
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount Sidekiq::Web => '/sidekiq'
 end

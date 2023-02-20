@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeColumnIntegerDefault < ActiveRecord::Migration[6.1]
   def up
     change_column :ideas, :view, :integer, default: 0, null: false

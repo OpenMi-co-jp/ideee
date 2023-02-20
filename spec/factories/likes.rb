@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: likes
@@ -19,12 +21,12 @@ FactoryBot.define do
     user
 
     trait :idea do
-      likable_id { FactoryBot.create(:idea).id }
+      likable_id { create(:idea).id }
       likable_type { 'Idea' }
     end
 
     trait :comment do
-      likable_id { FactoryBot.create(:comment).id }
+      likable_id { create(:comment).id }
       likable_type { 'Comment' }
     end
   end

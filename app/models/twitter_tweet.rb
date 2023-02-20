@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TwitterTweet
   def initialize
     @client = Twitter::REST::Client.new do |config|
@@ -9,7 +11,7 @@ class TwitterTweet
   end
 
   def tweet(idea, url)
-    user = User.find_by!(id: idea.user_id)
+    user = User.find(idea.user_id)
     twitter_user = user&.twitter_id.present? ? "@#{user.twitter_id} " : ''
     hashtags = '#ideee'
     hashtags = [hashtags, idea.idea_tags.pluck(:name)].flatten.join(' #') if idea.idea_tags.length.positive?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: comments
@@ -27,7 +29,7 @@ class Comment < ApplicationRecord
   has_many :notifications, dependent: :destroy, as: :notificatable
   has_many :likes, dependent: :destroy, as: :likable
 
-  scope :weekly_comments, -> { where(created_at: 7.days.ago..Time.now) }
+  scope :weekly_comments, -> { where(created_at: 7.days.ago..Time.zone.now) }
   scope :pickup_user_commets, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
 
   def over_length?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
     callback_for(:twitter)
@@ -12,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def callback_for(provider)
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
-      if Rails.env.production? && @user.created_at > Time.now.ago(5.minute)
+      if Rails.env.production? && @user.created_at > Time.zone.now.ago(5.minutes)
         Slack::SendNewJob.perform_later(@user, user_url(@user.id))
       end
     rescue StandardError => e

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: ideas
@@ -54,8 +56,8 @@ class Idea < ApplicationRecord
   after_commit :count_user_ideas # draftとideaを切り離したら作成と削除時に限定する
 
   validates :name, presence: true, length: { maximum: 50 }
-  validates :background, presence: true
-  validates :goal, presence: true
+  validates :background, presence: true, length: { maximum: 255 }
+  validates :goal, presence: true, length: { maximum: 255 }
   validate :validate_tags_num
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
@@ -68,12 +70,12 @@ class Idea < ApplicationRecord
   scope :drafts, -> { where draft: true }
   scope :most_liked, -> { preload(:idea_tags).order(likes_num: 'DESC') }
   scope :most_commented, -> { preload(:idea_tags).order(comments_num: 'DESC') }
-  scope :recent_select, -> { where(published_at: 30.days.ago..Time.now) }
+  scope :recent_select, -> { where(published_at: 30.days.ago..Time.zone.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
-  scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id: user_id).uniq }
+  scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id:).uniq }
 
   def published_time
     published_at&.strftime('%Y.%m.%d')
@@ -88,8 +90,7 @@ class Idea < ApplicationRecord
   end
 
   def count_comments
-    self.comments_num = comments.size
-    save!
+    update_column(:comments_num, comments.size)
   end
 
   def save_with_tags(tag_list)
@@ -117,19 +118,19 @@ class Idea < ApplicationRecord
   def same_tag_ideas
     return [] if idea_tags.empty?
 
-    Idea.published.where(idea_tags: { name: idea_tags.pluck(:name) }).where.not(id: id).eager_load(%i[idea_tags taggings])
+    Idea.published.where(idea_tags: { name: idea_tags.pluck(:name) }).where.not(id:).eager_load(%i[idea_tags taggings])
   end
 
   def same_user_other_ideas
     return [] if user.ideas_num == 1
 
-    user.ideas.published.eager_load(:idea_tags).where.not(id: id)
+    user.ideas.published.eager_load(:idea_tags).where.not(id:)
   end
 
   def send_draft_remind
     return unless Rails.env.production? || draft
 
-    RemindDraftJob.delay_for(1.week).perform_later(id)
+    RemindDraftJob.set(wait: 1.week).perform_now(id)
   end
 
   def voted_percentage(level)

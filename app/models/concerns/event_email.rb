@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EventEmail
   extend ActiveSupport::Concern
 
@@ -7,8 +9,8 @@ module EventEmail
   # お年玉キャンペーンで送ったメール
   def event_new_year
     body = "
-            <a href='https://www.ideee.tech/new_year_event?utm_source=event_mail&utm_medium=mail&utm_id=new_year_event' target='_blank' title='お年玉キャンペーン'>
-              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/event_new_year.png' style='max-height: 400px; margin: 0 auto;' alt='お年玉キャンペーン'>
+            <a href='https://www.ideee.tech/events/new_year_2023?utm_source=event_mail&utm_medium=mail&utm_id=new_year_2023' target='_blank' title='お年玉キャンペーン'>
+              <img src='https://ideee-bucket.s3.ap-northeast-1.amazonaws.com/ideee_new_year_event_2023.webp' style='max-height: 400px; margin: 0 auto;' alt='お年玉キャンペーン'>
             </a>
             <h4 style='color: #FF862E;'>🎍ideeeお年玉キャンペーン🎍</h4>
             <hr>
@@ -17,13 +19,13 @@ module EventEmail
               <li style='font-size: 2.5rem; color: #FF862E;'>Amazonギフト券3000円分</li>
               <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥇アイデアが盛り上がったで賞 １名</li>
               <li style='font-size: 2rem; color: #D9C2AD;'>Amazonギフト券1000円分</li>
-              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥈コメント投稿から抽選 1名</li>
+              <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥈コメント投稿から抽選 2名</li>
               <li style='font-size: 1.5rem; color: #FFBF85;'>Amazonギフト券500円分</li>
               <li style='margin-bottom: 40px; text-decoration: underline #FF862E;'>🥉アイデア投稿から抽選 2名</li>
             </ul>
             <h3>キャンペーン期間</h3>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              2021年12月26日(日)〜2022年1月5日(水)
+              2022年12月26日(月)〜2023年1月9日(月)
             </div>
             <h3>キャンペーン対象の条件</h3>
             <ul style='margin-bottom: 40px;'>
@@ -33,11 +35,11 @@ module EventEmail
               <li style='font-size: 1.5rem;'>2. 新規アイデアにコメントを投稿💬</li>
             </ul>
             <h4>
-              #{analytics_url('new_year_event', 'event_mail', '詳細はこちらのキャンペーンページにて')}
+              #{analytics_url('events/new_year_2023', 'event_mail', '詳細はこちらのキャンペーンページにて')}
             </h4>
           "
 
-    subject = 'ideee初のお年玉キャンペーン🎍10日間の盛り上がり'
+    subject = 'ideeeお年玉キャンペーン🎍年末年始の盛り上がり'
     content = Content.new(type: 'text/html', value: html_frame(body, 'event_mail'))
 
     User.event_emailable.map do |user|

@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'Ideas', type: :request do
+RSpec.describe 'Ideas' do
   let!(:idea) { FactoryBot.create(:idea) }
+
   before { sign_in idea.user }
 
   describe 'GET #index' do
     it 'リクエストが成功すること' do
       get ideas_path
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
   end
 
@@ -15,7 +18,7 @@ RSpec.describe 'Ideas', type: :request do
     context 'アイデアが存在する場合' do
       it 'リクエストが成功すること' do
         get idea_path(idea)
-        expect(response.status).to eq 200
+        expect(response).to have_http_status :ok
       end
 
       it 'アイデアの名前が表示されていること' do
@@ -26,6 +29,7 @@ RSpec.describe 'Ideas', type: :request do
 
     context 'アイデアが存在しない場合' do
       subject { -> { get idea_path(idea.id + 100) } }
+
       it { is_expected.to raise_error ActiveRecord::RecordNotFound }
     end
   end
@@ -33,14 +37,14 @@ RSpec.describe 'Ideas', type: :request do
   describe 'GET #new' do
     it 'リクエストが成功すること' do
       get new_idea_path
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
   end
 
   describe 'GET #edit' do
     it 'リクエストが成功すること' do
       get edit_idea_path(idea)
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
 
     it 'アイデアの名前が表示されていること' do
@@ -50,12 +54,14 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'POST #create' do
-    subject { post ideas_path, params: params }
+    subject { post ideas_path, params: }
+
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea) } }
+
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 302
+        expect(response).to have_http_status :found
       end
 
       it 'アイデアが登録されること' do
@@ -71,11 +77,12 @@ RSpec.describe 'Ideas', type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      let(:params) { { idea: attributes_for(:idea, :empty_name) } }
+      let(:params) { { idea: attributes_for(:idea, name: '') } }
+
       it 'アイデアが登録されないこと' do
         expect do
           subject
-        end.to_not change(Idea, :count)
+        end.not_to change(Idea, :count)
       end
 
       it 'エラーが表示されること' do
@@ -87,12 +94,14 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'PUT #update' do
-    subject { put idea_path(idea), params: params }
+    subject { put idea_path(idea), params: }
+
     context 'パラメータが妥当な場合' do
-      let(:params) { { idea: attributes_for(:idea, :updated_idea) } }
+      let(:params) { { idea: attributes_for(:idea, name: 'updated idea') } }
+
       it 'リクエストが成功すること' do
         subject
-        expect(response.status).to eq 302
+        expect(response).to have_http_status :found
       end
 
       it 'アイデア名が更新されること' do
@@ -108,11 +117,12 @@ RSpec.describe 'Ideas', type: :request do
     end
 
     context 'パラメータが不正な場合' do
-      let(:params) { { idea: attributes_for(:idea, :empty_name) } }
+      let(:params) { { idea: attributes_for(:idea, name: '') } }
+
       it 'アイデア名が変更されないこと' do
         expect do
           subject
-        end.to_not change(Idea.find(idea.id), :name)
+        end.not_to change(Idea.find(idea.id), :name)
       end
 
       it 'エラーが表示されること' do
@@ -125,9 +135,10 @@ RSpec.describe 'Ideas', type: :request do
 
   describe 'DELETE #destroy' do
     subject { delete idea_path(idea) }
+
     it 'リクエストが成功すること' do
       subject
-      expect(response.status).to eq 302
+      expect(response).to have_http_status :found
     end
 
     it 'アイデアが削除されること' do
@@ -143,16 +154,18 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'GET #search' do
-    subject { get search_ideas_path, params: params }
-    let(:params) { { keyword: idea.name } }
+    subject { get search_ideas_path, params: }
+
+    let(:params) { { q: { name_or_idea_tags_name_cont: idea.name } } }
+
     it 'リクエストが成功すること' do
       subject
-      expect(response.status).to eq 200
+      expect(response).to have_http_status :ok
     end
 
     it '検索したアイデアが表示されていること' do
       subject
-      expect(response.body).to include idea.name
+      expect(response.body.encode!).to include idea.name
     end
   end
 end

@@ -1,11 +1,8 @@
+# frozen_string_literal: true
+
 class RoomsController < ApplicationController
   before_action :authenticate_user!
   prepend_before_action :set_room, only: %i[show]
-
-  def create
-    @room = Room.create(team_id: room_params[:team_id])
-    redirect_to @room, notice: t('.success')
-  end
 
   def show
     @team = @room.team
@@ -15,10 +12,15 @@ class RoomsController < ApplicationController
     @messages = @room.messages.eager_load(:user, :rich_text_content)
   end
 
+  def create
+    @room = Room.create!(team_id: room_params[:team_id])
+    redirect_to @room, notice: t('.success')
+  end
+
   private
 
   def set_room
-    @room = Room.find_by!(id: params[:id])
+    @room = Room.find(params[:id])
   end
 
   def room_params

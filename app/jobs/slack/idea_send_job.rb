@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Slack
   class IdeaSendJob < ApplicationJob
     queue_as :default
 
     def perform
       # 本番用トライアル
-      puts '-------------perform------'
+      Rails.logger.debug '-------------perform------'
       SlackNotifier.new.trial
       # new_users = Analytics.new.daily_total_count('newUsers')
       # sessions = Analytics.new.daily_total_count('sessions')

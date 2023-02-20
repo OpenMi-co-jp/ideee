@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   prepend_before_action :set_team, except: %i[new create]
   before_action :authenticate_user!
@@ -15,6 +17,8 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
+  def edit; end
+
   def create
     @team = Team.new(team_params)
     if current_user == @team.owner
@@ -26,15 +30,13 @@ class TeamsController < ApplicationController
     end
   end
 
-  def edit; end
-
   def update
-    @team.update(team_params)
+    @team.update!(team_params)
     redirect_to @team, notice: t('.success')
   end
 
   def join
-    @team.team_users.create(user: current_user)
+    @team.team_users.create!(user: current_user)
     @idea.count_team_members
     Notifications::JoinTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
@@ -58,13 +60,13 @@ class TeamsController < ApplicationController
   private
 
   def set_team
-    @team = Team.find_by!(id: params[:id])
+    @team = Team.find(params[:id])
   end
 
   def set_idea
     @idea =
       if params[:idea_id].present?
-        Idea.find_by!(id: params[:idea_id])
+        Idea.find(params[:idea_id])
       else
         @team.idea
       end

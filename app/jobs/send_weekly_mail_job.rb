@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendWeeklyMailJob < ApplicationJob
   queue_as :default
 
@@ -5,7 +7,7 @@ class SendWeeklyMailJob < ApplicationJob
     return unless Rails.env.production?
 
     # 1週間後の同じ時間に実行
-    SendWeeklyMailJob.delay_for(1.week).perform_now
+    SendWeeklyMailJob.set(wait: 1.week).perform_now
     ideas = Idea.published.recent_select
     new_ideas = ideas.not_emailed
     # 新しいアイデアが10件無ければその週のメールはスキップ
@@ -15,7 +17,7 @@ class SendWeeklyMailJob < ApplicationJob
     selected_ideas = new_ideas.order(published_at: 'DESC').first(10)
     SendEmail.new.send_heart_ranking_and_new_idea(commented_ideas, selected_ideas)
     new_ideas.each do |idea|
-      idea.update_column(:emailed_at, Time.now)
+      idea.update_column(:emailed_at, Time.zone.now)
     end
   end
 end

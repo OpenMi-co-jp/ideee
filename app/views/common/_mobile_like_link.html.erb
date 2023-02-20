@@ -1,10 +1,8 @@
-<a>
-  <div class='mobile-like like-click idea <%= 'clicked' if current_user&.like?(object) %>' data-id='<%= object.id %>' data-type='<%= object.model_name %>'>
-    <span id='like-heart'>
-      <%= embedded_svg "like-heart.svg", alt: 'いいね数' %>
-    </span>
-    <span class='likes-count js-like-count'>
-      <%= object.likes.length %>
-    </span>
-  </div>
+<a class='mobile-like like-click idea <%= 'clicked' if current_user&.like?(object) %>' data-id='<%= object.id %>' data-type='<%= object.model_name %>'>
+  <span id='like-heart'>
+    <%= embedded_svg "like-heart.svg", alt: 'いいね数' %>
+  </span>
+  <span class='likes-count js-like-count'>
+    <%= object.likes.length %>
+  </span>
 </a>

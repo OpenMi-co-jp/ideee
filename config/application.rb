@@ -28,5 +28,8 @@ module Ideee
     config.active_job.queue_adapter = :sidekiq
 
     config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
+
+    # rails7以降はデフォルトをvips指定とsるのでmini_magickを指定する
+    config.active_storage.variant_processor = :mini_magick
   end
 end

@@ -25,7 +25,6 @@
 #  similar                                                  :string(255)
 #  stance                                                   :integer          default("free_right")
 #  target                                                   :string(255)
-#  team_members_num                                         :integer          default(0)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
 #  created_at                                               :datetime         not null
@@ -62,9 +61,9 @@ class Idea < ApplicationRecord
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
-  enum difficulty: %i[not_yet easy middle hard]
-  enum product_apply: %i[no_apply applying approved]
-  enum stance: %i[free_right personal_project team_project]
+  enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
+  enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
+  enum stance: { free_right: 0, personal_project: 1, team_project: 2 }
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }

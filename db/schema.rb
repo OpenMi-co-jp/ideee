@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_29_082846) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_112413) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -101,7 +101,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_082846) do
     t.string "github_url"
     t.string "monetize"
     t.integer "stance", default: 0
-    t.integer "team_members_num", limit: 2, default: 0
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 
@@ -197,6 +196,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_082846) do
     t.string "offer", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "members_num", default: 0
     t.index ["idea_id"], name: "index_teams_on_idea_id"
     t.index ["owner_id"], name: "index_teams_on_owner_id"
     t.index ["status", "owner_id"], name: "index_teams_on_status_and_owner_id"

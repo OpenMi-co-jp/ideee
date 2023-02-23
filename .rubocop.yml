@@ -204,3 +204,6 @@ Style/MissingElse:
 RSpec/FactoryBot/SyntaxMethods:
   Enabled: false
 
+# frozen_string_literalの記述を追加しない
+Style/FrozenStringLiteralComment:
+  Enabled: false

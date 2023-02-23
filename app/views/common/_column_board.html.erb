@@ -34,11 +34,11 @@
               <%= image_tag 'like-heart.svg', class: 'icon-size', loading: "lazy", alt: "ハート数" %>
               <p><%= idea.likes_num %></p>
             </div>
-            <!-- チーム開発募集中の検索ページ限りteam_members_numの数をアイデア表示に加える -->
+            <!-- チーム開発募集中の検索ページ限りteam.members_numの数をアイデア表示に加える -->
             <% if request.path == search_ideas_path && params[:q]&.include?('team_status_eq') && idea.enough_team_member? %>
               <div class='idea__item'>
                 <i class="material-icons">groups</i>
-                <p><%= idea.team_members_num %></p>
+                <p><%= idea.team.members_num %></p>
               </div>
             <% end %>
             <% if idea.approved? %>

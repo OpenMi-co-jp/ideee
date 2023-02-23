@@ -50,10 +50,10 @@ class Idea < ApplicationRecord
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :notifications, dependent: :destroy
   has_one :team, dependent: :destroy
+  counter_culture :user, column_name: 'ideas_num'
   has_rich_text :note
   mount_uploader :icon, ImageUploader
   after_create :send_draft_remind
-  after_commit :count_user_ideas # draftとideaを切り離したら作成と削除時に限定する
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :background, presence: true, length: { maximum: 255 }
@@ -62,9 +62,9 @@ class Idea < ApplicationRecord
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
-  enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
-  enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
-  enum stance: { free_right: 0, personal_project: 1, team_project: 2 }
+  enum difficulty: %i[not_yet easy middle hard]
+  enum product_apply: %i[no_apply applying approved]
+  enum stance: %i[free_right personal_project team_project]
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
@@ -148,11 +148,5 @@ class Idea < ApplicationRecord
 
   def enough_team_member?
     team_project? && team_members_num.positive?
-  end
-
-  def count_user_ideas
-    return unless Rails.env.production?
-
-    CountUserIdeasJob.perform_later(user_id)
   end
 end

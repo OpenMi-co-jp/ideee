@@ -89,10 +89,6 @@ class Idea < ApplicationRecord
     update_column(:likes_num, likes.size)
   end
 
-  def count_comments
-    update_column(:comments_num, comments.size)
-  end
-
   def save_with_tags(tag_list)
     if tag_list.nil?
       save!

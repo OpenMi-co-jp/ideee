@@ -22,7 +22,7 @@ RSpec.describe 'Comments' do
       it 'コメントが登録されること' do
         expect do
           subject
-        end.to change(Comment, :count).by(1)
+        end.to change(Comment, :count).by(+1)
       end
     end
 

@@ -210,7 +210,6 @@ Rails/SkipsModelValidations:
     - 'app/controllers/notifications_controller.rb'
     - 'app/controllers/users/registrations_controller.rb'
     - 'app/jobs/analytics_job/update_views_job.rb'
-    - 'app/jobs/count_user_ideas_job.rb'
     - 'app/jobs/notifications/send_heart_mail.rb'
     - 'app/jobs/send_weekly_mail_job.rb'
     - 'app/models/idea.rb'
@@ -281,3 +280,21 @@ Style/YodaExpression:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 186
+
+Style/StringLiterals:
+  Exclude:
+    - 'spec/rails_helper.rb'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Layout/CommentIndentation:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/models/send_email.rb'
+    - 'app/controllers/ideas_controller.rb'
+    - 'app/models/user.rb'

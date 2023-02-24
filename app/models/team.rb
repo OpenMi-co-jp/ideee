@@ -5,6 +5,7 @@
 # Table name: teams
 #
 #  id          :bigint           not null, primary key
+#  members_num :integer          default(0)
 #  offer       :string(255)      not null
 #  requirement :string(255)      not null
 #  status      :integer          default("active"), not null
@@ -40,8 +41,12 @@ class Team < ApplicationRecord
   enum status: { active: 0, stop: 1, finished: 2 }, _prefix: true
   alias user owner # owner?メソッドを使うために設定
 
+  def current_member
+    team_users.preload(:user).where(left: false).map(&:user)
+  end
+
   def member?(user)
-    members.include?(user)
+    current_member.include?(user)
   end
 
   def joined?(user)

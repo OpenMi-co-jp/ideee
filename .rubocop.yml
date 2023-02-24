@@ -204,3 +204,11 @@ Style/MissingElse:
 RSpec/FactoryBot/SyntaxMethods:
   Enabled: false
 
+# ファイルの先頭に文字列をfreezeするかの指摘を必要としない
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# letを定義する際に左右の括弧が揃っているかどうかを検証を必要としない
+RSpec/AlignRightLetBrace:
+  Enabled: false
+

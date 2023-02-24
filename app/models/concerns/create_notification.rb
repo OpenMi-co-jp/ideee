@@ -19,12 +19,19 @@ module CreateNotification
     end
   end
 
-  def create_notification(idea:, visited_id:, notificatable:)
-    active_notifications.find_or_create_by!(
+  def create_notification(idea:, visited_id:, notificatable: '', notificatable_type: '', notificatable_id: '')
+    notificatable_detail =
+      if notificatable.present?
+        { notificatable: }
+      else
+        { notificatable_type:, notificatable_id: }
+      end
+
+    active_notifications.create!(
       visitor: self,
       visited_id:,
       idea:,
-      notificatable:
+      **notificatable_detail
     )
   end
 

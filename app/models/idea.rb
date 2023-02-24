@@ -143,7 +143,7 @@ class Idea < ApplicationRecord
   end
 
   def count_team_members
-    update(team_members_num: team.members.size)
+    update(team_members_num: team.current_member.size)
   end
 
   def enough_team_member?

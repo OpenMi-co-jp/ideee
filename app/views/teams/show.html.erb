@@ -38,6 +38,8 @@
       <%= render 'teams/show/owner_link', team: @team %>
     <% elsif @team.status_active? && !@team.member?(current_user) %>
       <%= link_to t('default.team.join'), join_team_path(@team), method: :post, class: 'btn orange-action-back' %>
+    <% elsif @team.status_active? && @team.member?(current_user) %>
+      <%= link_to t('default.team.leave'), leave_team_path(@team), method: :post, data: { confirm: 'チーム開発から脱退してもよろしいですか？' }, class: 'btn gray-3-back' %>
     <% end %>
   </div>
 </div>

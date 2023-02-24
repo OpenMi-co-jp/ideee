@@ -20,7 +20,7 @@ RSpec.describe 'Likes' do
       it 'ハートが送られること' do
         expect do
           subject
-        end.to change(Like, :count).by(1)
+        end.to change(Like, :count).by(+1)
       end
     end
   end

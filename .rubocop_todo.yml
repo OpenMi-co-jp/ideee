@@ -280,3 +280,21 @@ Style/YodaExpression:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 186
+
+Style/StringLiterals:
+  Exclude:
+    - 'spec/rails_helper.rb'
+
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Layout/CommentIndentation:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/models/send_email.rb'
+    - 'app/controllers/ideas_controller.rb'
+    - 'app/models/user.rb'

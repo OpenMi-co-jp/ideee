@@ -153,9 +153,7 @@ class User < ApplicationRecord
     comment_params = { idea_id: params[:idea_id], description: params[:description] }
     return if comments.find_by(comment_params).present?
 
-    comment = comments.create!(comment_params)
-    comment.idea.count_comments if comment.valid?
-    comment
+    comments.create!(comment_params)
   end
 
   # Contributionの計算

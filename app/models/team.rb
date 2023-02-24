@@ -5,6 +5,7 @@
 # Table name: teams
 #
 #  id          :bigint           not null, primary key
+#  members_num :integer          default(0)
 #  offer       :string(255)      not null
 #  requirement :string(255)      not null
 #  status      :integer          default("active"), not null

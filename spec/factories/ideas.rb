@@ -25,7 +25,6 @@
 #  similar                                                  :string(255)
 #  stance                                                   :integer          default("free_right")
 #  target                                                   :string(255)
-#  team_members_num                                         :integer          default(0)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
 #  created_at                                               :datetime         not null

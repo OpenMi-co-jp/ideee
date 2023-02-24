@@ -136,8 +136,4 @@ class Idea < ApplicationRecord
   def enough_view?
     view > 10
   end
-
-  def enough_team_member?
-    team_project? && team.members_num.positive?
-  end
 end

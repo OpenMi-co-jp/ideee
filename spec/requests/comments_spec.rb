@@ -21,13 +21,8 @@ RSpec.describe 'Comments' do
 
       it 'コメントが登録されること' do
         expect do
-<<<<<<< Updated upstream
           subject
         end.to change(Comment, :count).by(1)
-=======
-          subject(:post_comments_path)
-        end.to change(Comment, :count).by(+1)
->>>>>>> Stashed changes
       end
     end
 
@@ -35,11 +30,7 @@ RSpec.describe 'Comments' do
       let(:params) { { description: '', idea_id: comment.idea_id } }
 
       it 'コメントが登録されないこと' do
-<<<<<<< Updated upstream
-        expect { subject }.to raise_error(ActiveRecord::RecordInvalid, "バリデーションに失敗しました: コメントを入力してください")
-=======
-        expect { subject(:post_comments_path) }.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: コメントを入力してください')
->>>>>>> Stashed changes
+        expect { subject }.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: コメントを入力してください')
       end
     end
   end

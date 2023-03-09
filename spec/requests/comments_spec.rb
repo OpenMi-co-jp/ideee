@@ -9,20 +9,25 @@ RSpec.describe 'Comments' do
   before { sign_in user }
 
   describe 'POST #create' do
-    subject { post comments_path, params: }
+    subject(:post_comments_path) { post comments_path, params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { description: comment.description, idea_id: comment.idea_id } }
 
       it 'リクエストが成功すること' do
-        subject
-        expect(response).to have_http_status :no_content
+        subject(:post_comments_path)
+        expect(post_comments_path.response).to have_http_status :no_content
       end
 
       it 'コメントが登録されること' do
         expect do
+<<<<<<< Updated upstream
           subject
         end.to change(Comment, :count).by(1)
+=======
+          subject(:post_comments_path)
+        end.to change(Comment, :count).by(+1)
+>>>>>>> Stashed changes
       end
     end
 
@@ -30,22 +35,26 @@ RSpec.describe 'Comments' do
       let(:params) { { description: '', idea_id: comment.idea_id } }
 
       it 'コメントが登録されないこと' do
+<<<<<<< Updated upstream
         expect { subject }.to raise_error(ActiveRecord::RecordInvalid, "バリデーションに失敗しました: コメントを入力してください")
+=======
+        expect { subject(:post_comments_path) }.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: コメントを入力してください')
+>>>>>>> Stashed changes
       end
     end
   end
 
   describe 'DELETE #destroy' do
-    subject { delete comment_path(comment) }
+    subject(:delete_comment_path) { delete comment_path(comment) }
 
     it 'リクエストが成功すること' do
-      subject
-      expect(response).to have_http_status :no_content
+      subject(:delete_comment_path)
+      expect(delete_comment_path.response).to have_http_status :no_content
     end
 
     it 'コメントが削除されること' do
       expect do
-        subject
+        subject(:delete_comment_path)
       end.to change(Comment, :count).by(-1)
     end
   end

@@ -92,7 +92,6 @@ RSpec/MultipleExpectations:
 RSpec/NamedSubject:
   Exclude:
     - 'spec/models/user_spec.rb'
-    - 'spec/requests/comments_spec.rb'
     - 'spec/requests/difficulties_spec.rb'
     - 'spec/requests/ideas_spec.rb'
     - 'spec/requests/likes_spec.rb'

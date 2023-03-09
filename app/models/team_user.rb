@@ -5,6 +5,11 @@
 # Table name: team_users
 #
 #  id         :bigint           not null, primary key
+<<<<<<< Updated upstream
+=======
+#  leave      :boolean          default(FALSE), not null
+#  left       :boolean          default(FALSE), not null
+>>>>>>> Stashed changes
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  team_id    :bigint

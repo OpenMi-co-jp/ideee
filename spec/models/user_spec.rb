@@ -156,7 +156,7 @@ RSpec.describe User do
   end
 
   describe 'create_comment' do
-    subject { user.create_comment(comment_params) }
+    subject(:users_comment) { user.create_comment(comment_params) }
 
     let(:idea) { FactoryBot.create(:idea) }
     let(:user)           { idea.user                          }
@@ -165,7 +165,7 @@ RSpec.describe User do
 
     context 'アイデアに初めてコメントするユーザーの場合' do
       it 'コメントが作成される' do
-        subject
+        users_comment
         expect(user.comments.where(**comment_params)).to exist
       end
     end
@@ -177,7 +177,7 @@ RSpec.describe User do
         let(:comment_params) { { idea_id: idea.id, description: 'fuga' } }
 
         it 'コメントが作成される' do
-          subject
+          users_comment
           expect(user.comments.where(**comment_params)).to exist
         end
       end
@@ -189,13 +189,13 @@ RSpec.describe User do
   end
 
   describe 'point_update' do
-    subject { user.point_update }
+    subject(:user_point_update) { user.point_update }
 
     context 'アイデア投稿、コメント投稿、いいね何もしていない場合' do
       let(:user) { FactoryBot.create(:user) }
 
       it 'pointは0' do
-        subject
+        user_point_update
         expect(user.point).to eq 0
       end
     end
@@ -204,7 +204,7 @@ RSpec.describe User do
       let(:user) { FactoryBot.create(:user, :idea) }
 
       it 'pointは3' do
-        subject
+        user_point_update
         expect(user.point).to eq 3
       end
     end
@@ -213,7 +213,7 @@ RSpec.describe User do
       let(:user) { FactoryBot.create(:user, :idea, :like) }
 
       it 'pointは4' do
-        subject
+        user_point_update
         expect(user.point).to eq 4
       end
     end
@@ -222,14 +222,14 @@ RSpec.describe User do
       let(:user) { FactoryBot.create(:user, :idea, :like, :comment) }
 
       it 'pointは5' do
-        subject
+        user_point_update
         expect(user.point).to eq 5
       end
     end
   end
 
   describe 'fix_ids' do
-    subject { user.fix_ids }
+    subject(:user_fix_fix) { user.fix_ids }
 
     context 'twitter_id' do
       context 'urlが含まれたtwitter_idで更新しようとした場合' do
@@ -237,7 +237,7 @@ RSpec.describe User do
         let(:user)       { FactoryBot.create(:user, twitter_id: "https://twitter.com/#{twitter_id}") }
 
         it 'id部分のみが抽出される' do
-          subject
+          user_fix_fix
           expect(user.twitter_id).to eq twitter_id
         end
       end
@@ -247,7 +247,7 @@ RSpec.describe User do
         let(:user) { FactoryBot.create(:user, twitter_id: "@#{twitter_id}") }
 
         it 'id部分のみが抽出される' do
-          subject
+          user_fix_fix
           expect(user.twitter_id).to eq twitter_id
         end
       end
@@ -258,7 +258,7 @@ RSpec.describe User do
       let(:user) { FactoryBot.create(:user, github_id: "https://github.com/#{github_id}") }
 
       it 'id部分のみが抽出される' do
-        subject
+        user_fix_fix
         expect(user.github_id).to eq github_id
       end
     end

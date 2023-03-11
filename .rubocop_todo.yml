@@ -93,8 +93,6 @@ RSpec/NamedSubject:
   Exclude:
     - 'spec/requests/difficulties_spec.rb'
     - 'spec/requests/ideas_spec.rb'
-    - 'spec/requests/likes_spec.rb'
-
 
 # Offense count: 31
 # Configuration parameters: AllowedGroups.

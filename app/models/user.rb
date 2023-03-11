@@ -75,6 +75,7 @@ class User < ApplicationRecord
   delegate :comment_email, to: :notification_config
   delegate :draft_remind_email, to: :notification_config
   delegate :team_join_email, to: :notification_config
+  delegate :team_leave_email, to: :notification_config
   delegate :team_message_email, to: :notification_config
   scope :event_emailable, -> { joins(:notification_config).where(notification_configs: { event_email: true }) }
   scope :heart_emailable, -> { joins(:notification_config).where(notification_configs: { heart_email: true }) }
@@ -152,9 +153,7 @@ class User < ApplicationRecord
     comment_params = { idea_id: params[:idea_id], description: params[:description] }
     return if comments.find_by(comment_params).present?
 
-    comment = comments.create!(comment_params)
-    comment.idea.count_comments if comment.valid?
-    comment
+    comments.create!(comment_params)
   end
 
   # Contributionの計算

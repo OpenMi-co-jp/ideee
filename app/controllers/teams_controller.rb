@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   prepend_before_action :set_team, except: %i[new create]
   before_action :authenticate_user!
   before_action :defined_check, except: %i[show]
-  before_action :set_idea, only: %i[new edit stop join activate finish]
+  before_action :set_idea, only: %i[new edit stop join leave activate finish]
   before_action :check_owner, only: %i[edit update stop activate finish]
 
   def show
@@ -37,8 +37,14 @@ class TeamsController < ApplicationController
 
   def join
     @team.team_users.create!(user: current_user)
-    @idea.count_team_members
     Notifications::JoinTeamJob.perform_later(current_user, @idea)
+    redirect_to @idea, notice: t('.success')
+  end
+
+  def leave
+    team_user = @team.team_users.find_by!(user_id: current_user.id)
+    team_user.update!(left: true)
+    Notifications::LeaveTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end
 

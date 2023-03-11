@@ -2,7 +2,8 @@
 
 class IdeasController < ApplicationController
   prepend_before_action :set_idea, only: %i[show edit update destroy publish suggest]
-  before_action :authenticate_user!, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
+  before_action :authenticate_user!,
+                except: %i[index show search tags most_comment most_liked team_active deployed suggest]
   before_action :own_user_check, only: %i[edit update destroy]
   before_action :defined_check, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
   before_action :own_draft_check, only: %i[show]
@@ -37,9 +38,9 @@ class IdeasController < ApplicationController
         redirect_to @idea, notice: t('.draft_save')
       else
         destination = if params.dig(
-                          :idea,
+          :idea,
                           :stance
-                         ) == 'team_project'
+        ) == 'team_project'
 
                         new_team_path(idea_id: @idea)
                       else
@@ -85,7 +86,7 @@ class IdeasController < ApplicationController
   def search
     @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)
     @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
-    @searched_ideas = @q.result(distinct: true)
+    @searched_ideas = @q.result
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
     current_page = params[:page].nil? ? 1 : params[:page].to_i
     @rank_num = (current_page - 1) * @paged_ideas.limit_value
@@ -155,11 +156,13 @@ class IdeasController < ApplicationController
   end
 
   def ransack_params
-    day_from = params[:q][:published_at_gteq]
-    params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
+    if params[:q]
+      day_from = params[:q][:published_at_gteq]
+      params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
 
-    day_to = params[:q][:published_at_lteq]
-    params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
+      day_to = params[:q][:published_at_lteq]
+      params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
+    end
 
     params[:q]
   end

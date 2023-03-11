@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :teams, except: %i[index destroy] do
     member do
       post :join
+      post :leave
       post :stop
       post :activate
       post :finish

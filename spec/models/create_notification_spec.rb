@@ -18,7 +18,7 @@ RSpec.describe CreateNotification, type: :helper do
         it '通知を作成する' do
           expect do
             idea_like_notification
-          end.to change(Notification, :count).by(1)
+          end.to change(Notification, :count).by(+1)
         end
 
         it 'notificatable_typeが正しく設定される' do
@@ -34,7 +34,7 @@ RSpec.describe CreateNotification, type: :helper do
         it '通知を作成する' do
           expect do
             product_apply_notification
-          end.to change(Notification, :count).by(1)
+          end.to change(Notification, :count).by(+1)
         end
 
         it 'notificatable_typeが正しく設定される' do
@@ -74,14 +74,14 @@ RSpec.describe CreateNotification, type: :helper do
       end
     end
 
-    describe 'create_notification' do
+    describe 'create_notification Idea' do
       context 'ideaのとき' do
         subject(:idea_notification) { user.create_notification(idea:, visited_id: user.id, notificatable: idea) }
 
         it '通知を作成する' do
           expect do
             idea_notification
-          end.to change(Notification, :count).by(1)
+          end.to change(Notification, :count).by(+1)
         end
 
         it 'notificatable_typeが正しく設定される' do
@@ -101,7 +101,7 @@ RSpec.describe CreateNotification, type: :helper do
         it '通知を作成する' do
           expect do
             team_user_notification
-          end.to change(Notification, :count).by(1)
+          end.to change(Notification, :count).by(+1)
         end
 
         it 'notificatable_typeが正しく設定される' do
@@ -123,12 +123,55 @@ RSpec.describe CreateNotification, type: :helper do
         it '通知を作成する' do
           expect do
             difficulty_notification
-          end.to change(Notification, :count).by(1)
+          end.to change(Notification, :count).by(+1)
         end
 
         it 'notificatable_typeが正しく設定される' do
           expect(difficulty_notification.notificatable_type).to eq('Difficulty')
           expect(difficulty_notification.notificatable_id).to eq(difficulty.id)
+        end
+      end
+    end
+
+    describe 'create_notification チーム開発' do
+      let(:current_user) { FactoryBot.create(:user) }
+      let(:team_user_id) { FactoryBot.create(:team_user).id }
+
+      context 'チーム開発参加のとき' do
+        subject(:join_team_user_notification) do
+          current_user.create_notification(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type:)
+        end
+
+        let(:notificatable_type) { 'join_team_user' }
+
+        it '通知を作成する' do
+          expect do
+            join_team_user_notification
+          end.to change(Notification, :count).by(+1)
+        end
+
+        it 'notificatable_id、notificatable_typeが正しく設定される' do
+          expect(join_team_user_notification.notificatable_id).to eq(team_user_id)
+          expect(join_team_user_notification.notificatable_type).to eq(notificatable_type)
+        end
+      end
+
+      context 'チーム開発脱退のとき' do
+        subject(:leave_team_user_notification) do
+          current_user.create_notification(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type:)
+        end
+
+        let(:notificatable_type) { 'leave_team_user' }
+
+        it '通知を作成する' do
+          expect do
+            leave_team_user_notification
+          end.to change(Notification, :count).by(+1)
+        end
+
+        it 'notificatable_id、notificatable_typeが正しく設定される' do
+          expect(leave_team_user_notification.notificatable_id).to eq(team_user_id)
+          expect(leave_team_user_notification.notificatable_type).to eq(notificatable_type)
         end
       end
     end

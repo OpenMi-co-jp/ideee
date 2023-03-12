@@ -6,46 +6,46 @@ RSpec.describe 'Users' do
   let!(:user) { FactoryBot.create(:user) }
 
   describe 'GET #index' do
-    subject(:get_users_path) { get users_path }
+    subject(:get_users) { get users_path }
 
     it 'リクエストが成功すること' do
-      get_users_path
+      get_users
       expect(response).to have_http_status :ok
     end
 
     it 'ユーザーの名前が表示されていること' do
-      get_users_path
+      get_users
       expect(response.body).to include user.name
     end
   end
 
   describe 'GET #show' do
-    subject(:get_users_path) { get user_path(user) }
+    subject(:get_users) { get user_path(user) }
 
     context 'ユーザーが存在する場合' do
       it 'リクエストが成功すること' do
-        get_users_path
+        get_users
         expect(response).to have_http_status :ok
       end
 
       it 'ユーザーの名前が表示されていること' do
-        get_users_path
+        get_users
         expect(response.body).to include user.name
       end
     end
 
     context 'ユーザーが存在しない場合' do
-      subject(:get_user_path) { get user_path(user.id + 100) }
+      subject(:get_users) { get user_path(user.id + 100) }
 
       it 'rootにリダイレクトされ302のレスポンスが返ってくること' do
-        get_user_path
+        get_users
         expect(response).to have_http_status :found
       end
     end
   end
 
   describe 'GET #search' do
-    subject(:get_search_users_path) { get search_users_path, params: }
+    subject(:get_search_users) { get search_users_path, params: }
 
     let!(:idea_man) { FactoryBot.create(:user, :idea_man) }
     let(:params)         { {}                                       }
@@ -54,7 +54,7 @@ RSpec.describe 'Users' do
 
     describe '検索項目を指定しない場合' do
       it 'リクエストが成功すること' do
-        get_search_users_path
+        get_search_users
         expect(response).to have_http_status :ok
       end
     end
@@ -64,7 +64,7 @@ RSpec.describe 'Users' do
         let(:params) { { 'q[definition_eq_any][]': [0, 2] } }
 
         it 'ユーザーが表示されていること' do
-          get_search_users_path
+          get_search_users
           expect(response.body).to include idea_man.name
           expect(response.body).not_to include engineer.name
           expect(response.body).to include idea_engineer.name
@@ -75,7 +75,7 @@ RSpec.describe 'Users' do
         let(:params) { { 'q[definition_eq_any][]': [1, 2] } }
 
         it 'ユーザーが表示されていること' do
-          get_search_users_path
+          get_search_users
           expect(response.body).not_to include idea_man.name
           expect(response.body).to include engineer.name
           expect(response.body).to include idea_engineer.name
@@ -86,7 +86,7 @@ RSpec.describe 'Users' do
         let(:params) { { 'q[definition_eq_any]': 2 } }
 
         it 'ユーザーが表示されていること' do
-          get_search_users_path
+          get_search_users
           expect(response.body).not_to include idea_man.name
           expect(response.body).not_to include engineer.name
           expect(response.body).to include idea_engineer.name

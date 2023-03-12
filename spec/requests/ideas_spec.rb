@@ -154,17 +154,17 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'GET #search' do
-    subject(:get_search_ideas_path) { get search_ideas_path, params: }
+    subject(:get_search_ideas) { get search_ideas_path, params: }
 
     let(:params) { { q: { name_or_idea_tags_name_cont: idea.name } } }
 
     it 'リクエストが成功すること' do
-      get_search_ideas_path
+      get_search_ideas
       expect(response).to have_http_status :ok
     end
 
     it '検索したアイデアが表示されていること' do
-      get_search_ideas_path
+      get_search_ideas
       expect(response.body.encode!).to include idea.name
     end
   end

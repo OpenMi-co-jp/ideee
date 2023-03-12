@@ -54,24 +54,24 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'POST #create' do
-    subject(:post_ideas_path) { post ideas_path, params: }
+    subject(:create_ideas_path) { post ideas_path, params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea) } }
 
       it 'リクエストが成功すること' do
-        post_ideas_path
+        create_ideas_path
         expect(response).to have_http_status :found
       end
 
       it 'アイデアが登録されること' do
         expect do
-          post_ideas_path
+          create_ideas_path
         end.to change(Idea, :count).by(1)
       end
 
       it '詳細ページにリダイレクトすること' do
-        post_ideas_path
+        create_ideas_path
         expect(response).to redirect_to("http://www.example.com/ideas/#{Idea.last.id}?share=true")
       end
     end
@@ -81,12 +81,12 @@ RSpec.describe 'Ideas' do
 
       it 'アイデアが登録されないこと' do
         expect do
-          post_ideas_path
+          create_ideas_path
         end.not_to change(Idea, :count)
       end
 
       it 'エラーが表示されること' do
-        post_ideas_path
+        create_ideas_path
         expect(response.body).to include 'アイデアの登録に失敗しました'
         expect(response.body).to include 'アイデア名を入力してください'
       end
@@ -94,24 +94,24 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'PUT #update' do
-    subject(:put_idea_path) { put idea_path(idea), params: }
+    subject(:update_idea_path) { put idea_path(idea), params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea, name: 'updated idea') } }
 
       it 'リクエストが成功すること' do
-        put_idea_path
+        update_idea_path
         expect(response).to have_http_status :found
       end
 
       it 'アイデア名が更新されること' do
         expect do
-          put_idea_path
+          update_idea_path
         end.to change { Idea.find(idea.id).name }.from(idea.name).to('updated idea')
       end
 
       it 'リダイレクトすること' do
-        put_idea_path
+        update_idea_path
         expect(response).to redirect_to Idea.find(idea.id)
       end
     end
@@ -121,12 +121,12 @@ RSpec.describe 'Ideas' do
 
       it 'アイデア名が変更されないこと' do
         expect do
-          put_idea_path
+          update_idea_path
         end.not_to change(Idea.find(idea.id), :name)
       end
 
       it 'エラーが表示されること' do
-        put_idea_path
+        update_idea_path
         expect(response.body).to include 'アイデアの更新に失敗しました'
         expect(response.body).to include 'アイデア名を入力してください'
       end
@@ -134,21 +134,21 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'DELETE #destroy' do
-    subject(:delete_idea_path) { delete idea_path(idea) }
+    subject(:destroy_idea_path) { delete idea_path(idea) }
 
     it 'リクエストが成功すること' do
-      delete_idea_path
+      destroy_idea_path
       expect(response).to have_http_status :found
     end
 
     it 'アイデアが削除されること' do
       expect do
-        delete_idea_path
+        destroy_idea_path
       end.to change(Idea, :count).by(-1)
     end
 
     it 'アイデア一覧にリダイレクトすること' do
-      delete_idea_path
+      destroy_idea_path
       expect(response).to redirect_to(ideas_path)
     end
   end

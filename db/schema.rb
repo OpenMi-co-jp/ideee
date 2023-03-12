@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_100229) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_112413) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -39,8 +38,8 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -138,8 +137,9 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.boolean "heart_to_comment_web", default: true, null: false
     t.boolean "vote_web", default: true, null: false
     t.boolean "team_join_web", default: true, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "team_leave_email", default: true, null: false
     t.index ["user_id"], name: "index_notification_configs_on_user_id"
   end
 
@@ -182,8 +182,10 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
   create_table "team_users", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "team_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "leave", default: false, null: false
+    t.boolean "left", default: false, null: false
     t.index ["team_id"], name: "index_team_users_on_team_id"
     t.index ["user_id"], name: "index_team_users_on_user_id"
   end
@@ -194,8 +196,9 @@ ActiveRecord::Schema.define(version: 2022_10_06_100229) do
     t.integer "status", default: 0, null: false
     t.string "requirement", null: false
     t.string "offer", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "members_num", default: 0
     t.index ["idea_id"], name: "index_teams_on_idea_id"
     t.index ["owner_id"], name: "index_teams_on_owner_id"
     t.index ["status", "owner_id"], name: "index_teams_on_status_and_owner_id"

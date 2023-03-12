@@ -9,17 +9,17 @@ RSpec.describe 'Difficulties' do
   before { sign_in user }
 
   describe 'POST #create' do
-    subject(:post_difficultys_path) { post difficultys_path, params: { idea_id: idea.id, level: Difficulty.levels.keys.sample } }
+    subject(:create_difficultys_path) { post difficultys_path, params: { idea_id: idea.id, level: Difficulty.levels.keys.sample } }
 
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
-        post_difficultys_path
+        create_difficultys_path
         expect(response).to have_http_status :found
       end
 
       it 'ハートが送られること' do
         expect do
-          post_difficultys_path
+          create_difficultys_path
         end.to change(Difficulty, :count).by(1)
       end
     end

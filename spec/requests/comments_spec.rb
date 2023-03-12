@@ -9,20 +9,20 @@ RSpec.describe 'Comments' do
   before { sign_in user }
 
   describe 'POST #create' do
-    subject(:post_comments_path) { post comments_path, params: }
+    subject(:create_comments_path) { post comments_path, params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { description: comment.description, idea_id: comment.idea_id } }
 
       it 'リクエストが成功すること' do
-        post_comments_path
+        create_comments_path
         expect(response).to have_http_status :no_content
       end
 
       it 'コメントが登録されること' do
         expect do
-          post_comments_path
-        end.to change(Comment, :count).by(1)
+          create_comments_path
+        end.to change(Comment, :count).by(+1)
       end
     end
 
@@ -30,22 +30,22 @@ RSpec.describe 'Comments' do
       let(:params) { { description: '', idea_id: comment.idea_id } }
 
       it 'コメントが登録されないこと' do
-        expect { post_comments_path }.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: コメントを入力してください')
+        expect { create_comments_path }.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: コメントを入力してください')
       end
     end
   end
 
   describe 'DELETE #destroy' do
-    subject(:delete_comment_path) { delete comment_path(comment) }
+    subject(:destroy_comment_path) { delete comment_path(comment) }
 
     it 'リクエストが成功すること' do
-      delete_comment_path
+      destroy_comment_path
       expect(response).to have_http_status :no_content
     end
 
     it 'コメントが削除されること' do
       expect do
-        delete_comment_path
+        destroy_comment_path
       end.to change(Comment, :count).by(-1)
     end
   end

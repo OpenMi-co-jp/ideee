@@ -37,7 +37,6 @@ class TeamsController < ApplicationController
 
   def join
     @team.team_users.create!(user: current_user)
-    @idea.count_team_members
     Notifications::JoinTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end
@@ -45,7 +44,6 @@ class TeamsController < ApplicationController
   def leave
     team_user = @team.team_users.find_by!(user_id: current_user.id)
     team_user.update!(left: true)
-    @idea.count_team_members
     Notifications::LeaveTeamJob.perform_later(current_user, @idea)
     redirect_to @idea, notice: t('.success')
   end

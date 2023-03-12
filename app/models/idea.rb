@@ -25,7 +25,6 @@
 #  similar                                                  :string(255)
 #  stance                                                   :integer          default("free_right")
 #  target                                                   :string(255)
-#  team_members_num                                         :integer          default(0)
 #  view                                                     :integer          default(0)
 #  wish_function                                            :string(255)
 #  created_at                                               :datetime         not null
@@ -50,10 +49,10 @@ class Idea < ApplicationRecord
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :notifications, dependent: :destroy
   has_one :team, dependent: :destroy
+  counter_culture :user, column_name: 'ideas_num'
   has_rich_text :note
   mount_uploader :icon, ImageUploader
   after_create :send_draft_remind
-  after_commit :count_user_ideas # draftとideaを切り離したら作成と削除時に限定する
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :background, presence: true, length: { maximum: 255 }
@@ -87,10 +86,6 @@ class Idea < ApplicationRecord
 
   def count_likes
     update_column(:likes_num, likes.size)
-  end
-
-  def count_comments
-    update_column(:comments_num, comments.size)
   end
 
   def save_with_tags(tag_list)
@@ -140,19 +135,5 @@ class Idea < ApplicationRecord
 
   def enough_view?
     view > 10
-  end
-
-  def count_team_members
-    update(team_members_num: team.current_member.size)
-  end
-
-  def enough_team_member?
-    team_project? && team_members_num.positive?
-  end
-
-  def count_user_ideas
-    return unless Rails.env.production?
-
-    CountUserIdeasJob.perform_later(user_id)
   end
 end

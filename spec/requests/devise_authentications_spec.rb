@@ -31,7 +31,8 @@ RSpec.describe 'DeviseAuthentications' do
   end
 
   describe 'GET #edit' do
-    subject { get edit_user_registration_path }
+    # subject(:edit_user_registration_path) { get edit_user_registration_path }
+    subject(:edit_user_registration) { get edit_user_registration_path }
 
     context 'ログインしているとき' do
       before do
@@ -40,14 +41,15 @@ RSpec.describe 'DeviseAuthentications' do
       end
 
       it 'リクエストが成功すること' do
-        subject
+        # get edit_user_registration_path
+        edit_user_registration
         expect(response).to have_http_status :ok
       end
     end
 
     context 'ゲストのとき' do
       it 'リダイレクトされること' do
-        subject
+        edit_user_registration
         expect(response).to redirect_to new_user_session_path
       end
     end

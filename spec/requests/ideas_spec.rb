@@ -54,24 +54,24 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'POST #create' do
-    subject { post ideas_path, params: }
+    subject(:create_idea) { post ideas_path, params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea) } }
 
       it 'リクエストが成功すること' do
-        subject
+        create_idea
         expect(response).to have_http_status :found
       end
 
       it 'アイデアが登録されること' do
         expect do
-          subject
-        end.to change(Idea, :count).by(+1)
+          create_idea
+        end.to change(Idea, :count).by(1)
       end
 
       it '詳細ページにリダイレクトすること' do
-        subject
+        create_idea
         expect(response).to redirect_to("http://www.example.com/ideas/#{Idea.last.id}?share=true")
       end
     end
@@ -81,12 +81,12 @@ RSpec.describe 'Ideas' do
 
       it 'アイデアが登録されないこと' do
         expect do
-          subject
+          create_idea
         end.not_to change(Idea, :count)
       end
 
       it 'エラーが表示されること' do
-        subject
+        create_idea
         expect(response.body).to include 'アイデアの登録に失敗しました'
         expect(response.body).to include 'アイデア名を入力してください'
       end
@@ -94,24 +94,24 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'PUT #update' do
-    subject { put idea_path(idea), params: }
+    subject(:update_idea) { put idea_path(idea), params: }
 
     context 'パラメータが妥当な場合' do
       let(:params) { { idea: attributes_for(:idea, name: 'updated idea') } }
 
       it 'リクエストが成功すること' do
-        subject
+        update_idea
         expect(response).to have_http_status :found
       end
 
       it 'アイデア名が更新されること' do
         expect do
-          subject
+          update_idea
         end.to change { Idea.find(idea.id).name }.from(idea.name).to('updated idea')
       end
 
       it 'リダイレクトすること' do
-        subject
+        update_idea
         expect(response).to redirect_to Idea.find(idea.id)
       end
     end
@@ -121,12 +121,12 @@ RSpec.describe 'Ideas' do
 
       it 'アイデア名が変更されないこと' do
         expect do
-          subject
+          update_idea
         end.not_to change(Idea.find(idea.id), :name)
       end
 
       it 'エラーが表示されること' do
-        subject
+        update_idea
         expect(response.body).to include 'アイデアの更新に失敗しました'
         expect(response.body).to include 'アイデア名を入力してください'
       end
@@ -134,37 +134,37 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'DELETE #destroy' do
-    subject { delete idea_path(idea) }
+    subject(:destroy_idea) { delete idea_path(idea) }
 
     it 'リクエストが成功すること' do
-      subject
+      destroy_idea
       expect(response).to have_http_status :found
     end
 
     it 'アイデアが削除されること' do
       expect do
-        subject
+        destroy_idea
       end.to change(Idea, :count).by(-1)
     end
 
     it 'アイデア一覧にリダイレクトすること' do
-      subject
+      destroy_idea
       expect(response).to redirect_to(ideas_path)
     end
   end
 
   describe 'GET #search' do
-    subject { get search_ideas_path, params: }
+    subject(:get_search_ideas) { get search_ideas_path, params: }
 
     let(:params) { { q: { name_or_idea_tags_name_cont: idea.name } } }
 
     it 'リクエストが成功すること' do
-      subject
+      get_search_ideas
       expect(response).to have_http_status :ok
     end
 
     it '検索したアイデアが表示されていること' do
-      subject
+      get_search_ideas
       expect(response.body.encode!).to include idea.name
     end
   end

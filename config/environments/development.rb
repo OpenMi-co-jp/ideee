@@ -49,7 +49,7 @@ Rails.application.configure do
   # config.action_mailer.delivery_method = :smtp
 
   # letter_openerでメールを確認するときにコメントアウトを外す
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
     port: 587,

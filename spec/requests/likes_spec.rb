@@ -9,18 +9,18 @@ RSpec.describe 'Likes' do
   before { sign_in user }
 
   describe 'POST #create' do
-    subject { post likes_path, params: { id: idea.id, type: 'Idea' } }
+    subject(:create_likes) { post likes_path, params: { id: idea.id, type: 'Idea' } }
 
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
-        subject
+        create_likes
         expect(response).to have_http_status :no_content
       end
 
       it 'ハートが送られること' do
         expect do
-          subject
-        end.to change(Like, :count).by(+1)
+          create_likes
+        end.to change(Like, :count).by(1)
       end
     end
   end

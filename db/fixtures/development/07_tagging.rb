@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 20.times do |m|
-  outer_num = 3 * m
-  idea_num = 1 + m
+  outer_num = m * 3
+  idea_num = m + 1
   # タグが被らないように3つランダムに選択
   tags = Tag.all.sample(3)
   3.times do |num|

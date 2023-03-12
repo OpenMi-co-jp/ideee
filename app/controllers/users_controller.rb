@@ -56,7 +56,10 @@ class UsersController < ApplicationController
   private
 
   def page_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    redirect_to root_path if @user.nil?
+    flash.now[:alert] = t('.fail')
+    # TODO: page.userはいろんなところにまたがっているので、i18を使用するのであれば各ページでalertの文言を用意しなければならない
   end
 
   def own_user?

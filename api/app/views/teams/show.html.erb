@@ -1,0 +1,45 @@
+<div class='c-team-form'>
+  <div class='c-team-form__idea_img'>
+    <%= link_to idea_path(@idea)do %>
+      <%= image_set(@idea) %>
+    <% end %>
+  </div>
+  <div class='c-team-form__idea_info'>
+    <%= link_to idea_path(@idea), class: 'c-team-form__idea_info--name' do %>
+      <%= @idea.name %>
+    <% end %>
+    <div class='c-team-form__idea_info--time'>
+      <%= l @team.created_at %>
+    </div>
+    <% if @team.status_active? && @team.joined?(current_user) %>
+      <% if @team.room.present? %>
+        <div class="">
+          <%= link_to room_path(@team.room), class: 'c-team-form__idea_info--message-btn' do %>
+            <span><i class="material-icons">message</i></span>チームメッセージを確認
+          <% end %>
+        </div>
+      <% else %>
+        <%= link_to rooms_path(team_id: @team.id), method: :post, class: 'c-team-form__idea_info--message-btn' do %>
+          <i class="material-icons">message</i>チームミーティングを開始する
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class='c-team-form__idea-content'>
+    <div class='flex'>
+      <div class='chip orange-soft-back mr-4'><%= I18n.t("enums.team.status.#{@team.status}") %></div>
+      <%= render 'teams/show/user_list', team: @team %>
+    </div>
+    <%= render 'teams/show/title_set', item: 'offer' %>
+    <%= render 'teams/show/title_set', item: 'requirement' %>
+  </div>
+  <div class='c-team-form__btns'>
+    <% if current_user.own?(@team) %>
+      <%= render 'teams/show/owner_link', team: @team %>
+    <% elsif @team.status_active? && !@team.member?(current_user) %>
+      <%= link_to t('default.team.join'), join_team_path(@team), method: :post, class: 'btn orange-action-back' %>
+    <% elsif @team.status_active? && @team.member?(current_user) %>
+      <%= link_to t('default.team.leave'), leave_team_path(@team), method: :post, data: { confirm: 'チーム開発から脱退してもよろしいですか？' }, class: 'btn gray-3-back' %>
+    <% end %>
+  </div>
+</div>

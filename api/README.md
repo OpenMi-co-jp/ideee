@@ -5,13 +5,6 @@
 
 <!-- TODO Readme書く -->
 
-## アプリURL
-
-https://www.ideee.tech/
-
-## BIツールURL
-https://ideee-metabase.herokuapp.com/
-
 ## セットアップの情報
 
 全セットアップ方法
@@ -22,3 +15,11 @@ https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 - Rails (7.0.4)
 - Ruby 3.0.2p107
 - mysql2 (0.5.3)
+
+* System dependencies
+
+# ER図
+
+`migrate時にER図を自動生成する`
+
+![](./ideee_erd.png)

@@ -1,0 +1,147 @@
+ja:
+  default:
+    login: ログイン
+    register: 登録
+    logout: ログアウト
+    create: 作成
+    post: 投稿
+    search: 検索
+    edit: 編集
+    submit: 送信
+    comment: コメント
+    delete: 削除
+    draft: 下書き
+    save_draft: 下書き保存
+    publish: 公開する
+    team:
+      start: チーム開発を募集
+      check: チーム開発をチェック
+      join: 参加
+      leave: チーム開発から脱退する
+      cancel: 参加を辞退
+      edit: 募集を編集
+      stop: 募集を停止
+      activate: 募集を再開
+      finish: チーム開発を終了
+    cancel: キャンセル
+    message:
+      unauthorized: 権限がないのでリダイレクトされました
+    users:
+      weekly_comments_num: 5
+      monthly_publisher_num: 10
+    sns:
+      share:
+        twitter: "https://twitter.com/intent/tweet?text=%{text}&hashtags=%{hashtags}&via=%{twitter_id}&related=ideee_tech&url=%{url}"
+        facebook: "https://www.facebook.com/share.php?u=%{url}"
+        line: "https://timeline.line.me/social-plugin/share?url=%{url}"
+        hatebu: "https://b.hatena.ne.jp/entry/%{url}"
+  devise:
+    confirmations:
+      new:
+        title: 確認メールが届いていない場合
+        submit: 確認メールを再送信
+    passwords:
+      new:
+        title: パスワードをお忘れですか?
+        submit: パスワード再発行
+      edit:
+        title: パスワード変更
+        submit: パスワードを変更する
+    registrations:
+      new:
+        title: ユーザー登録
+        submit: ユーザー登録
+        message: ideee
+      edit:
+        title: ユーザー情報編集
+        submit: ユーザー情報を更新する
+        cancel: ユーザー情報の取り消し
+    unlocks:
+      new:
+        title: ロック解除
+        submit: ロックを解除する
+  ideas:
+    show:
+      page: idea-show
+      url_button:
+        button_txt:
+          product_url: アプリを確認
+          github_url: GitHubを確認
+    create:
+      success: アイデアの登録が完了しました
+      draft_save: アイデアの下書きが保存されました
+      fail: アイデアの登録に失敗しました
+    update:
+      success: アイデア登録に成功しました
+      draft_save: アイデアの下書きが更新されました
+      fail: アイデアの更新に失敗しました
+    destroy:
+      success: アイデアを削除しました
+    publish:
+      success: アイデアを公開しました
+  teams:
+    new:
+      exist: このアイデアのチーム開発は既に存在します
+    create:
+      success: チーム開発の募集をスタートしました
+      not_owner: オーナー権限がありません
+    update:
+      success: チーム開発を更新しました
+    join:
+      success: チーム開発に参加しました！オーナーにメッセージしましょう！
+    leave:
+      success: チーム開発から脱退しました
+    stop:
+      success: チーム開発の募集を停止しました
+    activate:
+      success: チーム開発を再開しました
+    finish:
+      success: チーム開発を終了しました
+  comments:
+    board:
+      comments:
+        title: コメント
+        no_item_message: 気になること/応援のコメントをしよう！
+      messages:
+        title: メッセージ
+        no_item_message: まずは話しかけてみましょう
+    edit:
+      title: コメント編集
+    update:
+      success: コメントを更新しました
+      fail: コメントの更新に失敗しました
+  rooms:
+    show:
+      not_joined: チームに参加していません
+    create:
+      success: 会話ルームを開始しました
+      fail: 会話ルームの開始に失敗しました
+  messages:
+    create:
+      success: メッセージの投稿に成功しました
+    update:
+      success: メッセージの更新に成功しました
+      fail: メッセージの更新に失敗しました
+  settings:
+    notification_config:
+      success: 設定の更新に成功しました
+  common:
+    service_fund:
+      use_for: ideeeの運営は皆様の寄付によって、無料で使うことができます 。
+  layouts:
+    footer:
+      page: footer
+      share:
+        twitter: "https://twitter.com/intent/tweet?text=アイデアとエンジニアのマッチングサイトideee&hashtags=ideee&via=ideee_tech&related=ideee_tech&url=https://www.ideee.tech"
+        facebook: "https://www.facebook.com/share.php?u=https://www.ideee.tech"
+        line: "https://timeline.line.me/social-plugin/share?url=https://www.ideee.tech"
+        hatebu: "https://b.hatena.ne.jp/entry/https://www.ideee.tech"
+  notifications:
+    Comment: にコメントしました。
+    Like: にハートを送りました。 #移行後に削除予定
+    Difficulty: に難易度の投票をしました。
+    product_apply: のプロダクトURLを承認しました。
+    join_team_user: のチーム開発に参加しました。
+    leave_team_user: のチーム開発から脱退しました。
+    LikeIdea: にハートを送りました。
+    LikeComment: のコメントにハートを送りました。

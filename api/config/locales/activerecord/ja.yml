@@ -1,0 +1,77 @@
+ja:
+  enums:
+    user:
+      role:
+        general: 一般
+        admin: 管理者
+  activerecord:
+    models:
+      user: ユーザー
+      idea: アイデア
+    attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        icon: アイコン
+        password: パスワード
+        password_confirmation: パスワード確認
+        description: 自己紹介
+        definition: タイプ
+        point: コントリビュート数
+        icon: プロフィール画像
+        twitter_id: Twitter ID
+        github_id: Github ID
+        remote_url: リモート画像
+        site_url: サイトURL
+        provider:
+          twitter: Twitter
+          google: Google
+          mail: メール
+      idea:
+        name: アイデア名
+        icon: アイコン
+        background: 背景
+        issue: イシュー
+        goal: ゴール
+        wish_function: メイン機能
+        hypothesis: 仮説（数値的）
+        target: ターゲット（ペルソナ）
+        monetize: マネタイズ方法
+        similar: 類似サービス
+        github_url: GitHubのURL
+        note: 補足
+        view: ビュー数
+        tag_list: タグ
+        tags_up_to_three: タグ（3つまで入力できます）
+        product_url: 作っているアプリ
+        team: チーム開発
+        difficulty: 難易度
+        stance: スタンス
+        published_at: 公開日
+      comment:
+        description: コメント
+      team:
+        offer: 得られること
+        requirement: お願いしたいこと
+        status: ステータス
+      notification_config:
+        comment_email: アイデアへのコメント
+        draft_remind_email: 下書きへのリマインド
+        event_email: イベントのお知らせ
+        heart_email: ハートのお知らせ
+        team_join_email: チーム開発参加のお知らせ
+        team_leave_email: チーム開発脱退のお知らせ
+        team_message_email: チーム開発のメッセージ
+        weekly_email: 週間ランキング
+    sorts:
+      ideas:
+        likes_num: ハート数
+        comments_num: コメント数
+        view: ビュー数
+        published_at: 公開日
+        updated_at: 更新日
+        team_members_num: チームメンバー数
+      users:
+        created_at: 参加日
+        point: コントリビュート数
+        ideas_num: アイデア数

@@ -45,7 +45,6 @@ RSpec.describe 'DeviseAuthentications' do
       end
 
       it 'リクエストが成功すること' do
-        # get edit_user_registration_path
         edit_user_registration
         expect(response).to have_http_status :ok
       end

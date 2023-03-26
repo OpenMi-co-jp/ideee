@@ -35,7 +35,7 @@ RSpec.describe 'DeviseAuthentications' do
     end
   end
 
-  describe 'GET #edit' do
+  describe 'POST #edit' do
     subject(:edit_user_registration) { get edit_user_registration_path }
 
     context 'ログインしているとき' do

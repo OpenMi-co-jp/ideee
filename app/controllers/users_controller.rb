@@ -15,16 +15,29 @@ class UsersController < ApplicationController
   def show
     @user_published_ideas = @user.ideas.published
     @published_list = @user_published_ideas.eager_load(:idea_tags).order(published_at: 'DESC')
-    @published_ideas = Kaminari.paginate_array(@published_list).page(params[:published_page]).per(10)
-    @liked_idea_ids = @user.likes.type_idea_ids
-    @like_ideas = Kaminari.paginate_array(Idea.where(id: @liked_idea_ids).eager_load(:idea_tags).preload(:user)).page(
-      params[:like].try(
-        :[], :page
+    @published_ideas =
+      paginate_list(
+        @published_list,
+        params[:published_page],
+        10
       )
-    ).per(10)
+
+    @like_ideas =
+      paginate_list(
+        Idea.where(id: @user.likes.type_idea_ids)
+          .eager_load(:idea_tags)
+          .preload(:user),
+        params.dig(:like, :page),
+        10
+      )
+
     # 自分のアイデア以外でコメントしたアイデアを表示
-    @commented_idea_list = @user.comment_ideas.preload(:user).others_ideas(@user)
-    @commented_ideas = Kaminari.paginate_array(@commented_idea_list).page(params[:comment].try(:[], :page)).per(10)
+    @commented_ideas =
+      paginate_list(
+        @user.comment_ideas.preload(:user).others_ideas(@user),
+        params.dig(:comment, :page),
+        10
+      )
 
     # チーム開発参加数を取得
     @joined_team_num = TeamUser.where(user_id: @user.id).size
@@ -54,6 +67,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def paginate_list(list, page, per_page)
+    Kaminari.paginate_array(list).page(page).per(per_page)
+  end
 
   def page_user
     @user = User.find_by(id: params[:id])

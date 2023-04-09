@@ -58,7 +58,6 @@ class UsersController < ApplicationController
   def page_user
     @user = User.find_by(id: params[:id])
     redirect_to root_path, alert: t('page_user.fail') if @user.nil?
-    # TODO: page.userはいろんなところにまたがっているので、i18を使用するのであれば各ページでalertの文言を用意しなければならない
   end
 
   def own_user?

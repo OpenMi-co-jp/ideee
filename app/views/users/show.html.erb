@@ -38,8 +38,8 @@
     <div class="nav-content c-nav-var__content">
       <ul class="tabs tabs-transparent">
         <li class="tab c-nav-var__tab"><a class="active" href="#tab1" id="link1" title="アイデアリスト">アイデアリスト（<%= @user.ideas_num %>）</a></li>
-        <li class="tab c-nav-var__tab"><a href="#tab2" id="link2" title="ハート">ハート（<%= @liked_idea_ids.size %>）</a></li>
-        <li class="tab c-nav-var__tab"><a href="#tab3" id="link3" title="コメント">コメント（<%= @commented_idea_list.size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab2" id="link2" title="ハート">ハート（<%= @like_ideas.size %>）</a></li>
+        <li class="tab c-nav-var__tab"><a href="#tab3" id="link3" title="コメント">コメント（<%= @commented_ideas.size %>）</a></li>
         <li class="tab c-nav-var__tab"><a href="#tab4" id="link4" title="チーム開発参加">チーム開発参加（<%= @joined_team_num %>）</a></li>
       </ul>
     </div>

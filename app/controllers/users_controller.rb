@@ -15,22 +15,13 @@ class UsersController < ApplicationController
   def show
     @user_published_ideas = @user.ideas.published
     @published_list = @user_published_ideas.eager_load(:idea_tags).order(published_at: 'DESC')
-    @published_ideas =
-      paginate_list(
-        @published_list,
-        params[:published_page],
-        10
+    @published_ideas = Kaminari.paginate_array(@published_list).page(params[:published_page]).per(10)
+    @liked_idea_ids = @user.likes.type_idea_ids
+    @like_ideas = Kaminari.paginate_array(Idea.where(id: @liked_idea_ids).eager_load(:idea_tags).preload(:user)).page(
+      params[:like].try(
+        :[], :page
       )
-
-    @like_ideas =
-      paginate_list(
-        Idea.where(id: @user.likes.type_idea_ids)
-          .eager_load(:idea_tags)
-          .preload(:user),
-        params.dig(:like, :page),
-        10
-      )
-
+    ).per(10)
     # 自分のアイデア以外でコメントしたアイデアを表示
     @commented_ideas =
       paginate_list(

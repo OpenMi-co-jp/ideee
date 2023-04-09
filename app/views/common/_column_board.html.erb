@@ -1,9 +1,9 @@
 <%# TODO: rank_listに統合 %>
 <div class='idea'>
-  <% ideas.each.with_index(@rank_num || 0) do |idea, i| %>
+  <% ideas.each.with_index(1 + (@published_ideas.current_page - 1) * @published_ideas.limit_value) do |idea, i| %>
     <div class='idea__list'>
       <h5 class='idea__num'>
-        <%= i + 1 %>
+        <%= i %>
       </h5>
       <div class='idea__content'>
         <%= link_to idea_path(idea.id), class: 'c-idea-img', title: 'アイデアのリンク' do %>

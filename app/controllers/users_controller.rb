@@ -15,11 +15,29 @@ class UsersController < ApplicationController
   def show
     @user_published_ideas = @user.ideas.published
     @published_list = @user_published_ideas.eager_load(:idea_tags).order(published_at: 'DESC')
-    @published_ideas = paginate_list(@published_list, params[:published_page], 10)
-    @like_ideas = paginate_list(Idea.where(id: @user.likes.type_idea_ids).eager_load(:idea_tags).preload(:user), params.dig(:like, :page), 10)
+    @published_ideas =
+      paginate_list(
+        @published_list,
+        params[:published_page],
+        10
+      )
+
+    @like_ideas =
+      paginate_list(
+        Idea.where(id: @user.likes.type_idea_ids)
+                  .eager_load(:idea_tags)
+                  .preload(:user),
+        params.dig(:like, :page),
+        10
+      )
 
     # 自分のアイデア以外でコメントしたアイデアを表示
-    @commented_ideas = paginate_list(@user.comment_ideas.preload(:user).others_ideas(@user), params.dig(:comment, :page), 10)
+    @commented_ideas =
+      paginate_list(
+        @user.comment_ideas.preload(:user).others_ideas(@user),
+        params.dig(:comment, :page),
+        10
+      )
 
     # チーム開発参加数を取得
     @joined_team_num = TeamUser.where(user_id: @user.id).size

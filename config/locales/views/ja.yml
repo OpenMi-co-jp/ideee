@@ -145,3 +145,5 @@ ja:
     leave_team_user: のチーム開発から脱退しました。
     LikeIdea: にハートを送りました。
     LikeComment: のコメントにハートを送りました。
+  page_user:
+    fail: ユーザーが存在しません。

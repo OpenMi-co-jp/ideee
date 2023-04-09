@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def show
     @user_published_ideas = @user.ideas.published
     @published_list = @user_published_ideas.eager_load(:idea_tags).order(published_at: 'DESC')
-    @published_ideas = Kaminari.paginate_array(@published_list).page(params[:published].try(:[], :page)).per(10)
+    @published_ideas = Kaminari.paginate_array(@published_list).page(params[:published_page]).per(10)
     @liked_idea_ids = @user.likes.type_idea_ids
     @like_ideas = Kaminari.paginate_array(Idea.where(id: @liked_idea_ids).eager_load(:idea_tags).preload(:user)).page(
       params[:like].try(

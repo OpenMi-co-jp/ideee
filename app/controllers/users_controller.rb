@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 
   private
 
-  def paginate_list(list, page, per_page)
+  def paginate_list(list:, page:, per_page: 10)
     Kaminari.paginate_array(list).page(page).per(per_page)
   end
 

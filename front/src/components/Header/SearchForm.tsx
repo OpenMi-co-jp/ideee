@@ -11,7 +11,11 @@ export const SearchForm: FC = () => {
       icon={<IconSearch size={18} />}
       styles={{
         root: { flexGrow: 2 },
-        input: { border: 0, backgroundColor: 'transparent', borderBottom: 'solid gray' },
+        input: {
+          border: 0,
+          backgroundColor: 'transparent',
+          borderBottom: 'solid gray',
+        },
       }}
       onChange={(value) => {
         // eslint-disable-next-line no-console

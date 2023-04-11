@@ -1,6 +1,6 @@
 import { Box, Group, Portal, rem } from '@mantine/core'
 import type { FC } from 'react'
-import { useHeadroom } from '@mantine/hooks';
+import { useHeadroom } from '@mantine/hooks'
 import Image from 'next/image'
 import ideeeLogo from '../../../public/img/ideee_logo.webp'
 import { SearchForm } from './SearchForm'
@@ -9,7 +9,7 @@ import { IdeaCreateButton } from '@/components/Idea/createButton'
 import Link from 'next/link'
 
 export const Header: FC = () => {
-  const pinned = useHeadroom({ fixedAt: 120 });
+  const pinned = useHeadroom({ fixedAt: 120 })
 
   return (
     <Portal>
@@ -20,18 +20,19 @@ export const Header: FC = () => {
           left: 0,
           right: 0,
           padding: theme.spacing.xs,
-          height: rem(70),
+          height: rem(75),
           zIndex: 1000000,
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
           borderBottom: `1px solid ${theme.colors.gray[2]}`,
-          backgroundColor: theme.colorScheme === 'dark' ? theme.black : theme.white,
+          backgroundColor:
+            theme.colorScheme === 'dark' ? theme.black : theme.white,
           color: theme.colorScheme === 'dark' ? theme.white : theme.black,
         })}
       >
         <Group position="apart" spacing="xl" noWrap>
           <Link href="/">
-            <Image src={ideeeLogo} alt="ideeeのロゴ"/>
+            <Image src={ideeeLogo} alt="ideeeのロゴ" />
           </Link>
           <SearchForm />
           <Ranking />

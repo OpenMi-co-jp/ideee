@@ -16,7 +16,7 @@ const nextConfig = {
   // https://nextjs.org/docs/advanced-features/compiler#remove-console
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
-    // emotion: true,
+    emotion: true,
   },
 };
 

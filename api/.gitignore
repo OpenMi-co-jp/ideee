@@ -45,3 +45,6 @@ AWSCLIV2.pkg
 /coverage/
 
 dump.rdb
+
+# graphqlで作成される.keepを除外
+app/graphql/**/.keep

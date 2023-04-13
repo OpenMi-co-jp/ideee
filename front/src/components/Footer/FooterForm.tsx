@@ -12,7 +12,7 @@ import {
   IconNews,
 } from '@tabler/icons-react'
 import Image from 'next/image'
-import ideeeLogo from '../../../public/img/ideee_logo.webp'
+import ideeeLogo from '../../../public/img/IdeeeLogo.webp'
 
 const useStyles = createStyles((theme) => ({
   footer: {

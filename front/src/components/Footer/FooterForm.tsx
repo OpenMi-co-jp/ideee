@@ -12,7 +12,6 @@ import {
   IconNews,
 } from '@tabler/icons-react'
 import Image from 'next/image'
-import ideeeLogo from '../../../public/img/IdeeeLogo.webp'
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -151,7 +150,12 @@ export const FooterForm = (footerData: FooterLinksProps) => {
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
-          <Image src={ideeeLogo} alt="ideeeのロゴ" />
+          <Image
+            src="/img/IdeeeLogo.webp"
+            alt="ideeeのロゴ"
+            width={150}
+            height={50}
+          />
           <Text size="xs" color="dimmed" className={classes.description}>
             あなたの才能で世界をちょっとだけ良くする
           </Text>

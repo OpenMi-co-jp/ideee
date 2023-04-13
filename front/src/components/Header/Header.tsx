@@ -2,7 +2,6 @@ import { Box, Group, Portal, rem } from '@mantine/core'
 import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
 import Image from 'next/image'
-import ideeeLogo from '../../../public/img/IdeeeLogo.webp'
 import { SearchForm } from './SearchForm'
 import { UserIcon, Notification, Ranking } from './headerComponents'
 import { IdeaCreateButton } from '@/components/Idea/createButton'
@@ -32,7 +31,12 @@ export const Header: FC = () => {
       >
         <Group position="apart" spacing="xl" noWrap>
           <Link href="/">
-            <Image src={ideeeLogo} alt="ideeeのロゴ" />
+            <Image
+              src="/img/IdeeeLogo.webp"
+              alt="ideeeのロゴ"
+              width={150}
+              height={50}
+            />
           </Link>
           <SearchForm />
           <Ranking />

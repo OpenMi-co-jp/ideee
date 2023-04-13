@@ -3,7 +3,7 @@ name: Feature request
 about: ideeeの機能改善・追加
 title: #
 labels: ''
-assignees: ''
+assignees: author
 
 ---
 
@@ -13,5 +13,6 @@ As IS
 To Be
 - 
 
-テスト内容(開発者が書く)
-- 
+
+テスト確認内容(開発者が書く)
+- [ ]

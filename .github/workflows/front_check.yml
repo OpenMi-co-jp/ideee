@@ -1,0 +1,110 @@
+name: front_check
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      [opened, reopened, synchronize]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-yarn
+        with:
+          path: './front/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('./front/yarn.lock') }}
+
+      - name: Install Modules
+        run: |
+          cd front
+          yarn install
+
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - setup
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-yarn
+        with:
+          path: './front/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('./front/yarn.lock') }}
+
+      - name: Check Format
+        run: |
+          cd front
+          yarn format-check
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - setup
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-yarn
+        with:
+          path: './front/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('./front/yarn.lock') }}
+
+      - name: Check Code Rule
+        run: |
+          cd front
+          yarn lint
+
+  type-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - setup
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: actions/cache@v3
+        env:
+          cache-name: cache-yarn
+        with:
+          path: './front/node_modules'
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('./front/yarn.lock') }}
+
+      - name: Check Type Consistency
+        run: |
+          cd front
+          yarn type-check

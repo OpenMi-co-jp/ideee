@@ -243,6 +243,7 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (>= 0.16, < 2.a)
+    graphql (2.0.21)
     hashie (5.0.0)
     high_voltage (3.1.2)
     http (4.4.1)
@@ -637,6 +638,7 @@ DEPENDENCIES
   faker!
   fog-aws
   google-api-client
+  graphql
   high_voltage
   image_processing (~> 1.12)
   jbuilder (~> 2.7)

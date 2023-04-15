@@ -1,6 +1,5 @@
 <%# TODO: rank_listに統合 %>
 <div class='idea'>
-  <% if @published_ideas.present? %>
     <% ideas.each.with_index(1 + (@published_ideas.current_page - 1) * @published_ideas.limit_value) do |idea, i| %>
       <div class='idea__list'>
         <h5 class='idea__num'>
@@ -84,5 +83,4 @@
         </div>
       </div>
     <% end %>
-  <% end %>
 </div>

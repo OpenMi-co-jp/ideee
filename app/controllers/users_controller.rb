@@ -17,26 +17,23 @@ class UsersController < ApplicationController
     @published_list = @user_published_ideas.eager_load(:idea_tags).order(published_at: 'DESC')
     @published_ideas =
       paginate_list(
-        @published_list,
-        params[:published_page],
-        10
+        list: @published_list,
+        page: params[:published_page]
       )
 
     @like_ideas =
       paginate_list(
-        Idea.where(id: @user.likes.type_idea_ids)
+        list: Idea.where(id: @user.likes.type_idea_ids)
                   .eager_load(:idea_tags)
                   .preload(:user),
-        params.dig(:like, :page),
-        10
+        page: params.dig(:like, :page)
       )
 
     # 自分のアイデア以外でコメントしたアイデアを表示
     @commented_ideas =
       paginate_list(
-        @user.comment_ideas.preload(:user).others_ideas(@user),
-        params.dig(:comment, :page),
-        10
+        list: @user.comment_ideas.preload(:user).others_ideas(@user),
+        page: params.dig(:comment, :page)
       )
 
     # チーム開発参加数を取得

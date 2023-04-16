@@ -20,20 +20,17 @@ class UsersController < ApplicationController
         list: @published_list,
         page: params[:published_page]
       )
-
+    @liked_idea_ids = @user.likes.type_idea_ids
     @like_ideas =
       paginate_list(
-        list: Idea.where(id: @user.likes.type_idea_ids)
-                  .eager_load(:idea_tags)
-                  .preload(:user),
-        page: params.dig(:like, :page)
+        list: Idea.where(id: @liked_idea_ids).eager_load(:idea_tags).preload(:user),
+        page: params[:like_page]
       )
-
-    # 自分のアイデア以外でコメントしたアイデアを表示
+    @commented_idea_list = @user.comment_ideas.preload(:user).others_ideas(@user)
     @commented_ideas =
       paginate_list(
-        list: @user.comment_ideas.preload(:user).others_ideas(@user),
-        page: params.dig(:comment, :page)
+        list: @commented_idea_list,
+        page: params[:comment_page]
       )
 
     # チーム開発参加数を取得
@@ -65,8 +62,8 @@ class UsersController < ApplicationController
 
   private
 
-  def paginate_list(list:, page:, per_page: 10)
-    Kaminari.paginate_array(list).page(page).per(per_page)
+  def paginate_list(list:, page:, per: 10)
+    Kaminari.paginate_array(list).page(page).per(per)
   end
 
   def page_user

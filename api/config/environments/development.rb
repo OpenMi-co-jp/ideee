@@ -19,6 +19,9 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  # TODO: 一時的にCSRFを無効にしているので認証機能を追加後削除予定
+  config.action_controller.allow_forgery_protection = false
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp/caching-dev.txt').exist?
@@ -87,4 +90,6 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.hosts = 'localhost'
 end

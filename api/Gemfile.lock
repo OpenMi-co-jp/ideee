@@ -385,6 +385,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-mini-profiler (2.3.4)
       rack (>= 1.2.0)
     rack-protection (3.0.5)
@@ -662,6 +664,7 @@ DEPENDENCIES
   pry-rails
   psych
   puma (~> 5.6)
+  rack-cors
   rack-mini-profiler (~> 2.0)
   rack-timeout
   rails (~> 7.0.4)

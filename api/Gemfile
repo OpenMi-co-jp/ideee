@@ -136,7 +136,7 @@ group :development do
   gem 'rails-erd'
 
   # TODO: graphiqlを削除する場合には、以下のgemも削除する
-  gem "graphiql-rails"
+  gem 'graphiql-rails'
 end
 
 group :test do

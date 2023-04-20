@@ -211,3 +211,7 @@ Style/FrozenStringLiteralComment:
 # letを定義する際に左右の括弧が揃っているかどうかを検証を必要としない
 RSpec/AlignRightLetBrace:
   Enabled: false
+
+# 2文字以下のパラメーターを許可
+Naming/MethodParameterName:
+  Enabled: false

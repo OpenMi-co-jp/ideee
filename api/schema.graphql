@@ -1,0 +1,67 @@
+"""
+An ISO 8601-encoded datetime
+"""
+scalar ISO8601DateTime
+
+type Idea {
+  background: String
+  commentsNum: Int
+  createdAt: ISO8601DateTime!
+  difficulty: Int
+  draft: Boolean
+  emailedAt: ISO8601DateTime
+  githubUrl: String
+  goal: String
+  hypothesis: String
+  icon: String
+  id: ID!
+  issue: String
+  likesNum: Int
+  monetize: String
+  name: String
+  note: String
+  productApply: Int
+  productUrl: String
+  publishedAt: ISO8601DateTime
+  similar: String
+  stance: Int
+  target: String
+  updatedAt: ISO8601DateTime!
+  user: User!
+  userId: Int!
+  view: Int
+  wishFunction: String
+}
+
+type Mutation {
+  """
+  An example field added by the generator
+  """
+  testField: String!
+}
+
+type Query {
+  idea(id: ID!): Idea!
+}
+
+type User {
+  confirmationSentAt: ISO8601DateTime
+  confirmedAt: ISO8601DateTime
+  createdAt: ISO8601DateTime!
+  defined: Boolean
+  definition: Int
+  description: String
+  email: String
+  githubId: String
+  icon: String
+  id: ID!
+  ideasNum: Int
+  name: String
+  point: Int
+  provider: String
+  remoteUrl: String
+  siteUrl: String
+  twitterId: String
+  uid: String
+  updatedAt: ISO8601DateTime!
+}

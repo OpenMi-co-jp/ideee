@@ -18,6 +18,11 @@ yarn dev
 yarn lint & yarn lint-autofix & yarn format & yarn type-check
 ```
 
+3. graphqlのスキーマを更新した際にfrontでTSの自動生成
+
+```
+yarn compile
+```
 
 ## Deploy on Vercel
 

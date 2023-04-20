@@ -1,0 +1,8 @@
+query GetIdea($id: ID!) {
+  idea(id: $id) {
+    id
+    name
+    note
+    goal
+  }
+}

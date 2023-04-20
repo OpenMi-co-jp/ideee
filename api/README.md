@@ -23,3 +23,10 @@ https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 `migrate時にER図を自動生成する`
 
 ![](./ideee_erd.png)
+
+# graphqlの設定
+
+1. graphqlからSchemaダンプを作成
+
+`rake graphql:schema:dump`
+

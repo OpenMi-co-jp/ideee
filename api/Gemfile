@@ -12,11 +12,11 @@ gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+gem 'sass-rails', '>= 6' # 使わない
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+gem 'turbolinks', '~> 5' # 使わない
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -48,10 +48,10 @@ gem 'google-api-client'
 gem 'cloudinary'
 gem 'meta-tags'
 
-gem 'devise-i18n'
+gem 'devise-i18n' # 使わない
 gem 'rails-i18n'
 
-gem 'high_voltage'
+gem 'high_voltage' # 使わない
 
 gem 'enum_help'
 gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
@@ -59,7 +59,7 @@ gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 gem 'slack-notifier'
 
-gem 'render_async' # 遅延読み込み
+gem 'render_async' # 遅延読み込み # 使わない
 gem 'sendgrid-ruby' # メール送信
 
 # uncomment out when you need
@@ -87,6 +87,10 @@ gem 'uglifier'
 
 # カウントのキャッシュ設定
 gem 'counter_culture'
+
+gem 'graphql'
+
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -130,6 +134,9 @@ group :development do
 
   # ER図の自動生成
   gem 'rails-erd'
+
+  # TODO: graphiqlを削除する場合には、以下のgemも削除する
+  gem 'graphiql-rails'
 end
 
 group :test do

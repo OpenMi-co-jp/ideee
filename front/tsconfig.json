@@ -20,6 +20,6 @@
     },
     // "traceResolution": true // for debugging
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "codegen.yml"],
   "exclude": ["node_modules"]
 }

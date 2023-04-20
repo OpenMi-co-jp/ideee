@@ -17,6 +17,9 @@ task after_migrate: :environment do
   Rake::Task[:create_erd].invoke
 end
 
+require "graphql/rake_task"
+GraphQL::RakeTask.new(schema_name: "IdeeeSchema")
+
 # ER図を作成
 task create_erd: :environment do
   # attributes=foreign_keys,primary_keys (属性は主キー、外部キー)

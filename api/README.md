@@ -26,7 +26,7 @@ https://www.notion.so/ideee/Engineering-Wiki-80fac88f11804c7d86ee1ac06bcfc75f
 
 # graphqlの設定
 
-1. ダンプを作成
+1. graphqlからSchemaダンプを作成
 
 `rake graphql:schema:dump`
 

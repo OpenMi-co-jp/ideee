@@ -137,6 +137,7 @@ class IdeasController < ApplicationController
   def joined_team
     idea_ids = TeamUser.eager_load(:team).where(user_id: params[:user_id]).map(&:team).pluck(:idea_id)
     idea_list = Idea.where(id: idea_ids).eager_load(:user).preload(:idea_tags)
+    # ユーザー詳細画面のページネーション不具合対応のため、一時的に別パーシャルに退避
     render partial: 'common/joined_team_column_board', locals: { ideas: idea_list }
   end
 

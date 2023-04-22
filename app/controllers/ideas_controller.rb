@@ -137,7 +137,7 @@ class IdeasController < ApplicationController
   def joined_team
     idea_ids = TeamUser.eager_load(:team).where(user_id: params[:user_id]).map(&:team).pluck(:idea_id)
     idea_list = Idea.where(id: idea_ids).eager_load(:user).preload(:idea_tags)
-    render partial: 'common/column_board', locals: { ideas: idea_list }
+    render partial: 'common/joined_team_column_board', locals: { ideas: idea_list }
   end
 
   private

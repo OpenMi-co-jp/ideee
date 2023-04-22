@@ -1,6 +1,6 @@
 <%# TODO: rank_listに統合 %>
 <div class='idea'>
-<% ideas.each.with_index(1 + (ideas.current_page - 1) * ideas.limit_value) do |idea, i| %>
+  <% ideas.each.with_index(1 + (ideas.current_page - 1) * ideas.limit_value) do |idea, i| %>
     <div class='idea__list'>
       <h5 class='idea__num'>
         <%= i %>

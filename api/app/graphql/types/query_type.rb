@@ -4,7 +4,7 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    field :idea, resolver: Resolvers::Idea::IdeaResolver
+    field :idea, resolver: Resolvers::Idea::IdeaResolver, description: 'アイデアオブジェクト'
     # field :ideas, resolver: Resolvers::Ideas::IdeaResolver
   end
 end

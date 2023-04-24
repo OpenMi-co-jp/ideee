@@ -4,11 +4,9 @@ module Resolvers
   class Idea::IdeaResolver < BaseResolver
     graphql_name 'GetIdea'
 
-    # レスポンスタイプ
-    type Types::IdeaType, null: false
+    type Types::IdeaType, null: false, description: 'アイデア'
 
-    # リクエストパラメータ
-    argument :id, ID, required: true
+    argument :id, ID, required: true, description: 'アイデア検索ID'
 
     def resolve(**args)
       ::Idea.find(args[:id])

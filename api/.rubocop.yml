@@ -4,6 +4,7 @@ require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-graphql
 
 AllCops:
   NewCops: enable
@@ -214,4 +215,12 @@ RSpec/AlignRightLetBrace:
 
 # 2文字以下のパラメーターを許可
 Naming/MethodParameterName:
+  Enabled: false
+
+# フィールドの順番を気にしない
+GraphQL/OrderedFields:
+  Enabled: false
+
+# タイプに説明を要求しない
+GraphQL/ObjectDescription:
   Enabled: false

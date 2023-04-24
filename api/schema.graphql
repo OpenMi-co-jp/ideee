@@ -4,32 +4,133 @@ An ISO 8601-encoded datetime
 scalar ISO8601DateTime
 
 type Idea {
+  """
+  背景
+  """
   background: String
+
+  """
+  コメント数
+  """
   commentsNum: Int
+
+  """
+  作成日
+  """
   createdAt: ISO8601DateTime!
+
+  """
+  難易度
+  """
   difficulty: Int
+
+  """
+  下書きフラグ
+  """
   draft: Boolean
+
+  """
+  メール送信日
+  """
   emailedAt: ISO8601DateTime
+
+  """
+  GithubリポジトリURL
+  """
   githubUrl: String
+
+  """
+  ゴール
+  """
   goal: String
+
+  """
+  仮説
+  """
   hypothesis: String
+
+  """
+  アイコン
+  """
   icon: String
+
+  """
+  アイデアID
+  """
   id: ID!
+
+  """
+  課題・困っていること
+  """
   issue: String
+
+  """
+  ハート数
+  """
   likesNum: Int
+
+  """
+  マネタイズ方法
+  """
   monetize: String
+
+  """
+  アイデア名
+  """
   name: String
+
+  """
+  補足
+  """
   note: String
+
+  """
+  アプリ審査状況
+  """
   productApply: Int
+
+  """
+  作っているアプリのURL
+  """
   productUrl: String
+
+  """
+  公開日
+  """
   publishedAt: ISO8601DateTime
+
+  """
+  類似サービス
+  """
   similar: String
+
+  """
+  権利スタンス
+  """
   stance: Int
+
+  """
+  ターゲット
+  """
   target: String
+
+  """
+  更新日
+  """
   updatedAt: ISO8601DateTime!
+
+  """
+  """
   user: User!
-  userId: Int!
+
+  """
+  ビュー数
+  """
   view: Int
+
+  """
+  欲しい機能
+  """
   wishFunction: String
 }
 
@@ -40,28 +141,217 @@ type Mutation {
   testField: String!
 }
 
+type Notificatable {
+  """
+  ポリモーフィックID
+  """
+  notificatableId: Int
+
+  """
+  ポリモーフィックタイプ
+  """
+  notificatableType: String
+}
+
+type Notification {
+  """
+  確認フラグ
+  """
+  checked: Boolean!
+
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  通知ID
+  """
+  id: ID!
+
+  """
+  アイデアID
+  """
+  ideaId: Int
+
+  """
+  通知対象
+  """
+  notificatable: Notificatable!
+
+  """
+  メール送信日
+  """
+  sendAt: ISO8601DateTime
+
+  """
+  受信者ID
+  """
+  visitedId: Int
+
+  """
+  通知者ID
+  """
+  visitorId: Int
+}
+
 type Query {
-  idea(id: ID!): Idea!
+  """
+  アイデアオブジェクト
+  """
+  idea(
+    """
+    アイデア検索ID
+    """
+    id: ID!
+  ): Idea!
+
+  """
+  アイデア一覧
+  """
+  ideas: [Idea!]!
+
+  """
+  通知一覧
+  """
+  notifications: [Notification!]!
+
+  """
+  チームオブジェクト
+  """
+  team(
+    """
+    チーム検索ID
+    """
+    id: ID!
+  ): Team!
+
+  """
+  ユーザーオブジェクト
+  """
+  user(
+    """
+    ユーザー検索ID
+    """
+    id: ID!
+  ): User!
+
+  """
+  ユーザー一覧
+  """
+  users: [User!]!
+}
+
+type Team {
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  チームID
+  """
+  id: ID!
+
+  """
+  アイデアID
+  """
+  ideaId: Int!
+
+  """
+  メンバー数
+  """
+  membersNum: Int
+
+  """
+  (メンバーが)得られるもの
+  """
+  offer: String!
+
+  """
+  オーナーID
+  """
+  ownerId: Int!
+
+  """
+  お願いすること
+  """
+  requirement: String!
+
+  """
+  チームステータス
+  """
+  status: Int!
 }
 
 type User {
-  confirmationSentAt: ISO8601DateTime
-  confirmedAt: ISO8601DateTime
+  """
+  作成日
+  """
   createdAt: ISO8601DateTime!
+
+  """
+  設定完了フラグ
+  """
   defined: Boolean
+
+  """
+  タイプ
+  """
   definition: Int
+
+  """
+  自己紹介
+  """
   description: String
+
+  """
+  メールアドレス
+  """
   email: String
+
+  """
+  githubID
+  """
   githubId: String
+
+  """
+  アイコン
+  """
   icon: String
+
+  """
+  ユーザーID
+  """
   id: ID!
+
+  """
+  アイデア数
+  """
   ideasNum: Int
+
+  """
+  ユーザー名
+  """
   name: String
+
+  """
+  ポイント数
+  """
   point: Int
-  provider: String
+
+  """
+  アイコンURL
+  """
   remoteUrl: String
+
+  """
+  サイトURL
+  """
   siteUrl: String
+
+  """
+  TwitterID
+  """
   twitterId: String
-  uid: String
-  updatedAt: ISO8601DateTime!
 }

@@ -1,0 +1,9 @@
+query GetNotifications {
+  notifications {
+    id
+    visitedId
+    checked
+    notificatableId
+    notificatableType
+  }
+}

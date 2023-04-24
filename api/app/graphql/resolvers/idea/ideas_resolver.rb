@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 module Resolvers
-  class IdeasResolver < BaseResolver
+  class Idea::IdeasResolver < BaseResolver
     graphql_name 'GetIdeas'
 
-    type [Types::Idea::IdeaType], null: false, description: 'アイデア一覧'
+    type [Types::IdeaType], null: false
 
     def resolve
-      {
-        nodes: ::Idea.all
-      }
+      ::Idea.all
     end
   end
 end

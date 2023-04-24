@@ -6,3 +6,12 @@ query GetIdea($id: ID!) {
     goal
   }
 }
+
+query GetIdeas {
+  ideas {
+    id
+    name
+    note
+    goal
+  }
+}

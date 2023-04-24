@@ -50,7 +50,7 @@
           "fields": [
             {
               "name": "background",
-              "description": null,
+              "description": "背景",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -64,7 +64,7 @@
             },
             {
               "name": "commentsNum",
-              "description": null,
+              "description": "コメント数",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -78,7 +78,7 @@
             },
             {
               "name": "createdAt",
-              "description": null,
+              "description": "作成日",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -96,7 +96,7 @@
             },
             {
               "name": "difficulty",
-              "description": null,
+              "description": "難易度",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -110,7 +110,7 @@
             },
             {
               "name": "draft",
-              "description": null,
+              "description": "下書きフラグ",
               "type": {
                 "kind": "SCALAR",
                 "name": "Boolean",
@@ -124,7 +124,7 @@
             },
             {
               "name": "emailedAt",
-              "description": null,
+              "description": "メール送信日",
               "type": {
                 "kind": "SCALAR",
                 "name": "ISO8601DateTime",
@@ -138,7 +138,7 @@
             },
             {
               "name": "githubUrl",
-              "description": null,
+              "description": "GithubリポジトリURL",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -152,7 +152,7 @@
             },
             {
               "name": "goal",
-              "description": null,
+              "description": "ゴール",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -166,7 +166,7 @@
             },
             {
               "name": "hypothesis",
-              "description": null,
+              "description": "仮説",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -180,7 +180,7 @@
             },
             {
               "name": "icon",
-              "description": null,
+              "description": "アイコン",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -194,7 +194,7 @@
             },
             {
               "name": "id",
-              "description": null,
+              "description": "アイデアID",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -212,7 +212,7 @@
             },
             {
               "name": "issue",
-              "description": null,
+              "description": "課題・困っていること",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -226,7 +226,7 @@
             },
             {
               "name": "likesNum",
-              "description": null,
+              "description": "ハート数",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -240,7 +240,7 @@
             },
             {
               "name": "monetize",
-              "description": null,
+              "description": "マネタイズ方法",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -254,7 +254,7 @@
             },
             {
               "name": "name",
-              "description": null,
+              "description": "アイデア名",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -268,7 +268,7 @@
             },
             {
               "name": "note",
-              "description": null,
+              "description": "補足",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -282,7 +282,7 @@
             },
             {
               "name": "productApply",
-              "description": null,
+              "description": "アプリ審査状況",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -296,7 +296,7 @@
             },
             {
               "name": "productUrl",
-              "description": null,
+              "description": "作っているアプリのURL",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -310,7 +310,7 @@
             },
             {
               "name": "publishedAt",
-              "description": null,
+              "description": "公開日",
               "type": {
                 "kind": "SCALAR",
                 "name": "ISO8601DateTime",
@@ -324,7 +324,7 @@
             },
             {
               "name": "similar",
-              "description": null,
+              "description": "類似サービス",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -338,7 +338,7 @@
             },
             {
               "name": "stance",
-              "description": null,
+              "description": "権利スタンス",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -352,7 +352,7 @@
             },
             {
               "name": "target",
-              "description": null,
+              "description": "ターゲット",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -366,7 +366,7 @@
             },
             {
               "name": "updatedAt",
-              "description": null,
+              "description": "更新日",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -384,7 +384,7 @@
             },
             {
               "name": "user",
-              "description": null,
+              "description": "",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -401,26 +401,8 @@
               ]
             },
             {
-              "name": "userId",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
               "name": "view",
-              "description": null,
+              "description": "ビュー数",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -434,7 +416,7 @@
             },
             {
               "name": "wishFunction",
-              "description": null,
+              "description": "欲しい機能",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -502,7 +484,7 @@
           "fields": [
             {
               "name": "idea",
-              "description": null,
+              "description": "アイデアオブジェクト",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -517,7 +499,7 @@
               "args": [
                 {
                   "name": "id",
-                  "description": null,
+                  "description": "アイデア検索ID",
                   "type": {
                     "kind": "NON_NULL",
                     "name": null,
@@ -531,6 +513,91 @@
                   "isDeprecated": false,
                   "deprecationReason": null
                 }
+              ]
+            },
+            {
+              "name": "ideas",
+              "description": "アイデア一覧",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Idea",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "user",
+              "description": "ユーザーオブジェクト",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "User",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": "ユーザー検索ID",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                }
+              ]
+            },
+            {
+              "name": "users",
+              "description": "ユーザー一覧",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "User",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
               ]
             }
           ],
@@ -557,36 +624,8 @@
           "possibleTypes": null,
           "fields": [
             {
-              "name": "confirmationSentAt",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "ISO8601DateTime",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
-              "name": "confirmedAt",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "ISO8601DateTime",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
               "name": "createdAt",
-              "description": null,
+              "description": "作成日",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -604,7 +643,7 @@
             },
             {
               "name": "defined",
-              "description": null,
+              "description": "設定完了フラグ",
               "type": {
                 "kind": "SCALAR",
                 "name": "Boolean",
@@ -618,7 +657,7 @@
             },
             {
               "name": "definition",
-              "description": null,
+              "description": "タイプ",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -632,7 +671,7 @@
             },
             {
               "name": "description",
-              "description": null,
+              "description": "自己紹介",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -646,7 +685,7 @@
             },
             {
               "name": "email",
-              "description": null,
+              "description": "メールアドレス",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -660,7 +699,7 @@
             },
             {
               "name": "githubId",
-              "description": null,
+              "description": "githubID",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -674,7 +713,7 @@
             },
             {
               "name": "icon",
-              "description": null,
+              "description": "アイコン",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -688,7 +727,7 @@
             },
             {
               "name": "id",
-              "description": null,
+              "description": "ユーザーID",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -706,7 +745,7 @@
             },
             {
               "name": "ideasNum",
-              "description": null,
+              "description": "アイデア数",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -720,7 +759,7 @@
             },
             {
               "name": "name",
-              "description": null,
+              "description": "ユーザー名",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -734,7 +773,7 @@
             },
             {
               "name": "point",
-              "description": null,
+              "description": "ポイント数",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -747,22 +786,8 @@
               ]
             },
             {
-              "name": "provider",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
               "name": "remoteUrl",
-              "description": null,
+              "description": "アイコンURL",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -776,7 +801,7 @@
             },
             {
               "name": "siteUrl",
-              "description": null,
+              "description": "サイトURL",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -790,43 +815,11 @@
             },
             {
               "name": "twitterId",
-              "description": null,
+              "description": "TwitterID",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
-              "name": "uid",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
-              "name": "updatedAt",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ISO8601DateTime",
-                  "ofType": null
-                }
               },
               "isDeprecated": false,
               "deprecationReason": null,

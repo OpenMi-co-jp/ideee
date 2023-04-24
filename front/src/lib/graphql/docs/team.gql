@@ -1,0 +1,11 @@
+query GetTeam($id: ID!) {
+  team(id: $id) {
+    id
+    ownerId
+    ideaId
+    status
+    requirement
+    offer
+    membersNum
+  }
+}

@@ -9,5 +9,9 @@ module Types
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
     field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'
+
+    field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'
+
+    field :team, resolver: Resolvers::Team::TeamResolver, description: 'チームオブジェクト'
   end
 end

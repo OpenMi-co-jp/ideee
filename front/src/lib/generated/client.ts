@@ -83,12 +83,38 @@ export type Mutation = {
   testField: Scalars['String']
 }
 
+export type Notification = {
+  __typename?: 'Notification'
+  /** 確認フラグ */
+  checked: Scalars['Boolean']
+  /** 作成日 */
+  createdAt: Scalars['ISO8601DateTime']
+  /** 通知ID */
+  id: Scalars['ID']
+  /** アイデアID */
+  ideaId?: Maybe<Scalars['Int']>
+  /** ポリモーフィックID */
+  notificatableId?: Maybe<Scalars['Int']>
+  /** ポリモーフィックタイプ */
+  notificatableType?: Maybe<Scalars['String']>
+  /** メール送信日 */
+  sendAt?: Maybe<Scalars['ISO8601DateTime']>
+  /** 受信者ID */
+  visitedId?: Maybe<Scalars['Int']>
+  /** 通知者ID */
+  visitorId?: Maybe<Scalars['Int']>
+}
+
 export type Query = {
   __typename?: 'Query'
   /** アイデアオブジェクト */
   idea: Idea
   /** アイデア一覧 */
   ideas: Array<Idea>
+  /** 通知一覧 */
+  notifications: Array<Notification>
+  /** チームオブジェクト */
+  team: Team
   /** ユーザーオブジェクト */
   user: User
   /** ユーザー一覧 */
@@ -99,8 +125,32 @@ export type QueryIdeaArgs = {
   id: Scalars['ID']
 }
 
+export type QueryTeamArgs = {
+  id: Scalars['ID']
+}
+
 export type QueryUserArgs = {
   id: Scalars['ID']
+}
+
+export type Team = {
+  __typename?: 'Team'
+  /** 作成日 */
+  createdAt: Scalars['ISO8601DateTime']
+  /** チームID */
+  id: Scalars['ID']
+  /** アイデアID */
+  ideaId: Scalars['Int']
+  /** メンバー数 */
+  membersNum?: Maybe<Scalars['Int']>
+  /** (メンバーが)得られるもの */
+  offer: Scalars['String']
+  /** オーナーID */
+  ownerId: Scalars['Int']
+  /** お願いすること */
+  requirement: Scalars['String']
+  /** チームステータス */
+  status: Scalars['Int']
 }
 
 export type User = {
@@ -161,6 +211,38 @@ export type GetIdeasQuery = {
     note?: string | null
     goal?: string | null
   }>
+}
+
+export type GetNotificationsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetNotificationsQuery = {
+  __typename?: 'Query'
+  notifications: Array<{
+    __typename?: 'Notification'
+    id: string
+    visitedId?: number | null
+    checked: boolean
+    notificatableId?: number | null
+    notificatableType?: string | null
+  }>
+}
+
+export type GetTeamQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type GetTeamQuery = {
+  __typename?: 'Query'
+  team: {
+    __typename?: 'Team'
+    id: string
+    ownerId: number
+    ideaId: number
+    status: number
+    requirement: string
+    offer: string
+    membersNum?: number | null
+  }
 }
 
 export type GetUserQueryVariables = Exact<{
@@ -296,6 +378,121 @@ export type GetIdeasLazyQueryHookResult = ReturnType<
 export type GetIdeasQueryResult = Apollo.QueryResult<
   GetIdeasQuery,
   GetIdeasQueryVariables
+>
+export const GetNotificationsDocument = gql`
+  query GetNotifications {
+    notifications {
+      id
+      visitedId
+      checked
+      notificatableId
+      notificatableType
+    }
+  }
+`
+
+/**
+ * __useGetNotificationsQuery__
+ *
+ * To run a query within a React component, call `useGetNotificationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetNotificationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetNotificationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetNotificationsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetNotificationsQuery,
+    GetNotificationsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetNotificationsQuery, GetNotificationsQueryVariables>(
+    GetNotificationsDocument,
+    options
+  )
+}
+export function useGetNotificationsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetNotificationsQuery,
+    GetNotificationsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    GetNotificationsQuery,
+    GetNotificationsQueryVariables
+  >(GetNotificationsDocument, options)
+}
+export type GetNotificationsQueryHookResult = ReturnType<
+  typeof useGetNotificationsQuery
+>
+export type GetNotificationsLazyQueryHookResult = ReturnType<
+  typeof useGetNotificationsLazyQuery
+>
+export type GetNotificationsQueryResult = Apollo.QueryResult<
+  GetNotificationsQuery,
+  GetNotificationsQueryVariables
+>
+export const GetTeamDocument = gql`
+  query GetTeam($id: ID!) {
+    team(id: $id) {
+      id
+      ownerId
+      ideaId
+      status
+      requirement
+      offer
+      membersNum
+    }
+  }
+`
+
+/**
+ * __useGetTeamQuery__
+ *
+ * To run a query within a React component, call `useGetTeamQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTeamQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTeamQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetTeamQuery(
+  baseOptions: Apollo.QueryHookOptions<GetTeamQuery, GetTeamQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetTeamQuery, GetTeamQueryVariables>(
+    GetTeamDocument,
+    options
+  )
+}
+export function useGetTeamLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetTeamQuery, GetTeamQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetTeamQuery, GetTeamQueryVariables>(
+    GetTeamDocument,
+    options
+  )
+}
+export type GetTeamQueryHookResult = ReturnType<typeof useGetTeamQuery>
+export type GetTeamLazyQueryHookResult = ReturnType<typeof useGetTeamLazyQuery>
+export type GetTeamQueryResult = Apollo.QueryResult<
+  GetTeamQuery,
+  GetTeamQueryVariables
 >
 export const GetUserDocument = gql`
   query GetUser($id: ID!) {

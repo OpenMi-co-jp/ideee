@@ -141,6 +141,60 @@ type Mutation {
   testField: String!
 }
 
+type Notificatable {
+  """
+  ポリモーフィックID
+  """
+  notificatableId: Int
+
+  """
+  ポリモーフィックタイプ
+  """
+  notificatableType: String
+}
+
+type Notification {
+  """
+  確認フラグ
+  """
+  checked: Boolean!
+
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  通知ID
+  """
+  id: ID!
+
+  """
+  アイデアID
+  """
+  ideaId: Int
+
+  """
+  通知対象
+  """
+  notificatable: Notificatable!
+
+  """
+  メール送信日
+  """
+  sendAt: ISO8601DateTime
+
+  """
+  受信者ID
+  """
+  visitedId: Int
+
+  """
+  通知者ID
+  """
+  visitorId: Int
+}
+
 type Query {
   """
   アイデアオブジェクト
@@ -158,6 +212,21 @@ type Query {
   ideas: [Idea!]!
 
   """
+  通知一覧
+  """
+  notifications: [Notification!]!
+
+  """
+  チームオブジェクト
+  """
+  team(
+    """
+    チーム検索ID
+    """
+    id: ID!
+  ): Team!
+
+  """
   ユーザーオブジェクト
   """
   user(
@@ -171,6 +240,48 @@ type Query {
   ユーザー一覧
   """
   users: [User!]!
+}
+
+type Team {
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  チームID
+  """
+  id: ID!
+
+  """
+  アイデアID
+  """
+  ideaId: Int!
+
+  """
+  メンバー数
+  """
+  membersNum: Int
+
+  """
+  (メンバーが)得られるもの
+  """
+  offer: String!
+
+  """
+  オーナーID
+  """
+  ownerId: Int!
+
+  """
+  お願いすること
+  """
+  requirement: String!
+
+  """
+  チームステータス
+  """
+  status: Int!
 }
 
 type User {

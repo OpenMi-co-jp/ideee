@@ -28,6 +28,6 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false, description: '更新日'
     field :published_at, GraphQL::Types::ISO8601DateTime, description: '公開日'
 
-    field :user, Types::UserType, null: false, description: ''
+    field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
   end
 end

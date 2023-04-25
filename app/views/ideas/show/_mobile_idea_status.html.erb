@@ -2,6 +2,21 @@
   <div class='row gray-4'>
     <div class='col s12'>
       <div class='c-mobile-status-info'>
+        <div class="c-mobile-status-info__day">
+          <%= "更新日：#{l idea.updated_at}" %>
+        </div>
+        <% if idea.enough_view? %>
+          <div class="c-mobile-status-info__eye">
+            <%= image_tag 'icons/eye.svg', loading: "lazy", alt: "ビュー数" %>
+            <p><%= idea.view %></p>
+          </div>
+        <% end %>
+        <div class='c-mobile-status-info__comment', id="comments_count">
+          <%= image_tag 'icons/comment.svg', loading: "lazy", alt: "コメント数" %>
+          <p><%= idea.comments_num %></p>
+        </div>
+      </div>
+      <div class='c-mobile-status-info'>
         <%= render 'difficultys/vote', object: idea %>
         <%= render "common/like", object: idea, render_to: 'common/like_link' %>
       </div>

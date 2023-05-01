@@ -224,3 +224,17 @@ GraphQL/OrderedFields:
 # タイプに説明を要求しない
 GraphQL/ObjectDescription:
   Enabled: false
+
+# Argumentsをソートしない
+GraphQL/OrderedArguments:
+  Enabled: false
+
+# argumentsのinputTypeのエラー対処
+GraphQL/ExtractInputType:
+  Include:
+    - 'graphql/mutations/**/*.rb'
+
+# fieldのtype指定をさせない対処
+GraphQL/ExtractType:
+  Include:
+    - 'graphql/types/*.rb'

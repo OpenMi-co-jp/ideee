@@ -233,3 +233,8 @@ GraphQL/OrderedArguments:
 GraphQL/ExtractInputType:
   Include:
     - 'graphql/mutations/**/*.rb'
+
+# fieldのtype指定をさせない対処
+GraphQL/ExtractType:
+  Include:
+    - 'graphql/types/*.rb'

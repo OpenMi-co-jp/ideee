@@ -31,7 +31,7 @@ class Comment < ApplicationRecord
 
   counter_culture :idea, column_name: 'comments_num'
 
-  scope :weekly_comments, -> { where(created_at: 7.days.ago..Time.zone.now) }
+  scope :monthly_comments, -> { where(created_at: 1.month.ago..Time.zone.now) }
   scope :pickup_user_commets, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
 
   def over_length?

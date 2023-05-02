@@ -47,8 +47,8 @@ class UsersController < ApplicationController
   end
 
   def commenter
-    # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
-    user_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
+    # １ヶ月以内にコメントを追加したユーザーのIDとコメント数をピックアップ
+    user_array = Comment.monthly_comments.pickup_user_commets(t('default.users.monthly_comments_num'))
     user_list = user_array.map { |u| User.find(u[0]) }
     render partial: 'users/user_list', locals: { users: user_list, user_array:, icon: '💬' }
   end

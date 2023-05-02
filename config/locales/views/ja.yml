@@ -27,7 +27,7 @@ ja:
     message:
       unauthorized: 権限がないのでリダイレクトされました
     users:
-      weekly_comments_num: 5
+      monthly_comments_num: 5
       monthly_publisher_num: 10
     sns:
       share:

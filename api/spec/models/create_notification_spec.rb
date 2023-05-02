@@ -49,12 +49,8 @@ RSpec.describe CreateNotification, type: :helper do
       context 'コメントを数えるとき' do
         subject(:comment_notification) { user.create_notification_comment(idea, comment) }
 
-        let(:user1) { FactoryBot.create(:user) }
-        let(:user2) { FactoryBot.create(:user) }
-
         before do
-          FactoryBot.create(:comment, idea:, user: user1)
-          FactoryBot.create(:comment, idea:, user: user2)
+          FactoryBot.create_list(:comment, 2, idea:)
         end
 
         it '通知を作成する' do

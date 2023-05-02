@@ -221,8 +221,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_105925) do
     t.string "icon"
     t.integer "definition", limit: 2
     t.string "twitter_id"
-    t.string "provider"
-    t.string "uid"
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
     t.string "remote_url"
     t.string "site_url"
     t.boolean "defined"

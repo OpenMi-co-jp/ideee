@@ -133,6 +133,10 @@ class User < ApplicationRecord
         'Google'
       end
     end
+
+    def ransackable_attributes
+      %w[name definition created_at ideas_num point]
+    end
   end
 
   # cookieを使ってログインを保持

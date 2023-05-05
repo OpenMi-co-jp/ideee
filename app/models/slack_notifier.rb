@@ -36,7 +36,7 @@ class SlackNotifier
     recent_comment_users = Comment.monthly_comments.pluck(:user_id).uniq.size
     monthly_comments = Comment.where(created_at: 40.days.ago..Time.zone.now).size.to_f
     article = "データ【#{Time.current.yesterday.strftime('%Y / %m/ %d')}】\n新しいユーザーセッション：#{new_users}👏 セッション数: #{sessions} 👀\n" \
-              "40日以内のアイデア： #{recent_ideas}💡 今週のコメンテーター数： #{recent_comment_users}💬\n" \
+              "40日以内のアイデア： #{recent_ideas}💡 今月のコメンテーター数： #{recent_comment_users}💬\n" \
               "今月のアイデア数に対してのコメント数値：  🔥#{(monthly_comments / recent_ideas.to_f).round(2)}🔥 = (#{monthly_comments} / #{recent_ideas})"
     Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
   end

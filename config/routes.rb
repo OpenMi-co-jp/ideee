@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show] do
     collection do
       get :search
-      get :commenter
+      get :monthly_commenter
       get :idea_man
     end
   end

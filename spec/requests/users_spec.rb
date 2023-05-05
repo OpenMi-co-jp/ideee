@@ -99,7 +99,7 @@ RSpec.describe 'Users' do
     subject(:get_monthly_commenter) { get monthly_commenter_users_path }
 
     context '直近１ヶ月にコメントしたユーザーが存在しない場合' do
-      let!(:comment) { FactoryBot.create(:comment, created_at: 1.years.ago) }
+      let!(:comment)   { FactoryBot.create(:comment, created_at: 1.year.ago) }
       let!(:commenter) { comment.user }
 
       it 'リクエストが成功すること' do

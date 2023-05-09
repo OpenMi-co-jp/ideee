@@ -31,5 +31,12 @@ module Ideee
 
     # rails7以降はデフォルトをvips指定とsるのでmini_magickを指定する
     config.active_storage.variant_processor = :mini_magick
+
+    config.api_only = true
+
+    # OmniAuthのエラーに対処
+    config.session_store :cookie_store, key: '_interslice_session'
+    config.middleware.use ActionDispatch::Cookies # Required for all session management
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
   end
 end

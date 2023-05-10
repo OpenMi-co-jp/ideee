@@ -29,7 +29,7 @@ DeviseTokenAuth.setup do |config|
   # This route will be the prefix for all oauth2 redirect callbacks. For
   # example, using the default '/omniauth', the github oauth2 provider will
   # redirect successful authentications to '/omniauth/github/callback'
-  # config.omniauth_prefix = "/omniauth"
+  config.omniauth_prefix = "/omniauth"
 
   # By default sending current password is not needed for the password update.
   # Uncomment to enforce current_password param to be checked before all
@@ -41,12 +41,16 @@ DeviseTokenAuth.setup do |config|
   # It depends on fields like email, provider and uid.
   # config.default_callbacks = true
 
+  # 一例として一旦設定
+  config.default_confirm_success_url = ENV["CONFIRM_SUCCESS_URL"] || "http://localhost:3000/"
+
   # Makes it possible to change the headers names
-  # config.headers_names = {:'access-token' => 'access-token',
-  #                        :'client' => 'client',
-  #                        :'expiry' => 'expiry',
-  #                        :'uid' => 'uid',
-  #                        :'token-type' => 'token-type' }
+  config.headers_names = {:'access-token' => 'access-token',
+                         :'client' => 'client',
+                         :'expiry' => 'expiry',
+                         :'uid' => 'uid',
+                         :'token-type' => 'token-type',
+                         :'authorization' => 'authorization' }
 
   # Makes it possible to use custom uid column
   # config.other_uid = "foo"
@@ -59,5 +63,5 @@ DeviseTokenAuth.setup do |config|
   # By default DeviseTokenAuth will not send confirmation email, even when including
   # devise confirmable module. If you want to use devise confirmable module and
   # send email, set it to true. (This is a setting for compatibility)
-  # config.send_confirmation_email = true
+  config.send_confirmation_email = true
 end

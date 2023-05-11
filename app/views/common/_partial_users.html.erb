@@ -22,7 +22,7 @@
                     </div>
                   </div>
                   <div class='user-point grid-middle'>
-                    <% if users.length == t('default.users.weekly_comments_num') %>
+                    <% if users.length == t('default.users.montly_comments_num') %>
                       <p>💬</p>
                       <%= @commented_users_array.to_h[user.id] %>
                     <% elsif users.length == t('default.users.monthly_publisher_num') %>

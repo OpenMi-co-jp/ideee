@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search commenter idea_man]
+  before_action :authenticate_user!, except: %i[index show search monthly_commenter idea_man]
   prepend_before_action :page_user, only: %i[show]
-  before_action :defined_check, except: %i[index search commenter idea_man], if: :own_user?
+  before_action :defined_check, except: %i[index search monthly_commenter idea_man], if: :own_user?
 
   def index
     @users = Kaminari.paginate_array(User.defined_user.order(point: 'DESC'))
@@ -46,9 +46,9 @@ class UsersController < ApplicationController
     @rank_num = (current_page - 1) * @paged_users.limit_value
   end
 
-  def commenter
-    # 1週間以内にコメントを追加したユーザーのIDとコメント数をピックアップ
-    user_array = Comment.weekly_comments.pickup_user_commets(t('default.users.weekly_comments_num'))
+  def monthly_commenter
+    # １ヶ月以内にコメントを追加したユーザーのIDとコメント数をピックアップ
+    user_array = Comment.monthly_comments.pickup_user_commets(t('default.users.monthly_comments_num'))
     user_list = user_array.map { |u| User.find(u[0]) }
     render partial: 'users/user_list', locals: { users: user_list, user_array:, icon: '💬' }
   end

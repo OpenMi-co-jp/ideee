@@ -1,8 +1,31 @@
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client'
 import type { FC, ReactNode } from 'react'
+import { setContext } from '@apollo/client/link/context'
+
+const httpLink = createHttpLink({
+  uri: process.env.NEXT_PUBLIC_API_URL + 'graphql',
+})
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const authorization = localStorage.getItem('authorization')
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      // authorization: token ? `Bearer ${token}` : '',
+      authorization: authorization || '',
+    },
+  }
+})
 
 const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_API_URL,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 })
 

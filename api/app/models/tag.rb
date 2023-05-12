@@ -25,4 +25,8 @@ class Tag < ApplicationRecord
                            x.tagged_ideas.length <=> y.tagged_ideas.length
                          end
                        }
+
+  def self.ransackable_attributes
+    ['name']
+  end
 end

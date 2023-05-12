@@ -20,7 +20,7 @@ export const Header: FC = () => {
           right: 0,
           padding: theme.spacing.xs,
           height: rem(75),
-          zIndex: 1000000,
+          zIndex: 200, // modalのindexがが201のため
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
           borderBottom: `1px solid ${theme.colors.gray[2]}`,

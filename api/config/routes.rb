@@ -3,16 +3,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth'
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
   end
   post '/graphql', to: 'graphql#execute'
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    confirmations: 'users/confirmations',
-    sessions: 'users/sessions'
-  }
 
   devise_scope :user do
     get 'sign_in', to: 'users/sessions#new'

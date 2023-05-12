@@ -10,7 +10,7 @@ export const CustomMantineProvider: FC<{ children: ReactNode }> = ({
   return (
     <MantineProvider>
       <ModalsProvider>
-        <Notifications/>
+        <Notifications />
         {children}
       </ModalsProvider>
     </MantineProvider>

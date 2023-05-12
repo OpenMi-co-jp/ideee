@@ -3,11 +3,15 @@ import type { AppProps } from 'next/app'
 import Layout from '../components/layout'
 import { ApolloBaseProvider } from '@/lib/apollo'
 
+import { CustomMantineProvider } from './mantine/CustomMantineProvider'
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <ApolloBaseProvider>
-        <Component {...pageProps} />
+        <CustomMantineProvider>
+          <Component {...pageProps} />
+        </CustomMantineProvider>
       </ApolloBaseProvider>
     </Layout>
   )

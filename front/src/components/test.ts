@@ -1,6 +1,6 @@
 import { useGetIdeaQuery } from '@/lib/generated/client'
 
-export const testQuery = () => {
+export default function testQuery() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, loading, error } = useGetIdeaQuery({
     variables: {

@@ -16,4 +16,3 @@ export const CustomMantineProvider: FC<{ children: ReactNode }> = ({
     </MantineProvider>
   )
 }
-

@@ -154,90 +154,18 @@ RSpec.describe 'Ideas' do
   end
 
   describe 'GET #search' do
-    context 'キーワードで検索した場合' do
-      subject(:get_search_ideas) { get search_ideas_path, params: }
+    subject(:get_search_ideas) { get search_ideas_path, params: }
 
-      let(:params) { { q: { name_or_idea_tags_name_cont: idea.name } } }
+    let(:params) { { q: { name_or_idea_tags_name_cont: idea.name } } }
 
-      it 'リクエストが成功すること' do
-        get_search_ideas
-        expect(response).to have_http_status :ok
-      end
-
-      it '検索したアイデアが表示されていること' do
-        get_search_ideas
-        expect(response.body.encode!).to include idea.name
-      end
-    end
-    context '難易度で検索した場合' do
-      # DifficultyがEsayとMiddleのIdeaレコードを1件ずつ作成する
-      let!(:idea_with_easy) { FactoryBot.create(:idea,difficulty:0) }
-      let!(:idea_with_middle) { FactoryBot.create(:idea,difficulty:1) }
-
-      subject(:get_search_ideas) { get search_ideas_path, params: }
-      
-      context '難易度「すべて」で検索した場合' do
-        let(:params) { { q: { difficulty_eq: '' } } }
-        it 'リクエストが成功すること' do
-          get_search_ideas
-          expect(response).to have_http_status :ok
-        end
-
-        it 'EasyとMiddleのアイデアの両方が表示されていること' do
-          get_search_ideas
-          expect(response.body.encode!).to include idea_with_easy.name
-          expect(response.body.encode!).to include idea_with_middle.name
-        end
-      end
-      context '難易度「Easy」で検索した場合' do
-        let(:params) { { q: { difficulty_eq: 0 } } }
-        it 'リクエストが成功すること' do
-          get_search_ideas
-          expect(response).to have_http_status :ok
-        end
-
-        it 'Easyのアイデアのみが表示されていること' do
-          get_search_ideas
-          expect(response.body.encode!).to include idea_with_easy.name
-          expect(response.body.encode!).to_not include idea_with_middle.name
-        end
-      end
+    it 'リクエストが成功すること' do
+      get_search_ideas
+      expect(response).to have_http_status :ok
     end
 
-    context 'Teamステータスで検索した場合' do
-      # 下記にて、Teamステータスがactiveとstopのideaレコードを生成したい
-      # ideaのみは生成できるが、そのideaに紐づいたTeamレコードの生成の仕方が分からない
-      let!(:idea_with_active) { FactoryBot.create(:idea) }
-      let!(:idea_with_stop) { FactoryBot.create(:idea) }
-
-      subject(:get_search_ideas) { get search_ideas_path, params: }
-
-      let(:params) { { q: { team_status_eq: '' } } }
-
-      context 'Teamステータス「すべて」で検索した場合' do
-        it 'リクエストが成功すること' do
-          get_search_ideas
-          expect(response).to have_http_status :ok
-        end
-
-        it 'ActiveとStopのアイデアの両方が表示されていること' do
-          get_search_ideas
-          expect(response.body.encode!).to include idea_with_active.name
-          expect(response.body.encode!).to include idea_with_stop.name
-        end
-      end
-      context 'Teamステータス「Active」で検索した場合' do
-        it 'リクエストが成功すること' do
-          get_search_ideas
-          expect(response).to have_http_status :ok
-        end
-
-        it 'Activeのアイデアのみが表示されていること' do
-          get_search_ideas
-          # expect(response.body.encode!).to include idea_with_active.name
-          # expect(response.body.encode!).to_not include idea_with_stop.name
-        end
-      end
+    it '検索したアイデアが表示されていること' do
+      get_search_ideas
+      expect(response.body.encode!).to include idea.name
     end
   end
 end

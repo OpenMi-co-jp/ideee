@@ -11,11 +11,7 @@
             <%= f.label :difficulty %>
           </div>
           <div class='col s9 m10 l6'>
-              <label>
-                <%= f.radio_button :difficulty_eq, '', class: 'js-search-fire' %>
-                <span>すべて</span>
-              </label>
-           <% Difficulty.levels.each do |(key, value)| %>
+            <% Difficulty.levels.each do |(key, value)| %>
               <label>
                 <%= f.radio_button :difficulty_eq, value, class: 'js-search-fire' %>
                 <span><%= key.capitalize %></span>
@@ -28,10 +24,6 @@
             <%= f.label :team_status %>
           </div>
           <div class='col s9 m10 l6'>
-              <label>
-                <%= f.radio_button :team_status_eq, '', class: 'js-search-fire' %>
-                <span>すべて</span>
-              </label>
             <% Team.statuses.each do |(key, value)| %>
               <label>
                 <%= f.radio_button :team_status_eq, value, class: 'js-search-fire' %>

@@ -84,7 +84,7 @@ class IdeasController < ApplicationController
   end
 
   def search
-    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)
+    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user, :team).ransack(ransack_params)
     @q.sorts = 'team_members_num desc' if @q.sorts.empty?
     @searched_ideas = @q.result
     @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])

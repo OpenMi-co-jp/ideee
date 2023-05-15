@@ -48,7 +48,7 @@
             <% end %>
             <div class="idea__detail pc">
               <% unless idea.not_yet? %>
-                <div class="idea__detail--vote c-vote-button <%= idea.difficulty %>">
+                <div class="idea__detail--vote <%= idea.difficulty %>">
                   <%= idea.difficulty.capitalize %>
                 </div>
               <% end %>
@@ -68,7 +68,7 @@
         <div class='idea__info'>
           <div class="idea__detail sp">
             <% unless idea.not_yet? %>
-              <div class="idea__detail--vote c-vote-button <%= idea.difficulty %>">
+              <div class="idea__detail--vote <%= idea.difficulty %>">
                 <%= idea.difficulty.capitalize %>
               </div>
             <% end %>

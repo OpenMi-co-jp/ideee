@@ -35,7 +35,7 @@
               <p><%= idea.likes_num %></p>
             </div>
             <!-- チーム開発募集中の検索ページ限りteam.members_numの数をアイデア表示に加える -->
-            <% if request.path == search_ideas_path && params[:q]&.include?('team_status_eq') && idea.team.members_num.positive? %>
+            <% if request.path == search_ideas_path && params[:q]&.include?('team_status_eq') && idea.team && idea.team.members_num.positive? %>
               <div class='idea__item'>
                 <i class="material-icons">groups</i>
                 <p><%= idea.team.members_num %></p>

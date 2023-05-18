@@ -42,8 +42,4 @@ $(document).on ('turbolinks:load', function(){
     // TODO: jsでUIの文字を変更するようにする
     // $('#modal-trigger-difficulty').html($(this))
   });
-
-  // share用のパラメーターが渡されたらモーダルを開く
-  params = window.location.search;
-  params.includes('?share=true') ? $('#modal_share').modal('open') : null;
 })

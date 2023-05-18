@@ -1,3 +1,5 @@
+import { setJsonValueToStorage} from './modal_push.js'
+
 $(document).on ('turbolinks:load', function(){
   if (!['ideas-edit', 'ideas-new'].includes($('body').data('page'))) { return }
 
@@ -7,5 +9,7 @@ $(document).on ('turbolinks:load', function(){
     invalid_num += M.invalid_input_num('#idea_name');
     invalid_num += M.invalid_input_num('#idea_background');
     invalid_num += M.invalid_input_num('#idea_goal');
+
+    setJsonValueToStorage({ isDisplay: false });
   });
 })

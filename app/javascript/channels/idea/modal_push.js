@@ -16,33 +16,28 @@ $(document).on ('turbolinks:load', function(){
   // ideaのid毎にsessionを設定
   window.sessionStorage.setItem(has_session, true);
 
-  const ideaShareItem = JSON.parse(window.sessionStorage.getItem('ideaShare'));
-  // sessionStorateに既にideaShareItemがいる場合
-  if (ideaShareItem){
-    // シェアモーダルが１度も表示されなかった場合
-    if(ideaShareItem.isDisplay === false) {
-      $('#modal_share').modal('open');
-      ideaShareItem.isDisplay = true;
-      setJsonSessionToStorage(ideaShareItem);
-    }
-  }
-
-  const initIdeaShare = {
-    isShare: false,
-    isDisplay: false
-  };
-
-  const getedIitIdeaShare = window.sessionStorage.getItem('ideaShare');
-
-  if (!getedIitIdeaShare) {
-    $('#modal_share').modal('open');
-    initIdeaShare.isDisplay = true;
-    setJsonSessionToStorage(initIdeaShare);
-  } else {
-    // 既にモーダルが表示済みの場合
-    if (JSON.parse(getedIitIdeaShare).isDisplay === true) { return; }
-    setJsonSessionToStorage(initIdeaShare);
-  }
+  displayShareModal();
 })
 
-const setJsonSessionToStorage = value =>  window.sessionStorage.setItem('ideaShare', JSON.stringify(value));
+// SNSなどへのシェア用もモーダル表示
+const displayShareModal = () => {
+  
+  const ideaShareItemObject = JSON.parse(getSessionStorageByKey('ideaShare'));
+
+  // セッションストレージにシェアモーダル用のフラグが存在していない場合
+  if (!ideaShareItemObject) {
+    $('#modal_share').modal('open');
+    return setJsonValueToStorage({isDisplay: true})
+  }
+  
+  // 既にモーダルが表示済みの場合
+  if (JSON.parse(ideaShareItemObject).isDisplay === true) { 
+    return; 
+  }
+ 
+  setJsonValueToStorage({ isDisplay: false }); 
+}
+
+const setJsonValueToStorage = value => window.sessionStorage.setItem('ideaShare', JSON.stringify(value));
+
+const getSessionStorageByKey = (key) =>  window.sessionStorage.getItem(key);

@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     if @message.update(message_params)
       redirect_to @message.room, notice: t('.success')
     else
-      flash.now[:alert] = t('.fail')
+      Rails.logger.debug t('.fail')
       render :edit
     end
   end

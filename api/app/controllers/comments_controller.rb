@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     if @comment.update!(comment_update_params)
       redirect_to idea, notice: t('.success')
     else
-      flash.now[:alert] = t('.fail')
+      Rails.logger.debug t('.fail')
       render :edit
     end
   end

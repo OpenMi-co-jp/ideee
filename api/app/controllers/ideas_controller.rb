@@ -51,7 +51,7 @@ class IdeasController < ApplicationController
         redirect_to destination, notice: t('.success')
       end
     else
-      flash.now[:alert] = t('.fail')
+      Rails.logger.debug t('.fail')
       render :new
     end
   end
@@ -73,7 +73,7 @@ class IdeasController < ApplicationController
         redirect_to destination, notice: t('.success')
       end
     else
-      flash.now[:alert] = t('.fail')
+      Rails.logger.debug t('.fail')
       render :edit
     end
   end
@@ -171,7 +171,7 @@ class IdeasController < ApplicationController
     return if current_user.own?(@idea)
 
     redirect_to root_path
-    flash[:alert] = t('default.message.unauthorized')
+    Rails.logger.debug t('default.message.unauthorized')
   end
 
   def tags_params
@@ -186,7 +186,7 @@ class IdeasController < ApplicationController
     return if !@idea.draft || current_user.own?(@idea)
 
     redirect_to root_path
-    flash.now[:alert] = t('default.message.unauthorized')
+    Rails.logger.debug t('default.message.unauthorized')
   end
 
   def sidekiq_jobs

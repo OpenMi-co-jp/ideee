@@ -39,5 +39,7 @@ module Ideee
     # Required for all session management
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+    # TODO: materializeなどを削除してFlashの使用がなくなったら削除
+    config.middleware.use ActionDispatch::Flash
   end
 end

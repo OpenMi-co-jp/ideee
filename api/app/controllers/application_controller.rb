@@ -37,9 +37,9 @@ class ApplicationController < ActionController::Base
     return if defined_user?
 
     redirect_to edit_user_registration_path(params[:id])
-    flash[:alert] = 'ユーザーの名前を登録してください。' if current_user.name.blank?
-    flash[:alert] = 'ユーザーのメールアドレスを確認が完了していません。' if current_user.confirmed_at.blank?
-    flash[:alert] = 'ユーザーのタイプを登録してください。' if current_user.definition.blank?
+    Rails.logger.debug 'ユーザーの名前を登録してください。' if current_user.name.blank?
+    Rails.logger.debug 'ユーザーのメールアドレスを確認が完了していません。' if current_user.confirmed_at.blank?
+    Rails.logger.debug 'ユーザーのタイプを登録してください。' if current_user.definition.blank?
   end
 
   def store_user_location!

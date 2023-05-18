@@ -19,6 +19,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     rescue StandardError => e
       redirect_to new_user_session_path
+      Rails.logger.debug e.message
       # return set_flash_message(:notice, :failure, kind: provider.to_s.capitalize, reason: e.message)
     end
     if @user.persisted?

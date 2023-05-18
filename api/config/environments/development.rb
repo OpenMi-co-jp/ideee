@@ -19,8 +19,7 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
-  # TODO: 一時的にCSRFを無効にしているので認証機能を追加後削除予定
-  config.action_controller.allow_forgery_protection = false
+  config.action_controller.allow_forgery_protection = true
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -46,7 +45,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3010 }
 
   # SMTPでメールを確認するときにコメントアウトを外す
   # config.action_mailer.delivery_method = :smtp

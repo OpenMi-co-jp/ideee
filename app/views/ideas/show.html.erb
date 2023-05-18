@@ -81,7 +81,4 @@
 <% unless !current_user || @idea.draft %>
   <%= render 'ideas/show/vote_modal', object: @idea %>
 <% end %>
-<%# パラメータshareがある時にモーダルを設定 %>
-<% if params[:share].present? %>
-  <%= render 'ideas/show/share_modal' %>
-<% end %>
+<%= render 'ideas/show/share_modal' %>

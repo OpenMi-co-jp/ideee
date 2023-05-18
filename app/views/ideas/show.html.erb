@@ -58,7 +58,7 @@
       </div>
       <% if current_user&.own?(@idea) %>
         <% if @idea.draft %>
-          <%= link_to t('default.publish'), publish_idea_path(@idea), method: :post, data: { confirm: '公開してもよろしいですか？' }, class: 'btn orange-action-back'%>
+          <%= link_to t('default.publish'), publish_idea_path(@idea), method: :post, data: { confirm: '公開してもよろしいですか？' }, class: 'btn orange-action-back', name: 'idea-publish'%>
         <% end %>
         <%= link_to '編集', edit_idea_path(@idea), class: 'mw-3' %>
         <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'mw-3' %>

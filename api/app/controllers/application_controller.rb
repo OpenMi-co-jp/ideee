@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :store_user_location!, if: :storable_location?
   before_action :get_notifications, if: :defined_user?
+  protect_from_forgery with: :null_session
 
   # deviseでログインした後の設定
   def after_sign_in_path_for(resource_or_scope)

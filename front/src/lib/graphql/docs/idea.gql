@@ -19,7 +19,7 @@ query GetIdeas {
 mutation CreateIdea($input: CreateIdeaInput!) {
   createIdea(input: $input) {
     idea {
-      id
+      userId
       name
       background
       goal

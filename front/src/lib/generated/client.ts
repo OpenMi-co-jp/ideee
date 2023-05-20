@@ -178,6 +178,8 @@ export type Idea = {
   updatedAt: Scalars['ISO8601DateTime']
   /** ユーザーオブジェクト */
   user: User
+  /** ユーザーID */
+  userId: Scalars['Int']
   /** ビュー数 */
   view?: Maybe<Scalars['Int']>
   /** 欲しい機能 */
@@ -447,7 +449,7 @@ export type CreateIdeaMutation = {
     success: boolean
     idea: {
       __typename?: 'Idea'
-      id: string
+      userId: number
       name?: string | null
       background?: string | null
       goal?: string | null
@@ -696,7 +698,7 @@ export const CreateIdeaDocument = gql`
   mutation CreateIdea($input: CreateIdeaInput!) {
     createIdea(input: $input) {
       idea {
-        id
+        userId
         name
         background
         goal

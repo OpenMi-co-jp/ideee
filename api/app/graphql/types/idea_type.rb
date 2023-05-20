@@ -3,6 +3,7 @@
 module Types
   class IdeaType < Types::BaseObject
     field :id, ID, null: false, description: 'アイデアID'
+    field :user_id, Integer, null: false, description: 'ユーザーID'
     field :goal, String, description: 'ゴール'
     field :background, String, description: '背景'
     field :comments_num, Integer, description: 'コメント数'

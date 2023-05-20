@@ -1001,6 +1001,24 @@
               ]
             },
             {
+              "name": "userId",
+              "description": "ユーザーID",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "view",
               "description": "ビュー数",
               "type": {

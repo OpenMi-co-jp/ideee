@@ -1,0 +1,46 @@
+query GetUser($id: ID!) {
+  user(id: $id) {
+    id
+    name
+    description
+    definition
+  }
+}
+
+query GetUsers {
+  users {
+    id
+    name
+    description
+    definition
+  }
+}
+
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    user {
+      id
+      email
+    }
+    success
+  }
+}
+
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    user {
+      id
+      name
+      description
+      definition
+    }
+    success
+  }
+}
+
+mutation DestroyUser($input: DestroyUserInput!) {
+  destroyUser(input: $input) {
+    success
+  }
+}
+

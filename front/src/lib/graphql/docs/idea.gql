@@ -1,0 +1,50 @@
+query GetIdea($id: ID!) {
+  idea(id: $id) {
+    id
+    name
+    note
+    goal
+  }
+}
+
+query GetIdeas {
+  ideas {
+    id
+    name
+    note
+    goal
+  }
+}
+
+mutation CreateIdea($input: CreateIdeaInput!) {
+  createIdea(input: $input) {
+    idea {
+      id
+      name
+      background
+      goal
+      target
+    }
+    success
+  }
+}
+
+mutation UpdateIdea($input: UpdateIdeaInput!) {
+  updateIdea(input: $input) {
+    idea {
+      id
+      name
+      background
+      goal
+      target
+    }
+    success
+  }
+}
+
+mutation DestroyIdea($input: DestroyIdeaInput!) {
+  destroyIdea(input: $input) {
+    success
+  }
+}
+

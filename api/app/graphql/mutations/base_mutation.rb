@@ -6,10 +6,11 @@ module Mutations
     object_class Types::BaseObject
 
     def self.authorized?(object, context)
-      unless super && context[:current_user].present?
+      if !super || context[:current_user].nil?
         raise GraphQL::ExecutionError, "Authentication required"
         return false
       end
+      return true
     end
   end
 end

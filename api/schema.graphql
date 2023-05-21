@@ -340,6 +340,11 @@ type Idea {
   user: User!
 
   """
+  ユーザーID
+  """
+  userId: Int!
+
+  """
   ビュー数
   """
   view: Int

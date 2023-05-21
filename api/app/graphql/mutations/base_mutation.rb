@@ -4,5 +4,13 @@ module Mutations
     field_class Types::BaseField
     input_object_class Types::BaseInputObject
     object_class Types::BaseObject
+
+    def self.authorized?(object, context)
+      if !super || context[:current_user].nil?
+        raise GraphQL::ExecutionError, 'Authentication required'
+      end
+
+      true
+    end
   end
 end

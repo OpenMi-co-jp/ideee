@@ -1,5 +1,6 @@
 import { notifications } from '@mantine/notifications'
 // import { IconCheck, IconX } from '@tabler/icons-react'
+import Cookies from 'js-cookie'
 
 type FormValues = {
   email: string
@@ -11,7 +12,7 @@ export const handleSignIn = async (props: FormValues) => {
 
   try {
     const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + '/auth/sign_in',
+      process.env.NEXT_PUBLIC_API_URL + 'auth/sign_in',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -19,11 +20,9 @@ export const handleSignIn = async (props: FormValues) => {
       }
     )
     const data = response.json()
-    if (response.headers.get('authorization')) {
-      localStorage.setItem(
-        'authorization',
-        String(response.headers.get('authorization'))
-      )
+    const token = response.headers.get('authorization')
+    if (token) {
+      Cookies.set('authToken', String(token), { expires: 7, secure: true })
     }
 
     notifications.show({

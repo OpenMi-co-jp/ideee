@@ -1,5 +1,6 @@
 import { showSuccess, showError } from '@/components/notifications'
 import Cookies from 'js-cookie'
+import { modals } from '@mantine/modals'
 
 type FormValues = {
   email: string
@@ -24,11 +25,11 @@ export const handleSignIn = async (props: FormValues) => {
         Cookies.set('authToken', String(token), { expires: 7, secure: true })
       }
       showSuccess({ action: 'ログイン' })
+      modals.closeAll()
     } else {
       throw new Error('Request failed with status code: ' + response.status)
     }
   } catch (error) {
-    console.error(error)
     showError({ action: 'ログイン' })
   }
 }

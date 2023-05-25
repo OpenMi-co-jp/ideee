@@ -1,11 +1,14 @@
 import { showNotification } from '@mantine/notifications'
 
 type NotificationProps = {
-  message?: string,
-  action?: string,
+  message?: string
+  action?: string
 }
 
-export const showSuccess = ({ message = '成功しました', action = '' }: NotificationProps = {}) => {
+export const showSuccess = ({
+  message = '成功しました',
+  action = '',
+}: NotificationProps = {}) => {
   const actionWord = action ? action + 'に' : ''
   showNotification({
     color: 'green',

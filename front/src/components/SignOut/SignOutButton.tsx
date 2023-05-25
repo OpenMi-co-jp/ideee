@@ -1,6 +1,6 @@
 import { Button } from '@mantine/core'
 import * as React from 'react'
-import { handleSignOut } from './handleSignOut'
+import { handleSignOut } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
 
 export const SignOutButton = () => {

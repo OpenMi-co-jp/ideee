@@ -2,7 +2,7 @@ import { Box, Button } from '@mantine/core'
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '../ReactFormSet'
-import { handleSignIn } from './handleSignIn'
+import { handleSignIn } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
 
 type SignInFormValues = {

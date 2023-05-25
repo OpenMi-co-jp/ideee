@@ -1,5 +1,5 @@
 import { Avatar, Button, Group, Title } from '@mantine/core'
-import { SignOutButton } from '@/components/SignOut'
+import { SignOutButton } from '@/components/SignOut/SignOutButton'
 import { SignInForm } from '@/components/SignIn/SignInForm'
 import { openModal } from '@mantine/modals'
 import { useLoggedIn } from '@/components/loginContext'

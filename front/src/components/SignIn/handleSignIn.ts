@@ -21,7 +21,11 @@ export const handleSignIn = async (props: FormValues) => {
     const data = response.json()
     const token = response.headers.get('authorization')
     if (token) {
-      Cookies.set('authToken', String(token), { expires: 7, secure: true, httpOnly: true })
+      Cookies.set('authToken', String(token), {
+        expires: 7,
+        secure: true,
+        httpOnly: true,
+      })
     }
 
     notifications.show({

@@ -1,5 +1,3 @@
-import { setItemToSessionStorage} from './modal_push.js'
-
 $(document).on ('turbolinks:load', function(){
   if (!['ideas-edit', 'ideas-new'].includes($('body').data('page'))) { return }
 

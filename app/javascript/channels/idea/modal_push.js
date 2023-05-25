@@ -16,10 +16,6 @@ $(document).on ('turbolinks:load', function(){
   // ideaのid毎にsessionを設定
   window.sessionStorage.setItem(has_session, true)
 
-  $("[name=idea-publish]").on('click', function() {
-    setItemToSessionStorage('ideaShare', true)
-  })
-
   isShowModal ? $("#modal_share").modal("open") : null;
 });
 

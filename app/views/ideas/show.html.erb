@@ -81,11 +81,4 @@
 <% unless !current_user || @idea.draft %>
   <%= render 'ideas/show/vote_modal', object: @idea %>
 <% end %>
-<% if flash[:is_show_modal] %>
-  <%= render 'ideas/show/share_modal' %>
-<% end %>
-
-<script>
-  const isShowModal = '<%= j flash[:is_show_modal] %>';
-</script>
-
+<%= render 'ideas/show/share_modal' %>

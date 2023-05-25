@@ -44,6 +44,7 @@ class IdeasController < ApplicationController
                       end
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.zone.now)
+        flash[:is_show_modal] = true
         redirect_to destination, notice: t('.success')
       end
     else
@@ -92,6 +93,7 @@ class IdeasController < ApplicationController
   def publish
     @idea.update!(draft: false, published_at: Time.zone.now)
     sidekiq_jobs
+    flash[:is_show_modal] = true
     redirect_to idea_path(@idea), notice: t('.success')
   end
 

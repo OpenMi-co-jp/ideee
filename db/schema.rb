@@ -184,7 +184,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_23_112413) do
     t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "leave", default: false, null: false
     t.boolean "left", default: false, null: false
     t.index ["team_id"], name: "index_team_users_on_team_id"
     t.index ["user_id"], name: "index_team_users_on_user_id"

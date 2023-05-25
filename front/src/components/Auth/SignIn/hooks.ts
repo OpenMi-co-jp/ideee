@@ -26,7 +26,11 @@ export const handleSignIn = async (
     if (response.status === 200) {
       const token = response.headers.get('authorization')
       if (token) {
-        Cookies.set('authToken', String(token), { expires: 7, secure: true })
+        Cookies.set('authToken', String(token), {
+          expires: 7,
+          secure: true,
+          httpOnly: true,
+        })
       }
       setLoggedIn(true)
       showSuccess({ action: 'ログイン' })

@@ -1,13 +1,17 @@
 import { showSuccess, showError } from '@/components/notifications'
 import Cookies from 'js-cookie'
 import { modals } from '@mantine/modals'
+import type { LoginContextType } from '@/components/loginContext'
 
 type FormValues = {
   email: string
   password: string
 }
 
-export const handleSignIn = async (props: FormValues) => {
+export const handleSignIn = async (
+  props: FormValues,
+  setLoggedIn: LoginContextType['setLoggedIn']
+) => {
   const { email, password } = props
 
   try {
@@ -24,6 +28,7 @@ export const handleSignIn = async (props: FormValues) => {
       if (token) {
         Cookies.set('authToken', String(token), { expires: 7, secure: true })
       }
+      setLoggedIn(true)
       showSuccess({ action: 'ログイン' })
       modals.closeAll()
     } else {

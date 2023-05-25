@@ -1,6 +1,9 @@
 import { showSuccess, showError } from '@/components/notifications'
 import Cookies from 'js-cookie'
-export const handleSignOut = async () => {
+import type { LoginContextType } from '@/components/loginContext'
+export const handleSignOut = async (
+  setLoggedIn: LoginContextType['setLoggedIn']
+) => {
   try {
     const authorization = Cookies.get('authToken')
     const response = await fetch(
@@ -14,6 +17,7 @@ export const handleSignOut = async () => {
       }
     )
     if (response.status === 200) {
+      setLoggedIn(false)
       showSuccess({ action: 'ログアウト' })
     } else {
       throw new Error('Request failed with status code: ' + response.status)

@@ -1,41 +1,31 @@
-import { Avatar, Button, Group, Text } from '@mantine/core'
-import { Modal } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { Avatar, Button, Group, Title } from '@mantine/core'
+import { SignOutButton } from '@/components/SignOut'
 import { SignInForm } from '@/components/SignIn/SignInForm'
-import { modals } from '@mantine/modals'
+import { openModal } from '@mantine/modals'
+import { useLoggedIn } from '@/components/loginContext'
 
 export const UserIcon = () => {
-  // const [opened, { open, close }] = useDisclosure(false)
+  const { loggedIn } = useLoggedIn()
   return (
-    <>
-      <Group position="center">
-        {
-          (() => {
-            if (true) {
-              return <>
-                <Button onClick={() => {
-                  modals.openConfirmModal({
-                    title: 'ユーザーログイン',
-                    centered: true,
-                    confirmButton: null,
-                    cancelButton: null,
-                    children: (
-                      <SignInForm />
-                    ),
-                  })
-                }}>
-                  <Avatar radius="xl" />
-                </Button>
-              </>
-            } else {
-              return <Text>false</Text>
-            }
-          })()
+    <Group position="center">
+      {(() => {
+        if (!loggedIn) {
+          return (
+            <Button
+              onClick={() => {
+                return openModal({
+                  title: <Title>ユーザーログイン</Title>,
+                  children: <SignInForm />,
+                })
+              }}
+            >
+              <Avatar radius="xl" />
+            </Button>
+          )
+        } else {
+          return <SignOutButton />
         }
-      </Group>
-      {/* <Modal opened={opened} onClose={close} title="ユーザーログイン">
-        <SignInForm />
-      </Modal> */}
-    </>
+      })()}
+    </Group>
   )
 }

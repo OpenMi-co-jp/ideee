@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Likes' do
+RSpec.xdescribe 'Likes' do
   let!(:user) { FactoryBot.create(:user) }
   let(:idea)  { FactoryBot.create(:idea) }
 

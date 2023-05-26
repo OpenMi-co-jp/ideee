@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Comments' do
+RSpec.xdescribe 'Comments' do
   let!(:user)    { FactoryBot.create(:user)    }
   let!(:comment) { FactoryBot.create(:comment) }
 

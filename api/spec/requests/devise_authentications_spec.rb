@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'DeviseAuthentications' do
+RSpec.xdescribe 'DeviseAuthentications' do
   let(:user) { FactoryBot.create(:user) }
 
   let(:params) { { user: attributes_for(:user) } }

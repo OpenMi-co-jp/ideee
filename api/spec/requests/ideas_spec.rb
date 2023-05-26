@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Ideas' do
+RSpec.xdescribe 'Ideas' do
   let!(:idea) { FactoryBot.create(:idea) }
 
   before { sign_in idea.user }

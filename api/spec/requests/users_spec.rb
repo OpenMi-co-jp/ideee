@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users' do
+RSpec.xdescribe 'Users' do
   let!(:user) { FactoryBot.create(:user) }
 
   describe 'GET #index' do

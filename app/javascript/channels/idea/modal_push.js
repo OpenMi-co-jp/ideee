@@ -1,5 +1,6 @@
 $(document).on ('turbolinks:load', function(){
   if ($('body').data('page') != "ideas-show") { return }
+
   // #modal_difficultyが読み込まれていなかったらreturn
   if ($('#js_voted_mark').length){ return }
 
@@ -7,11 +8,16 @@ $(document).on ('turbolinks:load', function(){
 
   // ideaのセッションがあればシェアモーダルを出現
   if (window.sessionStorage.getItem(has_session)){
-    $('#modal_difficulty').modal('open');
+    $('#modal_difficulty').modal('open')
   } else {
-    sessionStorage.removeItem(has_session);
+    sessionStorage.removeItem(has_session)
   }
 
   // ideaのid毎にsessionを設定
-  window.sessionStorage.setItem(has_session, true);
-})
+  window.sessionStorage.setItem(has_session, true)
+
+  isShowModal ? $("#modal_share").modal("open") : null;
+});
+
+
+

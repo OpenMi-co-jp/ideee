@@ -37,17 +37,14 @@ class IdeasController < ApplicationController
       if draft_bool
         redirect_to @idea, notice: t('.draft_save')
       else
-        destination = if params.dig(
-          :idea,
-                          :stance
-        ) == 'team_project'
-
+        destination = if params.dig(:idea, :stance) == 'team_project'
                         new_team_path(idea_id: @idea)
                       else
-                        idea_path(@idea, share: true)
+                        idea_path(@idea)
                       end
         sidekiq_jobs
         @idea.update_attribute(:published_at, Time.zone.now)
+        flash[:is_show_modal] = true
         redirect_to destination, notice: t('.success')
       end
     else
@@ -64,7 +61,7 @@ class IdeasController < ApplicationController
       else
         if params[:commit] == t('default.publish')
           sidekiq_jobs
-          destination = idea_path(@idea, share: true)
+          destination = idea_path(@idea)
           @idea.update_attribute(:published_at, Time.zone.now)
         end
         destination = new_team_path(idea_id: @idea) if params.dig(:idea, :stance) == 'team_project'
@@ -96,7 +93,8 @@ class IdeasController < ApplicationController
   def publish
     @idea.update!(draft: false, published_at: Time.zone.now)
     sidekiq_jobs
-    redirect_to idea_path(@idea, share: true), notice: t('.success')
+    flash[:is_show_modal] = true
+    redirect_to idea_path(@idea), notice: t('.success')
   end
 
   def suggest

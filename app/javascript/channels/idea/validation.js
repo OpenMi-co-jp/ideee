@@ -7,5 +7,6 @@ $(document).on ('turbolinks:load', function(){
     invalid_num += M.invalid_input_num('#idea_name');
     invalid_num += M.invalid_input_num('#idea_background');
     invalid_num += M.invalid_input_num('#idea_goal');
+
   });
 })

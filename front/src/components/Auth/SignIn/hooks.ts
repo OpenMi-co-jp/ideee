@@ -29,7 +29,6 @@ export const handleSignIn = async (
         Cookies.set('authToken', String(token), {
           expires: 7,
           secure: true,
-          httpOnly: true,
         })
       }
       setLoggedIn(true)

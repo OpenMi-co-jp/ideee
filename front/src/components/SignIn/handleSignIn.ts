@@ -24,7 +24,6 @@ export const handleSignIn = async (props: FormValues) => {
       Cookies.set('authToken', String(token), {
         expires: 7,
         secure: true,
-        httpOnly: true,
       })
     }
 

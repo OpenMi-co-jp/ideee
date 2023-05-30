@@ -6,7 +6,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins ['http://localhost:3000', 'https://ideee.vercel.app', /ideee-(.*)-narucel\.vercel\.app/]
     resource '*',
       headers: :any,
-      expose: %w[access-token expiry token-type uid client authorization],
-      methods: %i[get post options delete put]
+      expose: %w[access-token expiry token-type uid client authorization X-CSRF-Token],
+      methods: %i[get post options delete put],
+      credentials: true
   end
 end

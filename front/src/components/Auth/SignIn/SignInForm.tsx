@@ -1,8 +1,9 @@
-import { TextInput, Box, Button, PasswordInput } from '@mantine/core'
+import { Box, Button } from '@mantine/core'
 import * as React from 'react'
-import { useForm, useController, UseControllerProps } from 'react-hook-form'
-import { PasswordForm, TextForm } from '../ReactFormSet'
-import { handleSignIn } from './handleSignIn'
+import { useForm } from 'react-hook-form'
+import { PasswordForm, TextForm } from '../../ReactFormSet'
+import { handleSignIn } from './hooks'
+import { useLoggedIn } from '@/components/loginContext'
 
 type SignInFormValues = {
   email: string
@@ -10,6 +11,7 @@ type SignInFormValues = {
 }
 
 export const SignInForm = () => {
+  const { setLoggedIn } = useLoggedIn()
   const form = useForm<SignInFormValues>({
     defaultValues: {
       email: '',
@@ -17,7 +19,7 @@ export const SignInForm = () => {
     },
     mode: 'onChange',
   })
-  const onSubmit = (data: SignInFormValues) => handleSignIn(data)
+  const onSubmit = (data: SignInFormValues) => handleSignIn(data, setLoggedIn)
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

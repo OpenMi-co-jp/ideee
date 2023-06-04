@@ -13,5 +13,9 @@ module Types
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'
 
     field :team, resolver: Resolvers::Team::TeamResolver, description: 'チームオブジェクト'
+
+    field :comment, resolver: Resolvers::Comment::CommentResolver, description: 'コメントオブジェクト'
+    field :comments, resolver: Resolvers::Comment::CommentsResolver, description: 'コメント一覧'
+
   end
 end

@@ -2,29 +2,17 @@ import { showSuccess, showError } from '@/components/notifications'
 import Cookies from 'js-cookie'
 import { modals } from '@mantine/modals'
 import type { LoginContextType } from '@/components/loginContext'
-
-type FormValues = {
-  email: string
-  password: string
-}
+import { signIn } from '@/utils/auth'
+import type { AuthFormValues } from '@/types/user'
 
 export const handleSignIn = async (
-  props: FormValues,
+  props: AuthFormValues,
   setLoggedIn: LoginContextType['setLoggedIn']
 ) => {
-  const { email, password } = props
-
   try {
-    const response = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + 'auth/sign_in',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      }
-    )
+    const response = await signIn(props)
     if (response.status === 200) {
-      const token = response.headers.get('authorization')
+      const token = response.headers['authorization']
       if (token) {
         Cookies.set('authToken', String(token), {
           expires: 7,

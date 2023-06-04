@@ -1,15 +1,19 @@
 import client from './client'
 import Cookies from 'js-cookie'
-import type { AuthFormValues } from '@/types/user'
+import type { SignUpFormValues, SignInFormValues } from '@/types/user'
 
-// サインイン
-export const signIn = (props: AuthFormValues) => {
+export const signUp = (props: SignUpFormValues) => {
+  return client.post('/auth', props, {
+    headers: { 'Content-Type': 'application/json' },
+  })
+}
+
+export const signIn = (props: SignInFormValues) => {
   return client.post('/auth/sign_in', props, {
     headers: { 'Content-Type': 'application/json' },
   })
 }
 
-// サインアウト
 export const signOut = () => {
   const authorization = Cookies.get('authToken')
 

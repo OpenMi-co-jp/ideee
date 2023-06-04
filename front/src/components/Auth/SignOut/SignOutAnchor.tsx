@@ -1,5 +1,4 @@
 import { Anchor } from '@mantine/core'
-import * as React from 'react'
 import { handleSignOut } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
 

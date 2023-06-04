@@ -15,7 +15,9 @@ export const UserMenu = () => {
 
         <Menu.Divider />
 
-        <Menu.Item color="red" icon={<IconLogout size={14} />}><SignOutAnchor /></Menu.Item>
+        <Menu.Item color="red" icon={<IconLogout size={14} />}>
+          <SignOutAnchor />
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   )

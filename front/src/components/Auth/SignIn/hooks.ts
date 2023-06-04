@@ -3,10 +3,10 @@ import Cookies from 'js-cookie'
 import { modals } from '@mantine/modals'
 import type { LoginContextType } from '@/components/loginContext'
 import { signIn } from '@/utils/auth'
-import type { AuthFormValues } from '@/types/user'
+import type { SignInFormValues } from '@/types/user'
 
 export const handleSignIn = async (
-  props: AuthFormValues,
+  props: SignInFormValues,
   setLoggedIn: LoginContextType['setLoggedIn']
 ) => {
   try {

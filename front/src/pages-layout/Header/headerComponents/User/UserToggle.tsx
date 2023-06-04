@@ -1,5 +1,5 @@
 import { Button, Anchor, Group, Title } from '@mantine/core'
-import { SignInForm } from '@/components/Auth'
+import { SignUpForm, SignInForm } from '@/components/Auth'
 import { openModal } from '@mantine/modals'
 import { useLoggedIn } from '@/components/loginContext'
 import { UserMenu } from './UserMenu'
@@ -18,12 +18,12 @@ export const UserToggle = () => {
               <Button
                 onClick={() => {
                   return openModal({
-                    title: <Title>ユーザーログイン</Title>,
-                    children: <SignInForm />,
+                    title: <Title>ユーザー作成</Title>,
+                    children: <SignUpForm />,
                   })
                 }}
               >
-                サインイン
+                ユーザー作成
               </Button>
               <Anchor
                 onClick={() => {

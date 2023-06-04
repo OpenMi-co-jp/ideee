@@ -1,0 +1,13 @@
+query GetComment($id: ID!) {
+  comment(id: $id) {
+    id
+    description
+  }
+}
+
+query GetComments {
+  comments {
+    id
+    description
+  }
+}

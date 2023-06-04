@@ -31,6 +31,7 @@ export const handleSignIn = async (
           secure: true,
         })
       }
+      localStorage.setItem('loggedIn', 'true')
       setLoggedIn(true)
       showSuccess({ action: 'ログイン' })
       modals.closeAll()

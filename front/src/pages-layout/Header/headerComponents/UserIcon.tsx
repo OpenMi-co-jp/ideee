@@ -5,10 +5,13 @@ import { useLoggedIn } from '@/components/loginContext'
 
 export const UserIcon = () => {
   const { loggedIn } = useLoggedIn()
+  const LSLoggedIn = localStorage.getItem('loggedIn') == 'true'
   return (
     <Group position="center">
       {(() => {
-        if (!loggedIn) {
+        if (LSLoggedIn || loggedIn) {
+          return <SignOutButton />
+        } else {
           return (
             <Button
               onClick={() => {
@@ -21,8 +24,6 @@ export const UserIcon = () => {
               <Avatar radius="xl" />
             </Button>
           )
-        } else {
-          return <SignOutButton />
         }
       })()}
     </Group>

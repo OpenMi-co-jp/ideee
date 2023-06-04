@@ -18,11 +18,13 @@ export const handleSignOut = async (
     )
     if (response.status === 200) {
       setLoggedIn(false)
+      localStorage.setItem('loggedIn', 'false')
       showSuccess({ action: 'ログアウト' })
     } else {
       throw new Error('Request failed with status code: ' + response.status)
     }
   } catch (error) {
+    localStorage.setItem('loggedIn', 'false')
     showError({ action: 'ログアウト' })
   }
 }

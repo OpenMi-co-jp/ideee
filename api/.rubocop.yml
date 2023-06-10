@@ -238,3 +238,11 @@ GraphQL/ExtractInputType:
 GraphQL/ExtractType:
   Include:
     - 'graphql/types/*.rb'
+
+# exampleの長さを6行まで拡張
+RSpec/ExampleLength:
+  Max: 6
+
+# expectを5行まで拡張
+RSpec/MultipleExpectations:
+  Max: 5

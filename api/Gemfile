@@ -64,6 +64,8 @@ gem 'slack-notifier'
 gem 'render_async' # 遅延読み込み # 使わない
 gem 'sendgrid-ruby' # メール送信
 
+gem 'activeadmin' # 管理画面
+
 # uncomment out when you need
 # gem 'stripe'
 

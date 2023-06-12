@@ -91,4 +91,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.hosts = 'localhost'
+
+  config.frontend_url = 'http://localhost:3000'
 end

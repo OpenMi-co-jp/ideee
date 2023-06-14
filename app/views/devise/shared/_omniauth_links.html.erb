@@ -5,6 +5,12 @@
       <%= link_to omniauth_authorize_path(resource_name, provider), method: :post, class: "omniauth-btn" do %>
         <div class="sign-up-box hoverable omniauth-sign-up">
           <%= omni_sign_image(provider) %>
+          <% if OmniAuth::Utils.camelize(provider)  == "GoogleOauth2" then %>
+            Google
+          <% else %>
+            <%= OmniAuth::Utils.camelize(provider) %>
+          <% end %>
+          で
           <%= omni_sign_word %>
         </div>
       <% end %>

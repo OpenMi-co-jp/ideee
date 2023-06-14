@@ -10,7 +10,12 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
 
     def resolve(**args)
-      comment = ::Comment.create!(**args)
+      comment = ::Comment.new(
+        description: args[:icon],
+        user_id: args[:user_id],
+        idea_id: args[:idea_id]
+      )
+      comment.save!
       {
         comment:,
         success: true

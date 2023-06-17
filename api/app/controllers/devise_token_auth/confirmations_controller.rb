@@ -8,7 +8,7 @@ class DeviseTokenAuth::ConfirmationsController < DeviseTokenAuth::ApplicationCon
     if resource.errors.empty?
       front_uri = Rails.application.config.frontend_url
 
-      redirect_to "#{front_uri}/confirm"
+      redirect_to "#{front_uri}/user/confirm"
     else
       render json: { errors: resource.errors }, status: :unprocessable_entity
     end

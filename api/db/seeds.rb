@@ -6,3 +6,4 @@
 #   user = User.new(name: Faker::JapaneseMedia::OnePiece.character, password: 'password', email: Faker::Internet.email, definition: [0,1,2].sample, confirmed_at: Time.now, defined: true)
 #   user.save!
 # end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       edit_user_registration_path(resource)
     end
   end
-  
+
   # 本番環境でのエラーハンドリング
   if Rails.env.production?
     rescue_from StandardError, with: :render500

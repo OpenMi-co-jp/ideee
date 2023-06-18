@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include DeviseTokenAuth::Concerns::SetUserByToken
   # before_action :store_user_location!, if: :storable_location?
   # before_action :get_notifications, if: :defined_user?
   protect_from_forgery with: :null_session
@@ -14,7 +13,7 @@ class ApplicationController < ActionController::Base
       edit_user_registration_path(resource)
     end
   end
-
+  
   # 本番環境でのエラーハンドリング
   if Rails.env.production?
     rescue_from StandardError, with: :render500

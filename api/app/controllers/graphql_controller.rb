@@ -1,4 +1,6 @@
 class GraphqlController < ApplicationController
+  include DeviseTokenAuth::Concerns::SetUserByToken
+
   protect_from_forgery with: :null_session
 
   def execute
@@ -16,6 +18,15 @@ class GraphqlController < ApplicationController
 
     handle_error_in_development(e)
   end
+
+  # deviseでログインした後の設定
+  def after_sign_in_path_for(resource_or_scope)
+    if resource.defined # ユーザー情報が登録されているか確認
+      stored_location_for(resource_or_scope) || super
+    else
+      edit_user_registration_path(resource)
+    end
+  end 
 
   private
 

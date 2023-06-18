@@ -2,9 +2,9 @@ module Mutations
   class Comment::Create < BaseMutation
     graphql_name 'CreateComment'
 
-    argument :description, String, null: false
-    argument :user_id, Integer, null: false
-    argument :idea_id, Integer, null: false
+    argument :description, String, required: true, description: 'コメント'
+    argument :user_id, Integer, required: true, description: '【必須】ユーザーID'
+    argument :idea_id, Integer, required: true, description: '【必須】アイデアID'
 
     field :comment, Types::CommentType, null: false, description: 'コメントオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'

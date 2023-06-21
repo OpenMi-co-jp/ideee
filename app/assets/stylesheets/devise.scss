@@ -17,6 +17,9 @@
     margin: 0.5rem 0;
     background-color: #FCD07E;
     border-radius: 1rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
 
     img {
       vertical-align: middle;
@@ -24,9 +27,6 @@
     }
 
     .omniauth-sign-up {
-      color: white;
-      font-weight: bold;
-      font-size: 1.2rem;
       display: inline-block;
     }
   }

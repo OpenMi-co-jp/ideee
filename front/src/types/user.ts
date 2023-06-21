@@ -14,3 +14,7 @@ export type ResetPasswordFormValues = {
   password: string
   passwordConfirmation: string
 }
+
+export type ForgotPasswordFormValues = {
+  email: string
+}

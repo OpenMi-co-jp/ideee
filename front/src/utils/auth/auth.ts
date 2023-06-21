@@ -4,6 +4,7 @@ import type {
   SignUpFormValues,
   SignInFormValues,
   ResetPasswordFormValues,
+  ForgotPasswordFormValues,
 } from '@/types/user'
 
 export const signUp = (props: SignUpFormValues) => {
@@ -45,6 +46,19 @@ export const passwordReset = (props: ResetPasswordFormValues) => {
         client: userClient,
         uid,
       },
+    }
+  )
+}
+
+export const passwordForgot = (props: ForgotPasswordFormValues) => {
+  const { email } = props
+  const redirect_url = process.env.NEXT_PUBLIC_FRONT_URL + 'reset_password'
+
+  return client.post(
+    '/auth/password',
+    { email, redirect_url },
+    {
+      headers: { 'Content-Type': 'application/json' },
     }
   )
 }

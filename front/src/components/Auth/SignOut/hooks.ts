@@ -18,6 +18,7 @@ export const handleSignOut = async (
     }
   } catch (error) {
     setLoggedIn(false)
+    Cookies.remove('authToken')
     localStorage.setItem('loggedIn', 'false')
     showError({ action: 'ログアウト' })
   }

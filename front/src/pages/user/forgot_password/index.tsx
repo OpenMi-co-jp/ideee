@@ -1,4 +1,4 @@
-import { ForgotPassword } from './ForgotPassword'
+import { ForgotPassword } from '@/components/Auth/ForgotPassword'
 import { AuthLayout } from '@/pages-layout/authLayout/AuthLayout'
 
 ForgotPassword.getLayout = AuthLayout

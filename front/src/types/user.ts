@@ -9,3 +9,8 @@ export type SignUpFormValues = {
   passwordConfirmation: string
   confirmSuccessUrl: string
 }
+
+export type ResetPasswordFormValues = {
+  password: string
+  passwordConfirmation: string
+}

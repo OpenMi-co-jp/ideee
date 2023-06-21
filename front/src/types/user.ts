@@ -1,8 +1,3 @@
-export type SignInFormValues = {
-  email: string
-  password: string
-}
-
 export type SignUpFormValues = {
   email: string
   password: string
@@ -10,11 +5,13 @@ export type SignUpFormValues = {
   confirmSuccessUrl: string
 }
 
-export type ResetPasswordFormValues = {
-  password: string
-  passwordConfirmation: string
-}
+export type SignInFormValues = Pick<SignUpFormValues, 'email' | 'password'>
 
-export type ForgotPasswordFormValues = {
-  email: string
-}
+export type ResetPasswordFormValues = Pick<
+  SignUpFormValues,
+  'password' | 'passwordConfirmation'
+>
+
+export type ForgotPasswordFormValues = Pick<SignUpFormValues, 'email'>
+
+export type ConfirmResendFormValues = Pick<SignUpFormValues, 'email'>

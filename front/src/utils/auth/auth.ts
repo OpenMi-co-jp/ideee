@@ -62,3 +62,9 @@ export const passwordForgot = (props: ForgotPasswordFormValues) => {
     }
   )
 }
+
+export const confirmResend = (props: ForgotPasswordFormValues) => {
+  return client.post('/auth/confirmation', props, {
+    headers: { 'Content-Type': 'application/json' },
+  })
+}

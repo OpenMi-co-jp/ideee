@@ -11,7 +11,7 @@ module Mutations
 
     def resolve(**args)
       comment = ::Comment.new(
-        description: args[:icon],
+        description: args[:description],
         user_id: args[:user_id],
         idea_id: args[:idea_id]
       )

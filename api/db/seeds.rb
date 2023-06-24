@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # seed_fuが上手く動かない時にコメントアウトを外し、rails db:seedを実行
 
 # 30.times do |n|

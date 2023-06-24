@@ -1,6 +1,6 @@
 class CreateActiveAdminComments < ActiveRecord::Migration[7.0]
-  def self.up
-    create_table :active_admin_comments do |t|
+  def up
+    create_table :active_admin_comments, comment: 'Table of admin comment' do |t|
       t.string :namespace
       t.text   :body
       t.references :resource, polymorphic: true
@@ -10,7 +10,7 @@ class CreateActiveAdminComments < ActiveRecord::Migration[7.0]
     add_index :active_admin_comments, [:namespace]
   end
 
-  def self.down
+  def down
     drop_table :active_admin_comments
   end
 end

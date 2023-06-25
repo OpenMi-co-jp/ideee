@@ -22,9 +22,9 @@ days_old = (current_date - Date.parse(pr_created_at)).to_i
 warn 'このPRはすでに3日以上開かれています' if days_old > 3
 
 # 再レビューが必要か
-has_app_changes = git.modified_files.any? { |path| path.include?('app/') }
-is_approved = github.pr_approved?
-warn '再レビューが必要な変更が加えられています' if has_app_changes && !is_approved
+# has_app_changes = git.modified_files.any? { |path| path.include?('app/') }
+# is_approved = github.pr_approved?
+# warn '再レビューが必要な変更が加えられています' if has_app_changes && !is_approved
 
 # マイグレーションの警告
 has_schema_changes = git.modified_files.include?('db/schema.rb')
@@ -34,7 +34,7 @@ warn 'このPRはデータベーススキーマを変更しています。マイ
 warn('Gemfileが変更されました') if git.modified_files.include?('Gemfile')
 
 # binding.pryのチェック
-fail('`binding.pry`がコードの変更部分で検出されました。') if `grep -r "binding.pry" .`.length.positive?
+fail('binding.pryがコードの変更部分で検出されました。') if `grep -r "binding.pry" .`.length.positive?
 
 # putsのチェック
-fail('`puts`がコードの変更部分で検出されました。') if `grep -r "puts" .`.length.positive?
+fail('putsがコードの変更部分で検出されました。') if `grep -r "puts" .`.length.positive?

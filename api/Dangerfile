@@ -1,3 +1,11 @@
+require 'tzinfo'
+
+# Create a TimeZone object for the desired timezone
+tz = TZInfo::Timezone.get('Asia/Tokyo')
+# Get the current time in that timezone
+current_time = tz.now
+current_date = current_time.to_date
+
 # WIPのお知らせ
 warn 'PRはWIPでまだ作業中のようです' if github.pr_title.include? 'WIP'
 
@@ -9,7 +17,7 @@ warn 'コミットが10を超えてます。PRの分割を検討ください' if
 
 # PRが3日以上開かれているか
 pr_created_at = github.pr_json['created_at']
-days_old = (Time.zone.today - Date.parse(pr_created_at)).to_i
+days_old = (current_date - Date.parse(pr_created_at)).to_i
 warn 'このPRはすでに3日以上開かれています' if days_old > 3
 
 # 再レビューが必要か

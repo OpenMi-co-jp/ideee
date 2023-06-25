@@ -84,11 +84,7 @@
     <% end %>
   </div>
   <div id="tab4" class="col s12">
-    <% if @joined_team_num.positive? %>
-      <%= render_async joined_team_idea_path(user_id: @user.id) %>
-    <% else %>
-      <h5>まだチーム開発に参加をしていません</h5>
-    <% end %>
+    <h5>まだチーム開発に参加をしていません</h5>
   </div>
   <%= render 'common/fund_link', object: @user %>
   <%= render 'users/show/lead_to_post' if own_user_checked(@user) %>

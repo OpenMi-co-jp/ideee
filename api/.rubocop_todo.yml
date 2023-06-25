@@ -302,7 +302,6 @@ Style/InlineComment:
     - 'app/models/twitter_tweet.rb'
     - 'app/uploaders/image_uploader.rb'
     - 'config/boot.rb'
-    - 'config/initializers/render_async.rb'
     - 'db/migrate/20210710155712_devise_create_users.rb'
     - 'lib/tasks/auto_update_qiita_post.rake'
     - 'spec/spec_helper.rb'

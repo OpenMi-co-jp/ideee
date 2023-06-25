@@ -447,7 +447,6 @@ GEM
     redis-client (0.14.1)
       connection_pool
     regexp_parser (2.8.0)
-    render_async (2.1.11)
     representable (3.2.0)
       declarative (< 0.1.0)
       trailblazer-option (>= 0.1.1, < 0.2.0)
@@ -680,7 +679,6 @@ DEPENDENCIES
   rails-i18n
   ransack
   redis (~> 4.6)
-  render_async
   rollbar
   rspec-rails
   rubocop

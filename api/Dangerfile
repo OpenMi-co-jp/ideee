@@ -1,0 +1,31 @@
+# WIPのお知らせ
+warn "PRはWIPでまだ作業中のようです" if github.pr_title.include? "WIP"
+
+# PRの大きさチェック
+warn "PRがが大きすぎます。PRの分割を考えましょう" if git.lines_of_code > 400
+
+number_of_commits = git.commits.size
+warn "コミットが10を超えてます。PRの分割を検討ください" if number_of_commits > 10
+
+# PRが3日以上開かれているか
+pr_created_at = github.pr_json['created_at']
+days_old = (Date.today - Date.parse(pr_created_at)).to_i
+warn "このPRはすでに3日以上開かれています" if days_old > 3
+
+# 再レビューが必要か
+has_app_changes = git.modified_files.any? { |path| path.include?('app/') }
+is_approved = github.pr_approved?
+warn "再レビューが必要な変更が加えられています" if has_app_changes && !is_approved
+
+# マイグレーションの警告
+has_schema_changes = git.modified_files.include?('db/schema.rb')
+warn "このPRはデータベーススキーマを変更しています。マイグレーションをお忘れなく" if has_schema_changes
+
+# Gemfileの変更チェック
+warn("Gemfileが変更されました") if git.modified_files.include?("Gemfile")
+
+# binding.pryのチェック
+fail("`binding.pry`がコードの変更部分で検出されました。") if `grep -r "binding.pry" .`.length > 0
+
+# putsのチェック
+fail("`puts`がコードの変更部分で検出されました。") if `grep -r "puts" .`.length > 0

@@ -72,10 +72,6 @@ Style/TrailingCommaInArrayLiteral:
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: no_comma
 
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
-
 Style/Copyright:
   Enabled: false
 

@@ -9,7 +9,9 @@ RSpec.describe 'Difficulties' do
   before { sign_in user }
 
   describe 'POST #create' do
-    subject(:create_difficultys) { post difficultys_path, params: { idea_id: idea.id, level: Difficulty.levels.keys.sample } }
+    subject(:create_difficultys) do
+      post difficultys_path, params: { idea_id: idea.id, level: Difficulty.levels.keys.sample }
+    end
 
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do

@@ -139,7 +139,10 @@ RSpec.describe CreateNotification, type: :helper do
 
       context 'チーム開発参加のとき' do
         subject(:join_team_user_notification) do
-          current_user.create_notification(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type:)
+          current_user.create_notification(
+            idea:, visited_id: idea.user_id, notificatable_id: team_user_id,
+            notificatable_type:
+          )
         end
 
         let(:notificatable_type) { 'join_team_user' }
@@ -158,7 +161,10 @@ RSpec.describe CreateNotification, type: :helper do
 
       context 'チーム開発脱退のとき' do
         subject(:leave_team_user_notification) do
-          current_user.create_notification(idea:, visited_id: idea.user_id, notificatable_id: team_user_id, notificatable_type:)
+          current_user.create_notification(
+            idea:, visited_id: idea.user_id, notificatable_id: team_user_id,
+            notificatable_type:
+          )
         end
 
         let(:notificatable_type) { 'leave_team_user' }

@@ -1,7 +1,7 @@
-import { Box, Button } from '@mantine/core'
-import * as React from 'react'
+import { Box, Button, Stack } from '@mantine/core'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import { PasswordForm, TextForm } from '../../ReactFormSet'
+import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
 
@@ -27,6 +27,16 @@ export const SignInForm = () => {
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <Button type="submit">ログイン</Button>
+        <Stack>
+          <Link href="/user/forgot_password" passHref>
+            メールアドレスを忘れた？
+          </Link>
+        </Stack>
+        <Stack>
+          <Link href="/user/confirm_resend" passHref>
+            確認メールが届いてない？
+          </Link>
+        </Stack>
       </Box>
     </form>
   )

@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
 import Image from 'next/image'
 import { SearchForm } from './SearchForm'
-import { UserIcon, Notification, Ranking } from './headerComponents'
+import { UserToggle, Notification, Ranking } from './headerComponents'
 import { IdeaCreateButton } from '@/components/Idea/createButton'
 import Link from 'next/link'
 
@@ -41,7 +41,7 @@ export const Header: FC = () => {
           <SearchForm />
           <Ranking />
           <Notification />
-          <UserIcon />
+          <UserToggle />
           <IdeaCreateButton />
         </Group>
       </Box>

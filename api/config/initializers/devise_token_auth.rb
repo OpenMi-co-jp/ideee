@@ -42,16 +42,18 @@ DeviseTokenAuth.setup do |config|
   # config.default_callbacks = true
 
   # 一例として一旦設定
-  config.default_confirm_success_url = ENV['CONFIRM_SUCCESS_URL'] || 'http://localhost:3000/'
+  config.default_confirm_success_url = "#{ENV['FRONTEND_URL'] || 'http://localhost:3000'}/user/confirm"
+
+  config.default_password_reset_url = "#{ENV['FRONTEND_URL'] || 'http://localhost:3000'}/user/reset_password"
 
   # Makes it possible to change the headers names
   config.headers_names = {
     'access-token': 'access-token',
-                         'client': 'client',
-                         'expiry': 'expiry',
-                         'uid': 'uid',
-                         'token-type': 'token-type',
-                         'authorization': 'authorization'
+    'client': 'client',
+    'expiry': 'expiry',
+    'uid': 'uid',
+    'token-type': 'token-type',
+    'authorization': 'authorization'
   }
 
   # Makes it possible to use custom uid column

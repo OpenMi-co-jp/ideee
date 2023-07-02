@@ -48,9 +48,9 @@ class SlackNotifier
   end
 
   def trial
-    channel = '#times_なる'
-    article = 'テストデータ'
+    channel = '#slack_テスト用'
+    article = '==================テストデータ================'
     Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
-    Slack::IdeaSendJob.set(wait: 5.minutes).perform_now
+    Slack::IdeaSendJob.set(wait: 5.minutes).perform_later
   end
 end

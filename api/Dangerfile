@@ -13,7 +13,7 @@ warn 'PRはWIPでまだ作業中のようです' if github.pr_title.include? 'WI
 # ===== PR size =====
 warn 'PRがが大きすぎます。PRの分割を考えましょう' if git.lines_of_code > 400
 number_of_commits = git.commits.size
-warn 'コミットが10を超えてます。PRの分割を検討ください' if number_of_commits > 15
+warn 'コミットが15を超えてます。PRの分割を検討ください' if number_of_commits > 15
 
 # PRが3日以上開かれているか
 pr_created_at = github.pr_json['created_at'].to_s

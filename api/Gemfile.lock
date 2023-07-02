@@ -291,6 +291,10 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kramdown (2.4.0)
+      rexml
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
     launchy (2.5.2)
       addressable (~> 2.8)
     letter_opener (1.8.1)
@@ -678,7 +682,7 @@ DEPENDENCIES
   dotenv-rails
   enum_help
   factory_bot_rails
-  faker!
+  faker
   faraday-retry
   fog-aws
   google-api-client

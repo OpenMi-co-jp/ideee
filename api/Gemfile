@@ -60,6 +60,8 @@ gem 'slack-notifier'
 
 gem 'sendgrid-ruby' # メール送信
 
+gem 'activeadmin' # 管理画面
+
 # uncomment out when you need
 # gem 'stripe'
 

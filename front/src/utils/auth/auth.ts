@@ -69,3 +69,9 @@ export const confirmResend = (props: ForgotPasswordFormValues) => {
     headers: { 'Content-Type': 'application/json' },
   })
 }
+
+export const googleLogin = () => {
+  return client.post('auth/google_oauth2', {
+    headers: { 'Content-Type': 'application/json' },
+  })
+}

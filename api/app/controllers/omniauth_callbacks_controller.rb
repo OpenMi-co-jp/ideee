@@ -1,24 +1,53 @@
 # frozen_string_literal: true
 
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
+  include Devise::Controllers::Rememberable
+
   def twitter
+    puts '==============twitter'
     callback_for(:twitter)
   end
 
   def google_oauth2
-    puts '------------------google but before'
+    Rails.logger.info '==============google_oauth2'
+    Rails.logger.info param
     callback_for(:google)
+  end
+
+  def redirect_callbacks
+    puts '==============redirect_callbacks'
+    super
+  end
+
+  def omniauth_success
+    puts '==============omniauth_success'
+    puts request.env["omniauth.auth"]
+    puts request.inspect
+    puts params
+    puts params[:provider]
+    puts params[:uid]
+    super
+  end
+
+  def omniauth_failure
+    puts '==============omniauth_failure'
+    super
+  end
+
+  def callback
+    puts '-============callback'
   end
 
   def failure
     puts '------------------failure'
+    puts params
     super
   end
 
   private
 
   def callback_for(provider)
-    puts '=============callback_for before'
+    puts '-------------callback_for'
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
       if Rails.env.production? && @user.created_at > Time.zone.now.ago(5.minutes)
@@ -45,7 +74,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def failure
-    redirect_to root_path
-  end
+  # def failure
+  #   redirect_to root_path
+  # end
 end

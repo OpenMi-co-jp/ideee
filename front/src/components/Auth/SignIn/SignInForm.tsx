@@ -21,6 +21,7 @@ export const SignInForm: CustomNextPage = () => {
     mode: 'onChange',
   })
   const onSubmit = (data: SignInFormValues) => handleSignIn(data, setLoggedIn)
+  const urlRef = process.env.NEXT_PUBLIC_API_URL + 'auth/twitter'
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -46,6 +47,8 @@ export const SignInForm: CustomNextPage = () => {
           </Link>
         </Stack>
       </Box>
+      {/* <Button component="a" href={urlRef}>Google ログイン</Button> */}
+      <OmniAuth />
     </form>
   )
 }

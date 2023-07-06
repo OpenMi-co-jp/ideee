@@ -17,16 +17,21 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def redirect_callbacks
     Rails.logger.debug '==============redirect_callbacks'
-    super
   end
-
-  def omniauth_success
     Rails.logger.debug '==============omniauth_success'
     Rails.logger.debug request.env['omniauth.auth']
     Rails.logger.debug request.inspect
     Rails.logger.debug params
     Rails.logger.debug params[:provider]
     Rails.logger.debug params[:uid]
+=======
+    puts '==============omniauth_success'
+    puts request.env["omniauth.auth"]
+    puts request.inspect
+    puts params
+    puts params[:provider]
+    puts params[:uid]
+>>>>>>> a3611555 (commit: 確認用コミット)
     super
   end
 

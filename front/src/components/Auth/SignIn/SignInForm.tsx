@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
+import { OmniAuth } from '@/components/Auth/OmniAuth'
 
 type SignInFormValues = {
   email: string
@@ -20,6 +21,7 @@ export const SignInForm = () => {
     mode: 'onChange',
   })
   const onSubmit = (data: SignInFormValues) => handleSignIn(data, setLoggedIn)
+  const urlRef = process.env.NEXT_PUBLIC_API_URL + 'auth/twitter'
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -38,6 +40,8 @@ export const SignInForm = () => {
           </Link>
         </Stack>
       </Box>
+      {/* <Button component="a" href={urlRef}>Google ログイン</Button> */}
+      <OmniAuth />
     </form>
   )
 }

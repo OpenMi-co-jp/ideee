@@ -134,8 +134,8 @@ class User < ApplicationRecord
       end
     end
 
-    def ransackable_attributes
-      %w[name definition created_at ideas_num point]
+    def ransackable_attributes(_auth_object = nil)
+      %w[name definition created_at ideas_num point].map(&:to_s) + _ransackers.keys
     end
   end
 

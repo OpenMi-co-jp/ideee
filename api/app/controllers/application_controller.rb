@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include DeviseTokenAuth::Concerns::SetUserByToken
   # before_action :store_user_location!, if: :storable_location?
   # before_action :get_notifications, if: :defined_user?
   protect_from_forgery with: :null_session
 
+  # TODO: Reactで再設定
   # deviseでログインした後の設定
-  def after_sign_in_path_for(resource_or_scope)
-    if resource.defined # ユーザー情報が登録されているか確認
-      stored_location_for(resource_or_scope) || super
-    else
-      edit_user_registration_path(resource)
-    end
-  end
+  # def after_sign_in_path_for(resource_or_scope)
+  #   if resource.defined # ユーザー情報が登録されているか確認
+  #     stored_location_for(resource_or_scope) || super
+  #   else
+  #     edit_user_registration_path(resource)
+  #   end
+  # end
 
   # 本番環境でのエラーハンドリング
   if Rails.env.production?

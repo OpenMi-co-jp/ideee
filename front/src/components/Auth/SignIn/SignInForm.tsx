@@ -4,13 +4,14 @@ import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
+import type { CustomNextPage } from 'next'
 
 type SignInFormValues = {
   email: string
   password: string
 }
 
-export const SignInForm = () => {
+export const SignInForm: CustomNextPage = () => {
   const { setLoggedIn } = useLoggedIn()
   const form = useForm<SignInFormValues>({
     defaultValues: {

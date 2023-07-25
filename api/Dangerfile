@@ -10,6 +10,7 @@ current_date = current_time.to_date
 has_graphql_changes = !git.modified_files.grep(/graphql/).empty?
 has_models_changes = !git.modified_files.grep(/models/).empty?
 has_test_changes = !git.modified_files.grep(/spec/).empty?
+has_api_changes = !git.modified_files.grep(/api/).empty?
 has_logic_changes = has_graphql_changes || has_models_changes
 
 # WIPのお知らせ
@@ -34,7 +35,7 @@ warn('Gemfileが変更されました。bundle installをお忘れなく') if gi
 warn('ロジックに変更があるようですが、テストが書かれていません') if has_logic_changes && has_test_changes
 
 # binding.pryのチェック
-fail('binding.pryがコードの変更部分で検出されました。') if `grep -r "binding.pry" .`.length.positive?
+fail('binding.pryがコードの変更部分で検出されました。') if has_api_changes && git.diff_for_file(/api/).patch.include?("binding.pry")
 
 # putsのチェック
-fail('putsがコードの変更部分で検出されました。') if `grep -r "puts " .`.length.positive?
+fail('binding.pryがコードの変更部分で検出されました。') if has_api_changes && git.diff_for_file(/api/).patch.include?("puts")

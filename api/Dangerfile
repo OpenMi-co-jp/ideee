@@ -39,6 +39,6 @@ if has_api_changes
   git.diff.each do |chunk|
     diffs = chunk.patch.lines
     fail('binding.pryがコードの変更部分で検出されました。') if diffs.include?("binding.pry")
-    fail('binding.pryがコードの変更部分で検出されました。') diffs.include?("puts ")
+    fail('binding.pryがコードの変更部分で検出されました。') if diffs.include?("puts ")
   end
 end

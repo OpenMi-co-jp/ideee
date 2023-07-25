@@ -10,7 +10,7 @@ current_date = current_time.to_date
 has_graphql_changes = !git.modified_files.grep(/graphql/).empty?
 has_models_changes = !git.modified_files.grep(/models/).empty?
 has_test_changes = !git.modified_files.grep(/spec/).empty?
-has_app_changes = has_graphql_changes || has_models_changes
+has_logic_changes = has_graphql_changes || has_models_changes
 
 # WIPのお知らせ
 warn 'PRはWIPでまだ作業中のようです' if github.pr_title.include? 'WIP'
@@ -25,17 +25,13 @@ pr_created_at = github.pr_json['created_at'].to_s
 days_old = (current_date - Date.parse(pr_created_at)).to_i
 warn 'このPRはすでに3日以上開かれています' if days_old > 3
 
-# 再レビューが必要か
-is_approved = github.pr_approved?
-warn('再レビューが必要な変更が加えられています') if has_app_changes && !is_approved
-
 # ===== 対応が必要なお知らせ =====
 has_schema_changes = git.modified_files.include?('db/schema.rb')
 warn 'このPRはデータベーススキーマを変更しています。マイグレーションをお忘れなく' if has_schema_changes
 warn('Gemfileが変更されました。bundle installをお忘れなく') if git.modified_files.include?('Gemfile')
 
 # ===== Test =====
-warn('テストが書かれていません') if has_app_changes && has_test_changes
+warn('ロジックに変更があるようですが、テストが書かれていません') if has_logic_changes && has_test_changes
 
 # binding.pryのチェック
 fail('binding.pryがコードの変更部分で検出されました。') if `grep -r "binding.pry" .`.length.positive?

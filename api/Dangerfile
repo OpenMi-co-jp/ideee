@@ -34,8 +34,11 @@ warn('Gemfileが変更されました。bundle installをお忘れなく') if gi
 # ===== Test =====
 warn('ロジックに変更があるようですが、テストが書かれていません') if has_logic_changes && has_test_changes
 
-# binding.pryのチェック
-fail('binding.pryがコードの変更部分で検出されました。') if has_api_changes && git.modified_files.grep(/api/).patch.include?("binding.pry")
-
-# putsのチェック
-fail('binding.pryがコードの変更部分で検出されました。') if has_api_changes && git.modified_files.grep(/api/).patch.include?("puts")
+# binding.pryとputsのチェック
+if has_api_changes
+  git.diff.each do |chunk|
+    diffs = chunk.patch.lines
+    fail('binding.pryがコードの変更部分で検出されました。') if diffs.include?("binding.pry")
+    fail('binding.pryがコードの変更部分で検出されました。') diffs.include?("puts ")
+  end
+end

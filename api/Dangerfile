@@ -37,8 +37,9 @@ warn('ロジックに変更があるようですが、テストが書かれて�
 # binding.pryとputsの消し忘れチェック
 if has_api_changes
   git.diff.each do |chunk|
-    diffs = chunk.patch.lines
-    fail('binding.pryがコードの変更部分で検出されました。') if diffs.include?('binding.pry')
-    fail('binding.pryがコードの変更部分で検出されました。') if diffs.include?('puts ')
+    chunk.patch.lines.each do |diff|
+      fail('binding.pryがコードの変更部分で検出されました。') if diff.include?('binding.pry')
+      fail('putsがコードの変更部分で検出されました。') if diff.include?('puts')
+    end
   end
 end

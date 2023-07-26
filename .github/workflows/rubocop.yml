@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
@@ -27,7 +27,10 @@ jobs:
         bundler-cache: true
         working-directory: ./api
 
-    - name: Run Rubocop
+    - uses: reviewdog/action-setup@v1
+    - name: Run rubocop with reviewdog
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
       run:  |
         cd api
-        bundle exec rubocop
+        bundle exec rubocop | reviewdog -reporter=github-pr-review -f=rubocop -filter-mode=nofilter -fail-on-error

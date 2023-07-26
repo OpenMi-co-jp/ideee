@@ -25,16 +25,9 @@ export const UserToggle = () => {
               >
                 ユーザー作成
               </Button>
-              <Anchor
-                onClick={() => {
-                  return openModal({
-                    title: <Title>ユーザーログイン</Title>,
-                    children: <SignInForm />,
-                  })
-                }}
-              >
+              <Button component="a" href="/user/sign_in">
                 ログイン
-              </Anchor>
+              </Button>
             </>
           )
         }

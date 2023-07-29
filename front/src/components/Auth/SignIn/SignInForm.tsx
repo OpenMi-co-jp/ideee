@@ -31,7 +31,9 @@ export const SignInForm: CustomNextPage = () => {
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <Col style={{ marginTop: '1rem' }}>
-          <Button type="submit" fullWidth>ログイン</Button>
+          <Button type="submit" fullWidth>
+            ログイン
+          </Button>
         </Col>
         <Stack>
           <Link href="/user/forgot_password" passHref>

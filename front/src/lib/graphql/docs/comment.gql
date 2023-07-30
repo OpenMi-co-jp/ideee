@@ -33,7 +33,7 @@ mutation UpdateComment($input: UpdateCommentInput!) {
 }
 
 mutation DestroyComment($input: DestroyCommentInput!) {
-  destoryComment(input: $Input) {
+  destroyComment(input: $input) {
     success
   }
 }

@@ -16,6 +16,5 @@ module Types
 
     field :comment, resolver: Resolvers::Comment::CommentResolver, description: 'コメントオブジェクト'
     field :comments, resolver: Resolvers::Comment::CommentsResolver, description: 'コメント一覧'
-
   end
 end

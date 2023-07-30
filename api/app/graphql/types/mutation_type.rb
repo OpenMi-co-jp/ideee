@@ -9,5 +9,7 @@ module Types
     field :destroy_user, mutation: Mutations::User::Destroy, description: 'ユーザー削除'
 
     field :create_comment, mutation: Mutations::Comment::Create, description: 'コメント作成'
+    field :update_comment, mutation: Mutations::Comment::Update, description: 'コメント更新'
+    field :destroy_comment, mutation: Mutations::Comment::Destroy, description: 'コメント削除'
   end
 end

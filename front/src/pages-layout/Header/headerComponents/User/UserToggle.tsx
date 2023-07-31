@@ -15,15 +15,8 @@ export const UserToggle = () => {
         } else {
           return (
             <>
-              <Button
-                onClick={() => {
-                  return openModal({
-                    title: <Title>ユーザー作成</Title>,
-                    children: <SignUpForm />,
-                  })
-                }}
-              >
-                ユーザー作成
+              <Button component="a" href="/user/sign_up">
+                ユーザー登録
               </Button>
               <Button component="a" href="/user/sign_in">
                 ログイン

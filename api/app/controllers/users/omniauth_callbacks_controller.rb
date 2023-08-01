@@ -6,19 +6,19 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-    puts '------------------google but before'
+    Rails.logger.debug '------------------google but before'
     callback_for(:google)
   end
 
   def failure
-    puts '------------------failure'
+    Rails.logger.debug '------------------failure'
     super
   end
 
   private
 
   def callback_for(provider)
-    puts '=============callback_for before'
+    Rails.logger.debug '=============callback_for before'
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
       if Rails.env.production? && @user.created_at > Time.zone.now.ago(5.minutes)
@@ -43,9 +43,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
       redirect_to new_user_registration_url
     end
-  end
-
-  def failure
-    redirect_to root_path
   end
 end

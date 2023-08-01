@@ -4,7 +4,7 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   include Devise::Controllers::Rememberable
 
   def twitter
-    puts '==============twitter'
+    Rails.logger.debug '==============twitter'
     callback_for(:twitter)
   end
 
@@ -15,39 +15,39 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   end
 
   def redirect_callbacks
-    puts '==============redirect_callbacks'
+    Rails.logger.debug '==============redirect_callbacks'
     super
   end
 
   def omniauth_success
-    puts '==============omniauth_success'
-    puts request.env["omniauth.auth"]
-    puts request.inspect
-    puts params
-    puts params[:provider]
-    puts params[:uid]
+    Rails.logger.debug '==============omniauth_success'
+    Rails.logger.debug request.env['omniauth.auth']
+    Rails.logger.debug request.inspect
+    Rails.logger.debug params
+    Rails.logger.debug params[:provider]
+    Rails.logger.debug params[:uid]
     super
   end
 
   def omniauth_failure
-    puts '==============omniauth_failure'
+    Rails.logger.debug '==============omniauth_failure'
     super
   end
 
   def callback
-    puts '-============callback'
+    Rails.logger.debug '-============callback'
   end
 
   def failure
-    puts '------------------failure'
-    puts params
+    Rails.logger.debug '------------------failure'
+    Rails.logger.debug params
     super
   end
 
   private
 
   def callback_for(provider)
-    puts '-------------callback_for'
+    Rails.logger.debug '-------------callback_for'
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
       if Rails.env.production? && @user.created_at > Time.zone.now.ago(5.minutes)

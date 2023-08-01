@@ -12,7 +12,7 @@ gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6' # 使わない
+gem 'sass-rails', '>= 6' # 使わない TODO: scssのファイルを削除後対応
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -48,12 +48,9 @@ gem 'omniauth-twitter'
 gem 'google-api-client'
 
 gem 'cloudinary'
-gem 'meta-tags'
 
 gem 'devise-i18n'
 gem 'rails-i18n'
-
-gem 'high_voltage' # 使わない
 
 gem 'enum_help'
 gem 'faker'
@@ -61,8 +58,9 @@ gem 'faker'
 gem 'kaminari'
 gem 'slack-notifier'
 
-gem 'render_async' # 遅延読み込み # 使わない
 gem 'sendgrid-ruby' # メール送信
+
+gem 'activeadmin' # 管理画面
 
 # uncomment out when you need
 # gem 'stripe'
@@ -115,6 +113,10 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+
+  # PRの自動チェック
+  gem 'danger'
+  gem 'faraday-retry'
 end
 
 group :development do

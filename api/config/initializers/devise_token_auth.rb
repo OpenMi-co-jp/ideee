@@ -71,9 +71,9 @@ DeviseTokenAuth.setup do |config|
 
   # config.omniauth :twitter, Rails.application.credentials.dig(:twitter, :api_key),
   #                 Rails.application.credentials.dig(:twitter, :api_secret), scope: 'email'
-                  # , oauth_callback: "#{ENV.fetch('HOST', nil)}/users/auth/twitter/callback"
+  # , oauth_callback: "#{ENV.fetch('HOST', nil)}/users/auth/twitter/callback"
   # config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :client_id),
   #                 Rails.application.credentials.dig(:google, :client_secret), scope: 'email'
-                  # , redirect_uri: "#{ENV.fetch('HOST', nil)}/users/auth/google_oauth2/callback"
+  # , redirect_uri: "#{ENV.fetch('HOST', nil)}/users/auth/google_oauth2/callback"
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
 end

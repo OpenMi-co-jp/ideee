@@ -45,7 +45,7 @@
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   # エラー対処のため二重記述
-  devise :omniauthable, omniauth_providers: [:twitter, :google_oauth2]
+  devise :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
   has_many :ideas, dependent: :destroy
@@ -90,7 +90,7 @@ class User < ApplicationRecord
   class << self
     # omniauthを使ったSNSログイン機能
     def from_omniauth(auth)
-      puts '---------------form_omniauth'
+      Rails.logger.debug '---------------form_omniauth'
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
         when 'google_oauth2'

@@ -3,7 +3,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     Rails.application.credentials.dig(:google, :client_id),
     Rails.application.credentials.dig(:google, :client_secret),
     {
-      redirect_uri: "#{ENV['HOST'] || 'http://localhost:3010'}/auth/google_oauth2/callback"
+      redirect_uri: "#{ENV.fetch('HOST', 'http://localhost:3010')}/auth/google_oauth2/callback"
     }
 
   provider :twitter,

@@ -11,20 +11,23 @@ import {
   Checkbox,
   Image,
 } from '@mantine/core'
-
+import { EditUserFromWrapper } from './EditUserForm.style'
 
 const EditUserForm = () => {
   return (
     <>
-      <div>
+      <EditUserFromWrapper >
         <Image
           height={198}
           width={1235}
           src="/img/edit-form-header.webp"
           alt="edit form header"
         />
-        <Paper p="md" radius="xl" shadow="md" 
-          style={{width:1136,height:1210}}>
+        <Paper p="xl" shadow="md" 
+          style={{
+            width:1136,
+            height:1210,
+            backgroundColor:'#D9D9D9'}}>
           <Grid grow>
             <Grid.Col span={4}>
               <div>
@@ -112,7 +115,7 @@ const EditUserForm = () => {
             </Col>
           </Grid>
         </Paper>
-      </div>
+      </EditUserFromWrapper>
     </>
   )
 }

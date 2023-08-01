@@ -95,7 +95,7 @@ class User < ApplicationRecord
   class << self
     # omniauthを使ったSNSログイン機能
     def from_omniauth(auth)
-      puts '---------------form_omniauth'
+      Rails.logger.debug '---------------form_omniauth'
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
         when 'google_oauth2'

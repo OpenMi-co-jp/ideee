@@ -25,13 +25,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     Rails.logger.debug params[:provider]
     Rails.logger.debug params[:uid]
 =======
-    puts '==============omniauth_success'
-    puts request.env["omniauth.auth"]
-    puts request.inspect
-    puts params
-    puts params[:provider]
-    puts params[:uid]
->>>>>>> a3611555 (commit: 確認用コミット)
+>>>>>>> 7a8600f3 (fix: rubocopの修正)
     super
   end
 

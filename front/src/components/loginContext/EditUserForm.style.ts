@@ -28,4 +28,8 @@ export const EditUserFromWrapper = styled.div`
   .mantine-gszoqu:focus, .mantine-gszoqu:focus-within{
     border-bottom-color: #000000;
   }
+  .mantine-Checkbox-input {
+    border-radius: 0;
+    border: 2px solid #EF8C45;
+  }
 `

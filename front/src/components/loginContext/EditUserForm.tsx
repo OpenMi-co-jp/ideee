@@ -134,7 +134,7 @@ const EditUserForm = () => {
                 />
               </Input.Wrapper>
             </Grid.Col>
-            <Grid.Col span={4}>
+            <Grid.Col span={4} offset={1}>
               <Input.Wrapper id="input-github" label="GitHub">
                 <Input
                   style={{

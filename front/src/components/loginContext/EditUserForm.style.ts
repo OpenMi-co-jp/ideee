@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 
-
 export const EditUserFromWrapper = styled.div`
-  display:flex;
-  flex-flow:column;
-  align-items:center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 
-  .mantine-Paper-root{
+  .mantine-Paper-root {
     border-radius: 0 0 2em 2em;
     padding: 80px;
   }
@@ -18,5 +17,4 @@ export const EditUserFromWrapper = styled.div`
   .mantine-InputWrapper-label {
     font-size: 20px;
   }
-
 `

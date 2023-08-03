@@ -17,7 +17,7 @@ export const EditUserFromWrapper = styled.div`
   .mantine-InputWrapper-label {
     font-size: 20px;
   }
-  .mantine-Input-input{
+  .mantine-Input-input {
     background-color: rgb(217, 217, 217);
     border-radius: 0;
     border-bottom-color: #000000;
@@ -25,11 +25,12 @@ export const EditUserFromWrapper = styled.div`
     border-left: none;
     border-right: none;
   }
-  .mantine-gszoqu:focus, .mantine-gszoqu:focus-within{
+  .mantine-gszoqu:focus,
+  .mantine-gszoqu:focus-within {
     border-bottom-color: #000000;
   }
   .mantine-Checkbox-input {
     border-radius: 0;
-    border: 2px solid #EF8C45;
+    border: 2px solid #ef8c45;
   }
 `

@@ -4,6 +4,10 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import testQuery from '@/components/test'
 import { Container } from '@mantine/core';
+import MainVisual from '@/components/features/MainVisual'
+import NewIdea from '@/components/features/NewIdea'
+import SearchTags from '@/components/features/SearchTags'
+import Philosophy from '@/components/features/Philosophy'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,7 +27,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div style={{width:'100%', height:'100vh'}}>
-
+        <MainVisual />
+        <NewIdea />
+        <SearchTags />
+        <Philosophy />
       </div>
     </>
   )

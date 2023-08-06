@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { Title, Button } from '@mantine/core'
+import { Title, Text, Button } from '@mantine/core'
 
 const MainVisual = () => {
   return (
@@ -22,7 +22,7 @@ const MainVisual = () => {
         style={{
           width: '350px',
           paddingTop: '200px',
-          paddingBottom: '220px',
+          paddingBottom: '130px',
           textAlign: 'center',
         }}
       >
@@ -30,7 +30,7 @@ const MainVisual = () => {
           style={{
             display: 'flex',
             flexFlow: 'column',
-            paddingBottom: '20px',
+            paddingBottom: '55px',
           }}
         >
           <Title
@@ -38,7 +38,7 @@ const MainVisual = () => {
               color: '#FF862F',
               textAlign: 'center',
               fontFamily: 'Inter',
-              fontSize: '32px',
+              fontSize: '35px',
               fontStyle: 'normal',
               fontWeight: 700,
               lineHeight: 'normal',
@@ -51,7 +51,7 @@ const MainVisual = () => {
               color: '#FF862F',
               textAlign: 'center',
               fontFamily: 'Inter',
-              fontSize: '32px',
+              fontSize: '35px',
               fontStyle: 'normal',
               fontWeight: 700,
               lineHeight: 'normal',
@@ -61,6 +61,17 @@ const MainVisual = () => {
           </Title>
         </div>
         <Button color="orange">IDEEEについて｜⇢</Button>
+        <Text fz="md"
+          style={{
+            paddingTop: '35px',
+            color: '#818181',
+            fontFamily: 'Inter',
+            fontSize: '20px',
+            fontStyle: 'normal',
+            fontWeight: 700,
+            lineHeight: 'normal',
+          }}
+        >現在のユーザーの数:937人</Text>
       </div>
     </>
   )

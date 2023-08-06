@@ -5,15 +5,15 @@ import { Title, Button } from '@mantine/core'
 const MainVisual = () => {
   return (
     <>
-      <div >
+      <div>
         <Image
           src={'/img/ideeemv.webp'}
-          alt='MvImage'
+          alt="MvImage"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           style={{
             maxHeight: '500px',
             zIndex: '-300',
-            top: '150px'
+            top: '150px',
           }}
           fill
         />
@@ -24,13 +24,15 @@ const MainVisual = () => {
           paddingTop: '200px',
           paddingBottom: '220px',
           textAlign: 'center',
-        }}>
+        }}
+      >
         <div
           style={{
             display: 'flex',
             flexFlow: 'column',
             paddingBottom: '20px',
-          }}>
+          }}
+        >
           <Title
             style={{
               color: '#FF862F',
@@ -40,7 +42,8 @@ const MainVisual = () => {
               fontStyle: 'normal',
               fontWeight: 700,
               lineHeight: 'normal',
-            }}>
+            }}
+          >
             あなたのアイデアを
           </Title>
           <Title
@@ -52,11 +55,12 @@ const MainVisual = () => {
               fontStyle: 'normal',
               fontWeight: 700,
               lineHeight: 'normal',
-            }}>
+            }}
+          >
             エンジニアと盛り上げる
           </Title>
         </div>
-        <Button color='orange'>IDEEEについて｜⇢</Button>
+        <Button color="orange">IDEEEについて｜⇢</Button>
       </div>
     </>
   )

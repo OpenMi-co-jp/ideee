@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import testQuery from '@/components/test'
-import { Container } from '@mantine/core';
 import MainVisual from '@/components/features/MainVisual'
 import NewIdea from '@/components/features/NewIdea'
 import SearchTags from '@/components/features/SearchTags'

@@ -61,7 +61,8 @@ const MainVisual = () => {
           </Title>
         </div>
         <Button color="orange">IDEEEについて｜⇢</Button>
-        <Text fz="md"
+        <Text
+          fz="md"
           style={{
             paddingTop: '35px',
             color: '#818181',
@@ -71,7 +72,9 @@ const MainVisual = () => {
             fontWeight: 700,
             lineHeight: 'normal',
           }}
-        >現在のユーザーの数:937人</Text>
+        >
+          現在のユーザーの数:937人
+        </Text>
       </div>
     </>
   )

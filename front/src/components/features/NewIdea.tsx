@@ -22,7 +22,7 @@ const NewIdea = () => {
             lineHeight: 'normal',
             marginTop: '24px',
             marginLeft: '80px',
-            marginBottom: '15px'
+            marginBottom: '15px',
           }}
         >
           新しいアイデア
@@ -36,7 +36,10 @@ const NewIdea = () => {
             margin: '15px 0 25px 0',
           }}
         >
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -73,7 +76,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -110,7 +116,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -147,7 +156,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -184,7 +196,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -221,7 +236,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -258,7 +276,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -295,7 +316,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -332,7 +356,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -369,7 +396,10 @@ const NewIdea = () => {
               }}
             />
           </Paper>
-          <Paper shadow="md" radius="md" p="md"
+          <Paper
+            shadow="md"
+            radius="md"
+            p="md"
             style={{
               display: 'flex',
               justifyContent: 'space-between',
@@ -407,7 +437,7 @@ const NewIdea = () => {
             />
           </Paper>
         </Flex>
-      </Box >
+      </Box>
     </>
   )
 }

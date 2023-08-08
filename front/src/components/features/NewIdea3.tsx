@@ -37,7 +37,6 @@ const NewIdea3 = () => {
             margin: '15px 0 25px 0',
           }}
         >
-
           <Paper
             shadow="md"
             radius="md"

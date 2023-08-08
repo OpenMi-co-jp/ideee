@@ -36,150 +36,225 @@ const SearchTags = () => {
             padding: '15px 80px 15px 80px',
           }}
         >
-          <Flex
-            justify="center"
-            align="center"
-            direction="row"
-            wrap="wrap"
-          >
-            <Badge size="xl" radius="sm" variant="filled"
+          <Flex justify="center" align="center" direction="row" wrap="wrap">
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #仕事探し
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #ChatGPT
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #友達
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #靴
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #安心
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #自動生成
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #友達
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #アニメ
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #ホーム
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #年賀状
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #アニメ
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #ゲーム
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #NFT
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #仕事探し
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #NPC
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #ホーム
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #靴
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #釣り
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #自動生成
             </Badge>
-            <Badge size="xl" radius="sm" variant="filled"
+            <Badge
+              size="xl"
+              radius="sm"
+              variant="filled"
               style={{
-                margin: "5px 15px 5px 15px",
+                margin: '5px 15px 5px 15px',
                 fontSize: '12px',
-              }}>
+              }}
+            >
               #AI
             </Badge>
           </Flex>

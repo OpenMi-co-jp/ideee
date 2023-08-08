@@ -1,5 +1,5 @@
-import { Box, Title, Text, Paper, Avatar, Flex } from '@mantine/core'
 import React from 'react'
+import { Box, Title, Text, Paper, Avatar, Flex } from '@mantine/core'
 
 const NewIdea3 = () => {
   return (

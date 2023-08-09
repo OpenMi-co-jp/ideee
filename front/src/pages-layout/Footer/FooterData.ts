@@ -15,7 +15,7 @@ export const footerData = {
         { label: 'よくある質問', link: '#' },
         { label: '利用規約', link: '#' },
         { label: 'プライバシーポリシー', link: '#' },
-        { label: '運営者', link: '#' },
+        { label: '運営者', link: 'https://naruhiro-portfolio.firebaseapp.com' },
       ],
     },
     {

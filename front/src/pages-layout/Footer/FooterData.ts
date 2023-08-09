@@ -5,7 +5,7 @@ export const footerData = {
       links: [
         { label: 'ideeeについて', link: '#' },
         { label: 'アイデアの探し方', link: '#' },
-        { label: '月間トレンドまとめ', link: '#' },
+        { label: '月間トレンドまとめ', link: 'https://qiita.com/naruqiita/items/0ef4b963434226eacb6b' },
         { label: '個人開発の落とし穴', link: '#' },
       ],
     },

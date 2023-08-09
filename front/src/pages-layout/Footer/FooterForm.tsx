@@ -6,9 +6,10 @@ import {
   Group,
   rem,
 } from '@mantine/core'
+import { MenuLabel } from '@mantine/core/lib/Menu/MenuLabel/MenuLabel'
+
 import {
   IconBrandTwitter,
-  IconBrandYoutube,
   IconNews,
 } from '@tabler/icons-react'
 import Image from 'next/image'
@@ -132,7 +133,6 @@ export const FooterForm = (footerData: FooterLinksProps) => {
         className={classes.link}
         component="a"
         href={link.link}
-        onClick={(event) => event.preventDefault()}
       >
         {link.label}
       </Text>
@@ -141,7 +141,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
     return (
       <div className={classes.wrapper} key={data.title}>
         <Text className={classes.title}>{data.title}</Text>
-        {links}
+        {links}[]
       </div>
     )
   })
@@ -162,17 +162,16 @@ export const FooterForm = (footerData: FooterLinksProps) => {
         </div>
         <div className={classes.groups}>{groups}</div>
       </Container>
+
       <Container className={classes.afterFooter}>
         <Text color="dimmed" size="sm">
           © 2022 ideee.tech All rights reserved.
         </Text>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <IconBrandTwitter size="1.05rem" stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandYoutube size="1.05rem" stroke={1.5} />
+          <ActionIcon size="lg" onClick={() => {
+               window.location.href = "https://twitter.com/ideee_tech";}}>
+            <IconBrandTwitter size="1.05rem" stroke={1.5}/>
           </ActionIcon>
           <ActionIcon size="lg">
             <IconNews size="1.05rem" stroke={1.5} />

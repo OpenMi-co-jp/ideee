@@ -6,11 +6,9 @@ import {
   Group,
   rem,
 } from '@mantine/core'
-import { MenuLabel } from '@mantine/core/lib/Menu/MenuLabel/MenuLabel'
 
 import {
   IconBrandTwitter,
-  IconNews,
 } from '@tabler/icons-react'
 import Image from 'next/image'
 
@@ -172,9 +170,6 @@ export const FooterForm = (footerData: FooterLinksProps) => {
           <ActionIcon size="lg" onClick={() => {
                window.location.href = "https://twitter.com/ideee_tech";}}>
             <IconBrandTwitter size="1.05rem" stroke={1.5}/>
-          </ActionIcon>
-          <ActionIcon size="lg" onClick={(event) => event.preventDefault()}>
-            <IconNews size="1.05rem" stroke={1.5} />
           </ActionIcon>
         </Group>
       </Container>

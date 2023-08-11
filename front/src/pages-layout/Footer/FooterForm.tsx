@@ -138,7 +138,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
     return (
       <div className={classes.wrapper} key={data.title}>
         <Text className={classes.title}>{data.title}</Text>
-        {links}[]
+        {links}
       </div>
     )
   })
@@ -169,12 +169,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
           <ActionIcon size="lg" onClick={() => {
                window.location.href = "https://twitter.com/ideee_tech";}}>
             <IconBrandTwitter size="1.05rem" stroke={1.5}/>
-          <ActionIcon size="lg">
-            <IconBrandTwitter size="1.05rem" stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconNews size="1.05rem" stroke={1.5} />
-          </ActionIcon>
+          </ActionIcon> 
         </Group>
       </Container>
     </footer>

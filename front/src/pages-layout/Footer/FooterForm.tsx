@@ -5,6 +5,7 @@ import {
   ActionIcon,
   Group,
   rem,
+  Anchor
 } from '@mantine/core'
 import {
   IconBrandTwitter,
@@ -166,9 +167,10 @@ export const FooterForm = (footerData: FooterLinksProps) => {
         </Text>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg" onClick={() => {
-               window.location.href = "https://twitter.com/ideee_tech";}}>
-            <IconBrandTwitter size="1.05rem" stroke={1.5}/>
+          <ActionIcon size="lg">
+            <Anchor href="https://twitter.com/ideee_tech">
+              <IconBrandTwitter size="1.05rem" stroke={1.5}/>
+            </Anchor>
           </ActionIcon> 
         </Group>
       </Container>

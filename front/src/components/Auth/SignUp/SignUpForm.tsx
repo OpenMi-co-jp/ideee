@@ -1,7 +1,8 @@
-import { Box, Button } from '@mantine/core'
+import { Box, Col, Button, Title } from '@mantine/core'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '../../ReactFormSet'
 import { handleSignUp } from './hooks'
+import type { CustomNextPage } from 'next'
 
 type SignUpFormValues = {
   email: string
@@ -10,7 +11,7 @@ type SignUpFormValues = {
   confirmSuccessUrl: string
 }
 
-export const SignUpForm = () => {
+export const SignUpForm: CustomNextPage = () => {
   const confirmSuccessUrl = process.env.NEXT_PUBLIC_FRONT_URL
   console.log(confirmSuccessUrl)
   const form = useForm<SignUpFormValues>({
@@ -27,6 +28,9 @@ export const SignUpForm = () => {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <Box maw={300} mx="auto">
+        <Title order={2} mb={30}>
+          ユーザー登録
+        </Title>
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <PasswordForm
@@ -35,7 +39,11 @@ export const SignUpForm = () => {
           label="確認用パスワード"
           required
         />
-        <Button type="submit">無料ユーザー作成</Button>
+        <Col style={{ marginTop: '1rem' }}>
+          <Button type="submit" fullWidth>
+            無料ユーザー作成
+          </Button>
+        </Col>
       </Box>
     </form>
   )

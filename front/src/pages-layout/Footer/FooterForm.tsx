@@ -167,7 +167,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
           <ActionIcon size="lg">
-            <Anchor href="https://twitter.com/ideee_tech">
+            <Anchor href="https://twitter.com/ideee_tech" aria-label="Twitterへのリンク">
               <IconBrandTwitter size="1.05rem" stroke={1.5}/>
             </Anchor>
           </ActionIcon> 

@@ -24,15 +24,17 @@ const Philosophy = () => {
         >
           アイデアをデザインしエンジニアの出会いを盛り上げる
         </Title>
-        <Divider style={{
-          border: 0,
-          borderTopWidth: '0.125rem',
-          borderTopColor: '#000000',
-          borderTopStyle: 'solid',
-          margin: '0 auto',
-          paddingBottom: '50px',
-          width: '55%',
-        }} />
+        <Divider
+          style={{
+            border: 0,
+            borderTopWidth: '0.125rem',
+            borderTopColor: '#000000',
+            borderTopStyle: 'solid',
+            margin: '0 auto',
+            paddingBottom: '50px',
+            width: '55%',
+          }}
+        />
         <Flex
           justify="center"
           align="center"
@@ -51,19 +53,19 @@ const Philosophy = () => {
           }}
         >
           <Text>
-            <span style={{ color: '#FDB221' }} >I</span>dea
+            <span style={{ color: '#FDB221' }}>I</span>dea
           </Text>
           <Text>
-            <span style={{ color: '#FDB221' }} >D</span>esign
+            <span style={{ color: '#FDB221' }}>D</span>esign
           </Text>
           <Text>
-            <span style={{ color: '#FDB221' }} >E</span>ngineer
+            <span style={{ color: '#FDB221' }}>E</span>ngineer
           </Text>
           <Text>
-            <span style={{ color: '#FDB221' }} >E</span>ncounter
+            <span style={{ color: '#FDB221' }}>E</span>ncounter
           </Text>
           <Text>
-            <span style={{ color: '#FDB221' }} >E</span>ncourage
+            <span style={{ color: '#FDB221' }}>E</span>ncourage
           </Text>
         </Flex>
         <Flex
@@ -144,7 +146,6 @@ const Philosophy = () => {
             }}
           />
         </Flex>
-
       </Box>
     </>
   )

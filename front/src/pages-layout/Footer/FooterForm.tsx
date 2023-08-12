@@ -160,7 +160,6 @@ export const FooterForm = (footerData: FooterLinksProps) => {
         </div>
         <div className={classes.groups}>{groups}</div>
       </Container>
-
       <Container className={classes.afterFooter}>
         <Text color="dimmed" size="sm">
           © 2022 ideee.tech All rights reserved.

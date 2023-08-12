@@ -6,10 +6,7 @@ import {
   Group,
   rem,
 } from '@mantine/core'
-import {
-  IconBrandTwitter,
-  IconNews,
-} from '@tabler/icons-react'
+import { IconBrandTwitter, IconNews } from '@tabler/icons-react'
 import Image from 'next/image'
 
 const useStyles = createStyles((theme) => ({
@@ -170,7 +167,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
           <ActionIcon size="lg">
             <IconBrandTwitter size="1.05rem" stroke={1.5} />
           </ActionIcon>
-          
+
           <ActionIcon size="lg">
             <IconNews size="1.05rem" stroke={1.5} />
           </ActionIcon>

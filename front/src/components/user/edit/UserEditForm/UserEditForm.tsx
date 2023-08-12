@@ -50,12 +50,13 @@ export const UserEditForm = () => {
       />
       <Card padding="xl" style={{ backgroundColor: '#fff' }}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Paper p={rem(50)} shadow="md" style={{ backgroundColor: '#F2F2F2' }}>
-            <Title
-              order={2}
-              mb={30}
-              weight={500} align="center"
-            >
+          <Paper
+            m="lg"
+            p={rem(40)}
+            shadow="md"
+            style={{ backgroundColor: '#F2F2F2' }}
+          >
+            <Title order={2} mb={30} weight={500} align="center">
               ユーザー情報編集
             </Title>
             <Grid grow>
@@ -113,15 +114,18 @@ export const UserEditForm = () => {
                 </Text>
                 <Checkbox color="orange" size="lg" label="🛠" />
               </Col>
-              <Col span={6} style={{
-                    display: 'flex',
-                    flexFlow: 'column',
-                    alignItems: 'center',
-                  }}>
-                  <Text fz="md" pb={20} size="xl">
-                    アイデアマン
-                  </Text>
-                  <Checkbox color="orange" size="lg" label="💡" />
+              <Col
+                span={6}
+                style={{
+                  display: 'flex',
+                  flexFlow: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Text fz="md" pb={20} size="xl">
+                  アイデアマン
+                </Text>
+                <Checkbox color="orange" size="lg" label="💡" />
               </Col>
             </Grid>
             <TextAreaForm form={form} name="profile" label="自己紹介" my="lg" />
@@ -160,7 +164,8 @@ export const UserEditForm = () => {
               type="submit"
               my={30}
               size="lg"
-              style={{ background: '#F4AE7B' }}
+              variant="gradient"
+              gradient={{ from: 'yellow', to: 'orange' }}
             >
               登録
             </Button>

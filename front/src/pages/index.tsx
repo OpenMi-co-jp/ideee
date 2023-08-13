@@ -29,8 +29,8 @@ export default function Home() {
       {!isLogin && <MainVisual />}
       <NewIdea />
       <SearchTags />
-      {isLogin && (<TeamIdea />)}
-      {isLogin && (<RealizedIdea />)}
+      {isLogin && <TeamIdea />}
+      {isLogin && <RealizedIdea />}
       <Philosophy />
     </>
   )

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -7,12 +8,14 @@ import MainVisual from '@/components/features/MainVisual'
 import NewIdea from '@/components/features/NewIdea'
 import SearchTags from '@/components/features/SearchTags'
 import Philosophy from '@/components/features/Philosophy'
+import TeamIdea from '@/components/features/TeamIdea'
+import RealizedIdea from '@/components/features/RealizedIdea'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { data, loading } = testQuery()
-
+  const [isLogin, setLogin] = useState(true)
   if (loading) return <p>Loading...</p>
 
   return (
@@ -23,9 +26,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainVisual />
+      {!isLogin && <MainVisual />}
       <NewIdea />
       <SearchTags />
+      {isLogin && (<TeamIdea />)}
+      {isLogin && (<RealizedIdea />)}
       <Philosophy />
     </>
   )

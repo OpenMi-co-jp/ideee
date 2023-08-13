@@ -4,9 +4,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import testQuery from '@/components/test'
 import MainVisual from '@/components/features/MainVisual'
-import NewIdea1 from '@/components/features/NewIdea1'
-import NewIdea2 from '@/components/features/NewIdea2'
-import NewIdea3 from '@/components/features/NewIdea3'
+import NewIdea from '@/components/features/NewIdea'
 import SearchTags from '@/components/features/SearchTags'
 import Philosophy from '@/components/features/Philosophy'
 
@@ -26,10 +24,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainVisual />
-      <NewIdea1 />
+      <NewIdea />
       <SearchTags />
-      <NewIdea2 />
-      <NewIdea3 />
       <Philosophy />
     </>
   )

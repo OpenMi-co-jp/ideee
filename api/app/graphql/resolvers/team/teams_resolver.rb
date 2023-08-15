@@ -4,7 +4,7 @@ module Resolvers
   class Team::TeamsResolver < BaseResolver
     graphql_name 'GetTeams'
 
-    type [Types::TeamsType], null: false
+    type [Types::TeamType], null: false
 
     def resolve
       ::Team.all

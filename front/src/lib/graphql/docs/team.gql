@@ -21,3 +21,17 @@ query GetTeams {
     membersNum
   }
 }
+
+mutation createTeam($input: CreateTeamInput!) {
+  createTeam(input: $input) {
+    team {
+      id
+      ownerId
+      status
+      requirement
+      offer
+      membersNum
+    }
+    success
+  }
+}

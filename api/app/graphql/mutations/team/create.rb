@@ -27,4 +27,5 @@ module Mutations
         success: true
       }
     end
+  end
 end

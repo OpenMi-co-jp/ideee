@@ -7,8 +7,8 @@ const MainVisual = () => {
     <>
       <div>
         <Image
-          src={'/img/ideeemv.webp'}
-          alt="MvImage"
+          src={'/img/top_vision_image.webp'}
+          alt="top_vision_image"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           style={{
             maxHeight: '500px',

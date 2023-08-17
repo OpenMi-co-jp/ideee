@@ -48,6 +48,7 @@ FactoryBot.define do
     view { (0..200).to_a.sample }
     product_url { Faker::Internet.url }
     github_url { Faker::Internet.url }
+    published_at { Time.zone.now }
     user
 
     trait :like do

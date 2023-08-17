@@ -31,7 +31,7 @@ export default function Home() {
       <SearchTags />
       {isLogin && <TeamIdea />}
       {isLogin && <RealizedIdea />}
-      <Philosophy />
+      {!isLogin && <Philosophy />}
     </>
   )
 }

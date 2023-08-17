@@ -166,13 +166,11 @@ export const FooterForm = (footerData: FooterLinksProps) => {
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
           <ActionIcon size="lg">
-
             <IconBrandTwitter size="1.05rem" stroke={1.5} />
           </ActionIcon>
 
           <ActionIcon size="lg">
             <IconNews size="1.05rem" stroke={1.5} />
-
           </ActionIcon>
         </Group>
       </Container>

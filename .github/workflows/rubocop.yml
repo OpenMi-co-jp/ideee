@@ -1,0 +1,40 @@
+name: rubocop
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  linter:
+    name: Run rubocop
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RAILS_ENV: test
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.3
+        bundler-cache: true
+        working-directory: ./api
+
+    - uses: reviewdog/action-setup@v1
+    - name: Run rubocop with reviewdog
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
+      run:  |
+        cd api
+        bundle exec rubocop | reviewdog -reporter=github-pr-review -f=rubocop -filter-mode=nofilter -fail-on-error

@@ -112,8 +112,8 @@ const Philosophy = () => {
               コードで社会に貢献してみませんか？
             </Text>
             <Image
-              src={'/img/people.webp'}
-              alt="people"
+              src={'/img/bottom_vision_image.webp'}
+              alt="bottom_vision_image"
               width={430}
               height={300}
               style={{

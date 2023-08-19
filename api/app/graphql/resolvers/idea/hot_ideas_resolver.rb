@@ -4,7 +4,7 @@ module Resolvers
   class Idea::HotIdeasResolver < BaseResolver
     graphql_name 'GetHotIdeas'
 
-    type [Types::IdeaType], null: false
+    type [Types::Idea::IdeaType], null: false
 
     def resolve
       new_ideas = ::Idea.eager_load(:user).published.last(4)

@@ -7,7 +7,8 @@ module Resolvers
     type [Types::NotificationType], null: false
 
     def resolve
-      ::Notification.all
+      notification_list = current_user.passive_notifications.eager_load(%i[visitor idea]).order(created_at: :desc)
+      Kaminari.paginate_array(notification_list).page(params[:page])
     end
   end
 end

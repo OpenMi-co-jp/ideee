@@ -76,8 +76,12 @@ class Idea < ApplicationRecord
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
   scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id:).uniq }
 
-  def self.ransackable_attributes
+  def self.ransackable_attributes(_auth_object = nil)
     %w[id name published_at difficulty comments_num likes_num updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[idea_tags team]
   end
 
   def published_time

@@ -134,7 +134,7 @@ class User < ApplicationRecord
       end
     end
 
-    def ransackable_attributes
+    def ransackable_attributes(_auth_object = nil)
       %w[name definition created_at ideas_num point]
     end
   end

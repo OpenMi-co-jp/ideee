@@ -439,7 +439,7 @@ type Idea {
   """
   難易度
   """
-  difficulty: Int
+  difficulty: String
 
   """
   下書きフラグ
@@ -535,6 +535,11 @@ type Idea {
   ターゲット
   """
   target: String
+
+  """
+  チームオブジェクト
+  """
+  team: Team
 
   """
   更新日
@@ -1024,7 +1029,7 @@ type Team {
   """
   チームステータス
   """
-  status: Int!
+  status: String!
 }
 
 """

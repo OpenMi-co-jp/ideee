@@ -5,7 +5,7 @@ module Types
     field :id, ID, null: false, description: 'チームID'
     field :owner_id, Integer, null: false, description: 'オーナーID'
     field :idea_id, Integer, null: false, description: 'アイデアID'
-    field :status, Integer, null: false, description: 'チームステータス'
+    field :status, String, null: false, description: 'チームステータス'
     field :requirement, String, null: false, description: 'お願いすること'
     field :offer, String, null: false, description: '(メンバーが)得られるもの'
     field :members_num, Integer, description: 'メンバー数'

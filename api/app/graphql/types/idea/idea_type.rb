@@ -7,7 +7,7 @@ module Types
     field :goal, String, description: 'ゴール'
     field :background, String, description: '背景'
     field :comments_num, Integer, description: 'コメント数'
-    field :difficulty, Integer, description: '難易度'
+    field :difficulty, String, description: '難易度'
     field :draft, Boolean, description: '下書きフラグ'
     field :emailed_at, GraphQL::Types::ISO8601DateTime, description: 'メール送信日'
     field :hypothesis, String, description: '仮説'
@@ -31,5 +31,6 @@ module Types
 
     field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
     field :idea_tags, [Types::TagType], null: true, description: 'タグオブジェクト'
+    field :team, Types::TeamType, null: true, description: 'チームオブジェクト'
   end
 end

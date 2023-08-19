@@ -699,7 +699,7 @@
               "description": "難易度",
               "type": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -978,6 +978,20 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "team",
+              "description": "チームオブジェクト",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Team",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -2283,7 +2297,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "Int",
+                  "name": "String",
                   "ofType": null
                 }
               },

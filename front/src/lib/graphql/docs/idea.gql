@@ -16,6 +16,7 @@ query GetIdeas($searchCondition: SearchCondition) {
       difficulty
       likesNum
       view
+      publishedAt
       user {
         id
         name
@@ -24,9 +25,19 @@ query GetIdeas($searchCondition: SearchCondition) {
       ideaTags {
         name
       }
+      team {
+        status
+      }
     }
     pageInfo {
-      Pagination
+      currentPage
+      isFirst
+      isLast
+      nextPage
+      per
+      prevPage
+      totalCount
+      totalPages
     }
   }
 }

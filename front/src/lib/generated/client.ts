@@ -152,6 +152,8 @@ export type Idea = {
   icon?: Maybe<Scalars['String']>
   /** アイデアID */
   id: Scalars['ID']
+  /** タグオブジェクト */
+  ideaTags?: Maybe<Array<Tag>>
   /** 課題・困っていること */
   issue?: Maybe<Scalars['String']>
   /** ハート数 */
@@ -184,6 +186,14 @@ export type Idea = {
   view?: Maybe<Scalars['Int']>
   /** 欲しい機能 */
   wishFunction?: Maybe<Scalars['String']>
+}
+
+export type Ideas = {
+  __typename?: 'Ideas'
+  /** アイデアオブジェクト */
+  nodes: Array<Idea>
+  /** ページネーション情報 */
+  pageInfo?: Maybe<Pagination>
 }
 
 export type Mutation = {
@@ -248,6 +258,18 @@ export type Notification = {
   visitorId?: Maybe<Scalars['Int']>
 }
 
+export type Pagination = {
+  __typename?: 'Pagination'
+  currentPage: Scalars['Int']
+  isFirst?: Maybe<Scalars['Boolean']>
+  isLast?: Maybe<Scalars['Boolean']>
+  nextPage?: Maybe<Scalars['Int']>
+  per: Scalars['Int']
+  prevPage?: Maybe<Scalars['Int']>
+  totalCount?: Maybe<Scalars['Int']>
+  totalPages?: Maybe<Scalars['Int']>
+}
+
 export type Query = {
   __typename?: 'Query'
   /** チーム開発募集中のアイデア一覧 */
@@ -259,7 +281,7 @@ export type Query = {
   /** アイデアオブジェクト */
   idea: Idea
   /** アイデア一覧 */
-  ideas: Array<Idea>
+  ideas: Ideas
   /** 通知一覧 */
   notifications: Array<Notification>
   /** 人気のタグ一覧 */
@@ -276,12 +298,39 @@ export type QueryIdeaArgs = {
   id: Scalars['ID']
 }
 
+export type QueryIdeasArgs = {
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+  searchCondition?: InputMaybe<SearchCondition>
+  sort?: InputMaybe<SortCondition>
+}
+
 export type QueryTeamArgs = {
   id: Scalars['ID']
 }
 
 export type QueryUserArgs = {
   id: Scalars['ID']
+}
+
+export type SearchCondition = {
+  /** 難易度で検索 */
+  difficultyEq?: InputMaybe<Scalars['Int']>
+  /** 名前かタグ名で検索 */
+  nameOrIdeaTagsNameCont?: InputMaybe<Scalars['String']>
+  /** 指定公開日以降で検索 */
+  publishedAtGteq?: InputMaybe<Scalars['ISO8601DateTime']>
+  /** 指定公開日で以前で検索 */
+  publishedAtLteq?: InputMaybe<Scalars['ISO8601DateTime']>
+  /** チーム状態で検索 */
+  teamStatusEq?: InputMaybe<Scalars['Int']>
+}
+
+export type SortCondition = {
+  /** カラム名 */
+  columnName: Scalars['String']
+  /** ソート順 */
+  order?: InputMaybe<Scalars['String']>
 }
 
 export type Tag = {
@@ -445,17 +494,42 @@ export type GetIdeaQuery = {
   }
 }
 
-export type GetIdeasQueryVariables = Exact<{ [key: string]: never }>
+export type GetIdeasQueryVariables = Exact<{
+  searchCondition?: InputMaybe<SearchCondition>
+}>
 
 export type GetIdeasQuery = {
   __typename?: 'Query'
-  ideas: Array<{
-    __typename?: 'Idea'
-    id: string
-    name?: string | null
-    note?: string | null
-    goal?: string | null
-  }>
+  ideas: {
+    __typename?: 'Ideas'
+    nodes: Array<{
+      __typename?: 'Idea'
+      id: string
+      name?: string | null
+      commentsNum?: number | null
+      difficulty?: number | null
+      likesNum?: number | null
+      view?: number | null
+      user: {
+        __typename?: 'User'
+        id: string
+        name?: string | null
+        icon?: string | null
+      }
+      ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
+    }>
+    pageInfo?: {
+      __typename?: 'Pagination'
+      currentPage: number
+      isFirst?: boolean | null
+      isLast?: boolean | null
+      nextPage?: number | null
+      per: number
+      prevPage?: number | null
+      totalCount?: number | null
+      totalPages?: number | null
+    } | null
+  }
 }
 
 export type GetHotIdeasQueryVariables = Exact<{ [key: string]: never }>
@@ -703,12 +777,34 @@ export type GetIdeaQueryResult = Apollo.QueryResult<
   GetIdeaQueryVariables
 >
 export const GetIdeasDocument = gql`
-  query GetIdeas {
-    ideas {
-      id
-      name
-      note
-      goal
+  query GetIdeas($searchCondition: SearchCondition) {
+    ideas(searchCondition: $searchCondition) {
+      nodes {
+        id
+        name
+        commentsNum
+        difficulty
+        likesNum
+        view
+        user {
+          id
+          name
+          icon
+        }
+        ideaTags {
+          name
+        }
+      }
+      pageInfo {
+        currentPage
+        isFirst
+        isLast
+        nextPage
+        per
+        prevPage
+        totalCount
+        totalPages
+      }
     }
   }
 `
@@ -725,6 +821,7 @@ export const GetIdeasDocument = gql`
  * @example
  * const { data, loading, error } = useGetIdeasQuery({
  *   variables: {
+ *      searchCondition: // value for 'searchCondition'
  *   },
  * });
  */

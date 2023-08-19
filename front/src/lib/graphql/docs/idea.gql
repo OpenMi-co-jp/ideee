@@ -7,12 +7,27 @@ query GetIdea($id: ID!) {
   }
 }
 
-query GetIdeas {
-  ideas {
-    id
-    name
-    note
-    goal
+query GetIdeas($searchCondition: SearchCondition) {
+  ideas(searchCondition: $searchCondition) {
+    nodes {
+      id
+      name
+      commentsNum
+      difficulty
+      likesNum
+      view
+      user {
+        id
+        name
+        icon
+      }
+      ideaTags {
+        name
+      }
+    }
+    pageInfo {
+      Pagination
+    }
   }
 }
 

@@ -9,6 +9,7 @@ import {
 } from '@mantine/core'
 import { IconBrandTwitter } from '@tabler/icons-react'
 import Image from 'next/image'
+import { CustomLink } from '../../pages/customlink'
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -124,14 +125,12 @@ export const FooterForm = (footerData: FooterLinksProps) => {
 
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
-      <Text<'a'>
-        key={index}
-        className={classes.link}
-        component="a"
-        href={link.link}
-      >
-        {link.label}
-      </Text>
+      <CustomLink key={index}
+        href={link.link}>
+        <Anchor className={classes.link}>
+          {link.label}
+        </Anchor>
+      </CustomLink>
     ))
 
     return (

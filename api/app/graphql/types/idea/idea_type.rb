@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class IdeaType < Types::BaseObject
+  class Idea::IdeaType < Types::BaseObject
     field :id, ID, null: false, description: 'アイデアID'
     field :user_id, Integer, null: false, description: 'ユーザーID'
     field :goal, String, description: 'ゴール'
@@ -30,5 +30,6 @@ module Types
     field :published_at, GraphQL::Types::ISO8601DateTime, description: '公開日'
 
     field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
+    field :idea_tags, [Types::TagType], null: true, description: 'タグオブジェクト'
   end
 end

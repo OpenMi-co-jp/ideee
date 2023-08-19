@@ -125,11 +125,8 @@ export const FooterForm = (footerData: FooterLinksProps) => {
 
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
-      <CustomLink key={index}
-        href={link.link}>
-        <Anchor className={classes.link}>
-          {link.label}
-        </Anchor>
+      <CustomLink key={index} href={link.link}>
+        <Anchor className={classes.link}>{link.label}</Anchor>
       </CustomLink>
     ))
 

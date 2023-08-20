@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -15,7 +15,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { data, loading } = testQuery()
-  const [isLogin, setLogin] = useState(true)
+  const [LSLoggedIn, setLSLoggedIn] = useState(false);
+  
+  useEffect(() => {
+    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true');
+  }, [])
   if (loading) return <p>Loading...</p>
 
   return (
@@ -26,12 +30,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {!isLogin && <MainVisual />}
+      {!LSLoggedIn && <MainVisual />}
       <NewIdea />
       <SearchTags />
-      {isLogin && <TeamIdea />}
-      {isLogin && <RealizedIdea />}
-      {!isLogin && <Philosophy />}
+      {LSLoggedIn && <TeamIdea />}
+      {LSLoggedIn && <RealizedIdea />}
+      {!LSLoggedIn && <Philosophy />}
     </>
   )
 }

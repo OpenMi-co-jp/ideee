@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Title, Text, Button } from '@mantine/core'
 
-const MainVisual = () => {
+const TopVision = () => {
   return (
     <>
       <div>
@@ -80,4 +80,4 @@ const MainVisual = () => {
   )
 }
 
-export default MainVisual
+export default TopVision

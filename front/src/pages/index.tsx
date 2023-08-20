@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import testQuery from '@/components/test'
-import MainVisual from '@/components/features/MainVisual'
+import TopVision from '@/components/features/TopVision'
 import SearchTags from '@/components/features/SearchTags'
 import Philosophy from '@/components/features/Philosophy'
 import TeamIdea from '@/components/features/TeamIdea'
@@ -30,7 +30,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {!LSLoggedIn && <MainVisual />}
+      {!LSLoggedIn && <TopVision />}
       <GetHotIdeas />
       <SearchTags />
       {LSLoggedIn && <TeamIdea />}

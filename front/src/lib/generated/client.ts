@@ -785,6 +785,7 @@ export type GetIdeaQuery = {
 
 export type GetIdeasQueryVariables = Exact<{
   searchCondition?: InputMaybe<SearchCondition>
+  sort?: InputMaybe<SortCondition>
 }>
 
 export type GetIdeasQuery = {
@@ -799,6 +800,7 @@ export type GetIdeasQuery = {
       difficulty?: string | null
       likesNum?: number | null
       view?: number | null
+      updatedAt: any
       publishedAt?: any | null
       user: {
         __typename?: 'User'
@@ -807,7 +809,11 @@ export type GetIdeasQuery = {
         icon?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
-      team?: { __typename?: 'Team'; status: string } | null
+      team?: {
+        __typename?: 'Team'
+        status: string
+        membersNum?: number | null
+      } | null
     }>
     pageInfo?: {
       __typename?: 'Pagination'
@@ -1422,8 +1428,8 @@ export type GetIdeaQueryResult = Apollo.QueryResult<
   GetIdeaQueryVariables
 >
 export const GetIdeasDocument = gql`
-  query GetIdeas($searchCondition: SearchCondition) {
-    ideas(searchCondition: $searchCondition) {
+  query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
+    ideas(searchCondition: $searchCondition, sort: $sort) {
       nodes {
         id
         name
@@ -1431,6 +1437,7 @@ export const GetIdeasDocument = gql`
         difficulty
         likesNum
         view
+        updatedAt
         publishedAt
         user {
           id
@@ -1442,6 +1449,7 @@ export const GetIdeasDocument = gql`
         }
         team {
           status
+          membersNum
         }
       }
       pageInfo {
@@ -1471,6 +1479,7 @@ export const GetIdeasDocument = gql`
  * const { data, loading, error } = useGetIdeasQuery({
  *   variables: {
  *      searchCondition: // value for 'searchCondition'
+ *      sort: // value for 'sort'
  *   },
  * });
  */

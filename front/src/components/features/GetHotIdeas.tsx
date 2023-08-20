@@ -7,7 +7,7 @@ const GetHotIdeas = () => {
   const { loading, data } = useQuery(getHotIdeas)
   if (loading) return <Text>loading・・・</Text>
   const Ideas = data.hotIdeas
-
+  console.log(Ideas)
   return (
     <>
       <Box
@@ -43,6 +43,7 @@ const GetHotIdeas = () => {
             return (
               <>
                 <Paper
+                  key={idea.id}
                   shadow="md"
                   radius="md"
                   p="md"
@@ -71,7 +72,7 @@ const GetHotIdeas = () => {
                   <Avatar
                     radius="xl"
                     size={24}
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80"
+                    src={idea.user?.icon}
                     style={{
                       marginTop: '25px',
                     }}

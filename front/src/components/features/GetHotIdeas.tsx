@@ -3,7 +3,7 @@ import { useGetHotIdeasQuery } from '@/lib/generated/client'
 
 const GetHotIdeas = () => {
   const { loading, data } = useGetHotIdeasQuery()
-  if(loading)return <p>Loading...</p>
+  if (loading) return <p>Loading...</p>
   const Ideas = data?.hotIdeas
   return (
     <>
@@ -38,42 +38,42 @@ const GetHotIdeas = () => {
         >
           {Ideas?.map((idea) => {
             return (
-                <Paper
-                  key={idea.id}
-                  shadow="md"
-                  radius="md"
-                  p="md"
+              <Paper
+                key={idea.id}
+                shadow="md"
+                radius="md"
+                p="md"
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  margin: '15px 45px',
+                }}
+              >
+                <Avatar
+                  radius="xl"
+                  size={60}
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    margin: '15px 45px',
+                    marginRight: '10px',
+                  }}
+                />
+                <Text
+                  style={{
+                    color: '#000',
+                    marginRight: '15px',
                   }}
                 >
-                  <Avatar
-                    radius="xl"
-                    size={60}
-                    style={{
-                      marginRight: '10px',
-                    }}
-                  />
-                  <Text
-                    style={{
-                      color: '#000',
-                      marginRight: '15px',
-                    }}
-                  >
-                    {idea.name}
-                  </Text>
-                  <Avatar
-                    radius="xl"
-                    size={24}
-                    src={idea.user?.icon}
-                    style={{
-                      marginTop: '25px',
-                    }}
-                  />
-                </Paper>
+                  {idea.name}
+                </Text>
+                <Avatar
+                  radius="xl"
+                  size={24}
+                  src={idea.user?.icon}
+                  style={{
+                    marginTop: '25px',
+                  }}
+                />
+              </Paper>
             )
           })}
         </Flex>

@@ -5,20 +5,20 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import testQuery from '@/components/test'
 import MainVisual from '@/components/features/MainVisual'
-import NewIdea from '@/components/features/NewIdea'
 import SearchTags from '@/components/features/SearchTags'
 import Philosophy from '@/components/features/Philosophy'
 import TeamIdea from '@/components/features/TeamIdea'
 import RealizedIdea from '@/components/features/RealizedIdea'
+import GetHotIdeas from '@/components/features/GetHotIdeas'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { data, loading } = testQuery()
-  const [LSLoggedIn, setLSLoggedIn] = useState(false);
-  
+  const [LSLoggedIn, setLSLoggedIn] = useState(false)
+
   useEffect(() => {
-    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true');
+    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
   }, [])
   if (loading) return <p>Loading...</p>
 
@@ -31,7 +31,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!LSLoggedIn && <MainVisual />}
-      <NewIdea />
+      <GetHotIdeas />
       <SearchTags />
       {LSLoggedIn && <TeamIdea />}
       {LSLoggedIn && <RealizedIdea />}

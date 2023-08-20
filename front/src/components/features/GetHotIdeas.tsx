@@ -7,7 +7,6 @@ const GetHotIdeas = () => {
   const { loading, data } = useQuery(getHotIdeas)
   if (loading) return <Text>loading・・・</Text>
   const Ideas = data.hotIdeas
-  console.log(Ideas)
   return (
     <>
       <Box

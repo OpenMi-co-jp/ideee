@@ -8,7 +8,7 @@ import TopVision from '@/components/features/TopVision'
 import GetPopularTags from '@/components/features/GetPopularTags'
 import Philosophy from '@/components/features/Philosophy'
 import GetActiveTeamIdeas from '@/components/features/GetActiveTeamIdeas'
-import RealizedIdea from '@/components/features/RealizedIdea'
+import GetDeployedIdeas from '@/components/features/GetDeployedIdeas'
 import GetHotIdeas from '@/components/features/GetHotIdeas'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -34,7 +34,7 @@ export default function Home() {
       <GetHotIdeas />
       <GetPopularTags />
       {LSLoggedIn && <GetActiveTeamIdeas />}
-      {LSLoggedIn && <RealizedIdea />}
+      {LSLoggedIn && <GetDeployedIdeas />}
       {!LSLoggedIn && <Philosophy />}
     </>
   )

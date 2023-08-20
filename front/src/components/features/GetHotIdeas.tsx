@@ -22,11 +22,7 @@ const GetHotIdeas = () => {
         <Title
           style={{
             color: '#DCCC39',
-            fontFamily: 'Inter',
             fontSize: '28px',
-            fontStyle: 'normal',
-            fontWeight: 800,
-            lineHeight: 'normal',
             marginTop: '24px',
             marginLeft: '80px',
             marginBottom: '15px',
@@ -67,11 +63,6 @@ const GetHotIdeas = () => {
                   <Text
                     style={{
                       color: '#000',
-                      fontFamily: 'Inter',
-                      fontSize: '25px',
-                      fontStyle: 'normal',
-                      fontWeight: 300,
-                      lineHeight: 'normal',
                       marginRight: '15px',
                     }}
                   >

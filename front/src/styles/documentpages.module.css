@@ -1,0 +1,24 @@
+.documentContainer{
+  padding: 50px 20px 50px 20px;
+}
+
+.documentLabel{
+  font-size: 25px;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.documentText{
+  font-size: 5px;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-display: swap;
+  
+}
+
+.documentWraper{
+  margin: 16px 30px 16px 20px;
+  background-color: rgba(244, 242, 242, 0.879);
+}

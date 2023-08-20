@@ -6,7 +6,6 @@ const GetActiveTeamIdeas = () => {
   const { loading, data } = useGetActiveTeamIdeasQuery()
   if (loading) return <p>Loading...</p>
   const TeamIdeas = data?.activeTeamIdeas
-  console.log(TeamIdeas)
   return (
     <>
       <Box

@@ -7,7 +7,7 @@ import testQuery from '@/components/test'
 import TopVision from '@/components/features/TopVision'
 import GetPopularTags from '@/components/features/GetPopularTags'
 import Philosophy from '@/components/features/Philosophy'
-import TeamIdea from '@/components/features/TeamIdea'
+import GetActiveTeamIdeas from '@/components/features/GetActiveTeamIdeas'
 import RealizedIdea from '@/components/features/RealizedIdea'
 import GetHotIdeas from '@/components/features/GetHotIdeas'
 
@@ -33,7 +33,7 @@ export default function Home() {
       {!LSLoggedIn && <TopVision />}
       <GetHotIdeas />
       <GetPopularTags />
-      {LSLoggedIn && <TeamIdea />}
+      {LSLoggedIn && <GetActiveTeamIdeas />}
       {LSLoggedIn && <RealizedIdea />}
       {!LSLoggedIn && <Philosophy />}
     </>

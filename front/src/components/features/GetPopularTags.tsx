@@ -12,18 +12,13 @@ const GetPopularTags = () => {
         style={{
           borderRadius: '20px',
           border: '3px solid #000',
-          background: '#FFFCFC',
           margin: '50px 35px 50px 35px',
         }}
       >
         <Title
           style={{
             color: '#ABA096FA',
-            fontFamily: 'Inter',
             fontSize: '28px',
-            fontStyle: 'normal',
-            fontWeight: 800,
-            lineHeight: 'normal',
             marginTop: '24px',
             marginLeft: '80px',
             marginBottom: '15px',

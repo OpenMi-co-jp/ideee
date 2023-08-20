@@ -1,12 +1,10 @@
-import { useQuery } from '@apollo/client'
-import { getHotIdeas } from './getHotIdeas'
 import { Box, Title, Text, Paper, Avatar, Flex } from '@mantine/core'
-import { Idea } from '@/types/idea'
+import { useGetHotIdeasQuery } from '@/lib/generated/client'
 
 const GetHotIdeas = () => {
-  const { loading, data } = useQuery(getHotIdeas)
-  if (loading) return <Text>loading・・・</Text>
-  const Ideas = data.hotIdeas
+  const { loading, data } = useGetHotIdeasQuery()
+  if(loading)return <p>Loading...</p>
+  const Ideas = data?.hotIdeas
   return (
     <>
       <Box
@@ -38,9 +36,8 @@ const GetHotIdeas = () => {
             margin: '15px 0 25px 0',
           }}
         >
-          {Ideas.map((idea: Idea) => {
+          {Ideas?.map((idea) => {
             return (
-              <>
                 <Paper
                   key={idea.id}
                   shadow="md"
@@ -77,7 +74,6 @@ const GetHotIdeas = () => {
                     }}
                   />
                 </Paper>
-              </>
             )
           })}
         </Flex>

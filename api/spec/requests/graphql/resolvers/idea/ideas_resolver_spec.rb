@@ -6,8 +6,8 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
 
     let(:query) do
       <<-GRAPHQL
-        query($searchCondition: SearchCondition) {
-          ideas(searchCondition: $searchCondition) {
+        query($searchCondition: SearchCondition, $sort: SortCondition) {
+          ideas(searchCondition: $searchCondition, sort: $sort) {
             nodes {
               id
               name
@@ -15,6 +15,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
               difficulty
               likesNum
               view
+              updatedAt
               publishedAt
               user {
                 id
@@ -26,6 +27,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
               }
               team {
                 status
+                membersNum
               }
             }
             pageInfo {
@@ -43,9 +45,9 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
       GRAPHQL
     end
 
-    before { create(:idea) }
-
     describe '検索条件' do
+      before { create(:idea) }
+
       context '名前かタグ名で検索する場合' do
         before { create(:idea, name: 'テスト1') }
 
@@ -128,6 +130,140 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
           res_json = response.parsed_body
           expect(res_json['data']['ideas']['nodes'].length).to eq 1
           expect(Date.parse(res_json['data']['ideas']['nodes'].first['publishedAt'])).to be >= idea.published_at.to_date
+        end
+      end
+    end
+
+    describe '並び替え条件' do
+      let!(:poor_idea) do
+        create(
+          :idea,
+          likes_num: 1,
+          comments_num: 1,
+          view: 1,
+          published_at: 5.days.ago,
+          updated_at: 5.days.ago
+        )
+      end
+      let!(:oldest_idea) do
+        create(
+          :idea,
+          likes_num: 2,
+          comments_num: 2,
+          view: 2,
+          published_at: 10.days.ago,
+          updated_at: 10.days.ago
+        )
+      end
+      let!(:popular_idea) do
+        create(
+          :idea,
+          likes_num: 3,
+          comments_num: 3,
+          view: 3,
+          published_at: 3.days.ago,
+          updated_at: 3.days.ago
+        )
+      end
+
+      before do
+        create(:team, idea: poor_idea, owner: poor_idea.user, members_num: 1)
+        create(:team, idea: oldest_idea, owner: oldest_idea.user, members_num: 2)
+        create(:team, idea: popular_idea, owner: popular_idea.user, members_num: 3)
+      end
+
+      context 'デフォルトのlikes_num descでソートする場合' do
+        let(:variables) do
+          {
+            searchCondition: {}
+          }
+        end
+
+        it 'likes_numを降順に並び替えること' do
+          expect(graphql_post).to eq 200
+          res_json = response.parsed_body
+          expect(res_json['data']['ideas']['nodes'].length).to eq 3
+          expect(res_json['data']['ideas']['nodes'].first['likesNum']).to eq popular_idea.likes_num
+        end
+      end
+
+      context 'comments_num ascでソートする場合' do
+        let(:variables) do
+          {
+            searchCondition: {},
+            sort: { columnName: 'comments_num', order: 'asc' }
+          }
+        end
+
+        it 'comments_numを昇順に並び替えること' do
+          expect(graphql_post).to eq 200
+          res_json = response.parsed_body
+          expect(res_json['data']['ideas']['nodes'].length).to eq 3
+          expect(res_json['data']['ideas']['nodes'].first['commentsNum']).to eq poor_idea.comments_num
+        end
+      end
+
+      context 'view ascでソートする場合' do
+        let(:variables) do
+          {
+            searchCondition: {},
+            sort: { columnName: 'view', order: 'asc' }
+          }
+        end
+
+        it 'viewを昇順に並び替えること' do
+          expect(graphql_post).to eq 200
+          res_json = response.parsed_body
+          expect(res_json['data']['ideas']['nodes'].length).to eq 3
+          expect(res_json['data']['ideas']['nodes'].first['view']).to eq poor_idea.view
+        end
+      end
+
+      context 'published_at descでソートする場合' do
+        let(:variables) do
+          {
+            searchCondition: {},
+            sort: { columnName: 'published_at', order: 'asc' }
+          }
+        end
+
+        it 'published_atを降順に並び替えること' do
+          expect(graphql_post).to eq 200
+          res_json = response.parsed_body
+          expect(res_json['data']['ideas']['nodes'].length).to eq 3
+          expect(res_json['data']['ideas']['nodes'].first['publishedAt']).to eq oldest_idea.published_at.iso8601
+        end
+      end
+
+      context 'updated_at ascでソートする場合' do
+        let(:variables) do
+          {
+            searchCondition: {},
+            sort: { columnName: 'updated_at', order: 'asc' }
+          }
+        end
+
+        it 'updated_atを昇順に並び替えること' do
+          expect(graphql_post).to eq 200
+          res_json = response.parsed_body
+          expect(res_json['data']['ideas']['nodes'].length).to eq 3
+          expect(res_json['data']['ideas']['nodes'].first['updatedAt']).to eq popular_idea.updated_at.iso8601
+        end
+      end
+
+      context 'team_members_num ascでソートする場合' do
+        let(:variables) do
+          {
+            searchCondition: {},
+            sort: { columnName: 'team_members_num', order: 'asc' }
+          }
+        end
+
+        it 'team_members_numを昇順に並び替えること' do
+          expect(graphql_post).to eq 200
+          res_json = response.parsed_body
+          expect(res_json['data']['ideas']['nodes'].length).to eq 3
+          expect(res_json['data']['ideas']['nodes'].first['team']['membersNum']).to eq poor_idea.team.members_num
         end
       end
     end

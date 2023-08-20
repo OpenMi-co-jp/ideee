@@ -7,8 +7,8 @@ query GetIdea($id: ID!) {
   }
 }
 
-query GetIdeas($searchCondition: SearchCondition) {
-  ideas(searchCondition: $searchCondition) {
+query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
+  ideas(searchCondition: $searchCondition, sort: $sort) {
     nodes {
       id
       name
@@ -16,6 +16,7 @@ query GetIdeas($searchCondition: SearchCondition) {
       difficulty
       likesNum
       view
+      updatedAt
       publishedAt
       user {
         id
@@ -27,6 +28,7 @@ query GetIdeas($searchCondition: SearchCondition) {
       }
       team {
         status
+        membersNum
       }
     }
     pageInfo {

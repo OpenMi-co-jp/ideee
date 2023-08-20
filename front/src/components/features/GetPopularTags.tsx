@@ -39,6 +39,7 @@ const GetPopularTags = () => {
             {Tags?.map((tag) => {
               return (
                 <Badge
+                  key={tag.id}
                   size="xl"
                   radius="sm"
                   variant="filled"

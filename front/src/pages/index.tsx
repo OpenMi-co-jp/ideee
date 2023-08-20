@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import testQuery from '@/components/test'
 import TopVision from '@/components/features/TopVision'
-import SearchTags from '@/components/features/SearchTags'
+import GetPopularTags from '@/components/features/GetPopularTags'
 import Philosophy from '@/components/features/Philosophy'
 import TeamIdea from '@/components/features/TeamIdea'
 import RealizedIdea from '@/components/features/RealizedIdea'
@@ -32,7 +32,7 @@ export default function Home() {
       </Head>
       {!LSLoggedIn && <TopVision />}
       <GetHotIdeas />
-      <SearchTags />
+      <GetPopularTags />
       {LSLoggedIn && <TeamIdea />}
       {LSLoggedIn && <RealizedIdea />}
       {!LSLoggedIn && <Philosophy />}

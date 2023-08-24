@@ -486,6 +486,24 @@ type Query {
   notifications: [Notification!]!
 
   """
+<<<<<<< HEAD
+=======
+  人気のタグ一覧
+  """
+  popularTags: [Tag!]!
+
+  """
+  ルームオブジェクト
+  """
+  room(
+    """
+    ルーム検索ID
+    """
+    id: ID!
+  ): Room!
+
+  """
+>>>>>>> 0b2bd7e5 (set: roomのresolverを設定)
   チームオブジェクト
   """
   team(
@@ -511,6 +529,53 @@ type Query {
   users: [User!]!
 }
 
+<<<<<<< HEAD
+=======
+type Room {
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  ルームID
+  """
+  id: ID!
+
+  """
+  チームID
+  """
+  teamId: Int
+
+  """
+  更新日
+  """
+  updatedAt: ISO8601DateTime!
+}
+
+type Tag {
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  タグID
+  """
+  id: ID!
+
+  """
+  タグ名
+  """
+  name: String!
+
+  """
+  更新日
+  """
+  updatedAt: ISO8601DateTime!
+}
+
+>>>>>>> 0b2bd7e5 (set: roomのresolverを設定)
 type Team {
   """
   作成日

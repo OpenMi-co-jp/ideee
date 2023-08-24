@@ -264,6 +264,8 @@ export type Query = {
   notifications: Array<Notification>
   /** 人気のタグ一覧 */
   popularTags: Array<Tag>
+  /** ルームオブジェクト */
+  room: Room
   /** チームオブジェクト */
   team: Team
   /** ユーザーオブジェクト */
@@ -276,12 +278,28 @@ export type QueryIdeaArgs = {
   id: Scalars['ID']
 }
 
+export type QueryRoomArgs = {
+  id: Scalars['ID']
+}
+
 export type QueryTeamArgs = {
   id: Scalars['ID']
 }
 
 export type QueryUserArgs = {
   id: Scalars['ID']
+}
+
+export type Room = {
+  __typename?: 'Room'
+  /** 作成日 */
+  createdAt: Scalars['ISO8601DateTime']
+  /** ルームID */
+  id: Scalars['ID']
+  /** チームID */
+  teamId?: Maybe<Scalars['Int']>
+  /** 更新日 */
+  updatedAt: Scalars['ISO8601DateTime']
 }
 
 export type Tag = {
@@ -555,6 +573,21 @@ export type GetNotificationsQuery = {
     notificatableId?: number | null
     notificatableType?: string | null
   }>
+}
+
+export type GetRoomQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type GetRoomQuery = {
+  __typename?: 'Query'
+  room: {
+    __typename?: 'Room'
+    id: string
+    teamId?: number | null
+    createdAt: any
+    updatedAt: any
+  }
 }
 
 export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
@@ -1160,6 +1193,57 @@ export type GetNotificationsLazyQueryHookResult = ReturnType<
 export type GetNotificationsQueryResult = Apollo.QueryResult<
   GetNotificationsQuery,
   GetNotificationsQueryVariables
+>
+export const GetRoomDocument = gql`
+  query GetRoom($id: ID!) {
+    room(id: $id) {
+      id
+      teamId
+      createdAt
+      updatedAt
+    }
+  }
+`
+
+/**
+ * __useGetRoomQuery__
+ *
+ * To run a query within a React component, call `useGetRoomQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRoomQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRoomQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetRoomQuery(
+  baseOptions: Apollo.QueryHookOptions<GetRoomQuery, GetRoomQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetRoomQuery, GetRoomQueryVariables>(
+    GetRoomDocument,
+    options
+  )
+}
+export function useGetRoomLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetRoomQuery, GetRoomQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetRoomQuery, GetRoomQueryVariables>(
+    GetRoomDocument,
+    options
+  )
+}
+export type GetRoomQueryHookResult = ReturnType<typeof useGetRoomQuery>
+export type GetRoomLazyQueryHookResult = ReturnType<typeof useGetRoomLazyQuery>
+export type GetRoomQueryResult = Apollo.QueryResult<
+  GetRoomQuery,
+  GetRoomQueryVariables
 >
 export const GetPopularTagsDocument = gql`
   query GetPopularTags {

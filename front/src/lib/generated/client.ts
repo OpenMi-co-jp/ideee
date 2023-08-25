@@ -250,12 +250,22 @@ export type Notification = {
 
 export type Query = {
   __typename?: 'Query'
+  /** チーム開発募集中のアイデア一覧 */
+  activeTeamIdeas: Array<Idea>
+  /** 実現したアイデア一覧 */
+  deployedIdeas: Array<Idea>
+  /** ホットなアイデア一覧 */
+  hotIdeas: Array<Idea>
   /** アイデアオブジェクト */
   idea: Idea
   /** アイデア一覧 */
   ideas: Array<Idea>
   /** 通知一覧 */
   notifications: Array<Notification>
+  /** 人気のタグ一覧 */
+  popularTags: Array<Tag>
+  /** ルームオブジェクト */
+  room: Room
   /** チームオブジェクト */
   team: Team
   /** ユーザーオブジェクト */
@@ -268,12 +278,40 @@ export type QueryIdeaArgs = {
   id: Scalars['ID']
 }
 
+export type QueryRoomArgs = {
+  id: Scalars['ID']
+}
+
 export type QueryTeamArgs = {
   id: Scalars['ID']
 }
 
 export type QueryUserArgs = {
   id: Scalars['ID']
+}
+
+export type Room = {
+  __typename?: 'Room'
+  /** 作成日 */
+  createdAt: Scalars['ISO8601DateTime']
+  /** ルームID */
+  id: Scalars['ID']
+  /** チームID */
+  teamId?: Maybe<Scalars['Int']>
+  /** 更新日 */
+  updatedAt: Scalars['ISO8601DateTime']
+}
+
+export type Tag = {
+  __typename?: 'Tag'
+  /** 作成日 */
+  createdAt: Scalars['ISO8601DateTime']
+  /** タグID */
+  id: Scalars['ID']
+  /** タグ名 */
+  name: Scalars['String']
+  /** 更新日 */
+  updatedAt: Scalars['ISO8601DateTime']
 }
 
 export type Team = {
@@ -438,6 +476,42 @@ export type GetIdeasQuery = {
   }>
 }
 
+export type GetHotIdeasQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetHotIdeasQuery = {
+  __typename?: 'Query'
+  hotIdeas: Array<{
+    __typename?: 'Idea'
+    id: string
+    name?: string | null
+    user: { __typename?: 'User'; icon?: string | null }
+  }>
+}
+
+export type GetDeployedIdeasQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetDeployedIdeasQuery = {
+  __typename?: 'Query'
+  deployedIdeas: Array<{
+    __typename?: 'Idea'
+    id: string
+    name?: string | null
+    user: { __typename?: 'User'; icon?: string | null }
+  }>
+}
+
+export type GetActiveTeamIdeasQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetActiveTeamIdeasQuery = {
+  __typename?: 'Query'
+  activeTeamIdeas: Array<{
+    __typename?: 'Idea'
+    id: string
+    name?: string | null
+    user: { __typename?: 'User'; icon?: string | null }
+  }>
+}
+
 export type CreateIdeaMutationVariables = Exact<{
   input: CreateIdeaInput
 }>
@@ -499,6 +573,28 @@ export type GetNotificationsQuery = {
     notificatableId?: number | null
     notificatableType?: string | null
   }>
+}
+
+export type GetRoomQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type GetRoomQuery = {
+  __typename?: 'Query'
+  room: {
+    __typename?: 'Room'
+    id: string
+    teamId?: number | null
+    createdAt: any
+    updatedAt: any
+  }
+}
+
+export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetPopularTagsQuery = {
+  __typename?: 'Query'
+  popularTags: Array<{ __typename?: 'Tag'; name: string }>
 }
 
 export type GetTeamQueryVariables = Exact<{
@@ -693,6 +789,187 @@ export type GetIdeasLazyQueryHookResult = ReturnType<
 export type GetIdeasQueryResult = Apollo.QueryResult<
   GetIdeasQuery,
   GetIdeasQueryVariables
+>
+export const GetHotIdeasDocument = gql`
+  query GetHotIdeas {
+    hotIdeas {
+      id
+      name
+      user {
+        icon
+      }
+    }
+  }
+`
+
+/**
+ * __useGetHotIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetHotIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetHotIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetHotIdeasQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetHotIdeasQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetHotIdeasQuery,
+    GetHotIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetHotIdeasQuery, GetHotIdeasQueryVariables>(
+    GetHotIdeasDocument,
+    options
+  )
+}
+export function useGetHotIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetHotIdeasQuery,
+    GetHotIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetHotIdeasQuery, GetHotIdeasQueryVariables>(
+    GetHotIdeasDocument,
+    options
+  )
+}
+export type GetHotIdeasQueryHookResult = ReturnType<typeof useGetHotIdeasQuery>
+export type GetHotIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetHotIdeasLazyQuery
+>
+export type GetHotIdeasQueryResult = Apollo.QueryResult<
+  GetHotIdeasQuery,
+  GetHotIdeasQueryVariables
+>
+export const GetDeployedIdeasDocument = gql`
+  query GetDeployedIdeas {
+    deployedIdeas {
+      id
+      name
+      user {
+        icon
+      }
+    }
+  }
+`
+
+/**
+ * __useGetDeployedIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetDeployedIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDeployedIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDeployedIdeasQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetDeployedIdeasQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetDeployedIdeasQuery,
+    GetDeployedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>(
+    GetDeployedIdeasDocument,
+    options
+  )
+}
+export function useGetDeployedIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetDeployedIdeasQuery,
+    GetDeployedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    GetDeployedIdeasQuery,
+    GetDeployedIdeasQueryVariables
+  >(GetDeployedIdeasDocument, options)
+}
+export type GetDeployedIdeasQueryHookResult = ReturnType<
+  typeof useGetDeployedIdeasQuery
+>
+export type GetDeployedIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetDeployedIdeasLazyQuery
+>
+export type GetDeployedIdeasQueryResult = Apollo.QueryResult<
+  GetDeployedIdeasQuery,
+  GetDeployedIdeasQueryVariables
+>
+export const GetActiveTeamIdeasDocument = gql`
+  query GetActiveTeamIdeas {
+    activeTeamIdeas {
+      id
+      name
+      user {
+        icon
+      }
+    }
+  }
+`
+
+/**
+ * __useGetActiveTeamIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetActiveTeamIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetActiveTeamIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetActiveTeamIdeasQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetActiveTeamIdeasQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetActiveTeamIdeasQuery,
+    GetActiveTeamIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<
+    GetActiveTeamIdeasQuery,
+    GetActiveTeamIdeasQueryVariables
+  >(GetActiveTeamIdeasDocument, options)
+}
+export function useGetActiveTeamIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetActiveTeamIdeasQuery,
+    GetActiveTeamIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    GetActiveTeamIdeasQuery,
+    GetActiveTeamIdeasQueryVariables
+  >(GetActiveTeamIdeasDocument, options)
+}
+export type GetActiveTeamIdeasQueryHookResult = ReturnType<
+  typeof useGetActiveTeamIdeasQuery
+>
+export type GetActiveTeamIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetActiveTeamIdeasLazyQuery
+>
+export type GetActiveTeamIdeasQueryResult = Apollo.QueryResult<
+  GetActiveTeamIdeasQuery,
+  GetActiveTeamIdeasQueryVariables
 >
 export const CreateIdeaDocument = gql`
   mutation CreateIdea($input: CreateIdeaInput!) {
@@ -916,6 +1193,114 @@ export type GetNotificationsLazyQueryHookResult = ReturnType<
 export type GetNotificationsQueryResult = Apollo.QueryResult<
   GetNotificationsQuery,
   GetNotificationsQueryVariables
+>
+export const GetRoomDocument = gql`
+  query GetRoom($id: ID!) {
+    room(id: $id) {
+      id
+      teamId
+      createdAt
+      updatedAt
+    }
+  }
+`
+
+/**
+ * __useGetRoomQuery__
+ *
+ * To run a query within a React component, call `useGetRoomQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRoomQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRoomQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetRoomQuery(
+  baseOptions: Apollo.QueryHookOptions<GetRoomQuery, GetRoomQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetRoomQuery, GetRoomQueryVariables>(
+    GetRoomDocument,
+    options
+  )
+}
+export function useGetRoomLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetRoomQuery, GetRoomQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetRoomQuery, GetRoomQueryVariables>(
+    GetRoomDocument,
+    options
+  )
+}
+export type GetRoomQueryHookResult = ReturnType<typeof useGetRoomQuery>
+export type GetRoomLazyQueryHookResult = ReturnType<typeof useGetRoomLazyQuery>
+export type GetRoomQueryResult = Apollo.QueryResult<
+  GetRoomQuery,
+  GetRoomQueryVariables
+>
+export const GetPopularTagsDocument = gql`
+  query GetPopularTags {
+    popularTags {
+      name
+    }
+  }
+`
+
+/**
+ * __useGetPopularTagsQuery__
+ *
+ * To run a query within a React component, call `useGetPopularTagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPopularTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPopularTagsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPopularTagsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetPopularTagsQuery,
+    GetPopularTagsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetPopularTagsQuery, GetPopularTagsQueryVariables>(
+    GetPopularTagsDocument,
+    options
+  )
+}
+export function useGetPopularTagsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetPopularTagsQuery,
+    GetPopularTagsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetPopularTagsQuery, GetPopularTagsQueryVariables>(
+    GetPopularTagsDocument,
+    options
+  )
+}
+export type GetPopularTagsQueryHookResult = ReturnType<
+  typeof useGetPopularTagsQuery
+>
+export type GetPopularTagsLazyQueryHookResult = ReturnType<
+  typeof useGetPopularTagsLazyQuery
+>
+export type GetPopularTagsQueryResult = Apollo.QueryResult<
+  GetPopularTagsQuery,
+  GetPopularTagsQueryVariables
 >
 export const GetTeamDocument = gql`
   query GetTeam($id: ID!) {

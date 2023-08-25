@@ -28,7 +28,7 @@
           <p><b>エンジニア：</b>需要のあるアイデアが手に入り、人助けができる</p>
         </div>
         <div class="modal-footer">
-          <%= link_to 'もっと見る', about_path, class: 'waves-effect waves-orange orange lighten-2 btn' %>
+          <%= link_to 'もっと見る', root_path, class: 'waves-effect waves-orange orange lighten-2 btn' %>
         </div>
       </div>
     <% end %>
@@ -40,16 +40,13 @@
             icon_mark: '💬',
             board_title: '今月のコメントが多いアイデア',
             path: search_ideas_path("q[s]": "comments_num desc", "q[published_at_gteq]": Date.today.prev_month) %>
-          <%= render_async most_comment_ideas_path %>
           <%= render 'ideas/index/ranking_head',
             icon_mark: '💛',
             board_title: '今月のハートが多いアイデア',
             path: search_ideas_path("q[published_at_gteq]": Date.today.prev_month) %>
-          <%= render_async most_liked_ideas_path %>
         </div>
       </div>
       <div class="col s12 l4">
-        <%= render_async tags_popular_path %>
         <%= render 'ideas/index/featured_users',
           icon: '🚀',
           title: '今週の注目コメンテーター',
@@ -69,12 +66,10 @@
             icon_mark: tag.i('groups', class: 'material-icons'),
             board_title: 'チーム開発募集中のアイデア',
             path: search_ideas_path("q[team_status_eq]": 0) %>
-          <%= render_async team_active_ideas_path %>
           <%= render 'ideas/index/ranking_head',
             icon_mark: tag.i('check_circle', class: 'material-icons'),
             board_title: '実現したアイデア',
             path: search_ideas_path("q[product_apply_eq]": 2) %>
-          <%= render_async deployed_ideas_path %>
         </div>
       </div>
     </div>

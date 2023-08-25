@@ -69,7 +69,7 @@ class Idea < ApplicationRecord
   scope :drafts, -> { where draft: true }
   scope :most_liked, -> { preload(:idea_tags).order(likes_num: 'DESC') }
   scope :most_commented, -> { preload(:idea_tags).order(comments_num: 'DESC') }
-  scope :recent_select, -> { where(published_at: 30.days.ago..Time.zone.now) }
+  scope :recent_select, -> { where(published_at: 40.days.ago..Time.zone.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
@@ -129,7 +129,7 @@ class Idea < ApplicationRecord
   def send_draft_remind
     return unless Rails.env.production? || draft
 
-    RemindDraftJob.set(wait: 1.week).perform_now(id)
+    RemindDraftJob.set(wait: 1.week).perform_later(id)
   end
 
   def voted_percentage(level)

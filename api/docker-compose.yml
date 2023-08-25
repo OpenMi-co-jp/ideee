@@ -10,7 +10,7 @@ services:
       - "4306:3306"
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/ideee
       - bundle_data:/usr/local/bundle
@@ -34,17 +34,6 @@ services:
       - redis:/data
     ports:
       - 6379:6379
-  sidekiq:
-    build: .
-    command: bundle exec sidekiq
-    volumes:
-      - .:/ideee
-      - bundle_data:/usr/local/bundle
-    depends_on:
-      - db
-      - redis
-    environment:
-      REDIS_URL: redis://redis:6379
 # 永続化領域
 volumes:
   bundle_data:

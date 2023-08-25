@@ -100,10 +100,10 @@ namespace :auto_update_qiita_post do
     begin
       response = client.patch(url, header:, body:) # headerとqueryを指定
       # HTTPステータスコードを表示
-      puts "Get stocks Status code #{response.code.to_i}"
+      Rails.logger.info "Get stocks Status code #{response.code.to_i}"
       SlackNotifier.new.send_error_report('Qiita自動投稿', response.http_header.reason_phrase) if response.code.to_i != 200
     rescue StandardError => e
-      puts "============rescue error #{e}========"
+      Rails.logger.error "============rescue error #{e}========"
       SlackNotifier.new.send_error_report('Qiita自動投稿', e)
     end
   end

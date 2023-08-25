@@ -1,6 +1,11 @@
 import client from './client'
 import Cookies from 'js-cookie'
-import type { SignUpFormValues, SignInFormValues } from '@/types/user'
+import type {
+  SignUpFormValues,
+  SignInFormValues,
+  ResetPasswordFormValues,
+  ForgotPasswordFormValues,
+} from '@/types/user'
 
 export const signUp = (props: SignUpFormValues) => {
   return client.post('/auth', props, {
@@ -22,5 +27,44 @@ export const signOut = () => {
       'Content-Type': 'application/json',
       authorization: authorization || '',
     },
+  })
+}
+
+export const passwordReset = (props: ResetPasswordFormValues) => {
+  const userClient = Cookies.get('client')
+  const uid = Cookies.get('uid')
+  const accessToken = Cookies.get('accessToken')
+  const { password, passwordConfirmation } = props
+
+  return client.put(
+    '/auth/password',
+    { password, password_confirmation: passwordConfirmation },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'access-token': accessToken,
+        client: userClient,
+        uid,
+      },
+    }
+  )
+}
+
+export const passwordForgot = (props: ForgotPasswordFormValues) => {
+  const { email } = props
+  const redirect_url = process.env.NEXT_PUBLIC_FRONT_URL + 'reset_password'
+
+  return client.post(
+    '/auth/password',
+    { email, redirect_url },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  )
+}
+
+export const confirmResend = (props: ForgotPasswordFormValues) => {
+  return client.post('/auth/confirmation', props, {
+    headers: { 'Content-Type': 'application/json' },
   })
 }

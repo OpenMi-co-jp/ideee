@@ -1,10 +1,10 @@
 import React from 'react'
-import { Box, Title, Badge, Flex } from '@mantine/core'
+import { Box, Title, Badge, Flex, Loader } from '@mantine/core'
 import { useGetPopularTagsQuery } from '@/lib/generated/client'
 
 const GetPopularTags = () => {
   const { loading, data } = useGetPopularTagsQuery()
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader color="yellow" />;
   const Tags = data?.popularTags
   return (
     <>

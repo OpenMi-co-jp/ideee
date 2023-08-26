@@ -1,10 +1,10 @@
 import React from 'react'
-import { Box, Title, Text, Paper, Avatar, Flex } from '@mantine/core'
+import { Box, Title, Text, Paper, Avatar, Flex, Loader } from '@mantine/core'
 import { useGetActiveTeamIdeasQuery } from '@/lib/generated/client'
 
 const GetActiveTeamIdeas = () => {
   const { loading, data } = useGetActiveTeamIdeasQuery()
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader color="yellow" />;
   const TeamIdeas = data?.activeTeamIdeas
   return (
     <>

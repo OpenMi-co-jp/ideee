@@ -1,9 +1,9 @@
-import { Box, Title, Text, Paper, Avatar, Flex } from '@mantine/core'
+import { Box, Title, Text, Paper, Avatar, Flex, Loader } from '@mantine/core'
 import { useGetHotIdeasQuery } from '@/lib/generated/client'
 
 const GetHotIdeas = () => {
   const { loading, data } = useGetHotIdeasQuery()
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader color="yellow" />;
   const Ideas = data?.hotIdeas
   return (
     <>

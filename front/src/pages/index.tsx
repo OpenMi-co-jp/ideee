@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
   }, [])
-  if (loading) return <Loader color="yellow" />;
+  if (loading) return <Loader color="yellow" />
 
   return (
     <>

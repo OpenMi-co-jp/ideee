@@ -4,7 +4,7 @@ import { useGetPopularTagsQuery } from '@/lib/generated/client'
 
 const GetPopularTags = () => {
   const { loading, data } = useGetPopularTagsQuery()
-  if (loading) return <Loader color="yellow" />;
+  if (loading) return <Loader color="yellow" />
   const Tags = data?.popularTags
   return (
     <>

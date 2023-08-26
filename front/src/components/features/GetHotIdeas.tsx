@@ -3,7 +3,7 @@ import { useGetHotIdeasQuery } from '@/lib/generated/client'
 
 const GetHotIdeas = () => {
   const { loading, data } = useGetHotIdeasQuery()
-  if (loading) return <Loader color="yellow" />;
+  if (loading) return <Loader color="yellow" />
   const Ideas = data?.hotIdeas
   return (
     <>

@@ -4,7 +4,7 @@ import { useGetActiveTeamIdeasQuery } from '@/lib/generated/client'
 
 const GetActiveTeamIdeas = () => {
   const { loading, data } = useGetActiveTeamIdeasQuery()
-  if (loading) return <Loader color="yellow" />;
+  if (loading) return <Loader color="yellow" />
   const TeamIdeas = data?.activeTeamIdeas
   return (
     <>

@@ -25,7 +25,7 @@ export const footerData = {
           label: 'よくある質問',
           link: 'https://www.ideee.tech/frequent_questions',
         },
-        { label: '利用規約', link: '/documentpages/termOfService' },
+        { label: '利用規約', link: '/documentpages/termofservice' },
         {
           label: 'プライバシーポリシー',
           link: 'https://www.ideee.tech/privacy_policy',

@@ -506,6 +506,16 @@ type Query {
   popularTags: [Tag!]!
 
   """
+  ルームオブジェクト
+  """
+  room(
+    """
+    ルーム検索ID
+    """
+    id: ID!
+  ): Room!
+
+  """
   チームオブジェクト
   """
   team(
@@ -529,6 +539,28 @@ type Query {
   ユーザー一覧
   """
   users: [User!]!
+}
+
+type Room {
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  ルームID
+  """
+  id: ID!
+
+  """
+  チームID
+  """
+  teamId: Int
+
+  """
+  更新日
+  """
+  updatedAt: ISO8601DateTime!
 }
 
 type Tag {

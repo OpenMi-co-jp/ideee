@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import testQuery from '@/components/test'
 import TopVision from '@/components/features/TopVision'
 import GetPopularTags from '@/components/features/GetPopularTags'
@@ -10,6 +8,7 @@ import Philosophy from '@/components/features/Philosophy'
 import GetActiveTeamIdeas from '@/components/features/GetActiveTeamIdeas'
 import GetDeployedIdeas from '@/components/features/GetDeployedIdeas'
 import GetHotIdeas from '@/components/features/GetHotIdeas'
+import { Loader } from '@mantine/core'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
   }, [])
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader color="yellow" />;
 
   return (
     <>
@@ -33,8 +32,8 @@ export default function Home() {
       {!LSLoggedIn && <TopVision />}
       <GetHotIdeas />
       <GetPopularTags />
-      {LSLoggedIn && <GetActiveTeamIdeas />}
-      {LSLoggedIn && <GetDeployedIdeas />}
+      <GetActiveTeamIdeas />
+      <GetDeployedIdeas />
       {!LSLoggedIn && <Philosophy />}
     </>
   )

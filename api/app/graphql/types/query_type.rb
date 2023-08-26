@@ -17,13 +17,11 @@ module Types
 
     field :team, resolver: Resolvers::Team::TeamResolver, description: 'チームオブジェクト'
 
-<<<<<<< HEAD
     field :comment, resolver: Resolvers::Comment::CommentResolver, description: 'コメントオブジェクト'
     field :comments, resolver: Resolvers::Comment::CommentsResolver, description: 'コメント一覧'
-=======
+
     field :room, resolver: Resolvers::Room::RoomResolver, description: 'ルームオブジェクト'
 
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'
->>>>>>> release
   end
 end

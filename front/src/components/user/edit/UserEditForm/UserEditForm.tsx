@@ -167,7 +167,7 @@ export const UserEditForm = () => {
               variant="gradient"
               gradient={{ from: 'yellow', to: 'orange' }}
             >
-              登録
+              保存
             </Button>
           </Group>
         </form>

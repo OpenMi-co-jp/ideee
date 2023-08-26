@@ -9,7 +9,7 @@ module Mutations
     argument :offer, String, required: true, description: '【必須】(メンバーが)得られるもの'
     argument :members_num, Integer, required: true, description: 'メンバー数'
 
-    field :team, Type::TeamType, null: false, description: 'チームオブジェクト'
+    field :team, Types::TeamType, null: false, description: 'チームオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
 
     def resolve(**args)

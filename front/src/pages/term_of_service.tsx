@@ -1,44 +1,47 @@
-import { Container, Paper, Text } from '@mantine/core'
+import { Container, Paper, Text, Title } from '@mantine/core'
 
 export default function TermOfService() {
   return (
     <Container>
-      <Paper>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+      <Paper shadow="xs" p="xl">
+        <Text>
           本利用規約（以下「本規約」といいます。）は、本ウェブサイト上で提供するサービス（以下「本サービス」といいます。）の利用条件を定めるものです。本サービスの利用者（以下「利用者」といいます。）は、本規約に同意して頂いたうえで、本サービスをご利用いただきます。
         </Text>
 
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        <Title order={2} mt="xl">
           第１条（規約の適用）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           本規約は、本サービスの提供条件及び本サービス運営者（以下「運営者」といいます。）と利用者との間の権利義務関係を定めることを目的とし、利用者と運営者との間のサービスの利用に関わる一切の関係に適用されるものとします。
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第２条（利用資格）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           本サービスは以下の条件をすべて満たす方に限り、ご利用いただくことができます。
           <br />
           <br />
           ご自身でインターネットの利用環境、端末、ソフトウェアなどを用意することができる方本規約に同意かつ遵守できる方
           過去に本規約に違反したことのない方
           <br />
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第３条（利用者メールアドレスおよびパスワードの管理）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           利用者は、自己の責任において、本サービスの利用者メールアドレスおよびパスワード等を適切に管理及び保管するものとします。利用者は、いかなる場合にも、アカウントの使用権限を第三者に譲渡または貸与することはできません。
           <br />
           <br />
           パスワード又はユーザーメールアドレス等の管理不十分、第三者の使用等によって生じた損害または不利益に関する責任は利用者が負うものとし、運営者は一切の責任を負いません。
           <br />
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第４条（禁止事項）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           利用者は、本サービスの利用にあたり、以下の行為をしてはなりません
           <br />
           <br />
@@ -70,11 +73,12 @@ export default function TermOfService() {
           <br />
           これらの行為が発覚した場合、当該コンテンツの削除、あるいはその利用者のアカウントを停止・削除する場合があります。
           <br />
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第５条（本サービスの提供の停止等）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           運営者は、以下のいずれかの事由があると判断した場合、利用者に事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
           <br />
           <br />
@@ -90,71 +94,77 @@ export default function TermOfService() {
           <br />
           運営者は、本サービスの提供の停止または中断により、利用者または第三者が被ったいかなる損害または不利益について、理由を問わず一切の責任を負わないものとします。
           <br />
-        </Text>
+        </Paper>
 
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        <Title order={2} mt="xl">
           第６条（著作権）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           利用者は、自ら著作権等の必要な知的財産権を有するか、または必要な権利者の許諾を得た文章、
           画像等の情報のみ、本サービスを利用し、投稿及び編集できるものとします。
           <br />
           利用者が本サービスを利用して投稿または編集した文章、画像等の著作権については、当該利用者あるいは既存の権利者に留保されるものとします。
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Paper>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           利用者または第三者は、本サービス上のコンテンツについて、権利者の許可を得ることなく、無断で転載または二次配布等を行うことはできません。
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第７条（広告の搭載）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           運営者は、第三者の広告を本サービス条に搭載できるものとします。
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第８条（退会および登録抹消）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           利用者はいつでも登録されたアカウントを削除（退会）することができますまた、利用者が本規約に違反した場合、運営者は事前の通知なく、アカウントに関わるデータを削除し、登録を抹消できるものとします。
           <br />
           退会および登録抹消が行われた場合、購入コンテンツへアクセスする権利、購入履歴・領収書へアクセスする権利、未振込の売上金額を受け取る権利も喪失します。退会および登録抹消に伴い利用者に生じた損害または不利益について、運営者は一切の責任を負いません。
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第9条（保証の否認および免責事項）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           運営者は、本サービスに事実上または法律上の瑕疵（安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性、セキュリティなどに関する欠陥、エラーやバグ、権利侵害などを含みます。）がないことを明示的にも黙示的にも保証しておりません。
           <br />
           運営者は、取引の当事者ではなくユーザー間取引プラットフォームの提供者であり、本サービスに関して利用者と他の利用者または第三者との間において生じた取引、連絡または紛争等について、運営者は一切の責任を負いません。
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第10条（サービス内容の変更・停止）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           運営者は、利用者に通知することなく、本サービスの内容の変更および一部機能の停止をすることができるものとし、これによって利用者に生じた損害または不利益について一切の責任を負いません。
           <br />
           本サービスを終了する場合、30日前まで、かつ未振込の売上が振り込まれる十分な猶予期間を持って、運営サービスを停止する旨を本サイト上で告知するものとします。
           <br />
           運営者は、本サービスの終了に伴い利用者に生じる損害または不利益について責任を負いません。
-        </Text>
+        </Paper>
 
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        <Title order={2} mt="xl">
           第11条（利用規約の変更）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           運営者は、必要と判断した場合には、利用者に通知することなくいつでも本規約を変更することができるものとします。ただし、利用者にとって不利益となる利用規約の変更（手数料の値上げなど、利用者の支払い額および受け取り額の変更を含みます。）については、十分な猶予期間を持って本サイトやメールにより利用者に周知するものとします。
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第12条（通知または連絡）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           利用者と運営者との間の通知または連絡は、運営者の定める方法によって行うものとします。
-        </Text>
-        <Text mr={35} ml={35} mt={40} fz={23}>
+        </Paper>
+
+        <Title order={2} mt="xl">
           第13条（権利義務の譲渡および貸与の禁止）
-        </Text>
-        <Text bg="#EEEEEE" mr={35} ml={35}>
+        </Title>
+        <Paper shadow="md" radius="xs" py="lg" px="xs">
           利用者は、運営者の書面による事前の承諾なく、利用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡および貸与することはできません。
-        </Text>
+        </Paper>
       </Paper>
     </Container>
   )

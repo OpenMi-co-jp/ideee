@@ -35,3 +35,17 @@ mutation createTeam($input: CreateTeamInput!) {
     success
   }
 }
+
+mutation updateTeam($input: UpdateTeamInput!) {
+  updateTeam(input: $input) {
+    team {
+      id
+      ownerId
+      status
+      requirement
+      offer
+      membersNum
+    }
+    success
+  }
+}

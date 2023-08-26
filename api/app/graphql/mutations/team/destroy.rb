@@ -1,14 +1,17 @@
 module Mutations
   class Team::Destroy < BaseMutation
-    # TODO: define return fields
-    # field :post, Types::PostType, null: false
+    graphql_name 'DestroyTeam'
 
-    # TODO: define arguments
-    # argument :name, String, required: true
+    argument :id, ID, required: true, description: 'チームID'
 
-    # TODO: define resolve method
-    # def resolve(name:)
-    #   { post: ... }
-    # end
+    field :success, Boolean, null: false, description: '成功フラグ'
+
+    def resolve(**args)
+      team = ::Team.find_by(id: args[:id])
+      team.destroy!
+      {
+        success: true
+      }
+    end
   end
 end

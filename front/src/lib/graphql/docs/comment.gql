@@ -1,0 +1,39 @@
+query GetComment($id: ID!) {
+  comment(id: $id) {
+    id
+    description
+  }
+}
+
+query GetComments {
+  comments {
+    id
+    description
+  }
+}
+
+mutation CreateComment($input: CreateCommentInput!) {
+  createComment(input: $input) {
+    comment {
+      id
+      description
+    }
+    success
+  }
+}
+
+mutation UpdateComment($input: UpdateCommentInput!) {
+  updateComment(input: $input) {
+    comment {
+      id
+      description
+    }
+    success
+  }
+}
+
+mutation DestroyComment($input: DestroyCommentInput!) {
+  destroyComment(input: $input) {
+    success
+  }
+}

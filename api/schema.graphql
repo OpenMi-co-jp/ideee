@@ -466,6 +466,21 @@ type Notification {
 
 type Query {
   """
+  チーム開発募集中のアイデア一覧
+  """
+  activeTeamIdeas: [Idea!]!
+
+  """
+  実現したアイデア一覧
+  """
+  deployedIdeas: [Idea!]!
+
+  """
+  ホットなアイデア一覧
+  """
+  hotIdeas: [Idea!]!
+
+  """
   アイデアオブジェクト
   """
   idea(
@@ -484,6 +499,21 @@ type Query {
   通知一覧
   """
   notifications: [Notification!]!
+
+  """
+  人気のタグ一覧
+  """
+  popularTags: [Tag!]!
+
+  """
+  ルームオブジェクト
+  """
+  room(
+    """
+    ルーム検索ID
+    """
+    id: ID!
+  ): Room!
 
   """
   チームオブジェクト
@@ -509,6 +539,50 @@ type Query {
   ユーザー一覧
   """
   users: [User!]!
+}
+
+type Room {
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  ルームID
+  """
+  id: ID!
+
+  """
+  チームID
+  """
+  teamId: Int
+
+  """
+  更新日
+  """
+  updatedAt: ISO8601DateTime!
+}
+
+type Tag {
+  """
+  作成日
+  """
+  createdAt: ISO8601DateTime!
+
+  """
+  タグID
+  """
+  id: ID!
+
+  """
+  タグ名
+  """
+  name: String!
+
+  """
+  更新日
+  """
+  updatedAt: ISO8601DateTime!
 }
 
 type Team {

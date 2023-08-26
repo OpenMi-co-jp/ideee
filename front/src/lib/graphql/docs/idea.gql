@@ -16,6 +16,36 @@ query GetIdeas {
   }
 }
 
+query GetHotIdeas {
+  hotIdeas {
+    id
+    name
+    user {
+      icon
+    }
+  }
+}
+
+query GetDeployedIdeas {
+  deployedIdeas {
+    id
+    name
+    user {
+      icon
+    }
+  }
+}
+
+query GetActiveTeamIdeas {
+  activeTeamIdeas {
+    id
+    name
+    user {
+      icon
+    }
+  }
+}
+
 mutation CreateIdea($input: CreateIdeaInput!) {
   createIdea(input: $input) {
     idea {
@@ -47,4 +77,3 @@ mutation DestroyIdea($input: DestroyIdeaInput!) {
     success
   }
 }
-

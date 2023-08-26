@@ -30,7 +30,7 @@ FactoryBot.define do
     offer { 'test_offer' }
     requirement { 'test_requirement' }
     status { 'active' }
-    owner { association(:user) }
+    owner factory: %i[user]
     idea
     owner_id { idea.user.id }
   end

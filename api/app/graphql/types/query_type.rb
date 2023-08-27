@@ -17,13 +17,14 @@ module Types
 
     field :team, resolver: Resolvers::Team::TeamResolver, description: 'チームオブジェクト'
 
-<<<<<<< HEAD
     field :comment, resolver: Resolvers::Comment::CommentResolver, description: 'コメントオブジェクト'
     field :comments, resolver: Resolvers::Comment::CommentsResolver, description: 'コメント一覧'
-=======
     field :room, resolver: Resolvers::Room::RoomResolver, description: 'ルームオブジェクト'
 
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'
->>>>>>> release
+
+    field :likes, resolver: Resolvers::Like::LikesResolver, description: 'いいね一覧'
+    field :likes_by_user, resolver: Resolvers::Like::LikesByUserResolver, description: '特定のユーザーによるいいね一覧'
+    field :likes_for_entity, resolver: Resolvers::Like::LikesForEntityResolver, description: '特定のエンティティに対するいいね一覧'
   end
 end

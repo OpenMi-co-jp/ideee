@@ -1,0 +1,26 @@
+query GetLikes {
+  likes {
+    id
+    user_id
+    likable_type
+    likable_id
+  }
+}
+
+query GetLikesByUser($user_id: ID!) {
+  likesByUser(userId: $user_id) {
+    id
+    user_id
+    likable_type
+    likable_id
+  }
+}
+
+query GetLikesForEntity($likable_type: String!, $likable_id: ID!) {
+  likesForEntity(likableType: $likable_type, likableId: $likable_id) {
+    id
+    user_id
+    likable_type
+    likable_id
+  }
+}

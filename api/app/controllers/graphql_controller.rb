@@ -49,15 +49,13 @@ class GraphqlController < ApplicationController
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: :internal_server_error
   end
 
-  private
-
-  require "cgi"
+  require 'cgi'
 
   def decode_authorization_header
     auth_header = request.headers['Authorization']
-    if auth_header&.start_with?('Bearer%20')
-      decoded_auth_header = CGI.unescape(auth_header)
-      request.headers['Authorization'] = decoded_auth_header
-    end
+    return unless auth_header&.start_with?('Bearer%20')
+
+    decoded_auth_header = CGI.unescape(auth_header)
+    request.headers['Authorization'] = decoded_auth_header
   end
 end

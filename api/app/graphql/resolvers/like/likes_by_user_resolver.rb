@@ -9,7 +9,7 @@ module Resolvers
     argument :user_id, Integer, required: true, description: 'ユーザーID'
 
     def resolve(**args)
-      ::Like.where(args[:user_id])
+      ::Like.where(user_id: args[:user_id])
     end
   end
 end

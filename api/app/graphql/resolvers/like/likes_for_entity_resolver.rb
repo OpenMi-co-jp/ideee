@@ -10,7 +10,7 @@ module Resolvers
     argument :likable_id, Integer, required: true, description: 'いいねをされたエンティティのID'
 
     def resolve(**args)
-      ::Like.where(args[:likable_type], args[:likable_id])
+      ::Like.where(likable_type: args[:likable_type], likable_id: args[:likable_id])
     end
   end
 end

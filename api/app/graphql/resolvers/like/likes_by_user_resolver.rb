@@ -2,14 +2,14 @@
 
 module Resolvers
   class Like::LikesByUserResolver < BaseResolver
-    graphql_name 'GetLikesByUser'
+    graphql_name 'LikesByUserResolver'
 
     type [Types::LikeType], null: false
 
     argument :user_id, Integer, required: true, description: 'ユーザーID'
 
-    def resolve(user_id:)
-      ::Like.where(user_id:)
+    def resolve(**args)
+      ::Like.where(args[:user_id])
     end
   end
 end

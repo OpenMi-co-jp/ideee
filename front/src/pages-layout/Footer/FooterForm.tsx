@@ -7,7 +7,8 @@ import {
   rem,
   Anchor,
 } from '@mantine/core'
-import { IconBrandTwitter } from '@tabler/icons-react'
+
+import { IconBrandTwitter, IconNews } from '@tabler/icons-react'
 import Image from 'next/image'
 
 const useStyles = createStyles((theme) => ({
@@ -165,12 +166,11 @@ export const FooterForm = (footerData: FooterLinksProps) => {
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
           <ActionIcon size="lg">
-            <Anchor
-              href="https://twitter.com/ideee_tech"
-              aria-label="Twitterへのリンク"
-            >
-              <IconBrandTwitter size="1.05rem" stroke={1.5} />
-            </Anchor>
+            <IconBrandTwitter size="1.05rem" stroke={1.5} />
+          </ActionIcon>
+
+          <ActionIcon size="lg">
+            <IconNews size="1.05rem" stroke={1.5} />
           </ActionIcon>
         </Group>
       </Container>

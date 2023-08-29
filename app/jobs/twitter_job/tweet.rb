@@ -3,6 +3,7 @@
 module TwitterJob
   class Tweet < ApplicationJob
     queue_as :default
+    sidekiq_options retry: 0
 
     def perform(idea, url)
       TwitterTweet.new.tweet(idea, url)

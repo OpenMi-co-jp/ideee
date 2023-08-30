@@ -1,23 +1,36 @@
 import React from 'react'
 import Image from 'next/image'
-import { Title, Text, Button } from '@mantine/core'
+import { createStyles, Title, Text, Button } from '@mantine/core'
+
+const useStyles = createStyles(() => ({
+  topVision: {
+    maxHeight: '500px',
+    zIndex: -300,
+
+    '@media (max-width: 649px)': {
+      maxHeight: '250px',
+    },
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      maxHeight: '350px',
+    },
+
+  },
+
+}))
 
 const TopVision = () => {
+  const { classes } = useStyles()
   return (
     <>
-      <div>
         <Image
           src={'/img/top_vision_image.webp'}
           alt="top_vision_image"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={classes.topVision}
           style={{
-            maxHeight: '500px',
-            zIndex: '-300',
-            top: '150px',
+            top: 150,
           }}
           fill
         />
-      </div>
       <div
         style={{
           width: '350px',

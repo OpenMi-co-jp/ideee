@@ -24,7 +24,10 @@ const FrequentQuestion = () => {
         <Accordion
           variant="contained"
           radius={10}
-          style={{ boxShadow: '0 4px 8px rgba(0, 0, 0.1, 0.2)' }}
+          style={{
+            boxShadow: '0 4px 8px rgba(0, 0, 0.1, 0.2)',
+            borderRadius: '10px',
+          }}
         >
           <Accordion.Item value="bulb">
             <Accordion.Control
@@ -42,8 +45,10 @@ const FrequentQuestion = () => {
               <Text>意外とアイデアは出てくるかも💡</Text>
               <br />
               <Button
-                color="orange"
-                style={{ boxShadow: '0 3px 1px rgba(0, 0, 0.3, 3)' }}
+                style={{
+                  boxShadow: '0 3px 1px rgba(0, 0, 0.3, 3)',
+                  color: 'FFCC99',
+                }}
               >
                 <Link href="">アイデアの出し方</Link>
               </Button>

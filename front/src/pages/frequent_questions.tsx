@@ -7,7 +7,13 @@ import {
   useMantineTheme,
   rem,
 } from '@mantine/core'
-import { IconBulb, IconFlag, IconUsers, IconWorld } from '@tabler/icons-react'
+import {
+  IconBulb,
+  IconFlag,
+  IconUsers,
+  IconWorld,
+  IconDoorExit,
+} from '@tabler/icons-react'
 import Link from 'next/link'
 const FrequentQuestion = () => {
   const theme = useMantineTheme()
@@ -119,6 +125,26 @@ const FrequentQuestion = () => {
                 ・紐づいたあなたのTwitterアカウントも注目されやすくなります
               </Text>
               <br />
+            </Accordion.Panel>
+          </Accordion.Item>
+
+          <Accordion.Item value="doorexit">
+            <Accordion.Control
+              icon={<IconDoorExit size={rem(20)} color={getColor('yellow')} />}
+            >
+              退会方法は？
+            </Accordion.Control>
+            <Accordion.Panel ml={19}>
+              <Text>
+                ページ下部のideeeに対しての質問 or
+                コメントに退会したい旨をお伝えください。
+                <br />
+                また、その際に退会理由とユーザー名も指定してお伝えくださると幸いです。
+                <br />
+                担当者が3営業日以内に対応致します。
+                <br />
+                <br />
+              </Text>
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>

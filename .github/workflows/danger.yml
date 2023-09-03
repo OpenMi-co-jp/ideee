@@ -3,6 +3,8 @@ name: danger
 on:
   workflow_dispatch:
   pull_request:
+    paths-ignore:
+      - 'front/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}

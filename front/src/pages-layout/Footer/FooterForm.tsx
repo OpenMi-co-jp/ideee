@@ -125,14 +125,9 @@ export const FooterForm = (footerData: FooterLinksProps) => {
 
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
-      <Text<'a'>
-        key={index}
-        className={classes.link}
-        component="a"
-        href={link.link}
-      >
+      <Anchor key={index} className={classes.link} href={link.link}>
         {link.label}
-      </Text>
+      </Anchor>
     ))
 
     return (

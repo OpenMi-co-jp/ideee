@@ -6,6 +6,11 @@ import {
   Accordion,
   useMantineTheme,
   rem,
+  Paper,
+  Code,
+  List,
+  Mark,
+  Anchor
 } from '@mantine/core'
 import {
   IconBulb,
@@ -15,169 +20,166 @@ import {
   IconDoorExit,
 } from '@tabler/icons-react'
 import Link from 'next/link'
-const FrequentQuestion = () => {
+const FrequentQuestions = () => {
   const theme = useMantineTheme()
   const getColor = (color: string) =>
-    theme.colors[color][theme.colorScheme === 'dark' ? 5 : 7]
+    theme.colors[color][theme.colorScheme === 'dark' ? 4 : 8]
 
   return (
-    <Container mr="5%" ml="5%">
-      <Title fz={26} fw={100} mt={160} ml={18} mb={20}>
+    <Container>
+      <Title order={1} m="lg">
         よくある質問
       </Title>
 
-      <Container mb={30}>
-        <Accordion
-          variant="contained"
-          radius={10}
-          style={{
-            boxShadow: '0 4px 8px rgba(0, 0, 0.1, 0.2)',
-            borderRadius: '10px',
-          }}
-        >
-          <Accordion.Item value="bulb">
-            <Accordion.Control
-              icon={<IconBulb size={rem(20)} color={getColor('red')} />}
+      <Accordion variant="separated">
+        <Accordion.Item value="bulb">
+          <Accordion.Control
+            icon={<IconBulb size={rem(20)} color={getColor('red')} />}
+          >
+            アイデアはどうやって探したらいいの？
+          </Accordion.Control>
+          <Accordion.Panel m="md">
+            <Text mb="lg">
+              リラックスした状態で
+              <br />
+              身の回りで困っていることやもったいないことアプリで楽になった経験なんかを思い出してみると
+              <br />
+              意外とアイデアは出てくるかも💡
+            </Text>
+            <Button
+              leftIcon={<IconBulb />}
+              variant="gradient"
+              gradient={{ from: 'orange', to: 'red' }}
             >
-              アイデアはどう探したらいいの？
-            </Accordion.Control>
-            <Accordion.Panel ml={19} mb={20}>
-              <Text>リラックスした状態で</Text>
-              <br />
-              <Text>
-                身の回りで困っていることやもったいないことアプリで楽になった経験なんかを思い出してみると
-              </Text>
-              <br />
-              <Text>意外とアイデアは出てくるかも💡</Text>
-              <br />
-              <Button
-                style={{
-                  boxShadow: '0 3px 1px rgba(0, 0, 0.3, 3)',
-                  color: 'FFCC99',
-                }}
-              >
-                <Link href="">アイデアの出し方</Link>
-              </Button>
-              <br />
-            </Accordion.Panel>
-          </Accordion.Item>
+              {/* TODO: アイデアの出し方のページを作成後URLの変更 */}
+              <Link href="https://qiita.com/naruqiita/items/65d3560e3bf8a88e80ac">
+                アイデアの出し方
+              </Link>
+            </Button>
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item value="flag">
-            <Accordion.Control
-              icon={<IconFlag size={rem(20)} color={getColor('blue')} />}
-            >
-              Contributionsとは？
-            </Accordion.Control>
-            <Accordion.Panel ml={19}>
-              <Text>
-                Contribution（コントリビューション）とは貢献度を意味しideeeでの貢献度を表しています！
-              </Text>
+        <Accordion.Item value="flag">
+          <Accordion.Control
+            icon={<IconFlag size={rem(20)} color={getColor('blue')} />}
+          >
+            Contributionsとは？
+          </Accordion.Control>
+          <Accordion.Panel m="md">
+            <Text>
+              Contribution（コントリビューション）とはideeeでの貢献度を表しています！
+            </Text>
+            <Text fw={500} my="sm">計算方法</Text>
+            <Code block color="blue">
+              アイデア投稿 ✖️ 2p
               <br />
-              <Text>計算方法</Text>
-              <Text>アイデア投稿✖️ 2p</Text>
-              <Text>自分のアイデアに対してのハート数✖️ 1p</Text>
-              <Text>アイデアに対してのハートを送った数✖️ 0.5p</Text>
-              <Text>自分のアイデアに対してへのコメント数✖️ 1p</Text>
+              自分のアイデアに対してのハート数 ✖️ 1p
               <br />
-            </Accordion.Panel>
-          </Accordion.Item>
+              アイデアに対してのハートを送った数 ✖️ 0.5p
+              <br />
+              自分のアイデアに対してへのコメント数 ✖️ 1p
+            </Code>
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item value="users">
-            <Accordion.Control
-              icon={<IconUsers size={rem(20)} color={getColor('teal')} />}
-            >
-              チーム開発募集機能でできることは？
-            </Accordion.Control>
-            <Accordion.Panel ml={19}>
-              <Text>現在の機能</Text>
-              <Text>・チーム開発の募集条件を設定</Text>
-              <Text>・チームリストの作成</Text>
-              <Text>・参加メンバーだけがみることができるチャットスペース</Text>
-              <Text>・アイデアが注目されやすくなる</Text>
-              <br />
-              <Text>今後の機能</Text>
-              <Text>・オーナーごとの審査制にする</Text>
-              <Text>・GitHub APIなどを利用した開発連携機能</Text>
-              <Text>・開発の軌跡を記録して、開発ストーリーを記事化</Text>
-              <br />
-            </Accordion.Panel>
-          </Accordion.Item>
+        <Accordion.Item value="users">
+          <Accordion.Control
+            icon={<IconUsers size={rem(20)} color={getColor('teal')} />}
+          >
+            チーム開発募集機能でできることは？
+          </Accordion.Control>
+          <Accordion.Panel m="md">
+            <Text>現在の機能</Text>
+            <Code block color="blue">
+              <List>
+                <List.Item>チーム開発の募集条件を設定</List.Item>
+                <List.Item>チームリストの作成</List.Item>
+                <List.Item>
+                  参加メンバーだけがみることができるチャットスペース
+                </List.Item>
+                <List.Item>アイデアが注目されやすくなる</List.Item>
+              </List>
+            </Code>
+            <Text>今後の機能</Text>
+            <Code block color="blue">
+              <List>
+                <List.Item>オーナーごとの審査制にする</List.Item>
+                <List.Item>GitHub APIなどを利用した開発連携機能</List.Item>
+                <List.Item>
+                  開発の軌跡を記録して、開発ストーリーを記事化
+                </List.Item>
+              </List>
+            </Code>
+          </Accordion.Panel>
+        </Accordion.Item>
 
-          <Accordion.Item value="world">
-            <Accordion.Control
-              icon={<IconWorld size={rem(20)} color={getColor('blue')} />}
-            >
-              TwitterIDを登録するとどうなる？
-            </Accordion.Control>
-            <Accordion.Panel ml={19}>
-              <Text>あなたのアイデアが採用されやすくなります</Text>
-              <Text>自動ツイート機能</Text>
-              <Text>
-                ・アイデアを投稿すると　twitterlink　がアイデアをツイートします。
-              </Text>
-              <Text>
-                ・上記のツイートにあなたのTwotterIDがメンションされます
-              </Text>
-              <Text>
-                ・メンションが通知として役立ち、シェアをしやすくします
-              </Text>
-              <Text>
-                ・紐づいたあなたのTwitterアカウントも注目されやすくなります
-              </Text>
+        <Accordion.Item value="world">
+          <Accordion.Control
+            icon={<IconWorld size={rem(20)} color={getColor('blue')} />}
+          >
+            X(旧Twitter)IDを登録するとどうなる？
+          </Accordion.Control>
+          <Accordion.Panel m="md">
+            <Text mb="md">アイデアがより注目されます！</Text>
+            <Text fw={600}>自動ツイート機能</Text>
+            <Code block color="blue">
+              <List>
+                <List.Item>
+                  アイデアを投稿すると<Anchor href="https://twitter.com/ideee_tech" target="_blank">公式 X アカウント</Anchor>でアイデアをツイート
+                </List.Item>
+                <List.Item>
+                  上記のツイートであなたのX IDをメンション
+                </List.Item>
+                <List.Item>
+                  メンションが通知として役立ち、拡散！
+                </List.Item>
+                <List.Item>
+                  紐づいたあなたの X アカウントも注目されます
+                </List.Item>
+              </List>
+            </Code>
+          </Accordion.Panel>
+        </Accordion.Item>
+
+        <Accordion.Item value="doorExit">
+          <Accordion.Control
+            icon={<IconDoorExit size={rem(20)} color={getColor('yellow')} />}
+          >
+            退会方法は？
+          </Accordion.Control>
+          <Accordion.Panel m="md">
+            <Text>
+              ページ下部の{' '}
+              <Mark color="gray">ideeeに対しての質問 or コメント</Mark>{' '}
+              に退会したい旨をお伝えください。
               <br />
-            </Accordion.Panel>
-          </Accordion.Item>
+              また、その際に<Mark color="lime">退会理由</Mark>と
+              <Mark color="lime">ユーザー名</Mark>
+              も指定してお伝えくださると幸いです。
+              <br />
+              担当者が3営業日以内に対応致します。
+            </Text>
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion>
 
-          <Accordion.Item value="doorexit">
-            <Accordion.Control
-              icon={<IconDoorExit size={rem(20)} color={getColor('yellow')} />}
-            >
-              退会方法は？
-            </Accordion.Control>
-            <Accordion.Panel ml={19}>
-              <Text>
-                ページ下部のideeeに対しての質問 or
-                コメントに退会したい旨をお伝えください。
-                <br />
-                また、その際に退会理由とユーザー名も指定してお伝えくださると幸いです。
-                <br />
-                担当者が3営業日以内に対応致します。
-                <br />
-                <br />
-              </Text>
-            </Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-      </Container>
-
-      <Container w="100%">
+      <Paper mt="xl" py="lg">
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSfZGyqfRpT0UgCjxPjZd3Ez30G-23veIGRoGuWHm59v9E4tpw/viewform?embedded=true"
-          height="750"
+          height="1250"
           width="100%"
           style={{
-            borderRadius: '10px',
             overflow: 'hidden',
             border: 'none',
-            boxShadow: '0 4px 8px rgba(0, 0, 0.1, 0.2)',
+            marginTop: '4rem',
           }}
           title="Google Form"
         >
           読み込んでいます…
         </iframe>
-      </Container>
+      </Paper>
     </Container>
   )
 }
 
-const styles = {
-  outerFrame: {
-    padding: '20px',
-    border: '1px solid #ccc',
-  },
-  iframe: {
-    boxSizing: 'border-box',
-  },
-}
-
-export default FrequentQuestion
+export default FrequentQuestions

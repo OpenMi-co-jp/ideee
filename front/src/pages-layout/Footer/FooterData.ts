@@ -28,7 +28,7 @@ export const footerData = {
         { label: '利用規約', link: '/terms_of_service' },
         {
           label: 'プライバシーポリシー',
-          link: 'https://www.ideee.tech/privacy_policy',
+          link: '/privacy_policy',
         },
         { label: '運営者', link: 'https://naruhiro-portfolio.firebaseapp.com' },
       ],

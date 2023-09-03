@@ -69,15 +69,15 @@ class Idea < ApplicationRecord
   scope :drafts, -> { where draft: true }
   scope :most_liked, -> { preload(:idea_tags).order(likes_num: 'DESC') }
   scope :most_commented, -> { preload(:idea_tags).order(comments_num: 'DESC') }
-  scope :recent_select, -> { where(published_at: 30.days.ago..Time.zone.now) }
+  scope :recent_select, -> { where(published_at: 40.days.ago..Time.zone.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
   scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id:).uniq }
 
-  def self.ransackable_attributes
-    %w[id name published_at difficulty comments_num likes_num updated_at]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[id name published_at difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
   end
 
   def published_time

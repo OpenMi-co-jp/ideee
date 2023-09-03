@@ -1,17 +1,18 @@
-import { Box, Button, Stack } from '@mantine/core'
+import { Box, Col, Button, Title, Stack } from '@mantine/core'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
 import { OmniAuth } from '@/components/Auth/OmniAuth'
+import type { CustomNextPage } from 'next'
 
 type SignInFormValues = {
   email: string
   password: string
 }
 
-export const SignInForm = () => {
+export const SignInForm: CustomNextPage = () => {
   const { setLoggedIn } = useLoggedIn()
   const form = useForm<SignInFormValues>({
     defaultValues: {
@@ -26,9 +27,16 @@ export const SignInForm = () => {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <Box maw={300} mx="auto">
+        <Title order={2} mb={30}>
+          ログイン
+        </Title>
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
-        <Button type="submit">ログイン</Button>
+        <Col style={{ marginTop: '1rem' }}>
+          <Button type="submit" fullWidth>
+            ログイン
+          </Button>
+        </Col>
         <Stack>
           <Link href="/user/forgot_password" passHref>
             メールアドレスを忘れた？

@@ -5,13 +5,12 @@ import {
   ActionIcon,
   Group,
   rem,
+  Anchor,
 } from '@mantine/core'
-import {
-  IconBrandTwitter,
-  IconBrandYoutube,
-  IconNews,
-} from '@tabler/icons-react'
+
+import { IconBrandTwitter, IconNews } from '@tabler/icons-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -127,15 +126,9 @@ export const FooterForm = (footerData: FooterLinksProps) => {
 
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
-      <Text<'a'>
-        key={index}
-        className={classes.link}
-        component="a"
-        href={link.link}
-        onClick={(event) => event.preventDefault()}
-      >
+      <Link key={index} className={classes.link} href={link.link}>
         {link.label}
-      </Text>
+      </Link>
     ))
 
     return (
@@ -171,9 +164,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
           <ActionIcon size="lg">
             <IconBrandTwitter size="1.05rem" stroke={1.5} />
           </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandYoutube size="1.05rem" stroke={1.5} />
-          </ActionIcon>
+
           <ActionIcon size="lg">
             <IconNews size="1.05rem" stroke={1.5} />
           </ActionIcon>

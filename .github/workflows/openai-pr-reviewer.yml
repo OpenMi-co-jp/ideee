@@ -1,0 +1,61 @@
+name: openai_pr_reviewer
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  pull_request:
+  pull_request_review_comment:
+    types: [created]
+
+concurrency:
+  group: ${{ github.repository }}-${{ github.event.number || github.head_ref || github.sha }}-${{ github.workflow }}-${{ github.event_name == 'pull_request_review_comment' && 'pr_comment' || 'pr' }}
+  cancel-in-progress: ${{ github.event_name != 'pull_request_review_comment' }}
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: coderabbitai/ai-pr-reviewer@latest # https://github.com/coderabbitai/ai-pr-reviewer/releases/tag/1.16.1 # 好きに変更して
+        env:
+          GITHUB_TOKEN: ${{ secrets.PR_REVIEWER_GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # 環境に応じて変更して
+        with:
+          debug: false
+          review_simple_changes: false
+          review_comment_lgtm: false
+          openai_light_model: gpt-3.5-turbo-0613 # 好きに変更
+          openai_heavy_model: gpt-4-0613 # 好きに変更 gpt-4 推奨（ただし、値段に注意）
+
+          # 以下のプロンプトは https://github.com/coderabbitai/openai-pr-reviewer/blob/main/action.yml から取ってくる。最後の `IMPORTANT` 部分を追加する。
+          system_message: |
+            You're `@openai` (aka `github-actions[bot]`), an OpenAI language model. Review the code focusing on:
+              - Logic
+              - Security
+              - Performance
+              - Data races
+              - Consistency
+              - Error handling
+              - Maintainability
+              - Modularity
+              - Complexity
+              - Optimization
+
+            Don't comment on minor style issues, missing documentation, confirming no problems,
+            or give compliments unless asked. Address major concerns,
+            trust newer APIs/methods used by the developer,
+            and focus on objective insights. Do not ask or question the developer's intentions.
+            Provide feedback in Japanese(日本語). If no change is needed, refrain from commenting.
+          summarize: |
+            Summarize in `markdown`:
+              - High-level summary (80 words max on overall change)
+              - Table of files and summaries. Group similar changes.
+
+            Avoid extra comments. Comment on the GitHub pull request in Japanese(日本語).
+          summarize_release_notes: |
+            Draft release notes in `markdown` (50-100 words) classifying as "New Feature",
+            "Bug fix", etc. Below.
+            Use emojis if apt. Share these notes in Japanese(日本語).
+            If no change is needed, refrain from commenting.
+

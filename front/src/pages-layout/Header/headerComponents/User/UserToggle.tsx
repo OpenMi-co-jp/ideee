@@ -3,6 +3,7 @@ import { SignUpForm, SignInForm } from '@/components/Auth'
 import { openModal } from '@mantine/modals'
 import { useLoggedIn } from '@/components/loginContext'
 import { UserMenu } from './UserMenu'
+import Link from 'next/link'
 
 export const UserToggle = () => {
   const { loggedIn } = useLoggedIn()
@@ -15,26 +16,12 @@ export const UserToggle = () => {
         } else {
           return (
             <>
-              <Button
-                onClick={() => {
-                  return openModal({
-                    title: <Title>ユーザー作成</Title>,
-                    children: <SignUpForm />,
-                  })
-                }}
-              >
-                ユーザー作成
-              </Button>
-              <Anchor
-                onClick={() => {
-                  return openModal({
-                    title: <Title>ユーザーログイン</Title>,
-                    children: <SignInForm />,
-                  })
-                }}
-              >
-                ログイン
-              </Anchor>
+              <Link href="/user/sign_up">
+                <Button>ユーザー登録</Button>
+              </Link>
+              <Link href="/user/sign_in">
+                <Button>ログイン</Button>
+              </Link>
             </>
           )
         }

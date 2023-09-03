@@ -43,6 +43,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  extend Devise::Models
   include DeviseTokenAuth::Concerns::User
   # エラー対処のため二重記述
   devise :omniauthable, omniauth_providers: %i[twitter google_oauth2]
@@ -134,8 +135,8 @@ class User < ApplicationRecord
       end
     end
 
-    def ransackable_attributes
-      %w[name definition created_at ideas_num point]
+    def ransackable_attributes(_auth_object = nil)
+      %w[name email definition created_at ideas_num point].map(&:to_s) + _ransackers.keys
     end
   end
 

@@ -1,5 +1,4 @@
 ActiveAdmin.register Idea do
-
   permit_params :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :stance, :user_id, :commit, :product_url
 
   index do

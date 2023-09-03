@@ -23,10 +23,10 @@ ja:
         github_id: Github ID
         remote_url: リモート画像
         site_url: サイトURL
-        provider:
-          twitter: Twitter
-          google: Google
-          mail: メール
+        provider: プロバイダー
+        twitter: Twitter
+        google: Google
+        mail: メール
       idea:
         name: アイデア名
         icon: アイコン

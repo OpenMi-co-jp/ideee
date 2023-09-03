@@ -23,7 +23,7 @@ export const footerData = {
       links: [
         {
           label: 'よくある質問',
-          link: 'https://www.ideee.tech/frequent_questions',
+          link: '/frequent_questions',
         },
         { label: '利用規約', link: '/terms_of_service' },
         {

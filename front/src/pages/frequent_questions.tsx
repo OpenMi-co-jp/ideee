@@ -10,7 +10,7 @@ import {
   Code,
   List,
   Mark,
-  Anchor
+  Anchor,
 } from '@mantine/core'
 import {
   IconBulb,
@@ -69,7 +69,9 @@ const FrequentQuestions = () => {
             <Text>
               Contribution（コントリビューション）とはideeeでの貢献度を表しています！
             </Text>
-            <Text fw={500} my="sm">計算方法</Text>
+            <Text fw={500} my="sm">
+              計算方法
+            </Text>
             <Code block color="blue">
               アイデア投稿 ✖️ 2p
               <br />
@@ -125,14 +127,14 @@ const FrequentQuestions = () => {
             <Code block color="blue">
               <List>
                 <List.Item>
-                  アイデアを投稿すると<Anchor href="https://twitter.com/ideee_tech" target="_blank">公式 X アカウント</Anchor>でアイデアをツイート
+                  アイデアを投稿すると
+                  <Anchor href="https://twitter.com/ideee_tech" target="_blank">
+                    公式 X アカウント
+                  </Anchor>
+                  でアイデアをツイート
                 </List.Item>
-                <List.Item>
-                  上記のツイートであなたのX IDをメンション
-                </List.Item>
-                <List.Item>
-                  メンションが通知として役立ち、拡散！
-                </List.Item>
+                <List.Item>上記のツイートであなたのX IDをメンション</List.Item>
+                <List.Item>メンションが通知として役立ち、拡散！</List.Item>
                 <List.Item>
                   紐づいたあなたの X アカウントも注目されます
                 </List.Item>

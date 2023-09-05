@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+workers 2
+threads 1, 3
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -39,7 +41,21 @@ pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
-# preload_app!
+preload_app!
+
+x = nil
+on_worker_boot do
+  x = Sidekiq.configure_embed do |config|
+    # config.logger.level = Logger::DEBUG
+    config.queues = %w[default low]
+    config.concurrency = 2
+  end
+  x.run
+end
+
+on_worker_shutdown do
+  x&.stop
+end
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart

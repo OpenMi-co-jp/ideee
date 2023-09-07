@@ -13,12 +13,22 @@ type InputTextProps<T extends FieldValues> = MantineStyleSystemProps & {
   required?: boolean
   disabled?: boolean
   searchIcon?: boolean
+  icon?: React.ReactNode
 }
 
 // react-hook-form対応済みのMantineのInputText
 export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
-  const { disabled, form, label, name, required, searchIcon, style, ...rest } =
-    props
+  const {
+    disabled,
+    form,
+    label,
+    name,
+    required,
+    searchIcon,
+    icon,
+    style,
+    ...rest
+  } = props
   return (
     <Controller
       name={name}
@@ -26,7 +36,7 @@ export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
       render={({ field }) => {
         return (
           <MantineTextInput
-            icon={searchIcon ? <IconSearch /> : undefined}
+            icon={searchIcon ? <IconSearch /> : icon || undefined}
             {...field}
             {...rest}
             {...{ style, label, disabled }}

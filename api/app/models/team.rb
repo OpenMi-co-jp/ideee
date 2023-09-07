@@ -42,7 +42,7 @@ class Team < ApplicationRecord
   alias user owner # owner?メソッドを使うために設定
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[status members_num]
+    %w[status members_num].map(&:to_s) + _ransackers.keys
   end
 
   def current_member

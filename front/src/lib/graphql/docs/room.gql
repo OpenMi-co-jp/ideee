@@ -1,0 +1,8 @@
+query GetRoom($id: ID!) {
+  room(id: $id) {
+    id
+    teamId
+    createdAt
+    updatedAt
+  }
+}

@@ -248,3 +248,6 @@ RSpec/ExampleLength:
 # expectを5行まで拡張
 RSpec/MultipleExpectations:
   Max: 5
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 6

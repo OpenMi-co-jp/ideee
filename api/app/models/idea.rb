@@ -77,7 +77,7 @@ class Idea < ApplicationRecord
   scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id:).uniq }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[id name published_at difficulty comments_num likes_num updated_at]
+    %w[id name published_at difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
   end
 
   def self.ransackable_associations(_auth_object = nil)

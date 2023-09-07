@@ -24,7 +24,7 @@
 FactoryBot.define do
   factory :comment do
     description { Faker::JapaneseMedia::OnePiece.quote }
-    association :user
-    association :idea
+    user
+    idea
   end
 end

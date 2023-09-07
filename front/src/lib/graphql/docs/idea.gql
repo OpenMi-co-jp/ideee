@@ -105,4 +105,3 @@ mutation DestroyIdea($input: DestroyIdeaInput!) {
     success
   }
 }
-

@@ -1,0 +1,26 @@
+name: Qiita自動投稿
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  vulnerability:
+    name: Run post qiita article
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.3
+        bundler-cache: true
+
+    - name: Run post qiita article
+      run: |
+        bundle install
+        bundle exec rake auto_update_qiita_post:update_recent_ideas

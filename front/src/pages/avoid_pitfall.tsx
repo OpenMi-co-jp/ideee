@@ -24,7 +24,7 @@ const useStyles = createStyles((_theme, _params) => ({
     boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)',
   },
   titlestyle: {
-    fontSize: '1.3rem',
+    fontSize: '1.2rem',
     marginTop: '0.3rem',
     marginBottom: '0.8rem',
     fontweight: 'normal',
@@ -36,12 +36,7 @@ const useStyles = createStyles((_theme, _params) => ({
     marginTop: '6rem',
     marginBottom: '1.1rem',
     fontWeight: 'normal',
-  },
-  centerContainer: {
-    display: 'flex', // Flexboxを使用
-    justifyContent: 'center', // 水平方向の中央に配置
-    alignItems: 'center', // 垂直方向の中央に配置
-    height: '100vh', // コンテナの高さをビューポートの高さと同じに設定
+    fontSize: '1.6rem',
   },
 }))
 
@@ -172,7 +167,7 @@ function AvoidPitfall() {
               時間や労力をかけても何を得て、どんな道が広がるか、どうなりたいかまで見据えておきたい
             </List.Item>
           </List>
-          <Text>戦略があればムリ・ムラ・ムダが減る</Text>
+          <Text color="gray">戦略があればムリ・ムラ・ムダが減る</Text>
 
           <Title className={classes.titletheme}>
             2.車輪の再発明（類似サービス）
@@ -755,7 +750,9 @@ function AvoidPitfall() {
 
           <Paper style={{ backgroundColor: '#FAFAFA' }} mt={100} shadow="xl">
             <Text p={15}>
-              <Title mb={25}>まとめ</Title>
+              <Title mb={10} fz="1.8rem" fw="bold">
+                まとめ
+              </Title>
               サービス開発を成功させるためには考えることが多いです。しかし、上記に記載したように大きなを失敗を避けて確実に成功に近づける方法はあるので上記の解決策を状況に合わせて実践し、試行錯誤しながら検証を繰り返していくことがサービス開発成功させる上で大切です。
               試行錯誤を繰り返して成果につなげようとする努力がエンジニアの醍醐味でもあり、その努力が世界を良くしていくのかもしれません。
             </Text>

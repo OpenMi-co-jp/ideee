@@ -13,24 +13,22 @@ const useStyles = createStyles(() => ({
     '@media (max-width: 1000px) and (min-width:650px)': {
       maxHeight: '350px',
     },
-
   },
-
 }))
 
 const TopVision = () => {
   const { classes } = useStyles()
   return (
     <>
-        <Image
-          src={'/img/top_vision_image.webp'}
-          alt="top_vision_image"
-          className={classes.topVision}
-          style={{
-            top: 150,
-          }}
-          fill
-        />
+      <Image
+        src={'/img/top_vision_image.webp'}
+        alt="top_vision_image"
+        className={classes.topVision}
+        style={{
+          top: 150,
+        }}
+        fill
+      />
       <div
         style={{
           width: '350px',

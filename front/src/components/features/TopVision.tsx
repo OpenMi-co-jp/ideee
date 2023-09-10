@@ -31,8 +31,8 @@ const TopVision = () => {
       />
       <div
         style={{
-          width: '350px',
-          paddingTop: '200px',
+          width: '400px',
+          paddingTop: '150px',
           paddingBottom: '130px',
           textAlign: 'center',
         }}
@@ -47,12 +47,6 @@ const TopVision = () => {
           <Title
             style={{
               color: '#FF862F',
-              textAlign: 'center',
-              fontFamily: 'Inter',
-              fontSize: '35px',
-              fontStyle: 'normal',
-              fontWeight: 700,
-              lineHeight: 'normal',
             }}
           >
             あなたのアイデアを
@@ -60,12 +54,7 @@ const TopVision = () => {
           <Title
             style={{
               color: '#FF862F',
-              textAlign: 'center',
-              fontFamily: 'Inter',
-              fontSize: '35px',
-              fontStyle: 'normal',
-              fontWeight: 700,
-              lineHeight: 'normal',
+              whiteSpace: 'nowrap',
             }}
           >
             エンジニアと盛り上げる

@@ -30,4 +30,4 @@ jobs:
     # Run the Heroku command
     - name: Run send weekly mail on Heroku
       run: |
-        heroku run rake weekly_mail:send
+        heroku run rake weekly_mail:send -a ideee-tech

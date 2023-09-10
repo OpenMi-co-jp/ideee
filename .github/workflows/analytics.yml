@@ -30,4 +30,4 @@ jobs:
     # Run the Heroku command
     - name: Run rake task on Heroku
       run: |
-        heroku run bundle exec rake report_analytics:send_to_slack
+        heroku run bundle exec rake report_analytics:send_to_slack -a ideee-tech

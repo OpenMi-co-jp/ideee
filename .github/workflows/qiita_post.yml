@@ -30,4 +30,4 @@ jobs:
     # Run the Heroku command
     - name: Run post qiita article on Heroku
       run: |
-        heroku run bundle exec rake auto_update_qiita_post:update_recent_ideas
+        heroku run bundle exec rake auto_update_qiita_post:update_recent_ideas -a ideee-tech

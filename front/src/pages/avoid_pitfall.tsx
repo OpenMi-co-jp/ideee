@@ -8,6 +8,8 @@ import {
   List,
   ThemeIcon,
   Anchor,
+  Card,
+  Image,
 } from '@mantine/core'
 import { IconCircleCheck } from '@tabler/icons-react'
 import Link from 'next/link'
@@ -18,13 +20,12 @@ const useStyles = createStyles((_theme, _params) => ({
   },
   hintwrapper: {
     borderRadius: '0.1rem',
-    marginTop: '0.8rem',
+    marginTop: '0.5rem',
     padding: '1rem',
     backgroundColor: '#FAFAFA',
     boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)',
   },
   titlestyle: {
-    fontSize: '1.2rem',
     marginTop: '0.3rem',
     marginBottom: '0.8rem',
     fontweight: 'normal',
@@ -33,10 +34,13 @@ const useStyles = createStyles((_theme, _params) => ({
     margin: '2rem',
   },
   titletheme: {
-    marginTop: '6rem',
+    marginTop: '9rem',
     marginBottom: '1.1rem',
     fontWeight: 'normal',
-    fontSize: '1.6rem',
+  },
+  textwrapper: {
+    marginBottom: '0.9rem',
+    marginTop: '1.2rem',
   },
 }))
 
@@ -45,24 +49,24 @@ function AvoidPitfall() {
   return (
     <Container>
       <Paper p="3.3rem" shadow="xl">
-        <Title ml="1.7rem" size="2.6rem" fw={600}>
+        <Title ml="1.7rem" mb="4rem" order={1} fw={600}>
           個人開発のよくある落とし穴まとめ
         </Title>
-        <br />
         <Paper className={classes.paperwrapper}>
-          <Title fw={540}>はじめに</Title>
-          <Text>
+          <Title order={2} fw={540}>
+            はじめに
+          </Title>
+          <Text mb="1rem">
             個人開発において「これをやれば必ず成功する」という方法はありません。しかし、大きな失敗を避けるための体系だったフレームワークや正攻法は存在します。
             <br />
             ここでは管理人の体験をベースとした個人開発における落とし穴を20個ご紹介。
             <br />
             よくある落とし穴を先に学んで最短距離であなたが思い描くエンジニア像を目指しましょう！！
-            <br />
           </Text>
         </Paper>
 
         <Paper className={classes.paperwrapper}>
-          <Title fw={600} className={classes.titlestyle}>
+          <Title order={3} fw={600} className={classes.titlestyle}>
             ターゲット
           </Title>
           <List
@@ -79,35 +83,41 @@ function AvoidPitfall() {
         </Paper>
 
         <Paper className={classes.paperwrapper}>
-          <Title fw={600} className={classes.titlestyle}>
+          <Title order={3} fw={600} className={classes.titlestyle}>
             記事を書いた背景
           </Title>
           <Text>
             企業や新規事業開発の落とし穴と個人開発の落とし穴を比較すると共通点が多いです。
             <br />
             これから個人でサービスを作りたいと考えている人やレベルアップのために個人開発をやっていきたい人へのヒントになると思い、スタートアップの記事や個人開発者へのインタビューを通して気付いた落とし穴を厳選してまとめました💡
-            <br />
           </Text>
         </Paper>
 
         <Paper className={classes.paperwrapper}>
-          <Title size="2.4rem" mt={85} mb={60}>
+          <Title order={1} mt={95} mb={45}>
             よくある落とし穴　🕳 ️
           </Title>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             1.目的がはっきりしていない
           </Title>
-          <Text>
+          <Card mt="2%" mb="2%" ml="8%" mr="8%">
+            <Image
+              src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/ea095e32-e192-3ccd-bebd-d2c5e72a6ce7.jpeg"
+              alt="個人開発の目的マップ.jpg"
+            />
+          </Card>
+          <Text className={classes.textwrapper}>
             これはサービス開発における最大にして一番多い落とし穴です。
             <br />
             スタートアップと個人開発で異なる点は、「マネタイズが絶対条件ではない点」です。
             <br />
             個人開発では個人が自分で開発をしたいと思う理由は千差万別なのでまずは「なぜ作るのか？」を明確にしてその目的を見失わないだけで成功体験は得やすくなります。
-            <br />
           </Text>
           <br />
-          <Title className={classes.titlestyle}>よくある例</Title>
+          <Title order={3} className={classes.titlestyle}>
+            よくある例
+          </Title>
           <List>
             <List.Item>
               お金儲けしたい目的のアプリに勉強の要素も追加、使ったことの無い言語の多様で工数の増加
@@ -122,8 +132,10 @@ function AvoidPitfall() {
               おもしろAPIを使用した簡易的なアプリでバズりを狙いにいってしまう（目的がずれる）
             </List.Item>
           </List>
-          <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+          <Paper mb={40} className={classes.hintwrapper}>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -140,9 +152,8 @@ function AvoidPitfall() {
               </List.Item>
             </List>
           </Paper>
-          <br />
-          <br />
-          <Title className={classes.titlestyle}>
+
+          <Title order={3} className={classes.titlestyle}>
             例）自分の学習のためのアプリ
           </Title>
           <List>
@@ -157,7 +168,9 @@ function AvoidPitfall() {
             </List.Item>
           </List>
           <br />
-          <Title className={classes.titlestyle}>自己成長が目的の場合</Title>
+          <Title order={3} className={classes.titlestyle}>
+            自己成長が目的の場合
+          </Title>
           <List>
             <List.Item>成長のために戦略を立てる</List.Item>
             <List.Item>
@@ -167,12 +180,14 @@ function AvoidPitfall() {
               時間や労力をかけても何を得て、どんな道が広がるか、どうなりたいかまで見据えておきたい
             </List.Item>
           </List>
-          <Text color="gray">戦略があればムリ・ムラ・ムダが減る</Text>
+          <Text>
+            <Mark color="gray">戦略があればムリ・ムラ・ムダが減る</Mark>
+          </Text>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             2.車輪の再発明（類似サービス）
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             大きく二つあり、
             <List>
               <List.Item>
@@ -183,7 +198,9 @@ function AvoidPitfall() {
             があります。
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -201,17 +218,24 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             3.いつの間にか「高機能なもの」を作ることが目的になる
           </Title>
-          <Paper>
+          <Text className={classes.textwrapper}>
             ユーザーが欲しいものではなく、自分が作れるものや作りたいものに焦点が当たってフォーカスがずれてしまう状態は個人開発を行う上で技術力のある人などがよく陥りがちな落とし穴です。
             <br />
             高機能は既存の顕在化された軸における延長線でしかないのでまずは格とするユーザーニーズを設定し、そこを最重要事項として開発を進めましょう。
-            <br />
-          </Paper>
+          </Text>
+          <Card mt="2%" mb="2%" ml="8%" mr="8%">
+            <Image
+              src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F0736ae79-c883-f76d-40e7-8ab04da954ed.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f40c8e23f2607f7b7b89a93c081899db"
+              alt="wooden-board-ge49422b2d_1280.jpg"
+            />
+          </Card>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -226,16 +250,19 @@ function AvoidPitfall() {
                 サービスができてからはユーザーインタビューなどを繰り返し、本当に欲しいものは何かを検証したり、インサイトを獲得する
               </List.Item>
             </List>
+            I
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             4.アプリの完成度が高ければユーザーがつくと思い込む
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             すでに成功している完成度の高いサイトを触っているとUXが良く「UXの良さが売れるアプリだ」というバイアスが生まれて自分だけでやり切れる作業量ではなくなり、開発速度の低下を招きます。
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -253,17 +280,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             5.アイデアの閃きが全てと思い込む
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             時間をかけてやっと出てきたアイデアだからこそ価値があると思い込みやすいです。
             <br />
             自分の中で「欲しい！」という感情が強くなり過ぎてしまい、周りが見えなくなりユーザの需要からずれてしまう場合が多くあります。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -281,18 +309,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             6.無自覚にバイアスのかかったユーザーインタビューをする
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             自分がいいと思って入れた仕組みやサービスを人に説明する際、認めて欲しいという思いが強いあまり、無意識に「Yes」を引き出すための説明と質問をしてしまうことがよくあります。
             <br />
             知り合いや面と向かって行うインタビュー、利害関係もない状態で行うインタビューでは多くの場合、よっぽどのことが無い限り相手は「No」と言わない。もしくは言いにくい状態になります。
-            <br />
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント:1💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント:1💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -311,8 +339,11 @@ function AvoidPitfall() {
                 「AってBですよね？」という質問はせずに、「Aについて良かった点、改善点を教えてください」といった質問にする
               </List.Item>
             </List>
-
-            <Title className={classes.titlestyle}>解決のヒント:2💡</Title>
+          </Paper>
+          <Paper className={classes.hintwrapper}>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント:2💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -331,10 +362,10 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             7.多くの人に気に入られようとする
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             サービスを作る上で「自分が欲しい！」と思ったアイデアを大衆にフィットさせようとし過ぎてしまうという事がよくあります。
             <br />
             大衆向けにサービスを作るのはそれだけ自分のサービスの対市場規模を大きくしたいという気持ちからついつい色んな機能やアイデアを盛り込みたくなってしまいます。
@@ -342,10 +373,11 @@ function AvoidPitfall() {
             けれどそう言った大衆の求めるサービス市場はどの会社もたくさんの資金、リソースを投下しているので個人で対抗するのは物理的に難しいです。
             <br />
             企業として動いている訳では無いので、個人リソースの限界を理解しましょう。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -365,19 +397,20 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             8.ペルソナ(自分)に固執しすぎる
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             サービスのペルソナを決める際、多くの人がペルソナを自分に設定してしまう事が多くあります。
             <br />
             これは個人開発者が陥りやすく、簡単に作れるというだけで自分の技術力だけに合わせたり、自分が欲しいものに設定できるが故にありふれたサービス、ユーザーニーズからずれたものになってしまいます。
             <br />
             この場合、自分の感情に固執し過ぎずにユーザーにフォーカスしましょう。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={24} radius="xl">
@@ -395,17 +428,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             9.完成させてからローンチしようとする
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             サービスのローンチを考えた時、人様に見せるものなら未完成のものを出したく無いというプライドが邪魔をして中々サービスが提供できない状態になってしまう事はよくあります。
             <br />
             これは日頃から仕事で質の高い完成品を求められている人にありがちな事ですが個人開発において試作段階でローンチする事はユーザの需要の有無やレスポンスが返ってくるなどが大きなメリットがあります。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={24} radius="xl">
@@ -424,34 +458,43 @@ function AvoidPitfall() {
               </List.Item>
             </List>
           </Paper>
-          <Title className={classes.titlestyle}>Mockとは</Title>
+          <Title order={3} className={classes.titlestyle} mt={20}>
+            Mockとは
+          </Title>
+          <Card mt="2%" mb="2%" ml="8%" mr="8%">
+            <Image
+              src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F3e63095f-ebbd-8b20-4123-4339bbf0a176.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f8076e476459c60af3c866c8df03c441"
+              alt="ibg_mock.jpg"
+            />
+          </Card>
           <Text>
             かつて、IBMが自動タイピング器を開発したとして実験した
             <br />
             マイクに声を入力するだけで画面上に文字がタイプされていくもので、当時は画期的であった
             <br />
             しかし、実際はマイクの先に手動でタイピングをする人がいて、打ち込んだ文字を画面に出力させていただけだった
-            <br />
           </Text>
-          <Title className={classes.titlestyle}>代替サービスでも良い</Title>
+          <Title order={3} className={classes.titlestyle} mt={30}>
+            代替サービスでも良い
+          </Title>
           <Paper>
             現在は、ノーコードやGoogleのフォームやスプレッドシートなど寄せ合わせるだけで多くのサービスが簡易的に代替できます。
             <br />
             大事なのは、ユーザーに届けるコアサービスにどれだけの価値があるかを測ることなので、まずは簡易版でアイデアが失敗に終わらないことを確認する事が重要です。
-            <br />
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             10.インタビューをして満足する
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             一定数の人にインタビューをして意見収集ができて、そこで受けた指摘や改善点にも対応をして満足してしまう事が多くあります。
             <br />
             もしくはユーザーの声をそのまま受け止めて、その全てに対応しようと考えてしまい手に負えなくなってしまうという事もあります。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={24} radius="xl">
@@ -475,17 +518,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             11.すぐにマネタイズをしようとする
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             最初のローンチのタイミングでトランザクションが多くなったことに味を占めてマネタイズを急ぐあまりにすぐに広告を付けたり、制限をかけたりすることによってUXが低下してしまう事があります。
             <br />
             そうなるとそこまで関係を築いてきたコアユーザーも離れていくような事態に繋がって行きかねません。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={24} radius="xl">
@@ -504,19 +548,20 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             12.モチベーションがなくなる
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             これはサービス開発をする上で最大の大敵です。
             <br />
             個人開発においては儲かるのも自分一人だけど困るのも自分一人
             <br />
             つまり、全て自分の内面や外部状況次第でモチベーションが変わり、責任感が薄くなり長期間化でモチベーションが薄まってしまう事が多くあります。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -534,17 +579,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             13.面白そうドリブンで進める
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             「誰」の「どんな」課題を「どうやって」解決するかが決まってないままにただ単純に「ワクワクした」という感情的な理由だけで開発を進めてしまう事があります。
             <br />
             それは初期衝動としてはとても良いですが結果として目的やサービスに対する軸がぶれてしまうのでリスクとなってしまう事もあります。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -561,10 +607,10 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             14.すぐに作ろうとしてしまう
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             未完成でローンチする事の大切さも対応方法の一つと前述しました。
             <br />
             それはアイデアが固まってからの話でサービスを開発するには「どのようなサービスを届けたいか」を明確にし、そこにどの程度の工数がかるのかを洗い出す必要があります。
@@ -572,10 +618,9 @@ function AvoidPitfall() {
             しかし開発工数が大きくかかる場合、最初からWBSを引いて開発を進めるのはリスクで時間がかかり過ぎて頓挫してしまいかねません。
             <br />
             そこで継続的に仮説検証を行い、作り込むべきサービスなのかミニマルバリュープロダクトを作成して需要を確かめるのか状況に合った方法を選定する手順を踏みましょう。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle} mt={10}>
+            <Title order={3} className={classes.titlestyle} mt={10}>
               例外もある
             </Title>
             <Link href="/"></Link>
@@ -583,19 +628,20 @@ function AvoidPitfall() {
             <br />
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             15.最初に想定したビジネスモデルに執着する
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             最初に「これだ！」と閃いて周りにも発表して口外したアイデアを変えるのは簡単ではありません。
             <br />
             また、サービスに関わる人が多くなればなるほどビジネスモデルのピボットが難しくなります。
             <br />
             これは過去にビジネスの成功体験がある人によくある事だと思います。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -610,15 +656,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>16.差別化を意識しすぎる</Title>
-          <Text>
+          <Title order={2} className={classes.titletheme}>
+            16.差別化を意識しすぎる
+          </Title>
+          <Text className={classes.textwrapper}>
             ライバルがまだ囲えていない需要を取りに行きたいと思うばかりに既存サービスとの差分を出すことにフォーカスし過ぎてしまいコアサービスの軸がぶれてしまうという事はよくあります。
             <br />
             これはマーケティング経験者に多い印象です。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -634,17 +683,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             17.Nice-to-haveな機能をプロダクトに追加する
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             インタビューで多くの意見を得られた場合カスタマーの意見に翻弄されてしまう事があります。
             <br />
             Nice-to-haveとは「あったほうが良い」の意味で全ての要望を叶えようとするとターゲットやサービスの方向性がぶれてしまいます。これはエンジニア経験者によくある事で以下の解決策をもとに追加すべき機能を選定する事が大切です。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -662,17 +712,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             18.最初からプロダクトデザインやユーザビリティの高さにこだわる
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             世の中の使われるサイトはUXが良いので安易な考えに陥り、UXが良い=売れるサービスと勘違いしてしまう事が多いです。
             <br />
             デザイナーよりの方によくあり、いち早くユーザレスポンスを得るために「UXや新機能は仮説検証して行く上で追加して行く」イメージを持つと良いです。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -691,17 +742,18 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             19. 最初からシステムの自動化・最適化を行う
           </Title>
-          <Text>
+          <Text className={classes.textwrapper}>
             これはバックエンドエンジニアにありがちな事ですがサービス開発をしている時、エンジニアであれば難しいシステムでも自動化を急ぎたくなる事がよくあります。
             <br />
             しかし、サービスに需要があると予測がついてからにしないと開発の期間が伸びるとユーザーに届くまでの時間が延びるので危険です。
-            <br />
           </Text>
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">
@@ -717,20 +769,21 @@ function AvoidPitfall() {
             </List>
           </Paper>
 
-          <Title className={classes.titletheme}>
+          <Title order={2} className={classes.titletheme}>
             20. 稼働を少なくして個人開発を行う
           </Title>
-          <Paper>
+          <Text className={classes.textwrapper}>
             売上も減り、心に余裕が持てなくなり、毎日のタスクが自分のモチベーションに左右される事があります。
             <br />
             時間がありすぎて、非効率になりがち（経験済み）
             <br />
             自分で全てやろうとしてしまって詰まってしまう
-            <br />
-          </Paper>
+          </Text>
 
           <Paper className={classes.hintwrapper}>
-            <Title className={classes.titlestyle}>解決のヒント💡</Title>
+            <Title order={3} className={classes.titlestyle}>
+              解決のヒント💡
+            </Title>
             <List
               icon={
                 <ThemeIcon color="teal" size={20} radius="xl">

@@ -20,14 +20,9 @@ jobs:
         ruby-version: 3.1.3
         bundler-cache: true
 
-    # Authenticate with Heroku CLI
-    - name: Authenticate with Heroku
+    # Run the Heroku command with HEROKU_API_KEY set for authentication
+    - name: Run rake task on Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: |
-        heroku auth:token
-
-    # Run the Heroku command
-    - name: Run rake task on Heroku
       run: |
         heroku run bundle exec rake report_analytics:send_to_slack -a ideee-tech

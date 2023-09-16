@@ -6,7 +6,7 @@ const useStyles = createStyles(() => ({
   topVisionImage: {
     maxHeight: '500px',
     zIndex: -300,
-    
+
     '@media (max-width: 649px)': {
       maxHeight: '250px',
     },
@@ -22,13 +22,12 @@ const useStyles = createStyles(() => ({
     textAlign: 'center',
 
     '@media (max-width: 649px)': {
-      width: "auto",
+      width: 'auto',
       paddingTop: '70px',
       paddingBottom: '30px',
     },
     '@media (max-width: 1000px) and (min-width:650px)': {
       paddingTop: '100px',
-
     },
   },
   topVisionTopTextWrapper: {
@@ -41,7 +40,6 @@ const useStyles = createStyles(() => ({
     },
     '@media (max-width: 1000px) and (min-width:650px)': {
       paddingBottom: '40px',
-
     },
   },
 
@@ -66,8 +64,7 @@ const useStyles = createStyles(() => ({
     '@media (max-width: 1000px) and (min-width:650px)': {
       fontSize: '18px',
     },
-  }
-
+  },
 }))
 
 const TopVision = () => {
@@ -83,27 +80,15 @@ const TopVision = () => {
         }}
         fill
       />
-      <div
-        className={classes.topVisionInnerWrapper}
-      >
-        <div
-          className={classes.topVisionTopTextWrapper}
-        >
-          <Title
-            className={classes.topVisionTopText}
-          >
-            あなたのアイデアを
-          </Title>
-          <Title
-            className={classes.topVisionTopText}
-          >
+      <div className={classes.topVisionInnerWrapper}>
+        <div className={classes.topVisionTopTextWrapper}>
+          <Title className={classes.topVisionTopText}>あなたのアイデアを</Title>
+          <Title className={classes.topVisionTopText}>
             エンジニアと盛り上げる
           </Title>
         </div>
         <Button color="orange">IDEEEについて｜⇢</Button>
-        <Text
-          className={classes.topVisionBottomText}
-        >
+        <Text className={classes.topVisionBottomText}>
           現在のユーザーの数:937人
         </Text>
       </div>

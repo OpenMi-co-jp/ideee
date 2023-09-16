@@ -3,10 +3,10 @@ import Image from 'next/image'
 import { createStyles, Title, Text, Button } from '@mantine/core'
 
 const useStyles = createStyles(() => ({
-  topVision: {
+  topVisionImage: {
     maxHeight: '500px',
     zIndex: -300,
-
+    
     '@media (max-width: 649px)': {
       maxHeight: '250px',
     },
@@ -14,6 +14,60 @@ const useStyles = createStyles(() => ({
       maxHeight: '350px',
     },
   },
+
+  topVisionInnerWrapper: {
+    width: '400px',
+    paddingTop: '150px',
+    paddingBottom: '130px',
+    textAlign: 'center',
+
+    '@media (max-width: 649px)': {
+      width: "auto",
+      paddingTop: '70px',
+      paddingBottom: '30px',
+    },
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      paddingTop: '100px',
+
+    },
+  },
+  topVisionTopTextWrapper: {
+    display: 'flex',
+    flexFlow: 'column',
+    paddingBottom: '55px',
+
+    '@media (max-width: 649px)': {
+      paddingBottom: '40px',
+    },
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      paddingBottom: '40px',
+
+    },
+  },
+
+  topVisionTopText: {
+    color: '#FF862F',
+    '@media (max-width: 649px)': {
+      fontSize: '26px',
+    },
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      fontSize: '28px',
+    },
+  },
+
+  topVisionBottomText: {
+    paddingTop: '35px',
+    color: '#818181',
+    fontSize: '20px',
+    fontWeight: 700,
+    '@media (max-width: 649px)': {
+      fontSize: '16px',
+    },
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      fontSize: '18px',
+    },
+  }
+
 }))
 
 const TopVision = () => {
@@ -23,55 +77,32 @@ const TopVision = () => {
       <Image
         src={'/img/top_vision_image.webp'}
         alt="top_vision_image"
-        className={classes.topVision}
+        className={classes.topVisionImage}
         style={{
           top: 150,
         }}
         fill
       />
       <div
-        style={{
-          width: '400px',
-          paddingTop: '150px',
-          paddingBottom: '130px',
-          textAlign: 'center',
-        }}
+        className={classes.topVisionInnerWrapper}
       >
         <div
-          style={{
-            display: 'flex',
-            flexFlow: 'column',
-            paddingBottom: '55px',
-          }}
+          className={classes.topVisionTopTextWrapper}
         >
           <Title
-            style={{
-              color: '#FF862F',
-            }}
+            className={classes.topVisionTopText}
           >
             あなたのアイデアを
           </Title>
           <Title
-            style={{
-              color: '#FF862F',
-              whiteSpace: 'nowrap',
-            }}
+            className={classes.topVisionTopText}
           >
             エンジニアと盛り上げる
           </Title>
         </div>
         <Button color="orange">IDEEEについて｜⇢</Button>
         <Text
-          fz="md"
-          style={{
-            paddingTop: '35px',
-            color: '#818181',
-            fontFamily: 'Inter',
-            fontSize: '20px',
-            fontStyle: 'normal',
-            fontWeight: 700,
-            lineHeight: 'normal',
-          }}
+          className={classes.topVisionBottomText}
         >
           現在のユーザーの数:937人
         </Text>

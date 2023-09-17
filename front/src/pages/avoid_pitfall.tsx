@@ -56,10 +56,14 @@ function AvoidPitfall() {
         <Container
           style={{
             height: '100%',
-            WebkitMaskImage:
-              'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
-            maskImage:
-              'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
+            ...(!loggedIn
+              ? {
+                  WebkitMaskImage:
+                    'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
+                  maskImage:
+                    'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
+                }
+              : {}),
           }}
         >
           <Title ml="1.7rem" mb="4rem" order={1} fw={600}>
@@ -119,23 +123,24 @@ function AvoidPitfall() {
 
         {!loggedIn && (
           <Container
+            w="60%"
             style={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               position: 'absolute',
-              top: '20%',
+              top: '70%',
               left: '50%',
-              transform: 'translate(-50%, 75%)',
+              transform: 'translate(-50%, 5%)',
               zIndex: 10,
             }}
           >
             <Card
               style={{
-                width: '90%',
-                height: '90%',
+                width: '80%',
+                height: '70%',
                 backgroundColor: 'white',
-                boxShadow: '0 5px 10px rgba(0, 0, 0, 0.7)',
+                boxShadow: '0 5px 13px rgba(0, 0, 0, 0.8)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',

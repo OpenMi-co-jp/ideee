@@ -10,6 +10,7 @@ import {
   Anchor,
   Card,
   Image,
+  Button,
 } from '@mantine/core'
 import { IconCircleCheck } from '@tabler/icons-react'
 import Link from 'next/link'
@@ -52,59 +53,138 @@ function AvoidPitfall() {
   return (
     <Container>
       <Paper p="3.3rem" shadow="xl">
-        <Title ml="1.7rem" mb="4rem" order={1} fw={600}>
-          個人開発のよくある落とし穴まとめ
-        </Title>
-        <Paper className={classes.paperwrapper}>
-          <Title order={2} fw={540}>
-            はじめに
+        <Container
+          style={{
+            height: '100%',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
+            maskImage:
+              'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
+          }}
+        >
+          <Title ml="1.7rem" mb="4rem" order={1} fw={600}>
+            個人開発のよくある落とし穴まとめ
           </Title>
-          <Text mb="1rem">
-            個人開発において「これをやれば必ず成功する」という方法はありません。しかし、大きな失敗を避けるための体系だったフレームワークや正攻法は存在します。
-            <br />
-            ここでは管理人の体験をベースとした個人開発における落とし穴を20個ご紹介。
-            <br />
-            よくある落とし穴を先に学んで最短距離であなたが思い描くエンジニア像を目指しましょう！！
-          </Text>
-        </Paper>
+          <Paper className={classes.paperwrapper}>
+            <Title order={2} fw={540}>
+              はじめに
+            </Title>
+            <Text mb="1rem">
+              個人開発において「これをやれば必ず成功する」という方法はありません。しかし、大きな失敗を避けるための体系だったフレームワークや正攻法は存在します。
+              <br />
+              ここでは管理人の体験をベースとした個人開発における落とし穴を20個ご紹介。
+              <br />
+              よくある落とし穴を先に学んで最短距離であなたが思い描くエンジニア像を目指しましょう！！
+            </Text>
+          </Paper>
 
-        <Paper className={classes.paperwrapper}>
-          <Title order={3} fw={600} className={classes.titlestyle}>
-            ターゲット
-          </Title>
-          <List
-            icon={
-              <ThemeIcon color="teal" size={20} radius="xl">
-                <IconCircleCheck size="1rem" />
-              </ThemeIcon>
-            }
+          <Paper className={classes.paperwrapper}>
+            <Title order={3} fw={600} className={classes.titlestyle}>
+              ターゲット
+            </Title>
+            <List
+              icon={
+                <ThemeIcon color="teal" size={20} radius="xl">
+                  <IconCircleCheck size="1rem" />
+                </ThemeIcon>
+              }
+            >
+              <List.Item>個人開発を今から始める方</List.Item>
+              <List.Item>個人開発で成功体験がまだない方</List.Item>
+              <List.Item>失敗を恐れているあなた</List.Item>
+            </List>
+          </Paper>
+
+          <Paper className={classes.paperwrapper}>
+            <Title order={3} fw={600} className={classes.titlestyle}>
+              記事を書いた背景
+            </Title>
+            <Text>
+              企業や新規事業開発の落とし穴と個人開発の落とし穴を比較すると共通点が多いです。
+              <br />
+              これから個人でサービスを作りたいと考えている人やレベルアップのために個人開発をやっていきたい人へのヒントになると思い、スタートアップの記事や個人開発者へのインタビューを通して気付いた落とし穴を厳選してまとめました💡
+            </Text>
+          </Paper>
+
+          <Paper className={classes.paperwrapper}>
+            <Title order={1} mt={95} mb={45}>
+              よくある落とし穴　🕳 ️
+            </Title>
+
+            <Title order={2} className={classes.titletheme}>
+              1.目的がはっきりしていない
+            </Title>
+          </Paper>
+        </Container>
+
+        {!loggedIn && (
+          <Container
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'absolute',
+              top: '20%',
+              left: '50%',
+              transform: 'translate(-50%, 75%)',
+              zIndex: 10,
+            }}
           >
-            <List.Item>個人開発を今から始める方</List.Item>
-            <List.Item>個人開発で成功体験がまだない方</List.Item>
-            <List.Item>失敗を恐れているあなた</List.Item>
-          </List>
-        </Paper>
-
-        <Paper className={classes.paperwrapper}>
-          <Title order={3} fw={600} className={classes.titlestyle}>
-            記事を書いた背景
-          </Title>
-          <Text>
-            企業や新規事業開発の落とし穴と個人開発の落とし穴を比較すると共通点が多いです。
-            <br />
-            これから個人でサービスを作りたいと考えている人やレベルアップのために個人開発をやっていきたい人へのヒントになると思い、スタートアップの記事や個人開発者へのインタビューを通して気付いた落とし穴を厳選してまとめました💡
-          </Text>
-        </Paper>
-
-        <Paper className={classes.paperwrapper}>
-          <Title order={1} mt={95} mb={45}>
-            よくある落とし穴　🕳 ️
-          </Title>
-
-          <Title order={2} className={classes.titletheme}>
-            1.目的がはっきりしていない
-          </Title>
-        </Paper>
+            <Card
+              style={{
+                width: '90%',
+                height: '90%',
+                backgroundColor: 'white',
+                boxShadow: '0 5px 10px rgba(0, 0, 0, 0.7)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              radius="0.5rem"
+              shadow="xl"
+            >
+              <Text
+                w="90%"
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                ユーザー登録 ログインをして記事を見る💡
+              </Text>
+              <Container
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                w="100%"
+              >
+                <Button m="2%" w="70%">
+                  <Link href="/user/sign_in" passHref>
+                    ユーザー登録
+                  </Link>
+                </Button>
+                <Button m="2%" w="70%">
+                  <Link href="/user/sign_up" passHref>
+                    ログイン
+                  </Link>
+                </Button>
+              </Container>
+              <Image
+                src="/img/userAuth.webp"
+                mt="1%"
+                style={{
+                  width: '80%',
+                  height: '80%',
+                }}
+              />
+            </Card>
+          </Container>
+        )}
 
         {loggedIn && (
           <Paper className={classes.paperwrapper}>

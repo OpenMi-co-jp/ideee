@@ -41,8 +41,8 @@ class Team < ApplicationRecord
   enum status: { active: 0, stop: 1, finished: 2 }, _prefix: true
   alias user owner # owner?メソッドを使うために設定
 
-  def self.ransackable_attributes
-    %w[status members_num]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[status members_num].map(&:to_s) + _ransackers.keys
   end
 
   def current_member

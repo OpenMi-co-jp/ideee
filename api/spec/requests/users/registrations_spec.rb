@@ -21,51 +21,60 @@ RSpec.describe 'セッション' do
   end
 
   describe 'POST /auth/sign_in' do
-    subject(:sign_in) do
+    subject(:auth_sign_in) do
       post user_session_path, params: {
         email: 'user@example.com',
-        password:
+        password: auth_password
       }
     end
 
-    before { create(:user, email: 'user@example.com', password:) }
+    let!(:user) { create(:user, email: 'user@example.com', password:) }
 
     context 'パスワードの長さが下限（6文字）の場合' do
       let(:password) { 'pass12' }
+      let(:auth_password) { 'pass12' }
 
       it '認証に成功する' do
-        sign_in
+        auth_sign_in
         expect(response).to have_http_status(:ok)
         expect(response.headers['client']).to be_present
         expect(response.headers['access-token']).to be_present
-        expect(response.headers['uid']).to be_present
+        expect(response.headers['uid']).to eq user.email
         expect(response.headers['authorization']).to be_present
       end
     end
 
     context 'パスワードの長さが上限（128文字）の場合' do
       let(:password) { 'p' * 128 }
+      let(:auth_password) { 'p' * 128 }
 
       it '認証に成功する' do
-        sign_in
+        auth_sign_in
         expect(response).to have_http_status(:ok)
         expect(response.headers['client']).to be_present
         expect(response.headers['access-token']).to be_present
-        expect(response.headers['uid']).to be_present
+        expect(response.headers['uid']).to eq user.email
         expect(response.headers['authorization']).to be_present
+      end
+    end
+
+    context 'パスワードが違う場合' do
+      let(:password) { 'password' }
+      let(:auth_password) { 'wrong_password' }
+
+      it '認証に失敗する' do
+        auth_sign_in
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end
 
   describe 'DELETE /auth/sign_out' do
     let(:user) { create(:user) }
-
-    before { post user_session_path, params: { email: user.email, password: user.password } }
-
-    let(:auth_tokens){ response.headers.slice('client', 'access-token', 'uid', 'authorization') }
+    let(:tokens) { sign_in(user) }
 
     it 'ユーザーをログアウトする' do
-      delete destroy_user_session_path, headers: auth_tokens
+      delete destroy_user_session_path, headers: tokens
       expect(response).to have_http_status(:ok)
     end
   end

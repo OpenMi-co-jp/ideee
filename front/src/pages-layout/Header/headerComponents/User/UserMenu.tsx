@@ -1,6 +1,7 @@
-import { Avatar, Button, Menu, Title } from '@mantine/core'
-import { IconSettings, IconLogout } from '@tabler/icons-react'
+import { Avatar, Menu } from '@mantine/core'
+import { IconSettings, IconLogout, IconUserCircle } from '@tabler/icons-react'
 import { SignOutAnchor } from '@/components/Auth'
+import Link from 'next/link'
 
 export const UserMenu = () => {
   return (
@@ -11,6 +12,11 @@ export const UserMenu = () => {
 
       <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
+        <Link href="/user/5/edit">
+          <Menu.Item icon={<IconUserCircle size={14} />}>
+            ユーザー情報編集
+          </Menu.Item>
+        </Link>
         <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
 
         <Menu.Divider />

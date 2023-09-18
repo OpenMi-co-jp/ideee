@@ -1,6 +1,4 @@
-import { Button, Anchor, Group, Title } from '@mantine/core'
-import { SignUpForm, SignInForm } from '@/components/Auth'
-import { openModal } from '@mantine/modals'
+import { Button, Group } from '@mantine/core'
 import { useLoggedIn } from '@/components/loginContext'
 import { UserMenu } from './UserMenu'
 import Link from 'next/link'

@@ -6,7 +6,6 @@ import { HiddenContent } from '@/components/avoidPitfall'
 
 function AvoidPitfall() {
   const { loggedIn } = useLoggedIn()
-  const LSLoggedIn = localStorage.getItem('loggedIn') == 'true'
 
   return (
     <Container>
@@ -28,7 +27,7 @@ function AvoidPitfall() {
         </Container>
 
         {(() => {
-          if (LSLoggedIn || loggedIn) {
+          if (loggedIn) {
             return <HiddenContent />
           } else {
             return <SignPath />

@@ -7,7 +7,7 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
 
     def resolve(**args)
-      team = ::Team.find_by(id: args[:id])
+      team = ::Team.find(args[:id])
       team.destroy!
       {
         success: true

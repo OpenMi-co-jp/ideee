@@ -6,12 +6,8 @@ const useStyles = createStyles(() => ({
   Box: {
     padding: '50px 0',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   Title: {
@@ -20,12 +16,8 @@ const useStyles = createStyles(() => ({
     marginBottom: '30px',
     letterSpacing: '3px',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   Divider: {
@@ -37,12 +29,8 @@ const useStyles = createStyles(() => ({
     paddingBottom: '50px',
     width: '55%',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   SubTitle: {
@@ -53,39 +41,27 @@ const useStyles = createStyles(() => ({
     width: '50%',
     margin: '0 auto',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   SubTitleInitialCommon: {
-    color: '#FDB221'
+    color: '#FDB221',
   },
 
   ImageWrapper: {
     position: 'relative',
     marginTop: '80px',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   ImageInnerWrapper: {
     margin: '-20px auto 0 auto',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   ImageTitle: {
@@ -96,24 +72,16 @@ const useStyles = createStyles(() => ({
     paddingBottom: '5px',
     letterSpacing: '3px',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   PeopleImage: {
     margin: '0 auto',
     zIndex: 500,
     marginTop: '16vh',
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   PeopleLeftImage: {
@@ -125,12 +93,8 @@ const useStyles = createStyles(() => ({
     top: 0,
     left: 0,
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   PeopleRightImage: {
@@ -142,14 +106,9 @@ const useStyles = createStyles(() => ({
     top: '50px',
     left: '450px',
 
-    '@media (max-width: 649px)': {
-
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-
-    },
+    '@media (max-width: 649px)': {},
+    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
-
 }))
 
 const Philosophy = () => {
@@ -157,7 +116,7 @@ const Philosophy = () => {
   return (
     <>
       <Box className={classes.Box}>
-        <Title className={classes.Title} >
+        <Title className={classes.Title}>
           アイデアをデザインしエンジニアの出会いを盛り上げる
         </Title>
         <Divider className={classes.Divider} />
@@ -190,10 +149,10 @@ const Philosophy = () => {
             wrap="wrap"
             className={classes.ImageInnerWrapper}
           >
-            <Text className={classes.ImageTitle} >
+            <Text className={classes.ImageTitle}>
               あなたの「困ってる」を形に
             </Text>
-            <Text className={classes.ImageTitle} >
+            <Text className={classes.ImageTitle}>
               コードで社会に貢献してみませんか？
             </Text>
             <Image
@@ -204,12 +163,8 @@ const Philosophy = () => {
               height={300}
             />
           </Flex>
-          <div
-            className={classes.PeopleLeftImage}
-          />
-          <div
-            className={classes.PeopleRightImage}
-          />
+          <div className={classes.PeopleLeftImage} />
+          <div className={classes.PeopleRightImage} />
         </Flex>
       </Box>
     </>

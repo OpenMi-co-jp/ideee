@@ -66,6 +66,9 @@ const useStyles = createStyles(() => ({
     textAlign: 'center',
     paddingBottom: '5px',
     letterSpacing: '3px',
+    '@media (max-width: 649px)': {
+      fontSize: '15px',
+    },
   },
 
   PeopleImage: {
@@ -75,7 +78,7 @@ const useStyles = createStyles(() => ({
     '@media (max-width: 649px)': {
       width: 286,
       height: 200,
-      marginTop: '5vh',
+      marginTop: '10vh',
     },
     '@media (max-width: 1000px) and (min-width:650px)': {
       width: 357,

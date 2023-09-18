@@ -5,7 +5,6 @@ import { createStyles, Box, Text, Title, Divider, Flex } from '@mantine/core'
 const useStyles = createStyles(() => ({
   Box: {
     padding: '50px 0',
-
   },
 
   Title: {
@@ -45,7 +44,6 @@ const useStyles = createStyles(() => ({
     '@media (max-width: 649px)': {
       fontSize: '12px',
     },
-
   },
 
   SubTitleInitialCommon: {
@@ -55,12 +53,10 @@ const useStyles = createStyles(() => ({
   ImageWrapper: {
     position: 'relative',
     marginTop: '80px',
-
   },
 
   ImageInnerWrapper: {
     margin: '-20px auto 0 auto',
-
   },
 
   ImageTitle: {
@@ -70,7 +66,6 @@ const useStyles = createStyles(() => ({
     textAlign: 'center',
     paddingBottom: '5px',
     letterSpacing: '3px',
-
   },
 
   PeopleImage: {
@@ -78,13 +73,13 @@ const useStyles = createStyles(() => ({
     zIndex: 500,
     marginTop: '16vh',
     '@media (max-width: 649px)': {
-      width:286,
-      height:200,
+      width: 286,
+      height: 200,
       marginTop: '5vh',
     },
     '@media (max-width: 1000px) and (min-width:650px)': {
-      width:357,
-      height:250,
+      width: 357,
+      height: 250,
       marginTop: '8vh',
     },
   },
@@ -106,7 +101,6 @@ const useStyles = createStyles(() => ({
     '@media (max-width: 1000px) and (min-width:650px)': {
       width: '333px',
       height: '290px',
-
     },
   },
 
@@ -125,7 +119,7 @@ const useStyles = createStyles(() => ({
       top: '50px',
       left: '180px',
     },
-    
+
     '@media (max-width: 1000px) and (min-width:650px)': {
       width: '333px',
       height: '290px',

@@ -6,8 +6,6 @@ const useStyles = createStyles(() => ({
   Box: {
     padding: '50px 0',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   Title: {
@@ -16,8 +14,10 @@ const useStyles = createStyles(() => ({
     marginBottom: '30px',
     letterSpacing: '3px',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      fontSize: '22px',
+      marginBottom: '20px',
+    },
   },
 
   Divider: {
@@ -29,8 +29,9 @@ const useStyles = createStyles(() => ({
     paddingBottom: '50px',
     width: '55%',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      paddingBottom: '20px',
+    },
   },
 
   SubTitle: {
@@ -38,11 +39,13 @@ const useStyles = createStyles(() => ({
     fontWeight: 700,
     paddingBottom: '50px',
     justifyContent: 'space-between',
-    width: '50%',
+    width: '80%',
     margin: '0 auto',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      fontSize: '12px',
+    },
+
   },
 
   SubTitleInitialCommon: {
@@ -53,15 +56,11 @@ const useStyles = createStyles(() => ({
     position: 'relative',
     marginTop: '80px',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   ImageInnerWrapper: {
     margin: '-20px auto 0 auto',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   ImageTitle: {
@@ -72,16 +71,22 @@ const useStyles = createStyles(() => ({
     paddingBottom: '5px',
     letterSpacing: '3px',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   PeopleImage: {
     margin: '0 auto',
     zIndex: 500,
     marginTop: '16vh',
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      width:286,
+      height:200,
+      marginTop: '5vh',
+    },
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      width:357,
+      height:250,
+      marginTop: '8vh',
+    },
   },
 
   PeopleLeftImage: {
@@ -93,8 +98,16 @@ const useStyles = createStyles(() => ({
     top: 0,
     left: 0,
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      width: '285px',
+      height: '250px',
+      left: '-60px',
+    },
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      width: '333px',
+      height: '290px',
+
+    },
   },
 
   PeopleRightImage: {
@@ -106,8 +119,19 @@ const useStyles = createStyles(() => ({
     top: '50px',
     left: '450px',
 
-    '@media (max-width: 649px)': {},
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      width: '285px',
+      height: '250px',
+      top: '50px',
+      left: '180px',
+    },
+    
+    '@media (max-width: 1000px) and (min-width:650px)': {
+      width: '333px',
+      height: '290px',
+      top: '50px',
+      left: '300px',
+    },
   },
 }))
 

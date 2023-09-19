@@ -34,6 +34,11 @@ const useStyles = createStyles(() => ({
   },
   CardContainer: {
     margin: '15px 0 25px 0',
+    '@media (max-width: 649px)': {
+      marginTop: '0px',
+      marginLeft: '25px',
+      marginRight: '25px',
+    },
   },
 
   CardWrapper: {

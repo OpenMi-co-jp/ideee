@@ -1,61 +1,41 @@
 import React from 'react'
-import { Box, Title, Badge, Flex, Loader } from '@mantine/core'
+import Link from 'next/link'
+import { Paper, Skeleton, Title, Badge, Flex, Loader } from '@mantine/core'
 import { useGetPopularTagsQuery } from '@/lib/generated/client'
 
 const GetPopularTags = () => {
   const { loading, data } = useGetPopularTagsQuery()
   if (loading) return <Loader color="yellow" />
   const Tags = data?.popularTags
+
   return (
-    <>
-      <Box
-        style={{
-          borderRadius: '20px',
-          border: '3px solid #000',
-          margin: '50px 35px 50px 35px',
-        }}
-      >
-        <Title
-          style={{
-            color: '#ABA096FA',
-            fontSize: '28px',
-            marginTop: '24px',
-            marginLeft: '80px',
-            marginBottom: '15px',
-          }}
-        >
-          タグから探す
+    <Paper shadow="lg" radius="md" p="lg" my="md">
+      <Skeleton visible={loading}>
+        <Title order={2} m="md">
+          人気のタグ
         </Title>
-        <Box
-          style={{
-            borderRadius: '20px',
-            border: '3px solid #A5E4FFD6',
-            background: '#FFF',
-            margin: '0 60px 50px 60px',
-            padding: '15px 80px 15px 80px',
-          }}
-        >
-          <Flex justify="center" align="center" direction="row" wrap="wrap">
-            {Tags?.map((tag) => {
-              return (
+        <Flex justify="center" align="center" wrap="wrap">
+          {Tags?.map((tag) => {
+            return (
+              <Link href={`/search?tag=${tag.name}`} key={tag.name}>
                 <Badge
-                  key={tag.id}
+                  key={tag.name}
+                  color="gray"
                   size="xl"
-                  radius="sm"
-                  variant="filled"
-                  style={{
-                    margin: '5px 15px 5px 15px',
-                    fontSize: '12px',
-                  }}
+                  radius="lg"
+                  m="sm"
+                  variant="gradient"
+                  gradient={{ from: '#f7eac0', to: '#ebcaca' }}
+                  style={{ color: 'gray' }}
                 >
                   {tag.name}
                 </Badge>
-              )
-            })}
-          </Flex>
-        </Box>
-      </Box>
-    </>
+              </Link>
+            )
+          })}
+        </Flex>
+      </Skeleton>
+    </Paper>
   )
 }
 

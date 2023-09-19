@@ -1,40 +1,99 @@
-import { Box, Title, Text, Paper, Avatar, Flex, Loader } from '@mantine/core'
+import {
+  createStyles,
+  Box,
+  Title,
+  Text,
+  Paper,
+  Avatar,
+  Flex,
+  Loader,
+} from '@mantine/core'
 import { useGetHotIdeasQuery } from '@/lib/generated/client'
 
+const useStyles = createStyles(() => ({
+  Box: {
+    borderRadius: '40px',
+    border: '3px solid #F2CE0D',
+    background: '#FFF',
+    marginTop: '50px',
+    marginBottom: '50px',
+
+    '@media (max-width: 649px)': {},
+
+    '@media (max-width: 1000px) and (min-width:650px)': {},
+  },
+
+  Title: {
+    color: '#DCCC39',
+    fontSize: '28px',
+    marginTop: '24px',
+    marginLeft: '80px',
+    marginBottom: '15px',
+
+    '@media (max-width: 649px)': {},
+
+    '@media (max-width: 1000px) and (min-width:650px)': {},
+  },
+  CardContainer: {
+    margin: '15px 0 25px 0',
+
+    '@media (max-width: 649px)': {},
+
+    '@media (max-width: 1000px) and (min-width:650px)': {},
+  },
+
+  CardWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: '15px 45px',
+
+    '@media (max-width: 649px)': {},
+
+    '@media (max-width: 1000px) and (min-width:650px)': {},
+  },
+
+  CardIcon: {
+    marginRight: '10px',
+
+    '@media (max-width: 649px)': {},
+
+    '@media (max-width: 1000px) and (min-width:650px)': {},
+  },
+
+  CardUserTitle: {
+    color: '#000',
+    marginRight: '15px',
+
+    '@media (max-width: 649px)': {},
+
+    '@media (max-width: 1000px) and (min-width:650px)': {},
+  },
+
+  CardUserIcon: {
+    marginTop: '25px',
+
+    '@media (max-width: 649px)': {},
+
+    '@media (max-width: 1000px) and (min-width:650px)': {},
+  },
+}))
+
 const GetHotIdeas = () => {
+  const { classes } = useStyles()
   const { loading, data } = useGetHotIdeasQuery()
   if (loading) return <Loader color="yellow" />
   const Ideas = data?.hotIdeas
   return (
     <>
-      <Box
-        style={{
-          borderRadius: '40px',
-          border: '3px solid #F2CE0D',
-          background: '#FFF',
-          marginTop: '50px',
-          marginBottom: '50px',
-        }}
-      >
-        <Title
-          style={{
-            color: '#DCCC39',
-            fontSize: '28px',
-            marginTop: '24px',
-            marginLeft: '80px',
-            marginBottom: '15px',
-          }}
-        >
-          新しいアイデア
-        </Title>
+      <Box className={classes.Box}>
+        <Title className={classes.Title}>新しいアイデア</Title>
         <Flex
           justify="center"
           align="center"
           direction="row"
           wrap="wrap"
-          style={{
-            margin: '15px 0 25px 0',
-          }}
+          className={classes.CardContainer}
         >
           {Ideas?.map((idea) => {
             return (
@@ -43,35 +102,15 @@ const GetHotIdeas = () => {
                 shadow="md"
                 radius="md"
                 p="md"
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  margin: '15px 45px',
-                }}
+                className={classes.CardWrapper}
               >
-                <Avatar
-                  radius="xl"
-                  size={60}
-                  style={{
-                    marginRight: '10px',
-                  }}
-                />
-                <Text
-                  style={{
-                    color: '#000',
-                    marginRight: '15px',
-                  }}
-                >
-                  {idea.name}
-                </Text>
+                <Avatar radius="xl" size={60} className={classes.CardIcon} />
+                <Text className={classes.CardUserTitle}>{idea.name}</Text>
                 <Avatar
                   radius="xl"
                   size={24}
                   src={idea.user?.icon}
-                  style={{
-                    marginTop: '25px',
-                  }}
+                  className={classes.CardUserIcon}
                 />
               </Paper>
             )

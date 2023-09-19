@@ -51,5 +51,17 @@ RSpec.describe Mutations::Comment::Create do
 
       end
     end
+
+    context '作成されていないideaが指定されたとき' do
+      before do
+        variables[:input][:ideaId] = 0
+      end
+      it "raise errror ActiveRecord::RecorInvalidとなること" do
+        expect {
+          post graphql_path, params: { query: query, variables: variables.to_json }, headers: tokens
+        }.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: Ideaを入力してください')
+      end
+    end
+
   end
 end

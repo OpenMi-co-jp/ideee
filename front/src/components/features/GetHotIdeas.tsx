@@ -14,7 +14,6 @@ const useStyles = createStyles(() => ({
   Box: {
     borderRadius: '40px',
     border: '3px solid #F2CE0D',
-    background: '#FFF',
     marginTop: '50px',
     marginBottom: '50px',
   },

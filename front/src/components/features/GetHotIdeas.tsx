@@ -17,10 +17,6 @@ const useStyles = createStyles(() => ({
     background: '#FFF',
     marginTop: '50px',
     marginBottom: '50px',
-
-    '@media (max-width: 649px)': {},
-
-    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   Title: {
@@ -30,52 +26,60 @@ const useStyles = createStyles(() => ({
     marginLeft: '80px',
     marginBottom: '15px',
 
-    '@media (max-width: 649px)': {},
-
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      textAlign: 'center',
+      margin: '0px',
+      marginTop: '24px',
+    },
   },
   CardContainer: {
     margin: '15px 0 25px 0',
-
-    '@media (max-width: 649px)': {},
-
-    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 
   CardWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: '15px 45px',
+    margin: '15px 10px',
+    width: '400px',
 
-    '@media (max-width: 649px)': {},
-
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      padding: '10px',
+      margin: '10px 10px',
+    },
   },
 
   CardIcon: {
     marginRight: '10px',
 
-    '@media (max-width: 649px)': {},
+    '@media (max-width: 649px)': {
+      marginRight: '5px',
+      height: 40,
+      width: 40,
+      minWidth: 40,
 
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+      '.mantine-Avatar-placeholder': {
+        minWidth: 40,
+        margin: 'auto',
+      },
+    },
   },
 
   CardUserTitle: {
     color: '#000',
     marginRight: '15px',
+    inlineSize: '250px',
+    overflowWrap: 'break-word',
 
-    '@media (max-width: 649px)': {},
-
-    '@media (max-width: 1000px) and (min-width:650px)': {},
+    '@media (max-width: 649px)': {
+      inlineSize: '200px',
+      overflowWrap: 'break-word',
+      marginRight: '5px',
+    },
   },
 
   CardUserIcon: {
     marginTop: '25px',
-
-    '@media (max-width: 649px)': {},
-
-    '@media (max-width: 1000px) and (min-width:650px)': {},
   },
 }))
 

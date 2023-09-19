@@ -2,8 +2,8 @@ import { Box, Group, Portal, rem } from '@mantine/core'
 import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
 import Image from 'next/image'
-import { SearchForm } from './SearchForm'
-import { UserToggle, Notification, Ranking } from './headerComponents'
+import { SearchIcon } from './headerComponents'
+import { UserToggle, Notification } from './headerComponents'
 import { IdeaCreateButton } from '@/components/Idea/createButton'
 import Link from 'next/link'
 
@@ -19,7 +19,7 @@ export const Header: FC = () => {
           left: 0,
           right: 0,
           padding: theme.spacing.xs,
-          height: rem(75),
+          height: rem(70),
           zIndex: 200, // modalのindexがが201のため
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
@@ -29,20 +29,21 @@ export const Header: FC = () => {
           color: theme.colorScheme === 'dark' ? theme.white : theme.black,
         })}
       >
-        <Group position="apart" spacing="xl" noWrap>
+        <Group position="apart" mx="md" noWrap>
           <Link href="/">
             <Image
               src="/img/IdeeeLogo.webp"
               alt="ideeeのロゴ"
-              width={150}
-              height={50}
+              width={140}
+              height={45}
             />
           </Link>
-          <SearchForm />
-          <Ranking />
-          <Notification />
-          <UserToggle />
-          <IdeaCreateButton />
+          <Group position="right" spacing="lg" noWrap>
+            <SearchIcon />
+            <Notification />
+            <UserToggle />
+            <IdeaCreateButton />
+          </Group>
         </Group>
       </Box>
     </Portal>

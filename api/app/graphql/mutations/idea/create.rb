@@ -18,7 +18,7 @@ module Mutations
     argument :product_url, String, required: false, description: '作っているアプリのURL'
     argument :draft, Boolean, required: false, description: '下書きフラグ'
 
-    field :idea, Types::IdeaType, null: false, description: 'アイデアオブジェクト'
+    field :idea, Types::Idea::IdeaType, null: false, description: 'アイデアオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
 
     def resolve(**args)

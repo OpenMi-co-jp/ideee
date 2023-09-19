@@ -7,12 +7,40 @@ query GetIdea($id: ID!) {
   }
 }
 
-query GetIdeas {
-  ideas {
-    id
-    name
-    note
-    goal
+query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
+  ideas(searchCondition: $searchCondition, sort: $sort) {
+    nodes {
+      id
+      name
+      commentsNum
+      difficulty
+      likesNum
+      view
+      updatedAt
+      publishedAt
+      user {
+        id
+        name
+        icon
+      }
+      ideaTags {
+        name
+      }
+      team {
+        status
+        membersNum
+      }
+    }
+    pageInfo {
+      currentPage
+      isFirst
+      isLast
+      nextPage
+      per
+      prevPage
+      totalCount
+      totalPages
+    }
   }
 }
 

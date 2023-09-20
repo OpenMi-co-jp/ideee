@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { createStyles, Title, Text, Button } from '@mantine/core'
+import Link from 'next/link'
 
 const useStyles = createStyles(() => ({
   topVisionImageBox: {},
@@ -97,9 +98,14 @@ export const TopVision = () => {
             エンジニアと盛り上げる
           </Title>
         </div>
-        <Button variant="gradient" gradient={{ from: 'orange', to: 'yellow' }}>
-          IDEEEについて｜⇢
-        </Button>
+        <Link href="/about">
+          <Button
+            variant="gradient"
+            gradient={{ from: 'orange', to: 'yellow' }}
+          >
+            IDEEEについて｜⇢
+          </Button>
+        </Link>
         <Text className={classes.topVisionBottomText}>
           現在のユーザー数:{' '}
           <b style={{ color: '#FF862F', fontSize: '2rem' }}>{userNum}</b>人

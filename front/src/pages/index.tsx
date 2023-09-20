@@ -5,8 +5,10 @@ import Philosophy from '@/components/features/Philosophy'
 import GetActiveTeamIdeas from '@/components/features/GetActiveTeamIdeas'
 import GetDeployedIdeas from '@/components/features/GetDeployedIdeas'
 import GetHotIdeas from '@/components/features/GetHotIdeas'
+import { useLoggedIn } from '@/components/loginContext'
 
 export default function Home() {
+  const { loggedIn } = useLoggedIn()
   const [LSLoggedIn, setLSLoggedIn] = useState(false)
 
   useEffect(() => {
@@ -15,12 +17,12 @@ export default function Home() {
 
   return (
     <>
-      {!LSLoggedIn && <TopVision />}
+      {(!LSLoggedIn || !loggedIn) && <TopVision />}
       <GetHotIdeas />
       <GetPopularTags />
       <GetActiveTeamIdeas />
       <GetDeployedIdeas />
-      {!LSLoggedIn && <Philosophy />}
+      {(!LSLoggedIn || !loggedIn) && <Philosophy />}
     </>
   )
 }

@@ -25,7 +25,6 @@ export const PopularTags = () => {
             return (
               <Link href={`/search?tag=${tag.name}`} key={tag.name}>
                 <Badge
-                  key={tag.name}
                   color="gray"
                   size="xl"
                   radius="lg"

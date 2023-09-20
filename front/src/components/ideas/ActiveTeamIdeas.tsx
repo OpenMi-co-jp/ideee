@@ -1,6 +1,6 @@
 import { Title, Loader, Paper, Flex } from '@mantine/core'
 import { useGetActiveTeamIdeasQuery } from '@/lib/generated/client'
-import { IdeaList } from '@/components/idea'
+import { IdeaList } from '@/components/ideas'
 import { IconUsers } from '@tabler/icons-react'
 
 export const ActiveTeamIdeas = () => {

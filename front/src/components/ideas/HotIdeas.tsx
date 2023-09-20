@@ -1,6 +1,6 @@
 import { Title, Loader, Paper, Flex } from '@mantine/core'
 import { useGetHotIdeasQuery } from '@/lib/generated/client'
-import { IdeaList } from '@/components/idea'
+import { IdeaList } from '@/components/ideas'
 import { IconConfetti } from '@tabler/icons-react'
 
 export const HotIdeas = () => {

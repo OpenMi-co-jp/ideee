@@ -2,10 +2,12 @@ import { Title, Loader, Paper, Flex } from '@mantine/core'
 import { useGetActiveTeamIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
 import { IconUsers } from '@tabler/icons-react'
+import { AlertError } from '@/components/alert'
 
 export const ActiveTeamIdeas = () => {
-  const { loading, data } = useGetActiveTeamIdeasQuery()
+  const { loading, data, error } = useGetActiveTeamIdeasQuery()
   if (loading) return <Loader color="yellow" />
+  if (error) return <AlertError />
 
   return (
     <Paper

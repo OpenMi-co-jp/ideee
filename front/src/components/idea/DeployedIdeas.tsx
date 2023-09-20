@@ -2,10 +2,12 @@ import { Title, Loader, Paper, Flex } from '@mantine/core'
 import { useGetDeployedIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
 import { IconCircleCheck } from '@tabler/icons-react'
+import { AlertError } from '@/components/alert'
 
 export const DeployedIdeas = () => {
-  const { loading, data } = useGetDeployedIdeasQuery()
+  const { loading, data, error } = useGetDeployedIdeasQuery()
   if (loading) return <Loader color="yellow" />
+  if (error) return <AlertError />
 
   return (
     <Paper

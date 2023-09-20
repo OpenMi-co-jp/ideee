@@ -3,11 +3,13 @@ import { Paper, Title, Flex, Loader, Skeleton, Badge } from '@mantine/core'
 import { useGetPopularTagsQuery } from '@/lib/generated/client'
 import { IconRocket } from '@tabler/icons-react'
 import Link from 'next/link'
+import { AlertError } from '@/components/alert'
 
 export const PopularTags = () => {
-  const { loading, data } = useGetPopularTagsQuery()
+  const { loading, data, error } = useGetPopularTagsQuery()
   if (loading) return <Loader color="yellow" />
-  const Tags = data?.popularTags
+  if (error) return <AlertError />
+  const tags = data?.popularTags
 
   return (
     <Paper shadow="md" radius="md" p="lg" my="md" withBorder>
@@ -21,7 +23,7 @@ export const PopularTags = () => {
           </Title>
         </Flex>
         <Flex justify="center" align="center" wrap="wrap">
-          {Tags?.map((tag) => {
+          {tags?.map((tag) => {
             return (
               <Link href={`/search?tag=${tag.name}`} key={tag.name}>
                 <Badge

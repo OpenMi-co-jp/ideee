@@ -2,10 +2,12 @@ import { Title, Loader, Paper, Flex } from '@mantine/core'
 import { useGetHotIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
 import { IconConfetti } from '@tabler/icons-react'
+import { AlertError } from '@/components/alert'
 
 export const HotIdeas = () => {
-  const { loading, data } = useGetHotIdeasQuery()
+  const { loading, data, error } = useGetHotIdeasQuery()
   if (loading) return <Loader color="yellow" />
+  if (error) return <AlertError />
 
   return (
     <Paper

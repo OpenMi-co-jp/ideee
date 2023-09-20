@@ -4,7 +4,7 @@ import { useHeadroom } from '@mantine/hooks'
 import Image from 'next/image'
 import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification } from './headerComponents'
-import { IdeaCreateButton } from '@/components/ideas/createButton'
+import { IdeaCreateButton } from '@/components/idea/createButton'
 import Link from 'next/link'
 
 export const Header: FC = () => {

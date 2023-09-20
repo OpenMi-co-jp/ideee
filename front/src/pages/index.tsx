@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { TopVision, Philosophy } from '@/components/features'
 import { Space } from '@mantine/core'
-import { HotIdeas, ActiveTeamIdeas, DeployedIdeas } from '@/components/ideas'
+import { HotIdeas, ActiveTeamIdeas, DeployedIdeas } from '@/components/idea'
 import { PopularTags } from '@/components/tag'
 import { useLoggedIn } from '@/components/loginContext'
 

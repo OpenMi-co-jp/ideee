@@ -1,6 +1,6 @@
 import { Title, Loader, Paper, Flex } from '@mantine/core'
 import { useGetHotIdeasQuery } from '@/lib/generated/client'
-import { IdeaList } from '@/components/ideas'
+import { IdeaList } from '@/components/idea'
 import { IconConfetti } from '@tabler/icons-react'
 
 export const HotIdeas = () => {
@@ -16,7 +16,7 @@ export const HotIdeas = () => {
       style={{ border: 'thick double #FFD6AF' }}
     >
       <Flex justify="left" align="center" direction="row" wrap="nowrap" mx="xl">
-        <Paper shadow="md" radius="md" p="sm">
+        <Paper shadow="sm" radius="md" p="sm">
           <IconConfetti size={30} stroke={1.5} />
         </Paper>
         <Title order={2} mx="xl" my="md" color="orange">

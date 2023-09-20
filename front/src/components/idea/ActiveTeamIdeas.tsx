@@ -1,6 +1,6 @@
 import { Title, Loader, Paper, Flex } from '@mantine/core'
 import { useGetActiveTeamIdeasQuery } from '@/lib/generated/client'
-import { IdeaList } from '@/components/ideas'
+import { IdeaList } from '@/components/idea'
 import { IconUsers } from '@tabler/icons-react'
 
 export const ActiveTeamIdeas = () => {
@@ -16,7 +16,7 @@ export const ActiveTeamIdeas = () => {
       style={{ border: 'thick double #FFECCC' }}
     >
       <Flex justify="left" align="center" direction="row" wrap="nowrap" mx="xl">
-        <Paper shadow="md" radius="md" p="sm">
+        <Paper shadow="sm" radius="md" p="sm">
           <IconUsers size={30} stroke={1.5} />
         </Paper>
         <Title order={2} mx="xl" my="md" color="#E5AA37">

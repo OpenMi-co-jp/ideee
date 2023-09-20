@@ -13,7 +13,7 @@ export const PopularTags = () => {
     <Paper shadow="md" radius="md" p="lg" my="md" withBorder>
       <Skeleton visible={loading}>
         <Flex justify="left" align="center" direction="row" wrap="nowrap">
-          <Paper shadow="md" radius="md" p="sm">
+          <Paper shadow="sm" radius="md" p="sm">
             <IconRocket size={30} stroke={1.5} />
           </Paper>
           <Title order={2} m="md" color="#3F3F3F">

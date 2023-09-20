@@ -46,19 +46,6 @@ const useStyles = createStyles(() => ({
     },
   },
 
-  SubTitleInitialCommon: {
-    color: '#FDB221',
-  },
-
-  ImageWrapper: {
-    position: 'relative',
-    marginTop: '80px',
-  },
-
-  ImageInnerWrapper: {
-    margin: '-20px auto 0 auto',
-  },
-
   ImageTitle: {
     fontSize: '25px',
     fontWeight: 700,
@@ -148,27 +135,27 @@ export const Philosophy = () => {
           className={classes.SubTitle}
         >
           <Text>
-            <span className={classes.SubTitleInitialCommon}>I</span>dea
+            <span style={{ color: '#FDB221' }}>I</span>dea
           </Text>
           <Text>
-            <span className={classes.SubTitleInitialCommon}>D</span>esign
+            <span style={{ color: '#FDB221' }}>D</span>esign
           </Text>
           <Text>
-            <span className={classes.SubTitleInitialCommon}>E</span>ngineer
+            <span style={{ color: '#FDB221' }}>E</span>ngineer
           </Text>
           <Text>
-            <span className={classes.SubTitleInitialCommon}>E</span>ncounter
+            <span style={{ color: '#FDB221' }}>E</span>ncounter
           </Text>
           <Text>
-            <span className={classes.SubTitleInitialCommon}>E</span>ncourage
+            <span style={{ color: '#FDB221' }}>E</span>ncourage
           </Text>
         </Flex>
-        <Flex className={classes.ImageWrapper}>
+        <Flex style={{ position: 'relative', marginTop: '80px' }}>
           <Flex
             justify="center"
             direction="column"
             wrap="wrap"
-            className={classes.ImageInnerWrapper}
+            style={{ margin: '-20px auto 0 auto' }}
           >
             <Text className={classes.ImageTitle}>
               あなたの「困ってる」を形に

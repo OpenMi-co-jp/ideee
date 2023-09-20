@@ -1,6 +1,7 @@
 import React from 'react'
-import { Paper, Title, Badge, Flex, Loader, Skeleton } from '@mantine/core'
+import { Paper, Title, Flex, Loader, Skeleton, Badge } from '@mantine/core'
 import { useGetPopularTagsQuery } from '@/lib/generated/client'
+import { IconRocket } from '@tabler/icons-react'
 import Link from 'next/link'
 
 export const PopularTags = () => {
@@ -9,11 +10,16 @@ export const PopularTags = () => {
   const Tags = data?.popularTags
 
   return (
-    <Paper shadow="lg" radius="md" p="lg" my="md">
+    <Paper shadow="md" radius="md" p="lg" my="md" withBorder>
       <Skeleton visible={loading}>
-        <Title order={2} m="md">
-          人気のタグ
-        </Title>
+        <Flex justify="left" align="center" direction="row" wrap="nowrap">
+          <Paper shadow="md" radius="md" p="sm">
+            <IconRocket size={30} stroke={1.5} />
+          </Paper>
+          <Title order={2} m="md" color="#3F3F3F">
+            人気のタグ
+          </Title>
+        </Flex>
         <Flex justify="center" align="center" wrap="wrap">
           {Tags?.map((tag) => {
             return (

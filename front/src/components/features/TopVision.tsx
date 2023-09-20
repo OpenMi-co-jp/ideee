@@ -67,13 +67,13 @@ const useStyles = createStyles(() => ({
   },
 }))
 
-const TopVision = () => {
+export const TopVision = () => {
   const { classes } = useStyles()
   return (
     <>
       <Image
         src={'/img/top_vision_image.webp'}
-        alt="top_vision_image"
+        alt="ビジョンを伝える画像"
         className={classes.topVisionImage}
         style={{
           top: 150,
@@ -95,5 +95,3 @@ const TopVision = () => {
     </>
   )
 }
-
-export default TopVision

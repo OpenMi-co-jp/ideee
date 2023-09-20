@@ -132,7 +132,7 @@ const useStyles = createStyles(() => ({
   },
 }))
 
-const Philosophy = () => {
+export const Philosophy = () => {
   const { classes } = useStyles()
   return (
     <>
@@ -179,7 +179,7 @@ const Philosophy = () => {
             <Image
               className={classes.PeopleImage}
               src={'/img/bottom_vision_image.webp'}
-              alt="bottom_vision_image"
+              alt="コラボレーションイメージ"
               width={430}
               height={300}
             />
@@ -191,5 +191,3 @@ const Philosophy = () => {
     </>
   )
 }
-
-export default Philosophy

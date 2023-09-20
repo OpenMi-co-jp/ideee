@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-import TopVision from '@/components/features/TopVision'
-import GetPopularTags from '@/components/features/GetPopularTags'
-import Philosophy from '@/components/features/Philosophy'
-import GetActiveTeamIdeas from '@/components/features/GetActiveTeamIdeas'
-import GetDeployedIdeas from '@/components/features/GetDeployedIdeas'
-import GetHotIdeas from '@/components/features/GetHotIdeas'
+import { TopVision, Philosophy } from '@/components/features'
+import { Space } from '@mantine/core'
+import { HotIdeas, ActiveTeamIdeas, DeployedIdeas } from '@/components/idea'
+import { PopularTags } from '@/components/tag'
 import { useLoggedIn } from '@/components/loginContext'
 
 export default function Home() {
@@ -17,12 +15,16 @@ export default function Home() {
 
   return (
     <>
-      {(!LSLoggedIn || !loggedIn) && <TopVision />}
-      <GetHotIdeas />
-      <GetPopularTags />
-      <GetActiveTeamIdeas />
-      <GetDeployedIdeas />
-      {(!LSLoggedIn || !loggedIn) && <Philosophy />}
+      {!(LSLoggedIn || loggedIn) && <TopVision />}
+      <Space h="3rem" />
+      <HotIdeas />
+      <Space h="lg" />
+      <PopularTags />
+      <Space h="lg" />
+      <ActiveTeamIdeas />
+      <Space h="xl" />
+      <DeployedIdeas />
+      {!(LSLoggedIn || loggedIn) && <Philosophy />}
     </>
   )
 }

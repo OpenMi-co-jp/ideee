@@ -1,1 +1,2 @@
-export { PopularTags } from './PopularTags'
+export { Philosophy } from './Philosophy'
+export { TopVision } from './TopVision'

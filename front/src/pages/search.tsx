@@ -1,6 +1,6 @@
 import { Autocomplete, Container } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
-import { PopularTags } from '@/components/features'
+import { PopularTags } from '@/components/tag'
 import { useRouter } from 'next/router'
 
 export default function Search() {

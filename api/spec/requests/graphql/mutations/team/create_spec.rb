@@ -42,7 +42,7 @@ RSpec.describe Mutations::Team::Create do
     end
 
     context '正しいideaIdとownerIdを指定しているとき' do
-      it '作成に成功する' do
+      it '作成に成功すること' do
         res = response.parsed_body
 
         expect(res['data']['createTeam']['success']).to be_truthy

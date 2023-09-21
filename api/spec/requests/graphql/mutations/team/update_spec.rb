@@ -53,7 +53,7 @@ RSpec.describe Mutations::Team::Update do
       expect(res['data']['updateTeam']['team']['status']).to eq(variables[:input][:status])
       expect(res['data']['updateTeam']['team']['requirement']).to eq(variables[:input][:requirement])
       expect(res['data']['updateTeam']['team']['offer']).to eq(variables[:input][:offer])
-      expect(res['data']['updateTeam']['team']['member_num']).to eq(variables[:input][:member_num])
+      expect(res['data']['updateTeam']['team']['members_num']).to eq(variables[:input][:members_num])
     end
 
   end

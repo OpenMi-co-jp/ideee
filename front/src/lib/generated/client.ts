@@ -850,7 +850,7 @@ export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetPopularTagsQuery = {
   __typename?: 'Query'
-  popularTags: Array<{ __typename?: 'Tag'; name: string }>
+  popularTags: Array<{ __typename?: 'Tag'; id: string; name: string }>
 }
 
 export type GetTeamQueryVariables = Exact<{
@@ -1806,6 +1806,7 @@ export type GetRoomQueryResult = Apollo.QueryResult<
 export const GetPopularTagsDocument = gql`
   query GetPopularTags {
     popularTags {
+      id
       name
     }
   }

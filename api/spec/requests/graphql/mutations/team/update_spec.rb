@@ -58,7 +58,7 @@ RSpec.describe Mutations::Team::Update do
       end
     end
 
-    context '更新対象のidが指定されていないとき' do
+    context '更新対象のidが存在していないとき' do
       before do
         variables[:input][:id] = nil
       end

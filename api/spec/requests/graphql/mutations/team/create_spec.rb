@@ -33,7 +33,7 @@ RSpec.describe Mutations::Team::Create do
         input: {
           ownerId: owner.id,
           ideaId: idea.id,
-          status: 0,
+          status: 'active',
           requirement: 'hoge',
           offer: 'fuga',
           membersNum: 3

@@ -15,7 +15,7 @@ RSpec.describe Mutations::Team::Destroy do
     GQL
   end
 
-  let(:team) { FactoryBot.create(:team, idea: idea, owner_id: owner.id)}
+  let(:team) { FactoryBot.create(:team, idea_id: idea.id, owner_id: owner.id) }
 
   describe 'チームの削除' do
     before do
@@ -25,13 +25,13 @@ RSpec.describe Mutations::Team::Destroy do
     let!(:variables) do
       {
         input: {
-          id: team.id,
+          id: team.id
         }
       }
     end
 
     context '適切なinputで削除するとき' do
-      it "削除に成功すること" do
+      it '削除に成功すること' do
         res = response.parsed_body
         reloaded_team = Team.find_by(id: team.id)
         expect(res['data']['destroyTeam']['success']).to be_truthy
@@ -51,6 +51,4 @@ RSpec.describe Mutations::Team::Destroy do
       end
     end
   end
-
-
 end

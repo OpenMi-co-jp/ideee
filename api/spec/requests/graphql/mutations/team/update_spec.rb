@@ -23,7 +23,7 @@ RSpec.describe Mutations::Team::Update do
     GQL
   end
 
-  let(:team) { FactoryBot.create(:team, idea: idea, owner_id: owner.id)}
+  let(:team) { FactoryBot.create(:team, idea:, owner_id: owner.id) }
 
   describe 'チームの作成' do
     before do
@@ -45,10 +45,14 @@ RSpec.describe Mutations::Team::Update do
     end
 
     context '適切なinputで更新するとき' do
-      it "更新に成功すること" do
+      it '更新に成功すること' do
+        res = response.parsed_body
+        expect(res['data']['updateTeam']['success']).to be_truthy
+      end
+
+      it '正しい更新内容が反映されていること' do
         res = response.parsed_body
 
-        expect(res['data']['updateTeam']['success']).to be_truthy
         # GraphQLはID型を通常文字列型として返却するためstringにcastしています。
         expect(res['data']['updateTeam']['team']['id']).to eq(team.id.to_s)
         expect(res['data']['updateTeam']['team']['status']).to eq(variables[:input][:status])
@@ -67,10 +71,7 @@ RSpec.describe Mutations::Team::Update do
         post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
         res =  response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type UpdateTeamInput! was provided invalid value for id (Expected value to not be null)')
-
       end
     end
   end
-
-
 end

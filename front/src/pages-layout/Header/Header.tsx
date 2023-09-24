@@ -1,4 +1,4 @@
-import { Box, Group, Portal, rem } from '@mantine/core'
+import { Box, Group, Portal, rem, Container } from '@mantine/core'
 import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
 import Image from 'next/image'
@@ -29,7 +29,7 @@ export const Header: FC = () => {
           color: theme.colorScheme === 'dark' ? theme.white : theme.black,
         })}
       >
-        <Group position="apart" mx="md" noWrap>
+        <Group position="apart" mx="auto" noWrap>
           <Link href="/">
             <Image
               src="/img/IdeeeLogo.webp"
@@ -38,11 +38,19 @@ export const Header: FC = () => {
               height={45}
             />
           </Link>
-          <Group position="right" spacing="lg" noWrap>
-            <SearchIcon />
-            <Notification />
-            <UserToggle />
-            <IdeaCreateButton />
+          <Group position="right" noWrap>
+            <Container
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: '0.9rem',
+              }}
+            >
+              <SearchIcon />
+              <Notification />
+              <UserToggle />
+              <IdeaCreateButton />
+            </Container>
           </Group>
         </Group>
       </Box>

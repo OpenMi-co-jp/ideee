@@ -9,20 +9,20 @@ export const UserToggle = () => {
   const { loggedIn } = useLoggedIn()
   const LSLoggedIn = localStorage.getItem('loggedIn') == 'true'
   return (
-    <Group position="center">
+    <Group>
       {(() => {
         if (LSLoggedIn || loggedIn) {
           return <UserMenu />
         } else {
           return (
-            <>
+            <Group mt="-0.5rem" mr="-1rem">
               <Link href="/user/sign_up">
-                <Button>ユーザー登録</Button>
+                <Button mr="-0.3rem">ユーザー登録</Button>
               </Link>
               <Link href="/user/sign_in">
                 <Button>ログイン</Button>
               </Link>
-            </>
+            </Group>
           )
         }
       })()}

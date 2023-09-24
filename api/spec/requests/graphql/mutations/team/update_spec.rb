@@ -55,7 +55,7 @@ RSpec.describe Mutations::Team::Update do
 
         # GraphQLはID型を通常文字列型として返却するためstringにcastしています。
         expect(res['data']['updateTeam']['team']['id']).to eq(team.id.to_s)
-        expect(res['data']['updateTeam']['team']['status']).to eq(variables[:input][:status])
+        expect(res['data']['updateTeam']['team']['status']).to eq(Team.statuses.key(variables[:input][:status]))
         expect(res['data']['updateTeam']['team']['requirement']).to eq(variables[:input][:requirement])
         expect(res['data']['updateTeam']['team']['offer']).to eq(variables[:input][:offer])
         expect(res['data']['updateTeam']['team']['members_num']).to eq(variables[:input][:members_num])

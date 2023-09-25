@@ -1,6 +1,6 @@
 import { Box, Group, Portal, rem, Container } from '@mantine/core'
 import type { FC } from 'react'
-import { useHeadroom } from '@mantine/hooks'
+import { useHeadroom, useMediaQuery } from '@mantine/hooks'
 import Image from 'next/image'
 import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification } from './headerComponents'
@@ -9,6 +9,7 @@ import Link from 'next/link'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
+  const isMobile = useMediaQuery(`(max-width: ${rem(493)})`)
 
   return (
     <Portal>
@@ -19,7 +20,7 @@ export const Header: FC = () => {
           left: 0,
           right: 0,
           padding: theme.spacing.xs,
-          height: rem(70),
+          height: isMobile ? rem(105) : rem(70),
           zIndex: 200, // modalのindexがが201のため
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
@@ -38,19 +39,19 @@ export const Header: FC = () => {
               height={45}
             />
           </Link>
-          <Group position="right" noWrap>
+          <Group position="right" spacing="xs" noWrap>
             <Container
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                gap: '0.9rem',
+                gap: '0.7rem',
               }}
             >
               <SearchIcon />
               <Notification />
-              <UserToggle />
-              <IdeaCreateButton />
             </Container>
+            <UserToggle />
+            <IdeaCreateButton />
           </Group>
         </Group>
       </Box>

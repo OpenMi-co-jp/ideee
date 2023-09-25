@@ -2,6 +2,8 @@
 
 module Types
   class LikeType < Types::BaseObject
+    field :create, mutation: Mutations::Like::Create, description: 'いいね作成'
+    field :destroy, mutation: Mutations::Like::Destroy, description: 'いいね削除'
     field :id, ID, null: false, description: 'コメントID'
     field :user_id, Integer, description: 'ユーザーID'
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'

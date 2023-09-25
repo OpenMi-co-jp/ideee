@@ -24,7 +24,10 @@ export const PopularTags = () => {
       <Flex justify="center" align="center" wrap="wrap" py="md">
         {tags?.map((tag) => {
           return (
-            <Link href={`/search?tag=${tag.name}`} key={tag.name}>
+            <Link
+              href={`/search?name_or_idea_tags_name_cont=${tag.name}`}
+              key={tag.name}
+            >
               <Badge
                 color="gray"
                 size="xl"

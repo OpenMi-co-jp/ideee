@@ -1,11 +1,16 @@
 import { Autocomplete, Container } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
 import { PopularTags } from '@/components/tag'
+import { SearchedIdeas } from '@/components/idea'
 import { useRouter } from 'next/router'
 
 export default function Search() {
   const router = useRouter()
-  const query = router.query
+  const { query } = router
+  const queryExist = Object.keys(query).length
+  const searchQuery = {
+    nameOrIdeaTagsNameCont: String(query.name_or_idea_tags_name_cont),
+  }
 
   return (
     <Container>
@@ -27,7 +32,7 @@ export default function Search() {
           console.log(value)
         }}
       />
-      {Object.keys(query).length ? null : <PopularTags />}
+      {queryExist ? <SearchedIdeas query={searchQuery} /> : <PopularTags />}
     </Container>
   )
 }

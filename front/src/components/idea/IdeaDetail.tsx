@@ -8,7 +8,7 @@ const IdeaDetail = () => {
 
   return (
     <>
-      <div>
+      <Group>
         <Image
           height={50}
           width={50}
@@ -17,7 +17,7 @@ const IdeaDetail = () => {
           alt="user prof"
         />
         <Title> Idea of title can be very large</Title>
-      </div>
+      </Group>
       <UserIcon />
       <AccompaniedTags />
       <IdeaContent />

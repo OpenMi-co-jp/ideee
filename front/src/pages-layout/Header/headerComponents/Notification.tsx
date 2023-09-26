@@ -1,5 +1,5 @@
 import { IconBell } from '@tabler/icons-react'
 
 export const Notification = () => {
-  return <IconBell />
+  return <IconBell size={25}/>
 }

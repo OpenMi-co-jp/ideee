@@ -1,4 +1,4 @@
-import { Box, Group, Portal, rem, Container } from '@mantine/core'
+import { Box, Group, Portal, rem, Container, Space, Text, Card } from '@mantine/core'
 import type { FC } from 'react'
 import { useHeadroom, useMediaQuery } from '@mantine/hooks'
 import Image from 'next/image'
@@ -9,7 +9,9 @@ import Link from 'next/link'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
-  const isMobile = useMediaQuery(`(max-width: ${rem(493)})`)
+  const isMobile = useMediaQuery(`(max-width: ${rem(530)})`)
+  const imgWidth = isMobile ? 100 : 140;
+  const imgHeight = (45 / 140) * imgWidth;
 
   return (
     <Portal>
@@ -20,7 +22,7 @@ export const Header: FC = () => {
           left: 0,
           right: 0,
           padding: theme.spacing.xs,
-          height: isMobile ? rem(105) : rem(70),
+          height: isMobile ? `calc(80px / 90vw)` : rem(70),
           zIndex: 200, // modalのindexがが201のため
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
@@ -30,31 +32,27 @@ export const Header: FC = () => {
           color: theme.colorScheme === 'dark' ? theme.white : theme.black,
         })}
       >
-        <Group position="apart" mx="auto" noWrap>
+        <Group position='apart'>
+        
           <Link href="/">
             <Image
               src="/img/IdeeeLogo.webp"
               alt="ideeeのロゴ"
-              width={140}
-              height={45}
+              width={imgWidth}
+              height={imgHeight}
             />
           </Link>
-          <Group position="right" spacing="xs" noWrap>
-            <Container
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                gap: '0.7rem',
-              }}
-            >
-              <SearchIcon />
-              <Notification />
-            </Container>
-            <UserToggle />
-            <IdeaCreateButton />
-          </Group>
+          
+            <Group position='center'>
+              <Text mb="-0.5rem">
+              <SearchIcon/>
+              </Text>
+              <Notification/>
+              <UserToggle />
+              <IdeaCreateButton />
+            </Group>
         </Group>
-      </Box>
+       </Box>
     </Portal>
   )
 }

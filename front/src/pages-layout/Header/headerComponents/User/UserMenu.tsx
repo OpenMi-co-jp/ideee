@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const UserMenu = () => {
   return (
-    <Menu shadow="md" width={200}>
+    <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
         <Avatar radius="xl" />
       </Menu.Target>

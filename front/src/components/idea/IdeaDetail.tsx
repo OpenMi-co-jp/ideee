@@ -1,13 +1,35 @@
 import { useRouter } from 'next/router'
+import { Image, Title, Group, Button } from '@mantine/core'
+import { UserIcon, AccompaniedTags, IdeaContent } from './'
 
 const IdeaDetail = () => {
   const router = useRouter()
-  const { id, lang } = router.query
+  const { id } = router.query
 
   return (
-    <p>
-      このページのIDは{id}で言語は{lang}です
-    </p>
+    <>
+      <div>
+        <Image
+          height={50}
+          width={50}
+          radius={50}
+          // src={iconRef}
+          alt="user prof"
+        />
+        <Title> Idea of title can be very large</Title>
+      </div>
+      <UserIcon />
+      <AccompaniedTags />
+      <IdeaContent />
+      <Group position="center">
+        <Button
+          type="submit"
+          size="lg"
+        >
+          送信
+        </Button>
+      </Group>
+    </>
   )
 }
 

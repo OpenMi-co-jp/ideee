@@ -1,4 +1,4 @@
-import { Button, Group, Space, Box,rem } from '@mantine/core'
+import { Button, Group, Space, Box, rem } from '@mantine/core'
 import { SignUpForm, SignInForm } from '@/components/Auth'
 import { openModal } from '@mantine/modals'
 import { useLoggedIn } from '@/components/loginContext'
@@ -18,7 +18,13 @@ export const UserToggle = () => {
           return <UserMenu />
         } else {
           return (
-            <Box m="0.5rem"  style={{display: "flex", flexDirection:  isMobile ? 'column' : 'row'}}>
+            <Box
+              m="0.5rem"
+              style={{
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+              }}
+            >
               <Link href="/user/sign_up">
                 <Button w="8rem">ユーザー登録</Button>
               </Link>

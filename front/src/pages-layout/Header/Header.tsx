@@ -1,4 +1,13 @@
-import { Box, Group, Portal, rem, Container, Space, Text, Card } from '@mantine/core'
+import {
+  Box,
+  Group,
+  Portal,
+  rem,
+  Container,
+  Space,
+  Text,
+  Card,
+} from '@mantine/core'
 import type { FC } from 'react'
 import { useHeadroom, useMediaQuery } from '@mantine/hooks'
 import Image from 'next/image'
@@ -10,8 +19,8 @@ import Link from 'next/link'
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const isMobile = useMediaQuery(`(max-width: ${rem(530)})`)
-  const imgWidth = isMobile ? 100 : 140;
-  const imgHeight = (45 / 140) * imgWidth;
+  const imgWidth = isMobile ? 100 : 140
+  const imgHeight = (45 / 140) * imgWidth
 
   return (
     <Portal>
@@ -32,8 +41,7 @@ export const Header: FC = () => {
           color: theme.colorScheme === 'dark' ? theme.white : theme.black,
         })}
       >
-        <Group position='apart'>
-        
+        <Group position="apart">
           <Link href="/">
             <Image
               src="/img/IdeeeLogo.webp"
@@ -42,17 +50,17 @@ export const Header: FC = () => {
               height={imgHeight}
             />
           </Link>
-          
-            <Group position='center'>
-              <Text mb="-0.5rem">
-              <SearchIcon/>
-              </Text>
-              <Notification/>
-              <UserToggle />
-              <IdeaCreateButton />
-            </Group>
+
+          <Group position="center">
+            <Text mb="-0.5rem">
+              <SearchIcon />
+            </Text>
+            <Notification />
+            <UserToggle />
+            <IdeaCreateButton />
+          </Group>
         </Group>
-       </Box>
+      </Box>
     </Portal>
   )
 }

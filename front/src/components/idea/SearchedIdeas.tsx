@@ -1,11 +1,18 @@
-import { Loader, Paper, Text, Divider } from '@mantine/core'
+import { Loader, Paper, Text, Divider, Flex, Title } from '@mantine/core'
 import { useGetIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
 import { AlertError } from '@/components/alert'
 import { IconSearch } from '@tabler/icons-react'
+import { IdeaNotFound } from '@/components/idea'
 
 type SearchProps = {
-  query: { nameOrIdeaTagsNameCont?: string }
+  query: {
+    nameOrIdeaTagsNameCont: string | null
+    difficultyEq: number | null
+    teamStatusEq: number | null
+    publishedAtGteq: string | null
+    publishedAtLteq: string | null
+  }
 }
 
 export const SearchedIdeas: React.FC<SearchProps> = ({ query }) => {
@@ -14,7 +21,7 @@ export const SearchedIdeas: React.FC<SearchProps> = ({ query }) => {
   })
   if (loading) return <Loader color="yellow" />
   if (error) return <AlertError />
-  const { nameOrIdeaTagsNameCont } = query
+  const totalCount = data?.ideas.pageInfo?.totalCount
 
   return (
     <>
@@ -31,9 +38,21 @@ export const SearchedIdeas: React.FC<SearchProps> = ({ query }) => {
           </>
         }
       />
-      <Paper shadow="md" py="lg" my="xl">
-        <IdeaList ideas={data?.ideas.nodes} />
-      </Paper>
+      {totalCount == 0 ? (
+        <IdeaNotFound />
+      ) : (
+        <>
+          <Flex justify="left" align="center" direction="row" wrap="nowrap">
+            <IconSearch stroke={1.2} />
+            <Title order={4} m="sm" color="gray">
+              検索結果: {totalCount} 件
+            </Title>
+          </Flex>
+          <Paper shadow="md" py="lg" my="xl">
+            <IdeaList ideas={data?.ideas.nodes} />
+          </Paper>
+        </>
+      )}
     </>
   )
 }

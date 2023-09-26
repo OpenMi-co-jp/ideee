@@ -9,7 +9,12 @@ export default function Search() {
   const { query } = router
   const queryExist = Object.keys(query).length
   const searchQuery = {
-    nameOrIdeaTagsNameCont: String(query.name_or_idea_tags_name_cont),
+    nameOrIdeaTagsNameCont:
+      (query.name_or_idea_tags_name_cont as string) || null,
+    difficultyEq: Number(query.difficulty_eq) || null,
+    teamStatusEq: Number(query.team_status_eq) || null,
+    publishedAtGteq: (query.published_at_gteq as string) || null,
+    publishedAtLteq: (query.published_at_lteq as string) || null,
   }
 
   return (

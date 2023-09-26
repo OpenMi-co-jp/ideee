@@ -22,10 +22,7 @@ const IdeaDetail = () => {
       <AccompaniedTags />
       <IdeaContent />
       <Group position="center">
-        <Button
-          type="submit"
-          size="lg"
-        >
+        <Button type="submit" size="lg">
           送信
         </Button>
       </Group>

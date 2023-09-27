@@ -44,10 +44,14 @@ export const Header: FC = () => {
         <Group position="apart">
           <Link href="/">
             <Image
-              src="/img/IdeeeLogo.webp"
+              src={
+                isMobile
+                  ? '/img/mobile_version_icon.png'
+                  : '/img/IdeeeLogo.webp'
+              }
               alt="ideeeのロゴ"
-              width={imgWidth}
-              height={imgHeight}
+              width={isMobile ? 40 : imgWidth}
+              height={isMobile ? 40 : imgHeight}
             />
           </Link>
 

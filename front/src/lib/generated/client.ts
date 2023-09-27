@@ -34,6 +34,8 @@ export type Comment = {
   ideaId: Scalars['Int']
   /** 更新日 */
   updatedAt: Scalars['ISO8601DateTime']
+  /** ユーザーオブジェクト */
+  user: User
   /** ユーザーID */
   userId: Scalars['Int']
 }
@@ -190,6 +192,8 @@ export type Idea = {
   __typename?: 'Idea'
   /** 背景 */
   background?: Maybe<Scalars['String']>
+  /** コメントリスト */
+  comments: Array<Comment>
   /** コメント数 */
   commentsNum?: Maybe<Scalars['Int']>
   /** 作成日 */
@@ -683,6 +687,12 @@ export type GetIdeaQuery = {
     name?: string | null
     note?: string | null
     goal?: string | null
+    comments: Array<{
+      __typename?: 'Comment'
+      id: string
+      description: string
+      user: { __typename?: 'User'; name?: string | null; icon?: string | null }
+    }>
   }
 }
 
@@ -1219,6 +1229,14 @@ export const GetIdeaDocument = gql`
       name
       note
       goal
+      comments {
+        id
+        description
+        user {
+          name
+          icon
+        }
+      }
     }
   }
 `

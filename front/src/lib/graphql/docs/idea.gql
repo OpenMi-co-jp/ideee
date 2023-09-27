@@ -4,6 +4,14 @@ query GetIdea($id: ID!) {
     name
     note
     goal
+    comments {
+      id
+      description
+      user {
+        name
+        icon
+      }
+    }
   }
 }
 

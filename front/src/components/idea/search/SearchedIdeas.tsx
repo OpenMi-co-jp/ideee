@@ -1,25 +1,27 @@
-import { Loader, Paper, Text, Divider, Flex, Title } from '@mantine/core'
+import { Paper, Text, Divider, Flex, Title } from '@mantine/core'
 import { useGetIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
 import { AlertError } from '@/components/alert'
 import { IconSearch } from '@tabler/icons-react'
 import { IdeaNotFound } from '@/components/idea'
+import { useRouter } from 'next/router'
+import { LoaderBox } from '@/components/features'
 
-type SearchProps = {
-  query: {
-    nameOrIdeaTagsNameCont: string | null
-    difficultyEq: number | null
-    teamStatusEq: number | null
-    publishedAtGteq: string | null
-    publishedAtLteq: string | null
+export const SearchedIdeas = () => {
+  const router = useRouter()
+  const { query } = router
+  const searchQuery = {
+    nameOrIdeaTagsNameCont:
+      (query.name_or_idea_tags_name_cont as string) || null,
+    difficultyEq: Number(query.difficulty_eq) || null,
+    teamStatusEq: Number(query.team_status_eq) || null,
+    publishedAtGteq: (query.published_at_gteq as string) || null,
+    publishedAtLteq: (query.published_at_lteq as string) || null,
   }
-}
-
-export const SearchedIdeas: React.FC<SearchProps> = ({ query }) => {
   const { loading, data, error } = useGetIdeasQuery({
-    variables: { searchCondition: query },
+    variables: { searchCondition: searchQuery },
   })
-  if (loading) return <Loader color="yellow" />
+  if (loading) return <LoaderBox />
   if (error) return <AlertError />
   const totalCount = data?.ideas.pageInfo?.totalCount
 

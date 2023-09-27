@@ -7,7 +7,7 @@ module Resolvers
     type [Types::TagType], null: false
 
     def resolve
-      ::Tag.all
+      ::Tag.all.shuffle
     end
   end
 end

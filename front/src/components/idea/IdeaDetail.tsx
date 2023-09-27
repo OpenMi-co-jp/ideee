@@ -1,19 +1,26 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Image, Title, Group, Button } from '@mantine/core'
-import { UserIcon, AccompaniedTags, IdeaContent } from './'
+import { Image, Title, Group, Button, Loader } from '@mantine/core'
+import { UserIcon, AccompaniedTags, IdeaContent } from '@/components/idea'
 import { useLoggedIn } from '@/components/loginContext'
+import { useGetIdeaQuery } from '@/lib/generated/client'
 
 const IdeaDetail = () => {
   const router = useRouter()
-
+  const { data, loading, error } = useGetIdeaQuery({
+    variables: {
+      id: router.query.id as string,
+    },
+  })
   const { loggedIn } = useLoggedIn()
   const [LSLoggedIn, setLSLoggedIn] = useState(false)
 
-  const { id } = router.query
   useEffect(() => {
     setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
   }, [])
+
+  if (loading) return <Loader color='yellow' />
+  const idea = data?.idea
 
   return (
     <>
@@ -26,7 +33,7 @@ const IdeaDetail = () => {
           // src={iconRef}
           alt="user prof"
         />
-        <Title> Idea of title can be very large</Title>
+        <Title>{idea?.name}</Title>
       </Group>
       <UserIcon />
       <AccompaniedTags />

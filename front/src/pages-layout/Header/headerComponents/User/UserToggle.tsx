@@ -26,7 +26,9 @@ export const UserToggle = () => {
               }}
             >
               <Link href="/user/sign_up">
-                <Button w="8rem">ユーザー登録</Button>
+                <Button w="8rem" style={{ display: isMobile ? 'none' : '' }}>
+                  ユーザー登録
+                </Button>
               </Link>
               <Space m="2%" />
               <Link href="/user/sign_in">

@@ -22,6 +22,7 @@ module Types
 
     field :room, resolver: Resolvers::Room::RoomResolver, description: 'ルームオブジェクト'
 
+    field :tags, resolver: Resolvers::Tag::TagsResolver, description: 'タグ一覧'
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'
   end
 end

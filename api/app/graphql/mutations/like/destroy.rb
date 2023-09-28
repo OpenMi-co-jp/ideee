@@ -1,14 +1,17 @@
 module Mutations
   class Like::Destroy < BaseMutation
-    # TODO: define return fields
-    # field :post, Types::PostType, null: false
+    graphql_name 'DestroyLike'
 
-    # TODO: define arguments
-    # argument :name, String, required: true
+    argument :id, ID, required: true, description: 'いいねID'
 
-    # TODO: define resolve method
-    # def resolve(name:)
-    #   { post: ... }
-    # end
+    field :success, Boolean, null: false, description: '成功フラグ'
+
+    def resolve(**args)
+      like = ::Like.find_by(id: args[:id])
+      like.destroy!
+      {
+        success: true
+      }
+    end
   end
 end

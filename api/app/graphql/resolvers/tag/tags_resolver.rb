@@ -7,7 +7,7 @@ module Resolvers
     type [Types::TagType], null: false
 
     def resolve
-      ::Tag.all.shuffle
+      ::Tag.order(Arel.sql('RAND()'))
     end
   end
 end

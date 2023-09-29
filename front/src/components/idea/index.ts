@@ -6,4 +6,3 @@ export { UserIcon } from './UserIcon'
 export { AccompaniedTags } from './AccompaniedTags'
 export { IdeaContent } from './IdeaContent'
 export { SearchedIdeas, IdeaNotFound, SearchInput } from './search'
-

@@ -1,5 +1,6 @@
 query GetPopularTags {
   popularTags {
+    id
     name
   }
 }

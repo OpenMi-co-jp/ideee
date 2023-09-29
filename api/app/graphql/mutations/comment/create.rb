@@ -6,8 +6,9 @@ module Mutations
     argument :user_id, Integer, required: true, description: '【必須】ユーザーID'
     argument :idea_id, Integer, required: true, description: '【必須】アイデアID'
 
-    field :comment, Types::CommentType, null: false, description: 'コメントオブジェクト'
+    field :comment, Types::CommentType, null: true, description: 'コメントオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーメッセージのリスト'
 
     def resolve(**args)
       comment = ::Comment.new(
@@ -19,6 +20,11 @@ module Mutations
       {
         comment:,
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

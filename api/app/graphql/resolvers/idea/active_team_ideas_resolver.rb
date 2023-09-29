@@ -4,7 +4,7 @@ module Resolvers
   class Idea::ActiveTeamIdeasResolver < BaseResolver
     graphql_name 'GetActiveTeamIdeas'
 
-    type [Types::IdeaType], null: false
+    type [Types::Idea::IdeaType], null: false
 
     def resolve
       ::Idea.eager_load(:team)

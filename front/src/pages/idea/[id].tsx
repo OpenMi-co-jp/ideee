@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Image, Title, Group, Button, Loader } from '@mantine/core'
 import { UserIcon, AccompaniedTags, IdeaContent } from '@/components/idea'
 import { useLoggedIn } from '@/components/loginContext'
-import { useGetIdeaQuery, } from '@/lib/generated/client'
+import { useGetIdeaQuery } from '@/lib/generated/client'
 
 const IdeaDetail = () => {
   const router = useRouter()
@@ -16,12 +16,11 @@ const IdeaDetail = () => {
       id: router.query.id as string,
     },
   })
-
-  if (loading) return <Loader color='yellow' />
-
   useEffect(() => {
     setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
   }, [])
+
+  if (loading) return <Loader color="yellow" />
 
   return (
     <>

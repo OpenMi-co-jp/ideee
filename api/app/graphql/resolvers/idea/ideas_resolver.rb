@@ -13,7 +13,7 @@ module Resolvers
 
     def resolve(**args)
       Rails.logger.info args
-      ransack_params = args[:search_condition].arguments.keyword_arguments
+      ransack_params = args[:search_condition]&.arguments&.keyword_arguments
 
       search = ::Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)
       search.sorts = args[:sort].to_ransack_condition

@@ -382,6 +382,8 @@ export type Query = {
   popularTags: Array<Tag>
   /** ルームオブジェクト */
   room: Room
+  /** タグ一覧 */
+  tags: Array<Tag>
   /** チームオブジェクト */
   team: Team
   /** ユーザーオブジェクト */
@@ -869,6 +871,13 @@ export type GetRoomQuery = {
     createdAt: any
     updatedAt: any
   }
+}
+
+export type GetTagsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetTagsQuery = {
+  __typename?: 'Query'
+  tags: Array<{ __typename?: 'Tag'; id: string; name: string }>
 }
 
 export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
@@ -1852,6 +1861,54 @@ export type GetRoomLazyQueryHookResult = ReturnType<typeof useGetRoomLazyQuery>
 export type GetRoomQueryResult = Apollo.QueryResult<
   GetRoomQuery,
   GetRoomQueryVariables
+>
+export const GetTagsDocument = gql`
+  query GetTags {
+    tags {
+      id
+      name
+    }
+  }
+`
+
+/**
+ * __useGetTagsQuery__
+ *
+ * To run a query within a React component, call `useGetTagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTagsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTagsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetTagsQuery, GetTagsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetTagsQuery, GetTagsQueryVariables>(
+    GetTagsDocument,
+    options
+  )
+}
+export function useGetTagsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetTagsQuery, GetTagsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetTagsQuery, GetTagsQueryVariables>(
+    GetTagsDocument,
+    options
+  )
+}
+export type GetTagsQueryHookResult = ReturnType<typeof useGetTagsQuery>
+export type GetTagsLazyQueryHookResult = ReturnType<typeof useGetTagsLazyQuery>
+export type GetTagsQueryResult = Apollo.QueryResult<
+  GetTagsQuery,
+  GetTagsQueryVariables
 >
 export const GetPopularTagsDocument = gql`
   query GetPopularTags {

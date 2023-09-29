@@ -2,8 +2,21 @@ query GetIdea($id: ID!) {
   idea(id: $id) {
     id
     name
-    note
+    icon
+    background
     goal
+    issue
+    wishFunction
+    hypothesis
+    target
+    monetize
+    similar
+		note
+    user {
+      id
+      name
+      icon
+    }
     comments {
       id
       description
@@ -11,6 +24,10 @@ query GetIdea($id: ID!) {
         name
         icon
       }
+    }
+    ideaTags {
+      id
+      name
     }
   }
 }

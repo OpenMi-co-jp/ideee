@@ -685,14 +685,29 @@ export type GetIdeaQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    note?: string | null
+    icon?: string | null
+    background?: string | null
     goal?: string | null
+    issue?: string | null
+    wishFunction?: string | null
+    hypothesis?: string | null
+    target?: string | null
+    monetize?: string | null
+    similar?: string | null
+    note?: string | null
+    user: {
+      __typename?: 'User'
+      id: string
+      name?: string | null
+      icon?: string | null
+    }
     comments: Array<{
       __typename?: 'Comment'
       id: string
       description: string
       user: { __typename?: 'User'; name?: string | null; icon?: string | null }
     }>
+    ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
   }
 }
 
@@ -1227,8 +1242,21 @@ export const GetIdeaDocument = gql`
     idea(id: $id) {
       id
       name
-      note
+      icon
+      background
       goal
+      issue
+      wishFunction
+      hypothesis
+      target
+      monetize
+      similar
+      note
+      user {
+        id
+        name
+        icon
+      }
       comments {
         id
         description
@@ -1236,6 +1264,10 @@ export const GetIdeaDocument = gql`
           name
           icon
         }
+      }
+      ideaTags {
+        id
+        name
       }
     }
   }

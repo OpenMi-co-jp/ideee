@@ -7,18 +7,14 @@ export const SignPath: CustomNextPage = () => {
     <Card padding="xl">
       <Grid grow gutter="xs">
         <Col span={12} md={6}>
-          <Card>
-            <Card.Section>
-              <Image
-                mx="auto"
-                height="15rem"
-                fit="contain"
-                src="/img/userAuth.webp"
-                alt="user auth image"
-                withPlaceholder
-              />
-            </Card.Section>
-          </Card>
+          <Image
+            mx="auto"
+            height="15rem"
+            fit="contain"
+            src="/img/userAuth.webp"
+            alt="user auth image"
+            withPlaceholder
+          />
         </Col>
         <Col span={12} md={6}>
           <Card radius="0.5rem" shadow="xl">

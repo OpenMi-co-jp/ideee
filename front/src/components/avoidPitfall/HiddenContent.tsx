@@ -8,7 +8,6 @@ import {
   Anchor,
   Image,
   Divider,
-  Card,
 } from '@mantine/core'
 import { IconCircleCheck } from '@tabler/icons-react'
 
@@ -482,12 +481,10 @@ export const HiddenContent = () => {
           <br />
           そうなるとそこまで関係を築いてきたコアユーザーも離れていくような事態に繋がって行きかねません。
         </Text>
-        <Card>
-          <Image
-            src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F5d058bd0-3cd4-094a-b7f3-60ebe5ce1302.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=0dcfa86a0783dbcc4f2abffd1e35e511"
-            alt="スクリーンショット 278db9e80c02a55f503 1x"
-          />
-        </Card>
+        <Image
+          src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F5d058bd0-3cd4-094a-b7f3-60ebe5ce1302.png?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=0dcfa86a0783dbcc4f2abffd1e35e511"
+          alt="スクリーンショット 278db9e80c02a55f503 1x"
+        />
         <Paper shadow="lg" radius="md" p="lg" my="md">
           <Title order={3} my="md">
             解決のヒント💡
@@ -597,14 +594,12 @@ export const HiddenContent = () => {
           <Title order={3} my="md">
             例外もある
           </Title>
-          <Card>
-            <Image
-              src="//images.ctfassets.net/21j88hnww0mj/6gpl7vmvXaIZdGpja4aHbd/5420c0deb98aab76b8076126a769ed1f/____________________________2022-10-30_16.03.35.png"
-              alt="スクリーンショット 2022-10-30 16.03.35"
-              height="20rem"
-              fit="contain"
-            />
-          </Card>
+          <Image
+            src="//images.ctfassets.net/21j88hnww0mj/6gpl7vmvXaIZdGpja4aHbd/5420c0deb98aab76b8076126a769ed1f/____________________________2022-10-30_16.03.35.png"
+            alt="スクリーンショット 2022-10-30 16.03.35"
+            height="20rem"
+            fit="contain"
+          />
           <Text my="lg">
             AI画像アプリがAPIを発表し、どのサービスがLINEなどのサービスに組み込むかのイス取り合戦が起きました
           </Text>
@@ -832,7 +827,10 @@ export const HiddenContent = () => {
         <Text my="4rem">
           以上、個人開発における陥りがちな20個の落とし穴をご紹介しました。
           開発者の数だけ意見があると思うのでより良いページへブラッシュアップして行くためにもご意見ご要望等ありましたら
-          <Anchor href="https://naruhiro-portfolio.firebaseapp.com/">
+          <Anchor
+            href="https://naruhiro-portfolio.firebaseapp.com/"
+            target="_blank"
+          >
             管理者
           </Anchor>
           までお聞かせ下さい。 それではみなさん、良き開発ライフを！！

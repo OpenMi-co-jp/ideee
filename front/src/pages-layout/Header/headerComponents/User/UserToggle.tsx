@@ -14,10 +14,10 @@ export const UserToggle = () => {
         } else {
           return (
             <>
-              <Link href="/user/sign_up">
+              <Link href="@/user/sign_up">
                 <Button>ユーザー登録</Button>
               </Link>
-              <Link href="/user/sign_in">
+              <Link href="@/user/sign_in">
                 <Button>ログイン</Button>
               </Link>
             </>

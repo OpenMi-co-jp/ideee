@@ -12,6 +12,7 @@ query GetIdea($id: ID!) {
     monetize
     similar
 		note
+    createdAt
     user {
       id
       name
@@ -20,6 +21,7 @@ query GetIdea($id: ID!) {
     comments {
       id
       description
+      createdAt
       user {
         name
         icon

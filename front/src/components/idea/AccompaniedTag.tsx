@@ -1,13 +1,7 @@
 import React from 'react'
+import { AccompaniedTagType } from '@/types/idea'
 
-type AccompaniedTag = {
-  tag: {
-    id: string
-    name: string
-  }
-}
-
-export const AccompaniedTag = ({ tag }: AccompaniedTag) => {
+export const AccompaniedTag = ({ tag }: AccompaniedTagType) => {
   const { name } = tag
   return (
     <>

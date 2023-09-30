@@ -1,18 +1,7 @@
 import React from 'react'
+import { CommentType } from '@/types/idea'
 
-type Comment = {
-  comment: {
-    id: string
-    description: string
-    createdAt: string
-    user: {
-      name?: string | null | undefined
-      icon?: string | null | undefined
-    }
-  }
-}
-
-export const Comment = ({ comment }: Comment) => {
+export const Comment = ({ comment }: CommentType) => {
   const { description, createdAt, user } = comment
   return (
     <>

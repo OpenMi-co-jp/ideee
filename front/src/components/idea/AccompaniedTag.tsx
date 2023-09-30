@@ -2,8 +2,8 @@ import React from 'react'
 
 type AccompaniedTag = {
   tag: {
-    id: string;
-    name: string;
+    id: string
+    name: string
   }
 }
 

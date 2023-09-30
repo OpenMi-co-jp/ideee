@@ -16,10 +16,9 @@ export const CommentList = () => {
 
   return (
     <>
-      {data?.idea.comments.map((comment) =>
+      {data?.idea.comments.map((comment) => (
         <Comment key={comment.id} comment={comment} />
-      )}
+      ))}
     </>
   )
 }
-

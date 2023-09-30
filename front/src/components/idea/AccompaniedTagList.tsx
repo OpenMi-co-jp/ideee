@@ -17,7 +17,7 @@ export const AccompaniedTagList = () => {
   return (
     <>
       {data?.idea.ideaTags?.map((tag) => {
-        return <AccompaniedTag  key={tag.id} tag={tag} />
+        return <AccompaniedTag key={tag.id} tag={tag} />
       })}
     </>
   )

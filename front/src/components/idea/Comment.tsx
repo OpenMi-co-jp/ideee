@@ -2,12 +2,12 @@ import React from 'react'
 
 type Comment = {
   comment: {
-    id: string;
-    description: string;
-    createdAt: string;
+    id: string
+    description: string
+    createdAt: string
     user: {
-      name?: string | null | undefined;
-      icon?: string | null | undefined;
+      name?: string | null | undefined
+      icon?: string | null | undefined
     }
   }
 }

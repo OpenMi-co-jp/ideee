@@ -2,8 +2,9 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { Loader } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'
+import { AccompaniedTag } from '@/components/idea'
 
-export const AccompaniedTags = () => {
+export const AccompaniedTagList = () => {
   const router = useRouter()
   const { data, loading, error } = useGetIdeaQuery({
     variables: {
@@ -16,7 +17,7 @@ export const AccompaniedTags = () => {
   return (
     <>
       {data?.idea.ideaTags?.map((tag) => {
-        return <div key={tag.id}>{tag.name}</div>
+        return <AccompaniedTag  key={tag.id} tag={tag} />
       })}
     </>
   )

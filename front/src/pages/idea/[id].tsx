@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Image, Title, Group, Button, Loader } from '@mantine/core'
-import { UserIcon, AccompaniedTags, IdeaContent } from '@/components/idea'
+import { UserIcon, AccompaniedTagList, IdeaContent, CommentList } from '@/components/idea'
 import { useLoggedIn } from '@/components/loginContext'
 import { useGetIdeaQuery } from '@/lib/generated/client'
 
@@ -37,8 +37,9 @@ const IdeaDetail = () => {
             <Title>{data?.idea.name}</Title>
           </Group>
           <UserIcon />
-          <AccompaniedTags />
+          <AccompaniedTagList />
           <IdeaContent />
+          <CommentList/>
           <Group position="center">
             <Button type="submit" size="lg">
               送信

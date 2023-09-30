@@ -19,17 +19,25 @@ export const UserToggle = () => {
             <Box
               mx="0.5rem"
               style={{
-                display: 'flex'
+                display: 'flex',
               }}
             >
               <Link href="/user/sign_up">
-                <Button variant="gradient" gradient={{ from: 'red', to: 'orange' }}>
+                <Button
+                  variant="gradient"
+                  gradient={{ from: 'red', to: 'orange' }}
+                >
                   ユーザー登録
                 </Button>
               </Link>
-              <Space m="2%" />
-              <Link href="/user/sign_in" style={{ display: isMobile ? 'none' : '' }}>
-                <Button variant="outline" color='orange'>ログイン</Button>
+              <Space mx="xs" />
+              <Link
+                href="/user/sign_in"
+                style={{ display: isMobile ? 'none' : '' }}
+              >
+                <Button variant="outline" color="orange">
+                  ログイン
+                </Button>
               </Link>
             </Box>
           )

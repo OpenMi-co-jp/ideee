@@ -1,5 +1,10 @@
 import { IconBell } from '@tabler/icons-react'
+import Link from 'next/link'
 
 export const Notification = () => {
-  return <IconBell size={25} />
+  return (
+    <Link href="/notifications" passHref>
+      <IconBell size={25} />
+    </Link>
+  )
 }

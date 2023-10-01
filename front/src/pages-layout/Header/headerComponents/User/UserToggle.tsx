@@ -17,7 +17,6 @@ export const UserToggle = () => {
         } else {
           return (
             <Box
-              mx="0.5rem"
               style={{
                 display: 'flex',
               }}
@@ -30,15 +29,16 @@ export const UserToggle = () => {
                   ユーザー登録
                 </Button>
               </Link>
-              <Space mx="xs" />
-              <Link
-                href="/user/sign_in"
-                style={{ display: isMobile ? 'none' : '' }}
-              >
-                <Button variant="outline" color="orange">
-                  ログイン
-                </Button>
-              </Link>
+              {!isMobile && (
+                <>
+                  <Space mx="xs" />
+                  <Link href="/user/sign_in">
+                    <Button variant="outline" color="orange">
+                      ログイン
+                    </Button>
+                  </Link>
+                </>
+              )}
             </Box>
           )
         }

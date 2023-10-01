@@ -1,4 +1,3 @@
-
 import { Button, Group, Space, Box, rem } from '@mantine/core'
 import { useLoggedIn } from '@/components/loginContext'
 import { UserMenu } from './UserMenu'

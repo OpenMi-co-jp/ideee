@@ -80,6 +80,10 @@ class Idea < ApplicationRecord
     %w[id name published_at difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    %w[idea_tags team]
+  end
+
   def published_time
     published_at&.strftime('%Y.%m.%d')
   end

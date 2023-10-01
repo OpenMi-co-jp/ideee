@@ -349,7 +349,7 @@ type Idea {
   """
   難易度
   """
-  difficulty: Int
+  difficulty: String
 
   """
   下書きフラグ
@@ -385,6 +385,11 @@ type Idea {
   アイデアID
   """
   id: ID!
+
+  """
+  タグオブジェクト
+  """
+  ideaTags: [Tag!]
 
   """
   課題・困っていること
@@ -442,6 +447,11 @@ type Idea {
   target: String
 
   """
+  チームオブジェクト
+  """
+  team: Team
+
+  """
   更新日
   """
   updatedAt: ISO8601DateTime!
@@ -465,6 +475,18 @@ type Idea {
   欲しい機能
   """
   wishFunction: String
+}
+
+type Ideas {
+  """
+  アイデアオブジェクト
+  """
+  nodes: [Idea!]!
+
+  """
+  ページネーション情報
+  """
+  pageInfo: Pagination
 }
 
 type Mutation {
@@ -606,6 +628,48 @@ type Notification {
   visitorId: Int
 }
 
+type Pagination {
+  """
+  現在のページ
+  """
+  currentPage: Int!
+
+  """
+  最初のページ確認
+  """
+  isFirst: Boolean
+
+  """
+  最後のページ確認
+  """
+  isLast: Boolean
+
+  """
+  次のページ
+  """
+  nextPage: Int
+
+  """
+  1ページに表示するアイデア数
+  """
+  per: Int!
+
+  """
+  前のページ
+  """
+  prevPage: Int
+
+  """
+  総アイデア数
+  """
+  totalCount: Int
+
+  """
+  総ページ数
+  """
+  totalPages: Int
+}
+
 type Query {
   """
   チーム開発募集中のアイデア一覧
@@ -650,7 +714,27 @@ type Query {
   """
   アイデア一覧
   """
-  ideas: [Idea!]!
+  ideas(
+    """
+    ページ番号
+    """
+    page: Int = 1
+
+    """
+    1ページに表示するアイデア数
+    """
+    per: Int = 30
+
+    """
+    アイデア検索条件
+    """
+    searchCondition: SearchCondition
+
+    """
+    ソート順
+    """
+    sort: SortCondition = {columnName: "likes_num"}
+  ): Ideas!
 
   """
   通知一覧
@@ -671,6 +755,11 @@ type Query {
     """
     id: ID!
   ): Room!
+
+  """
+  タグ一覧
+  """
+  tags: [Tag!]!
 
   """
   チームオブジェクト
@@ -718,6 +807,45 @@ type Room {
   更新日
   """
   updatedAt: ISO8601DateTime!
+}
+
+input SearchCondition {
+  """
+  難易度で検索
+  """
+  difficultyEq: Int
+
+  """
+  名前かタグ名で検索
+  """
+  nameOrIdeaTagsNameCont: String
+
+  """
+  指定公開日以降で検索
+  """
+  publishedAtGteq: ISO8601DateTime
+
+  """
+  指定公開日で以前で検索
+  """
+  publishedAtLteq: ISO8601DateTime
+
+  """
+  チーム状態で検索
+  """
+  teamStatusEq: Int
+}
+
+input SortCondition {
+  """
+  カラム名
+  """
+  columnName: String!
+
+  """
+  ソート順
+  """
+  order: String = "desc"
 }
 
 type Tag {
@@ -781,7 +909,7 @@ type Team {
   """
   チームステータス
   """
-  status: Int!
+  status: String!
 }
 
 """

@@ -4,7 +4,7 @@ module Resolvers
   class Idea::IdeaResolver < BaseResolver
     graphql_name 'GetIdea'
 
-    type Types::IdeaType, null: false
+    type Types::Idea::IdeaType, null: false
 
     argument :id, ID, required: true, description: 'アイデア検索ID'
 

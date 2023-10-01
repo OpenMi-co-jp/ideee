@@ -73,7 +73,7 @@ gem 'rack-timeout'
 gem 'rollbar' # 本番のみで運用
 
 # 検索メソッド
-gem 'ransack'
+gem 'ransack', '>= 4.0.0'
 
 # Rubyバージョンアップで対応
 

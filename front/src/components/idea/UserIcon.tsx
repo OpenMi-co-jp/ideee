@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Loader } from '@mantine/core'
+import { Group, Image, Loader, Text } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'
 
 export const UserIcon = () => {
@@ -14,9 +14,17 @@ export const UserIcon = () => {
   if (loading) return <Loader color="yellow" />
 
   return (
-    <>
-      <div>{data?.idea.user.icon}</div>
-      <div>{data?.idea.user.name}</div>
-    </>
+    <Group py="lg" pl='xl'>
+      <Image
+        height={30}
+        width={30}
+        radius={30}
+        src={data?.idea.user.icon}
+        alt="user prof"
+      />
+      <Text size="xl">
+        {data?.idea.user.name}
+      </Text>
+    </Group>
   )
 }

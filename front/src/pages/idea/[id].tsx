@@ -28,7 +28,7 @@ const IdeaDetail = () => {
           <IdeaContent />
           <CommentList />
           <Group position="center">
-            <Button type="submit" size="lg">
+            <Button type="submit" size="lg" bg="#EAAE59">
               送信
             </Button>
           </Group>

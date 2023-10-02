@@ -6,7 +6,9 @@ export const AccompaniedTag = ({ tag }: AccompaniedTagType) => {
   const { name } = tag
   return (
     <>
-      <Text size="lg" c="#EAAE59">#{name}</Text>
+      <Text size="lg" c="#EAAE59">
+        #{name}
+      </Text>
     </>
   )
 }

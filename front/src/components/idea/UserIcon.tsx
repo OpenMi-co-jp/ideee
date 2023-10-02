@@ -14,7 +14,7 @@ export const UserIcon = () => {
   if (loading) return <Loader color="yellow" />
 
   return (
-    <Group py="lg" pl='xl'>
+    <Group py="lg" pl="xl">
       <Image
         height={30}
         width={30}
@@ -22,9 +22,7 @@ export const UserIcon = () => {
         src={data?.idea.user.icon}
         alt="user prof"
       />
-      <Text size="xl">
-        {data?.idea.user.name}
-      </Text>
+      <Text size="xl">{data?.idea.user.name}</Text>
     </Group>
   )
 }

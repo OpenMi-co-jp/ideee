@@ -15,7 +15,7 @@ export const AccompaniedTagList = () => {
   if (loading) return <Loader color="yellow" />
 
   return (
-    <Group pb="lg" pl='xl'>
+    <Group pb="lg" pl="xl">
       {data?.idea.ideaTags?.map((tag) => {
         return <AccompaniedTag key={tag.id} tag={tag} />
       })}

@@ -8,7 +8,6 @@ import {
   CommentList,
 } from '@/components/idea'
 import { useLoggedIn } from '@/components/loginContext'
-import { useGetIdeaQuery } from '@/lib/generated/client'
 
 const IdeaDetail = () => {
   const { loggedIn } = useLoggedIn()

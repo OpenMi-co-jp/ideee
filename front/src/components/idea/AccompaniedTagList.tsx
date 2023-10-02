@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Loader } from '@mantine/core'
+import { Group, Loader } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'
 import { AccompaniedTag } from '@/components/idea'
 
@@ -15,10 +15,10 @@ export const AccompaniedTagList = () => {
   if (loading) return <Loader color="yellow" />
 
   return (
-    <>
+    <Group pb="lg" pl='xl'>
       {data?.idea.ideaTags?.map((tag) => {
         return <AccompaniedTag key={tag.id} tag={tag} />
       })}
-    </>
+    </Group>
   )
 }

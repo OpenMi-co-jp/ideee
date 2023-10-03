@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Group, Button } from '@mantine/core'
-import {
-  UserIcon,
-  AccompaniedTagList,
-  IdeaTitle,
-  IdeaContent,
-  CommentList,
-} from '@/components/idea'
 import { useLoggedIn } from '@/components/loginContext'
+import { IdeaPage, PreviewIdeaPage } from '@/components/idea'
+import { Container } from '@mantine/core'
+import { SignPath } from '@/components/Auth/SignPath'
+import { PreviewContent } from '@/components/avoidPitfall'
 
 const IdeaDetail = () => {
   const { loggedIn } = useLoggedIn()
@@ -19,18 +15,22 @@ const IdeaDetail = () => {
 
   return (
     <>
-      {(LSLoggedIn || loggedIn) && (
+      {LSLoggedIn || loggedIn ? (
+        <IdeaPage />
+      ) : (
         <>
-          <IdeaTitle />
-          <UserIcon />
-          <AccompaniedTagList />
-          <IdeaContent />
-          <CommentList />
-          <Group position="center">
-            <Button type="submit" size="lg" bg="#EAAE59">
-              送信
-            </Button>
-          </Group>
+          <Container
+            style={{
+              height: '100%',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
+              maskImage:
+                'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
+            }}
+          >
+            <PreviewIdeaPage />
+          </Container>
+          <SignPath />
         </>
       )}
     </>

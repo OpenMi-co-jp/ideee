@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Image, Title, Group, Button, Loader } from '@mantine/core'
+import { Group, Loader, Text } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'
 
-export const IdeaTitle = () => {
+export const IdeaTagList = () => {
   const router = useRouter()
   const { data, loading, error } = useGetIdeaQuery({
     variables: {
@@ -14,15 +14,14 @@ export const IdeaTitle = () => {
   if (loading) return <Loader color="yellow" />
 
   return (
-    <Group py="xl" position="center">
-      <Image
-        height={50}
-        width={50}
-        radius={50}
-        src={data?.idea.icon}
-        alt="user prof"
-      />
-      <Title>{data?.idea.name}</Title>
+    <Group pb="lg" pl="xl">
+      {data?.idea.ideaTags?.map((tag) => {
+        return (
+          <Text size="lg" c="#EAAE59" key={tag.id}>
+            #{tag.name}
+          </Text>
+        )
+      })}
     </Group>
   )
 }

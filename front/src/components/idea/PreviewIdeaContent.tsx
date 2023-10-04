@@ -1,9 +1,8 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Group, Loader, Paper, Text } from '@mantine/core'
+import { Loader, Paper, Text } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'
-import { FormatDate } from '@/utils/common'
-import { IdeaSection } from './IdeaSection'
+import { IdeaSection } from './show/IdeaSection'
 export const PreviewIdeaContent = () => {
   const router = useRouter()
   const { data, loading, error } = useGetIdeaQuery({

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex } from '@mantine/core'
 import { IdeaBoxType } from '@/types/idea'
-import { IdeaBox } from './IdeaBox'
+import { IdeaBox } from './show/IdeaBox'
 
 export type IdeasType = {
   ideas: Array<IdeaBoxType> | undefined

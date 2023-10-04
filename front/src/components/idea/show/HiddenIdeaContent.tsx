@@ -1,17 +1,9 @@
 import { Group, Button } from '@mantine/core'
-import {
-  UserIcon,
-  AccompaniedTagList,
-  IdeaTitle,
-  IdeaContent,
-  CommentList,
-} from '@/components/idea'
-export const IdeaPage = () => {
+import { IdeaContent } from '@/components/idea/show'
+import { CommentList } from '@/components/comment'
+export const HiddenIdeaContent = () => {
   return (
     <>
-      <IdeaTitle />
-      <UserIcon />
-      <AccompaniedTagList />
       <IdeaContent />
       <CommentList />
       <Group position="center">

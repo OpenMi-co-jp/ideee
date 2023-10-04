@@ -1,9 +1,10 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Group, Image, Loader, Text } from '@mantine/core'
+import { Group, Loader, Text } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'
+import { UserIcon } from '@/components/user'
 
-export const UserIcon = () => {
+export const UserSection = () => {
   const router = useRouter()
   const { data, loading, error } = useGetIdeaQuery({
     variables: {
@@ -15,13 +16,7 @@ export const UserIcon = () => {
 
   return (
     <Group py="lg" pl="xl">
-      <Image
-        height={30}
-        width={30}
-        radius={30}
-        src={data?.idea.user.icon}
-        alt="user prof"
-      />
+      <UserIcon userIcon={String(data?.idea.user.icon)} />
       <Text size="xl">{data?.idea.user.name}</Text>
     </Group>
   )

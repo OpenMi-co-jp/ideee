@@ -1,20 +1,16 @@
 import React from 'react'
-import { Group, Image, Text, Paper } from '@mantine/core'
+import { Group, Text, Paper } from '@mantine/core'
 import { CommentType } from '@/types/idea'
 import { FormatDate } from '@/utils/common'
+import { UserIcon } from '@/components/user'
+
 export const Comment = ({ comment }: CommentType) => {
   const { description, createdAt, user } = comment
   const formatedCreatedAt = createdAt ? new Date(createdAt) : null
   return (
     <>
       <Group m="lg" position="center">
-        <Image
-          height={30}
-          width={30}
-          radius={30}
-          src={user.icon}
-          alt="user prof"
-        />
+        <UserIcon userIcon={user.icon} />
         <Group p="xs">
           <Paper bg="#FFFFFF" maw="30rem" p="md" radius="lg">
             {description}

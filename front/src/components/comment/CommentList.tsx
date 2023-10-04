@@ -1,4 +1,3 @@
-import React from 'react'
 import { useRouter } from 'next/router'
 import { Loader, Paper, Text, Divider } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'

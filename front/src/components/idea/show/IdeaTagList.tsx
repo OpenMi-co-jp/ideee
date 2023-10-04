@@ -1,7 +1,7 @@
-import React from 'react'
 import { useRouter } from 'next/router'
-import { Group, Loader, Text } from '@mantine/core'
+import { Flex, Loader } from '@mantine/core'
 import { useGetIdeaQuery } from '@/lib/generated/client'
+import { Tag } from '@/components/tag'
 
 export const IdeaTagList = () => {
   const router = useRouter()
@@ -14,14 +14,10 @@ export const IdeaTagList = () => {
   if (loading) return <Loader color="yellow" />
 
   return (
-    <Group pb="lg" pl="xl">
+    <Flex justify="left" align="center" direction="row" mb="sm" wrap="wrap">
       {data?.idea.ideaTags?.map((tag) => {
-        return (
-          <Text size="lg" c="#EAAE59" key={tag.id}>
-            #{tag.name}
-          </Text>
-        )
+        return <Tag tagName={tag.name} key={tag.id} />
       })}
-    </Group>
+    </Flex>
   )
 }

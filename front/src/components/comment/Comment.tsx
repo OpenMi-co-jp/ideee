@@ -1,4 +1,3 @@
-import React from 'react'
 import { Group, Text, Paper } from '@mantine/core'
 import { CommentType } from '@/types/idea'
 import { FormatDate } from '@/utils/common'

@@ -1,5 +1,5 @@
-query GetLikes {
-  likes {
+query GetLikes($userId: ID!) {
+  likes(userId: $userId) {
     id
     userId
     likableType
@@ -7,20 +7,19 @@ query GetLikes {
   }
 }
 
-query GetLikesByUser($userId: ID!) {
-  likesByUser(userId: $userId) {
-    id
-    userId
-    likableType
-    likableId
+mutation CreateLike($input: CreateLikeInput!) {
+  createLike(input: $input) {
+    like {
+      userId
+      likableType
+      likableId
+    }
+    success
   }
 }
 
-query GetLikesForEntity($likableType: String!, $likableId: ID!) {
-  likesForEntity(likableType: $likableType, likableId: $likableId) {
-    id
-    userId
-    likableType
-    likableId
+mutation DestroyLike($input: DestroyLikeInput!) {
+  destroyLike(input: $input) {
+    success
   }
 }

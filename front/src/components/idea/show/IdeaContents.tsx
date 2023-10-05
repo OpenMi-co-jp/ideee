@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
-import { Group, Loader, Paper, Text } from '@mantine/core'
+import { Button, Group, Loader, Paper, Text, Anchor } from '@mantine/core'
+import { IconApps, IconBrandGithub } from '@tabler/icons-react'
 import { useGetIdeaQuery } from '@/lib/generated/client'
 import { FormatDate } from '@/utils/common'
 import { IdeaContentSet } from './IdeaContentSet'
@@ -38,6 +39,34 @@ export const IdeaContents = () => {
         {sections.map((section, index) => (
           <IdeaContentSet key={index} {...section} />
         ))}
+        {idea?.productUrl && (
+          <Anchor href={idea?.productUrl} target="_blank">
+            <Button
+              variant="gradient"
+              gradient={{ from: 'green', to: 'blue' }}
+              radius="xl"
+              size="md"
+              m="md"
+              leftIcon={<IconApps />}
+              mt="lg"
+            >
+              アプリを確認
+            </Button>
+          </Anchor>
+        )}
+        {idea?.githubUrl && (
+          <Anchor href={idea?.githubUrl} target="_blank">
+            <Button
+              color="dark"
+              radius="xl"
+              size="md"
+              leftIcon={<IconBrandGithub />}
+              mt="xl"
+            >
+              GitHubを確認
+            </Button>
+          </Anchor>
+        )}
       </Paper>
       <Group py="lg" mr="lg" position="apart">
         <IdeaManage idea={idea} />

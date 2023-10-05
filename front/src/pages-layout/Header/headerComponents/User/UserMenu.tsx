@@ -1,16 +1,22 @@
-import { Avatar, Button, Menu, Title } from '@mantine/core'
-import { IconSettings, IconLogout } from '@tabler/icons-react'
+import { Avatar, Menu } from '@mantine/core'
+import { IconSettings, IconLogout, IconUserCircle } from '@tabler/icons-react'
 import { SignOutAnchor } from '@/components/Auth'
+import Link from 'next/link'
 
 export const UserMenu = () => {
   return (
-    <Menu shadow="md" width={200}>
+    <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
         <Avatar radius="xl" />
       </Menu.Target>
 
       <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
+        <Link href="/user/5/edit">
+          <Menu.Item icon={<IconUserCircle size={14} />}>
+            ユーザー情報編集
+          </Menu.Item>
+        </Link>
         <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
 
         <Menu.Divider />

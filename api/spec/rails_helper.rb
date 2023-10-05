@@ -63,6 +63,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  config.include AuthorizationSpecHelper, type: :request
+
   # settings to let developers use FactoryBot without writing "FactoryBot"
   config.include FactoryBot::Syntax::Methods
 

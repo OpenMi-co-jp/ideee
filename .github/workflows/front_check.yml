@@ -3,6 +3,8 @@ name: front_check
 on:
   workflow_dispatch:
   pull_request:
+    paths-ignore:
+      - 'api/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}

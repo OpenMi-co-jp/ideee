@@ -14,7 +14,7 @@ export const footerData = {
         },
         {
           label: '個人開発の落とし穴',
-          link: 'https://www.ideee.tech/avoid_pitfall',
+          link: '/avoid_pitfall',
         },
       ],
     },
@@ -23,12 +23,12 @@ export const footerData = {
       links: [
         {
           label: 'よくある質問',
-          link: 'https://www.ideee.tech/frequent_questions',
+          link: '/frequent_questions',
         },
-        { label: '利用規約', link: 'https://www.ideee.tech/terms_of_service' },
+        { label: '利用規約', link: '/terms_of_service' },
         {
           label: 'プライバシーポリシー',
-          link: 'https://www.ideee.tech/privacy_policy',
+          link: '/privacy_policy',
         },
         { label: '運営者', link: 'https://naruhiro-portfolio.firebaseapp.com' },
       ],

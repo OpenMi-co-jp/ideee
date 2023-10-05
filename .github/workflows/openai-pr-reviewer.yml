@@ -17,7 +17,7 @@ jobs:
   review:
     runs-on: ubuntu-latest
     steps:
-      - uses: coderabbitai/openai-pr-reviewer@9ac127d9e21d898c665f3a7cf12229e5908149d5 # https://github.com/coderabbitai/openai-pr-reviewer/releases/tag/0.60.0 # 好きに変更して
+      - uses: coderabbitai/ai-pr-reviewer@latest # https://github.com/coderabbitai/ai-pr-reviewer/releases/tag/1.16.1 # 好きに変更して
         env:
           GITHUB_TOKEN: ${{ secrets.PR_REVIEWER_GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # 環境に応じて変更して
@@ -26,7 +26,7 @@ jobs:
           review_simple_changes: false
           review_comment_lgtm: false
           openai_light_model: gpt-3.5-turbo-0613 # 好きに変更
-          openai_heavy_model: gpt-3.5-turbo-0613 # 好きに変更 gpt-4 推奨（ただし、値段に注意）
+          openai_heavy_model: gpt-4-0613 # 好きに変更 gpt-4 推奨（ただし、値段に注意）
 
           # 以下のプロンプトは https://github.com/coderabbitai/openai-pr-reviewer/blob/main/action.yml から取ってくる。最後の `IMPORTANT` 部分を追加する。
           system_message: |
@@ -45,25 +45,11 @@ jobs:
               - Complexity
               - Optimization
 
-            Refrain from commenting on minor code style issues, missing
-            comments/documentation, or giving compliments, unless explicitly
-            requested. Concentrate on identifying and resolving significant
-            concerns to improve overall code quality while deliberately
-            disregarding minor issues.
-
-            Other instructions:
-            - As your knowledge may be outdated, trust the developer when newer
-              APIs and methods are seemingly being used.
-            - Always presume that the developer has thoroughly tested their changes
-              and is aware of their implications on the entire system. Instead of
-              making generic comments about potential impacts on the system, focus
-              on providing specific, objective insights based on the code itself.
-            - Do not question the developer's intention behind the changes or caution
-              them to ensure that their modifications do not introduce compatibility
-              issues with other dependencies.
-            - Never ask the developer to review the changes.
-
-            IMPORTANT: Provide your review in Japanese(日本語).
+            Don't comment on minor style issues, missing documentation, confirming no problems,
+            or give compliments unless asked. Address major concerns,
+            trust newer APIs/methods used by the developer,
+            and focus on objective insights. Do not ask or question the developer's intentions.
+            Provide feedback in Japanese(日本語). If no change is needed, refrain from commenting.
           summarize: |
             Provide your final response in the `markdown` format with
             the following content:
@@ -77,13 +63,10 @@ jobs:
 
             IMPORTANT: Provide your summary in Japanese(日本語).
           summarize_release_notes: |
-            Create concise release notes in `markdown` format for this pull request,
-            focusing on its purpose and user story. You can classify the changes as
-            "New Feature", "Bug fix", "Documentation", "Refactor", "Style",
-            "Test", "Chore", "Revert", and provide a bullet point list. For example:
-            "New Feature: An integrations page was added to the UI". Keep your
-            response within 50-100 words. Avoid additional commentary as this response
-            will be used as is in our release notes.
+            Draft release notes in `markdown` (50-100 words) classifying as "New Feature",
+            "Bug fix", etc. Below.
+            Use emojis if apt. Share these notes in Japanese(日本語).
+            If no change is needed, refrain from commenting.
 
             Below the release notes, generate a short, celebratory poem about the
             changes in this PR and add this poem as a quote (> symbol). You can

@@ -1,27 +1,45 @@
-import { Button, Anchor, Group, Title } from '@mantine/core'
-import { SignUpForm, SignInForm } from '@/components/Auth'
-import { openModal } from '@mantine/modals'
+import { Button, Group, Space, Box, rem } from '@mantine/core'
 import { useLoggedIn } from '@/components/loginContext'
 import { UserMenu } from './UserMenu'
+import Link from 'next/link'
+import { useMediaQuery } from '@mantine/hooks'
 
 export const UserToggle = () => {
   const { loggedIn } = useLoggedIn()
   const LSLoggedIn = localStorage.getItem('loggedIn') == 'true'
+  const isMobile = useMediaQuery(`(max-width: ${rem(550)})`)
+
   return (
-    <Group position="center">
+    <Group>
       {(() => {
         if (LSLoggedIn || loggedIn) {
           return <UserMenu />
         } else {
           return (
-            <>
-              <Button component="a" href="/user/sign_up">
-                ユーザー登録
-              </Button>
-              <Button component="a" href="/user/sign_in">
-                ログイン
-              </Button>
-            </>
+            <Box
+              style={{
+                display: 'flex',
+              }}
+            >
+              <Link href="/user/sign_up">
+                <Button
+                  variant="gradient"
+                  gradient={{ from: 'red', to: 'orange' }}
+                >
+                  ユーザー登録
+                </Button>
+              </Link>
+              {!isMobile && (
+                <>
+                  <Space mx="xs" />
+                  <Link href="/user/sign_in">
+                    <Button variant="outline" color="orange">
+                      ログイン
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </Box>
           )
         }
       })()}

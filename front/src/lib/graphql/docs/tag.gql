@@ -1,5 +1,12 @@
+query GetTags {
+  tags {
+    name
+  }
+}
+
 query GetPopularTags {
   popularTags {
+    id
     name
   }
 }

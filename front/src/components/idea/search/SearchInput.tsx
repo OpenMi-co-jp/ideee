@@ -27,12 +27,12 @@ export const SearchInput = () => {
       size="md"
       placeholder="アイデアを検索"
       limit={10}
-      icon={<IconSearch size={18} />}
-      transitionProps={{
-        transition: 'pop-top-left',
-        duration: 300,
-        timingFunction: 'ease',
-      }}
+      // icon={<IconSearch size={18} />}
+      // transitionProps={{
+      //   transition: 'pop-top-left',
+      //   duration: 300,
+      //   timingFunction: 'ease',
+      // }}
       styles={{
         input: {
           border: 0,
@@ -41,10 +41,10 @@ export const SearchInput = () => {
         },
       }}
       value={searchValue}
-      onItemSubmit={({ value }) => {
-        router.push(`/search?name_or_idea_tags_name_cont=${value}`)
-        setSearchTrigger(false)
-      }}
+      // onItemSubmit={({ value }) => {
+      //   router.push(`/search?name_or_idea_tags_name_cont=${value}`)
+      //   setSearchTrigger(false)
+      // }}
       onChange={(value) => {
         setSearchValue(value)
       }}
@@ -54,7 +54,9 @@ export const SearchInput = () => {
       rightSection={
         searchTrigger ? (
           <Link href={`/search?name_or_idea_tags_name_cont=${searchValue}`}>
-            <Button color="yellow" radius="xl" size="sm" compact>
+            <Button color="yellow" radius="xl" size="sm" 
+            // compact
+            >
               クリックで検索
             </Button>
           </Link>

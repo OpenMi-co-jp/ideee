@@ -1,4 +1,4 @@
-import { Box, Col, Button, Title, Stack } from '@mantine/core'
+import { Box, Grid, Button, Title, Stack } from '@mantine/core'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '@/components/ReactFormSet'
@@ -30,11 +30,11 @@ export const SignInForm: CustomNextPage = () => {
         </Title>
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
-        <Col style={{ marginTop: '1rem' }}>
+        <Grid style={{ marginTop: '1rem' }}>
           <Button type="submit" fullWidth>
             ログイン
           </Button>
-        </Col>
+        </Grid>
         <Stack>
           <Link href="/user/forgot_password" passHref>
             メールアドレスを忘れた？

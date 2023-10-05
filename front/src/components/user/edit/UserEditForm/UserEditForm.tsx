@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Card,
   Button,
-  Col,
+  // Col,
   Paper,
   Title,
   Grid,
@@ -56,7 +56,9 @@ export const UserEditForm = () => {
             shadow="md"
             style={{ backgroundColor: '#F2F2F2' }}
           >
-            <Title order={2} mb={30} weight={500} align="center">
+            <Title order={2} mb={30} 
+            // weight={500} 
+            ta="center">
               ユーザー情報編集
             </Title>
             <Grid grow>
@@ -80,28 +82,30 @@ export const UserEditForm = () => {
                   label="ユーザーアイコン"
                   radius="md"
                   mt="xl"
-                  icon={<IconUpload size={rem(14)} />}
+                  // icon={<IconUpload size={rem(14)} />}
                 />
               </Grid.Col>
-              <Grid.Col md={5}>
-                <TextForm
+              <Grid.Col 
+              // md={5}
+              >
+                {/* <TextForm
                   form={form}
                   name="name"
                   label="ユーザー名"
                   required
                   my="lg"
-                />
-                <TextForm
+                /> */}
+                {/* <TextForm
                   form={form}
                   name="email"
                   label="メールアドレス"
                   required
                   my="lg"
-                />
+                /> */}
               </Grid.Col>
             </Grid>
             <Grid id="my-grid" justify="center" pt={40} grow>
-              <Col
+              <Grid.Col
                 span={6}
                 style={{
                   display: 'flex',
@@ -113,8 +117,8 @@ export const UserEditForm = () => {
                   エンジニア
                 </Text>
                 <Checkbox color="orange" size="lg" label="🛠" />
-              </Col>
-              <Col
+              </Grid.Col>
+              <Grid.Col
                 span={6}
                 style={{
                   display: 'flex',
@@ -126,40 +130,48 @@ export const UserEditForm = () => {
                   アイデアマン
                 </Text>
                 <Checkbox color="orange" size="lg" label="💡" />
-              </Col>
+              </Grid.Col>
             </Grid>
-            <TextAreaForm form={form} name="profile" label="自己紹介" my="lg" />
+            {/* <TextAreaForm form={form} name="profile" label="自己紹介" my="lg" /> */}
             <Grid grow>
-              <Grid.Col md={4}>
-                <TextForm
+              <Grid.Col 
+              // md={4}
+              >
+                {/* <TextForm
                   form={form}
                   name="twitterId"
                   label="Twitter ID"
                   my="lg"
                   icon={<IconBrandTwitter size={rem(20)} />}
-                />
+                /> */}
               </Grid.Col>
-              <Grid.Col md={4}>
-                <TextForm
+              <Grid.Col 
+              // md={4}
+              >
+                {/* <TextForm
                   form={form}
                   name="githubId"
                   label="GitHub"
                   my="lg"
                   icon={<IconBrandGithub size={rem(20)} />}
-                />
+                /> */}
               </Grid.Col>
-              <Grid.Col md={4}>
-                <TextForm
+              <Grid.Col 
+              // md={4}
+              >
+                {/* <TextForm
                   form={form}
                   name="siteUrl"
                   label="サイトURL"
                   my="lg"
                   icon={<IconLink size={rem(20)} />}
-                />
+                /> */}
               </Grid.Col>
             </Grid>
           </Paper>
-          <Group position="center">
+          <Group 
+          // position="center"
+          >
             <Button
               type="submit"
               my={30}

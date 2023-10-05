@@ -22,7 +22,7 @@ export const HotIdeas = () => {
         <Paper shadow="sm" radius="md" p="sm">
           <IconConfetti size={30} stroke={1.5} />
         </Paper>
-        <Title order={2} mx="xl" my="md" color="orange">
+        <Title order={2} mx="xl" my="md" c="orange">
           新しいアイデア
         </Title>
       </Flex>

@@ -18,8 +18,8 @@ function Confirm() {
   return (
     <LoadingOverlay
       loaderProps={{ size: 'sm', color: 'gray', variant: 'bars' }}
-      overlayOpacity={0.3}
-      overlayColor="#c5c5c5"
+      // overlayOpacity={0.3}
+      // overlayColor="#c5c5c5"
       visible
     />
   )

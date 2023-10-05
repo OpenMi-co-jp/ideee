@@ -21,9 +21,9 @@ import {
 } from '@tabler/icons-react'
 import Link from 'next/link'
 const FrequentQuestions = () => {
-  const theme = useMantineTheme()
-  const getColor = (color: string) =>
-    theme.colors[color][theme.colorScheme === 'dark' ? 4 : 8]
+  // const theme = useMantineTheme()
+  // const getColor = (color: string) =>
+  //   theme.colors[color][theme.colorScheme === 'dark' ? 4 : 8]
 
   return (
     <Container>
@@ -34,7 +34,9 @@ const FrequentQuestions = () => {
       <Accordion variant="separated">
         <Accordion.Item value="bulb">
           <Accordion.Control
-            icon={<IconBulb size={rem(20)} color={getColor('red')} />}
+            icon={<IconBulb size={rem(20)} 
+            // color={getColor('red')} 
+            />}
           >
             アイデアはどうやって探したらいいの？
           </Accordion.Control>
@@ -47,7 +49,7 @@ const FrequentQuestions = () => {
               意外とアイデアは出てくるかも💡
             </Text>
             <Button
-              leftIcon={<IconBulb />}
+              // leftIcon={<IconBulb />}
               variant="gradient"
               gradient={{ from: 'orange', to: 'red' }}
             >
@@ -61,7 +63,9 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="flag">
           <Accordion.Control
-            icon={<IconFlag size={rem(20)} color={getColor('blue')} />}
+            icon={<IconFlag size={rem(20)} 
+            // color={getColor('blue')} 
+            />}
           >
             Contributionsとは？
           </Accordion.Control>
@@ -86,7 +90,9 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="users">
           <Accordion.Control
-            icon={<IconUsers size={rem(20)} color={getColor('teal')} />}
+            icon={<IconUsers size={rem(20)} 
+            // color={getColor('teal')} 
+            />}
           >
             チーム開発募集機能でできることは？
           </Accordion.Control>
@@ -117,7 +123,9 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="world">
           <Accordion.Control
-            icon={<IconWorld size={rem(20)} color={getColor('blue')} />}
+            icon={<IconWorld size={rem(20)} 
+            // color={getColor('blue')} 
+            />}
           >
             X(旧Twitter)IDを登録するとどうなる？
           </Accordion.Control>
@@ -145,7 +153,9 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="doorExit">
           <Accordion.Control
-            icon={<IconDoorExit size={rem(20)} color={getColor('yellow')} />}
+            icon={<IconDoorExit size={rem(20)} 
+            // color={getColor('yellow')} 
+            />}
           >
             退会方法は？
           </Accordion.Control>

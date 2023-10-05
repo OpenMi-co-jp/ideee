@@ -1,11 +1,11 @@
-import { Col, Card, Grid, Image } from '@mantine/core'
+import { Card, Grid, Image } from '@mantine/core'
 import type { CustomLayout } from 'next'
 
 export const AuthLayout: CustomLayout = (page) => {
   return (
     <Card padding="xl">
       <Grid grow gutter="xs">
-        <Col span={12} md={6}>
+        <Grid.Col span={12} offset={6}>
           <Card>
             <Card.Section>
               <Image
@@ -13,14 +13,14 @@ export const AuthLayout: CustomLayout = (page) => {
                 fit="cover"
                 src="/img/userAuth.webp"
                 alt="user auth image"
-                withPlaceholder
+                // withPlaceholder
               />
             </Card.Section>
           </Card>
-        </Col>
-        <Col span={12} md={6}>
+        </Grid.Col>
+        <Grid.Col span={12} offset={6}>
           {page}
-        </Col>
+        </Grid.Col>
       </Grid>
     </Card>
   )

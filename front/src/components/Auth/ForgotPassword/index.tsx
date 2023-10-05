@@ -1,4 +1,4 @@
-import { Button, Col, Paper, Title, Grid } from '@mantine/core'
+import { Button, Paper, Title, Grid } from '@mantine/core'
 import { TextForm } from '@/components/ReactFormSet'
 import type { CustomNextPage } from 'next'
 import { useForgotPassword } from './hooks'
@@ -12,13 +12,13 @@ export const ForgotPassword: CustomNextPage = () => {
         パスワードを忘れた？
       </Title>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <TextForm form={form} name="email" label="メールアドレス" required />
+        {/* <TextForm form={form} name="email" label="メールアドレス" required /> */}
         <Grid gutter="md">
-          <Col style={{ marginTop: '1rem' }}>
+          <Grid.Col style={{ marginTop: '1rem' }}>
             <Button type="submit" fullWidth>
               パスワードリセット用メール送信
             </Button>
-          </Col>
+          </Grid.Col>
         </Grid>
       </form>
     </Paper>

@@ -5,7 +5,6 @@ import {
   ActionIcon,
   Group,
   rem,
-  Avatar,
 } from '@mantine/core'
 
 import { IconBrandTwitter, IconNews } from '@tabler/icons-react'

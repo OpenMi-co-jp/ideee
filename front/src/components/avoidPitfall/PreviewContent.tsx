@@ -12,7 +12,7 @@ import { IconCircleCheck } from '@tabler/icons-react'
 export const PreviewContent = () => {
   return (
     <>
-      <Title my="4rem" order={1} fw={600} align="center">
+      <Title my="4rem" order={1} fw={600} ta="center">
         個人開発のよくある落とし穴まとめ
       </Title>
 
@@ -59,7 +59,7 @@ export const PreviewContent = () => {
 
         <Divider my="3rem" />
 
-        <Title order={1} my="4rem" align="center">
+        <Title order={1} my="4rem" ta="center">
           よくある落とし穴
           <br />
           🕳

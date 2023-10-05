@@ -1,14 +1,23 @@
-import { Group, Button } from '@mantine/core'
-import { IdeaContent } from '@/components/idea/show'
+import { Group, Button, Space } from '@mantine/core'
+import { IconSend } from '@tabler/icons-react'
+import { IdeaContents } from '@/components/idea/show'
 import { CommentList } from '@/components/comment'
 export const HiddenIdeaContent = () => {
   return (
     <>
-      <IdeaContent />
+      <IdeaContents />
+      <Space h="xl" />
       <CommentList />
       <Group position="center">
-        <Button type="submit" size="lg" bg="#EAAE59">
-          送信
+        <Button
+          type="submit"
+          variant="light"
+          size="lg"
+          color="orange"
+          disabled={true}
+          leftIcon={<IconSend />}
+        >
+          Send
         </Button>
       </Group>
     </>

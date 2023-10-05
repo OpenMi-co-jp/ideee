@@ -13,6 +13,8 @@ query GetIdea($id: ID!) {
     similar
 		note
     createdAt
+    updatedAt
+    userId
     user {
       id
       name

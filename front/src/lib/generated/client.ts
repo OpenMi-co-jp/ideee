@@ -698,6 +698,8 @@ export type GetIdeaQuery = {
     similar?: string | null
     note?: string | null
     createdAt: any
+    updatedAt: any
+    userId: number
     user: {
       __typename?: 'User'
       id: string
@@ -1264,6 +1266,8 @@ export const GetIdeaDocument = gql`
       similar
       note
       createdAt
+      updatedAt
+      userId
       user {
         id
         name

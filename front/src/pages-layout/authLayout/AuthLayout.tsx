@@ -13,7 +13,7 @@ export const AuthLayout: CustomLayout = (page) => {
                 fit="cover"
                 src="/img/userAuth.webp"
                 alt="user auth image"
-                // withPlaceholder
+                fallbackSrc="https://placehold.co/600x400?text=Placeholder"
               />
             </Card.Section>
           </Card>

@@ -7,7 +7,7 @@ import { useMediaQuery } from '@mantine/hooks'
 export const UserToggle = () => {
   const { loggedIn } = useLoggedIn()
   const LSLoggedIn = localStorage.getItem('loggedIn') == 'true'
-  const isMobile = useMediaQuery(`(max-width: ${rem(550)})`)
+  const isMobile = useMediaQuery(`(max-width: 550px)`)
 
   return (
     <Group>

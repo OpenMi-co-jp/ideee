@@ -13,77 +13,12 @@ import {
   rem,
   Box,
   Paper,
+  px,
 } from '@mantine/core'
 import React from 'react'
 import { useMediaQuery } from '@mantine/hooks'
 
-const useStyles = createStyles(() => ({
-  ImageTitle: {
-    fontSize: '25px',
-    fontWeight: 700,
-    zIndex: 500,
-    textAlign: 'center',
-    paddingBottom: '5px',
-    letterSpacing: '3px',
-    '@media (max-width: 649px)': {
-      fontSize: '15px',
-    },
-  },
-  circlePattern: {
-    width: '20rem',
-    height: '20rem',
-    background: 'radial-gradient(circle at center, #F5D0A9 50%, white 50.1%)',
-  },
-  circleStyle: {
-    width: '16rem',
-    height: '16rem',
-    borderRadius: '50%',
-    backgroundColor: '#F5D0A9',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  LeftImage: {
-    flex: 1,
-    width: '500px',
-    height: '445px',
-    borderRadius: '50%',
-    background: 'rgba(239, 213, 120, 0.49)',
-    top: 0,
-    left: '35px',
-    position: 'relative',
-    transition: 'all 0.3s',
-    '@media (max-width: 649px)': {
-      width: '310px',
-      height: '250px',
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-      width: '333px',
-      height: '290px',
-    },
-  },
-
-  RightImage: {
-    flex: 1,
-    width: '500px',
-    height: '445px',
-    borderRadius: '50%',
-    background: 'rgba(215, 145, 145, 0.50)',
-    position: 'relative',
-    top: '50px',
-    '@media (max-width: 649px)': {
-      width: '310px',
-      height: '250px',
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-      width: '333px',
-      height: '290px',
-    },
-  },
-}))
-
 const AboutPage = () => {
-  const { classes } = useStyles()
   const isMobile = useMediaQuery(`(max-width: ${rem(500)})`)
 
   return (
@@ -94,8 +29,13 @@ const AboutPage = () => {
             <Group miw={110} mt="8rem" w="50%">
               <Flex direction="column">
                 <Text
-                  style={{ textAlign: 'left' }}
-                  className={classes.ImageTitle}
+                  style={{
+                    textAlign: 'left',
+                    fontWeight: 700,
+                    paddingBottom: '5px',
+                    letterSpacing: '3px',
+                    fontSize: '23px',
+                  }}
                 >
                   ideeeとは
                 </Text>
@@ -291,11 +231,33 @@ const AboutPage = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
-        ml={isMobile ? '-70px' : ''}
+        ml={isMobile ? '5px' : '-20px'}
         w={isMobile ? '380px' : '100%'}
       >
-        <Box className={classes.LeftImage} />
-        <Box className={classes.RightImage} />
+        <Box
+          style={{
+            flex: 1,
+            width: isMobile ? '330px' : '500px',
+            height: isMobile ? '290px' : '445px',
+            borderRadius: '50%',
+            background: 'rgba(239, 213, 120, 0.49)',
+            top: 0,
+            left: '35px',
+            position: 'relative',
+            transition: 'all 0.3s',
+          }}
+        />
+        <Box
+          style={{
+            flex: 1,
+            width: isMobile ? '330px' : '500px',
+            height: isMobile ? '290px' : '445px',
+            borderRadius: '50%',
+            background: 'rgba(215, 145, 145, 0.50)',
+            position: 'relative',
+            top: '50px',
+          }}
+        />
       </Flex>
     </Box>
   )

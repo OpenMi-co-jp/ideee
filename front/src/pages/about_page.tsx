@@ -54,7 +54,7 @@ const useStyles = createStyles(() => ({
     position: 'relative',
     transition: 'all 0.3s',
     '@media (max-width: 649px)': {
-      width: '285px',
+      width: '310px',
       height: '250px',
     },
     '@media (max-width: 1000px) and (min-width:650px)': {
@@ -72,7 +72,7 @@ const useStyles = createStyles(() => ({
     position: 'relative',
     top: '50px',
     '@media (max-width: 649px)': {
-      width: '285px',
+      width: '310px',
       height: '250px',
     },
     '@media (max-width: 1000px) and (min-width:650px)': {
@@ -132,129 +132,150 @@ const AboutPage = () => {
           <Title order={2}>メリット</Title>
         </Center>
         <Space my="2rem" />
-        <Center>
-          <Grid>
-            <Grid.Col w="30%">
-              <Center>
-                <Card style={{ position: 'relative' }}>
-                  <div
-                    style={{
-                      width: '260px',
-                      height: '260px',
-                      borderRadius: '50%',
-                      backgroundColor: '#F5D0A9',
-                      position: 'relative',
-                    }}
-                  />
-                  <Image
-                    src={'/img/undraw_location_search_re_ttoj 1.png'}
-                    alt="コラボレーションイメージ"
-                    height="auto"
-                    width="15rem"
-                    style={{
-                      position: 'absolute',
-                      top: '15px',
-                      left: '15px',
-                      zIndex: 1,
-                    }}
-                  />
-                </Card>
 
-                <Paper>
-                  <Title order={3} color="#DBA901">
-                    アイデアが見つかる
-                  </Title>
-                  <Text w="13rem">
-                    権利フリーのアイデアもたくさん見つかります。
-                    <br />
-                    あなたのコードで世の中をちょっとよくしませんか？
-                  </Text>
-                </Paper>
-              </Center>
-            </Grid.Col>
+        <Container
+          style={{
+            flexDirection: isMobile ? 'column' : 'row',
+            display: 'flex',
+            marginLeft: '-40px',
+          }}
+        >
+          <Container>
+            <Card
+              style={{
+                position: 'relative',
+                flexDirection: 'column',
+                display: 'flex',
+              }}
+            >
+              <div
+                style={{
+                  width: '260px',
+                  height: '260px',
+                  borderRadius: '50%',
+                  backgroundColor: '#F5D0A9',
+                  position: 'relative',
+                  marginLeft: '-10px',
+                }}
+              />
+              <Image
+                src={'/img/undraw_location_search_re_ttoj 1.png'}
+                alt="コラボレーションイメージ"
+                height="auto"
+                width="15rem"
+                style={{
+                  position: 'absolute',
+                  top: '17px',
+                  left: '10px',
+                  zIndex: 1,
+                }}
+              />
+            </Card>
+            <Center>
+              <Paper>
+                <Title order={3} color="#DBA901">
+                  アイデアが見つかる
+                </Title>
+                <Text w="13rem">
+                  権利フリーのアイデアもたくさん見つかります。
+                  <br />
+                  あなたのコードで世の中をちょっとよくしませんか？
+                </Text>
+              </Paper>
+            </Center>
+          </Container>
 
-            <Space m="1.5rem" />
+          <Container>
+            <Card
+              style={{
+                position: 'relative',
+                flexDirection: 'column',
+                display: 'flex',
+              }}
+            >
+              <div
+                style={{
+                  width: '260px',
+                  height: '260px',
+                  borderRadius: '50%',
+                  backgroundColor: '#F5D0A9',
+                  position: 'relative',
+                  marginLeft: '-10px',
+                }}
+              />
+              <Image
+                src={'/img/undraw_performance_overview_re_mqrq 1.png'}
+                alt="コラボレーションイメージ"
+                height="auto"
+                width="15rem"
+                style={{
+                  position: 'absolute',
+                  top: '55px',
+                  left: '15px',
+                  zIndex: 1,
+                }}
+              />
+            </Card>
+            <Center>
+              <Paper>
+                <Title order={3} color="#DBA901">
+                  需要を確認できる
+                </Title>
+                <Text w="13rem">
+                  作ってから誰にも使われないのはとてももったいない。
+                  <br />
+                  <br />
+                  アイデアを公表し、反応を確認することでブラッシュアップされます。
+                </Text>
+              </Paper>
+            </Center>
+          </Container>
 
-            <Grid.Col>
-              <Center>
-                <Card style={{ position: 'relative' }}>
-                  <div
-                    style={{
-                      width: '260px',
-                      height: '260px',
-                      borderRadius: '50%',
-                      backgroundColor: '#F5D0A9',
-                      position: 'relative',
-                    }}
-                  />
-                  <Image
-                    src={'/img/undraw_performance_overview_re_mqrq 1.png'}
-                    alt="コラボレーションイメージ"
-                    height="auto"
-                    width="15rem"
-                    style={{
-                      position: 'absolute',
-                      top: '48px',
-                      left: '25px',
-                      zIndex: 1,
-                    }}
-                  />
-                </Card>
-                <Paper>
-                  <Title order={3} color="#DBA901">
-                    需要を確認できる
-                  </Title>
-                  <Text w="13rem">
-                    作ってから誰にも使われないのはとてももったいない。
-                    <br />
-                    <br />
-                    アイデアを公表し、反応を確認することでブラッシュアップされます。
-                  </Text>
-                </Paper>
-              </Center>
-            </Grid.Col>
-
-            <Space m="1.5rem" />
-
-            <Grid.Col>
-              <Center>
-                <Card style={{ position: 'relative' }}>
-                  <div
-                    style={{
-                      width: '260px',
-                      height: '260px',
-                      borderRadius: '50%',
-                      backgroundColor: '#F5D0A9',
-                      position: 'relative',
-                    }}
-                  />
-                  <Image
-                    src={'/img/Frame.png'}
-                    alt="コラボレーションイメージ"
-                    height="auto"
-                    width="15rem"
-                    style={{
-                      position: 'absolute',
-                      top: '45px',
-                      left: '15px',
-                      zIndex: 1,
-                    }}
-                  />
-                </Card>
-                <Paper>
-                  <Title order={3} color="#DBA901">
-                    仲間が見つかる
-                  </Title>
-                  <Text w="13rem">
-                    チーム開発の募集ができます。
-                    <br />
-                    実現したい世界観を描いて、チームを作れるユニークなギルドとして活用できます
-                  </Text>
-                </Paper>
-              </Center>
-            </Grid.Col>
-          </Grid>
-        </Center>
+          <Container>
+            <Card
+              style={{
+                position: 'relative',
+                flexDirection: 'column',
+                display: 'flex',
+              }}
+            >
+              <div
+                style={{
+                  width: '260px',
+                  height: '260px',
+                  borderRadius: '50%',
+                  backgroundColor: '#F5D0A9',
+                  position: 'relative',
+                  marginLeft: '-10px',
+                }}
+              />
+              <Image
+                src={'/img/Frame.png'}
+                alt="コラボレーションイメージ"
+                height="auto"
+                width="15rem"
+                style={{
+                  position: 'absolute',
+                  top: '55px',
+                  left: '15px',
+                  zIndex: 1,
+                }}
+              />
+            </Card>
+            <Center>
+              <Paper>
+                <Title order={3} color="#DBA901">
+                  仲間が見つかる
+                </Title>
+                <Text w="13rem">
+                  チーム開発の募集ができます。
+                  <br />
+                  実現したい世界観を描いて、チームを作れるユニークなギルドとして活用できます
+                </Text>
+              </Paper>
+            </Center>
+          </Container>
+        </Container>
       </Container>
 
       <Center>
@@ -270,6 +291,7 @@ const AboutPage = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
+        ml={isMobile ? '-70px' : ''}
         w={isMobile ? '380px' : '100%'}
       >
         <Box className={classes.LeftImage} />

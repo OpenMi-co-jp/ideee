@@ -5,7 +5,7 @@ export const AuthLayout: CustomLayout = (page) => {
   return (
     <Card padding="xl">
       <Grid grow gutter="xs">
-        <Grid.Col span={12} offset={6}>
+        <Grid.Col span={{ base: 12, md: 6 }} >
           <Card>
             <Card.Section>
               <Image
@@ -18,7 +18,7 @@ export const AuthLayout: CustomLayout = (page) => {
             </Card.Section>
           </Card>
         </Grid.Col>
-        <Grid.Col span={12} offset={6}>
+        <Grid.Col span={{ base: 12, md: 6 }} >
           {page}
         </Grid.Col>
       </Grid>

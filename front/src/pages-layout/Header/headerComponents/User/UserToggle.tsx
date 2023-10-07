@@ -1,4 +1,4 @@
-import { Button, Group, Space, Box, rem } from '@mantine/core'
+import { Button, Group, Space, Box } from '@mantine/core'
 import { useLoggedIn } from '@/components/loginContext'
 import { UserMenu } from './UserMenu'
 import Link from 'next/link'

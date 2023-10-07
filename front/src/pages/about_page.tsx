@@ -172,8 +172,8 @@ const AboutPage = () => {
               />
             </Card>
             <Center>
-              <Paper>
-                <Title order={3} color="#DBA901">
+              <Paper mt="lg" mb="10rem">
+                <Title order={3} color="#DBA901" mb="lg">
                   アイデアが見つかる
                 </Title>
                 <Text w="13rem">
@@ -217,8 +217,8 @@ const AboutPage = () => {
               />
             </Card>
             <Center>
-              <Paper>
-                <Title order={3} color="#DBA901">
+              <Paper mt="lg" mb="10rem">
+                <Title order={3} color="#DBA901" mb="lg">
                   需要を確認できる
                 </Title>
                 <Text w="13rem">
@@ -263,8 +263,8 @@ const AboutPage = () => {
               />
             </Card>
             <Center>
-              <Paper>
-                <Title order={3} color="#DBA901">
+              <Paper mt="lg" mb="10rem">
+                <Title order={3} color="#DBA901" mb="lg">
                   仲間が見つかる
                 </Title>
                 <Text w="13rem">

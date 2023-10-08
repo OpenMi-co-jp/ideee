@@ -31,14 +31,14 @@ export const SignUpForm: CustomNextPage = () => {
         <Title order={2} mb={30}>
           ユーザー登録
         </Title>
-        {/* <TextForm form={form} name="email" label="メールアドレス" required /> */}
-        {/* <PasswordForm form={form} name="password" label="パスワード" required /> */}
-        {/* <PasswordForm
+        <TextForm form={form} name="email" label="メールアドレス" required />
+        <PasswordForm form={form} name="password" label="パスワード" required />
+        <PasswordForm
           form={form}
           name="passwordConfirmation"
           label="確認用パスワード"
           required
-        /> */}
+        />
         <Grid style={{ marginTop: '1rem' }}>
           <Button type="submit" fullWidth>
             無料ユーザー作成

@@ -1,17 +1,9 @@
-import { useRouter } from 'next/router'
-import { Loader, Paper, Title, Divider } from '@mantine/core'
-import { useGetIdeaQuery } from '@/lib/generated/client'
+import { Paper, Title, Divider } from '@mantine/core'
 import { Comment } from './Comment'
+import { useIdea } from '@/context/IdeaContext'
 
 export const CommentList = () => {
-  const router = useRouter()
-  const { data, loading, error } = useGetIdeaQuery({
-    variables: {
-      id: router.query.id as string,
-    },
-  })
-
-  if (loading) return <Loader color="yellow" />
+  const idea = useIdea()
 
   return (
     <Paper bg="#fef6eb" radius="md" p="xs" m="lg">
@@ -19,7 +11,7 @@ export const CommentList = () => {
         Comment
       </Title>
       <Divider size="sm" my="xs" color="gray" />
-      {data?.idea.comments.map((comment) => (
+      {idea.comments?.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
     </Paper>

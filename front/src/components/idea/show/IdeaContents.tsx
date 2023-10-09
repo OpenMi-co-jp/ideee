@@ -1,13 +1,12 @@
-import { useRouter } from 'next/router'
-import { Button, Group, Loader, Paper, Text, Anchor } from '@mantine/core'
+import { Button, Group, Paper, Text, Anchor } from '@mantine/core'
 import { IconApps, IconBrandGithub } from '@tabler/icons-react'
-import { useGetIdeaQuery } from '@/lib/generated/client'
 import { FormatDate } from '@/utils/common'
 import { IdeaContentSet } from './IdeaContentSet'
 import { IdeaManage } from '@/components/idea/manage'
-import type { Idea } from '@/lib/generated/client'
+import type { GetIdeaQuery } from '@/lib/generated/client'
+import { useIdea } from '@/context/IdeaContext'
 
-const getSections = (idea?: Idea) => [
+const getSections = (idea: GetIdeaQuery['idea']) => [
   { label: '背景', content: idea?.background },
   { label: 'ゴール', content: idea?.goal },
   { label: 'イシュー', content: idea?.issue },
@@ -20,16 +19,8 @@ const getSections = (idea?: Idea) => [
 ]
 
 export const IdeaContents = () => {
-  const router = useRouter()
-  const { data, loading } = useGetIdeaQuery({
-    variables: {
-      id: router.query.id as string,
-    },
-  })
+  const idea = useIdea()
 
-  if (loading) return <Loader color="yellow" />
-
-  const idea = data?.idea as Idea
   const createdAt = new Date(idea?.createdAt)
   const sections = getSections(idea)
 

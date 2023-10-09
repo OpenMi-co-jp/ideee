@@ -1,16 +1,8 @@
-import { useRouter } from 'next/router'
-import { Image, Title, Flex, Loader } from '@mantine/core'
-import { useGetIdeaQuery } from '@/lib/generated/client'
+import { Image, Title, Flex } from '@mantine/core'
+import { useIdea } from '@/context/IdeaContext'
 
 export const IdeaTitle = () => {
-  const router = useRouter()
-  const { data, loading, error } = useGetIdeaQuery({
-    variables: {
-      id: router.query.id as string,
-    },
-  })
-
-  if (loading) return <Loader color="yellow" />
+  const idea = useIdea()
 
   return (
     <Flex
@@ -20,10 +12,10 @@ export const IdeaTitle = () => {
       direction="column"
       wrap="wrap"
     >
-      <Title order={1}>{data?.idea.name}</Title>
-      {data?.idea.icon && (
+      <Title order={1}>{idea?.name}</Title>
+      {idea?.icon && (
         <Image
-          src={data?.idea.icon}
+          src={idea?.icon}
           height={200}
           radius="sm"
           fit="contain"

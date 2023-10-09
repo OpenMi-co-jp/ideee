@@ -1,22 +1,14 @@
-import { useRouter } from 'next/router'
-import { Group, Loader, Text } from '@mantine/core'
-import { useGetIdeaQuery } from '@/lib/generated/client'
+import { Group, Text } from '@mantine/core'
 import { UserIcon } from '@/components/user'
+import { useIdea } from '@/context/IdeaContext'
 
 export const UserSection = () => {
-  const router = useRouter()
-  const { data, loading, error } = useGetIdeaQuery({
-    variables: {
-      id: router.query.id as string,
-    },
-  })
-
-  if (loading) return <Loader color="yellow" />
+  const idea = useIdea()
 
   return (
     <Group py="lg" pl="xl">
-      <UserIcon userIcon={String(data?.idea.user.icon)} />
-      <Text size="xl">{data?.idea.user.name}</Text>
+      <UserIcon userIcon={String(idea.user.icon)} />
+      <Text size="xl">{idea.user.name}</Text>
     </Group>
   )
 }

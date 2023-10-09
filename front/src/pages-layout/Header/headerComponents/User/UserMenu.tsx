@@ -1,4 +1,4 @@
-import { Menu } from '@mantine/core'
+import { Menu, Box } from '@mantine/core'
 import { IconSettings, IconLogout, IconUserCircle } from '@tabler/icons-react'
 import { SignOutAnchor } from '@/components/Auth'
 import Link from 'next/link'
@@ -8,7 +8,9 @@ export const UserMenu = () => {
   return (
     <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
-        <UserIcon />
+        <Box>
+          <UserIcon />
+        </Box>
       </Menu.Target>
 
       <Menu.Dropdown>

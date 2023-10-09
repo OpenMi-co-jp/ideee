@@ -21,6 +21,7 @@ query GetIdea($id: ID!) {
       id
       name
       icon
+      twitterId
     }
     comments {
       id

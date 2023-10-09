@@ -1,13 +1,8 @@
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import { Menu } from '@mantine/core'
-import type { Idea } from '@/lib/generated/client'
 import Link from 'next/link'
 
-type IdeaMenuProps = {
-  idea?: Idea
-}
-
-export const IdeaMenu = ({ idea }: IdeaMenuProps) => {
+export const IdeaMenu = () => {
   return (
     <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>

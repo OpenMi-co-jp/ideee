@@ -1,1 +1,0 @@
-export { IdeaManage } from './IdeaManage'

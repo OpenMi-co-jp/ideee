@@ -707,6 +707,7 @@ export type GetIdeaQuery = {
       id: string
       name: string
       icon?: string | null
+      twitterId?: string | null
     }
     comments: Array<{
       __typename?: 'Comment'
@@ -1276,6 +1277,7 @@ export const GetIdeaDocument = gql`
         id
         name
         icon
+        twitterId
       }
       comments {
         id

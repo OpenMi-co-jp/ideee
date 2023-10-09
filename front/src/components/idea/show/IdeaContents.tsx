@@ -1,8 +1,6 @@
-import { Button, Group, Paper, Text, Anchor } from '@mantine/core'
+import { Button, Paper, Anchor } from '@mantine/core'
 import { IconApps, IconBrandGithub } from '@tabler/icons-react'
-import { FormatDate } from '@/utils/common'
 import { IdeaContentSet } from './IdeaContentSet'
-import { IdeaManage } from '@/components/idea/manage'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 import { useIdea } from '@/context/IdeaContext'
 
@@ -21,7 +19,6 @@ const getSections = (idea: GetIdeaQuery['idea']) => [
 export const IdeaContents = () => {
   const idea = useIdea()
 
-  const createdAt = new Date(idea?.createdAt)
   const sections = getSections(idea)
 
   return (
@@ -59,10 +56,6 @@ export const IdeaContents = () => {
           </Anchor>
         )}
       </Paper>
-      <Group py="lg" mr="lg" position="apart">
-        <IdeaManage idea={idea} />
-        <Text size="md">{FormatDate(createdAt)}</Text>
-      </Group>
     </>
   )
 }

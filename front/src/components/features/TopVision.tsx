@@ -1,116 +1,95 @@
 import React from 'react'
-import Image from 'next/image'
-import { 
-  // createStyles, 
-  Title, Text, Button } from '@mantine/core'
+import NextImage from 'next/image'
+import {
+  Title, Text, Button, Image, Box
+} from '@mantine/core'
 import Link from 'next/link'
-
-// const useStyles = createStyles(() => ({
-//   topVisionImageBox: {},
-//   topVisionImage: {
-//     maxHeight: '500px',
-//     zIndex: -300,
-
-//     '@media (max-width: 649px)': {
-//       maxHeight: '250px',
-//       objectFit: 'cover',
-//     },
-//     '@media (max-width: 1000px) and (min-width:650px)': {
-//       maxHeight: '350px',
-//     },
-//   },
-
-//   topVisionInnerWrapper: {
-//     width: '400px',
-//     paddingTop: '150px',
-//     paddingBottom: '130px',
-//     textAlign: 'center',
-
-//     '@media (max-width: 649px)': {
-//       width: 'auto',
-//       paddingTop: '70px',
-//       paddingBottom: '30px',
-//     },
-//     '@media (max-width: 1000px) and (min-width:650px)': {
-//       paddingTop: '100px',
-//     },
-//   },
-//   topVisionTopTextWrapper: {
-//     display: 'flex',
-//     flexFlow: 'column',
-//     paddingBottom: '55px',
-
-//     '@media (max-width: 649px)': {
-//       paddingBottom: '40px',
-//       textShadow:
-//         '8px 8px 12px white, -8px 8px 12px white, 8px -8px 12px white, -8px -8px 12px white',
-//     },
-//     '@media (max-width: 1000px) and (min-width:650px)': {
-//       paddingBottom: '40px',
-//     },
-//   },
-
-//   topVisionTopText: {
-//     color: '#FF862F',
-
-//     '@media (max-width: 649px)': {
-//       fontSize: '26px',
-//     },
-//     '@media (max-width: 1000px) and (min-width:650px)': {
-//       fontSize: '28px',
-//     },
-//   },
-
-//   topVisionBottomText: {
-//     paddingTop: '35px',
-//     color: '#818181',
-//     fontSize: '20px',
-//     fontWeight: 700,
-
-//     '@media (max-width: 649px)': {
-//       fontSize: '16px',
-//     },
-//     '@media (max-width: 1000px) and (min-width:650px)': {
-//       fontSize: '18px',
-//     },
-//   },
-// }))
+import { relative } from 'path'
 
 export const TopVision = () => {
-  // const { classes } = useStyles()
   // TODO: 現在のユーザー数を設定予定
+  // TODO: Imageが固定される。
   const userNum = 937
   return (
     <>
-      <div 
-      // className={classes.topVisionImageBox}
-      >
-        <Image
-          src={'/img/top_vision_image.webp'}
-          alt="ビジョンを伝える画像"
-          // className={classes.topVisionImage}
-          style={{
-            top: 150,
-          }}
-          fill
+      <Image 
+        component={NextImage} 
+        src={'/img/top_vision_image.webp'} 
+        alt='ビジョンを伝える画像' 
+        fill
+        style={{
+          top: 150,
+          maxHeight: '500px',
+          zIndex: -300,
+
+          '@media (max-width: 649px)': {
+            maxHeight: '250px',
+            objectFit: 'cover',
+          },
+          '@media (max-width: 1000px) and (min-width:650px)': {
+            maxHeight: '350px',
+          },
+        }}
         />
-      </div>
-      <div 
-      // className={classes.topVisionInnerWrapper}
+      <Box
+        style={{
+          width: '400px',
+          paddingTop: '150px',
+          paddingBottom: '130px',
+          textAlign: 'center',
+
+          '@media (max-width: 649px)': {
+            width: 'auto',
+            paddingTop: '70px',
+            paddingBottom: '30px',
+          },
+          '@media (max-width: 1000px) and (min-width:650px)': {
+            paddingTop: '100px',
+          },
+        }}
       >
-        <div 
-        // className={classes.topVisionTopTextWrapper}
+        <Box
+          style={{
+            display: 'flex',
+            flexFlow: 'column',
+            paddingBottom: '55px',
+
+            '@media (max-width: 649px)': {
+              paddingBottom: '40px',
+              textShadow:
+                '8px 8px 12px white, -8px 8px 12px white, 8px -8px 12px white, -8px -8px 12px white',
+            },
+            '@media (max-width: 1000px) and (min-width:650px)': {
+              paddingBottom: '40px',
+            },
+          }}
         >
-          <Title 
-          // className={classes.topVisionTopText}
+          <Title
+            style={{
+              color: '#FF862F',
+              '@media (max-width: 649px)': {
+                fontSize: '26px',
+              },
+              '@media (max-width: 1000px) and (min-width:650px)': {
+                fontSize: '28px',
+              },
+            }}
           >あなたのアイデアを
           </Title>
-          <Title 
-          // className={classes.topVisionTopText}
+          <Title
+            style={{
+              color: '#FF862F',
+              '@media (max-width: 649px)': {
+                fontSize: '26px',
+              },
+              '@media (max-width: 1000px) and (min-width:650px)': {
+                fontSize: '28px',
+              },
+            }}
           >
             エンジニアと盛り上げる
           </Title>
-        </div>
+        </Box>
         <Link href="/about">
           <Button
             variant="gradient"
@@ -119,13 +98,25 @@ export const TopVision = () => {
             IDEEEについて｜⇢
           </Button>
         </Link>
-        <Text 
-        // className={classes.topVisionBottomText}
+        <Text
+          style={{
+            paddingTop: '35px',
+            color: '#818181',
+            fontSize: '20px',
+            fontWeight: 700,
+
+            '@media (max-width: 649px)': {
+              fontSize: '16px',
+            },
+            '@media (max-width: 1000px) and (min-width:650px)': {
+              fontSize: '18px',
+            },
+          }}
         >
           現在のユーザー数:{' '}
           <b style={{ color: '#FF862F', fontSize: '2rem' }}>{userNum}</b>人
         </Text>
-      </div>
+      </Box>
     </>
   )
 }

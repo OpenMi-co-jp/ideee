@@ -7,8 +7,8 @@ export const UserSection = () => {
 
   return (
     <Group py="lg" pl="xl">
-      <UserIcon userIcon={String(idea.user.icon)} />
-      <Text size="xl">{idea.user.name}</Text>
+      <UserIcon userIcon={String(idea.user?.icon)} />
+      <Text size="xl">{idea.user?.name}</Text>
     </Group>
   )
 }

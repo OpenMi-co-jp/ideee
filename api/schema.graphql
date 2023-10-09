@@ -1201,7 +1201,7 @@ type User {
   """
   ユーザー名
   """
-  name: String
+  name: String!
 
   """
   ポイント数

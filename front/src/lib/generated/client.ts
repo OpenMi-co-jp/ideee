@@ -611,7 +611,7 @@ export type User = {
   /** アイデア数 */
   ideasNum?: Maybe<Scalars['Int']>
   /** ユーザー名 */
-  name?: Maybe<Scalars['String']>
+  name: Scalars['String']
   /** ポイント数 */
   point?: Maybe<Scalars['Int']>
   /** アイコンURL */
@@ -705,7 +705,7 @@ export type GetIdeaQuery = {
     user: {
       __typename?: 'User'
       id: string
-      name?: string | null
+      name: string
       icon?: string | null
     }
     comments: Array<{
@@ -713,7 +713,7 @@ export type GetIdeaQuery = {
       id: string
       description: string
       createdAt: any
-      user: { __typename?: 'User'; name?: string | null; icon?: string | null }
+      user: { __typename?: 'User'; name: string; icon?: string | null }
     }>
     ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
   }
@@ -741,7 +741,7 @@ export type GetIdeasQuery = {
       user: {
         __typename?: 'User'
         id: string
-        name?: string | null
+        name: string
         icon?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
@@ -920,7 +920,7 @@ export type GetUserQuery = {
   user: {
     __typename?: 'User'
     id: string
-    name?: string | null
+    name: string
     description?: string | null
     definition?: number | null
   }
@@ -933,7 +933,7 @@ export type GetUsersQuery = {
   users: Array<{
     __typename?: 'User'
     id: string
-    name?: string | null
+    name: string
     description?: string | null
     definition?: number | null
   }>
@@ -964,7 +964,7 @@ export type UpdateUserMutation = {
     user: {
       __typename?: 'User'
       id: string
-      name?: string | null
+      name: string
       description?: string | null
       definition?: number | null
     }

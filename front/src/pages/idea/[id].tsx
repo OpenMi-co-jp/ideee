@@ -20,14 +20,20 @@ const IdeaDetail = () => {
     },
   })
 
+  const [idea, setIdea] = useState({})
+
   useEffect(() => {
     setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
-  }, [])
+
+    if (data) {
+      setIdea(data?.idea)
+    }
+  }, [data])
 
   if (loading) return <Loader color="yellow" />
 
   return (
-    <IdeaProvider idea={data?.idea as GetIdeaQuery['idea']}>
+    <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
       <Container
         style={{
           height: '100%',

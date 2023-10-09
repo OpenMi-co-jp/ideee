@@ -4,6 +4,7 @@ type UserIconProps = {
   userIcon?: string | null
   height?: number
 }
+
 export const UserIcon = ({ height = 30, userIcon = '' }: UserIconProps) => {
   return (
     <Image

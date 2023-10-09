@@ -12,18 +12,16 @@ export const IdeaOptions = () => {
   const createdAt = new Date(idea?.createdAt)
 
   return (
-    <>
-      <Group py="lg" mr="lg" position="apart">
-        <Group>
-          <Like />
-          <XShare />
-          <UrlCopy />
-          <IdeaMenu />
-        </Group>
-        <Text size="md" color="gray">
-          {FormatDate(createdAt)}
-        </Text>
+    <Group py="lg" mr="lg" position="apart">
+      <Group>
+        <Like />
+        <XShare />
+        <UrlCopy />
+        <IdeaMenu />
       </Group>
-    </>
+      <Text size="md" color="gray">
+        {FormatDate(createdAt)}
+      </Text>
+    </Group>
   )
 }

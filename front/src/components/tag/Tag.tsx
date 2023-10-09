@@ -4,6 +4,7 @@ import Link from 'next/link'
 type TagProps = {
   tagName: string
 }
+
 export const Tag = ({ tagName }: TagProps) => {
   return (
     <Link href={`/search?name_or_idea_tags_name_cont=${tagName}`}>

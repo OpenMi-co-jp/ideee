@@ -5,7 +5,7 @@ import { UserIcon } from '@/components/user'
 
 export const Comment = ({ comment }: CommentType) => {
   const { description, createdAt, user } = comment
-  const formatedCreatedAt = createdAt ? new Date(createdAt) : null
+  const commentCreatedAt = new Date(createdAt)
   return (
     <>
       <Group m="lg" position="center">
@@ -14,7 +14,7 @@ export const Comment = ({ comment }: CommentType) => {
           <Paper bg="#FFFFFF" maw="30rem" p="md" radius="lg">
             {description}
           </Paper>
-          <Text color="gray">{FormatDate(formatedCreatedAt)}</Text>
+          <Text color="gray">{FormatDate(commentCreatedAt)}</Text>
         </Group>
       </Group>
     </>

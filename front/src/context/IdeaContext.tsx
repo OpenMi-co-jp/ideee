@@ -8,6 +8,7 @@ type IdeaProviderProps = {
   children: ReactNode
   idea: GetIdeaQuery['idea']
 }
+
 export function IdeaProvider({ children, idea }: IdeaProviderProps) {
   return <IdeaContext.Provider value={idea}>{children}</IdeaContext.Provider>
 }

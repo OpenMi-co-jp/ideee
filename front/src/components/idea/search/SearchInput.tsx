@@ -39,6 +39,7 @@ export const SearchInput = () => {
           transitionDuration: '300',
           transitionTimingFunction: 'ease',
         },
+// TODO: ドロップダウンの時のアニメーションがおかしい。
       }}
       value={searchValue}
       onSubmit={( value ) => {

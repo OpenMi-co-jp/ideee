@@ -1,22 +1,19 @@
 import React from 'react'
 import NextImage from 'next/image'
 import {
-  Title, Text, Button, Image, Box
+  Title, Text, Button, Image, Box, BackgroundImage
 } from '@mantine/core'
 import Link from 'next/link'
-import { relative } from 'path'
+
 
 export const TopVision = () => {
   // TODO: 現在のユーザー数を設定予定
-  // TODO: Imageが固定される。
+  // TODO: BackgroundImageが横幅いっぱいにならない
   const userNum = 937
   return (
-    <>
-      <Image 
-        component={NextImage} 
+    <Box>
+      <BackgroundImage 
         src={'/img/top_vision_image.webp'} 
-        alt='ビジョンを伝える画像' 
-        fill
         style={{
           top: 150,
           maxHeight: '500px',
@@ -30,7 +27,7 @@ export const TopVision = () => {
             maxHeight: '350px',
           },
         }}
-        />
+        >
       <Box
         style={{
           width: '400px',
@@ -117,6 +114,7 @@ export const TopVision = () => {
           <b style={{ color: '#FF862F', fontSize: '2rem' }}>{userNum}</b>人
         </Text>
       </Box>
-    </>
+      </BackgroundImage>
+    </Box>
   )
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 import { createStyles, Box, Text, Title, Divider, Flex } from '@mantine/core'
 

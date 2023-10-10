@@ -34,6 +34,8 @@ export type Comment = {
   ideaId: Scalars['Int']
   /** 更新日 */
   updatedAt: Scalars['ISO8601DateTime']
+  /** ユーザーオブジェクト */
+  user: User
   /** ユーザーID */
   userId: Scalars['Int']
 }
@@ -190,6 +192,8 @@ export type Idea = {
   __typename?: 'Idea'
   /** 背景 */
   background?: Maybe<Scalars['String']>
+  /** コメントリスト */
+  comments: Array<Comment>
   /** コメント数 */
   commentsNum?: Maybe<Scalars['Int']>
   /** 作成日 */
@@ -607,7 +611,7 @@ export type User = {
   /** アイデア数 */
   ideasNum?: Maybe<Scalars['Int']>
   /** ユーザー名 */
-  name?: Maybe<Scalars['String']>
+  name: Scalars['String']
   /** ポイント数 */
   point?: Maybe<Scalars['Int']>
   /** アイコンURL */
@@ -683,8 +687,36 @@ export type GetIdeaQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    note?: string | null
+    icon?: string | null
+    background?: string | null
     goal?: string | null
+    issue?: string | null
+    wishFunction?: string | null
+    hypothesis?: string | null
+    target?: string | null
+    monetize?: string | null
+    similar?: string | null
+    note?: string | null
+    createdAt: any
+    updatedAt: any
+    userId: number
+    productUrl?: string | null
+    githubUrl?: string | null
+    user: {
+      __typename?: 'User'
+      id: string
+      name: string
+      icon?: string | null
+      twitterId?: string | null
+    }
+    comments: Array<{
+      __typename?: 'Comment'
+      id: string
+      description: string
+      createdAt: any
+      user: { __typename?: 'User'; name: string; icon?: string | null }
+    }>
+    ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
   }
 }
 
@@ -710,7 +742,7 @@ export type GetIdeasQuery = {
       user: {
         __typename?: 'User'
         id: string
-        name?: string | null
+        name: string
         icon?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
@@ -852,7 +884,7 @@ export type GetTagsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetTagsQuery = {
   __typename?: 'Query'
-  tags: Array<{ __typename?: 'Tag'; id: string; name: string }>
+  tags: Array<{ __typename?: 'Tag'; name: string }>
 }
 
 export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
@@ -889,7 +921,7 @@ export type GetUserQuery = {
   user: {
     __typename?: 'User'
     id: string
-    name?: string | null
+    name: string
     description?: string | null
     definition?: number | null
   }
@@ -902,7 +934,7 @@ export type GetUsersQuery = {
   users: Array<{
     __typename?: 'User'
     id: string
-    name?: string | null
+    name: string
     description?: string | null
     definition?: number | null
   }>
@@ -933,7 +965,7 @@ export type UpdateUserMutation = {
     user: {
       __typename?: 'User'
       id: string
-      name?: string | null
+      name: string
       description?: string | null
       definition?: number | null
     }
@@ -1226,8 +1258,40 @@ export const GetIdeaDocument = gql`
     idea(id: $id) {
       id
       name
-      note
+      icon
+      background
       goal
+      issue
+      wishFunction
+      hypothesis
+      target
+      monetize
+      similar
+      note
+      createdAt
+      updatedAt
+      userId
+      productUrl
+      githubUrl
+      user {
+        id
+        name
+        icon
+        twitterId
+      }
+      comments {
+        id
+        description
+        createdAt
+        user {
+          name
+          icon
+        }
+      }
+      ideaTags {
+        id
+        name
+      }
     }
   }
 `
@@ -1815,7 +1879,6 @@ export type GetRoomQueryResult = Apollo.QueryResult<
 export const GetTagsDocument = gql`
   query GetTags {
     tags {
-      id
       name
     }
   }

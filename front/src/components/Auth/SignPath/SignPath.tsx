@@ -13,7 +13,7 @@ export const SignPath: CustomNextPage = () => {
             fit="contain"
             src="/img/userAuth.webp"
             alt="user auth image"
-            // withPlaceholder
+            fallbackSrc="https://placehold.co/600x400?text=Placeholder"
           />
         </Grid.Col>
         <Grid.Col span={12} offset={6}>

@@ -12,7 +12,7 @@ export const ConfirmResend: CustomNextPage = () => {
         確認メールが届いていない場合
       </Title>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        {/* <TextForm form={form} name="email" label="メールアドレス" required /> */}
+        <TextForm form={form} name="email" label="メールアドレス" required />
         <Grid gutter="md">
           <Grid.Col style={{ marginTop: '1rem' }}>
             <Button type="submit" fullWidth>

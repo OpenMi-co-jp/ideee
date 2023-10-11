@@ -12,7 +12,7 @@ export const ForgotPassword: CustomNextPage = () => {
         パスワードを忘れた？
       </Title>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        {/* <TextForm form={form} name="email" label="メールアドレス" required /> */}
+        <TextForm form={form} name="email" label="メールアドレス" required />
         <Grid gutter="md">
           <Grid.Col style={{ marginTop: '1rem' }}>
             <Button type="submit" fullWidth>

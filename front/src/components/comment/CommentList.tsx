@@ -9,10 +9,10 @@ export const CommentList = () => {
   return (
     <>
       <Paper bg="#fef6eb" radius="md" p="xs" m="lg">
-        <Title order={3} size="xl" p="sm" color="gray">
+        <Title order={3} size="xl" p="sm" c="gray">
           Comment
         </Title>
-        <Divider size="sm" my="xs" color="gray" />
+        <Divider size="sm" my="xs" c="gray" />
         {idea.comments?.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}

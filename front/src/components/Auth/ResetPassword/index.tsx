@@ -23,16 +23,16 @@ export const ResetPassword: CustomNextPage = () => {
         </Title>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <PasswordForm
-          // form={form}
-          // name="password"
-          // label="パスワード"
-          // required
+            form={form}
+            name="password"
+            label="パスワード"
+            required
           />
           <PasswordForm
-          // form={form}
-          // name="passwordConfirmation"
-          // label="確認用パスワード"
-          // required
+            form={form}
+            name="passwordConfirmation"
+            label="確認用パスワード"
+            required
           />
           <Grid gutter="md">
             <Grid.Col style={{ marginTop: '1rem' }}>

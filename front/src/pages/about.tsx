@@ -5,7 +5,6 @@ import {
   Card,
   Center,
   Container,
-  createStyles,
   Space,
   Flex,
   Title,
@@ -13,24 +12,26 @@ import {
   rem,
   Box,
   Paper,
-  px,
+  Button,
 } from '@mantine/core'
 import React from 'react'
 import { useMediaQuery } from '@mantine/hooks'
+import { UserToggle } from '@/pages-layout/Header/headerComponents'
+import Link from 'next/link'
 
 const AboutPage = () => {
-  const isMobile = useMediaQuery(`(max-width: ${rem(500)})`)
+  const isMobile = useMediaQuery(`(max-width: ${rem(460)})`)
 
   return (
     <Box mx="xs">
       <Container mt="13rem" mb="9rem" mx="6%">
         <Center>
           <Grid>
-            <Group miw={110} mt="8rem" w="50%">
+            <Group miw={110} mt="8rem" w={isMobile ? '100%' : '50%'}>
               <Flex direction="column">
                 <Text
                   style={{
-                    textAlign: 'left',
+                    textAlign: isMobile ? 'center' : 'left',
                     fontWeight: 700,
                     paddingBottom: '5px',
                     letterSpacing: '3px',
@@ -40,13 +41,13 @@ const AboutPage = () => {
                   ideeeとは
                 </Text>
                 <Space my="md" />
-                <Text>
+                <Text style={{ textAlign: isMobile ? 'center' : 'left' }}>
                   アイデアとエンジニアの
                   <br />
                   マッチングプラットフォーム
                 </Text>
                 <Space my="xs" />
-                <Text>
+                <Text style={{ textAlign: isMobile ? 'center' : 'left' }}>
                   アイデアをアイデアで終わらせない。
                   <br />
                   つくれる人と繋がり、アイデアを実現しよう
@@ -59,6 +60,7 @@ const AboutPage = () => {
               alt="コラボレーションイメージ"
               my="5rem"
               style={{
+                marginLeft: isMobile ? '3%' : '',
                 width: isMobile ? '80%' : '40%',
                 height: 'auto',
               }}
@@ -67,7 +69,7 @@ const AboutPage = () => {
         </Center>
       </Container>
 
-      <Container>
+      <Container w="100%">
         <Center>
           <Title order={2}>メリット</Title>
         </Center>
@@ -77,7 +79,7 @@ const AboutPage = () => {
           style={{
             flexDirection: isMobile ? 'column' : 'row',
             display: 'flex',
-            marginLeft: '-40px',
+            marginLeft: '-6%',
           }}
         >
           <Container>
@@ -218,11 +220,52 @@ const AboutPage = () => {
         </Container>
       </Container>
 
-      <Center>
-        <Container my="15rem">
-          <Text>ideeeをより詳しく知りたい方はこちらをご覧ください。</Text>
-        </Container>
-      </Center>
+      <Container my="15rem" w="100%">
+        <Center>
+          <Title order={3} fw="normal" my="4rem">
+            ideeeをより詳しく知りたい方はこちらをご覧ください。
+          </Title>
+        </Center>
+        <Box style={{ position: 'relative' }} w="100%" p="0" pt="56.25%">
+          <iframe
+            loading="lazy"
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: '0',
+              left: '0',
+              border: 'none',
+              padding: '0',
+              margin: '0',
+            }}
+            src="https://www.canva.com/design/DAFw4Tm5BB4/view?embed"
+            allowFullScreen
+          >
+            {' '}
+          </iframe>
+        </Box>
+      </Container>
+
+      <Paper mb="8rem" shadow="md" radius="xs" py="lg" px="lg" mx="10rem">
+        <Center>
+          <Title order={3} fw="normal" my="lg">
+            無料登録してアイデアを見に行く
+          </Title>
+        </Center>
+        <Center>
+          <Link href="/user/sign_up">
+            <Button
+              w="15rem"
+              mb="xs"
+              variant="gradient"
+              gradient={{ from: 'red', to: 'orange' }}
+            >
+              ユーザー登録
+            </Button>
+          </Link>
+        </Center>
+      </Paper>
 
       <Flex
         style={{
@@ -232,7 +275,7 @@ const AboutPage = () => {
           justifyContent: 'space-between',
         }}
         ml={isMobile ? '5px' : '-20px'}
-        w={isMobile ? '380px' : '100%'}
+        w={isMobile ? '450px' : '100%'}
       >
         <Box
           style={{
@@ -242,7 +285,7 @@ const AboutPage = () => {
             borderRadius: '50%',
             background: 'rgba(239, 213, 120, 0.49)',
             top: 0,
-            left: '35px',
+            left: isMobile ? '-5%' : '25px',
             position: 'relative',
             transition: 'all 0.3s',
           }}
@@ -256,6 +299,7 @@ const AboutPage = () => {
             background: 'rgba(215, 145, 145, 0.50)',
             position: 'relative',
             top: '50px',
+            left: isMobile ? '-10%' : '-5px',
           }}
         />
       </Flex>

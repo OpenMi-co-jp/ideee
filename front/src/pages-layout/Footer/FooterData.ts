@@ -3,7 +3,7 @@ export const footerData = {
     {
       title: 'About',
       links: [
-        { label: 'ideeeについて', link: '/about_page' },
+        { label: 'ideeeについて', link: '/about' },
         {
           label: 'アイデアの探し方',
           link: 'https://www.ideee.tech/how_to_find_idea',

@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       {!(LSLoggedIn || loggedIn) && <TopVision />}
-      <Space h="3rem" /> 
+      <Space h="3rem" />
       <HotIdeas />
       <Space h="lg" />
       <PopularTags />
@@ -24,7 +24,7 @@ export default function Home() {
       <ActiveTeamIdeas />
       <Space h="xl" />
       <DeployedIdeas />
-      {!(LSLoggedIn || loggedIn) && <Philosophy />} 
+      {!(LSLoggedIn || loggedIn) && <Philosophy />}
     </>
   )
 }

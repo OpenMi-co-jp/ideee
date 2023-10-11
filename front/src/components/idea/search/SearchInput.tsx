@@ -39,10 +39,10 @@ export const SearchInput = () => {
           transitionDuration: '300',
           transitionTimingFunction: 'ease',
         },
-// TODO: ドロップダウンの時のアニメーションがおかしい。
+        // TODO: ドロップダウンの時のアニメーションがおかしい。
       }}
       value={searchValue}
-      onSubmit={( value ) => {
+      onSubmit={(value) => {
         router.push(`/search?name_or_idea_tags_name_cont=${value}`)
         setSearchTrigger(false)
       }}
@@ -55,8 +55,7 @@ export const SearchInput = () => {
       rightSection={
         searchTrigger ? (
           <Link href={`/search?name_or_idea_tags_name_cont=${searchValue}`}>
-            <Button color="yellow" radius="xl" size="compact-sm"
-            >
+            <Button color="yellow" radius="xl" size="compact-sm">
               クリックで検索
             </Button>
           </Link>

@@ -25,7 +25,7 @@ const FrequentQuestions = () => {
   const { colorScheme } = useMantineColorScheme()
   const getColor = (color: string) =>
     theme.colors[color][colorScheme === 'dark' ? 4 : 8]
-// TODO:backgroud-colorの青がおかしい。
+  // TODO:backgroud-colorの青がおかしい。
   return (
     <Container>
       <Title order={1} m="lg">
@@ -35,9 +35,7 @@ const FrequentQuestions = () => {
       <Accordion variant="separated">
         <Accordion.Item value="bulb">
           <Accordion.Control
-            icon={<IconBulb size={20} 
-            color={getColor('red')} 
-            />}
+            icon={<IconBulb size={20} color={getColor('red')} />}
           >
             アイデアはどうやって探したらいいの？
           </Accordion.Control>
@@ -64,9 +62,7 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="flag">
           <Accordion.Control
-            icon={<IconFlag size={20} 
-            color={getColor('blue')} 
-            />}
+            icon={<IconFlag size={20} color={getColor('blue')} />}
           >
             Contributionsとは？
           </Accordion.Control>
@@ -91,9 +87,7 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="users">
           <Accordion.Control
-            icon={<IconUsers size={20} 
-            color={getColor('teal')} 
-            />}
+            icon={<IconUsers size={20} color={getColor('teal')} />}
           >
             チーム開発募集機能でできることは？
           </Accordion.Control>
@@ -124,9 +118,7 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="world">
           <Accordion.Control
-            icon={<IconWorld size={20} 
-            color={getColor('blue')} 
-            />}
+            icon={<IconWorld size={20} color={getColor('blue')} />}
           >
             X(旧Twitter)IDを登録するとどうなる？
           </Accordion.Control>
@@ -154,9 +146,7 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="doorExit">
           <Accordion.Control
-            icon={<IconDoorExit size={20} 
-            color={getColor('yellow')} 
-            />}
+            icon={<IconDoorExit size={20} color={getColor('yellow')} />}
           >
             退会方法は？
           </Accordion.Control>

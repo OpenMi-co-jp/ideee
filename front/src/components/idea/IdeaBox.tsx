@@ -33,12 +33,16 @@ export const IdeaBox: FC<IdeaBoxType> = ({ id, name, user }) => {
     <Link href={`/idea/${id}`}>
       <Paper shadow="md" radius="md" p="md" withBorder>
         <Flex justify="center" direction="row" wrap="wrap" gap="md">
-          <Avatar radius="xl" size={60} 
-          // className={classes.CardIcon}
-           />
-          <Text 
+          <Avatar
+            radius="xl"
+            size={60}
+            // className={classes.CardIcon}
+          />
+          <Text
           // className={classes.CardUserTitle}
-          >{name}</Text>
+          >
+            {name}
+          </Text>
           <Avatar radius="xl" size={24} src={user?.icon} mt="xl" />
         </Flex>
       </Paper>

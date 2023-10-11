@@ -17,9 +17,7 @@ type InputTextProps<T extends FieldValues> = MantineStyleProps & {
 }
 
 // react-hook-form対応済みのMantineのInputText
-export const TextForm = <T extends FieldValues>(
-  props: InputTextProps<T>
-  ) => {
+export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
   const {
     disabled,
     form,

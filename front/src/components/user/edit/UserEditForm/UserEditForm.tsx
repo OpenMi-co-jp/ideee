@@ -55,9 +55,12 @@ export const UserEditForm = () => {
             shadow="md"
             style={{ backgroundColor: '#F2F2F2' }}
           >
-            <Title order={2} mb={30} 
-            // weight={500} 
-            ta="center">
+            <Title
+              order={2}
+              mb={30}
+              // weight={500}
+              ta="center"
+            >
               ユーザー情報編集
             </Title>
             <Grid grow>
@@ -84,7 +87,7 @@ export const UserEditForm = () => {
                   // icon={<IconUpload size={rem(14)} />}
                 />
               </Grid.Col>
-              <Grid.Col 
+              <Grid.Col
               // md={5}
               >
                 {/* <TextForm
@@ -133,7 +136,7 @@ export const UserEditForm = () => {
             </Grid>
             {/* <TextAreaForm form={form} name="profile" label="自己紹介" my="lg" /> */}
             <Grid grow>
-              <Grid.Col 
+              <Grid.Col
               // md={4}
               >
                 {/* <TextForm
@@ -144,7 +147,7 @@ export const UserEditForm = () => {
                   icon={<IconBrandTwitter size={rem(20)} />}
                 /> */}
               </Grid.Col>
-              <Grid.Col 
+              <Grid.Col
               // md={4}
               >
                 {/* <TextForm
@@ -155,7 +158,7 @@ export const UserEditForm = () => {
                   icon={<IconBrandGithub size={rem(20)} />}
                 /> */}
               </Grid.Col>
-              <Grid.Col 
+              <Grid.Col
               // md={4}
               >
                 {/* <TextForm
@@ -168,7 +171,7 @@ export const UserEditForm = () => {
               </Grid.Col>
             </Grid>
           </Paper>
-          <Group 
+          <Group
           // position="center"
           >
             <Button

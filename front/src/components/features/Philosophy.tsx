@@ -1,7 +1,12 @@
 import Image from 'next/image'
-import { 
-  // createStyles, 
-  Box, Text, Title, Divider, Flex } from '@mantine/core'
+import {
+  // createStyles,
+  Box,
+  Text,
+  Title,
+  Divider,
+  Flex,
+} from '@mantine/core'
 
 // const useStyles = createStyles(() => ({
 //   Box: {
@@ -124,17 +129,17 @@ export const Philosophy = () => {
   // const { classes } = useStyles()
   return (
     <>
-      <Box 
-        // className={classes.Box}
+      <Box
+      // className={classes.Box}
+      >
+        <Title
+        // className={classes.Title}
         >
-        <Title 
-          // className={classes.Title}
-          >
           アイデアをデザインしエンジニアの出会いを盛り上げる
         </Title>
-        <Divider 
-          // className={classes.Divider} 
-          />
+        <Divider
+        // className={classes.Divider}
+        />
         <Flex
           align="center"
           direction="row"
@@ -164,12 +169,12 @@ export const Philosophy = () => {
             wrap="wrap"
             style={{ margin: '-20px auto 0 auto' }}
           >
-            <Text 
+            <Text
             // className={classes.ImageTitle}
             >
               あなたの「困ってる」を形に
             </Text>
-            <Text 
+            <Text
             // className={classes.ImageTitle}
             >
               コードで社会に貢献してみませんか？
@@ -182,11 +187,11 @@ export const Philosophy = () => {
               height={300}
             />
           </Flex>
-          <div 
+          <div
           // className={classes.PeopleLeftImage}
-           />
-          <div 
-          // className={classes.PeopleRightImage} 
+          />
+          <div
+          // className={classes.PeopleRightImage}
           />
         </Flex>
       </Box>

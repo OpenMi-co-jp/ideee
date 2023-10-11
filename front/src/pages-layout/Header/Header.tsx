@@ -24,8 +24,7 @@ export const Header: FC = () => {
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
           borderBottom: `1px solid ${theme.colors.gray[2]}`,
-          backgroundColor:
-            colorScheme === 'dark' ? theme.black : theme.white,
+          backgroundColor: colorScheme === 'dark' ? theme.black : theme.white,
           color: colorScheme === 'dark' ? theme.white : theme.black,
         })}
       >

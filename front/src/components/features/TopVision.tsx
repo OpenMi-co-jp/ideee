@@ -6,44 +6,55 @@ export const TopVision = () => {
   // TODO: 現在のユーザー数を設定予定
   const userNum = 937
   return (
-    <div style={{
-      position: 'relative',
-      display: 'flex', 
-      justifyContent: 'center', 
-    }}>
+    <div
+      style={{
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <BackgroundImage
         src={'/img/top_vision_image.webp'}
-        h='350px'
-        w='100vw'
+        h="350px"
+        w="100vw"
         style={{
           position: 'absolute',
           objectFit: 'cover',
           zIndex: -300,
-        }} />
+        }}
+      />
       <Box
-        w='400px'
-        pt='50px'
+        w="400px"
+        pt="50px"
         mr="auto"
         style={{
           textAlign: 'center',
         }}
       >
         <Box
-          pb='55px'
+          pb="55px"
           style={{
             display: 'flex',
             flexFlow: 'column',
           }}
         >
           <Title
-            c='#FF862F'
-            fz={{base: '32px', md: '34px'}}
+            c="#FF862F"
+            fz={{ base: '32px', md: '34px' }}
+            style={{
+              textShadow:
+                '8px 8px 12px white, -8px 8px 12px white, 8px -8px 12px white, -8px -8px 12px white',
+            }}
           >
             あなたのアイデアを
           </Title>
           <Title
-            c='#FF862F'
-            fz={{base: '32px', md: '34px'}}
+            c="#FF862F"
+            fz={{ base: '32px', md: '34px' }}
+            style={{
+              textShadow:
+                '8px 8px 12px white, -8px 8px 12px white, 8px -8px 12px white, -8px -8px 12px white',
+            }}
           >
             エンジニアと盛り上げる
           </Title>
@@ -56,12 +67,7 @@ export const TopVision = () => {
             IDEEEについて｜⇢
           </Button>
         </Link>
-        <Text
-          c='#818181'
-          pt='30px'
-          fz='20px'
-          fw='bold'
-        >
+        <Text c="#818181" pt="30px" fz="20px" fw="bold">
           現在のユーザー数:{' '}
           <b style={{ color: '#FF862F', fontSize: '2rem' }}>{userNum}</b>人
         </Text>

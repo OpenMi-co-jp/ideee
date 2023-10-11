@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Mutations::Like::Create do
   subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens }
 
-  let(:user) { create(:user) }
-  let(:idea) { create(:idea) }
+  let(:user)   { create(:user) }
+  let(:idea)   { create(:idea) }
   let(:tokens) { sign_in(user) }
 
   let(:query) do
@@ -47,9 +47,7 @@ RSpec.describe Mutations::Like::Create do
       end
 
       it 'ハートが送られること' do
-        expect do
-          graphql_post
-        end.to change(Like, :count).by(1)
+        expect { graphql_post }.to change(Like, :count).by(1)
       end
     end
 
@@ -65,9 +63,7 @@ RSpec.describe Mutations::Like::Create do
       end
 
       it 'ハートが送られないこと' do
-        expect do
-          graphql_post
-        end.not_to change(Like, :count)
+        expect { graphql_post }.not_to change(Like, :count)
       end
     end
   end

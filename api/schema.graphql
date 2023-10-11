@@ -25,6 +25,11 @@ type Comment {
   updatedAt: ISO8601DateTime!
 
   """
+  ユーザーオブジェクト
+  """
+  user: User!
+
+  """
   ユーザーID
   """
   userId: Int!
@@ -335,6 +340,11 @@ type Idea {
   背景
   """
   background: String
+
+  """
+  コメントリスト
+  """
+  comments: [Comment!]!
 
   """
   コメント数
@@ -1191,7 +1201,7 @@ type User {
   """
   ユーザー名
   """
-  name: String
+  name: String!
 
   """
   ポイント数

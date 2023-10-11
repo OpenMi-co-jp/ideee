@@ -1,7 +1,4 @@
-import React from 'react'
-import { 
-  // createStyles,
-   Text, Paper, Avatar, Flex } from '@mantine/core'
+import { Text, Paper, Avatar, Flex } from '@mantine/core'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { IdeaBoxType } from '@/types/idea'

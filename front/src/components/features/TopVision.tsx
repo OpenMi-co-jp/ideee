@@ -1,8 +1,5 @@
-import React from 'react'
-import NextImage from 'next/image'
-import {
-  Title, Text, Button, Image, Box, BackgroundImage
-} from '@mantine/core'
+// import Image from 'next/image'
+import { Title, Text, Button } from '@mantine/core'
 import Link from 'next/link'
 
 

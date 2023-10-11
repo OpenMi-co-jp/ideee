@@ -17,7 +17,6 @@ RSpec.describe Mutations::Like::Destroy do
     GQL
   end
 
-
   describe 'ハートを削除' do
     let(:variables) do
       {
@@ -26,6 +25,7 @@ RSpec.describe Mutations::Like::Destroy do
         }
       }
     end
+
     it 'リクエストが成功すること' do
       graphql_post
       res = response.parsed_body

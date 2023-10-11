@@ -86,7 +86,7 @@ export const Philosophy = () => {
               height={350}
               w={{ base: '286px', sm: '357px', md: '430px' }}
               h={{ base: '200px', sm: '250px', md: '350px' }}
-              mt={{ base: '10vh', sm: '8vh', md: '16vh' }}
+              mt={{ base: '100px', md: '150px' }}
               style={{
                 margin: '0 auto',
                 zIndex: 500,

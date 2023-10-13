@@ -12,7 +12,7 @@ export const IdeaOptions = () => {
   const createdAt = new Date(idea?.createdAt)
 
   return (
-    <Group py="lg" mr="lg" position="apart">
+    <Group py="lg" mr="lg" align="apart">
       <Group>
         <Like />
         <XShare />

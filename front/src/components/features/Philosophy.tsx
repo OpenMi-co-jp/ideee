@@ -87,8 +87,8 @@ export const Philosophy = () => {
               w={{ base: '286px', sm: '357px', md: '430px' }}
               h={{ base: '200px', sm: '250px', md: '350px' }}
               mt={{ base: '100px', md: '150px' }}
+              mx="auto"
               style={{
-                margin: '0 auto',
                 zIndex: 100,
               }}
             />
@@ -97,8 +97,7 @@ export const Philosophy = () => {
             w={{ base: '285px', sm: '333px', md: '500px' }}
             h={{ base: '250px', sm: '290px', md: '435px' }}
             top={0}
-            // left={{ base: '-60px', sm: 0 }}
-            left={{ base: '-140px', xs: '0px' ,md: '0px' }}
+            left={{ base: '-70px', xs: '95px', md: '0px' }}
             bg={'rgba(239, 213, 120, 0.49)'}
             style={{
               borderRadius: '50%',
@@ -109,9 +108,8 @@ export const Philosophy = () => {
             w={{ base: '285px', sm: '333px', md: '500px' }}
             h={{ base: '250px', sm: '290px', md: '435px' }}
             bg={'rgba(215, 145, 145, 0.50)'}
-            top={50}
-            // left={{ base: '180px', sm: '300px', md: '450px' }}
-            left={{ base: '130px', sm: '300px', md: '450px' }}
+            top={{ base: '30px', sm: '50px' }}
+            left={{ base: '180px', xs: '365px', md: '450px' }}
             style={{
               borderRadius: '50%',
               position: 'absolute',

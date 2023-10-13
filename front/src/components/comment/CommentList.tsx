@@ -17,14 +17,14 @@ export const CommentList = () => {
           <Comment key={comment.id} comment={comment} />
         ))}
       </Paper>
-      <Group position="center">
+      <Group align="center">
         <Button
           type="submit"
           variant="light"
           size="lg"
           color="orange"
           disabled={true}
-          leftIcon={<IconSend />}
+          leftSection={<IconSend />}
         >
           Send
         </Button>

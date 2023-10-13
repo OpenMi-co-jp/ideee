@@ -35,7 +35,7 @@ export const IdeaContents = () => {
               radius="xl"
               size="md"
               m="md"
-              leftIcon={<IconApps />}
+              leftSection={<IconApps />}
               mt="lg"
             >
               アプリを確認
@@ -48,7 +48,7 @@ export const IdeaContents = () => {
               color="dark"
               radius="xl"
               size="md"
-              leftIcon={<IconBrandGithub />}
+              leftSection={<IconBrandGithub />}
               mt="xl"
             >
               GitHubを確認

@@ -16,11 +16,11 @@ import {
 } from '@mantine/core'
 import React from 'react'
 import { useMediaQuery } from '@mantine/hooks'
-import { UserToggle } from '@/pages-layout/Header/headerComponents'
 import Link from 'next/link'
 
 const AboutPage = () => {
   const isMobile = useMediaQuery(`(max-width: ${rem(460)})`)
+  const objectMinWidth = useMediaQuery(`(max-width: ${rem(750)})`)
 
   return (
     <Box mx="xs">
@@ -56,8 +56,8 @@ const AboutPage = () => {
             </Group>
             <Space mx="xs" />
             <Image
-              src={'/img/undraw_lightbulb_moment_re_ulyo 1.png'}
-              alt="コラボレーションイメージ"
+              src={'/img/undraw_lightbulb_moment_re_ulyo-1.webp'}
+              alt="アイデアを考える人"
               my="5rem"
               style={{
                 marginLeft: isMobile ? '3%' : '',
@@ -77,9 +77,10 @@ const AboutPage = () => {
 
         <Container
           style={{
-            flexDirection: isMobile ? 'column' : 'row',
+            flexDirection: objectMinWidth ? 'column' : 'row',
             display: 'flex',
-            marginLeft: '-6%',
+            marginLeft: isMobile ? '' : '-5.5%',
+            alignItems: isMobile ? 'center' : '',
           }}
         >
           <Container>
@@ -101,8 +102,8 @@ const AboutPage = () => {
                 }}
               />
               <Image
-                src={'/img/undraw_location_search_re_ttoj 1.png'}
-                alt="コラボレーションイメージ"
+                src={'/img/undraw_location_search_re_ttoj-1.webp'}
+                alt="アイデアを探す女性"
                 height="auto"
                 width="15rem"
                 style={{
@@ -146,8 +147,8 @@ const AboutPage = () => {
                 }}
               />
               <Image
-                src={'/img/undraw_performance_overview_re_mqrq 1.png'}
-                alt="コラボレーションイメージ"
+                src={'/img/undraw_performance_overview_re_mqrq-1.webp'}
+                alt="データを確認する男性"
                 height="auto"
                 width="15rem"
                 style={{
@@ -192,8 +193,8 @@ const AboutPage = () => {
                 }}
               />
               <Image
-                src={'/img/Frame.png'}
-                alt="コラボレーションイメージ"
+                src={'/img/Frame.webp'}
+                alt="仲間見つける"
                 height="auto"
                 width="15rem"
                 style={{
@@ -220,7 +221,7 @@ const AboutPage = () => {
         </Container>
       </Container>
 
-      <Container my="15rem" w="100%">
+      <Container w="100%" mt="8rem">
         <Center>
           <Title order={3} fw="normal" my="4rem">
             ideeeをより詳しく知りたい方はこちらをご覧ください。
@@ -247,25 +248,35 @@ const AboutPage = () => {
         </Box>
       </Container>
 
-      <Paper mb="8rem" shadow="md" radius="xs" py="lg" px="lg" mx="10rem">
-        <Center>
-          <Title order={3} fw="normal" my="lg">
-            無料登録してアイデアを見に行く
-          </Title>
-        </Center>
-        <Center>
-          <Link href="/user/sign_up">
-            <Button
-              w="15rem"
-              mb="xs"
-              variant="gradient"
-              gradient={{ from: 'red', to: 'orange' }}
-            >
-              ユーザー登録
-            </Button>
-          </Link>
-        </Center>
-      </Paper>
+      <Center>
+        <Paper
+          miw="15rem"
+          my="7rem"
+          shadow="md"
+          radius="xs"
+          py="lg"
+          px="lg"
+          mx="10rem"
+        >
+          <Center>
+            <Title order={5} fw="normal" my="lg">
+              無料登録してアイデアを見に行く💡
+            </Title>
+          </Center>
+          <Center>
+            <Link href="/user/sign_up">
+              <Button
+                w="13rem"
+                mb="xs"
+                variant="gradient"
+                gradient={{ from: 'red', to: 'orange' }}
+              >
+                ユーザー登録
+              </Button>
+            </Link>
+          </Center>
+        </Paper>
+      </Center>
 
       <Flex
         style={{

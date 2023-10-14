@@ -55,7 +55,7 @@ export const SearchInput = () => {
       rightSection={
         searchTrigger ? (
           <Link href={`/search?name_or_idea_tags_name_cont=${searchValue}`}>
-            <Button c="yellow" radius="xl" size="compact-sm">
+            <Button color="yellow" radius="xl" size="compact-sm">
               クリックで検索
             </Button>
           </Link>

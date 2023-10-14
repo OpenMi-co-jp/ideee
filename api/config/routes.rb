@@ -20,7 +20,6 @@ Rails.application.routes.draw do
     get 'sign_out', to: 'users/sessions#destroy'
   end
 
-  root 'ideas#index'
   resources :ideas do
     collection do
       get :search

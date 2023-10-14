@@ -34,6 +34,8 @@ export type Comment = {
   ideaId: Scalars['Int']
   /** 更新日 */
   updatedAt: Scalars['ISO8601DateTime']
+  /** ユーザーオブジェクト */
+  user: User
   /** ユーザーID */
   userId: Scalars['Int']
 }
@@ -190,6 +192,8 @@ export type Idea = {
   __typename?: 'Idea'
   /** 背景 */
   background?: Maybe<Scalars['String']>
+  /** コメントリスト */
+  comments: Array<Comment>
   /** コメント数 */
   commentsNum?: Maybe<Scalars['Int']>
   /** 作成日 */
@@ -378,6 +382,8 @@ export type Query = {
   popularTags: Array<Tag>
   /** ルームオブジェクト */
   room: Room
+  /** タグ一覧 */
+  tags: Array<Tag>
   /** チームオブジェクト */
   team: Team
   /** ユーザーオブジェクト */
@@ -605,7 +611,7 @@ export type User = {
   /** アイデア数 */
   ideasNum?: Maybe<Scalars['Int']>
   /** ユーザー名 */
-  name?: Maybe<Scalars['String']>
+  name: Scalars['String']
   /** ポイント数 */
   point?: Maybe<Scalars['Int']>
   /** アイコンURL */
@@ -681,8 +687,36 @@ export type GetIdeaQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    note?: string | null
+    icon?: string | null
+    background?: string | null
     goal?: string | null
+    issue?: string | null
+    wishFunction?: string | null
+    hypothesis?: string | null
+    target?: string | null
+    monetize?: string | null
+    similar?: string | null
+    note?: string | null
+    createdAt: any
+    updatedAt: any
+    userId: number
+    productUrl?: string | null
+    githubUrl?: string | null
+    user: {
+      __typename?: 'User'
+      id: string
+      name: string
+      icon?: string | null
+      twitterId?: string | null
+    }
+    comments: Array<{
+      __typename?: 'Comment'
+      id: string
+      description: string
+      createdAt: any
+      user: { __typename?: 'User'; name: string; icon?: string | null }
+    }>
+    ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
   }
 }
 
@@ -708,7 +742,7 @@ export type GetIdeasQuery = {
       user: {
         __typename?: 'User'
         id: string
-        name?: string | null
+        name: string
         icon?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
@@ -846,6 +880,13 @@ export type GetRoomQuery = {
   }
 }
 
+export type GetTagsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetTagsQuery = {
+  __typename?: 'Query'
+  tags: Array<{ __typename?: 'Tag'; name: string }>
+}
+
 export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetPopularTagsQuery = {
@@ -880,7 +921,7 @@ export type GetUserQuery = {
   user: {
     __typename?: 'User'
     id: string
-    name?: string | null
+    name: string
     description?: string | null
     definition?: number | null
   }
@@ -893,7 +934,7 @@ export type GetUsersQuery = {
   users: Array<{
     __typename?: 'User'
     id: string
-    name?: string | null
+    name: string
     description?: string | null
     definition?: number | null
   }>
@@ -924,7 +965,7 @@ export type UpdateUserMutation = {
     user: {
       __typename?: 'User'
       id: string
-      name?: string | null
+      name: string
       description?: string | null
       definition?: number | null
     }
@@ -1217,8 +1258,40 @@ export const GetIdeaDocument = gql`
     idea(id: $id) {
       id
       name
-      note
+      icon
+      background
       goal
+      issue
+      wishFunction
+      hypothesis
+      target
+      monetize
+      similar
+      note
+      createdAt
+      updatedAt
+      userId
+      productUrl
+      githubUrl
+      user {
+        id
+        name
+        icon
+        twitterId
+      }
+      comments {
+        id
+        description
+        createdAt
+        user {
+          name
+          icon
+        }
+      }
+      ideaTags {
+        id
+        name
+      }
     }
   }
 `
@@ -1802,6 +1875,53 @@ export type GetRoomLazyQueryHookResult = ReturnType<typeof useGetRoomLazyQuery>
 export type GetRoomQueryResult = Apollo.QueryResult<
   GetRoomQuery,
   GetRoomQueryVariables
+>
+export const GetTagsDocument = gql`
+  query GetTags {
+    tags {
+      name
+    }
+  }
+`
+
+/**
+ * __useGetTagsQuery__
+ *
+ * To run a query within a React component, call `useGetTagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTagsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTagsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetTagsQuery, GetTagsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetTagsQuery, GetTagsQueryVariables>(
+    GetTagsDocument,
+    options
+  )
+}
+export function useGetTagsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetTagsQuery, GetTagsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetTagsQuery, GetTagsQueryVariables>(
+    GetTagsDocument,
+    options
+  )
+}
+export type GetTagsQueryHookResult = ReturnType<typeof useGetTagsQuery>
+export type GetTagsLazyQueryHookResult = ReturnType<typeof useGetTagsLazyQuery>
+export type GetTagsQueryResult = Apollo.QueryResult<
+  GetTagsQuery,
+  GetTagsQueryVariables
 >
 export const GetPopularTagsDocument = gql`
   query GetPopularTags {

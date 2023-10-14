@@ -14,7 +14,7 @@ export const footerData = {
         },
         {
           label: '個人開発の落とし穴',
-          link: 'https://www.ideee.tech/avoid_pitfall',
+          link: '/avoid_pitfall',
         },
       ],
     },

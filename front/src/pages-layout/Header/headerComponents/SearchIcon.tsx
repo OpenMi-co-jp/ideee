@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const SearchIcon = () => {
   return (
     <Link href="/search" passHref>
-      <IconSearch />
+      <IconSearch size={25} />
     </Link>
   )
 }

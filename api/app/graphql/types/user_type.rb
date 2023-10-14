@@ -8,7 +8,7 @@ module Types
     field :definition, Integer, description: 'タイプ'
     field :description, String, description: '自己紹介'
     field :icon, String, description: 'アイコン'
-    field :name, String, description: 'ユーザー名'
+    field :name, String, null: false, description: 'ユーザー名'
     field :point, Integer, description: 'ポイント数'
     field :remote_url, String, description: 'アイコンURL'
     field :site_url, String, description: 'サイトURL'

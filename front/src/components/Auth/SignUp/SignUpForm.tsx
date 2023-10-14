@@ -40,7 +40,7 @@ export const SignUpForm: CustomNextPage = () => {
           required
         />
         <Grid style={{ marginTop: '1rem' }}>
-          <Button type="submit" fullWidth>
+          <Button type="submit" fullWidth m={10}>
             無料ユーザー作成
           </Button>
         </Grid>

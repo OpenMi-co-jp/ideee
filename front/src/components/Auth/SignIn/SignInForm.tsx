@@ -30,8 +30,8 @@ export const SignInForm: CustomNextPage = () => {
         </Title>
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
-        <Grid style={{ marginTop: '1rem' }}>
-          <Button type="submit" fullWidth>
+        <Grid mt={'1rem'} mb={'0.5rem'}>
+          <Button type="submit" fullWidth m={10}>
             ログイン
           </Button>
         </Grid>

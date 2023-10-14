@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Mutations::Team::Create do
+  subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens }
+
   let(:owner)  { create(:user) }
   let(:idea)   { FactoryBot.create(:idea) }
   let(:tokens) { sign_in(owner) }
@@ -24,11 +26,7 @@ RSpec.describe Mutations::Team::Create do
   end
 
   describe 'チームの作成' do
-    before do
-      post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
-    end
-
-    let!(:variables) do
+    let(:variables) do
       {
         input: {
           ownerId: owner.id,
@@ -43,6 +41,7 @@ RSpec.describe Mutations::Team::Create do
 
     context '正しいideaIdとownerIdを指定しているとき' do
       it '作成に成功すること' do
+        graphql_post
         res = response.parsed_body
 
         expect(res['data']['createTeam']['success']).to be_truthy
@@ -60,7 +59,7 @@ RSpec.describe Mutations::Team::Create do
 
       it 'raise errror ActiveRecord::RecordInvalidとなること' do
         request_result = expect do
-          post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
+          graphql_post
         end
 
         request_result.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: Ideaを入力してください')
@@ -74,7 +73,7 @@ RSpec.describe Mutations::Team::Create do
 
       it 'raise errror ActiveRecord::RecordInvalidとなること' do
         request_result = expect do
-          post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
+          graphql_post
         end
 
         request_result.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: Ownerを入力してください')
@@ -87,7 +86,7 @@ RSpec.describe Mutations::Team::Create do
       end
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
-        post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
+        graphql_post
         res =  response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateTeamInput! was provided invalid value for ideaId')
       end
@@ -99,7 +98,7 @@ RSpec.describe Mutations::Team::Create do
       end
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
-        post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
+        graphql_post
         res =  response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateTeamInput! was provided invalid value for ownerId')
       end

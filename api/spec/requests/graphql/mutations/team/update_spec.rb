@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Mutations::Team::Update do
+  subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens }
+
   let(:owner)  { create(:user) }
   let(:idea)   { FactoryBot.create(:idea) }
   let(:tokens) { sign_in(owner) }
@@ -26,11 +28,7 @@ RSpec.describe Mutations::Team::Update do
   let(:team) { FactoryBot.create(:team, idea:, owner_id: owner.id) }
 
   describe 'チームの作成' do
-    before do
-      post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
-    end
-
-    let!(:variables) do
+    let(:variables) do
       {
         input: {
           id: team.id,
@@ -46,11 +44,13 @@ RSpec.describe Mutations::Team::Update do
 
     context '適切なinputで更新するとき' do
       it '更新に成功すること' do
+        graphql_post
         res = response.parsed_body
         expect(res['data']['updateTeam']['success']).to be_truthy
       end
 
       it '正しい更新内容が反映されていること' do
+        graphql_post
         res = response.parsed_body
 
         # GraphQLはID型を通常文字列型として返却するためstringにcastしています。
@@ -68,7 +68,7 @@ RSpec.describe Mutations::Team::Update do
       end
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
-        post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens
+        graphql_post
         res =  response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type UpdateTeamInput! was provided invalid value for id (Expected value to not be null)')
       end

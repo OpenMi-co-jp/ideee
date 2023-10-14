@@ -17,7 +17,7 @@ has_logic_changes = has_graphql_changes || has_models_changes
 warn 'PRはWIPでまだ作業中のようです' if github.pr_title.include? 'WIP'
 
 # ===== PR size =====
-warn 'PRがが大きすぎます。PRの分割を考えましょう' if git.lines_of_code > 400
+warn 'コードライン数が500を超えてます。PRの分割を考えましょう' if git.lines_of_code > 500
 number_of_commits = git.commits.size
 warn 'コミットが15を超えてます。PRの分割を検討ください' if number_of_commits > 15
 

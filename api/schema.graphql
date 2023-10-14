@@ -25,6 +25,11 @@ type Comment {
   updatedAt: ISO8601DateTime!
 
   """
+  ユーザーオブジェクト
+  """
+  user: User!
+
+  """
   ユーザーID
   """
   userId: Int!
@@ -425,6 +430,11 @@ type Idea {
   背景
   """
   background: String
+
+  """
+  コメントリスト
+  """
+  comments: [Comment!]!
 
   """
   コメント数
@@ -875,6 +885,11 @@ type Query {
     """
     id: ID!
   ): Room!
+
+  """
+  タグ一覧
+  """
+  tags: [Tag!]!
 
   """
   チームオブジェクト
@@ -1376,7 +1391,7 @@ type User {
   """
   ユーザー名
   """
-  name: String
+  name: String!
 
   """
   ポイント数

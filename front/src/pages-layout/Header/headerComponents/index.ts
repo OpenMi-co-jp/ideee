@@ -1,3 +1,4 @@
 export { UserToggle } from './User'
 export { Notification } from './Notification'
-export { Ranking } from './Ranking'
+export { SearchIcon } from './SearchIcon'
+export { ServiceIcon } from './ServiceIcon'

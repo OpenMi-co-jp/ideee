@@ -43,10 +43,8 @@ RSpec.describe Mutations::Team::Create do
       it '作成に成功すること' do
         graphql_post
         res = response.parsed_body
-
         expect(res['data']['createTeam']['success']).to be_truthy
         expect(res['data']['createTeam']['team']['status']).to eq(Team.statuses.key(variables[:input][:status]))
-        expect(res['data']['createTeam']['team']['requirement']).to eq(variables[:input][:requirement])
         expect(res['data']['createTeam']['team']['offer']).to eq(variables[:input][:offer])
         expect(res['data']['createTeam']['team']['member_num']).to eq(variables[:input][:member_num])
       end

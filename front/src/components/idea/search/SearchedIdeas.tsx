@@ -34,7 +34,7 @@ export const SearchedIdeas = () => {
         label={
           <>
             <IconSearch size={12} />
-            <Text ml="xs" color="gray">
+            <Text ml="xs" c="gray">
               Search results
             </Text>
           </>

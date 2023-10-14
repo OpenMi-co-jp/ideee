@@ -14,7 +14,7 @@ export const Comment = ({ comment }: CommentType) => {
           <Paper bg="#FFFFFF" maw="30rem" p="md" radius="lg">
             {description}
           </Paper>
-          <Text color="gray">{FormatDate(commentCreatedAt)}</Text>
+          <Text c="gray">{FormatDate(commentCreatedAt)}</Text>
         </Group>
       </Group>
     </>

@@ -12,7 +12,7 @@ export const XShare = () => {
   const twitterShareUrl = `https://twitter.com/intent/tweet?text=${idea?.name}&hashtags=ideee,${hashtags}${viaUser}&related=ideee_tech&url=${currentUrl}`
 
   return (
-    <Anchor color="black" target="_blank" pt="0.4rem" href={twitterShareUrl}>
+    <Anchor c="black" target="_blank" pt="0.4rem" href={twitterShareUrl}>
       <IconBrandX />
     </Anchor>
   )

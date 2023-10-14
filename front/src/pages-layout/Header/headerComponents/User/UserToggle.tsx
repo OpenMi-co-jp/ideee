@@ -33,7 +33,7 @@ export const UserToggle = () => {
                 <>
                   <Space mx="xs" />
                   <Link href="/user/sign_in">
-                    <Button variant="outline" color="orange">
+                    <Button variant="outline" c="orange">
                       ログイン
                     </Button>
                   </Link>

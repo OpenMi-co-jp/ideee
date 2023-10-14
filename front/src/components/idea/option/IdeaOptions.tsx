@@ -19,7 +19,7 @@ export const IdeaOptions = () => {
         <UrlCopy />
         <IdeaMenu />
       </Group>
-      <Text size="md" color="gray">
+      <Text size="md" c="gray">
         {FormatDate(createdAt)}
       </Text>
     </Group>

@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       {!(LSLoggedIn || loggedIn) && <TopVision />}
-      <Space h="3rem" />
+      <Space h="10rem" />
       <HotIdeas />
       <Space h="lg" />
       <PopularTags />

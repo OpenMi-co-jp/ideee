@@ -73,7 +73,7 @@ const FrequentQuestions = () => {
             <Text fw={500} my="sm">
               計算方法
             </Text>
-            <Code block color="blue">
+            <Code block style={{ backgroundColor: 'rgb(231, 245, 255)' }}>
               アイデア投稿 ✖️ 2p
               <br />
               自分のアイデアに対してのハート数 ✖️ 1p
@@ -93,7 +93,11 @@ const FrequentQuestions = () => {
           </Accordion.Control>
           <Accordion.Panel m="md">
             <Text>現在の機能</Text>
-            <Code block color="blue">
+            <Code
+              block
+              fz="md"
+              style={{ backgroundColor: 'rgb(231, 245, 255)' }}
+            >
               <List>
                 <List.Item>チーム開発の募集条件を設定</List.Item>
                 <List.Item>チームリストの作成</List.Item>
@@ -104,7 +108,11 @@ const FrequentQuestions = () => {
               </List>
             </Code>
             <Text>今後の機能</Text>
-            <Code block color="blue">
+            <Code
+              block
+              fz="md"
+              style={{ backgroundColor: 'rgb(231, 245, 255)' }}
+            >
               <List>
                 <List.Item>オーナーごとの審査制にする</List.Item>
                 <List.Item>GitHub APIなどを利用した開発連携機能</List.Item>
@@ -125,7 +133,11 @@ const FrequentQuestions = () => {
           <Accordion.Panel m="md">
             <Text mb="md">アイデアがより注目されます！</Text>
             <Text fw={600}>自動ツイート機能</Text>
-            <Code block color="blue">
+            <Code
+              block
+              fz="md"
+              style={{ backgroundColor: 'rgb(231, 245, 255)' }}
+            >
               <List>
                 <List.Item>
                   アイデアを投稿すると

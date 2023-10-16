@@ -8,7 +8,7 @@ export const SignPath: CustomNextPage = () => {
         <Grid.Col span={6} >
           <Image
             mx="auto"
-            height="240px"
+            height="240"
             fit="contain"
             src="/img/userAuth.webp"
             alt="user auth image"

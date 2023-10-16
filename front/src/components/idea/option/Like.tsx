@@ -7,7 +7,11 @@ export const Like = () => {
 
   return (
     <Button onClick={() => toggleLike()} variant="transparent" px="xs">
-      {like ? <IconHeartFilled style={{ color: 'black' }}/> : <IconHeart style={{ color: 'black' }}/>}
+      {like ? (
+        <IconHeartFilled style={{ color: 'black' }} />
+      ) : (
+        <IconHeart style={{ color: 'black' }} />
+      )}
     </Button>
   )
 }

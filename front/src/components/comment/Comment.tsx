@@ -8,7 +8,7 @@ export const Comment = ({ comment }: CommentType) => {
   const commentCreatedAt = new Date(createdAt)
   return (
     <>
-      <Center m="lg" >
+      <Center m="lg">
         <UserIcon userIcon={user.icon} />
         <Group p="xs">
           <Paper bg="#FFFFFF" maw="30rem" p="md" radius="lg">

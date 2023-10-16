@@ -1,4 +1,4 @@
-import { Paper, Title, Divider, Group, Button } from '@mantine/core'
+import { Paper, Title, Divider, Group, Button, Center } from '@mantine/core'
 import { Comment } from './Comment'
 import { useIdea } from '@/context/IdeaContext'
 import { IconSend } from '@tabler/icons-react'
@@ -12,12 +12,12 @@ export const CommentList = () => {
         <Title order={3} size="xl" p="sm" c="gray">
           Comment
         </Title>
-        <Divider size="sm" my="xs" c="gray" />
+        <Divider size="sm" my="xs" color="gray" />
         {idea.comments?.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}
       </Paper>
-      <Group align="center">
+      <Center>
         <Button
           type="submit"
           variant="light"
@@ -28,7 +28,7 @@ export const CommentList = () => {
         >
           Send
         </Button>
-      </Group>
+      </Center>
     </>
   )
 }

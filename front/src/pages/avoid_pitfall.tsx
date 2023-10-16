@@ -12,14 +12,13 @@ function AvoidPitfall() {
     setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
   }, [])
 
-
   return (
     <Container>
       <Paper p="xl" shadow="xl">
         <Container
           style={{
             height: '100%',
-            ...(!(loggedIn|| LSLoggedIn)
+            ...(!(loggedIn || LSLoggedIn)
               ? {
                   WebkitMaskImage:
                     'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
@@ -33,7 +32,7 @@ function AvoidPitfall() {
         </Container>
 
         {(() => {
-          if (loggedIn|| LSLoggedIn) {
+          if (loggedIn || LSLoggedIn) {
             return <HiddenContent />
           } else {
             return <SignPath />

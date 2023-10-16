@@ -13,12 +13,12 @@ import { IconCircleCheck } from '@tabler/icons-react'
 
 export const HiddenContent = () => {
   return (
-    <Paper mx="md">
+    <>
       <Title order={2} my="2rem">
         1.目的がはっきりしていない
       </Title>
       <Image
-        height="20rem"
+        height="320"
         fit="contain"
         src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/ea095e32-e192-3ccd-bebd-d2c5e72a6ce7.jpeg"
         alt="個人開発の目的マップ"
@@ -146,7 +146,7 @@ export const HiddenContent = () => {
       </Text>
 
       <Image
-        height="20rem"
+        height="320"
         fit="contain"
         src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F0736ae79-c883-f76d-40e7-8ab04da954ed.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f40c8e23f2607f7b7b89a93c081899db"
         alt="ドリルの穴の画像"
@@ -408,7 +408,7 @@ export const HiddenContent = () => {
         Mockとは
       </Title>
       <Image
-        height="20rem"
+        height="320"
         fit="contain"
         src="https://qiita-user-contents.imgix.net/https%3A%2F%2Fqiita-image-store.s3.ap-northeast-1.amazonaws.com%2F0%2F498701%2F3e63095f-ebbd-8b20-4123-4339bbf0a176.jpeg?ixlib=rb-4.0.0&amp;auto=format&amp;gif-q=60&amp;q=75&amp;s=f8076e476459c60af3c866c8df03c441"
         alt="モックのイメージ画像"
@@ -594,7 +594,7 @@ export const HiddenContent = () => {
         <Image
           src="//images.ctfassets.net/21j88hnww0mj/6gpl7vmvXaIZdGpja4aHbd/5420c0deb98aab76b8076126a769ed1f/____________________________2022-10-30_16.03.35.png"
           alt="スクリーンショット 2022-10-30 16.03.35"
-          height="20rem"
+          height="320"
           fit="contain"
         />
         <Text my="lg">
@@ -677,7 +677,7 @@ export const HiddenContent = () => {
       </Text>
       <Paper shadow="lg" radius="md" p="lg" my="md">
         <Title order={3} my="xl">
-          解解決のヒント💡
+          解決のヒント💡
         </Title>
         <List
           icon={
@@ -832,6 +832,6 @@ export const HiddenContent = () => {
         </Anchor>
         までお聞かせ下さい。 それではみなさん、良き開発ライフを！！
       </Text>
-    </Paper>
+    </>
   )
 }

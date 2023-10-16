@@ -1,7 +1,6 @@
 import {
   Title,
   Text,
-  Paper,
   Mark,
   List,
   ThemeIcon,
@@ -16,7 +15,6 @@ export const PreviewContent = () => {
         個人開発のよくある落とし穴まとめ
       </Title>
 
-      <Paper my="xl" mx="md">
         <Title order={2} fw={540} my="xl">
           はじめに
         </Title>
@@ -64,7 +62,6 @@ export const PreviewContent = () => {
           <br />
           🕳
         </Title>
-      </Paper>
     </>
   )
 }

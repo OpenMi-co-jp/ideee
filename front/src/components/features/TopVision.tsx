@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 import { createStyles, Title, Text, Button } from '@mantine/core'
 import Link from 'next/link'

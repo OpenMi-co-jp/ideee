@@ -32,5 +32,6 @@ module Types
     field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
     field :idea_tags, [Types::TagType], null: true, description: 'タグオブジェクト'
     field :team, Types::TeamType, null: true, description: 'チームオブジェクト'
+    field :comments, [Types::CommentType], null: false, description: 'コメントリスト'
   end
 end

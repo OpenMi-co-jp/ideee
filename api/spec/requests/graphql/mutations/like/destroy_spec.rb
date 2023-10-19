@@ -17,7 +17,7 @@ RSpec.describe Mutations::Like::Destroy do
     GQL
   end
 
-  describe 'ハートを削除' do
+  describe 'いいねを削除' do
     let(:variables) do
       {
         input: {
@@ -32,7 +32,7 @@ RSpec.describe Mutations::Like::Destroy do
       expect(res['data']['destroyLike']['success']).to be_truthy
     end
 
-    it 'ハートが削除されていること' do
+    it 'いいねが削除されていること' do
       expect { graphql_post }.to change(Like, :count).by(-1)
     end
   end

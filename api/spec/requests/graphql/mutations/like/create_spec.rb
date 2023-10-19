@@ -32,7 +32,7 @@ RSpec.describe Mutations::Like::Create do
     }
   end
 
-  describe 'ハートを送る' do
+  describe 'いいねを送る' do
     context '正しいlikableIdを指定している時' do
       let(:likable_id) { idea.id }
       let(:likable_type) { 'Idea' }
@@ -46,7 +46,7 @@ RSpec.describe Mutations::Like::Create do
         expect(res['data']['createLike']['like']['likableId']).to eq(likable_id)
       end
 
-      it 'ハートが送られること' do
+      it 'いいねが送られること' do
         expect { graphql_post }.to change(Like, :count).by(1)
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe Mutations::Like::Create do
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateLikeInput!')
       end
 
-      it 'ハートが送られないこと' do
+      it 'いいねが送られないこと' do
         expect { graphql_post }.not_to change(Like, :count)
       end
     end

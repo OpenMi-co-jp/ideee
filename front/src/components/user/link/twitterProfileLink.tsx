@@ -1,20 +1,20 @@
 import { useUser } from '@/context/userProfileContext';
 import { Anchor, ActionIcon } from '@mantine/core';
-import { IconBrandGithub  } from '@tabler/icons-react'
+import { IconBrandTwitter,  } from '@tabler/icons-react'
 
 
-export function GithubProfileLink() {
+export function twitterProfileLink() {
     const user = useUser();
-    const githubId = user.githubId;
+    const twitterId = user.twitterId;
 
     return (
         <Anchor
-            href={githubId ? 'https://github.com/${githubId}' : ''}
+            href={twitterId ? 'https://twitter.com/${twitterId}' : ''}
             target="_blank"
             rel="nopener noreferrer"
         >
             <ActionIcon>
-                <IconBrandGithub/>
+                <IconBrandTwitter/>
             </ActionIcon>
         </Anchor>
     )

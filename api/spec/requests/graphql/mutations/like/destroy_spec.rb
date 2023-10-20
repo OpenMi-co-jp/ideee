@@ -42,7 +42,7 @@ RSpec.describe Mutations::Like::Destroy do
       let(:variables) do
         {
           input: {
-            id: 100
+            id: 0
           }
         }
       end

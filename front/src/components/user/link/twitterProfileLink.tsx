@@ -3,7 +3,7 @@ import { Anchor, ActionIcon } from '@mantine/core';
 import { IconBrandTwitter,  } from '@tabler/icons-react'
 
 
-export function twitterProfileLink() {
+export function TwitterProfileLink() {
     const user = useUser();
     const twitterId = user.twitterId;
 

@@ -18,8 +18,11 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
+import { useLoggedIn } from '@/components/loginContext'
+import { ImageFrameComponent } from '@/components/styleComponent/imageFrameComponent'
 
 const AboutPage = () => {
+  const loggedIn = useLoggedIn()
   const isMobile = useMediaQuery(`(max-width: ${rem(380)})`)
   const objectMinWidth = useMediaQuery(`(max-width: ${rem(750)})`)
   const [windowWidth, setWindowWidth] = useState(
@@ -251,6 +254,7 @@ const AboutPage = () => {
       </Container>
 
       <Container
+        my="5rem"
         style={{
           flexDirection: objectMinWidth ? 'column' : 'row',
           display: 'flex',
@@ -268,7 +272,7 @@ const AboutPage = () => {
         </Text>
       </Container>
 
-      <Container w="100%" mt="8rem">
+      <Container w="100%" my="8rem">
         <Center>
           <Title order={3} fw="normal" my="4rem">
             ideeeをより詳しく知りたい方はこちらをご覧ください。
@@ -295,72 +299,45 @@ const AboutPage = () => {
         </Box>
       </Container>
 
-      <Center>
-        <Paper
-          miw="15rem"
-          my="7rem"
-          shadow="md"
-          radius="xs"
-          py="lg"
-          px="lg"
-          mx="10rem"
-        >
-          <Center>
-            <Title order={5} fw="normal" my="lg">
-              無料登録してアイデアを見に行く💡
-            </Title>
-          </Center>
-          <Center>
-            <Link href="/user/sign_up">
-              <Button
-                w="13rem"
-                mb="xs"
-                variant="gradient"
-                gradient={{ from: 'red', to: 'orange' }}
+      {(() => {
+        if (loggedIn) {
+          return ''
+        } else {
+          return (
+            <Center>
+              <Paper
+                miw="15rem"
+                my="7rem"
+                shadow="md"
+                radius="xs"
+                py="lg"
+                px="lg"
+                mx="10rem"
               >
-                ユーザー登録
-              </Button>
-            </Link>
-          </Center>
-        </Paper>
-      </Center>
+                <Center>
+                  <Title order={5} fw="normal" my="lg">
+                    無料登録してアイデアを見に行く💡
+                  </Title>
+                </Center>
+                <Center>
+                  <Link href="/user/sign_up">
+                    <Button
+                      w="13rem"
+                      mb="xs"
+                      variant="gradient"
+                      gradient={{ from: 'red', to: 'orange' }}
+                    >
+                      ユーザー登録
+                    </Button>
+                  </Link>
+                </Center>
+              </Paper>
+            </Center>
+          )
+        }
+      })()}
 
-      <Flex
-        style={{
-          position: 'relative',
-          marginTop: '0px',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-        ml={isMobile ? '5px' : '-20px'}
-        w={isMobile ? '450px' : '100%'}
-      >
-        <Box
-          style={{
-            flex: 1,
-            width: isMobile ? '330px' : '500px',
-            height: isMobile ? '290px' : '445px',
-            borderRadius: '50%',
-            background: 'rgba(239, 213, 120, 0.49)',
-            top: 0,
-            left: isMobile ? '-5%' : '25px',
-            position: 'relative',
-            transition: 'all 0.3s',
-          }}
-        />
-        <Box
-          style={{
-            flex: 1,
-            width: isMobile ? '330px' : '500px',
-            height: isMobile ? '290px' : '445px',
-            borderRadius: '50%',
-            background: 'rgba(215, 145, 145, 0.50)',
-            position: 'relative',
-            top: '50px',
-            left: isMobile ? '-10%' : '-5px',
-          }}
-        />
-      </Flex>
+      <ImageFrameComponent />
     </Box>
   )
 }

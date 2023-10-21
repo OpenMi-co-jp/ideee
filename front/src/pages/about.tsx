@@ -22,7 +22,9 @@ import Link from 'next/link'
 const AboutPage = () => {
   const isMobile = useMediaQuery(`(max-width: ${rem(380)})`)
   const objectMinWidth = useMediaQuery(`(max-width: ${rem(750)})`)
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0)
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 0
+  )
   const [marginTop, setMarginTop] = useState('')
 
   useEffect(() => {
@@ -248,20 +250,23 @@ const AboutPage = () => {
         </Container>
       </Container>
 
-      <Center>
-        <Card w="85%" bg="" p="3rem" radius="lg" shadow="md">
-          <Title align="center" order={2} mb="xl">
-            コンセプト💡
-          </Title>
-          <Text align="center">
-            ideeeは、もったいないを無くし「誰かの役に立つもの」を増やすために作られています。
-            <br />
-            アイデアが思いつく人、アイデアを形にできる人。それぞれが才能です。「作ったけど需要がなくて使われない」「アイデアは面白いけどリソースがなくて作れない」才能たちをマッチさせることによって、そんな機会損失を少しでも無くしていけると考えています。
-            <br />
-            改善を見つける才能・開発の才能をぜひ活かしましょう
-          </Text>
-        </Card>
-      </Center>
+      <Container
+        style={{
+          flexDirection: objectMinWidth ? 'column' : 'row',
+          display: 'flex',
+        }}
+      >
+        <Title order={2} mb="xl" m={isMobile ? '12%' : ''}>
+          全ての才能が有効活用され、世の中のもったいないを無くす
+        </Title>
+        <Text align="center" m={isMobile ? '8%' : ''}>
+          ideeeは、もったいないを無くし「誰かの役に立つもの」を増やすために作られています。
+          <br />
+          アイデアが思いつく人、アイデアを形にできる人。それぞれが才能です。「作ったけど需要がなくて使われない」「アイデアは面白いけどリソースがなくて作れない」才能たちをマッチさせることによって、そんな機会損失を少しでも無くしていけると考えています。
+          <br />
+          改善を見つける才能・開発の才能をぜひ活かしましょう
+        </Text>
+      </Container>
 
       <Container w="100%" mt="8rem">
         <Center>

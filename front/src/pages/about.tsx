@@ -15,12 +15,37 @@ import {
   Button,
 } from '@mantine/core'
 import React from 'react'
+import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
 
 const AboutPage = () => {
-  const isMobile = useMediaQuery(`(max-width: ${rem(460)})`)
+  const isMobile = useMediaQuery(`(max-width: ${rem(380)})`)
   const objectMinWidth = useMediaQuery(`(max-width: ${rem(750)})`)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [marginTop, setMarginTop] = useState('');
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };},[]);
+  
+
+  useEffect(() => {
+    if (windowWidth <= 653) {
+      setMarginTop('');
+    } else if (windowWidth <= 750){
+      setMarginTop('9rem');
+    } else {
+      setMarginTop('')
+    }
+    },[windowWidth]);
+  
 
   return (
     <Box mx="xs">
@@ -79,12 +104,13 @@ const AboutPage = () => {
           style={{
             flexDirection: objectMinWidth ? 'column' : 'row',
             display: 'flex',
-            marginLeft: isMobile ? '' : '-5.5%',
             alignItems: isMobile ? 'center' : '',
           }}
         >
-          <Container>
+          <Group>
+            <Center>
             <Card
+              mb="lg"
               style={{
                 position: 'relative',
                 flexDirection: 'column',
@@ -114,22 +140,27 @@ const AboutPage = () => {
                 }}
               />
             </Card>
-            <Center>
-              <Paper mt="lg" mb="10rem">
-                <Title order={3} color="#DBA901" mb="lg">
+            </Center>
+            
+              <Paper mb="10rem" ml="2.2rem" mt={marginTop}>
+                <Title order={3} color="#DBA901" mb="lg" align="center">
                   アイデアが見つかる
                 </Title>
-                <Text w="13rem">
+                <Text w="13rem" align="center">
                   権利フリーのアイデアもたくさん見つかります。
                   <br />
                   あなたのコードで世の中をちょっとよくしませんか？
                 </Text>
               </Paper>
-            </Center>
-          </Container>
+          
+          </Group>
 
-          <Container>
+
+
+          <Group>
+            <Center>
             <Card
+              mb="lg"
               style={{
                 position: 'relative',
                 flexDirection: 'column',
@@ -159,23 +190,27 @@ const AboutPage = () => {
                 }}
               />
             </Card>
-            <Center>
-              <Paper mt="lg" mb="10rem">
-                <Title order={3} color="#DBA901" mb="lg">
+            </Center>
+              <Paper mb="10rem" ml="2.2rem" mt={marginTop}>
+                <Title order={3} color="#DBA901" mb="lg" align="center">
                   需要を確認できる
                 </Title>
-                <Text w="13rem">
+                <Text w="13rem" align="center" >
                   作ってから誰にも使われないのはとてももったいない。
                   <br />
                   <br />
                   アイデアを公表し、反応を確認することでブラッシュアップされます。
                 </Text>
               </Paper>
-            </Center>
-          </Container>
+          </Group>
 
-          <Container>
+
+
+
+          <Group>
+            <Center>
             <Card
+              mb="lg"
               style={{
                 position: 'relative',
                 flexDirection: 'column',
@@ -205,23 +240,36 @@ const AboutPage = () => {
                 }}
               />
             </Card>
-            <Center>
-              <Paper mt="lg" mb="10rem">
-                <Title order={3} color="#DBA901" mb="lg">
+            </Center>
+              <Paper mb="10rem" ml="2.2rem" mt={marginTop}>
+                <Title order={3} color="#DBA901" mb="lg" align="center">
                   仲間が見つかる
                 </Title>
-                <Text w="13rem">
+                <Text w="13rem" align="center">
                   チーム開発の募集ができます。
                   <br />
                   実現したい世界観を描いて、チームを作れるユニークなギルドとして活用できます
                 </Text>
               </Paper>
-            </Center>
-          </Container>
+          </Group>
         </Container>
       </Container>
 
-      <Container w="100%" mt="8rem">
+      <Center>
+      <Card w="85%" bg="" p="3rem" radius="lg" shadow="md">
+        <Title align="center" order={2} mb="xl" >コンセプト💡</Title>
+        <Text align="center">
+          ideeeは、もったいないを無くし「誰かの役に立つもの」を増やすために作られています。<br />
+          アイデアが思いつく人、アイデアを形にできる人。それぞれが才能です。「作ったけど需要がなくて使われない」「アイデアは面白いけどリソースがなくて作れない」才能たちをマッチさせることによって、そんな機会損失を少しでも無くしていけると考えています。<br />
+          改善を見つける才能・開発の才能をぜひ活かしましょう
+        </Text>
+      </Card>
+      </Center>
+
+
+
+
+      <Container w="100%" mt="8rem" >
         <Center>
           <Title order={3} fw="normal" my="4rem">
             ideeeをより詳しく知りたい方はこちらをご覧ください。

@@ -495,6 +495,28 @@ type DestroyUserPayload {
   success: Boolean!
 }
 
+type Difficulty {
+  """
+  ID
+  """
+  id: ID!
+
+  """
+  アイデアID
+  """
+  ideaId: Int!
+
+  """
+  難易度
+  """
+  level: Int!
+
+  """
+  ユーザーID
+  """
+  userId: Int!
+}
+
 """
 An ISO 8601-encoded datetime
 """
@@ -681,7 +703,7 @@ type Like {
   likableId: Int!
 
   """
-  いいねをされたエンティティのタイプ（例: "記事", "コメント"）
+  いいねをされたエンティティのタイプ
   """
   likableType: String!
 
@@ -952,6 +974,16 @@ type Query {
   実現したアイデア一覧
   """
   deployedIdeas: [Idea!]!
+
+  """
+  難易度一覧
+  """
+  difficulties(
+    """
+    ユーザーID
+    """
+    userId: ID!
+  ): [Difficulty!]!
 
   """
   ホットなアイデア一覧

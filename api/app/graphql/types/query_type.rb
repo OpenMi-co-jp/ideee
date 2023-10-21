@@ -27,5 +27,6 @@ module Types
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'
 
     field :likes, resolver: Resolvers::Like::LikesResolver, description: 'ユーザーのいいね一覧'
+    field :difficulties, resolver: Resolvers::Difficulty::DifficultiesResolver, description: '難易度一覧'
   end
 end

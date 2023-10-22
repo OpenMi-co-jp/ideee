@@ -6,5 +6,6 @@ module Types
     field :user_id, Integer, null: false, description: 'ユーザーID'
     field :idea_id, Integer, null: false, description: 'アイデアID'
     field :level, Integer, null: false, description: '難易度'
+    field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日時'
   end
 end

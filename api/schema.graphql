@@ -497,6 +497,11 @@ type DestroyUserPayload {
 
 type Difficulty {
   """
+  作成日時
+  """
+  createdAt: ISO8601DateTime!
+
+  """
   ID
   """
   id: ID!

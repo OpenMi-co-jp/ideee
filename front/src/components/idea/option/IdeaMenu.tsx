@@ -12,12 +12,12 @@ export const IdeaMenu = () => {
       <Menu.Dropdown>
         <Menu.Label>アイデア管理</Menu.Label>
         <Link href="/idea/5/edit">
-          <Menu.Item icon={<IconPencil size={14} />}>Edit</Menu.Item>
+          <Menu.Item leftSection={<IconPencil size={14} />}>Edit</Menu.Item>
         </Link>
 
         <Menu.Divider />
 
-        <Menu.Item color="red" icon={<IconTrash size={14} />}>
+        <Menu.Item color="red" leftSection={<IconTrash size={14} />}>
           Delete
         </Menu.Item>
       </Menu.Dropdown>

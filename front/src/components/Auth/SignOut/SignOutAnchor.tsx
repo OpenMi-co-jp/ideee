@@ -7,7 +7,7 @@ export const SignOutAnchor = () => {
   const onSubmit = () => handleSignOut(setLoggedIn)
 
   return (
-    <Anchor color="yellow" onClick={onSubmit}>
+    <Anchor c="yellow" onClick={onSubmit}>
       ログアウト
     </Anchor>
   )

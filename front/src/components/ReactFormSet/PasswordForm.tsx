@@ -1,9 +1,9 @@
-import type { MantineStyleSystemProps } from '@mantine/core'
+import type { MantineStyleProps } from '@mantine/core'
 import type { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { PasswordInput as MantinePasswordInput } from '@mantine/core'
 import { Controller } from 'react-hook-form'
 
-type InputTextProps<T extends FieldValues> = MantineStyleSystemProps & {
+type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   label?: string
   name: Path<T>
   form: UseFormReturn<T, any>

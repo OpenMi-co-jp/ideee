@@ -1,4 +1,4 @@
-import { Button, Group, Space, Box, rem } from '@mantine/core'
+import { Button, Group, Space, Box } from '@mantine/core'
 import { useLoggedIn } from '@/components/loginContext'
 import { UserMenu } from './UserMenu'
 import Link from 'next/link'
@@ -7,7 +7,7 @@ import { useMediaQuery } from '@mantine/hooks'
 export const UserToggle = () => {
   const { loggedIn } = useLoggedIn()
   const LSLoggedIn = localStorage.getItem('loggedIn') == 'true'
-  const isMobile = useMediaQuery(`(max-width: ${rem(550)})`)
+  const isMobile = useMediaQuery(`(max-width: 550px)`)
 
   return (
     <Group>

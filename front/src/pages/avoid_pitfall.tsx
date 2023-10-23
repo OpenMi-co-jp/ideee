@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Container, Paper } from '@mantine/core'
 import { useLoggedIn } from '@/components/loginContext'
 import { SignPath } from '@/components/Auth/SignPath'
@@ -6,6 +7,14 @@ import { HiddenContent } from '@/components/avoidPitfall'
 
 function AvoidPitfall() {
   const { loggedIn } = useLoggedIn()
+  const [LSLoggedIn, setLSLoggedIn] = useState(false)
+  useEffect(() => {
+    try {
+      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
 
   return (
     <Container>
@@ -13,7 +22,7 @@ function AvoidPitfall() {
         <Container
           style={{
             height: '100%',
-            ...(!loggedIn
+            ...(!(loggedIn || LSLoggedIn)
               ? {
                   WebkitMaskImage:
                     'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
@@ -27,7 +36,7 @@ function AvoidPitfall() {
         </Container>
 
         {(() => {
-          if (loggedIn) {
+          if (loggedIn || LSLoggedIn) {
             return <HiddenContent />
           } else {
             return <SignPath />

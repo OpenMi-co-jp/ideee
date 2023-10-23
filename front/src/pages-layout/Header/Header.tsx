@@ -1,4 +1,4 @@
-import { Box, Group, Portal, rem } from '@mantine/core'
+import { useMantineColorScheme, Box, Group, Portal, rem } from '@mantine/core'
 import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
 import { SearchIcon } from './headerComponents'
@@ -7,13 +7,14 @@ import { IdeaCreateButton } from '@/components/idea/createButton'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
+  const { colorScheme } = useMantineColorScheme()
 
   return (
     <Portal>
       <Box
         px="lg"
         py="sm"
-        sx={(theme) => ({
+        style={(theme) => ({
           position: 'fixed',
           top: 0,
           left: 0,
@@ -23,14 +24,13 @@ export const Header: FC = () => {
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
           borderBottom: `1px solid ${theme.colors.gray[2]}`,
-          backgroundColor:
-            theme.colorScheme === 'dark' ? theme.black : theme.white,
-          color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+          backgroundColor: colorScheme === 'dark' ? theme.black : theme.white,
+          color: colorScheme === 'dark' ? theme.white : theme.black,
         })}
       >
-        <Group position="apart">
+        <Group justify="space-between">
           <ServiceIcon />
-          <Group position="center">
+          <Group justify="center">
             <SearchIcon />
             <Notification />
             <UserToggle />

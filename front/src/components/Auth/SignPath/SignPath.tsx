@@ -1,26 +1,25 @@
-import { Title, Card, Image, Button, Grid, Col } from '@mantine/core'
+import { Title, Card, Image, Button, Grid, Flex } from '@mantine/core'
 import Link from 'next/link'
 import type { CustomNextPage } from 'next'
 
 export const SignPath: CustomNextPage = () => {
   return (
-    <Card padding="xl">
-      <Grid grow gutter="xs">
-        <Col span={12} md={6}>
-          <Image
-            mx="auto"
-            height="15rem"
-            fit="contain"
-            src="/img/userAuth.webp"
-            alt="user auth image"
-            withPlaceholder
-          />
-        </Col>
-        <Col span={12} md={6}>
-          <Card radius="0.5rem" shadow="xl">
-            <Title order={3} m="lg">
-              ログインして続きを確認
-            </Title>
+    <Grid grow gutter="xs">
+      <Grid.Col span={6}>
+        <Image
+          mx="auto"
+          height="240"
+          fit="contain"
+          src="/img/userAuth.webp"
+          alt="user auth image"
+        />
+      </Grid.Col>
+      <Grid.Col span={6}>
+        <Card radius="0.5rem" shadow="xl">
+          <Title order={3} m="lg">
+            ログインして続きを確認
+          </Title>
+          <Flex>
             <Link href="/user/sign_up">
               <Button
                 m="lg"
@@ -31,17 +30,13 @@ export const SignPath: CustomNextPage = () => {
               </Button>
             </Link>
             <Link href="/user/sign_in">
-              <Button
-                m="lg"
-                variant="gradient"
-                gradient={{ from: 'orange', to: 'yellow' }}
-              >
+              <Button m="lg" variant="outline" color="orange">
                 ログイン
               </Button>
             </Link>
-          </Card>
-        </Col>
-      </Grid>
-    </Card>
+          </Flex>
+        </Card>
+      </Grid.Col>
+    </Grid>
   )
 }

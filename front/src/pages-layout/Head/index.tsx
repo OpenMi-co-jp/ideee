@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { ColorSchemeScript } from '@mantine/core'
 
 export const HeadBlock = () => {
   const pageTitle = 'アイディー'
@@ -12,6 +13,7 @@ export const HeadBlock = () => {
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
+      <ColorSchemeScript />
     </Head>
   )
 }

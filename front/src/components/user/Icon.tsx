@@ -6,15 +6,17 @@ type UserIconProps = {
 }
 
 export const UserIcon = ({ height = 30, userIcon = '' }: UserIconProps) => {
+  if (!userIcon) {
+    return <Avatar radius="xl" />
+  }
+
   return (
     <Image
       height={height}
       width={height}
       radius={height / 2}
       src={userIcon}
-      alt="user prof"
-      withPlaceholder
-      placeholder={<Avatar radius="xl" />}
+      alt="user profile"
     />
   )
 }

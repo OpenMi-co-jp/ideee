@@ -1,4 +1,4 @@
-import { Group, Text } from '@mantine/core'
+import { Flex, Group, Text } from '@mantine/core'
 import { FormatDate } from '@/utils/common'
 import { useIdea } from '@/context/IdeaContext'
 import { IdeaMenu } from './IdeaMenu'
@@ -12,16 +12,16 @@ export const IdeaOptions = () => {
   const createdAt = new Date(idea?.createdAt)
 
   return (
-    <Group py="lg" mr="lg" position="apart">
+    <Flex py="lg" mr="lg" align="apart" justify="space-between">
       <Group>
         <Like />
         <XShare />
         <UrlCopy />
         <IdeaMenu />
       </Group>
-      <Text size="md" color="gray">
+      <Text size="md" c="gray">
         {FormatDate(createdAt)}
       </Text>
-    </Group>
+    </Flex>
   )
 }

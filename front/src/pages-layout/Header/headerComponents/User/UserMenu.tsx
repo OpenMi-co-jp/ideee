@@ -16,15 +16,15 @@ export const UserMenu = () => {
       <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
         <Link href="/user/5/edit">
-          <Menu.Item icon={<IconUserCircle size={14} />}>
+          <Menu.Item leftSection={<IconUserCircle size={14} />}>
             ユーザー情報編集
           </Menu.Item>
         </Link>
-        <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
+        <Menu.Item leftSection={<IconSettings size={14} />}>Settings</Menu.Item>
 
         <Menu.Divider />
 
-        <Menu.Item color="red" icon={<IconLogout size={14} />}>
+        <Menu.Item color="red" leftSection={<IconLogout size={14} />}>
           <SignOutAnchor />
         </Menu.Item>
       </Menu.Dropdown>

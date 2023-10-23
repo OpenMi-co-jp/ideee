@@ -1,4 +1,4 @@
-import { Button, Col, Paper, Title, Grid, Container } from '@mantine/core'
+import { Button, Paper, Title, Grid, Container } from '@mantine/core'
 import { PasswordForm } from '@/components/ReactFormSet'
 import type { CustomNextPage } from 'next'
 import { useResetPassword } from './hooks'
@@ -35,11 +35,11 @@ export const ResetPassword: CustomNextPage = () => {
             required
           />
           <Grid gutter="md">
-            <Col style={{ marginTop: '1rem' }}>
+            <Grid.Col style={{ marginTop: '1rem' }}>
               <Button type="submit" fullWidth>
                 パスワードをリセット
               </Button>
-            </Col>
+            </Grid.Col>
           </Grid>
         </form>
       </Paper>

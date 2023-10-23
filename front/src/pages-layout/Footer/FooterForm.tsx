@@ -1,117 +1,17 @@
 import {
-  createStyles,
   Text,
   Container,
   ActionIcon,
   Group,
   rem,
+  Box,
+  useMantineColorScheme,
+  Flex,
 } from '@mantine/core'
 
 import { IconBrandTwitter, IconNews } from '@tabler/icons-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const useStyles = createStyles((theme) => ({
-  footer: {
-    marginTop: rem(120),
-    paddingTop: `calc(${theme.spacing.xl} * 2)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 2)`,
-    backgroundColor:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[6]
-        : theme.colors.gray[0],
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
-  },
-
-  logo: {
-    maxWidth: rem(200),
-
-    [theme.fn.smallerThan('sm')]: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-  },
-
-  description: {
-    marginTop: rem(5),
-
-    [theme.fn.smallerThan('sm')]: {
-      marginTop: theme.spacing.xs,
-      textAlign: 'center',
-    },
-  },
-
-  inner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-
-    [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-  },
-
-  groups: {
-    display: 'flex',
-    flexWrap: 'wrap',
-
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
-    },
-  },
-
-  wrapper: {
-    width: rem(160),
-  },
-
-  link: {
-    display: 'block',
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[1]
-        : theme.colors.gray[6],
-    fontSize: theme.fontSizes.sm,
-    paddingTop: rem(3),
-    paddingBottom: rem(3),
-
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-
-  title: {
-    fontSize: theme.fontSizes.lg,
-    fontWeight: 700,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    marginBottom: `calc(${theme.spacing.xs} / 2)`,
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-  },
-
-  afterFooter: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: theme.spacing.xl,
-    paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.xl,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
-    }`,
-
-    [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column',
-    },
-  },
-
-  social: {
-    [theme.fn.smallerThan('sm')]: {
-      marginTop: theme.spacing.xs,
-    },
-  },
-}))
 
 interface FooterLinksProps {
   data: {
@@ -121,54 +21,155 @@ interface FooterLinksProps {
 }
 
 export const FooterForm = (footerData: FooterLinksProps) => {
-  const { classes } = useStyles()
-
+  const { colorScheme } = useMantineColorScheme()
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
-      <Link key={index} className={classes.link} href={link.link}>
-        {link.label}
+      <Link key={index} href={link.link}>
+        <Text
+          style={(theme) => ({
+            display: 'block',
+            color:
+              colorScheme === 'dark'
+                ? theme.colors.dark[1]
+                : theme.colors.gray[6],
+            fontSize: theme.fontSizes.sm,
+            paddingTop: rem(3),
+            paddingBottom: rem(3),
+
+            '&:hover': {
+              textDecoration: 'underline',
+            },
+          })}
+        >
+          {link.label}
+        </Text>
       </Link>
     ))
 
     return (
-      <div className={classes.wrapper} key={data.title}>
-        <Text className={classes.title}>{data.title}</Text>
+      <Box
+        key={data.title}
+        style={{
+          width: rem(160),
+        }}
+      >
+        <Text
+          style={(theme) => ({
+            fontSize: theme.fontSizes.lg,
+            fontWeight: 700,
+            fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+            marginBottom: `calc(${theme.spacing.xs} / 2)`,
+            color: colorScheme === 'dark' ? theme.white : theme.black,
+          })}
+        >
+          {data.title}
+        </Text>
         {links}
-      </div>
+      </Box>
     )
   })
 
   return (
-    <footer className={classes.footer}>
-      <Container className={classes.inner}>
-        <div className={classes.logo}>
-          <Image
-            src="/img/IdeeeLogo.webp"
-            alt="ideeeのロゴ"
-            width={150}
-            height={50}
-          />
-          <Text size="xs" color="dimmed" className={classes.description}>
-            あなたの才能で世界をちょっとだけ良くする
-          </Text>
-        </div>
-        <div className={classes.groups}>{groups}</div>
-      </Container>
-      <Container className={classes.afterFooter}>
-        <Text color="dimmed" size="sm">
-          © 2022 ideee.tech All rights reserved.
-        </Text>
-
-        <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <IconBrandTwitter size="1.05rem" stroke={1.5} />
-          </ActionIcon>
-
-          <ActionIcon size="lg">
-            <IconNews size="1.05rem" stroke={1.5} />
-          </ActionIcon>
-        </Group>
-      </Container>
+    <footer>
+      <Box
+        mt={rem(120)}
+        style={(theme) => ({
+          paddingTop: `calc(${theme.spacing.xl} * 2)`,
+          paddingBottom: `calc(${theme.spacing.xl} * 2)`,
+          backgroundColor:
+            colorScheme === 'dark'
+              ? theme.colors.dark[6]
+              : theme.colors.gray[0],
+          borderTop: `${rem(1)} solid ${
+            colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
+          }`,
+        })}
+      >
+        <Container>
+          <Flex
+            justify="space-between"
+            direction={{ base: 'column', sm: 'row' }}
+            align={{ base: 'center', sm: 'flex-start' }}
+          >
+            <Flex
+              maw={rem(200)}
+              direction={'column'}
+              align={{ base: 'center', sm: 'flex-start' }}
+            >
+              <Image
+                src="/img/IdeeeLogo.webp"
+                alt="ideeeのロゴ"
+                width={150}
+                height={50}
+              />
+              <Text
+                size="xs"
+                c="dimmed"
+                mt={{ base: 'xs', sm: rem(5) }}
+                ta={{ base: 'center', sm: 'left' }}
+              >
+                あなたの才能で世界をちょっとだけ良くする
+              </Text>
+            </Flex>
+            <Flex wrap="wrap" display={{ base: 'none', sm: 'flex' }}>
+              {groups}
+            </Flex>
+          </Flex>
+        </Container>
+        <Container
+          style={(theme) => ({
+            marginTop: theme.spacing.xl,
+            paddingTop: theme.spacing.xl,
+            paddingBottom: theme.spacing.xl,
+            borderTop: `${rem(1)} solid ${
+              colorScheme === 'dark'
+                ? theme.colors.dark[4]
+                : theme.colors.gray[2]
+            }`,
+          })}
+        >
+          <Flex
+            justify="space-between"
+            align="center"
+            direction={{ base: 'column', sm: 'row' }}
+          >
+            <Text c="dimmed" size="sm">
+              © 2022 ideee.tech All rights reserved.
+            </Text>
+            <Group
+              gap={0}
+              wrap="nowrap"
+              align="start"
+              mt={{ base: 'xs', sm: 0 }}
+            >
+              <ActionIcon
+                size="lg"
+                c="dimmed"
+                style={(theme) => ({
+                  backgroundColor:
+                    colorScheme === 'dark'
+                      ? theme.colors.dark[6]
+                      : theme.colors.gray[0],
+                })}
+              >
+                <IconBrandTwitter size="1.05rem" stroke={1.5} />
+              </ActionIcon>
+              <ActionIcon
+                size="lg"
+                c="dimmed"
+                style={(theme) => ({
+                  backgroundColor:
+                    colorScheme === 'dark'
+                      ? theme.colors.dark[6]
+                      : theme.colors.gray[0],
+                })}
+              >
+                <IconNews size="1.05rem" stroke={1.5} />
+              </ActionIcon>
+            </Group>
+          </Flex>
+        </Container>
+      </Box>
     </footer>
   )
 }

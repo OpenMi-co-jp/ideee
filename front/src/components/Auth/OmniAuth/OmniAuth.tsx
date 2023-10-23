@@ -1,9 +1,14 @@
-import { Box, Button, Stack } from '@mantine/core'
+import { Button } from '@mantine/core'
 import { handleSignIn } from './hooks'
-import { useLoggedIn } from '@/components/loginContext'
 
 export const OmniAuth = () => {
-  const onSubmit = () => handleSignIn()
+  const onGoogleLogin = () => handleSignIn({ provider: 'google_oauth2' })
+  const onTwitterLogin = () => handleSignIn({ provider: 'twitter' })
 
-  return <Button onClick={onSubmit}>Google ログインpost</Button>
+  return (
+    <>
+      <Button onClick={onGoogleLogin}>Google ログインpost</Button>
+      <Button onClick={onTwitterLogin}>Twitter ログインpost</Button>
+    </>
+  )
 }

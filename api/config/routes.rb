@@ -6,10 +6,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  mount_devise_token_auth_for 'User', at: 'auth',
-    controllers: {
-      omniauth_callbacks: 'omniauth_callbacks'
-    }
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+
   if Rails.env.development?
     mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
   end

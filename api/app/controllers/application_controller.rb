@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   # before_action :store_user_location!, if: :storable_location?
   # before_action :get_notifications, if: :defined_user?
-  protect_from_forgery except: :callback
+  protect_from_forgery with: :null_session
 
   # TODO: Reactで再設定
   # deviseでログインした後の設定

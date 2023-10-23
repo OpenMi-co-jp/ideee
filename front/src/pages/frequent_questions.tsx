@@ -25,7 +25,6 @@ const FrequentQuestions = () => {
   const { colorScheme } = useMantineColorScheme()
   const getColor = (color: string) =>
     theme.colors[color][colorScheme === 'dark' ? 4 : 8]
-  // TODO:backgroud-colorの青がおかしい。
   return (
     <Container>
       <Title order={1} m="lg">

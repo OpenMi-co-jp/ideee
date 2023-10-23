@@ -42,7 +42,7 @@ export const SearchInput = () => {
         // TODO: ドロップダウンの時のアニメーションがおかしい。
       }}
       value={searchValue}
-      onSubmit={(value) => {
+      onOptionSubmit={(value) => {
         router.push(`/search?name_or_idea_tags_name_cont=${value}`)
         setSearchTrigger(false)
       }}

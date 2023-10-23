@@ -1,4 +1,3 @@
-// import Image from 'next/image'
 import { Title, Text, Button, Box, BackgroundImage } from '@mantine/core'
 import Link from 'next/link'
 

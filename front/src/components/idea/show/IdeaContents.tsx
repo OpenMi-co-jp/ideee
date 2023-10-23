@@ -34,7 +34,11 @@ export const IdeaContents = () => {
   const idea = useIdea()
 
   useEffect(() => {
-    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    try {
+      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    } catch (e) {
+      console.error(e)
+    }
   }, [])
 
   const sections = getSections(idea, LSLoggedIn)

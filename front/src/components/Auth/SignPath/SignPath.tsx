@@ -30,11 +30,7 @@ export const SignPath: CustomNextPage = () => {
               </Button>
             </Link>
             <Link href="/user/sign_in">
-              <Button
-                m="lg"
-                variant="gradient"
-                gradient={{ from: 'orange', to: 'yellow' }}
-              >
+              <Button m="lg" variant="outline" color="orange">
                 ログイン
               </Button>
             </Link>

@@ -23,7 +23,11 @@ const IdeaDetail = () => {
   const [idea, setIdea] = useState({})
 
   useEffect(() => {
-    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    try {
+      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    } catch (e) {
+      console.error(e)
+    }
 
     if (data) {
       setIdea(data?.idea)

@@ -9,3 +9,49 @@ query GetTeam($id: ID!) {
     membersNum
   }
 }
+
+query GetTeams {
+  teams {
+    id
+    ownerId
+    ideaId
+    status
+    requirement
+    offer
+    membersNum
+  }
+}
+
+mutation createTeam($input: CreateTeamInput!) {
+  createTeam(input: $input) {
+    team {
+      id
+      ownerId
+      status
+      requirement
+      offer
+      membersNum
+    }
+    success
+  }
+}
+
+mutation updateTeam($input: UpdateTeamInput!) {
+  updateTeam(input: $input) {
+    team {
+      id
+      ownerId
+      status
+      requirement
+      offer
+      membersNum
+    }
+    success
+  }
+}
+
+mutation DestroyTeam($input: DestroyTeamInput!) {
+  destroyTeam(input: $input) {
+    success
+  }
+}

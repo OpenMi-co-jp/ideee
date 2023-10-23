@@ -16,6 +16,7 @@ module Types
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'
 
     field :team, resolver: Resolvers::Team::TeamResolver, description: 'チームオブジェクト'
+    field :teams, resolver: Resolvers::Team::TeamsResolver, description: 'チーム一覧'
 
     field :comment, resolver: Resolvers::Comment::CommentResolver, description: 'コメントオブジェクト'
     field :comments, resolver: Resolvers::Comment::CommentsResolver, description: 'コメント一覧'
@@ -24,5 +25,7 @@ module Types
 
     field :tags, resolver: Resolvers::Tag::TagsResolver, description: 'タグ一覧'
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'
+
+    field :likes, resolver: Resolvers::Like::LikesResolver, description: 'ユーザーのいいね一覧'
   end
 end

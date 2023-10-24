@@ -28,7 +28,7 @@ RSpec.describe Mutations::Difficulty::Create do
       input: {
         userId: user.id,
         ideaId: idea_id,
-        level: level
+        level
       }
     }
   end
@@ -37,7 +37,7 @@ RSpec.describe Mutations::Difficulty::Create do
     context '正しいideaIdを指定している時' do
       let(:idea_id) { create(:idea).id }
       let(:level) { 1 }
-    
+
       it '作成に成功する' do
         graphql_post
         res = response.parsed_body
@@ -57,7 +57,7 @@ RSpec.describe Mutations::Difficulty::Create do
 
         expect(res['data']['createDifficulty']['success']).to be_falsy
         expect(res['data']['createDifficulty']['errors']).to include('variable $input of type CreateDifficultyInput!')
-      end    
+      end
     end
   end
 end

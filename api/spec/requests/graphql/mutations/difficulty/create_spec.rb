@@ -57,6 +57,6 @@ RSpec.describe Mutations::Difficulty::Create do
 
         expect(res['data']['createDifficulty']['success']).to be_falsy
         expect(res['data']['createDifficulty']['errors']).to include('variable $input of type CreateDifficultyInput!')
-  end
-
+      end    
+    end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Mutations::Difficulty::Create do
-  subject(:graphql_post) { post graphql_path, params: { query: query, variables: variables.to_json }, headers: tokens }
+  subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens }
 
   let(:user)   { create(:user) }
   let(:tokens) { sign_in(user) }

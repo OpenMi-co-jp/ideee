@@ -17,7 +17,7 @@ module Mutations
       )
       difficulty.save!
       {
-        difficulty:,
+        difficulty: difficulty,
         success: true
       }
     end

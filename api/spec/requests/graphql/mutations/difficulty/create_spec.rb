@@ -28,7 +28,7 @@ RSpec.describe Mutations::Difficulty::Create do
       input: {
         userId: user.id,
         ideaId: idea_id,
-        level: level
+        level:
       }
     }
   end

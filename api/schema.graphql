@@ -125,6 +125,11 @@ type CreateDifficultyPayload {
   difficulty: Difficulty!
 
   """
+  エラーメッセージのリスト
+  """
+  errors: [String!]
+
+  """
   成功フラグ
   """
   success: Boolean!

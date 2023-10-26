@@ -8,6 +8,7 @@ module Mutations
 
     field :difficulty, Types::DifficultyType, null: false, description: '難易度'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーメッセージのリスト'
 
     def resolve(**args)
       difficulty = ::Difficulty.new(
@@ -19,6 +20,11 @@ module Mutations
       {
         difficulty:,
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

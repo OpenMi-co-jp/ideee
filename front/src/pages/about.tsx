@@ -11,14 +11,13 @@ import {
   Image,
   rem,
   Box,
-  Paper,
-  Button,
+  Paper
 } from '@mantine/core'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
-import Link from 'next/link'
 import { useLoggedIn } from '@/components/loginContext'
+import  LoginInvitationBox  from '@/pages/about/loginInvitationBox'
 import { ImageFrameComponent } from '@/components/styleComponent/imageFrameComponent'
 
 const AboutPage = () => {
@@ -299,43 +298,7 @@ const AboutPage = () => {
         </Box>
       </Container>
 
-      {(() => {
-        if (loggedIn) {
-          return ''
-        } else {
-          return (
-            <Center>
-              <Paper
-                miw="15rem"
-                my="7rem"
-                shadow="md"
-                radius="xs"
-                py="lg"
-                px="lg"
-                mx="10rem"
-              >
-                <Center>
-                  <Title order={5} fw="normal" my="lg">
-                    無料登録してアイデアを見に行く💡
-                  </Title>
-                </Center>
-                <Center>
-                  <Link href="/user/sign_up">
-                    <Button
-                      w="13rem"
-                      mb="xs"
-                      variant="gradient"
-                      gradient={{ from: 'red', to: 'orange' }}
-                    >
-                      ユーザー登録
-                    </Button>
-                  </Link>
-                </Center>
-              </Paper>
-            </Center>
-          )
-        }
-      })()}
+      {!loggedIn && <LoginInvitationBox/>}
 
       <ImageFrameComponent />
     </Box>

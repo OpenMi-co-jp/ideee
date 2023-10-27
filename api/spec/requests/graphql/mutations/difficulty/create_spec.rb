@@ -58,5 +58,17 @@ RSpec.describe Mutations::Difficulty::Create do
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateDifficultyInput!')
       end
     end
+
+    context '正しいlevelを指定していない時' do
+      let(:idea_id) { create(:idea).id }
+      let(:level) { 0 }
+
+      it '作成に失敗する' do
+        graphql_post
+        res = response.parsed_body
+
+        expect(res['errors'][0]['message']).to include('Variable $input of type CreateDifficultyInput!')
+      end
+    end
   end
 end

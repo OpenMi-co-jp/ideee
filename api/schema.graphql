@@ -102,7 +102,7 @@ input CreateDifficultyInput {
   """
   難易度レベル
   """
-  level: Int!
+  level: String!
 
   """
   ユーザーID
@@ -564,7 +564,7 @@ type Difficulty {
   """
   難易度レベル
   """
-  level: Int!
+  level: String!
 
   """
   ユーザーID

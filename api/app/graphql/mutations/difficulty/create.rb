@@ -4,7 +4,7 @@ module Mutations
 
     argument :idea_id, Integer, required: true, description: 'アイデアID'
     argument :user_id, Integer, required: true, description: 'ユーザーID'
-    argument :level, Integer, required: true, description: '難易度レベル'
+    argument :level, String, required: true, description: '難易度レベル'
 
     field :difficulty, Types::DifficultyType, null: false, description: '難易度'
     field :success, Boolean, null: false, description: '成功フラグ'

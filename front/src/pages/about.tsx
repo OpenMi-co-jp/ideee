@@ -11,44 +11,21 @@ import {
   Image,
   rem,
   Box,
-  Paper
+  Paper,
 } from '@mantine/core'
 import React from 'react'
-import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@mantine/hooks'
 import { useLoggedIn } from '@/components/loginContext'
-import  LoginInvitationBox  from '@/pages/about/loginInvitationBox'
+import LoginInvitationBox from '@/pages/about/loginInvitationBox'
 import { ImageFrameComponent } from '@/components/styleComponent/imageFrameComponent'
 
 const AboutPage = () => {
   const loggedIn = useLoggedIn()
   const isMobile = useMediaQuery(`(max-width: ${rem(380)})`)
   const objectMinWidth = useMediaQuery(`(max-width: ${rem(750)})`)
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 0
+  const betweenWidth = useMediaQuery(
+    '(min-width: 658px) and (max-width: 750px)'
   )
-  const [marginTop, setMarginTop] = useState('')
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth)
-    }
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (windowWidth <= 653) {
-      setMarginTop('')
-    } else if (windowWidth <= 750) {
-      setMarginTop('9rem')
-    } else {
-      setMarginTop('')
-    }
-  }, [windowWidth])
 
   return (
     <Box mx="xs">
@@ -145,7 +122,7 @@ const AboutPage = () => {
               </Card>
             </Center>
 
-            <Paper mb="10rem" ml="2.2rem" mt={marginTop}>
+            <Paper mb="10rem" ml="2.2rem" mt={betweenWidth ? '8rem' : ''}>
               <Title order={3} color="#DBA901" mb="lg" align="center">
                 アイデアが見つかる
               </Title>
@@ -191,7 +168,7 @@ const AboutPage = () => {
                 />
               </Card>
             </Center>
-            <Paper mb="10rem" ml="2.2rem" mt={marginTop}>
+            <Paper mb="10rem" ml="2.2rem" mt={betweenWidth ? '8rem' : ''}>
               <Title order={3} color="#DBA901" mb="lg" align="center">
                 需要を確認できる
               </Title>
@@ -238,7 +215,7 @@ const AboutPage = () => {
                 />
               </Card>
             </Center>
-            <Paper mb="10rem" ml="2.2rem" mt={marginTop}>
+            <Paper mb="10rem" ml="2.2rem" mt={betweenWidth ? '8rem' : ''}>
               <Title order={3} color="#DBA901" mb="lg" align="center">
                 仲間が見つかる
               </Title>
@@ -298,7 +275,7 @@ const AboutPage = () => {
         </Box>
       </Container>
 
-      {!loggedIn && <LoginInvitationBox/>}
+      {!loggedIn && <LoginInvitationBox />}
 
       <ImageFrameComponent />
     </Box>

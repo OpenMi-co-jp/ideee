@@ -36,14 +36,14 @@ RSpec.describe Mutations::Difficulty::Create do
   describe '難易度の作成' do
     context '正しいideaIdを指定している時' do
       let(:idea_id) { create(:idea).id }
-      let(:level) { 1 }
+      let(:level) { 'easy' }
 
       it '作成に成功する' do
         graphql_post
         res = response.parsed_body
 
         expect(res['data']['createDifficulty']['success']).to be_truthy
-        # expect(res['data']['createDifficulty']['difficulty']['level']).to eq(level)
+        expect(res['data']['createDifficulty']['difficulty']['level']).to eq(level)
       end
     end
 

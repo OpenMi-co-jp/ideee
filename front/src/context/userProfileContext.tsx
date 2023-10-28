@@ -1,23 +1,20 @@
-import React, { createContext, useContext } from 'react';
-import type { ReactNode } from 'react';
-import type { User } from '@/lib/generated/client';
+import React, { createContext, useContext } from 'react'
+import type { ReactNode } from 'react'
+import type { GetUserQuery } from '@/lib/generated/client'
 
-export const UserProfileContext = createContext<User | undefined>(undefined);
+export const UserContext = createContext({} as GetUserQuery['user'])
 
 type UserProviderProps = {
-    children: ReactNode;
-    user: User;
-};
-
-
-export function UserProvider({ children, user}: UserProviderProps) {
-    return <UserProfileContext.Provider value={user}>{children}</UserProfileContext.Provider>
+    children: ReactNode
+    user: GetUserQuery['user']
 }
 
+
+export function UserProvider({ children, user }: UserProviderProps) {
+    return (<UserContext.Provider value={user}>{children}</UserContext.Provider>)
+}
+
+
 export function useUser() {
-    const context = useContext(UserProfileContext);
-    if(!context) {
-        throw new Error('useUser must be used within a UserProvider');
-    }
-    return context;
+    return useContext(UserContext)
 }

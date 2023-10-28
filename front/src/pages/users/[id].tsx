@@ -8,6 +8,7 @@ import { useLoggedIn } from '@/components/loginContext'
 import { useRouter } from 'next/router'
 import { GetUserQuery } from '@/lib/generated/client'
 import { useGetUserQuery } from '@/lib/generated/client'
+import { UserProvider } from '@/context/userProfileContext'
 
 export default function UserProfile() {
     const isMobile = useMediaQuery(`(max-width: ${rem(300)})`)
@@ -35,9 +36,7 @@ export default function UserProfile() {
 
     
     return (
-//UserProviderを定義↓
-
-
+    <UserProvider user={user as GetUserQuery['user']}>
         <Box w="100%" miw="15rem" p="lg" bg="" style={{borderRadius: "0.5rem"}} >
             <Group>
             <UserIconComponent/>
@@ -46,8 +45,6 @@ export default function UserProfile() {
             <UserDescription/>
             <Divider/>
         </Box>
-    
-    
-    
+    </UserProvider>
     )
 }

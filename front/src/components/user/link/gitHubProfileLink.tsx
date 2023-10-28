@@ -1,16 +1,16 @@
-//import { useUser } from '@/context/userProfileContext';
 import { Anchor, ActionIcon } from '@mantine/core'
 import { IconBrandGithub } from '@tabler/icons-react'
 import { useHover } from '@mantine/hooks'
+import { useUser } from '@/context/userProfileContext';
+
 
 export default function GithubProfileLink() {
-  //const user = useUser();
-  //const githubId = user.githubId;
-  //<Anchor href={githubId ? 'https://github.com/${githubId}' : ''} target="_blank" rel="nopener noreferrer"></Anchor>
-
+  const user = useUser();
+  
   const { hovered, ref } = useHover()
   return (
     <ActionIcon>
+      <Anchor href={user.githubId ? 'https://github.com/${githubId}' : ''} target="_blank" rel="nopener noreferrer">
       <div ref={ref}>
         <IconBrandGithub
           color="black"
@@ -19,6 +19,7 @@ export default function GithubProfileLink() {
           }
         />
       </div>
+      </Anchor>
     </ActionIcon>
   )
 }

@@ -1,17 +1,17 @@
-//import { useUser } from '@/context/userProfileContext';
 import { Anchor, ActionIcon } from '@mantine/core'
 import { IconBrandTwitter } from '@tabler/icons-react'
 import { useHover } from '@mantine/hooks'
+import { useUser } from '@/context/userProfileContext';
+
 
 export default function TwitterProfileLink() {
-  //const user = useUser();
-  //const twitterId = user.twitterId;
-  //<Anchor href={twitterId ? 'https://twitter.com/${twitterId}' : ''} target="_blank" rel="nopener noreferrer"></Anchor>
-
+  const user = useUser();
+  
   const { hovered, ref } = useHover()
 
   return (
     <ActionIcon>
+      <Anchor href={user.twitterId ? 'https://twitter.com/${twitterId}' : ''} target="_blank" rel="nopener noreferrer">
       <div ref={ref}>
         <IconBrandTwitter
           color="black"
@@ -20,6 +20,7 @@ export default function TwitterProfileLink() {
           }
         />
       </div>
+      </Anchor>
     </ActionIcon>
   )
 }

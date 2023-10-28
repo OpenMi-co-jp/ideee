@@ -1,9 +1,13 @@
-import { Text, Box } from '@mantine/core'
+import { Text, Paper } from '@mantine/core'
+import { useUser } from '@/context/userProfileContext'
 
 export default function UserDescription() {
+
+  const user = useUser();
+
   return (
-    <Text p="sm">
-      テストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータテストデータ
-    </Text>
+    <Paper bg="transparent">
+    <Text p="sm" w="100%">{user.description}</Text>
+    </Paper>
   )
 }

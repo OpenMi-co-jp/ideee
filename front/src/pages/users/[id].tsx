@@ -1,6 +1,6 @@
 import UserDescription from '@/components/user/show/description'
 import UserIconComponent from '@/components/user/show/iconComponent'
-import  UserDetailDataIndex from '@/components/user/userDetailComponentIndex'
+import  UserDetailComponentIndex from '@/components/user/userDetailComponentIndex'
 import { Box, Divider, Group, rem, Loader } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { useState, useEffect } from 'react'
@@ -41,7 +41,7 @@ export default function UserProfile() {
         <Box w="100%" miw="15rem" p="lg" bg="" style={{borderRadius: "0.5rem"}} >
             <Group>
             <UserIconComponent/>
-            <UserDetailDataIndex/>
+            <UserDetailComponentIndex/>
             </Group>
             <UserDescription/>
             <Divider/>

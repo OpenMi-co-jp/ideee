@@ -127,7 +127,12 @@ export const UserEditForm = () => {
                 <Checkbox color="orange" size="lg" label="💡" />
               </Col>
             </Grid>
-            <TextAreaForm form={form} name="description" label="自己紹介" my="lg" />
+            <TextAreaForm
+              form={form}
+              name="description"
+              label="自己紹介"
+              my="lg"
+            />
             <Grid grow>
               <Grid.Col md={4}>
                 <TextForm

@@ -15,7 +15,7 @@ export const UserMenu = () => {
 
       <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
-        <Link href="/user/5/edit">
+        <Link href="/users/5/edit">
           <Menu.Item icon={<IconUserCircle size={14} />}>
             ユーザー情報編集
           </Menu.Item>

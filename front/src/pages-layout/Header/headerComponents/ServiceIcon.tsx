@@ -1,9 +1,8 @@
-import { Image, rem } from '@mantine/core'
+import { Image } from '@mantine/core'
 import Link from 'next/link'
 import { useMediaQuery } from '@mantine/hooks'
 export const ServiceIcon = () => {
-  const isMobile = useMediaQuery(`(max-width: ${rem(550)})`)
-
+  const isMobile = useMediaQuery(`(max-width: 550px)`)
   return (
     <Link href="/">
       <Image

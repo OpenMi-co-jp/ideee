@@ -2,8 +2,40 @@ query GetIdea($id: ID!) {
   idea(id: $id) {
     id
     name
-    note
+    icon
+    background
     goal
+    issue
+    wishFunction
+    hypothesis
+    target
+    monetize
+    similar
+		note
+    createdAt
+    updatedAt
+    userId
+    productUrl
+    githubUrl
+    user {
+      id
+      name
+      icon
+      twitterId
+    }
+    comments {
+      id
+      description
+      createdAt
+      user {
+        name
+        icon
+      }
+    }
+    ideaTags {
+      id
+      name
+    }
   }
 }
 

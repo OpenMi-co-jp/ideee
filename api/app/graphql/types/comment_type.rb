@@ -8,5 +8,6 @@ module Types
     field :idea_id, Integer, null: false, description: 'アイデアID'
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false, description: '更新日'
+    field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
   end
 end

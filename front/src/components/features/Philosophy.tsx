@@ -1,152 +1,53 @@
-import React from 'react'
-import Image from 'next/image'
-import { createStyles, Box, Text, Title, Divider, Flex } from '@mantine/core'
-
-const useStyles = createStyles(() => ({
-  Box: {
-    padding: '50px 0',
-  },
-
-  Title: {
-    fontSize: '32px',
-    textAlign: 'center',
-    marginBottom: '30px',
-    letterSpacing: '3px',
-
-    '@media (max-width: 649px)': {
-      fontSize: '22px',
-      marginBottom: '20px',
-    },
-  },
-
-  Divider: {
-    border: 0,
-    borderTopWidth: '0.125rem',
-    borderTopColor: '#000000',
-    borderTopStyle: 'solid',
-    margin: '0 auto',
-    paddingBottom: '50px',
-    width: '55%',
-
-    '@media (max-width: 649px)': {
-      paddingBottom: '20px',
-    },
-  },
-
-  SubTitle: {
-    fontSize: '14px',
-    fontWeight: 700,
-    paddingBottom: '50px',
-    justifyContent: 'space-between',
-    width: '80%',
-    margin: '0 auto',
-
-    '@media (max-width: 649px)': {
-      fontSize: '12px',
-    },
-  },
-
-  ImageTitle: {
-    fontSize: '25px',
-    fontWeight: 700,
-    zIndex: 500,
-    textAlign: 'center',
-    paddingBottom: '5px',
-    letterSpacing: '3px',
-    '@media (max-width: 649px)': {
-      fontSize: '15px',
-    },
-  },
-
-  PeopleImage: {
-    margin: '0 auto',
-    zIndex: 500,
-    marginTop: '16vh',
-    '@media (max-width: 649px)': {
-      width: 286,
-      height: 200,
-      marginTop: '10vh',
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-      width: 357,
-      height: 250,
-      marginTop: '8vh',
-    },
-  },
-
-  PeopleLeftImage: {
-    width: '500px',
-    height: '435px',
-    borderRadius: '50%',
-    position: 'absolute',
-    background: 'rgba(239, 213, 120, 0.49)',
-    top: 0,
-    left: 0,
-
-    '@media (max-width: 649px)': {
-      width: '285px',
-      height: '250px',
-      left: '-60px',
-    },
-    '@media (max-width: 1000px) and (min-width:650px)': {
-      width: '333px',
-      height: '290px',
-    },
-  },
-
-  PeopleRightImage: {
-    width: '500px',
-    height: '435px',
-    borderRadius: '50%',
-    position: 'absolute',
-    background: 'rgba(215, 145, 145, 0.50)',
-    top: '50px',
-    left: '450px',
-
-    '@media (max-width: 649px)': {
-      width: '285px',
-      height: '250px',
-      top: '50px',
-      left: '180px',
-    },
-
-    '@media (max-width: 1000px) and (min-width:650px)': {
-      width: '333px',
-      height: '290px',
-      top: '50px',
-      left: '300px',
-    },
-  },
-}))
+import NextImage from 'next/image'
+import { Box, Text, Title, Divider, Flex, Image } from '@mantine/core'
 
 export const Philosophy = () => {
-  const { classes } = useStyles()
   return (
     <>
-      <Box className={classes.Box}>
-        <Title className={classes.Title}>
+      <Box py="50px" px="0px">
+        <Title
+          fz={{ base: 22, md: 32 }}
+          ta="center"
+          mb={{ base: 20, md: 30 }}
+          lts="3px"
+        >
           アイデアをデザインしエンジニアの出会いを盛り上げる
         </Title>
-        <Divider className={classes.Divider} />
+        <Divider
+          pb={{ base: 20, md: 50 }}
+          style={{
+            border: 0,
+            borderTopWidth: '0.125rem',
+            borderTopColor: '#000000',
+            borderTopStyle: 'solid',
+            margin: '0 auto',
+            width: '55%',
+          }}
+        />
         <Flex
           align="center"
           direction="row"
           wrap="wrap"
-          className={classes.SubTitle}
+          style={{
+            paddingBottom: '50px',
+            justifyContent: 'space-between',
+            width: '80%',
+            margin: '0 auto',
+          }}
         >
-          <Text>
+          <Text fz={{ base: 12, md: 14 }} fw={700}>
             <span style={{ color: '#FDB221' }}>I</span>dea
           </Text>
-          <Text>
+          <Text fz={{ base: 12, md: 14 }} fw={700}>
             <span style={{ color: '#FDB221' }}>D</span>esign
           </Text>
-          <Text>
+          <Text fz={{ base: 12, md: 14 }} fw={700}>
             <span style={{ color: '#FDB221' }}>E</span>ngineer
           </Text>
-          <Text>
+          <Text fz={{ base: 12, md: 14 }} fw={700}>
             <span style={{ color: '#FDB221' }}>E</span>ncounter
           </Text>
-          <Text>
+          <Text fz={{ base: 12, md: 14 }} fw={700}>
             <span style={{ color: '#FDB221' }}>E</span>ncourage
           </Text>
         </Flex>
@@ -157,22 +58,63 @@ export const Philosophy = () => {
             wrap="wrap"
             style={{ margin: '-20px auto 0 auto' }}
           >
-            <Text className={classes.ImageTitle}>
+            <Text
+              fz={{ base: 15, md: 25 }}
+              fw={700}
+              ta="center"
+              pb="5px"
+              lts="3px"
+              style={{ zIndex: 100 }}
+            >
               あなたの「困ってる」を形に
             </Text>
-            <Text className={classes.ImageTitle}>
+            <Text
+              fz={{ base: 15, md: 25 }}
+              fw={700}
+              ta="center"
+              pb="5px"
+              lts="3px"
+              style={{ zIndex: 100 }}
+            >
               コードで社会に貢献してみませんか？
             </Text>
             <Image
-              className={classes.PeopleImage}
+              component={NextImage}
               src={'/img/bottom_vision_image.webp'}
               alt="コラボレーションイメージ"
               width={430}
-              height={300}
+              height={350}
+              w={{ base: '286px', sm: '357px', md: '430px' }}
+              h={{ base: '200px', sm: '250px', md: '350px' }}
+              mt={{ base: '100px', md: '150px' }}
+              mx="auto"
+              style={{
+                zIndex: 100,
+              }}
             />
           </Flex>
-          <div className={classes.PeopleLeftImage} />
-          <div className={classes.PeopleRightImage} />
+          <Box
+            w={{ base: '285px', sm: '333px', md: '500px' }}
+            h={{ base: '250px', sm: '290px', md: '435px' }}
+            top={0}
+            left={{ base: '-70px', xs: '95px', md: '0px' }}
+            bg={'rgba(239, 213, 120, 0.49)'}
+            style={{
+              borderRadius: '50%',
+              position: 'absolute',
+            }}
+          />
+          <Box
+            w={{ base: '285px', sm: '333px', md: '500px' }}
+            h={{ base: '250px', sm: '290px', md: '435px' }}
+            bg={'rgba(215, 145, 145, 0.50)'}
+            top={{ base: '30px', sm: '50px' }}
+            left={{ base: '180px', xs: '365px', md: '450px' }}
+            style={{
+              borderRadius: '50%',
+              position: 'absolute',
+            }}
+          />
         </Flex>
       </Box>
     </>

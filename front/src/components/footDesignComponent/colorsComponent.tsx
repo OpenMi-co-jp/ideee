@@ -1,7 +1,7 @@
 import { Flex, Box, rem } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
-export const ImageFrameComponent = () => {
+export const ColorsComponent = () => {
   const isMobile = useMediaQuery(`(max-width: ${rem(600)})`)
 
   return (

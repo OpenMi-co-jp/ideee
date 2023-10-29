@@ -17,7 +17,7 @@ import React from 'react'
 import { useMediaQuery } from '@mantine/hooks'
 import { useLoggedIn } from '@/components/loginContext'
 import LoginInvitationBox from '@/pages/about/loginInvitationBox'
-import { ImageFrameComponent } from '@/components/styleComponent/imageFrameComponent'
+import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
 
 const AboutPage = () => {
   const loggedIn = useLoggedIn()
@@ -29,7 +29,7 @@ const AboutPage = () => {
 
   return (
     <Box mx="xs">
-      <Container mt="13rem" mb="9rem" mx="6%">
+      <Container mt="13rem">
         <Center>
           <Grid>
             <Group miw={110} mt="8rem" w={isMobile ? '100%' : '50%'}>
@@ -61,8 +61,8 @@ const AboutPage = () => {
             </Group>
             <Space mx="xs" />
             <Image
-              src={'/img/undraw_lightbulb_moment_re_ulyo-1.webp'}
-              alt="アイデアを考える人"
+              src={'/img/about_lightbulb.webp'}
+              alt="アイデアを探す人"
               my="5rem"
               style={{
                 marginLeft: isMobile ? '3%' : '',
@@ -108,7 +108,7 @@ const AboutPage = () => {
                   }}
                 />
                 <Image
-                  src={'/img/undraw_location_search_re_ttoj-1.webp'}
+                  src={'/img/about_search.webp'}
                   alt="アイデアを探す女性"
                   height="auto"
                   width="15rem"
@@ -155,7 +155,7 @@ const AboutPage = () => {
                   }}
                 />
                 <Image
-                  src={'/img/undraw_performance_overview_re_mqrq-1.webp'}
+                  src={'/img/about_overview.webp'}
                   alt="データを確認する男性"
                   height="auto"
                   width="15rem"
@@ -202,7 +202,7 @@ const AboutPage = () => {
                   }}
                 />
                 <Image
-                  src={'/img/Frame.webp'}
+                  src={'/img/about_connect.webp'}
                   alt="仲間見つける"
                   height="auto"
                   width="15rem"
@@ -277,7 +277,7 @@ const AboutPage = () => {
 
       {!loggedIn && <LoginInvitationBox />}
 
-      <ImageFrameComponent />
+      <ColorsComponent />
     </Box>
   )
 }

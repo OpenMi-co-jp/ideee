@@ -11,6 +11,7 @@ module Types
     field :active_team_ideas, resolver: Resolvers::Idea::ActiveTeamIdeasResolver, description: 'チーム開発募集中のアイデア一覧'
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
+    field :current_user, resolver: Resolvers::User::CurrentUserResolver, description: '現在ログイン中のユーザーオブジェクト'
     field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'
 
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'

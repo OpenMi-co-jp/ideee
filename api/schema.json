@@ -2099,7 +2099,7 @@
             },
             {
               "name": "likableType",
-              "description": "いいねをされたエンティティのタイプ（例: \"記事\", \"コメント\"）",
+              "description": "いいねをされたエンティティのタイプ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -2940,6 +2940,24 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "currentUser",
+              "description": "現在ログイン中のユーザーオブジェクト",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "User",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,

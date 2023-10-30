@@ -681,7 +681,7 @@ type Like {
   likableId: Int!
 
   """
-  いいねをされたエンティティのタイプ（例: "記事", "コメント"）
+  いいねをされたエンティティのタイプ
   """
   likableType: String!
 
@@ -947,6 +947,11 @@ type Query {
   コメント一覧
   """
   comments: [Comment!]!
+
+  """
+  現在ログイン中のユーザーオブジェクト
+  """
+  currentUser: User!
 
   """
   実現したアイデア一覧

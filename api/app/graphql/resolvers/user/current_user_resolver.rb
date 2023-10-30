@@ -7,7 +7,7 @@ module Resolvers
     type Types::UserType, null: false
 
     def resolve
-      ::User.find(context[:current_user].id)
+      context[:current_user] ? ::User.find_by(id: context[:current_user].id) : nil
     end
   end
 end

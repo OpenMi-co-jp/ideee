@@ -1,9 +1,9 @@
 query GetDifficulties ($userId: ID!){
   difficulties(userId:$userId){
-		id
+    id
     userId
-		ideaId
-		level
+    ideaId
+    level
     createdAt
   }
 }

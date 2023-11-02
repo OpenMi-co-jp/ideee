@@ -45,6 +45,8 @@ RSpec.describe Mutations::Difficulty::Create do
         expect(res['data']['createDifficulty']['success']).to be_truthy
         expect(res['data']['createDifficulty']['difficulty']['level']).to eq(level)
       end
+
+      # TODO: sidekiqのテスト追加
     end
 
     context '正しいideaIdを指定していない時' do

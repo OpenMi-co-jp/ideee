@@ -1,0 +1,33 @@
+<div class='user-colum-board p-1'>
+  <% users.each.with_index(@rank_num) do |user, i| %>
+    <div class='row'>
+      <h5 class='italic col ml-2'>
+        <%= i+1 %>
+      </h4>
+      <%= link_to user_path(user.id) do %>
+        <div class='user-column border-line'>
+          <div class='user-column-inside flex'>
+            <%= user_icon(user) %>
+            <div class='user-column-body'>
+              <div class='user-name-point'>
+                <div>
+                  <div class='user-name orange-action'><%= user.name %></div>
+                  <div class='flex'>
+                    <%= user_definiton(user, ver='short') %>
+                    <div class='row-user__ideas'>
+                      <%= image_tag 'icons/idea.svg', class: 'icon-size', loading: "lazy", alt: "アイデアアイコン" %><%= user.ideas_num %>
+                    </div>
+                  </div>
+                </div>
+                <div class='user-point grid-middle'>
+                  <p><%= icon %></p>
+                  <%= user_array.to_h[user.id] || user.point %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

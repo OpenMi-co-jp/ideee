@@ -1,0 +1,86 @@
+<%# mete_tags %>
+<% set_meta_tags title: @idea.name,
+  keywords: @idea.idea_tags.pluck(:name).join(','),
+  og: {
+    title: @idea.name,
+    image: return_ogp_url(@idea.name),
+    description: strip_tags(@idea.goal).gsub(/[\n]/, "").strip.truncate(120)
+  }
+%>
+
+<div class='idea-show'>
+  <div class='row'>
+    <div class='idea-column-img col l3 s12'>
+      <% if @idea.draft %>
+        <div class='chip'><%= t('default.draft') %></div>
+      <% end %>
+      <div class='idea-date gray-3'>
+        <%= embedded_svg 'icons/clock.svg', class: 'idea-date--clock', alt: '投稿日' %>
+        <%= idea_opened_date(@idea) %>
+      </div>
+      <%= image_set(@idea) %>
+      <% unless @idea.draft %>
+        <%= render 'ideas/show/idea_share' %>
+      <% end %>
+      <%= render 'teams/box_on_idea', idea: @idea %>
+    </div>
+    <div class='idea-status-column col l9 s12'>
+      <h1 class='idea-name orange-action'>
+        <%= @idea.name %>
+      </h1>
+      <div class='hide-on-small-only'>
+        <%= render 'ideas/show/pc_idea_status', idea: @idea, time_on_page: @time_on_page %>
+      </div>
+      <div class='hide-on-med-and-up'>
+        <%= render 'ideas/show/mobile_idea_status', idea: @idea, time_on_page: @time_on_page %>
+      </div>
+      <div class='idea-content mb-2'>
+        <% if current_user || @idea.approved? %>
+          <%= render 'ideas/show/title_set', item: 'background' %>
+          <%= render 'ideas/show/title_set', item: 'goal' %>
+          <%= render 'ideas/show/title_set', item: 'issue' %>
+          <%= render 'ideas/show/title_set', item: 'wish_function' %>
+          <%= render 'ideas/show/title_set', item: 'hypothesis' %>
+          <%= render 'ideas/show/title_set', item: 'target' %>
+          <%= render 'ideas/show/title_set', item: 'monetize' %>
+          <%= render 'ideas/show/title_set', item: 'similar' %>
+          <%= render 'ideas/show/title_set', item: 'note' %>
+          <%= render 'ideas/show/url_button', item: 'product_url' %>
+          <%= render 'ideas/show/url_button', item: 'github_url' %>
+        <% else %>
+          <% if @idea&.background.length > 0 %>
+            <%= strip_tags(@idea&.background).gsub(/[\n]/, "").strip.truncate(60) %>
+          <% else %>
+            <%= strip_tags(@idea&.note.to_s).gsub(/[\n]/, "").strip.truncate(120) %>
+          <% end %>
+          <%= render 'common/login_lead_links' %>
+        <% end %>
+      </div>
+      <% if current_user&.own?(@idea) %>
+        <% if @idea.draft %>
+          <%= link_to t('default.publish'), publish_idea_path(@idea), method: :post, data: { confirm: '公開してもよろしいですか？' }, class: 'btn orange-action-back'%>
+        <% end %>
+        <%= link_to '編集', edit_idea_path(@idea), class: 'mw-3' %>
+        <%= link_to '削除', idea_path(@idea), method: :delete, data: { confirm: '削除してもよろしいですか？' }, class: 'mw-3' %>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+
+  <% unless @idea.draft %>
+    <%= render 'comments/board', items: @comments, item_class: 'comments' %>
+    <%= render 'comments/form' %>
+    <%= render 'common/user_description', user: @idea.user %>
+    <%= render 'common/fund_link', object: @idea %>
+  <% end %>
+</div>
+
+<%# モーダルの設定 %>
+<% unless !current_user || @idea.draft %>
+  <%= render 'ideas/show/vote_modal', object: @idea %>
+<% end %>
+<%# パラメータshareがある時にモーダルを設定 %>
+<% if params[:share].present? %>
+  <%= render 'ideas/show/share_modal' %>
+<% end %>

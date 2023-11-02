@@ -1,0 +1,53 @@
+<footer>
+  <div class="container orange-action-back">
+    <div class="footer-body mt-3 p-3 row">
+      <div class="col l3 m6 s12">
+        <%= link_to root_path, class:'footer-logo' do %>
+          <%= image_tag 'footer-logo.svg', class: "ml-3", alt: "ideee", loading: "lazy" %></li>
+        <% end %>
+      </div>
+      <ul class='col l3 m6 s12'>
+        <li class='footer-title'>About</li>
+        <li><%= link_to 'ideeeについて', root_path, class: "white-text" %></li>
+        <li><%= link_to 'アイデアの探し方', how_to_find_idea_path, class: "white-text" %></li>
+        <li><%= link_to '公式Twitter', "https://twitter.com/ideee_tech/", class: "white-text", target: :_blank%></li>
+        <li><%= link_to '月間トレンドまとめ', "https://qiita.com/naruqiita/items/0ef4b963434226eacb6b", class: "white-text", target: :_blank %></li>
+        <li><%= link_to '個人開発の落とし穴', avoid_pitfall_path, class: "white-text" %></li>
+      </ul>
+      <ul class='col l3 m6 s12'>
+        <li class='footer-title'>Ranking</li>
+        <li><%= link_to 'ハートランキング', search_ideas_path, class: "white-text" %></li>
+        <li><%= link_to 'コメントランキング', search_ideas_path("q[s]": "comments_num desc"), class: "white-text" %></li>
+        <li><%= link_to 'View数ランキング', search_ideas_path("q[s]": "view desc"), class: "white-text" %></li>
+        <li><%= link_to 'ユーザーランキング', search_users_path, class: "white-text" %></li>
+      </ul>
+      <ul class='col l3 m6 s12'>
+        <li class='footer-title'>Legal</li>
+        <li><%= link_to 'よくある質問', frequent_questions_path, class: "white-text" %></li>
+        <li><%= link_to '利用規約', terms_of_service_path, class: "white-text" %></li>
+        <li><%= link_to 'プライバシーポリシー', privacy_policy_path, class: "white-text" %></li>
+        <li><%= link_to '運営者', "https://naruhiro-portfolio.firebaseapp.com/", class: "white-text", target: :_blank %></li>
+      </ul>
+    </div>
+    <div class="c-share footer-share">
+      <ul class="c-share__flex">
+        <li class="c-share__box">
+          <%= sns_share_icon("twitter") %>
+        </li>
+        <li class="c-share__box">
+          <%= sns_share_icon("facebook") %>
+        </li>
+        <li class="c-share__box">
+          <%= sns_share_icon("line") %>
+        </li>
+        <li class="c-share__box">
+          <%= sns_share_icon("hatebu") %>
+        </li>
+      </ul>
+      <p class="c-share__text footer-share__text">＼ シェア ／</p>
+    </div>
+  </div>
+  <div class="copyright gray-5">
+    ©️ <%= Time.current.year %> ﾌﾟﾛﾀﾞｸﾄｴﾝｼﾞﾆｱ
+  </div>
+</footer>

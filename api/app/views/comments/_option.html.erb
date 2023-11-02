@@ -1,0 +1,19 @@
+<div class='c-unit-comment__options'>
+  <div class='c-comment-icons'>
+    <%= link_to '#', data: { target: "dropdown_comment-more_vert-#{item.id}" }, class:'dropdown-trigger' do %>
+      <i class="material-icons">more_vert</i>
+    <% end %>
+    <ul id="dropdown_comment-more_vert-<%= item.id %>" class='dropdown-content'>
+      <li>
+        <%= link_to "/#{item.class.model_name.collection}/#{item.id}/edit" do %>
+          編集
+        <% end %>
+      </li>
+      <li>
+        <%= link_to '#', id: item.id, class: "dropdown-#{item.class.model_name.element}-delete", remote: true do %>
+          削除
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

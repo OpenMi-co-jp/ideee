@@ -1,0 +1,22 @@
+<div class='idea'>
+  <% ideas.each do |idea| %>
+    <div class='idea__list'>
+      <div class='idea__content'>
+        <%= link_to idea_path(idea.id), class: 'c-idea-img', title: 'アイデアリンク' do %>
+          <figure class='c-idea-img__figure'>
+            <%= image_set(idea) %>
+          </figure>
+        <% end %>
+        <div class='idea__box'>
+          <%= link_to idea_path(idea.id) do %>
+            <b class='idea__name orange-action'><%= idea.name %></b>
+          <% end %>
+          <div class='idea__status gray-3'>
+            <%= embedded_svg 'icons/clock.svg', class:'idea__status--clock', alt: '投稿日' %>
+            <%= idea_opened_date(idea) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

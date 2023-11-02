@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <% if Rails.env.production? %>
+      <%= render 'layouts/google_analytics' %>
+      <%= render 'layouts/tag_manager' %>
+    <% end %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body data-page="<%= data_page %>">
+    <%# Google tag manager setting %>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5Q4VDZ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <%= render 'layouts/header' %>
+    <main>
+      <div class="notification">
+        <p class="alert"><%= alert %></p>
+        <p class="notice"><%= notice %></p>
+      </div>
+      <%= render 'common/modal_before_login' %>
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

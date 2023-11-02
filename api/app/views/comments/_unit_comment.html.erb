@@ -1,0 +1,27 @@
+<div class='c-unit-comment'>
+  <div class="flex">
+    <% if current_user&.own?(item) %>
+      <%= render 'comments/time', item: item %>
+      <div class='c-unit-comment__info'>
+        <%= render 'comments/body', item: item %>
+        <%= render 'comments/option', item: item %>
+      </div>
+    <% else %>
+      <div class='c-unit-comment__user'>
+        <%= link_to user_path(item.user_id), title: 'ユーザーリンク' do %>
+          <%= user_icon(User.find(item.user_id), size: 'small') %>
+        <% end %>
+      </div>
+      <div>
+        <div class='c-unit-comment__user--name'><%= User.find(item.user_id).name %></div>
+        <div class='c-unit-comment__info'>
+          <%= render 'comments/body', item: item %>
+          <div class='c-unit-comment__options'>
+            <%= render 'comments/comment_heart', object: item %>
+          </div>
+        </div>
+      </div>
+      <%= render 'comments/time', item: item %>
+    <% end %>
+  </div>
+</div>

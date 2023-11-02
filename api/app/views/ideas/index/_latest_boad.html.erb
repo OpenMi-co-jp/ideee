@@ -1,0 +1,27 @@
+<div class='boad'>
+  <div class='back-color-board'></div>
+  <div class='latest-board'>
+    <div class='flex'>
+      <p class='icon-mark white-back'>🎉</p>
+      <h1 class='board-title white-text'><%= title %></h1>
+    </div>
+    <div class='carousel'>
+      <% if ideas %>
+        <% ideas.each do |idea| %>
+          <div class='carousel-item'>
+            <%= link_to idea_path(idea.id) do %>
+              <div class='idea-column-img yellow-soft-back'>
+                <%= image_set(idea) %>
+                <div class='time-label'>
+                  <%= idea.published_time %>
+                </div>
+              </div>
+            <% end %>
+            <p class='orange-action'><%= idea.name %></p>
+            <p class='gray-3'><%= user_definiton(idea.user, ver='short') %><%= idea.user.name %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

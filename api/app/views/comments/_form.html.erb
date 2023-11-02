@@ -1,0 +1,25 @@
+<div class="c-comment-form row mh-3">
+  <% if current_user %>
+    <div class="c-comment-form__input-area">
+      <textarea class='c-comment-form__input-area--textarea yellow-soft-back mh-3' id="comment-form" placeholder='コメントする'></textarea>
+      <div id="comment-form_message"></div>
+    </div>
+    <div class='c-comment-form__btn-area'>
+      <%= link_to "#!",
+        # comment.jsを発火
+        id: "js-comment-send",
+        data: { id: @idea.id },
+        class: "c-comment-form__submit-btn waves-effect btn orange-action-back nav-link disabled" do %>
+        <b class='white-text'><%= t('default.submit') %></b>
+      <% end %>
+    </div>
+  <% else %>
+    <div class='c-comment-form__btn-area'>
+      <%= link_to "#modal_before_login",
+        data: { turbolinks: false },
+        class: "modal-trigger-login c-comment-form__submit-btn waves-effect btn orange-action-back nav-link disabled" do %>
+        <b class='white-text'><%= t('default.comment') %></b>
+      <% end %>
+    </div>
+  <% end %>
+</div>

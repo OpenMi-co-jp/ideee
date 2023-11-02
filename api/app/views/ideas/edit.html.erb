@@ -1,0 +1,7 @@
+<div class='idea-edit'>
+  <% if @idea.draft %>
+    <div class='chip'><%= t('default.draft') %></div>
+  <% end %>
+  <h4>アイデア編集</h4>
+  <%= render 'form', idea: @idea %>
+</div>

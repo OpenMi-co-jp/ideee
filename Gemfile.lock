@@ -125,7 +125,6 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     brakeman (5.4.0)
-    buftok (0.2.0)
     builder (3.2.4)
     bullet (7.0.7)
       activesupport (>= 3.0.0)
@@ -180,8 +179,9 @@ GEM
       railties (>= 3.2)
     enum_help (0.0.19)
       activesupport (>= 3.0.0)
-    equalizer (0.0.11)
     erubi (1.12.0)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
     excon (0.98.0)
     execjs (2.8.1)
     factory_bot (6.2.1)
@@ -194,9 +194,6 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
     ffi (1.15.5)
-    ffi-compiler (1.0.1)
-      ffi (>= 1.0.0)
-      rake
     fog-aws (3.16.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -245,18 +242,9 @@ GEM
       signet (>= 0.16, < 2.a)
     hashie (5.0.0)
     high_voltage (3.1.2)
-    http (4.4.1)
-      addressable (~> 2.3)
-      http-cookie (~> 1.0)
-      http-form_data (~> 2.2)
-      http-parser (~> 1.2.0)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
-    http-form_data (2.3.0)
-    http-parser (1.2.3)
-      ffi-compiler (>= 1.0, < 2.0)
-    http_parser.rb (0.6.0)
     httpclient (2.8.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -292,8 +280,6 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     memoist (0.16.2)
-    memoizable (0.4.2)
-      thread_safe (~> 0.3, >= 0.3.1)
     meta-tags (2.18.0)
       actionpack (>= 3.2.0, < 7.1)
     method_source (1.0.0)
@@ -307,9 +293,7 @@ GEM
     msgpack (1.6.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.3.0)
     mysql2 (0.5.5)
-    naught (1.1.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -532,7 +516,6 @@ GEM
       faraday (>= 0.17.5, < 3.a)
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
-    simple_oauth (0.3.1)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -556,24 +539,14 @@ GEM
     ssrf_filter (1.1.1)
     stringio (3.0.4)
     thor (1.2.1)
-    thread_safe (0.3.6)
     tilt (2.0.11)
     timeout (0.3.1)
     trailblazer-option (0.1.2)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    twitter (7.0.0)
-      addressable (~> 2.3)
-      buftok (~> 0.2.0)
-      equalizer (~> 0.0.11)
-      http (~> 4.0)
-      http-form_data (~> 2.0)
-      http_parser.rb (~> 0.6.0)
-      memoizable (~> 0.4.0)
-      multipart-post (~> 2.0)
-      naught (~> 1.0)
-      simple_oauth (~> 0.3.0)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
@@ -647,6 +620,7 @@ DEPENDENCIES
   meta-tags
   mysql2 (~> 0.5)
   net-smtp
+  oauth
   omniauth
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
@@ -680,7 +654,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   turbolinks (~> 5)
-  twitter
+  typhoeus
   tzinfo-data
   uglifier
   web-console (>= 4.1.0)

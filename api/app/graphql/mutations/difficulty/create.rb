@@ -21,6 +21,7 @@ module Mutations
         difficulty:,
         success: true
       }
+      
     rescue ActiveRecord::RecordInvalid => e
       {
         success: false,

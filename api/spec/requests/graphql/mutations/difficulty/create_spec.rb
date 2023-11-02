@@ -49,7 +49,7 @@ RSpec.describe Mutations::Difficulty::Create do
 
     context '正しいideaIdを指定していない時' do
       let(:idea_id) { nil }
-      let(:level) { 1 }
+      let(:level) { 'easy' }
 
       it '作成に失敗する' do
         graphql_post

@@ -6,7 +6,7 @@ module TwitterJob
     sidekiq_options retry: 0
 
     def perform(idea, url)
-      TwitterTweet.new.tweet(idea, url)
+      Twitter.new.tweet(idea, url)
     rescue StandardError => e
       Rails.logger.debug e.message
       Rails.logger.debug e.backtrace

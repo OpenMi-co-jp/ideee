@@ -10,7 +10,7 @@ import {
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
 
 const AboutPage = () => {
-  const {loggedIn} = useLoggedIn()
+  const { loggedIn } = useLoggedIn()
   const [LSLoggedIn, setLSLoggedIn] = useState(false)
 
   useEffect(() => {

@@ -11,12 +11,12 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーメッセージのリスト'
 
     def resolve(**args)
-      difficulty = ::Difficulty.create!(
+      difficulty = ::Difficulty.new(
         idea_id: args[:idea_id],
         user_id: args[:user_id],
         level: args[:level]
       )
-      if difficulty.valid?
+      if difficulty.save
         IdeaJob::UpdateDifficultyJob.perform_later(args[:idea_id])
         Notifications::UpdateDifficultyJob.perform_later(context[:current_user], difficulty) unless context[:current_user].id == args[:user_id]
       end

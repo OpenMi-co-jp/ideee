@@ -1,13 +1,3 @@
-query GetDifficulties ($userId: ID!){
-  difficulties(userId:$userId){
-    id
-    userId
-    ideaId
-    level
-    createdAt
-  }
-}
-
 mutation CreateDifficulty($input: CreateDifficultyInput!){
   createDifficulty(input:$input){
     difficulty{

@@ -47,7 +47,7 @@ export const Merit = ({ data }: MeritsProps) => {
             <Title order={3} c="#DBA901">
               {data.message.title}
             </Title>
-            <Text>{convertNewlines(data.message.description)}</Text>
+            {convertNewlines(data.message.description)}
           </Paper>
         </Grid.Col>
       </Grid>
@@ -60,10 +60,10 @@ function convertNewlines(text: string) {
     index === array.length - 1 ? (
       str
     ) : (
-      <>
+      <Text key={str}>
         {str}
         <br />
-      </>
+      </Text>
     )
   )
 }

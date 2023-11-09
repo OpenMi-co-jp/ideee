@@ -46,7 +46,7 @@ export const Merits = () => {
 
       <Grid gutter="xl">
         {meritsData.map((data, index) => (
-          <Grid.Col span={{ base: 12, lg: 4 }} key={index}>
+          <Grid.Col span={{ base: 12, lg: 4 }} key={data.message.title}>
             <Merit data={data} />
           </Grid.Col>
         ))}

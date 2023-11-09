@@ -7,7 +7,7 @@ permissions:
 on:
   pull_request:
   pull_request_review_comment:
-    types: [created]
+    types: [opened]
 
 concurrency:
   group: ${{ github.repository }}-${{ github.event.number || github.head_ref || github.sha }}-${{ github.workflow }}-${{ github.event_name == 'pull_request_review_comment' && 'pr_comment' || 'pr' }}
@@ -16,6 +16,7 @@ concurrency:
 jobs:
   review:
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.title, 'wip') == false
     steps:
       - uses: coderabbitai/ai-pr-reviewer@latest # https://github.com/coderabbitai/ai-pr-reviewer/releases/tag/1.16.1 # 好きに変更して
         env:

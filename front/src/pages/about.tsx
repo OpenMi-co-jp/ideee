@@ -21,8 +21,6 @@ const AboutPage = () => {
     }
   }, [])
 
-  console.log(LSLoggedIn)
-  console.log(loggedIn)
   return (
     <Container my="6rem">
       <Introduction />

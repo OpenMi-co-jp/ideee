@@ -53,6 +53,8 @@ class GraphqlController < ApplicationController
     return unless token
 
     decoded_token = decode_token(token)
+    return unless decoded_token
+
     User.find_by(id: decoded_token['id'])
   rescue JWT::DecodeError
     authenticate_error
@@ -61,13 +63,18 @@ class GraphqlController < ApplicationController
   require 'cgi'
   def extract_token_from_authorization
     authorization = request.headers['Authorization']
-    return if authorization.blank?
+    return if authorization.blank? || !authorization.start_with?('Bearer ')
 
     CGI.unescape(authorization).split('Bearer ').last.presence
   end
 
   def decode_token(token)
-    JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }).first
+    begin
+      JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }).first
+    rescue JWT::DecodeError => e
+      puts "====== Error decoding token: #{e.message} ======"
+      nil
+    end
   end
 
   def authenticate_error

@@ -69,16 +69,14 @@ class GraphqlController < ApplicationController
   end
 
   def decode_token(token)
-    begin
-      JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }).first
-    rescue JWT::DecodeError => e
-      puts "====== Error decoding token: #{e.message} ======"
-      nil
-    end
+    JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }).first
+  rescue JWT::DecodeError => e
+    puts "====== Error decoding token: #{e.message} ======"
+    nil
   end
 
   def authenticate_error
     render json: { error: t('devise.failure.unauthenticated') }, status: :unauthorized
-    return
+    nil
   end
 end

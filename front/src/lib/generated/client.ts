@@ -618,6 +618,31 @@ export type User = {
   twitterId?: Maybe<Scalars['String']>
 }
 
+
+
+
+export type UserData = {
+  
+  /** 自己紹介 */
+  description: Maybe<Scalars['String']>
+  /** githubID */
+  githubId: Maybe<Scalars['String']>
+  /** アイコン */
+  icon: Maybe<Scalars['String']>
+  /** ユーザーID */
+  id: Scalars['ID']
+   /** ユーザー名 */
+  name: Scalars['String']
+  /** サイトURL */
+  siteUrl: Maybe<Scalars['String']>
+  /** TwitterID */
+  twitterId: Maybe<Scalars['String']>
+}
+
+
+
+
+
 export type GetCommentQueryVariables = Exact<{
   id: Scalars['ID']
 }>
@@ -880,6 +905,120 @@ export type GetTeamQuery = {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+export type GetTeamsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetTeamsQuery = {
+  __typename?: 'Query'
+  teams: Array<{
+    __typename?: 'Team'
+    id: string
+    ownerId: number
+    ideaId: number
+    status: string
+    requirement: string
+    offer: string
+    membersNum?: number | null
+  }>
+}
+
+export type CreateTeamMutationVariables = Exact<{
+  input: CreateTeamInput
+}>
+
+export type CreateTeamMutation = {
+  __typename?: 'Mutation'
+  createTeam?: {
+    __typename?: 'CreateTeamPayload'
+    success: boolean
+    team: {
+      __typename?: 'Team'
+      id: string
+      ownerId: number
+      status: string
+      requirement: string
+      offer: string
+      membersNum?: number | null
+    }
+  } | null
+}
+
+export type UpdateTeamMutationVariables = Exact<{
+  input: UpdateTeamInput
+}>
+
+export type UpdateTeamMutation = {
+  __typename?: 'Mutation'
+  updateTeam?: {
+    __typename?: 'UpdateTeamPayload'
+    success: boolean
+    team: {
+      __typename?: 'Team'
+      id: string
+      ownerId: number
+      status: string
+      requirement: string
+      offer: string
+      membersNum?: number | null
+    }
+  } | null
+}
+
+export type DestroyTeamMutationVariables = Exact<{
+  input: DestroyTeamInput
+}>
+
+export type DestroyTeamMutation = {
+  __typename?: 'Mutation'
+  destroyTeam?: { __typename?: 'DestroyTeamPayload'; success: boolean } | null
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export type GetUserDataQueryVariables = Exact<{
+  id: Scalars['ID']
+}>
+
+export type GetUserDataQuery = {
+  __typename: 'Query'
+  user: {
+    
+    id: string
+    icon: string | null
+    name: string | null
+    githubId: string | null
+    twitterId: string | null
+    siteUrl: string | null
+    description: string | null
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 export type GetUserQueryVariables = Exact<{
   id: Scalars['ID']
 }>
@@ -1972,6 +2111,306 @@ export type GetTeamQueryResult = Apollo.QueryResult<
   GetTeamQuery,
   GetTeamQueryVariables
 >
+<<<<<<< Updated upstream
+=======
+export const GetTeamsDocument = gql`
+  query GetTeams {
+    teams {
+      id
+      ownerId
+      ideaId
+      status
+      requirement
+      offer
+      membersNum
+    }
+  }
+`
+
+/**
+ * __useGetTeamsQuery__
+ *
+ * To run a query within a React component, call `useGetTeamsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTeamsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTeamsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTeamsQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetTeamsQuery, GetTeamsQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetTeamsQuery, GetTeamsQueryVariables>(
+    GetTeamsDocument,
+    options
+  )
+}
+export function useGetTeamsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetTeamsQuery,
+    GetTeamsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetTeamsQuery, GetTeamsQueryVariables>(
+    GetTeamsDocument,
+    options
+  )
+}
+export type GetTeamsQueryHookResult = ReturnType<typeof useGetTeamsQuery>
+export type GetTeamsLazyQueryHookResult = ReturnType<
+  typeof useGetTeamsLazyQuery
+>
+export type GetTeamsQueryResult = Apollo.QueryResult<
+  GetTeamsQuery,
+  GetTeamsQueryVariables
+>
+export const CreateTeamDocument = gql`
+  mutation createTeam($input: CreateTeamInput!) {
+    createTeam(input: $input) {
+      team {
+        id
+        ownerId
+        status
+        requirement
+        offer
+        membersNum
+      }
+      success
+    }
+  }
+`
+export type CreateTeamMutationFn = Apollo.MutationFunction<
+  CreateTeamMutation,
+  CreateTeamMutationVariables
+>
+
+/**
+ * __useCreateTeamMutation__
+ *
+ * To run a mutation, you first call `useCreateTeamMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTeamMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTeamMutation, { data, loading, error }] = useCreateTeamMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateTeamMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateTeamMutation,
+    CreateTeamMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<CreateTeamMutation, CreateTeamMutationVariables>(
+    CreateTeamDocument,
+    options
+  )
+}
+export type CreateTeamMutationHookResult = ReturnType<
+  typeof useCreateTeamMutation
+>
+export type CreateTeamMutationResult = Apollo.MutationResult<CreateTeamMutation>
+export type CreateTeamMutationOptions = Apollo.BaseMutationOptions<
+  CreateTeamMutation,
+  CreateTeamMutationVariables
+>
+export const UpdateTeamDocument = gql`
+  mutation updateTeam($input: UpdateTeamInput!) {
+    updateTeam(input: $input) {
+      team {
+        id
+        ownerId
+        status
+        requirement
+        offer
+        membersNum
+      }
+      success
+    }
+  }
+`
+export type UpdateTeamMutationFn = Apollo.MutationFunction<
+  UpdateTeamMutation,
+  UpdateTeamMutationVariables
+>
+
+/**
+ * __useUpdateTeamMutation__
+ *
+ * To run a mutation, you first call `useUpdateTeamMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTeamMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTeamMutation, { data, loading, error }] = useUpdateTeamMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateTeamMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateTeamMutation,
+    UpdateTeamMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<UpdateTeamMutation, UpdateTeamMutationVariables>(
+    UpdateTeamDocument,
+    options
+  )
+}
+export type UpdateTeamMutationHookResult = ReturnType<
+  typeof useUpdateTeamMutation
+>
+export type UpdateTeamMutationResult = Apollo.MutationResult<UpdateTeamMutation>
+export type UpdateTeamMutationOptions = Apollo.BaseMutationOptions<
+  UpdateTeamMutation,
+  UpdateTeamMutationVariables
+>
+export const DestroyTeamDocument = gql`
+  mutation DestroyTeam($input: DestroyTeamInput!) {
+    destroyTeam(input: $input) {
+      success
+    }
+  }
+`
+export type DestroyTeamMutationFn = Apollo.MutationFunction<
+  DestroyTeamMutation,
+  DestroyTeamMutationVariables
+>
+
+/**
+ * __useDestroyTeamMutation__
+ *
+ * To run a mutation, you first call `useDestroyTeamMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDestroyTeamMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [destroyTeamMutation, { data, loading, error }] = useDestroyTeamMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDestroyTeamMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DestroyTeamMutation,
+    DestroyTeamMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<DestroyTeamMutation, DestroyTeamMutationVariables>(
+    DestroyTeamDocument,
+    options
+  )
+}
+export type DestroyTeamMutationHookResult = ReturnType<
+  typeof useDestroyTeamMutation
+>
+export type DestroyTeamMutationResult =
+  Apollo.MutationResult<DestroyTeamMutation>
+export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
+  DestroyTeamMutation,
+  DestroyTeamMutationVariables
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const GetUserDataDocument = gql`
+  query GetUser($id: ID!) {
+    user(id: $id) {
+      id
+      icon
+      name
+      githubId
+      twitterId
+      siteUrl
+      description    }
+  }
+`
+      
+
+
+
+
+export function useGetUserDataQuery(
+  baseOptions: Apollo.QueryHookOptions<GetUserDataQuery, GetUserDataQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetUserDataQuery, GetUserDataQueryVariables>(
+    GetUserDataDocument,
+    options
+  )
+}
+export function useGetUserDataLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUserDataQuery, GetUserDataQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetUserDataQuery, GetUserDataQueryVariables>(
+    GetUserDataDocument,
+    options
+  )
+}
+export type GetUserDataQueryHookResult = ReturnType<typeof useGetUserDataQuery>
+export type GetUserDataLazyQueryHookResult = ReturnType<typeof useGetUserDataLazyQuery>
+export type GetUserDataQueryResult = Apollo.QueryResult<
+  GetUserDataQuery,
+  GetUserDataQueryVariables
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 export const GetUserDocument = gql`
   query GetUser($id: ID!) {
     user(id: $id) {

@@ -15,7 +15,7 @@ export default function GithubProfileLink() {
                     <IconBrandGithub 
                     color='black'
                     style={
-                        hovered ? { transform: 'scale(1,2)', transition: 'all 0.5s' } : {}}
+                        hovered ? { transform: 'scale(1.2)', transition: 'all 0.05s' } : {}}
                     />
                 </div>
             </ActionIcon>

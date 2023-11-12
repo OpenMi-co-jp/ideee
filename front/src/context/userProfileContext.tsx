@@ -1,15 +1,15 @@
 import React, { createContext, useContext } from 'react'
 import type { ReactNode } from 'react'
-import type { GetUserDataQuery } from '@/lib/generated/client'
+import type { GetUserQuery } from '@/lib/generated/client'
 
-export const UserContext = createContext({} as GetUserDataQuery['user'])
+export const UserContext = createContext({} as GetUserQuery['user'])
 
-type UserDataProviderProps = {
+type UserProviderProps = {
   children: ReactNode
-  user: GetUserDataQuery['user'];
+  user: GetUserQuery['user'];
 }
 
-export function UserDataProvider({ children, user }: UserDataProviderProps) {
+export function UserProvider({ children, user }: UserProviderProps) {
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>
 }
 

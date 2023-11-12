@@ -905,8 +905,6 @@ export type GetTeamQuery = {
   }
 }
 
-<<<<<<< Updated upstream
-=======
 export type GetTeamsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetTeamsQuery = {
@@ -924,7 +922,7 @@ export type GetTeamsQuery = {
 }
 
 export type CreateTeamMutationVariables = Exact<{
-  input: CreateTeamInput
+  input: CreateIdeaInput
 }>
 
 export type CreateTeamMutation = {
@@ -945,7 +943,7 @@ export type CreateTeamMutation = {
 }
 
 export type UpdateTeamMutationVariables = Exact<{
-  input: UpdateTeamInput
+  input: UpdateIdeaInput
 }>
 
 export type UpdateTeamMutation = {
@@ -966,7 +964,7 @@ export type UpdateTeamMutation = {
 }
 
 export type DestroyTeamMutationVariables = Exact<{
-  input: DestroyTeamInput
+  input: DestroyIdeaInput
 }>
 
 export type DestroyTeamMutation = {
@@ -975,50 +973,6 @@ export type DestroyTeamMutation = {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-export type GetUserDataQueryVariables = Exact<{
-  id: Scalars['ID']
-}>
-
-export type GetUserDataQuery = {
-  __typename: 'Query'
-  user: {
-    
-    id: string
-    icon: string | null
-    name: string | null
-    githubId: string | null
-    twitterId: string | null
-    siteUrl: string | null
-    description: string | null
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 export type GetUserQueryVariables = Exact<{
   id: Scalars['ID']
 }>
@@ -1029,6 +983,9 @@ export type GetUserQuery = {
     __typename?: 'User'
     id: string
     name?: string | null
+    twitterId?: string | null
+    githubId?: string | null
+    siteUrl?: string | null
     description?: string | null
     definition?: number | null
   }
@@ -2111,8 +2068,7 @@ export type GetTeamQueryResult = Apollo.QueryResult<
   GetTeamQuery,
   GetTeamQueryVariables
 >
-<<<<<<< Updated upstream
-=======
+
 export const GetTeamsDocument = gql`
   query GetTeams {
     teams {
@@ -2337,80 +2293,6 @@ export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
 >
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const GetUserDataDocument = gql`
-  query GetUser($id: ID!) {
-    user(id: $id) {
-      id
-      icon
-      name
-      githubId
-      twitterId
-      siteUrl
-      description    }
-  }
-`
-      
-
-
-
-
-export function useGetUserDataQuery(
-  baseOptions: Apollo.QueryHookOptions<GetUserDataQuery, GetUserDataQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetUserDataQuery, GetUserDataQueryVariables>(
-    GetUserDataDocument,
-    options
-  )
-}
-export function useGetUserDataLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetUserDataQuery, GetUserDataQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<GetUserDataQuery, GetUserDataQueryVariables>(
-    GetUserDataDocument,
-    options
-  )
-}
-export type GetUserDataQueryHookResult = ReturnType<typeof useGetUserDataQuery>
-export type GetUserDataLazyQueryHookResult = ReturnType<typeof useGetUserDataLazyQuery>
-export type GetUserDataQueryResult = Apollo.QueryResult<
-  GetUserDataQuery,
-  GetUserDataQueryVariables
->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 export const GetUserDocument = gql`
   query GetUser($id: ID!) {
     user(id: $id) {

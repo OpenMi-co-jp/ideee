@@ -5,8 +5,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
   before_action :underscore_params!
 
-  respond_to :json
-
   # GET /resource/sign_up
   # def new
   #   super
@@ -20,10 +18,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
         response.set_header('Authorization', resource.generate_jwt_token)
-        render json: { success: true }, status: :created
+        render json: { action: 'ユーザー作成', message: 'ユーザー作成・ログインに成功しました' }, status: :created
       else
         expire_data_after_sign_in!
-        render json: { success: false, message: 'Signed up but inactive.' }, status: :ok
+        render json: { action: 'ユーザー作成', message: '確認用メールをご確認ください' }, status: :ok
       end
     else
       clean_up_passwords(resource)
@@ -100,8 +98,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def underscore_params!
     params.deep_transform_keys!(&:underscore)
   end
-
-  # def account_update_params
-  #   params.permit(:name, :email, :icon, :description, :definition)
-  # end
 end

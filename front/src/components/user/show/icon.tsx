@@ -2,7 +2,6 @@ import { Image, Card, rem } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 import { useUser } from '@/context/userProfileContext'
 
-
 export default function UserIconComponent() {
   const isMobile = useMediaQuery(`(max-width: ${rem(450)})`)
   const user = useUser()
@@ -21,7 +20,10 @@ export default function UserIconComponent() {
       h="16%"
       miw="6rem"
     >
-      <Image src={icon ? icon : "/img/undefined_user_icon.webp"} alt="ユーザーアイコン" />
+      <Image
+        src={icon ? icon : '/img/undefined_user_icon.webp'}
+        alt="ユーザーアイコン"
+      />
     </Card>
   )
 }

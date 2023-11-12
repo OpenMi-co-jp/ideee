@@ -6,7 +6,7 @@ export const UserContext = createContext({} as GetUserQuery['user'] | undefined)
 
 type UserProviderProps = {
   children: ReactNode
-  user: GetUserQuery['user'] | undefined;
+  user: GetUserQuery['user'] | undefined
 }
 
 export function UserProvider({ children, user }: UserProviderProps) {

@@ -618,11 +618,7 @@ export type User = {
   twitterId?: Maybe<Scalars['String']>
 }
 
-
-
-
 export type UserData = {
-  
   /** 自己紹介 */
   description: Maybe<Scalars['String']>
   /** githubID */
@@ -631,17 +627,13 @@ export type UserData = {
   icon: Maybe<Scalars['String']>
   /** ユーザーID */
   id: Scalars['ID']
-   /** ユーザー名 */
+  /** ユーザー名 */
   name: Scalars['String']
   /** サイトURL */
   siteUrl: Maybe<Scalars['String']>
   /** TwitterID */
   twitterId: Maybe<Scalars['String']>
 }
-
-
-
-
 
 export type GetCommentQueryVariables = Exact<{
   id: Scalars['ID']
@@ -971,7 +963,6 @@ export type DestroyTeamMutation = {
   __typename?: 'Mutation'
   destroyTeam?: { __typename?: 'DestroyTeamPayload'; success: boolean } | null
 }
-
 
 export type GetUserQueryVariables = Exact<{
   id: Scalars['ID']
@@ -2293,7 +2284,6 @@ export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
   DestroyTeamMutationVariables
 >
 
-
 export const GetUserDocument = gql`
   query GetUser($id: ID!) {
     user(id: $id) {
@@ -2349,8 +2339,6 @@ export type GetUserQueryResult = Apollo.QueryResult<
   GetUserQuery,
   GetUserQueryVariables
 >
-
-
 
 export const GetUsersDocument = gql`
   query GetUsers {

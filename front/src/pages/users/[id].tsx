@@ -8,16 +8,10 @@ import { UserProvider, useUser } from '@/context/userProfileContext'
 import { LoaderBox } from '@/components/features/LoaderBox'
 import { AlertError } from '@/components/alert/error'
 
-
-
-
-
 export default function UserProfile() {
   const router = useRouter()
   const { id } = router.query
 
-
-  
   const { data, loading, error } = useGetUserQuery({
     skip: !id || Array.isArray(id),
     variables: {
@@ -27,10 +21,9 @@ export default function UserProfile() {
   if (loading) return <LoaderBox />
   if (error) return <AlertError />
 
-
   function UserProfileContent() {
     const user = useUser()
-    return(
+    return (
       <Box w="100%" miw="15rem" p="lg" bg="" style={{ borderRadius: '0.5rem' }}>
         <Group>
           <UserIconComponent />
@@ -39,10 +32,10 @@ export default function UserProfile() {
         <UserDescription />
         <Divider />
       </Box>
-      )
+    )
   }
 
-  return(
+  return (
     <UserProvider user={data?.user}>
       <UserProfileContent />
     </UserProvider>

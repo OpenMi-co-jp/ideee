@@ -33,18 +33,5 @@ export const footerData = {
         { label: '運営者', link: 'https://naruhiro-portfolio.firebaseapp.com' },
       ],
     },
-    {
-      title: 'Links',
-      links: [
-        {
-          label: 'アイデアランキング',
-          link: 'https://www.ideee.tech/ideas/search',
-        },
-        {
-          label: 'ユーザーランキング',
-          link: 'https://www.ideee.tech/users/search',
-        },
-      ],
-    },
   ],
 }

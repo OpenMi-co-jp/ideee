@@ -34,7 +34,7 @@ export const SearchedIdeas = () => {
         label={
           <>
             <IconSearch size={12} />
-            <Text ml="xs" color="gray">
+            <Text ml="xs" c="gray">
               Search results
             </Text>
           </>
@@ -46,7 +46,7 @@ export const SearchedIdeas = () => {
         <>
           <Flex justify="left" align="center" direction="row" wrap="nowrap">
             <IconSearch stroke={1.2} />
-            <Title order={4} m="sm" color="gray">
+            <Title order={4} m="sm" c="gray">
               検索結果: {totalCount} 件
             </Title>
           </Flex>

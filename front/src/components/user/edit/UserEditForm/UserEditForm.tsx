@@ -1,7 +1,6 @@
 import {
   Card,
   Button,
-  Col,
   Paper,
   Title,
   Grid,
@@ -10,7 +9,7 @@ import {
   Image,
   FileInput,
   rem,
-  Group,
+  Center,
 } from '@mantine/core'
 import { TextForm, TextAreaForm } from '@/components/ReactFormSet'
 import { useForm } from 'react-hook-form'
@@ -55,7 +54,7 @@ export const UserEditForm = () => {
             shadow="md"
             style={{ backgroundColor: '#F2F2F2' }}
           >
-            <Title order={2} mb={30} weight={500} align="center">
+            <Title order={2} mb={30} fw={500} ta="center">
               ユーザー情報編集
             </Title>
             <Grid grow>
@@ -71,6 +70,8 @@ export const UserEditForm = () => {
                   height={150}
                   width={150}
                   radius={50}
+                  maw={150}
+                  mah={150}
                   src={iconRef}
                   alt="user prof"
                 />
@@ -79,10 +80,10 @@ export const UserEditForm = () => {
                   label="ユーザーアイコン"
                   radius="md"
                   mt="xl"
-                  icon={<IconUpload size={rem(14)} />}
+                  leftSection={<IconUpload size={14} />}
                 />
               </Grid.Col>
-              <Grid.Col md={5}>
+              <Grid.Col span={5}>
                 <TextForm
                   form={form}
                   name="name"
@@ -100,7 +101,7 @@ export const UserEditForm = () => {
               </Grid.Col>
             </Grid>
             <Grid id="my-grid" justify="center" pt={40} grow>
-              <Col
+              <Grid.Col
                 span={6}
                 style={{
                   display: 'flex',
@@ -112,8 +113,8 @@ export const UserEditForm = () => {
                   エンジニア
                 </Text>
                 <Checkbox color="orange" size="lg" label="🛠" />
-              </Col>
-              <Col
+              </Grid.Col>
+              <Grid.Col
                 span={6}
                 style={{
                   display: 'flex',
@@ -125,40 +126,40 @@ export const UserEditForm = () => {
                   アイデアマン
                 </Text>
                 <Checkbox color="orange" size="lg" label="💡" />
-              </Col>
+              </Grid.Col>
             </Grid>
             <TextAreaForm form={form} name="profile" label="自己紹介" my="lg" />
             <Grid grow>
-              <Grid.Col md={4}>
+              <Grid.Col span={{ md: 4 }}>
                 <TextForm
                   form={form}
                   name="twitterId"
                   label="Twitter ID"
                   my="lg"
-                  icon={<IconBrandTwitter size={rem(20)} />}
+                  leftSection={<IconBrandTwitter size={20} />}
                 />
               </Grid.Col>
-              <Grid.Col md={4}>
+              <Grid.Col span={{ md: 4 }}>
                 <TextForm
                   form={form}
                   name="githubId"
                   label="GitHub"
                   my="lg"
-                  icon={<IconBrandGithub size={rem(20)} />}
+                  leftSection={<IconBrandGithub size={20} />}
                 />
               </Grid.Col>
-              <Grid.Col md={4}>
+              <Grid.Col span={{ md: 4 }}>
                 <TextForm
                   form={form}
                   name="siteUrl"
                   label="サイトURL"
                   my="lg"
-                  icon={<IconLink size={rem(20)} />}
+                  leftSection={<IconLink size={20} />}
                 />
               </Grid.Col>
             </Grid>
           </Paper>
-          <Group position="center">
+          <Center>
             <Button
               type="submit"
               my={30}
@@ -168,7 +169,7 @@ export const UserEditForm = () => {
             >
               保存
             </Button>
-          </Group>
+          </Center>
         </form>
       </Card>
     </>

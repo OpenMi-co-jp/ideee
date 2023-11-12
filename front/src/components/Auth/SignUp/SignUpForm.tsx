@@ -1,4 +1,4 @@
-import { Box, Col, Button, Title } from '@mantine/core'
+import { Box, Button, Title, Grid } from '@mantine/core'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '../../ReactFormSet'
 import { handleSignUp } from './hooks'
@@ -39,11 +39,11 @@ export const SignUpForm: CustomNextPage = () => {
           label="確認用パスワード"
           required
         />
-        <Col style={{ marginTop: '1rem' }}>
-          <Button type="submit" fullWidth>
+        <Grid style={{ marginTop: '1rem' }}>
+          <Button type="submit" fullWidth m={10}>
             無料ユーザー作成
           </Button>
-        </Col>
+        </Grid>
       </Box>
     </form>
   )

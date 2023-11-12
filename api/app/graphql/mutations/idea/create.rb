@@ -52,4 +52,22 @@ module Mutations
     #   { idea: idea }
     # end
   end
+
+  class TweetIdea < BaseMutation
+    graphql_name 'TweetIdea'
+
+    argument :idea_id, ID, required: true, description: 'アイデアID'
+
+    field :idea, Types::Idea::IdeaType, null: false, description: 'アイデアオブジェクト'
+    field :success, Boolean, null: false, description: '成功フラグ'
+
+    def resolve(**args)
+      idea = ::Idea.find(args[:idea_id])
+      idea.tweet!
+      {
+        idea:,
+        success: true
+      }
+    end
+  end
 end

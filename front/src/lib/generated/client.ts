@@ -982,12 +982,13 @@ export type GetUserQuery = {
   user: {
     __typename?: 'User'
     id: string
-    name?: string | null
-    twitterId?: string | null
-    githubId?: string | null
-    siteUrl?: string | null
-    description?: string | null
-    definition?: number | null
+    name?: string | null | undefined
+    icon?: string | null | undefined
+    twitterId?: string | undefined
+    githubId?: string | undefined
+    siteUrl?: string | undefined
+    description?: string | undefined
+    definition?: number | undefined
   }
 }
 
@@ -2298,6 +2299,10 @@ export const GetUserDocument = gql`
     user(id: $id) {
       id
       name
+      icon
+      twitterId
+      githubId
+      siteUrl
       description
       definition
     }
@@ -2344,6 +2349,9 @@ export type GetUserQueryResult = Apollo.QueryResult<
   GetUserQuery,
   GetUserQueryVariables
 >
+
+
+
 export const GetUsersDocument = gql`
   query GetUsers {
     users {

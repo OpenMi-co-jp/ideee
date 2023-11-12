@@ -1,36 +1,36 @@
 import UserDescription from '@/components/user/show/description'
-import UserIconComponent from '@/components/user/show/iconComponent'
+import UserIconComponent from '@/components/user/show/icon'
 import UserDetailComponentIndex from '@/components/user/userDetailComponentIndex'
-import { Box, Divider, Group, Loader } from '@mantine/core'
-import { useState, useEffect } from 'react'
-import { useLoggedIn } from '@/components/loginContext'
+import { Box, Divider, Group } from '@mantine/core'
 import { useRouter } from 'next/router'
-import { useGetUserDataQuery } from '@/lib/generated/client'
-import { UserDataProvider } from '@/context/userProfileContext'
-import { UserData } from '@/lib/generated/client'
+import { useGetUserQuery } from '@/lib/generated/client'
+import { UserProvider, useUser } from '@/context/userProfileContext'
+import { LoaderBox } from '@/components/features/LoaderBox'
+import { AlertError } from '@/components/alert/error'
+
+
 
 
 
 export default function UserProfile() {
-  const { loggedIn } = useLoggedIn()
-  const [LSLoggedIn, setLSLoggedIn] = useState(false)
   const router = useRouter()
   const { id } = router.query
-  const [user, setUser] = useState<UserData | undefined>()
 
 
-  const testUserData = {
-    id: 'test_user_id',
-    icon: '@/img/undefined_user_icon.webp',
-    name: 'Test User',
-    githubId: '/naru20181117/ideee',
-    twitterId: '/ideee_tech',
-    siteUrl: 'https://www.ideee.tech',
-    description: 'This is a test user',
-  }
+  
+  const { data, loading, error } = useGetUserQuery({
+    skip: !id || Array.isArray(id),
+    variables: {
+      id: id as string,
+    },
+  })
+  if (loading) return <LoaderBox />
+  if (error) return <AlertError />
 
-  const provider =
-      <UserDataProvider user={testUserData}>
+
+  function UserProfileContent() {
+    const user = useUser()
+    return(
       <Box w="100%" miw="15rem" p="lg" bg="" style={{ borderRadius: '0.5rem' }}>
         <Group>
           <UserIconComponent />
@@ -39,7 +39,12 @@ export default function UserProfile() {
         <UserDescription />
         <Divider />
       </Box>
-    </UserDataProvider>
-  
-return provider
+      )
+  }
+
+  return(
+    <UserProvider user={data?.user}>
+      <UserProfileContent />
+    </UserProvider>
+  )
 }

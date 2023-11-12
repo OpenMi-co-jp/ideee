@@ -1041,16 +1041,6 @@ type Query {
   deployedIdeas: [Idea!]!
 
   """
-  難易度一覧
-  """
-  difficulties(
-    """
-    ユーザーID
-    """
-    userId: ID!
-  ): [Difficulty!]!
-
-  """
   ホットなアイデア一覧
   """
   hotIdeas: [Idea!]!

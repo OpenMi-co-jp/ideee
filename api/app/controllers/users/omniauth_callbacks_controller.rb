@@ -9,36 +9,29 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
-  def failure
-    super
-  end
-
   private
 
   def callback_for(provider)
     begin
-      @user = User.from_omniauth(request.env['omniauth.auth'])
-      if Rails.env.production? && @user.created_at > Time.zone.now.ago(5.minutes)
-        Slack::SendNewJob.perform_later(@user, user_url(@user.id))
+      user = User.from_omniauth(request.env['omniauth.auth'])
+      if Rails.env.production? && user.created_at > Time.zone.now.ago(5.minutes)
+        Slack::SendNewJob.perform_later(user, user_url(user.id))
       end
     rescue StandardError => e
-      redirect_to new_user_session_path
       Rails.logger.debug e.message
-      # return set_flash_message(:notice, :failure, kind: provider.to_s.capitalize, reason: e.message)
+      render json: { action: 'ログイン', message: e.message }, status: :unauthorized
     end
-    if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication
+    if user.persisted?
+      sign_in user, event: :authentication
       cookies[:devise_provider] = provider
-      # set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
     else
-      # session["devise.#{provider}_data"] = request.env["omniauth.auth"].except("extra")
       if (data = request.env['omniauth.auth']['extra']['raw_info'])
         session['devise.omniauth_data'] = {
           email: data['email'],
           name: data['name']
         }
       end
-      redirect_to new_user_registration_url
+      render json: { action: 'ログイン', message: e.message }, status: :unauthorized
     end
   end
 end

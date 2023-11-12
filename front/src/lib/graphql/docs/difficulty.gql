@@ -1,0 +1,12 @@
+mutation CreateDifficulty($input: CreateDifficultyInput!){
+  createDifficulty(input:$input){
+    difficulty{
+      id
+      userId
+      ideaId
+      level
+      createdAt
+    }
+    success
+  }
+}

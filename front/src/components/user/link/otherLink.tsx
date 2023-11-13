@@ -9,17 +9,25 @@ export default function OtherLink() {
   <Anchor href={user.siteUrl ? 'https://twitter.com/${siteUrl}' : ''} target="_blank" rel="nopener noreferrer"></Anchor>
 
   const { hovered, ref } = useHover()
-
+  const siteUrl = user?.siteUrl
   return (
     <ActionIcon>
-      <div ref={ref}>
-        <IconLink
-          color="black"
-          style={
-            hovered ? { transform: 'scale(1.2)', transition: 'all 0.05s' } : {}
-          }
-        />
-      </div>
+      <Anchor
+        href={siteUrl ? `https://twitter.com/${siteUrl}` : ''}
+        target="_blank"
+        rel="nopener noreferrer"
+      >
+        <div ref={ref}>
+          <IconLink
+            color="black"
+            style={
+              hovered
+                ? { transform: 'scale(1.2)', transition: 'all 0.05s' }
+                : {}
+            }
+          />
+        </div>
+      </Anchor>
     </ActionIcon>
   )
 }

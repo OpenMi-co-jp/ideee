@@ -1,19 +1,25 @@
 import UserDescription from '@/components/user/show/description'
 import UserIconComponent from '@/components/user/show/iconComponent'
 import UserDetailComponentIndex from '@/components/user/userDetailComponentIndex'
-import { Box, Divider, Group, rem, Loader } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
-import { useState, useEffect } from 'react'
-import { useLoggedIn } from '@/components/loginContext'
+import { Box, Divider, Group, rem } from '@mantine/core'
 import { useRouter } from 'next/router'
-import { GetUserQuery } from '@/lib/generated/client'
 import { useGetUserQuery } from '@/lib/generated/client'
 import { UserProvider } from '@/context/userProfileContext'
+import { useLoggedIn } from '@/components/loginContext'
+import { useEffect, useState } from 'react'
 
 export default function UserProfile() {
-  const isMobile = useMediaQuery(`(max-width: ${rem(300)})`)
   const { loggedIn } = useLoggedIn()
   const [LSLoggedIn, setLSLoggedIn] = useState(false)
+
+  useEffect(() => {
+    try {
+      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+
   const router = useRouter()
   const { id } = router.query
   const { data, loading, error } = useGetUserQuery({
@@ -22,20 +28,8 @@ export default function UserProfile() {
     },
   })
 
-  const [user, setUser] = useState({})
-
-  useEffect(() => {
-    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
-
-    if (data) {
-      setUser(data?.user)
-    }
-  }, [data])
-
-  if (loading) return <Loader color="yellow" />
-
   return (
-    <UserProvider user={user as GetUserQuery['user']}>
+    <UserProvider user={data?.user}>
       <Box w="100%" miw="15rem" p="lg" bg="" style={{ borderRadius: '0.5rem' }}>
         <Group>
           <UserIconComponent />

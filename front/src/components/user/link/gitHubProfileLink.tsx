@@ -8,6 +8,8 @@ export default function GithubProfileLink() {
   const user = useUser();
   
   const { hovered, ref } = useHover()
+  const githubId = user?.githubId
+
   return (
     <ActionIcon>
       <Anchor href={user.githubId ? 'https://github.com/${githubId}' : ''} target="_blank" rel="nopener noreferrer">

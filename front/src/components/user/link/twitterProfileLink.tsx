@@ -8,6 +8,7 @@ export default function TwitterProfileLink() {
   const user = useUser();
   
   const { hovered, ref } = useHover()
+  const twitterId = user?.twitterId
 
   return (
     <ActionIcon>

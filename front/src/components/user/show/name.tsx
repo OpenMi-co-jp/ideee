@@ -6,8 +6,8 @@ export default function UserName() {
   const user = useUser();
 
   return (
-    <Paper bg="transparent" ml="1rem">
-      <Text>{user.name}</Text>
+    <Paper bg="transparent" ml="1rem" style={{ fontWeight: 'bold' }}>
+      <Text>{user?.name}</Text>
     </Paper>
   )
 }

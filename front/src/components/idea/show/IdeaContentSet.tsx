@@ -1,4 +1,4 @@
-import { Paper, Space, Stack, Text, Title } from '@mantine/core'
+import { Title, Text, Space, Paper, Stack } from '@mantine/core'
 
 export const IdeaContentSet = ({
   label,

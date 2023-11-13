@@ -1,10 +1,10 @@
+import { useState, useEffect } from 'react'
 import { useLoggedIn } from '@/components/loginContext'
-import { useIdea } from '@/context/IdeaContext'
-import type { GetIdeaQuery } from '@/lib/generated/client'
-import { Anchor, Button, Paper } from '@mantine/core'
+import { Button, Paper, Anchor } from '@mantine/core'
 import { IconApps, IconBrandGithub } from '@tabler/icons-react'
-import { useEffect, useState } from 'react'
 import { IdeaContentSet } from './IdeaContentSet'
+import type { GetIdeaQuery } from '@/lib/generated/client'
+import { useIdea } from '@/context/IdeaContext'
 
 const getSections = (idea: GetIdeaQuery['idea'], isLogin: boolean) => {
   if (isLogin) {

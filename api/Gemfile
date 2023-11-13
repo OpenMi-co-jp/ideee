@@ -66,7 +66,10 @@ gem 'activeadmin' # 管理画面
 # gem 'stripe'
 
 gem 'sidekiq'
-gem 'twitter'
+
+# twitterV2用設定
+gem 'oauth'
+gem 'typhoeus'
 
 # エラー関係
 gem 'rack-timeout'

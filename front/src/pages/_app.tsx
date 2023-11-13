@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import '@mantine/core/styles.css'
 import type { CustomAppPage } from 'next/app'
 import Layout from '@/pages-layout/layout'
 import { ApolloBaseProvider } from '@/lib/apollo'

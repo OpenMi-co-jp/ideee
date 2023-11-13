@@ -1,12 +1,15 @@
 import { Anchor, ActionIcon } from '@mantine/core'
 import { IconLink } from '@tabler/icons-react'
 import { useHover } from '@mantine/hooks'
-import { useUser } from '@/context/userProfileContext';
-
+import { useUser } from '@/context/userProfileContext'
 
 export default function OtherLink() {
-  const user = useUser();
-  <Anchor href={user.siteUrl ? 'https://twitter.com/${siteUrl}' : ''} target="_blank" rel="nopener noreferrer"></Anchor>
+  const user = useUser()
+  ;<Anchor
+    href={user.siteUrl ? 'https://twitter.com/${siteUrl}' : ''}
+    target="_blank"
+    rel="nopener noreferrer"
+  ></Anchor>
 
   const { hovered, ref } = useHover()
 

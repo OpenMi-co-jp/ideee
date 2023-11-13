@@ -5,7 +5,7 @@ import {
   Title,
   Accordion,
   useMantineTheme,
-  rem,
+  useMantineColorScheme,
   Paper,
   Code,
   List,
@@ -22,9 +22,9 @@ import {
 import Link from 'next/link'
 const FrequentQuestions = () => {
   const theme = useMantineTheme()
+  const { colorScheme } = useMantineColorScheme()
   const getColor = (color: string) =>
-    theme.colors[color][theme.colorScheme === 'dark' ? 4 : 8]
-
+    theme.colors[color][colorScheme === 'dark' ? 4 : 8]
   return (
     <Container>
       <Title order={1} m="lg">
@@ -34,7 +34,7 @@ const FrequentQuestions = () => {
       <Accordion variant="separated">
         <Accordion.Item value="bulb">
           <Accordion.Control
-            icon={<IconBulb size={rem(20)} color={getColor('red')} />}
+            icon={<IconBulb size={20} color={getColor('red')} />}
           >
             アイデアはどうやって探したらいいの？
           </Accordion.Control>
@@ -47,7 +47,7 @@ const FrequentQuestions = () => {
               意外とアイデアは出てくるかも💡
             </Text>
             <Button
-              leftIcon={<IconBulb />}
+              leftSection={<IconBulb />}
               variant="gradient"
               gradient={{ from: 'orange', to: 'red' }}
             >
@@ -61,7 +61,7 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="flag">
           <Accordion.Control
-            icon={<IconFlag size={rem(20)} color={getColor('blue')} />}
+            icon={<IconFlag size={20} color={getColor('blue')} />}
           >
             Contributionsとは？
           </Accordion.Control>
@@ -72,7 +72,7 @@ const FrequentQuestions = () => {
             <Text fw={500} my="sm">
               計算方法
             </Text>
-            <Code block color="blue">
+            <Code block style={{ backgroundColor: 'rgb(231, 245, 255)' }}>
               アイデア投稿 ✖️ 2p
               <br />
               自分のアイデアに対してのハート数 ✖️ 1p
@@ -86,13 +86,17 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="users">
           <Accordion.Control
-            icon={<IconUsers size={rem(20)} color={getColor('teal')} />}
+            icon={<IconUsers size={20} color={getColor('teal')} />}
           >
             チーム開発募集機能でできることは？
           </Accordion.Control>
           <Accordion.Panel m="md">
             <Text>現在の機能</Text>
-            <Code block color="blue">
+            <Code
+              block
+              fz="md"
+              style={{ backgroundColor: 'rgb(231, 245, 255)' }}
+            >
               <List>
                 <List.Item>チーム開発の募集条件を設定</List.Item>
                 <List.Item>チームリストの作成</List.Item>
@@ -103,7 +107,11 @@ const FrequentQuestions = () => {
               </List>
             </Code>
             <Text>今後の機能</Text>
-            <Code block color="blue">
+            <Code
+              block
+              fz="md"
+              style={{ backgroundColor: 'rgb(231, 245, 255)' }}
+            >
               <List>
                 <List.Item>オーナーごとの審査制にする</List.Item>
                 <List.Item>GitHub APIなどを利用した開発連携機能</List.Item>
@@ -117,14 +125,18 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="world">
           <Accordion.Control
-            icon={<IconWorld size={rem(20)} color={getColor('blue')} />}
+            icon={<IconWorld size={20} color={getColor('blue')} />}
           >
             X(旧Twitter)IDを登録するとどうなる？
           </Accordion.Control>
           <Accordion.Panel m="md">
             <Text mb="md">アイデアがより注目されます！</Text>
             <Text fw={600}>自動ツイート機能</Text>
-            <Code block color="blue">
+            <Code
+              block
+              fz="md"
+              style={{ backgroundColor: 'rgb(231, 245, 255)' }}
+            >
               <List>
                 <List.Item>
                   アイデアを投稿すると
@@ -145,7 +157,7 @@ const FrequentQuestions = () => {
 
         <Accordion.Item value="doorExit">
           <Accordion.Control
-            icon={<IconDoorExit size={rem(20)} color={getColor('yellow')} />}
+            icon={<IconDoorExit size={20} color={getColor('yellow')} />}
           >
             退会方法は？
           </Accordion.Control>

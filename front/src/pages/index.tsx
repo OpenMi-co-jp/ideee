@@ -10,13 +10,17 @@ export default function Home() {
   const [LSLoggedIn, setLSLoggedIn] = useState(false)
 
   useEffect(() => {
-    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    try {
+      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    } catch (e) {
+      console.error(e)
+    }
   }, [])
 
   return (
     <>
       {!(LSLoggedIn || loggedIn) && <TopVision />}
-      <Space h="3rem" />
+      <Space h="10rem" />
       <HotIdeas />
       <Space h="lg" />
       <PopularTags />

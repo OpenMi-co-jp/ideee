@@ -18,7 +18,7 @@ RSpec.describe 'Difficulties' do
           expect(response).to have_http_status :found
         end
 
-        it 'ハートが送られること' do
+        it '難易度が作成されること' do
           expect do
             create_difficultys
           end.to change(Difficulty, :count).by(1)

@@ -15,5 +15,10 @@ module Types
     field :create_comment, mutation: Mutations::Comment::Create, description: 'コメント作成'
     field :update_comment, mutation: Mutations::Comment::Update, description: 'コメント更新'
     field :destroy_comment, mutation: Mutations::Comment::Destroy, description: 'コメント削除'
+
+    field :create_like, mutation: Mutations::Like::Create, description: 'いいね作成'
+    field :destroy_like, mutation: Mutations::Like::Destroy, description: 'いいね削除'
+
+    field :create_difficulty, mutation: Mutations::Difficulty::Create, description: '難易度作成'
   end
 end

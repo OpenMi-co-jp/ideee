@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLoggedIn } from '@/components/loginContext'
-import { HiddenIdeaContent } from '@/components/idea/show'
+import { HiddenIdeaContent, IdeaContents } from '@/components/idea/show'
 import { Container, Loader } from '@mantine/core'
 import { SignPath } from '@/components/Auth/SignPath'
 import { UserSection, IdeaTagList, IdeaTitle } from '@/components/idea'
@@ -23,7 +23,11 @@ const IdeaDetail = () => {
   const [idea, setIdea] = useState({})
 
   useEffect(() => {
-    setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    try {
+      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
+    } catch (e) {
+      console.error(e)
+    }
 
     if (data) {
       setIdea(data?.idea)
@@ -50,6 +54,7 @@ const IdeaDetail = () => {
         <IdeaTitle />
         <UserSection />
         <IdeaTagList />
+        {!(loggedIn || LSLoggedIn) && <IdeaContents />}
       </Container>
 
       {(() => {

@@ -249,5 +249,6 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Max: 5
 
+# describe, context ブロックなど）内での let または let! の使用回数を制限しない
 RSpec/MultipleMemoizedHelpers:
-  Max: 6
+  Enabled: false

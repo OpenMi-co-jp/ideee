@@ -3,7 +3,7 @@ export const footerData = {
     {
       title: 'About',
       links: [
-        { label: 'ideeeについて', link: 'https://www.ideee.tech/about' },
+        { label: 'ideeeについて', link: '/about' },
         {
           label: 'アイデアの探し方',
           link: 'https://www.ideee.tech/how_to_find_idea',
@@ -31,19 +31,6 @@ export const footerData = {
           link: '/privacy_policy',
         },
         { label: '運営者', link: 'https://naruhiro-portfolio.firebaseapp.com' },
-      ],
-    },
-    {
-      title: 'Links',
-      links: [
-        {
-          label: 'アイデアランキング',
-          link: 'https://www.ideee.tech/ideas/search',
-        },
-        {
-          label: 'ユーザーランキング',
-          link: 'https://www.ideee.tech/users/search',
-        },
       ],
     },
   ],

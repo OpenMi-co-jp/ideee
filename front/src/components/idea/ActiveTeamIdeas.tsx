@@ -22,7 +22,7 @@ export const ActiveTeamIdeas = () => {
         <Paper shadow="sm" radius="md" p="sm">
           <IconUsers size={30} stroke={1.5} />
         </Paper>
-        <Title order={2} mx="xl" my="md" color="#E5AA37">
+        <Title order={2} mx="xl" my="md" c="#E5AA37">
           チーム開発募集中のアイデア
         </Title>
       </Flex>

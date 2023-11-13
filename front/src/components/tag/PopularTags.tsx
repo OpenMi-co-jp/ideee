@@ -16,7 +16,7 @@ export const PopularTags = () => {
         <Paper shadow="sm" radius="md" p="sm">
           <IconRocket size={30} stroke={1.5} />
         </Paper>
-        <Title order={2} m="md" color="#3F3F3F">
+        <Title order={2} m="md" c="#3F3F3F">
           人気のタグ
         </Title>
       </Flex>

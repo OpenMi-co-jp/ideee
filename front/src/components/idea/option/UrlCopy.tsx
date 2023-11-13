@@ -17,7 +17,7 @@ export const UrlCopy = () => {
             showSuccess({ action: 'URLコピー' })
           }}
           variant="outline"
-          compact
+          size="compact-sm"
         >
           {copied ? <IconSquareRoundedCheckFilled /> : <IconCopy />}
         </Button>

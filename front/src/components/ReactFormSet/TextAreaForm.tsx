@@ -1,10 +1,10 @@
-import type { MantineStyleSystemProps } from '@mantine/core'
+import type { MantineStyleProps } from '@mantine/core'
 import { Textarea as MantineTextarea } from '@mantine/core'
 import type { CSSProperties } from 'react'
 import type { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { Controller } from 'react-hook-form'
 
-type InputTextProps<T extends FieldValues> = MantineStyleSystemProps & {
+type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   label?: string
   name: Path<T>
   form: UseFormReturn<T, any>

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
 import { useLoggedIn } from '@/components/loginContext'
-import { Button, Paper, Anchor } from '@mantine/core'
-import { IconApps, IconBrandGithub } from '@tabler/icons-react'
-import { IdeaContentSet } from './IdeaContentSet'
-import type { GetIdeaQuery } from '@/lib/generated/client'
 import { useIdea } from '@/context/IdeaContext'
+import type { GetIdeaQuery } from '@/lib/generated/client'
+import { Anchor, Button, Paper } from '@mantine/core'
+import { IconApps, IconBrandGithub } from '@tabler/icons-react'
+import { useEffect, useState } from 'react'
+import { IdeaContentSet } from './IdeaContentSet'
 
 const getSections = (idea: GetIdeaQuery['idea'], isLogin: boolean) => {
   if (isLogin) {
@@ -58,9 +58,9 @@ export const IdeaContents = () => {
                   gradient={{ from: 'green', to: 'blue' }}
                   radius="xl"
                   size="md"
-                  m="md"
+                  mr="md"
                   leftSection={<IconApps />}
-                  mt="lg"
+                  mt="xl"
                 >
                   アプリを確認
                 </Button>

@@ -7,7 +7,7 @@ export default function UserDescription() {
   return (
     <Paper bg="transparent">
       <Text p="sm" w="100%">
-        {user.description}
+        {user?.description}
       </Text>
     </Paper>
   )

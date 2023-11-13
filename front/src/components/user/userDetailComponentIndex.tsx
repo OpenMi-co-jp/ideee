@@ -8,10 +8,6 @@ export default function UserDetailComponentIndex() {
   return (
     <Box>
       <UserName />
-      <div></div>
-      <div>コントリビューション</div>
-      <div>アイデアマンorエンジニア</div>
-
       <Container
         style={{ display: 'flex', flexDirection: 'row', gap: 'sm' }}
         mt="0.4rem"

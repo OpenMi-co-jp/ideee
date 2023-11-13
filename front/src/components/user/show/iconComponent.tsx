@@ -5,6 +5,7 @@ import { useUser } from '@/context/userProfileContext'
 export default function UserIconComponent() {
   const isMobile = useMediaQuery(`(max-width: ${rem(450)})`)
   const user = useUser()
+  const icon = user?.icon
 
   return (
     <Card
@@ -20,7 +21,7 @@ export default function UserIconComponent() {
       miw="6rem"
     >
       <Image
-        src={user.icon || '/img/undefined_user_icon.webp'}
+        src={icon ? icon : '/img/undefined_user_icon.webp'}
         alt="ユーザーアイコン"
       />
     </Card>

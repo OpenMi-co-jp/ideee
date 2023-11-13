@@ -5,13 +5,13 @@ import { useUser } from '@/context/userProfileContext'
 
 export default function TwitterProfileLink() {
   const user = useUser()
-
   const { hovered, ref } = useHover()
+  const twitterId = user?.twitterId
 
   return (
     <ActionIcon>
       <Anchor
-        href={user.twitterId ? 'https://twitter.com/${twitterId}' : ''}
+        href={twitterId ? 'https://twitter.com/${twitterId}' : ''}
         target="_blank"
         rel="nopener noreferrer"
       >

@@ -2,11 +2,11 @@ import React, { createContext, useContext } from 'react'
 import type { ReactNode } from 'react'
 import type { GetUserQuery } from '@/lib/generated/client'
 
-export const UserContext = createContext({} as GetUserQuery['user'])
+export const UserContext = createContext({} as GetUserQuery['user'] | undefined)
 
 type UserProviderProps = {
   children: ReactNode
-  user: GetUserQuery['user']
+  user: GetUserQuery['user'] | undefined
 }
 
 export function UserProvider({ children, user }: UserProviderProps) {

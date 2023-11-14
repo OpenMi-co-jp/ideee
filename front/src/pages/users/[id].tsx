@@ -8,7 +8,7 @@ import { UserProvider } from '@/context/userProfileContext'
 import { LoaderBox } from '@/components/features/LoaderBox'
 import { AlertError } from '@/components/alert/error'
 
-export default function UserProfile() {
+export const UserProfile = () => {
   const router = useRouter()
   const { id } = router.query
   const { data, loading, error } = useGetUserQuery({

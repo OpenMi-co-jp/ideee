@@ -72,7 +72,7 @@ export type CreateDifficultyInput = {
   /** アイデアID */
   ideaId: Scalars['Int']
   /** 難易度レベル */
-  level: Scalars['Int']
+  level: Scalars['String']
   /** ユーザーID */
   userId: Scalars['Int']
 }
@@ -84,6 +84,8 @@ export type CreateDifficultyPayload = {
   clientMutationId?: Maybe<Scalars['String']>
   /** 難易度 */
   difficulty: Difficulty
+  /** エラーメッセージのリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** 成功フラグ */
   success: Scalars['Boolean']
 }
@@ -306,7 +308,7 @@ export type Difficulty = {
   /** アイデアID */
   ideaId: Scalars['Int']
   /** 難易度レベル */
-  level: Scalars['Int']
+  level: Scalars['String']
   /** ユーザーID */
   userId: Scalars['Int']
 }
@@ -545,8 +547,6 @@ export type Query = {
   comments: Array<Comment>
   /** 実現したアイデア一覧 */
   deployedIdeas: Array<Idea>
-  /** 難易度一覧 */
-  difficulties: Array<Difficulty>
   /** ホットなアイデア一覧 */
   hotIdeas: Array<Idea>
   /** アイデアオブジェクト */
@@ -575,10 +575,6 @@ export type Query = {
 
 export type QueryCommentArgs = {
   id: Scalars['ID']
-}
-
-export type QueryDifficultiesArgs = {
-  userId: Scalars['ID']
 }
 
 export type QueryIdeaArgs = {
@@ -897,22 +893,6 @@ export type DestroyCommentMutation = {
   } | null
 }
 
-export type GetDifficultiesQueryVariables = Exact<{
-  userId: Scalars['ID']
-}>
-
-export type GetDifficultiesQuery = {
-  __typename?: 'Query'
-  difficulties: Array<{
-    __typename?: 'Difficulty'
-    id: string
-    userId: number
-    ideaId: number
-    level: number
-    createdAt: any
-  }>
-}
-
 export type CreateDifficultyMutationVariables = Exact<{
   input: CreateDifficultyInput
 }>
@@ -927,7 +907,7 @@ export type CreateDifficultyMutation = {
       id: string
       userId: number
       ideaId: number
-      level: number
+      level: string
       createdAt: any
     }
   } | null
@@ -964,6 +944,7 @@ export type GetIdeaQuery = {
       name: string
       icon?: string | null
       twitterId?: string | null
+      remoteUrl?: string | null
     }
     comments: Array<{
       __typename?: 'Comment'
@@ -1000,6 +981,7 @@ export type GetIdeasQuery = {
         id: string
         name: string
         icon?: string | null
+        remoteUrl?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
       team?: {
@@ -1030,7 +1012,11 @@ export type GetHotIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -1042,7 +1028,11 @@ export type GetDeployedIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -1054,7 +1044,11 @@ export type GetActiveTeamIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -1618,68 +1612,6 @@ export type DestroyCommentMutationOptions = Apollo.BaseMutationOptions<
   DestroyCommentMutation,
   DestroyCommentMutationVariables
 >
-export const GetDifficultiesDocument = gql`
-  query GetDifficulties($userId: ID!) {
-    difficulties(userId: $userId) {
-      id
-      userId
-      ideaId
-      level
-      createdAt
-    }
-  }
-`
-
-/**
- * __useGetDifficultiesQuery__
- *
- * To run a query within a React component, call `useGetDifficultiesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetDifficultiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetDifficultiesQuery({
- *   variables: {
- *      userId: // value for 'userId'
- *   },
- * });
- */
-export function useGetDifficultiesQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    GetDifficultiesQuery,
-    GetDifficultiesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetDifficultiesQuery, GetDifficultiesQueryVariables>(
-    GetDifficultiesDocument,
-    options
-  )
-}
-export function useGetDifficultiesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetDifficultiesQuery,
-    GetDifficultiesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<
-    GetDifficultiesQuery,
-    GetDifficultiesQueryVariables
-  >(GetDifficultiesDocument, options)
-}
-export type GetDifficultiesQueryHookResult = ReturnType<
-  typeof useGetDifficultiesQuery
->
-export type GetDifficultiesLazyQueryHookResult = ReturnType<
-  typeof useGetDifficultiesLazyQuery
->
-export type GetDifficultiesQueryResult = Apollo.QueryResult<
-  GetDifficultiesQuery,
-  GetDifficultiesQueryVariables
->
 export const CreateDifficultyDocument = gql`
   mutation CreateDifficulty($input: CreateDifficultyInput!) {
     createDifficulty(input: $input) {
@@ -1762,6 +1694,7 @@ export const GetIdeaDocument = gql`
         name
         icon
         twitterId
+        remoteUrl
       }
       comments {
         id
@@ -1836,6 +1769,7 @@ export const GetIdeasDocument = gql`
           id
           name
           icon
+          remoteUrl
         }
         ideaTags {
           name
@@ -1912,6 +1846,7 @@ export const GetHotIdeasDocument = gql`
       name
       user {
         icon
+        remoteUrl
       }
     }
   }
@@ -1971,6 +1906,7 @@ export const GetDeployedIdeasDocument = gql`
       name
       user {
         icon
+        remoteUrl
       }
     }
   }
@@ -2032,6 +1968,7 @@ export const GetActiveTeamIdeasDocument = gql`
       name
       user {
         icon
+        remoteUrl
       }
     }
   }

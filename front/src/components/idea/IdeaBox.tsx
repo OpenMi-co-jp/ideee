@@ -23,7 +23,12 @@ export const IdeaBox: FC<IdeaBoxType> = ({ id, name, user }) => {
           >
             {name}
           </Text>
-          <Avatar radius="xl" size={24} src={user?.icon} mt="xl" />
+          <Avatar
+            radius="xl"
+            size={24}
+            src={user?.remoteUrl || user?.icon}
+            mt="xl"
+          />
         </Flex>
       </Paper>
     </Link>

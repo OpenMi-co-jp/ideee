@@ -28,7 +28,7 @@ class Twitter
     create_tweet_url = 'https://api.twitter.com/2/tweets'
 
     user = User.find(idea.user_id)
-    twitter_user = user&.twitter_id.present? ? "@#{user.twitter_id} " : ''
+    twitter_user = user.twitter_id.present? ? "@#{user.twitter_id} " : ''
     hashtags = ['ideee', idea.idea_tags&.pluck(:name)].flatten.map { "##{_1}" }.join(' ')
 
     json_payload = { "text": "【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#{hashtags}\n#{url}" }

@@ -1,14 +1,19 @@
 import UserDescription from '@/components/user/show/description'
 import UserIconComponent from '@/components/user/show/iconComponent'
 import UserDetailComponentIndex from '@/components/user/userDetailComponentIndex'
-import { Box, Divider, Group } from '@mantine/core'
+import { Box, Container, Divider, Group } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { useGetUserQuery } from '@/lib/generated/client'
 import { UserProvider } from '@/context/userProfileContext'
 import { LoaderBox } from '@/components/features/LoaderBox'
 import { AlertError } from '@/components/alert/error'
+import UserName from '@/components/user/show/name'
+import LinkComponent from '@/components/user/show/LinkComponent'
 
-export const UserProfile = () => {
+
+
+export default function UserProfile() {
+
   const router = useRouter()
   const { id } = router.query
   const { data, loading, error } = useGetUserQuery({
@@ -24,7 +29,15 @@ export const UserProfile = () => {
       <Box w="100%" miw="15rem" p="lg" bg="" style={{ borderRadius: '0.5rem' }}>
         <Group>
           <UserIconComponent />
-          <UserDetailComponentIndex />
+          <Box>
+            <UserName />
+              <Container
+                  style={{ display: 'flex', flexDirection: 'row', gap: 'sm' }}
+                  mt="0.4rem"
+              >
+                <LinkComponent />
+              </Container>
+          </Box>
         </Group>
         <UserDescription />
         <Divider />
@@ -32,3 +45,4 @@ export const UserProfile = () => {
     </UserProvider>
   )
 }
+

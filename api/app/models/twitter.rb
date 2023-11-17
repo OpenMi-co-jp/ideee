@@ -28,14 +28,9 @@ class Twitter
     create_tweet_url = 'https://api.twitter.com/2/tweets'
 
     user = User.find(idea.user_id)
-<<<<<<< HEAD
-    twitter_user = user.twitter_id.present? ? "@#{user.twitter_id} " : ''
-    hashtags = ['ideee', idea.idea_tags&.pluck(:name)].flatten.map { "##{_1}" }.join(' ')
-=======
     twitter_user = user&.twitter_id.present? ? "@#{user.twitter_id} " : ''
     hashtags = '#ideee'
     hashtags = [hashtags, idea.idea_tags.pluck(:name)].flatten.join(' #') if idea.idea_tags.length.positive?
->>>>>>> parent of 360ea5de (#1203 update: リファクタリング)
 
     json_payload = { "text": "【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#{hashtags}\n#{url}" }
 

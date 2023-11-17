@@ -34,11 +34,11 @@ class Twitter
 
     json_payload = { "text": "【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#{hashtags}\n#{url}" }
 
-    create_tweet(create_tweet_url, @oauth_params, json_payload)
+    create_tweet(create_tweet_url, json_payload)
   end
 
   private
-  def create_tweet(url, oauth_params, json_payload)
+  def create_tweet(url, json_payload)
     options = {
       method: :post,
       headers: {
@@ -48,7 +48,7 @@ class Twitter
       body: JSON.dump(json_payload)
     }
     request = Typhoeus::Request.new(url, options)
-    oauth_helper = OAuth::Client::Helper.new(request, oauth_params.merge(request_uri: url))
+    oauth_helper = OAuth::Client::Helper.new(request, @oauth_params.merge(request_uri: url))
     # Signs the request
     request.options[:headers]['Authorization'] = oauth_helper.header
     request.run

@@ -29,8 +29,7 @@ class Twitter
 
     user = User.find(idea.user_id)
     twitter_user = user&.twitter_id.present? ? "@#{user.twitter_id} " : ''
-    hashtags = '#ideee'
-    hashtags = [hashtags, idea.idea_tags.pluck(:name)].flatten.join(' #') if idea.idea_tags.length.positive?
+    hashtags = ['ideee', idea.idea_tags&.pluck(:name)].flatten.map { "##{_1}" }.join(' ')
 
     json_payload = { "text": "【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#{hashtags}\n#{url}" }
 

@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-require 'oauth'
-require 'json'
-require 'typhoeus'
-require 'oauth/request_proxy/typhoeus_request'
-require 'dotenv/load'
-
 class Twitter
   def initialize
     consumer_key = Rails.application.credentials.dig(:twitter_bot, :consumer_key)

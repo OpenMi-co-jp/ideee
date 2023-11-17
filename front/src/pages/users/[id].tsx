@@ -10,7 +10,6 @@ import UserName from '@/components/user/show/name'
 import LinkComponent from '@/components/user/show/LinkComponent'
 
 export default function UserProfile() {
-
   const router = useRouter()
   const { id } = router.query
   const { data, loading, error } = useGetUserQuery({

@@ -37,6 +37,7 @@ class Twitter
   end
 
   private
+
   def create_tweet(url, json_payload)
     options = {
       method: :post,

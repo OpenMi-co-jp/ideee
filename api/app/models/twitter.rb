@@ -43,6 +43,7 @@ class Twitter
     create_tweet(create_tweet_url, @oauth_params, json_payload)
   end
 
+  private
   def create_tweet(url, oauth_params, json_payload)
     options = {
       method: :post,

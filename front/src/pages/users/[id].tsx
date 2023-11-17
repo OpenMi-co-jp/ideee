@@ -1,6 +1,5 @@
 import UserDescription from '@/components/user/show/description'
 import UserIconComponent from '@/components/user/show/iconComponent'
-import UserDetailComponentIndex from '@/components/user/userDetailComponentIndex'
 import { Box, Container, Divider, Group } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { useGetUserQuery } from '@/lib/generated/client'
@@ -9,8 +8,6 @@ import { LoaderBox } from '@/components/features/LoaderBox'
 import { AlertError } from '@/components/alert/error'
 import UserName from '@/components/user/show/name'
 import LinkComponent from '@/components/user/show/LinkComponent'
-
-
 
 export default function UserProfile() {
 
@@ -31,12 +28,12 @@ export default function UserProfile() {
           <UserIconComponent />
           <Box>
             <UserName />
-              <Container
-                  style={{ display: 'flex', flexDirection: 'row', gap: 'sm' }}
-                  mt="0.4rem"
-              >
-                <LinkComponent />
-              </Container>
+            <Container
+              style={{ display: 'flex', flexDirection: 'row', gap: 'sm' }}
+              mt="0.4rem"
+            >
+              <LinkComponent />
+            </Container>
           </Box>
         </Group>
         <UserDescription />
@@ -45,4 +42,3 @@ export default function UserProfile() {
     </UserProvider>
   )
 }
-

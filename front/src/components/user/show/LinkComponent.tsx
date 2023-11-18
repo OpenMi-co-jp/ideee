@@ -18,7 +18,6 @@ export default function LinkComponent() {
   const { hovered, ref } = useHover()
 
   const renderLink = (type: string) => {
-    
     switch (type) {
       case LinkTypes.GITHUB:
         return (

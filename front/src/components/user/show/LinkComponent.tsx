@@ -21,7 +21,7 @@ export default function LinkComponent() {
     switch (type) {
       case LinkTypes.GITHUB:
         return (
-          <ActionIcon>
+          <ActionIcon variant="subtle" color="transparent" mr="-0.3rem">
             <Anchor
               href={user?.githubId ? `https://github.com/${user.githubId}` : ''}
               target="_blank"
@@ -43,7 +43,7 @@ export default function LinkComponent() {
 
       case LinkTypes.TWITTER:
         return (
-          <ActionIcon>
+          <ActionIcon variant="subtle" color="transparent" mr="-0.3rem">
             <Anchor
               href={
                 user?.twitterId ? `https://twitter.com/${user.twitterId}` : ''
@@ -67,7 +67,7 @@ export default function LinkComponent() {
 
       case LinkTypes.SITEURL:
         return (
-          <ActionIcon>
+          <ActionIcon variant="subtle" color="transparent">
             <Anchor
               href={user?.siteUrl ? `${user.siteUrl}` : ''}
               target="_blank"
@@ -91,7 +91,7 @@ export default function LinkComponent() {
     }
   }
   return (
-    <Group spacing="6px" ml="-6px">
+    <Group ml="-6px">
       {renderLink(LinkTypes.GITHUB)}
       {renderLink(LinkTypes.TWITTER)}
       {renderLink(LinkTypes.SITEURL)}

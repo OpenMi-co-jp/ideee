@@ -10,7 +10,7 @@ export const IdeaContentSet = ({
   if (!content) return null
 
   return (
-    <Stack gap="xs" px="md">
+    <Stack gap="xs">
       <Space h="xl" />
       <Title order={4} size="lg" c="gray" ml="md">
         {label}

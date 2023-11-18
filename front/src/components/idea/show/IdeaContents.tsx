@@ -58,9 +58,9 @@ export const IdeaContents = () => {
                   gradient={{ from: 'green', to: 'blue' }}
                   radius="xl"
                   size="md"
-                  m="md"
+                  mr="md"
                   leftSection={<IconApps />}
-                  mt="lg"
+                  mt="xl"
                 >
                   アプリを確認
                 </Button>

@@ -3,7 +3,7 @@ module Mutations
     graphql_name 'CreateLike'
 
     argument :likable_type, String, required: true, description: 'いいねしたオブジェクトタイプ'
-    argument :user_id, Integer, required: true, description: 'ユーザーID'
+    # argument :user_id, Integer, required: true, description: 'ユーザーID'
     argument :likable_id, Integer, required: true, description: 'オブジェクトID'
 
     field :like, Types::LikeType, null: false, description: 'いいねのオブジェクト'
@@ -12,7 +12,7 @@ module Mutations
     def resolve(**args)
       like = ::Like.new(
         likable_type: args[:likable_type],
-        user_id: args[:user_id],
+        user_id: context[:current_user].id,
         likable_id: args[:likable_id]
       )
       like.save!

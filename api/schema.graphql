@@ -253,11 +253,6 @@ input CreateLikeInput {
   いいねしたオブジェクトタイプ
   """
   likableType: String!
-
-  """
-  ユーザーID
-  """
-  userId: Int!
 }
 
 """

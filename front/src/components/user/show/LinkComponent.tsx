@@ -15,9 +15,10 @@ export default function LinkComponent() {
   }
 
   const user = useUser()
+  const { hovered, ref } = useHover()
 
   const renderLink = (type: string) => {
-    const { hovered, ref } = useHover()
+    
     switch (type) {
       case LinkTypes.GITHUB:
         return (
@@ -25,7 +26,7 @@ export default function LinkComponent() {
             <Anchor
               href={user?.githubId ? `https://github.com/${user.githubId}` : ''}
               target="_blank"
-              rel="nopener noreferrer"
+              rel="noopener noreferrer"
             >
               <div ref={ref}>
                 <IconBrandGithub
@@ -49,14 +50,14 @@ export default function LinkComponent() {
                 user?.twitterId ? `https://twitter.com/${user.twitterId}` : ''
               }
               target="_blank"
-              rel="nopener noreferrer"
+              rel="noopener noreferrer"
             >
               <div ref={ref}>
                 <IconBrandTwitter
                   color="black"
                   style={
                     hovered
-                      ? { transform: 'scale(1.2)', transition: 'all 0.0.5s' }
+                      ? { transform: 'scale(1.2)', transition: 'all 0.05s' }
                       : {}
                   }
                 />
@@ -71,7 +72,7 @@ export default function LinkComponent() {
             <Anchor
               href={user?.siteUrl ? `${user.siteUrl}` : ''}
               target="_blank"
-              rel="nopener noreferrer"
+              rel="noopener noreferrer"
             >
               <div ref={ref}>
                 <IconLink

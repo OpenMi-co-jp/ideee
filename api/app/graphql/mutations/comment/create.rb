@@ -15,11 +15,11 @@ module Mutations
         description: args[:description],
         idea_id: args[:idea_id]
       )
-      comment.save!
-      {
-        comment:,
-        success: true
-      }
+      if comment.save
+        { comment:, success: true }
+      else
+        { success: false, errors: comment.errors.full_messages }
+      end
     rescue ActiveRecord::RecordInvalid => e
       {
         success: false,

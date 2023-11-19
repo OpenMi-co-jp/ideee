@@ -576,7 +576,7 @@ export type QueryCommentArgs = {
 }
 
 export type QueryCommentsArgs = {
-  ideaId?: InputMaybe<Scalars['ID']>
+  ideaId: Scalars['ID']
 }
 
 export type QueryIdeaArgs = {

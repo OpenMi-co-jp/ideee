@@ -4,7 +4,7 @@ module Resolvers
   class Comment::CommentsResolver < BaseResolver
     graphql_name 'GetComments'
 
-    argument :idea_id, ID, required: false, description: 'アイデアID'
+    argument :idea_id, ID, required: true, description: 'アイデアID'
 
     type [Types::CommentType], null: false
 

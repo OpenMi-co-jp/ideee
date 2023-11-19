@@ -29,7 +29,6 @@ export const useCommentAction = () => {
       .then((res) => {
         if (res.data?.createComment?.success) {
           showSuccess({ action: 'コメント作成' })
-          console.log(res.data?.createComment?.comment)
           refetch()
         }
       })

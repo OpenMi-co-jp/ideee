@@ -1032,7 +1032,7 @@ type Query {
     """
     アイデアID
     """
-    ideaId: ID
+    ideaId: ID!
   ): [Comment!]!
 
   """

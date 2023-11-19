@@ -22,7 +22,8 @@ export const Like = () => {
   const [destroyLike, destroyResult] = useDestroyLikeMutation({
     variables: {
       input: {
-        id: id as string,
+        likableId: Number(id),
+        likableType: 'Idea',
       },
     },
   })
@@ -33,8 +34,14 @@ export const Like = () => {
     })
   }
 
+  const destroyLikeHandler = () => {
+    destroyLike().then(() => {
+      console.log(destroyResult.data?.destroyLike)
+    })
+  }
+
   return (
-    <Button onClick={() => createLikeHandler()} variant="transparent" px="xs">
+    <Button onClick={() => destroyLikeHandler()} variant="transparent" px="xs">
       {like ? (
         <IconHeartFilled style={{ color: 'black' }} />
       ) : (

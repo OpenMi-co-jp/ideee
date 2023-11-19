@@ -2,9 +2,8 @@ module Mutations
   class Comment::Create < BaseMutation
     graphql_name 'CreateComment'
 
-    argument :description, String, required: true, description: 'コメント'
-    argument :user_id, Integer, required: true, description: '【必須】ユーザーID'
-    argument :idea_id, Integer, required: true, description: '【必須】アイデアID'
+    argument :description, String, required: true, description: '【必須】コメント'
+    argument :idea_id, String, required: true, description: '【必須】アイデアID'
 
     field :comment, Types::CommentType, null: true, description: 'コメントオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
@@ -12,8 +11,8 @@ module Mutations
 
     def resolve(**args)
       comment = ::Comment.new(
+        user_id: context[:current_user].id,
         description: args[:description],
-        user_id: args[:user_id],
         idea_id: args[:idea_id]
       )
       comment.save!

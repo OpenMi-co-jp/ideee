@@ -4,10 +4,12 @@ module Resolvers
   class Comment::CommentsResolver < BaseResolver
     graphql_name 'GetComments'
 
+    argument :idea_id, ID, required: false, description: 'アイデアID'
+
     type [Types::CommentType], null: false
 
-    def resolve
-      ::Comment.all
+    def resolve(idea_id:)
+      ::Comment.eager_load(:user).where(idea_id:)
     end
   end
 end

@@ -460,9 +460,14 @@ input DestroyLikeInput {
   clientMutationId: String
 
   """
-  いいねID
+  リアクション対象のID
   """
-  id: ID!
+  likableId: Int!
+
+  """
+  リアクション対象のタイプ
+  """
+  likableType: String!
 }
 
 """

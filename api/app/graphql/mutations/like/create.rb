@@ -3,7 +3,6 @@ module Mutations
     graphql_name 'CreateLike'
 
     argument :likable_type, String, required: true, description: 'いいねしたオブジェクトタイプ'
-    # argument :user_id, Integer, required: true, description: 'ユーザーID'
     argument :likable_id, Integer, required: true, description: 'オブジェクトID'
 
     field :like, Types::LikeType, null: false, description: 'いいねのオブジェクト'

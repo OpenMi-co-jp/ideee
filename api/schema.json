@@ -1387,14 +1387,30 @@
               "deprecationReason": null
             },
             {
-              "name": "id",
-              "description": "いいねID",
+              "name": "likableType",
+              "description": "リアクション対象のタイプ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "ID",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "likableId",
+              "description": "リアクション対象のID",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
                   "ofType": null
                 }
               },

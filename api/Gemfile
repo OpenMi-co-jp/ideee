@@ -23,6 +23,11 @@ gem 'jbuilder', '~> 2.7'
 gem 'redis', '~> 4.6'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+# NOTE: sprockets は rails に同梱されていて明示的にインストールする必要はないが、app/assets/config/manifest.js を削除したことで
+#       sprockets に関するエラーが出るようになってしまった
+#       3系のバージョンだとエラーが出ないようなので、3系の最新を導入している
+#       ref. https://qiita.com/sasakura_870/items/106484f88c857bd9563e
+gem 'sprockets', '~> 3.7.2'
 
 gem 'devise'
 

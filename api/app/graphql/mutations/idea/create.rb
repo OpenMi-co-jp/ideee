@@ -41,7 +41,7 @@ module Mutations
         # user_id: context[:current_user].id
       )
       idea.save!
-      TwitterJob::Tweet.new.perform(idea, 'https://www.ideee.tech/ideas/' + idea.id.to_s)
+      TwitterJob::Tweet.new.perform(idea, "https://www.ideee.tech/ideas/#{idea.id}")
       {
         idea:,
         success: true

@@ -41,7 +41,7 @@ module Mutations
         # user_id: context[:current_user].id
       )
       idea.save!
-      if idea.save
+      if idea.save == true
         url = "#{Rails.application.config.host}/ideas/#{idea.id}"
         TwitterJob::Tweet.new.perform(idea, url)
       end

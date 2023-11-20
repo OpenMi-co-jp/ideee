@@ -6,10 +6,8 @@ module Resolvers
 
     type [Types::LikeType], null: false
 
-    argument :user_id, ID, required: true, description: 'ユーザーID'
-
-    def resolve(**args)
-      ::Like.where(user_id: args[:user_id])
+    def resolve
+      ::Like.where(user_id: context[:current_user].id)
     end
   end
 end

@@ -1,5 +1,5 @@
-query GetLikes($userId: ID!) {
-  likes(userId: $userId) {
+query GetLikes {
+  likes {
     id
     userId
     likableType

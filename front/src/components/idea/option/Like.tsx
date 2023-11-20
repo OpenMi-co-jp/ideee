@@ -41,7 +41,7 @@ export const Like = () => {
   }
 
   return (
-    <Button onClick={() => destroyLikeHandler()} variant="transparent" px="xs">
+    <Button onClick={() => createLikeHandler()} variant="transparent" px="xs">
       {like ? (
         <IconHeartFilled style={{ color: 'black' }} />
       ) : (

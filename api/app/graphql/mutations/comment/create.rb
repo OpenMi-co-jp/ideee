@@ -3,7 +3,7 @@ module Mutations
     graphql_name 'CreateComment'
 
     argument :description, String, required: true, description: '【必須】コメント'
-    argument :idea_id, String, required: true, description: '【必須】アイデアID'
+    argument :idea_id, ID, required: true, description: '【必須】アイデアID'
 
     field :comment, Types::CommentType, null: true, description: 'コメントオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
@@ -15,11 +15,11 @@ module Mutations
         description: args[:description],
         idea_id: args[:idea_id]
       )
-      if comment.save
-        { comment:, success: true }
-      else
-        { success: false, errors: comment.errors.full_messages }
-      end
+      comment.save!
+      {
+        comment:,
+        success: true,
+      }
     rescue ActiveRecord::RecordInvalid => e
       {
         success: false,

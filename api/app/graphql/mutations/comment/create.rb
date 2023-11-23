@@ -18,7 +18,7 @@ module Mutations
       comment.save!
       {
         comment:,
-        success: true,
+        success: true
       }
     rescue ActiveRecord::RecordInvalid => e
       {

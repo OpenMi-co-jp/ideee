@@ -950,6 +950,7 @@ export type GetIdeaQuery = {
       id: string
       description: string
       createdAt: any
+      userId: number
       user: { __typename?: 'User'; name: string; icon?: string | null }
     }>
     ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
@@ -1692,6 +1693,7 @@ export const GetIdeaDocument = gql`
         id
         description
         createdAt
+        userId
         user {
           name
           icon
@@ -2843,6 +2845,7 @@ export const GetUserDocument = gql`
     }
   }
 `
+
 /**
  * __useGetUserQuery__
  *

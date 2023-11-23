@@ -2,12 +2,11 @@ import { showSuccess, showError } from '@/components/notifications'
 import { useForm } from 'react-hook-form'
 import type { CreateCommentInput } from '@/lib/generated/client'
 import { useCreateCommentMutation } from '@/lib/generated/client'
-import { useRouter } from 'next/router'
 import { useCommentsInstance } from '@/components/comment/CommentList/useCommentsInstance'
+import { useIdea } from '@/context/IdeaContext'
 
 export const useCommentAction = () => {
-  const router = useRouter()
-  const { id } = router.query
+  const idea = useIdea()
   const { refetch } = useCommentsInstance()
   const form = useForm<CreateCommentInput>({
     defaultValues: { description: '' },
@@ -22,7 +21,7 @@ export const useCommentAction = () => {
       variables: {
         input: {
           description: props.description,
-          ideaId: id as string,
+          ideaId: idea.id,
         },
       },
     })
@@ -30,6 +29,7 @@ export const useCommentAction = () => {
         if (res.data?.createComment?.success) {
           showSuccess({ action: 'コメント作成' })
           refetch()
+          form.reset()
         }
       })
       .catch((error) => {

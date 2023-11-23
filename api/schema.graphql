@@ -52,7 +52,7 @@ input CreateCommentInput {
   """
   【必須】アイデアID
   """
-  ideaId: String!
+  ideaId: ID!
 }
 
 """

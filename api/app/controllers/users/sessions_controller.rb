@@ -4,6 +4,7 @@ class Users::SessionsController < Devise::SessionsController
   before_action :underscore_params!, only: %i[create]
   after_action :set_login_cookie, only: %i[create]
   prepend_before_action :verify_signed_out_user, only: :destroy
+  respond_to :json
 
   # POST /resource/sign_in
   def create

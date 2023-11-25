@@ -98,7 +98,7 @@ class User < ApplicationRecord
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
         when 'google_oauth2'
-          user.name = ''
+          user.name = auth.info.name
         when 'twitter'
           user.name = auth.info.name
           user.description = auth.info.description

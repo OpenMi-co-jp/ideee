@@ -30,10 +30,10 @@ RSpec.describe 'セッション' do
       }
     end
 
-    let!(:user) { create(:user, email: 'user@example.com', password:) }
+    before { create(:user, email: 'user@example.com', password:) }
 
     context 'パスワードの長さが下限（6文字）の場合' do
-      let(:password) { 'pass12' }
+      let(:password)      { 'pass12' }
       let(:auth_password) { 'pass12' }
 
       it '認証に成功する' do

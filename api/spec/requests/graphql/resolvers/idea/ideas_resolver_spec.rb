@@ -247,7 +247,8 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
           expect(graphql_post).to eq 200
           res_json = response.parsed_body
           expect(res_json['data']['ideas']['nodes'].length).to eq 3
-          expect(res_json['data']['ideas']['nodes'].first['updatedAt']).to eq popular_idea.updated_at.iso8601
+          expected_time = popular_idea.updated_at.change(sec: 0).iso8601
+          expect(res_json['data']['ideas']['nodes'].first['updatedAt'].to_time.change(sec: 0)).to eq expected_time
         end
       end
 

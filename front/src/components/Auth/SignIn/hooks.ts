@@ -12,6 +12,7 @@ export const handleSignIn = async (
   try {
     const response = await signIn(props)
     const token = response.headers['authorization']
+    // TODO: validateTokenメソッドを設定
     if (token) {
       Cookies.set('authToken', String(token), {
         expires: 7,

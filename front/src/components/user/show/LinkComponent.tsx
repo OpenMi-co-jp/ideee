@@ -1,4 +1,4 @@
-import { Anchor, ActionIcon, Group } from '@mantine/core'
+import { Anchor, ActionIcon, Grid, Group, Flex, rem } from '@mantine/core'
 import {
   IconBrandGithub,
   IconBrandTwitter,
@@ -12,7 +12,7 @@ const GithubLink = () => {
   const { hovered, ref } = useHover()
 
   return (
-    <ActionIcon variant="subtle" color="transparent">
+    <ActionIcon variant="transparent">
       <Anchor
         href={user?.githubId ? `https://github.com/${user.githubId}` : ''}
         target="_blank"
@@ -23,7 +23,7 @@ const GithubLink = () => {
             color="black"
             style={
               hovered
-                ? { transform: 'scale(1.2)', transition: 'all 0.05s' }
+                ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
                 : {}
             }
           />
@@ -37,7 +37,7 @@ const TwitterLink = () => {
   const user = useUser()
   const { hovered, ref } = useHover()
   return (
-    <ActionIcon variant="subtle" color="transparent" mr="-0.4rem">
+    <ActionIcon variant="transparent">
       <Anchor
         href={user?.twitterId ? `https://twitter.com/${user.twitterId}` : ''}
         target="_blank"
@@ -48,7 +48,7 @@ const TwitterLink = () => {
             color="black"
             style={
               hovered
-                ? { transform: 'scale(1.2)', transition: 'all 0.05s' }
+                ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
                 : {}
             }
           />
@@ -62,7 +62,7 @@ const SiteUrl = () => {
   const user = useUser()
   const { hovered, ref } = useHover()
   return (
-    <ActionIcon variant="subtle" color="transparent">
+    <ActionIcon variant="transparent">
       <Anchor
         href={user?.siteUrl ? `${user.siteUrl}` : ''}
         target="_blank"
@@ -73,7 +73,7 @@ const SiteUrl = () => {
             color="black"
             style={
               hovered
-                ? { transform: 'scale(1.2)', transition: 'all 0.05s' }
+                ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
                 : {}
             }
           />
@@ -84,8 +84,10 @@ const SiteUrl = () => {
 }
 
 export const LinkComponent = () => {
+
+
   return (
-    <Group>
+    <Group mx="2rem">
       <GithubLink />
       <TwitterLink />
       <SiteUrl />

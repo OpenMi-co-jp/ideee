@@ -280,7 +280,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2,
     Rails.application.credentials.dig(:google, :client_id),
     Rails.application.credentials.dig(:google, :client_secret),
-    scope: 'email',
+    scope: 'email, profile',
     redirect_uri: "#{ENV.fetch('HOST', 'http://localhost:3010')}/users/auth/google_oauth2/callback"
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
 

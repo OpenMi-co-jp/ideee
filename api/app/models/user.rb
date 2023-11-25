@@ -46,8 +46,8 @@ class User < ApplicationRecord
   extend Devise::Models
   # エラー対処のため二重記述
   devise :confirmable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable
-  devise :omniauthable, omniauth_providers: %i[twitter google_oauth2]
+         :recoverable, :rememberable, :validatable, :trackable,
+         :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy

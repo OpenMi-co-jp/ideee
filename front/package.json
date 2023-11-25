@@ -24,7 +24,7 @@
     "@mantine/hooks": "^7.1.2",
     "@mantine/modals": "^7.1.2",
     "@mantine/notifications": "^7.1.2",
-    "@tabler/icons-react": "^2.38.0",
+    "@tabler/icons-react": "^2.42.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",

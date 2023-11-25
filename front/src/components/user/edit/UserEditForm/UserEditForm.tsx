@@ -19,6 +19,19 @@ import {
   IconBrandGithub,
   IconLink,
 } from '@tabler/icons-react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+const UserEditFormSchema = z.object({
+  name: z.string().max(30, { message: '名前は20文字以内で入力してください' }),
+  email: z
+    .string()
+    .email({ message: 'メールアドレスの形式で入力してください' }),
+  profile: z
+    .string()
+    .max(200, { message: '自己紹介は200文字以内で入力してください' }),
+  siteUrl: z.string().url({ message: 'URLの形式で入力してください' }),
+})
 
 type UserEditFormValues = {
   name: String
@@ -32,6 +45,7 @@ type UserEditFormValues = {
 export const UserEditForm = () => {
   const iconRef = '/img/undefined_user_icon.webp'
   const form = useForm<UserEditFormValues>({
+    resolver: zodResolver(UserEditFormSchema),
     defaultValues: {},
     mode: 'onChange',
   })

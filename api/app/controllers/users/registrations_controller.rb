@@ -30,7 +30,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render json: { success: false, errors: resource.errors.full_messages }, status: :unprocessable_entity
     end
 
-    # Slack::SendNewJob.perform_later(resource, user_url(resource.id)) if Rails.env.production? && resource.present?
+    if Rails.env.production? && resource.present?
+      user_url = Rails.application.config.frontend_url + '/users/' + resource.id.to_s
+      Slack::SendNewJob.perform_later(resource, user_url)
+    end
   end
 
   # GET /resource/edit

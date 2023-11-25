@@ -15,8 +15,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def callback_for(provider)
     begin
       user = User.from_omniauth(request.env['omniauth.auth'])
-      if  user.created_at > Time.zone.now.ago(5.minutes)
-        user_url = Rails.application.config.frontend_url + '/users/' + user.id.to_s
+      if user.created_at > Time.zone.now.ago(5.minutes)
+        user_url = "#{Rails.application.config.frontend_url}/users/#{user.id}"
         Slack::SendNewJob.perform_later(user, user_url)
       end
     rescue StandardError => e

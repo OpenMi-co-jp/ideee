@@ -1,22 +1,29 @@
-import { Image, Card, rem, Flex, Center, px } from '@mantine/core'
-import { useUser } from '@/context/userProfileContext'
+import { Image, Card, rem } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
+import { useUser } from '@/context/userProfileContext'
 
 export const IconComponent = () => {
+  const isMobile = useMediaQuery(`(max-width: ${rem(450)})`)
   const user = useUser()
   const icon = user?.icon
 
   return (
-    <Image
-      src={icon ? icon : '/img/undefined_user_icon.webp'}
-      alt="ユーザーアイコン"
-      my="xs"
-      w="13%"
-      h="13%"
-      miw="6rem"
+    <Card
       style={{
+        display: 'flex',
+        justifyContent: isMobile ? '' : 'flex-start',
         borderRadius: '50%',
       }}
-    />
+      ml={isMobile ? '-4.5%' : ''}
+      mb="lg"
+      w="16%"
+      h="16%"
+      miw="6rem"
+    >
+      <Image
+        src={icon ? icon : '/img/undefined_user_icon.webp'}
+        alt="ユーザーアイコン"
+      />
+    </Card>
   )
 }

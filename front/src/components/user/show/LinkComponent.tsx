@@ -1,4 +1,4 @@
-import { Anchor, ActionIcon, Grid, Group, Flex, rem } from '@mantine/core'
+import { Anchor, ActionIcon, Group, Flex, rem } from '@mantine/core'
 import {
   IconBrandGithub,
   IconBrandTwitter,
@@ -84,8 +84,6 @@ const SiteUrl = () => {
 }
 
 export const LinkComponent = () => {
-
-
   return (
     <Group mx="2rem">
       <GithubLink />

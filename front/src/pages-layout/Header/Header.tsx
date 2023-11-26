@@ -4,6 +4,7 @@ import { useHeadroom } from '@mantine/hooks'
 import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification, ServiceIcon } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
+import { Sidebar } from './headerComponents/Sidebar'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
@@ -35,6 +36,7 @@ export const Header: FC = () => {
             <Notification />
             <UserToggle />
             <IdeaCreateButton />
+            <Sidebar />
           </Group>
         </Group>
       </Box>

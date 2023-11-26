@@ -41,7 +41,7 @@ FactoryBot.use_parent_strategy = false
 
 FactoryBot.define do
   factory :idea do
-    name { Faker::JapaneseMedia::Doraemon.gadget }
+    name { Faker::Fantasy::Tolkien.character }
     background { Faker::Creature::Animal.name }
     goal { Faker::Fantasy::Tolkien.character }
     note { Faker::Lorem.paragraph(sentence_count: 20) }

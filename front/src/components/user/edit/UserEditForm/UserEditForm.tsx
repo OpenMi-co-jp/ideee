@@ -23,7 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 const UserEditFormSchema = z.object({
-  name: z.string().max(30, { message: '名前は20文字以内で入力してください' }),
+  name: z.string().max(25, { message: '名前は25文字以内で入力してください' }),
   email: z
     .string()
     .email({ message: 'メールアドレスの形式で入力してください' }),

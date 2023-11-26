@@ -9,9 +9,9 @@ RSpec.describe User do
 
   describe 'validations' do
     it 'nameが31文字以上あればユーザー登録に失敗すること' do
-      user = FactoryBot.build(:user, name: 'a' * 21)
+      user = FactoryBot.build(:user, name: 'a' * 26)
       user.valid?
-      expect(user.errors[:name]).to include('は20文字以内で入力してください')
+      expect(user.errors[:name]).to include('は25文字以内で入力してください')
     end
 
     it 'emailがなかったら、ユーザー登録に失敗すること' do

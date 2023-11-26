@@ -73,7 +73,7 @@ class User < ApplicationRecord
   }
   mount_uploader :icon, ImageUploader
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
-  validates :name, length: { maximum: 20 }
+  validates :name, length: { maximum: 25 }
   validates :description, length: { maximum: 200 }
   validates :site_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 

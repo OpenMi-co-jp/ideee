@@ -85,7 +85,7 @@ const SiteUrl = () => {
 
 export const LinkComponent = () => {
   return (
-    <Group mx="2rem">
+    <Group mx="0.5rem">
       <GithubLink />
       <TwitterLink />
       <SiteUrl />

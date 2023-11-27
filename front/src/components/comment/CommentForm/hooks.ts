@@ -4,12 +4,18 @@ import type { CreateCommentInput } from '@/lib/generated/client'
 import { useCreateCommentMutation } from '@/lib/generated/client'
 import { useCommentsInstance } from '@/components/comment/CommentList/useCommentsInstance'
 import { useIdea } from '@/context/IdeaContext'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useCommentAction = () => {
   const idea = useIdea()
   const { refetch } = useCommentsInstance()
+  const commentSchema = z.object({
+    description: z.string().min(1, { message: 'コメントを入力してください' }),
+  })
   const form = useForm<CreateCommentInput>({
     defaultValues: { description: '' },
+    resolver: zodResolver(commentSchema),
     mode: 'onChange',
   })
 

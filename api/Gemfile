@@ -145,6 +145,11 @@ group :development do
 
   # TODO: graphiqlを削除する場合には、以下のgemも削除する
   gem 'graphiql-rails'
+
+  # RBS関連
+  gem 'steep', '>= 0.39.0', require: false
+  gem 'rbs', '>= 1', require: false
+  gem 'rbs_rails', '>= 0.6.0', require: false
 end
 
 group :test do

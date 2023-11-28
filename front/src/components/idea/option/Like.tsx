@@ -1,16 +1,17 @@
 import { IconHeartFilled, IconHeart } from '@tabler/icons-react'
 import { Button } from '@mantine/core'
-import { useToggle } from '@mantine/hooks'
 import {
   useCreateLikeMutation,
   useDestroyLikeMutation,
+  useGetLikesQuery,
 } from '@/lib/generated/client'
 import { useRouter } from 'next/router'
+import { useCallback, useState } from 'react'
 
 export const Like = () => {
-  const [like, toggleLike] = useToggle([false, true])
   const { id } = useRouter().query
-
+  const { data: likes } = useGetLikesQuery()
+  const [isLike, setLike] = useState(likes?.likes.find((like) => like.likableId == Number(id)) ? true : false)
   const [createLike, createResult] = useCreateLikeMutation({
     variables: {
       input: {
@@ -28,22 +29,26 @@ export const Like = () => {
     },
   })
 
-  const createDestroyHandler = () => {
-    if (like) {
-      destroyLike().then(() => {
-        console.log(destroyResult.data?.destroyLike)
+  const createDestroyHandler = useCallback(async () => {
+    if (isLike) {
+      await destroyLike().then(() => {
+        setLike(false)
       })
     } else {
-      createLike().then(() => {
-        console.log(createResult.data?.createLike)
+      await createLike().then(() => {
+        setLike(true)
       })
     }
-    toggleLike()
-  }
+    console.log(createResult.data?.createLike)
+  }, [createLike, createResult.data?.createLike, destroyLike, isLike])
 
   return (
-    <Button onClick={() => createDestroyHandler()} variant="transparent" px="xs">
-      {like ? (
+    <Button
+      onClick={() => createDestroyHandler()}
+      variant="transparent"
+      px="xs"
+    >
+      {isLike ? (
         <IconHeartFilled style={{ color: 'black' }} />
       ) : (
         <IconHeart style={{ color: 'black' }} />

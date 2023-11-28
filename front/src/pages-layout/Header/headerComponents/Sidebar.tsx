@@ -1,11 +1,15 @@
 import { useDisclosure } from '@mantine/hooks'
-import { Drawer, Button } from '@mantine/core'
+import { Drawer, Button, Box } from '@mantine/core'
 import { IconMenu2 } from '@tabler/icons-react'
+import { useMediaQuery } from '@mantine/hooks'
 
 export const Sidebar = () => {
   const [opened, { open, close }] = useDisclosure(false)
+  const isMobile = useMediaQuery('(max-width: 47.99em)')
 
   return (
+    <>
+    {isMobile && (
     <>
       <Drawer
         opened={opened}
@@ -18,6 +22,7 @@ export const Sidebar = () => {
       <Button onClick={open} variant="outline" color="orange">
         <IconMenu2 />
       </Button>
+      </>)}
     </>
   )
 }

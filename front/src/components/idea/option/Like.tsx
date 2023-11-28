@@ -28,20 +28,21 @@ export const Like = () => {
     },
   })
 
-  const createLikeHandler = () => {
-    createLike().then(() => {
-      console.log(createResult.data?.createLike)
-    })
-  }
-
-  const destroyLikeHandler = () => {
-    destroyLike().then(() => {
-      console.log(destroyResult.data?.destroyLike)
-    })
+  const createDestroyHandler = () => {
+    if (like) {
+      destroyLike().then(() => {
+        console.log(destroyResult.data?.destroyLike)
+      })
+    } else {
+      createLike().then(() => {
+        console.log(createResult.data?.createLike)
+      })
+    }
+    toggleLike()
   }
 
   return (
-    <Button onClick={() => createLikeHandler()} variant="transparent" px="xs">
+    <Button onClick={() => createDestroyHandler()} variant="transparent" px="xs">
       {like ? (
         <IconHeartFilled style={{ color: 'black' }} />
       ) : (

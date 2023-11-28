@@ -11,7 +11,9 @@ import { useCallback, useState } from 'react'
 export const Like = () => {
   const { id } = useRouter().query
   const { data: likes } = useGetLikesQuery()
-  const [isLike, setLike] = useState(likes?.likes.find((like) => like.likableId == Number(id)) ? true : false)
+  const [isLike, setLike] = useState(
+    likes?.likes.find((like) => like.likableId == Number(id)) ? true : false
+  )
   const [createLike, createResult] = useCreateLikeMutation({
     variables: {
       input: {

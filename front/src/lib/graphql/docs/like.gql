@@ -20,5 +20,6 @@ mutation CreateLike($input: CreateLikeInput!) {
 mutation DestroyLike($input: DestroyLikeInput!) {
   destroyLike(input: $input) {
     success
+    errors
   }
 }

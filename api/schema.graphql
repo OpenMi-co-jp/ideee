@@ -455,14 +455,9 @@ input DestroyLikeInput {
   clientMutationId: String
 
   """
-  リアクション対象のID
+  いいねID
   """
-  likableId: Int!
-
-  """
-  リアクション対象のタイプ
-  """
-  likableType: String!
+  id: ID!
 }
 
 """
@@ -473,6 +468,11 @@ type DestroyLikePayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
+
+  """
+  エラーリスト
+  """
+  errors: [String!]!
 
   """
   成功フラグ

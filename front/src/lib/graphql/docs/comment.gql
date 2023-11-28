@@ -5,10 +5,17 @@ query GetComment($id: ID!) {
   }
 }
 
-query GetComments {
-  comments {
+query GetComments($ideaId: ID!) {
+  comments(ideaId: $ideaId) {
     id
     description
+    createdAt
+    user {
+      id
+      name
+      icon
+      remoteUrl
+    }
   }
 }
 

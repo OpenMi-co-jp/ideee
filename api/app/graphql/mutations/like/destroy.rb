@@ -2,20 +2,21 @@ module Mutations
   class Like::Destroy < BaseMutation
     graphql_name 'DestroyLike'
 
-    argument :likable_type, String, required: true, description: 'リアクション対象のタイプ'
-    argument :likable_id, Integer, required: true, description: 'リアクション対象のID'
+    argument :id, ID, required: true, description: 'いいねID'
 
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: false, description: 'エラーリスト'
 
     def resolve(**args)
-      like = ::Like.find_by(
-        likable_type: args[:likable_type],
-        user_id: context[:current_user].id,
-        likable_id: args[:likable_id]
-      )
+      like = ::Like.find_by(id: args[:id])
       like.destroy!
       {
         success: true
+      }
+    rescue StandardError => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

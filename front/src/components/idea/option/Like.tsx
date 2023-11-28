@@ -22,6 +22,7 @@ export const Like = () => {
       },
     },
   })
+  // TODO: DestroyについてはLikeのIDだけで良いのせ修正する
   const [destroyLike, destroyResult] = useDestroyLikeMutation({
     variables: {
       input: {

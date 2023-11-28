@@ -12,6 +12,7 @@ export const Sidebar = () => {
       {isMobile && (
         <>
           <Drawer
+            position="right"
             opened={opened}
             onClose={close}
             title="Authentication"

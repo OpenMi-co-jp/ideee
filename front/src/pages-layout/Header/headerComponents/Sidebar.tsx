@@ -9,20 +9,21 @@ export const Sidebar = () => {
 
   return (
     <>
-    {isMobile && (
-    <>
-      <Drawer
-        opened={opened}
-        onClose={close}
-        title="Authentication"
-        overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
-      >
-        {/* Drawer content */}
-      </Drawer>
-      <Button onClick={open} variant="outline" color="orange">
-        <IconMenu2 />
-      </Button>
-      </>)}
+      {isMobile && (
+        <>
+          <Drawer
+            opened={opened}
+            onClose={close}
+            title="Authentication"
+            overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+          >
+            {/* Drawer content */}
+          </Drawer>
+          <Button onClick={open} variant="outline" color="orange">
+            <IconMenu2 />
+          </Button>
+        </>
+      )}
     </>
   )
 }

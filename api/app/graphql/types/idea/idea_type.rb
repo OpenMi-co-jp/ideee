@@ -33,5 +33,6 @@ module Types
     field :idea_tags, [Types::TagType], null: true, description: 'タグオブジェクト'
     field :team, Types::TeamType, null: true, description: 'チームオブジェクト'
     field :comments, [Types::CommentType], null: false, description: 'コメントリスト'
+    field :likes, [Types::LikeType], null: false, description: 'いいねリスト'
   end
 end

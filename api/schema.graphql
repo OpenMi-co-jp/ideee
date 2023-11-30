@@ -455,9 +455,14 @@ input DestroyLikeInput {
   clientMutationId: String
 
   """
-  いいねID
+  オブジェクトID
   """
-  id: ID!
+  likableId: Int!
+
+  """
+  いいねしたオブジェクトタイプ
+  """
+  likableType: String!
 }
 
 """
@@ -472,7 +477,7 @@ type DestroyLikePayload {
   """
   エラーリスト
   """
-  errors: [String!]!
+  errors: [String!]
 
   """
   成功フラグ
@@ -642,6 +647,11 @@ type Idea {
   課題・困っていること
   """
   issue: String
+
+  """
+  いいねリスト
+  """
+  likes: [Like!]!
 
   """
   ハート数

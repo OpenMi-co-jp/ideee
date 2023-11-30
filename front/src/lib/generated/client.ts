@@ -960,6 +960,7 @@ export type GetIdeaQuery = {
       name: string
       icon?: string | null
       twitterId?: string | null
+      remoteUrl?: string | null
     }
     comments: Array<{
       __typename?: 'Comment'
@@ -996,6 +997,7 @@ export type GetIdeasQuery = {
         id: string
         name: string
         icon?: string | null
+        remoteUrl?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
       team?: {
@@ -1026,7 +1028,11 @@ export type GetHotIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -1038,7 +1044,11 @@ export type GetDeployedIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -1050,7 +1060,11 @@ export type GetActiveTeamIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -1704,6 +1718,7 @@ export const GetIdeaDocument = gql`
         name
         icon
         twitterId
+        remoteUrl
       }
       comments {
         id
@@ -1778,6 +1793,7 @@ export const GetIdeasDocument = gql`
           id
           name
           icon
+          remoteUrl
         }
         ideaTags {
           name
@@ -1854,6 +1870,7 @@ export const GetHotIdeasDocument = gql`
       name
       user {
         icon
+        remoteUrl
       }
     }
   }
@@ -1913,6 +1930,7 @@ export const GetDeployedIdeasDocument = gql`
       name
       user {
         icon
+        remoteUrl
       }
     }
   }
@@ -1974,6 +1992,7 @@ export const GetActiveTeamIdeasDocument = gql`
       name
       user {
         icon
+        remoteUrl
       }
     }
   }

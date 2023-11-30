@@ -1371,14 +1371,30 @@
               "deprecationReason": null
             },
             {
-              "name": "id",
-              "description": "いいねID",
+              "name": "likableType",
+              "description": "いいねしたオブジェクトタイプ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "ID",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "likableId",
+              "description": "オブジェクトID",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
                   "ofType": null
                 }
               },
@@ -1416,19 +1432,15 @@
               "name": "errors",
               "description": "エラーリスト",
               "type": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "LIST",
+                  "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
                   }
                 }
               },
@@ -1977,6 +1989,32 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "likes",
+              "description": "いいねリスト",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Like",
+                      "ofType": null
+                    }
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null,

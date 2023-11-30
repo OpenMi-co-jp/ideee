@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
+import { OmniAuth } from '@/components/Auth/OmniAuth'
 import type { CustomNextPage } from 'next'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -40,6 +41,7 @@ export const SignInForm: CustomNextPage = () => {
         <Title order={2} mb={30}>
           ログイン
         </Title>
+        <OmniAuth />
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <Grid mt={'1rem'} mb={'0.5rem'}>

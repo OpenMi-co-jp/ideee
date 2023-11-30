@@ -19,7 +19,8 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
-  config.action_controller.allow_forgery_protection = true
+  # 確認用
+  config.action_controller.allow_forgery_protection = false
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -93,5 +94,7 @@ Rails.application.configure do
   config.hosts = 'localhost'
 
   config.frontend_url = 'http://localhost:3000'
+
+  config.web_console.allowed_ips = '0.0.0.0/0'
   config.host = 'http://localhost:3010/'
 end

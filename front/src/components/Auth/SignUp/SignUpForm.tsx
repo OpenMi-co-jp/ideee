@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '../../ReactFormSet'
 import { handleSignUp } from './hooks'
 import type { CustomNextPage } from 'next'
+import { OmniAuth } from '@/components/Auth/OmniAuth'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -27,7 +28,6 @@ export const SignUpFormSchema = z.object({
 
 export const SignUpForm: CustomNextPage = () => {
   const confirmSuccessUrl = process.env.NEXT_PUBLIC_FRONT_URL
-  console.log(confirmSuccessUrl)
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
@@ -46,6 +46,7 @@ export const SignUpForm: CustomNextPage = () => {
         <Title order={2} mb={30}>
           ユーザー登録
         </Title>
+        <OmniAuth />
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <PasswordForm

@@ -6,14 +6,19 @@ import {
   useGetLikesQuery,
 } from '@/lib/generated/client'
 import { useRouter } from 'next/router'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 
 export const Like = () => {
   const { id } = useRouter().query
   const { data: likes } = useGetLikesQuery()
-  const [isLike, setLike] = useState(
-    likes?.likes.find((like) => like.likableId == Number(id)) ? true : false
-  )
+  const [isLike, setLike] = useState(false)
+
+  useEffect(() => {
+    if(likes) {
+      setLike(likes.likes.some(like => like.likableId === Number(id))); 
+    }
+  }, [id, likes])
+
   const [createLike, createResult] = useCreateLikeMutation({
     variables: {
       input: {
@@ -32,18 +37,15 @@ export const Like = () => {
     },
   })
 
-  const createDestroyHandler = useCallback(async () => {
+  const createDestroyHandler = useCallback(() => {
     if (isLike) {
-      await destroyLike().then(() => {
-        setLike(false)
-      })
+      destroyLike()
+      setLike(false)
     } else {
-      await createLike().then(() => {
-        setLike(true)
-      })
+      createLike()
+      setLike(true)
     }
-    console.log(createResult.data?.createLike)
-  }, [createLike, createResult.data?.createLike, destroyLike, isLike])
+  }, [createLike, destroyLike, isLike])
 
   return (
     <Button

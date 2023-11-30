@@ -39,11 +39,10 @@ export const Like = () => {
 
   const createDestroyHandler = useCallback(() => {
     if (isLike) {
-      destroyLike()
+      destroyLike().then(() => setLike(false))
     } else {
-      createLike()
+      createLike().then(() => setLike(true))
     }
-    setLike(!isLike)
   }, [createLike, destroyLike, isLike])
 
   return (

@@ -40,19 +40,14 @@ export const Like = () => {
   const createDestroyHandler = useCallback(() => {
     if (isLike) {
       destroyLike()
-      setLike(false)
     } else {
       createLike()
-      setLike(true)
     }
+    setLike(!isLike)
   }, [createLike, destroyLike, isLike])
 
   return (
-    <Button
-      onClick={() => createDestroyHandler()}
-      variant="transparent"
-      px="xs"
-    >
+    <Button onClick={createDestroyHandler} variant="transparent" px="xs">
       {isLike ? (
         <IconHeartFilled style={{ color: 'black' }} />
       ) : (

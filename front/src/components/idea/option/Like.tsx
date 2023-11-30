@@ -27,7 +27,7 @@ export const Like = () => {
       },
     },
   })
-  
+
   const [destroyLike, destroyResult] = useDestroyLikeMutation({
     variables: {
       input: {

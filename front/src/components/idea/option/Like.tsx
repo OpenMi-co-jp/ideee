@@ -14,8 +14,8 @@ export const Like = () => {
   const [isLike, setLike] = useState(false)
 
   useEffect(() => {
-    if(likes) {
-      setLike(likes.likes.some(like => like.likableId === Number(id))); 
+    if (likes) {
+      setLike(likes.likes.some((like) => like.likableId === Number(id)))
     }
   }, [id, likes])
 

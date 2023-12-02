@@ -1,49 +1,15 @@
 import { IconHeartFilled, IconHeart } from '@tabler/icons-react'
 import { Button } from '@mantine/core'
-import {
-  useCreateLikeMutation,
-  useDestroyLikeMutation,
-  useGetLikesQuery,
-} from '@/lib/generated/client'
+import { useToggleLike } from './useToggleLike'
 import { useRouter } from 'next/router'
-import { useCallback, useState, useEffect } from 'react'
 
-export const Like = () => {
+/**
+ * Likeコンポーネントは、アイデアに対する「いいね」の切り替え機能を提供します。
+ * @returns {JSX.Element} Likeボタンを含んだReact要素
+ */
+export const Like = (): JSX.Element => {
   const { id } = useRouter().query
-  const { data: likes } = useGetLikesQuery()
-  const [isLike, setLike] = useState(false)
-
-  useEffect(() => {
-    if (likes) {
-      setLike(likes.likes.some((like) => like.likableId === Number(id)))
-    }
-  }, [id, likes])
-
-  const [createLike, createResult] = useCreateLikeMutation({
-    variables: {
-      input: {
-        likableType: 'Idea',
-        likableId: Number(id),
-      },
-    },
-  })
-
-  const [destroyLike, destroyResult] = useDestroyLikeMutation({
-    variables: {
-      input: {
-        likableId: Number(id),
-        likableType: 'Idea',
-      },
-    },
-  })
-
-  const createDestroyHandler = useCallback(() => {
-    if (isLike) {
-      destroyLike().then(() => setLike(false))
-    } else {
-      createLike().then(() => setLike(true))
-    }
-  }, [createLike, destroyLike, isLike])
+  const { isLike, createDestroyHandler } = useToggleLike(Number(id), 'Idea')
 
   return (
     <Button onClick={createDestroyHandler} variant="transparent" px="xs">

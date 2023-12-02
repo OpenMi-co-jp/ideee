@@ -3,6 +3,7 @@ import { CommentType } from '@/types/idea'
 import { FormatDate } from '@/utils/common'
 import { UserIcon } from '@/components/user'
 import Link from 'next/link'
+import { TextWithLinks } from '@/utils/Text'
 
 export const Comment = ({ comment }: CommentType) => {
   const { description, createdAt, user, userId } = comment

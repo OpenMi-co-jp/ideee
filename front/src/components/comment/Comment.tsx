@@ -5,12 +5,12 @@ import { UserIcon } from '@/components/user'
 import { TextWithLinks } from '@/utils/Text'
 
 export const Comment = ({ comment }: CommentType) => {
-  const { description, createdAt, user, id } = comment
+  const { description, createdAt, user } = comment
   const commentCreatedAt = new Date(createdAt)
   return (
     <>
       <Center m="lg">
-        <Link href={`/users/${id}`} passHref>
+        <Link href={`/users/${user.id}`} passHref>
           <UserIcon userIcon={user.icon} />
         </Link>
 

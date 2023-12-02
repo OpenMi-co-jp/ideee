@@ -18,7 +18,7 @@ module Mutations
       {
         success: true
       }
-    rescue StandardError => e
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound => e
       {
         success: false,
         errors: e.record.errors.full_messages

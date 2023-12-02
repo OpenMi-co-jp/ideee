@@ -11,7 +11,8 @@
       email: Faker::Internet.email,
       definition: [0, 1, 2].sample,
       confirmed_at: Time.zone.now,
-      defined: true
+      defined: true,
+      remote_url: Faker::Avatar.image
     }
   )
 end

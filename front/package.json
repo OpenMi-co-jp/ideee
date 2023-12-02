@@ -20,11 +20,12 @@
     "@graphql-codegen/typescript": "^3.0.3",
     "@graphql-codegen/typescript-operations": "^3.0.3",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@hookform/resolvers": "^3.3.2",
     "@mantine/core": "^7.1.2",
     "@mantine/hooks": "^7.1.2",
     "@mantine/modals": "^7.1.2",
     "@mantine/notifications": "^7.1.2",
-    "@tabler/icons-react": "^2.38.0",
+    "@tabler/icons-react": "^2.42.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
@@ -38,7 +39,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
-    "typescript": "5.0.3"
+    "react-string-replace": "^1.1.1",
+    "typescript": "5.0.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^3.3.0",

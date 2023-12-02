@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'セッション' do
-  describe 'POST /auth' do
+  describe 'POST /users' do
     let(:user_params) do
       {
-        email: 'example@example.com',
-        password: 'password',
-        password_confirmation: 'password'
+        registration: {
+          email: 'example@example.com',
+          password: 'password',
+          password_confirmation: 'password'
+        }
       }
     end
 
@@ -20,7 +22,7 @@ RSpec.describe 'セッション' do
     end
   end
 
-  describe 'POST /auth/sign_in' do
+  describe 'POST /users/sign_in' do
     subject(:auth_sign_in) do
       post user_session_path, params: {
         email: 'user@example.com',
@@ -28,18 +30,15 @@ RSpec.describe 'セッション' do
       }
     end
 
-    let!(:user) { create(:user, email: 'user@example.com', password:) }
+    before { create(:user, email: 'user@example.com', password:) }
 
     context 'パスワードの長さが下限（6文字）の場合' do
-      let(:password) { 'pass12' }
+      let(:password)      { 'pass12' }
       let(:auth_password) { 'pass12' }
 
       it '認証に成功する' do
         auth_sign_in
         expect(response).to have_http_status(:ok)
-        expect(response.headers['client']).to be_present
-        expect(response.headers['access-token']).to be_present
-        expect(response.headers['uid']).to eq user.email
         expect(response.headers['authorization']).to be_present
       end
     end
@@ -51,9 +50,6 @@ RSpec.describe 'セッション' do
       it '認証に成功する' do
         auth_sign_in
         expect(response).to have_http_status(:ok)
-        expect(response.headers['client']).to be_present
-        expect(response.headers['access-token']).to be_present
-        expect(response.headers['uid']).to eq user.email
         expect(response.headers['authorization']).to be_present
       end
     end
@@ -69,7 +65,7 @@ RSpec.describe 'セッション' do
     end
   end
 
-  describe 'DELETE /auth/sign_out' do
+  describe 'DELETE /users/sign_out' do
     let(:user) { create(:user) }
     let(:tokens) { sign_in(user) }
 

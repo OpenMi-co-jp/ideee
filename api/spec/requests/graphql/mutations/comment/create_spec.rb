@@ -26,8 +26,7 @@ RSpec.describe Mutations::Comment::Create do
   let(:variables) do
     {
       input: {
-        userId: user.id,
-        ideaId: idea_id,
+        ideaId: idea_id.to_s,
         description:
       }
     }
@@ -68,7 +67,7 @@ RSpec.describe Mutations::Comment::Create do
         graphql_post
         res = response.parsed_body
 
-        expect(res['errors'][0]['message']).to include('Variable $input of type CreateCommentInput!')
+        expect(res['data']['createComment']['errors']).to include('Ideaを入力してください')
       end
     end
   end

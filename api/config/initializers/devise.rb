@@ -263,7 +263,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = %i[json html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -272,10 +272,16 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :twitter, Rails.application.credentials.dig(:twitter, :api_key),
-                  Rails.application.credentials.dig(:twitter, :api_secret), scope: 'email', oauth_callback: "#{ENV.fetch('HOST', nil)}/users/auth/twitter/callback"
-  config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :client_id),
-                  Rails.application.credentials.dig(:google, :client_secret), scope: 'email', redirect_uri: "#{ENV.fetch('HOST', nil)}/users/auth/google_oauth2/callback"
+  config.omniauth :twitter,
+    Rails.application.credentials.dig(:twitter, :api_key),
+    Rails.application.credentials.dig(:twitter, :api_secret),
+    scope: 'email',
+    oauth_callback: "#{ENV.fetch('HOST', 'http://localhost:3010')}/users/auth/twitter/callback"
+  config.omniauth :google_oauth2,
+    Rails.application.credentials.dig(:google, :client_id),
+    Rails.application.credentials.dig(:google, :client_secret),
+    scope: 'email, profile',
+    redirect_uri: "#{ENV.fetch('HOST', 'http://localhost:3010')}/users/auth/google_oauth2/callback"
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
 
   # ==> Warden configuration

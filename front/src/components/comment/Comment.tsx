@@ -16,7 +16,7 @@ export const Comment = ({ comment }: CommentType) => {
 
         <Group p="xs">
           <Paper bg="#FFFFFF" maw="30rem" p="md" radius="lg">
-            {description}
+            <TextWithLinks>{description}</TextWithLinks>
           </Paper>
           <Text c="gray">{FormatDate(commentCreatedAt)}</Text>
         </Group>

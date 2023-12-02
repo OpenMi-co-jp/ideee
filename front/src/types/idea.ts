@@ -4,6 +4,7 @@ export type IdeaBoxType = {
   user: {
     __typename?: 'User'
     icon?: string | null
+    remoteUrl?: string | null
   }
 }
 

@@ -12,7 +12,7 @@
       definition: [0, 1, 2].sample,
       confirmed_at: Time.zone.now,
       defined: true,
-      description: Faker::Lorem.paragraph(sentence_count: 10)
+      remote_url: Faker::Avatar.image
     }
   )
 end

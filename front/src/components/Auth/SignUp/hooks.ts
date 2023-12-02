@@ -1,3 +1,5 @@
+'use client'
+
 import { showSuccess, showError } from '@/components/notifications'
 import { modals } from '@mantine/modals'
 import { signUp } from '@/utils/auth'
@@ -6,17 +8,21 @@ import type { SignUpFormValues } from '@/types/user'
 export const handleSignUp = async (props: SignUpFormValues) => {
   try {
     const response = await signUp(props)
-    if (response.status === 200) {
-      const token = response.headers['authorization']
-      showSuccess({
-        action: 'ユーザー作成',
-        message: '確認用メールをご確認ください',
-      })
-      modals.closeAll()
+    const token = response.headers['authorization']
+    const { action, message } = response.data
+    showSuccess({ action, message })
+    modals.closeAll()
+  } catch (error: any) {
+    if (error.response) {
+      // サーバーからのレスポンスがあり、かつステータスコードが200-299以外の場合
+      console.error('Request failed with status code: ' + error.response.status)
+    } else if (error.request) {
+      // リクエストが送られたが、レスポンスが受け取れなかった場合
+      console.error('No response received.')
     } else {
-      throw new Error('Request failed with status code: ' + response.status)
+      // 何かがリクエストの送信前にエラーを発生させた場合
+      console.error('Error setting up the request.')
     }
-  } catch (error) {
     showError({ action: 'ユーザー作成' })
   }
 }

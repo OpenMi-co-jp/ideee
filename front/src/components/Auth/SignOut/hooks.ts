@@ -8,18 +8,11 @@ export const handleSignOut = async (
 ) => {
   try {
     const response = await signOut()
-    if (response.status === 200) {
-      Cookies.remove('authToken')
-      setLoggedIn(false)
-      localStorage.setItem('loggedIn', 'false')
-      showSuccess({ action: 'ログアウト' })
-    } else {
-      throw new Error('Request failed with status code: ' + response.status)
-    }
-  } catch (error) {
-    setLoggedIn(false)
     Cookies.remove('authToken')
+    setLoggedIn(false)
     localStorage.setItem('loggedIn', 'false')
-    showError({ action: 'ログアウト' })
+    showSuccess({ action: 'ログアウト' })
+  } catch (error: any) {
+    showError({ action: 'ログアウト', message: error.message })
   }
 }

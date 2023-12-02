@@ -1,8 +1,5 @@
 class GraphqlController < ApplicationController
-  include DeviseTokenAuth::Concerns::SetUserByToken
   protect_from_forgery with: :null_session
-
-  before_action :decode_authorization_header
 
   def execute
     variables = prepare_variables(params[:variables])
@@ -10,7 +7,7 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      current_user:
+      current_user: current_user_from_token
     }
     result = IdeeeSchema.execute(query, variables:, context:, operation_name:)
     render json: result
@@ -49,13 +46,37 @@ class GraphqlController < ApplicationController
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: :internal_server_error
   end
 
+  def current_user_from_token
+    return current_user if current_user.present?
+
+    token = extract_token_from_authorization
+    return unless token
+
+    decoded_token = decode_token(token)
+    return unless decoded_token
+
+    User.find_by(id: decoded_token['id'])
+  rescue JWT::DecodeError
+    authenticate_error
+  end
+
   require 'cgi'
+  def extract_token_from_authorization
+    authorization = request.headers['Authorization']
+    return if authorization.blank? || !authorization.start_with?('Bearer ')
 
-  def decode_authorization_header
-    auth_header = request.headers['Authorization']
-    return unless auth_header&.start_with?('Bearer%20')
+    CGI.unescape(authorization).split('Bearer ').last.presence
+  end
 
-    decoded_auth_header = CGI.unescape(auth_header)
-    request.headers['Authorization'] = decoded_auth_header
+  def decode_token(token)
+    JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }).first
+  rescue JWT::DecodeError => e
+    Rails.logger.debug { "====== Error decoding token: #{e.message} ======" }
+    nil
+  end
+
+  def authenticate_error
+    render json: { error: t('devise.failure.unauthenticated') }, status: :unauthorized
+    nil
   end
 end

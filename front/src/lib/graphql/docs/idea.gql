@@ -22,6 +22,7 @@ query GetIdea($id: ID!) {
       name
       icon
       twitterId
+      remoteUrl
     }
     comments {
       id
@@ -55,6 +56,7 @@ query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
         id
         name
         icon
+        remoteUrl
       }
       ideaTags {
         name
@@ -83,6 +85,7 @@ query GetHotIdeas {
     name
     user {
       icon
+      remoteUrl
     }
   }
 }
@@ -93,6 +96,7 @@ query GetDeployedIdeas {
     name
     user {
       icon
+      remoteUrl
     }
   }
 }
@@ -103,6 +107,7 @@ query GetActiveTeamIdeas {
     name
     user {
       icon
+      remoteUrl
     }
   }
 }

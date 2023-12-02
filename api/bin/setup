@@ -23,7 +23,6 @@ FileUtils.chdir APP_ROOT do
   # end
 
   Rails.logger.info "\n== Prepare action text =="
-  system! "bin/rails assets:precompile"
   system! "yarn install --check-files"
   system! "bin/rails action_text:install"
 

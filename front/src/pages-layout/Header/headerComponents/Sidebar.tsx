@@ -48,7 +48,26 @@ export const Sidebar = () => {
               labelPosition="left"
               color="orange"
             />
-
+            <Link href="/">
+              <Anchor underline="never">
+                <NavLink
+                  px="2rem"
+                  h="4rem"
+                  label="アイデア投稿"
+                  color="black"
+                  leftSection={<IconBulb size="1.3rem" stroke={2.5} />}
+                  rightSection={
+                    <IconChevronRight
+                      size="0.8rem"
+                      stroke={1.5}
+                      color="black"
+                    />
+                  }
+                  variant="subtle"
+                  active
+                />
+              </Anchor>
+            </Link>
             <Space />
 
             <Menu width={290} shadow="lg">

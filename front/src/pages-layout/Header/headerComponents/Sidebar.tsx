@@ -18,6 +18,8 @@ import {
   IconSun,
   IconBook,
   IconBulb,
+  IconUserCircle,
+  IconPencil,
 } from '@tabler/icons-react'
 import { useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
@@ -331,6 +333,51 @@ export const Sidebar = () => {
                       labelPosition="left"
                       color="orange"
                     />
+                    <Link href="/">
+                      <Anchor underline="never">
+                        <NavLink
+                          px="2rem"
+                          h="4rem"
+                          label="マイページ"
+                          color="black"
+                          leftSection={
+                            <IconUserCircle size="1.6rem" stroke={2.5} />
+                          }
+                          rightSection={
+                            <IconChevronRight
+                              size="0.8rem"
+                              stroke={1.5}
+                              color="black"
+                            />
+                          }
+                          variant="subtle"
+                          active
+                        />
+                      </Anchor>
+                    </Link>
+
+                    <Link href="/">
+                      <Anchor underline="never">
+                        <NavLink
+                          px="2rem"
+                          h="4rem"
+                          label="ユーザー情報編集"
+                          color="black"
+                          leftSection={
+                            <IconPencil size="1.3rem" stroke={2.5} />
+                          }
+                          rightSection={
+                            <IconChevronRight
+                              size="0.8rem"
+                              stroke={1.5}
+                              color="black"
+                            />
+                          }
+                          variant="subtle"
+                          active
+                        />
+                      </Anchor>
+                    </Link>
 
                     <Anchor underline="never">
                       <NavLink

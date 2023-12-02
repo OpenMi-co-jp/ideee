@@ -1,4 +1,4 @@
-import { Anchor, ActionIcon, Group, Flex, rem } from '@mantine/core'
+import { Anchor, ActionIcon, Group } from '@mantine/core'
 import {
   IconBrandGithub,
   IconBrandTwitter,

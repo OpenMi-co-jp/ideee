@@ -12,10 +12,8 @@ export const IconComponent = () => {
       style={{
         display: 'flex',
         justifyContent: isMobile ? '' : 'flex-start',
-        borderRadius: '50%',
       }}
       ml={isMobile ? '-4.5%' : ''}
-      mb="lg"
       w="16%"
       h="16%"
       miw="6rem"
@@ -23,6 +21,7 @@ export const IconComponent = () => {
       <Image
         src={icon ? icon : '/img/undefined_user_icon.webp'}
         alt="ユーザーアイコン"
+        radius="50%"
       />
     </Card>
   )

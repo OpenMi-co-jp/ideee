@@ -1,13 +1,14 @@
 import { showSuccess, showError } from '@/components/notifications'
 import Cookies from 'js-cookie'
 import { modals } from '@mantine/modals'
-import type { LoginContextType } from '@/components/loginContext'
+import type { CurrentUserContextType } from '@/context/CurrentUserContext'
 import { signIn } from '@/utils/auth'
 import type { SignInFormValues } from '@/types/user'
+import { DecodeJwt } from '@/utils/auth'
 
 export const handleSignIn = async (
   props: SignInFormValues,
-  setLoggedIn: LoginContextType['setLoggedIn']
+  setCurrentUser: CurrentUserContextType['setCurrentUser']
 ) => {
   try {
     const response = await signIn(props)
@@ -18,9 +19,9 @@ export const handleSignIn = async (
         expires: 7,
         secure: true,
       })
+      const decodedToken = DecodeJwt(String(token))
+      setCurrentUser(decodedToken)
     }
-    localStorage.setItem('loggedIn', 'true')
-    setLoggedIn(true)
     showSuccess({ action: 'ログイン' })
     modals.closeAll()
   } catch (error) {

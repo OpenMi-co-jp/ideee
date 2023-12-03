@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { showSuccess } from '@/components/notifications'
 import Cookies from 'js-cookie'
 import { LoadingOverlay } from '@mantine/core'
-import { useLoggedIn } from '@/components/loginContext'
+import { useCurrentUser } from '@/context/CurrentUserContext'
+import { DecodeJwt } from '@/utils/auth'
 
 function AuthCallback() {
-  const { setLoggedIn } = useLoggedIn()
+  const { setCurrentUser } = useCurrentUser()
   const router = useRouter()
   const { query } = router
   const token = query.token
@@ -17,15 +18,19 @@ function AuthCallback() {
         expires: 7,
         secure: true,
       })
-      localStorage.setItem('loggedIn', 'true')
-      setLoggedIn(true)
-    }
-    router.push('/').then(() => {
-      showSuccess({
-        action: 'ログイン',
+      try {
+        const decodedToken = DecodeJwt(String(token))
+        setCurrentUser(decodedToken)
+      } catch (error) {
+        console.error('Failed to decode JWT:', error)
+      }
+      router.push('/').then(() => {
+        showSuccess({
+          action: 'ログイン',
+        })
       })
-    })
-  }, [token])
+    }
+  }, [token, setCurrentUser, router])
 
   return (
     <LoadingOverlay

@@ -1,0 +1,642 @@
+class NotificationConfig < ::ApplicationRecord
+  extend _ActiveRecord_Relation_ClassMethods[NotificationConfig, ActiveRecord_Relation, Integer]
+
+  module GeneratedAttributeMethods
+    def id: () -> Integer
+
+    def id=: (Integer) -> Integer
+
+    def id?: () -> bool
+
+    def id_changed?: () -> bool
+
+    def id_change: () -> [ Integer?, Integer? ]
+
+    def id_will_change!: () -> void
+
+    def id_was: () -> Integer?
+
+    def id_previously_changed?: () -> bool
+
+    def id_previous_change: () -> Array[Integer?]?
+
+    def id_previously_was: () -> Integer?
+
+    def id_before_last_save: () -> Integer?
+
+    def id_change_to_be_saved: () -> Array[Integer?]?
+
+    def id_in_database: () -> Integer?
+
+    def saved_change_to_id: () -> Array[Integer?]?
+
+    def saved_change_to_id?: () -> bool
+
+    def will_save_change_to_id?: () -> bool
+
+    def restore_id!: () -> void
+
+    def clear_id_change: () -> void
+
+    def user_id: () -> Integer
+
+    def user_id=: (Integer) -> Integer
+
+    def user_id?: () -> bool
+
+    def user_id_changed?: () -> bool
+
+    def user_id_change: () -> [ Integer?, Integer? ]
+
+    def user_id_will_change!: () -> void
+
+    def user_id_was: () -> Integer?
+
+    def user_id_previously_changed?: () -> bool
+
+    def user_id_previous_change: () -> Array[Integer?]?
+
+    def user_id_previously_was: () -> Integer?
+
+    def user_id_before_last_save: () -> Integer?
+
+    def user_id_change_to_be_saved: () -> Array[Integer?]?
+
+    def user_id_in_database: () -> Integer?
+
+    def saved_change_to_user_id: () -> Array[Integer?]?
+
+    def saved_change_to_user_id?: () -> bool
+
+    def will_save_change_to_user_id?: () -> bool
+
+    def restore_user_id!: () -> void
+
+    def clear_user_id_change: () -> void
+
+    def heart_email: () -> bool
+
+    def heart_email=: (bool) -> bool
+
+    def heart_email?: () -> bool
+
+    def heart_email_changed?: () -> bool
+
+    def heart_email_change: () -> [ bool?, bool? ]
+
+    def heart_email_will_change!: () -> void
+
+    def heart_email_was: () -> bool?
+
+    def heart_email_previously_changed?: () -> bool
+
+    def heart_email_previous_change: () -> Array[bool?]?
+
+    def heart_email_previously_was: () -> bool?
+
+    def heart_email_before_last_save: () -> bool?
+
+    def heart_email_change_to_be_saved: () -> Array[bool?]?
+
+    def heart_email_in_database: () -> bool?
+
+    def saved_change_to_heart_email: () -> Array[bool?]?
+
+    def saved_change_to_heart_email?: () -> bool
+
+    def will_save_change_to_heart_email?: () -> bool
+
+    def restore_heart_email!: () -> void
+
+    def clear_heart_email_change: () -> void
+
+    def comment_email: () -> bool
+
+    def comment_email=: (bool) -> bool
+
+    def comment_email?: () -> bool
+
+    def comment_email_changed?: () -> bool
+
+    def comment_email_change: () -> [ bool?, bool? ]
+
+    def comment_email_will_change!: () -> void
+
+    def comment_email_was: () -> bool?
+
+    def comment_email_previously_changed?: () -> bool
+
+    def comment_email_previous_change: () -> Array[bool?]?
+
+    def comment_email_previously_was: () -> bool?
+
+    def comment_email_before_last_save: () -> bool?
+
+    def comment_email_change_to_be_saved: () -> Array[bool?]?
+
+    def comment_email_in_database: () -> bool?
+
+    def saved_change_to_comment_email: () -> Array[bool?]?
+
+    def saved_change_to_comment_email?: () -> bool
+
+    def will_save_change_to_comment_email?: () -> bool
+
+    def restore_comment_email!: () -> void
+
+    def clear_comment_email_change: () -> void
+
+    def draft_remind_email: () -> bool
+
+    def draft_remind_email=: (bool) -> bool
+
+    def draft_remind_email?: () -> bool
+
+    def draft_remind_email_changed?: () -> bool
+
+    def draft_remind_email_change: () -> [ bool?, bool? ]
+
+    def draft_remind_email_will_change!: () -> void
+
+    def draft_remind_email_was: () -> bool?
+
+    def draft_remind_email_previously_changed?: () -> bool
+
+    def draft_remind_email_previous_change: () -> Array[bool?]?
+
+    def draft_remind_email_previously_was: () -> bool?
+
+    def draft_remind_email_before_last_save: () -> bool?
+
+    def draft_remind_email_change_to_be_saved: () -> Array[bool?]?
+
+    def draft_remind_email_in_database: () -> bool?
+
+    def saved_change_to_draft_remind_email: () -> Array[bool?]?
+
+    def saved_change_to_draft_remind_email?: () -> bool
+
+    def will_save_change_to_draft_remind_email?: () -> bool
+
+    def restore_draft_remind_email!: () -> void
+
+    def clear_draft_remind_email_change: () -> void
+
+    def team_join_email: () -> bool
+
+    def team_join_email=: (bool) -> bool
+
+    def team_join_email?: () -> bool
+
+    def team_join_email_changed?: () -> bool
+
+    def team_join_email_change: () -> [ bool?, bool? ]
+
+    def team_join_email_will_change!: () -> void
+
+    def team_join_email_was: () -> bool?
+
+    def team_join_email_previously_changed?: () -> bool
+
+    def team_join_email_previous_change: () -> Array[bool?]?
+
+    def team_join_email_previously_was: () -> bool?
+
+    def team_join_email_before_last_save: () -> bool?
+
+    def team_join_email_change_to_be_saved: () -> Array[bool?]?
+
+    def team_join_email_in_database: () -> bool?
+
+    def saved_change_to_team_join_email: () -> Array[bool?]?
+
+    def saved_change_to_team_join_email?: () -> bool
+
+    def will_save_change_to_team_join_email?: () -> bool
+
+    def restore_team_join_email!: () -> void
+
+    def clear_team_join_email_change: () -> void
+
+    def team_message_email: () -> bool
+
+    def team_message_email=: (bool) -> bool
+
+    def team_message_email?: () -> bool
+
+    def team_message_email_changed?: () -> bool
+
+    def team_message_email_change: () -> [ bool?, bool? ]
+
+    def team_message_email_will_change!: () -> void
+
+    def team_message_email_was: () -> bool?
+
+    def team_message_email_previously_changed?: () -> bool
+
+    def team_message_email_previous_change: () -> Array[bool?]?
+
+    def team_message_email_previously_was: () -> bool?
+
+    def team_message_email_before_last_save: () -> bool?
+
+    def team_message_email_change_to_be_saved: () -> Array[bool?]?
+
+    def team_message_email_in_database: () -> bool?
+
+    def saved_change_to_team_message_email: () -> Array[bool?]?
+
+    def saved_change_to_team_message_email?: () -> bool
+
+    def will_save_change_to_team_message_email?: () -> bool
+
+    def restore_team_message_email!: () -> void
+
+    def clear_team_message_email_change: () -> void
+
+    def weekly_email: () -> bool
+
+    def weekly_email=: (bool) -> bool
+
+    def weekly_email?: () -> bool
+
+    def weekly_email_changed?: () -> bool
+
+    def weekly_email_change: () -> [ bool?, bool? ]
+
+    def weekly_email_will_change!: () -> void
+
+    def weekly_email_was: () -> bool?
+
+    def weekly_email_previously_changed?: () -> bool
+
+    def weekly_email_previous_change: () -> Array[bool?]?
+
+    def weekly_email_previously_was: () -> bool?
+
+    def weekly_email_before_last_save: () -> bool?
+
+    def weekly_email_change_to_be_saved: () -> Array[bool?]?
+
+    def weekly_email_in_database: () -> bool?
+
+    def saved_change_to_weekly_email: () -> Array[bool?]?
+
+    def saved_change_to_weekly_email?: () -> bool
+
+    def will_save_change_to_weekly_email?: () -> bool
+
+    def restore_weekly_email!: () -> void
+
+    def clear_weekly_email_change: () -> void
+
+    def event_email: () -> bool
+
+    def event_email=: (bool) -> bool
+
+    def event_email?: () -> bool
+
+    def event_email_changed?: () -> bool
+
+    def event_email_change: () -> [ bool?, bool? ]
+
+    def event_email_will_change!: () -> void
+
+    def event_email_was: () -> bool?
+
+    def event_email_previously_changed?: () -> bool
+
+    def event_email_previous_change: () -> Array[bool?]?
+
+    def event_email_previously_was: () -> bool?
+
+    def event_email_before_last_save: () -> bool?
+
+    def event_email_change_to_be_saved: () -> Array[bool?]?
+
+    def event_email_in_database: () -> bool?
+
+    def saved_change_to_event_email: () -> Array[bool?]?
+
+    def saved_change_to_event_email?: () -> bool
+
+    def will_save_change_to_event_email?: () -> bool
+
+    def restore_event_email!: () -> void
+
+    def clear_event_email_change: () -> void
+
+    def heart_web: () -> bool
+
+    def heart_web=: (bool) -> bool
+
+    def heart_web?: () -> bool
+
+    def heart_web_changed?: () -> bool
+
+    def heart_web_change: () -> [ bool?, bool? ]
+
+    def heart_web_will_change!: () -> void
+
+    def heart_web_was: () -> bool?
+
+    def heart_web_previously_changed?: () -> bool
+
+    def heart_web_previous_change: () -> Array[bool?]?
+
+    def heart_web_previously_was: () -> bool?
+
+    def heart_web_before_last_save: () -> bool?
+
+    def heart_web_change_to_be_saved: () -> Array[bool?]?
+
+    def heart_web_in_database: () -> bool?
+
+    def saved_change_to_heart_web: () -> Array[bool?]?
+
+    def saved_change_to_heart_web?: () -> bool
+
+    def will_save_change_to_heart_web?: () -> bool
+
+    def restore_heart_web!: () -> void
+
+    def clear_heart_web_change: () -> void
+
+    def comment_web: () -> bool
+
+    def comment_web=: (bool) -> bool
+
+    def comment_web?: () -> bool
+
+    def comment_web_changed?: () -> bool
+
+    def comment_web_change: () -> [ bool?, bool? ]
+
+    def comment_web_will_change!: () -> void
+
+    def comment_web_was: () -> bool?
+
+    def comment_web_previously_changed?: () -> bool
+
+    def comment_web_previous_change: () -> Array[bool?]?
+
+    def comment_web_previously_was: () -> bool?
+
+    def comment_web_before_last_save: () -> bool?
+
+    def comment_web_change_to_be_saved: () -> Array[bool?]?
+
+    def comment_web_in_database: () -> bool?
+
+    def saved_change_to_comment_web: () -> Array[bool?]?
+
+    def saved_change_to_comment_web?: () -> bool
+
+    def will_save_change_to_comment_web?: () -> bool
+
+    def restore_comment_web!: () -> void
+
+    def clear_comment_web_change: () -> void
+
+    def heart_to_comment_web: () -> bool
+
+    def heart_to_comment_web=: (bool) -> bool
+
+    def heart_to_comment_web?: () -> bool
+
+    def heart_to_comment_web_changed?: () -> bool
+
+    def heart_to_comment_web_change: () -> [ bool?, bool? ]
+
+    def heart_to_comment_web_will_change!: () -> void
+
+    def heart_to_comment_web_was: () -> bool?
+
+    def heart_to_comment_web_previously_changed?: () -> bool
+
+    def heart_to_comment_web_previous_change: () -> Array[bool?]?
+
+    def heart_to_comment_web_previously_was: () -> bool?
+
+    def heart_to_comment_web_before_last_save: () -> bool?
+
+    def heart_to_comment_web_change_to_be_saved: () -> Array[bool?]?
+
+    def heart_to_comment_web_in_database: () -> bool?
+
+    def saved_change_to_heart_to_comment_web: () -> Array[bool?]?
+
+    def saved_change_to_heart_to_comment_web?: () -> bool
+
+    def will_save_change_to_heart_to_comment_web?: () -> bool
+
+    def restore_heart_to_comment_web!: () -> void
+
+    def clear_heart_to_comment_web_change: () -> void
+
+    def vote_web: () -> bool
+
+    def vote_web=: (bool) -> bool
+
+    def vote_web?: () -> bool
+
+    def vote_web_changed?: () -> bool
+
+    def vote_web_change: () -> [ bool?, bool? ]
+
+    def vote_web_will_change!: () -> void
+
+    def vote_web_was: () -> bool?
+
+    def vote_web_previously_changed?: () -> bool
+
+    def vote_web_previous_change: () -> Array[bool?]?
+
+    def vote_web_previously_was: () -> bool?
+
+    def vote_web_before_last_save: () -> bool?
+
+    def vote_web_change_to_be_saved: () -> Array[bool?]?
+
+    def vote_web_in_database: () -> bool?
+
+    def saved_change_to_vote_web: () -> Array[bool?]?
+
+    def saved_change_to_vote_web?: () -> bool
+
+    def will_save_change_to_vote_web?: () -> bool
+
+    def restore_vote_web!: () -> void
+
+    def clear_vote_web_change: () -> void
+
+    def team_join_web: () -> bool
+
+    def team_join_web=: (bool) -> bool
+
+    def team_join_web?: () -> bool
+
+    def team_join_web_changed?: () -> bool
+
+    def team_join_web_change: () -> [ bool?, bool? ]
+
+    def team_join_web_will_change!: () -> void
+
+    def team_join_web_was: () -> bool?
+
+    def team_join_web_previously_changed?: () -> bool
+
+    def team_join_web_previous_change: () -> Array[bool?]?
+
+    def team_join_web_previously_was: () -> bool?
+
+    def team_join_web_before_last_save: () -> bool?
+
+    def team_join_web_change_to_be_saved: () -> Array[bool?]?
+
+    def team_join_web_in_database: () -> bool?
+
+    def saved_change_to_team_join_web: () -> Array[bool?]?
+
+    def saved_change_to_team_join_web?: () -> bool
+
+    def will_save_change_to_team_join_web?: () -> bool
+
+    def restore_team_join_web!: () -> void
+
+    def clear_team_join_web_change: () -> void
+
+    def created_at: () -> ActiveSupport::TimeWithZone
+
+    def created_at=: (ActiveSupport::TimeWithZone) -> ActiveSupport::TimeWithZone
+
+    def created_at?: () -> bool
+
+    def created_at_changed?: () -> bool
+
+    def created_at_change: () -> [ ActiveSupport::TimeWithZone?, ActiveSupport::TimeWithZone? ]
+
+    def created_at_will_change!: () -> void
+
+    def created_at_was: () -> ActiveSupport::TimeWithZone?
+
+    def created_at_previously_changed?: () -> bool
+
+    def created_at_previous_change: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def created_at_previously_was: () -> ActiveSupport::TimeWithZone?
+
+    def created_at_before_last_save: () -> ActiveSupport::TimeWithZone?
+
+    def created_at_change_to_be_saved: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def created_at_in_database: () -> ActiveSupport::TimeWithZone?
+
+    def saved_change_to_created_at: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_created_at?: () -> bool
+
+    def will_save_change_to_created_at?: () -> bool
+
+    def restore_created_at!: () -> void
+
+    def clear_created_at_change: () -> void
+
+    def updated_at: () -> ActiveSupport::TimeWithZone
+
+    def updated_at=: (ActiveSupport::TimeWithZone) -> ActiveSupport::TimeWithZone
+
+    def updated_at?: () -> bool
+
+    def updated_at_changed?: () -> bool
+
+    def updated_at_change: () -> [ ActiveSupport::TimeWithZone?, ActiveSupport::TimeWithZone? ]
+
+    def updated_at_will_change!: () -> void
+
+    def updated_at_was: () -> ActiveSupport::TimeWithZone?
+
+    def updated_at_previously_changed?: () -> bool
+
+    def updated_at_previous_change: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def updated_at_previously_was: () -> ActiveSupport::TimeWithZone?
+
+    def updated_at_before_last_save: () -> ActiveSupport::TimeWithZone?
+
+    def updated_at_change_to_be_saved: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def updated_at_in_database: () -> ActiveSupport::TimeWithZone?
+
+    def saved_change_to_updated_at: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_updated_at?: () -> bool
+
+    def will_save_change_to_updated_at?: () -> bool
+
+    def restore_updated_at!: () -> void
+
+    def clear_updated_at_change: () -> void
+
+    def team_leave_email: () -> bool
+
+    def team_leave_email=: (bool) -> bool
+
+    def team_leave_email?: () -> bool
+
+    def team_leave_email_changed?: () -> bool
+
+    def team_leave_email_change: () -> [ bool?, bool? ]
+
+    def team_leave_email_will_change!: () -> void
+
+    def team_leave_email_was: () -> bool?
+
+    def team_leave_email_previously_changed?: () -> bool
+
+    def team_leave_email_previous_change: () -> Array[bool?]?
+
+    def team_leave_email_previously_was: () -> bool?
+
+    def team_leave_email_before_last_save: () -> bool?
+
+    def team_leave_email_change_to_be_saved: () -> Array[bool?]?
+
+    def team_leave_email_in_database: () -> bool?
+
+    def saved_change_to_team_leave_email: () -> Array[bool?]?
+
+    def saved_change_to_team_leave_email?: () -> bool
+
+    def will_save_change_to_team_leave_email?: () -> bool
+
+    def restore_team_leave_email!: () -> void
+
+    def clear_team_leave_email_change: () -> void
+  end
+  include GeneratedAttributeMethods
+
+  def user: () -> User
+  def user=: (User?) -> User?
+  def reload_user: () -> User?
+  def build_user: (untyped) -> User
+  def create_user: (untyped) -> User
+  def create_user!: (untyped) -> User
+  module GeneratedAssociationMethods
+  end
+  include GeneratedAssociationMethods
+
+  module GeneratedRelationMethods
+  end
+
+  class ActiveRecord_Relation < ::ActiveRecord::Relation
+    include GeneratedRelationMethods
+    include _ActiveRecord_Relation[NotificationConfig, Integer]
+    include Enumerable[NotificationConfig]
+  end
+
+  class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include GeneratedRelationMethods
+    include _ActiveRecord_Relation[NotificationConfig, Integer]
+  end
+end

@@ -1,0 +1,388 @@
+class Team < ::ApplicationRecord
+  extend _ActiveRecord_Relation_ClassMethods[Team, ActiveRecord_Relation, Integer]
+
+  module GeneratedAttributeMethods
+    def id: () -> Integer
+
+    def id=: (Integer) -> Integer
+
+    def id?: () -> bool
+
+    def id_changed?: () -> bool
+
+    def id_change: () -> [ Integer?, Integer? ]
+
+    def id_will_change!: () -> void
+
+    def id_was: () -> Integer?
+
+    def id_previously_changed?: () -> bool
+
+    def id_previous_change: () -> Array[Integer?]?
+
+    def id_previously_was: () -> Integer?
+
+    def id_before_last_save: () -> Integer?
+
+    def id_change_to_be_saved: () -> Array[Integer?]?
+
+    def id_in_database: () -> Integer?
+
+    def saved_change_to_id: () -> Array[Integer?]?
+
+    def saved_change_to_id?: () -> bool
+
+    def will_save_change_to_id?: () -> bool
+
+    def restore_id!: () -> void
+
+    def clear_id_change: () -> void
+
+    def owner_id: () -> Integer
+
+    def owner_id=: (Integer) -> Integer
+
+    def owner_id?: () -> bool
+
+    def owner_id_changed?: () -> bool
+
+    def owner_id_change: () -> [ Integer?, Integer? ]
+
+    def owner_id_will_change!: () -> void
+
+    def owner_id_was: () -> Integer?
+
+    def owner_id_previously_changed?: () -> bool
+
+    def owner_id_previous_change: () -> Array[Integer?]?
+
+    def owner_id_previously_was: () -> Integer?
+
+    def owner_id_before_last_save: () -> Integer?
+
+    def owner_id_change_to_be_saved: () -> Array[Integer?]?
+
+    def owner_id_in_database: () -> Integer?
+
+    def saved_change_to_owner_id: () -> Array[Integer?]?
+
+    def saved_change_to_owner_id?: () -> bool
+
+    def will_save_change_to_owner_id?: () -> bool
+
+    def restore_owner_id!: () -> void
+
+    def clear_owner_id_change: () -> void
+
+    def idea_id: () -> Integer
+
+    def idea_id=: (Integer) -> Integer
+
+    def idea_id?: () -> bool
+
+    def idea_id_changed?: () -> bool
+
+    def idea_id_change: () -> [ Integer?, Integer? ]
+
+    def idea_id_will_change!: () -> void
+
+    def idea_id_was: () -> Integer?
+
+    def idea_id_previously_changed?: () -> bool
+
+    def idea_id_previous_change: () -> Array[Integer?]?
+
+    def idea_id_previously_was: () -> Integer?
+
+    def idea_id_before_last_save: () -> Integer?
+
+    def idea_id_change_to_be_saved: () -> Array[Integer?]?
+
+    def idea_id_in_database: () -> Integer?
+
+    def saved_change_to_idea_id: () -> Array[Integer?]?
+
+    def saved_change_to_idea_id?: () -> bool
+
+    def will_save_change_to_idea_id?: () -> bool
+
+    def restore_idea_id!: () -> void
+
+    def clear_idea_id_change: () -> void
+
+    def status: () -> String
+
+    def status=: (String) -> String
+
+    def status?: () -> bool
+
+    def status_changed?: () -> bool
+
+    def status_change: () -> [ String?, String? ]
+
+    def status_will_change!: () -> void
+
+    def status_was: () -> String?
+
+    def status_previously_changed?: () -> bool
+
+    def status_previous_change: () -> Array[String?]?
+
+    def status_previously_was: () -> String?
+
+    def status_before_last_save: () -> String?
+
+    def status_change_to_be_saved: () -> Array[String?]?
+
+    def status_in_database: () -> String?
+
+    def saved_change_to_status: () -> Array[String?]?
+
+    def saved_change_to_status?: () -> bool
+
+    def will_save_change_to_status?: () -> bool
+
+    def restore_status!: () -> void
+
+    def clear_status_change: () -> void
+
+    def requirement: () -> String
+
+    def requirement=: (String) -> String
+
+    def requirement?: () -> bool
+
+    def requirement_changed?: () -> bool
+
+    def requirement_change: () -> [ String?, String? ]
+
+    def requirement_will_change!: () -> void
+
+    def requirement_was: () -> String?
+
+    def requirement_previously_changed?: () -> bool
+
+    def requirement_previous_change: () -> Array[String?]?
+
+    def requirement_previously_was: () -> String?
+
+    def requirement_before_last_save: () -> String?
+
+    def requirement_change_to_be_saved: () -> Array[String?]?
+
+    def requirement_in_database: () -> String?
+
+    def saved_change_to_requirement: () -> Array[String?]?
+
+    def saved_change_to_requirement?: () -> bool
+
+    def will_save_change_to_requirement?: () -> bool
+
+    def restore_requirement!: () -> void
+
+    def clear_requirement_change: () -> void
+
+    def offer: () -> String
+
+    def offer=: (String) -> String
+
+    def offer?: () -> bool
+
+    def offer_changed?: () -> bool
+
+    def offer_change: () -> [ String?, String? ]
+
+    def offer_will_change!: () -> void
+
+    def offer_was: () -> String?
+
+    def offer_previously_changed?: () -> bool
+
+    def offer_previous_change: () -> Array[String?]?
+
+    def offer_previously_was: () -> String?
+
+    def offer_before_last_save: () -> String?
+
+    def offer_change_to_be_saved: () -> Array[String?]?
+
+    def offer_in_database: () -> String?
+
+    def saved_change_to_offer: () -> Array[String?]?
+
+    def saved_change_to_offer?: () -> bool
+
+    def will_save_change_to_offer?: () -> bool
+
+    def restore_offer!: () -> void
+
+    def clear_offer_change: () -> void
+
+    def created_at: () -> ActiveSupport::TimeWithZone
+
+    def created_at=: (ActiveSupport::TimeWithZone) -> ActiveSupport::TimeWithZone
+
+    def created_at?: () -> bool
+
+    def created_at_changed?: () -> bool
+
+    def created_at_change: () -> [ ActiveSupport::TimeWithZone?, ActiveSupport::TimeWithZone? ]
+
+    def created_at_will_change!: () -> void
+
+    def created_at_was: () -> ActiveSupport::TimeWithZone?
+
+    def created_at_previously_changed?: () -> bool
+
+    def created_at_previous_change: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def created_at_previously_was: () -> ActiveSupport::TimeWithZone?
+
+    def created_at_before_last_save: () -> ActiveSupport::TimeWithZone?
+
+    def created_at_change_to_be_saved: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def created_at_in_database: () -> ActiveSupport::TimeWithZone?
+
+    def saved_change_to_created_at: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_created_at?: () -> bool
+
+    def will_save_change_to_created_at?: () -> bool
+
+    def restore_created_at!: () -> void
+
+    def clear_created_at_change: () -> void
+
+    def updated_at: () -> ActiveSupport::TimeWithZone
+
+    def updated_at=: (ActiveSupport::TimeWithZone) -> ActiveSupport::TimeWithZone
+
+    def updated_at?: () -> bool
+
+    def updated_at_changed?: () -> bool
+
+    def updated_at_change: () -> [ ActiveSupport::TimeWithZone?, ActiveSupport::TimeWithZone? ]
+
+    def updated_at_will_change!: () -> void
+
+    def updated_at_was: () -> ActiveSupport::TimeWithZone?
+
+    def updated_at_previously_changed?: () -> bool
+
+    def updated_at_previous_change: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def updated_at_previously_was: () -> ActiveSupport::TimeWithZone?
+
+    def updated_at_before_last_save: () -> ActiveSupport::TimeWithZone?
+
+    def updated_at_change_to_be_saved: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def updated_at_in_database: () -> ActiveSupport::TimeWithZone?
+
+    def saved_change_to_updated_at: () -> Array[ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_updated_at?: () -> bool
+
+    def will_save_change_to_updated_at?: () -> bool
+
+    def restore_updated_at!: () -> void
+
+    def clear_updated_at_change: () -> void
+
+    def members_num: () -> Integer?
+
+    def members_num=: (Integer?) -> Integer?
+
+    def members_num?: () -> bool
+
+    def members_num_changed?: () -> bool
+
+    def members_num_change: () -> [ Integer?, Integer? ]
+
+    def members_num_will_change!: () -> void
+
+    def members_num_was: () -> Integer?
+
+    def members_num_previously_changed?: () -> bool
+
+    def members_num_previous_change: () -> Array[Integer?]?
+
+    def members_num_previously_was: () -> Integer?
+
+    def members_num_before_last_save: () -> Integer?
+
+    def members_num_change_to_be_saved: () -> Array[Integer?]?
+
+    def members_num_in_database: () -> Integer?
+
+    def saved_change_to_members_num: () -> Array[Integer?]?
+
+    def saved_change_to_members_num?: () -> bool
+
+    def will_save_change_to_members_num?: () -> bool
+
+    def restore_members_num!: () -> void
+
+    def clear_members_num_change: () -> void
+  end
+  include GeneratedAttributeMethods
+  def team_users: () -> TeamUser::ActiveRecord_Associations_CollectionProxy
+  def team_users=: (TeamUser::ActiveRecord_Associations_CollectionProxy | Array[TeamUser]) -> (TeamUser::ActiveRecord_Associations_CollectionProxy | Array[TeamUser])
+  def team_user_ids: () -> Array[Integer]
+  def team_user_ids=: (Array[Integer]) -> Array[Integer]
+  def members: () -> User::ActiveRecord_Associations_CollectionProxy
+  def members=: (User::ActiveRecord_Associations_CollectionProxy | Array[User]) -> (User::ActiveRecord_Associations_CollectionProxy | Array[User])
+  def member_ids: () -> Array[Integer]
+  def member_ids=: (Array[Integer]) -> Array[Integer]
+  def room: () -> Room?
+  def room=: (Room?) -> Room?
+  def build_room: (untyped) -> Room
+  def create_room: (untyped) -> Room
+  def create_room!: (untyped) -> Room
+  def reload_room: () -> Room?
+  def owner: () -> User
+  def owner=: (User?) -> User?
+  def reload_owner: () -> User?
+  def build_owner: (untyped) -> User
+  def create_owner: (untyped) -> User
+  def create_owner!: (untyped) -> User
+  def idea: () -> Idea
+  def idea=: (Idea?) -> Idea?
+  def reload_idea: () -> Idea?
+  def build_idea: (untyped) -> Idea
+  def create_idea: (untyped) -> Idea
+  def create_idea!: (untyped) -> Idea
+  module GeneratedAssociationMethods
+  end
+  include GeneratedAssociationMethods
+
+  def status_active!: () -> bool
+  def status_active?: () -> bool
+  def status_stop!: () -> bool
+  def status_stop?: () -> bool
+  def status_finished!: () -> bool
+  def status_finished?: () -> bool
+  def self.status_active: () -> ActiveRecord_Relation
+  def self.status_stop: () -> ActiveRecord_Relation
+  def self.status_finished: () -> ActiveRecord_Relation
+
+  module GeneratedRelationMethods
+    def status_active: () -> ActiveRecord_Relation
+
+    def status_stop: () -> ActiveRecord_Relation
+
+    def status_finished: () -> ActiveRecord_Relation
+  end
+
+  class ActiveRecord_Relation < ::ActiveRecord::Relation
+    include GeneratedRelationMethods
+    include _ActiveRecord_Relation[Team, Integer]
+    include Enumerable[Team]
+  end
+
+  class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include GeneratedRelationMethods
+    include _ActiveRecord_Relation[Team, Integer]
+  end
+end

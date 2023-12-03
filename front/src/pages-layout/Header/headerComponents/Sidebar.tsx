@@ -122,6 +122,7 @@ export const Sidebar = () => {
                           size="0.8rem"
                           stroke={1.5}
                           color="black"
+                          onClick={close}
                         />
                       }
                       type="button"
@@ -274,7 +275,7 @@ export const Sidebar = () => {
             </Menu>
 
             {(() => {
-              if (loggedIn) {
+              if (!loggedIn) {
                 return (
                   <>
                     <Divider
@@ -302,6 +303,7 @@ export const Sidebar = () => {
                           }
                           variant="subtle"
                           active
+                          onClick={close}
                         />
                       </Anchor>
                     </Link>
@@ -325,6 +327,7 @@ export const Sidebar = () => {
                           }
                           variant="subtle"
                           active
+                          onClick={close}
                         />
                       </Anchor>
                     </Link>
@@ -358,11 +361,12 @@ export const Sidebar = () => {
                           }
                           variant="subtle"
                           active
+                          onClick={close}
                         />
                       </Anchor>
                     </Link>
 
-                    <Link href="/">
+                    <Link href="user/{userId}/edit">
                       <Anchor underline="never">
                         <NavLink
                           px="2rem"
@@ -381,6 +385,7 @@ export const Sidebar = () => {
                           }
                           variant="subtle"
                           active
+                          onClick={close}
                         />
                       </Anchor>
                     </Link>

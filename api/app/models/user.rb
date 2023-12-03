@@ -194,14 +194,14 @@ class User < ApplicationRecord
     self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
   end
 
-  def update_access_token!
-    self.tokens = "#{self.id}:#{Devise.friendly_token}"
-    save!
-  end
-
   private
 
   def create_notification_config
     NotificationConfig.create!(user: self)
+  end
+
+  def update_access_token!
+    self.tokens = "#{self.id}:#{Devise.friendly_token}"
+    save!
   end
 end

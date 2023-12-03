@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 type SignInFormValues = {
   email: string
@@ -38,9 +39,11 @@ export const SignInForm: CustomNextPage = () => {
     handleSignIn(data, setCurrentUser)
   const router = useRouter()
 
-  if (currentUser) {
-    router.push('/')
-  }
+  useEffect(() => {
+    if (currentUser) {
+      router.push('/')
+    }
+  }, [currentUser, router])
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

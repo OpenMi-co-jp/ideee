@@ -35,7 +35,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           name: data['name']
         }
       end
-      render json: { action: 'ログイン', message: e.message }, status: :unauthorized
+      render json: { action: 'ログイン' }, status: :unauthorized
     end
   end
 end

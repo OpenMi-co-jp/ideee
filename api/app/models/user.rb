@@ -142,7 +142,9 @@ class User < ApplicationRecord
   def generate_jwt_token
     payload = {
       id: self.id,
-      email: self.email,
+      name: self.name,
+      image: self.icon&.url || self.remote_url,
+      defined: self.defined,
       exp: Time.now.to_i + 1.week.to_i
     }
 

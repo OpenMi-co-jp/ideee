@@ -63,6 +63,7 @@ export const Sidebar = () => {
                       size="0.8rem"
                       stroke={1.5}
                       color="black"
+                      onClick={close}
                     />
                   }
                   variant="subtle"
@@ -104,6 +105,7 @@ export const Sidebar = () => {
                           color="black"
                         />
                       }
+                      onClick={close}
                     >
                       ideeeについて
                     </Menu.Item>
@@ -161,6 +163,7 @@ export const Sidebar = () => {
                         />
                       }
                       type="button"
+                      onClick={close}
                     >
                       個人顔発の落とし穴
                     </Menu.Item>
@@ -202,6 +205,7 @@ export const Sidebar = () => {
                         />
                       }
                       type="button"
+                      onClick={close}
                     >
                       よくある質問
                     </Menu.Item>
@@ -221,6 +225,7 @@ export const Sidebar = () => {
                         />
                       }
                       type="button"
+                      onClick={close}
                     >
                       利用規約
                     </Menu.Item>
@@ -240,6 +245,7 @@ export const Sidebar = () => {
                         />
                       }
                       type="button"
+                      onClick={close}
                     >
                       プライバシーポリシー
                     </Menu.Item>

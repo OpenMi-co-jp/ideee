@@ -7,7 +7,7 @@ export const HandleSignOut = async (
   setCurrentUser: CurrentUserContextType['setCurrentUser']
 ) => {
   try {
-    const response = await signOut()
+    await signOut()
     Cookies.remove('authToken')
     setCurrentUser(null)
     showSuccess({ action: 'ログアウト' })

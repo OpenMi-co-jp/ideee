@@ -20,9 +20,9 @@ export const useToggleLike = (
 
   useEffect(() => {
     if (likes) {
-      setLike(likes.likes.some((like) => like.likableId === Number(id)))
+      setLike(likes.likes.some((like) => like.likableId === Number(id) && like.likableType === likableType))
     }
-  }, [id, likes])
+  }, [id, likes, likableType])
 
   const [createLike] = useCreateLikeMutation({
     variables: {

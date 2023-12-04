@@ -6,15 +6,15 @@ import { useMediaQuery } from '@mantine/hooks'
 
 export const Profile = () => {
   const user = useUser()
-  const matches = useMediaQuery('(min-width: 26em)')
+  const isMobile = useMediaQuery('(min-width: 26em)')
 
   return (
     <>
       <Box mx="2rem">
-        <Flex justify={matches ? 'flex-start' : 'center'}>
+        <Flex justify={isMobile ? 'flex-start' : 'center'}>
           <IconComponent />
         </Flex>
-        <Flex align={matches ? 'flex-start' : 'center'} direction={'column'}>
+        <Flex align={isMobile ? 'flex-start' : 'center'} direction={'column'}>
           <Text style={{ fontWeight: 'bold' }} fz="1.5rem" mx="1rem" mb="xs">
             {user?.name}
           </Text>

@@ -22,8 +22,7 @@ export const useToggleLike = (
     if (likes) {
       setLike(
         likes.likes.some(
-          (like) =>
-            like.likableId === id && like.likableType === likableType
+          (like) => like.likableId === id && like.likableType === likableType
         )
       )
     }

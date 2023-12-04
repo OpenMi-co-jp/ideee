@@ -4,6 +4,7 @@ import { UserProvider } from '@/context/userProfileContext'
 import { LoaderBox } from '@/components/features/LoaderBox'
 import { AlertError } from '@/components/alert/error'
 import { Profile } from '@/components/user/show'
+import { Divider } from '@mantine/core'
 
 export default function UserProfile() {
   const router = useRouter()
@@ -19,6 +20,8 @@ export default function UserProfile() {
   return (
     <UserProvider user={data?.user}>
       <Profile />
+      <Divider />
     </UserProvider>
+    
   )
 }

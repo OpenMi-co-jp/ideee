@@ -1,7 +1,7 @@
 import { LinkComponent } from '@/components/user/show'
 import { IconComponent } from '@/components/user/show/iconComponent'
 import { useUser } from '@/context/userProfileContext'
-import { Box, Divider, Flex, Paper, Text } from '@mantine/core'
+import { Box, Flex, Paper, Text } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
 export const Profile = () => {
@@ -26,7 +26,6 @@ export const Profile = () => {
           {user?.description}
         </Text>
       </Paper>
-      <Divider />
     </>
   )
 }

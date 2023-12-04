@@ -11,21 +11,18 @@ export const handleSignIn = async (
 ) => {
   try {
     const response = await signIn(props)
-    if (response.status === 200) {
-      const token = response.headers['authorization']
-      if (token) {
-        Cookies.set('authToken', String(token), {
-          expires: 7,
-          secure: true,
-        })
-      }
-      localStorage.setItem('loggedIn', 'true')
-      setLoggedIn(true)
-      showSuccess({ action: 'ログイン' })
-      modals.closeAll()
-    } else {
-      throw new Error('Request failed with status code: ' + response.status)
+    const token = response.headers['authorization']
+    // TODO: validateTokenメソッドを設定
+    if (token) {
+      Cookies.set('authToken', String(token), {
+        expires: 7,
+        secure: true,
+      })
     }
+    localStorage.setItem('loggedIn', 'true')
+    setLoggedIn(true)
+    showSuccess({ action: 'ログイン' })
+    modals.closeAll()
   } catch (error) {
     showError({ action: 'ログイン' })
   }

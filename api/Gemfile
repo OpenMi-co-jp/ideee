@@ -23,8 +23,7 @@ gem 'redis', '~> 4.6'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
-
-gem 'devise_token_auth'
+gem 'jwt'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.12'
@@ -64,7 +63,10 @@ gem 'activeadmin' # 管理画面
 # gem 'stripe'
 
 gem 'sidekiq'
-gem 'twitter'
+
+# twitterV2用設定
+gem 'oauth'
+gem 'typhoeus'
 
 # エラー関係
 gem 'rack-timeout'

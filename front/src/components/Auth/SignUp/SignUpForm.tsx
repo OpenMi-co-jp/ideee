@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '../../ReactFormSet'
 import { handleSignUp } from './hooks'
 import type { CustomNextPage } from 'next'
+import { OmniAuth } from '@/components/Auth/OmniAuth'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 type SignUpFormValues = {
   email: string
@@ -11,10 +14,22 @@ type SignUpFormValues = {
   confirmSuccessUrl: string
 }
 
+export const SignUpFormSchema = z.object({
+  email: z
+    .string()
+    .email({ message: 'メールアドレスの形式で入力してください' }),
+  password: z
+    .string()
+    .min(6, { message: '6文字以上のパスワードを入力してください' }),
+  passwordConfirmation: z
+    .string()
+    .min(6, { message: '6文字以上の確認パスワードを入力してください' }),
+})
+
 export const SignUpForm: CustomNextPage = () => {
   const confirmSuccessUrl = process.env.NEXT_PUBLIC_FRONT_URL
-  console.log(confirmSuccessUrl)
   const form = useForm<SignUpFormValues>({
+    resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -31,6 +46,7 @@ export const SignUpForm: CustomNextPage = () => {
         <Title order={2} mb={30}>
           ユーザー登録
         </Title>
+        <OmniAuth />
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <PasswordForm

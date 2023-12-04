@@ -5,14 +5,14 @@ import { useRouter } from 'next/router'
 
 /**
  * Likeコンポーネントは、アイデアに対する「いいね」の切り替え機能を提供します。
- * @returns {JSX.Element} Likeボタンを含んだReact要素
+ * @returns Button, IconHeartFilled, IconHeart
  */
-export const Like = (): JSX.Element => {
+export const Like = () => {
   const { id } = useRouter().query
-  const { isLike, createDestroyHandler } = useToggleLike(Number(id), 'Idea')
+  const { isLike, toggleLike } = useToggleLike(Number(id), 'Idea')
 
   return (
-    <Button onClick={createDestroyHandler} variant="transparent" px="xs">
+    <Button onClick={toggleLike} variant="transparent" px="xs">
       {isLike ? (
         <IconHeartFilled style={{ color: 'black' }} />
       ) : (

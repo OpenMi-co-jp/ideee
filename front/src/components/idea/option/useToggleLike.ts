@@ -9,18 +9,23 @@ import {
  * 指定されたIDとタイプのアイテムの「いいね」機能をトグルするためのカスタムフックです。
  * @param {number} id - ID
  * @param {string} likableType - 種類
- * @returns {{ isLike: boolean, createDestroyHandler: () => void }} 「いいね」状態とトグル処理のハンドラ
+ * @returns {{ isLike: boolean, toggleLike: () => void }} 「いいね」状態とトグル処理のハンドラ
  */
 export const useToggleLike = (
   id: number,
   likableType: string
-): { isLike: boolean; createDestroyHandler: () => void } => {
+): { isLike: boolean; toggleLike: () => void } => {
   const { data: likes } = useGetLikesQuery()
   const [isLike, setLike] = useState(false)
 
   useEffect(() => {
     if (likes) {
-      setLike(likes.likes.some((like) => like.likableId === Number(id) && like.likableType === likableType))
+      setLike(
+        likes.likes.some(
+          (like) =>
+            like.likableId === id && like.likableType === likableType
+        )
+      )
     }
   }, [id, likes, likableType])
 
@@ -28,7 +33,7 @@ export const useToggleLike = (
     variables: {
       input: {
         likableType: likableType,
-        likableId: Number(id),
+        likableId: id,
       },
     },
   })
@@ -36,13 +41,13 @@ export const useToggleLike = (
   const [destroyLike] = useDestroyLikeMutation({
     variables: {
       input: {
-        likableId: Number(id),
         likableType: likableType,
+        likableId: id,
       },
     },
   })
 
-  const createDestroyHandler = useCallback(() => {
+  const toggleLike = useCallback(() => {
     if (isLike) {
       destroyLike().then(() => setLike(false))
     } else {
@@ -50,5 +55,5 @@ export const useToggleLike = (
     }
   }, [createLike, destroyLike, isLike])
 
-  return { isLike, createDestroyHandler }
+  return { isLike, toggleLike }
 }

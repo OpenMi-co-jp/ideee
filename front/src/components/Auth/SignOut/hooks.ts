@@ -1,16 +1,15 @@
 import { showSuccess, showError } from '@/components/notifications'
 import Cookies from 'js-cookie'
-import type { LoginContextType } from '@/components/loginContext'
 import { signOut } from '@/utils/auth'
+import type { CurrentUserContextType } from '@/context/CurrentUserContext'
 
-export const handleSignOut = async (
-  setLoggedIn: LoginContextType['setLoggedIn']
+export const HandleSignOut = async (
+  setCurrentUser: CurrentUserContextType['setCurrentUser']
 ) => {
   try {
-    const response = await signOut()
+    await signOut()
     Cookies.remove('authToken')
-    setLoggedIn(false)
-    localStorage.setItem('loggedIn', 'false')
+    setCurrentUser(null)
     showSuccess({ action: 'ログアウト' })
   } catch (error: any) {
     showError({ action: 'ログアウト', message: error.message })

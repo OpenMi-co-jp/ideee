@@ -142,7 +142,9 @@ class User < ApplicationRecord
   def generate_jwt_token
     payload = {
       id: self.id,
-      email: self.email,
+      name: self.name,
+      image: self.icon&.url || self.remote_url,
+      defined: self.defined,
       exp: Time.now.to_i + 1.week.to_i
     }
 
@@ -192,14 +194,14 @@ class User < ApplicationRecord
     self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
   end
 
-  def update_access_token!
-    self.tokens = "#{self.id}:#{Devise.friendly_token}"
-    save!
-  end
-
   private
 
   def create_notification_config
     NotificationConfig.create!(user: self)
+  end
+
+  def update_access_token!
+    self.tokens = "#{self.id}:#{Devise.friendly_token}"
+    save!
   end
 end

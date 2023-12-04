@@ -1,10 +1,10 @@
 import { Anchor } from '@mantine/core'
-import { handleSignOut } from './hooks'
-import { useLoggedIn } from '@/components/loginContext'
+import { HandleSignOut } from './hooks'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const SignOutAnchor = () => {
-  const { setLoggedIn } = useLoggedIn()
-  const onSubmit = () => handleSignOut(setLoggedIn)
+  const { setCurrentUser } = useCurrentUser()
+  const onSubmit = () => HandleSignOut(setCurrentUser)
 
   return (
     <Anchor c="yellow" onClick={onSubmit}>

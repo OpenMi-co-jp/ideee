@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLoggedIn } from '@/components/loginContext'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 import { HiddenIdeaContent, IdeaContents } from '@/components/idea/show'
 import { Container, Loader } from '@mantine/core'
 import { SignPath } from '@/components/Auth/SignPath'
@@ -10,8 +10,7 @@ import { useRouter } from 'next/router'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 
 const IdeaDetail = () => {
-  const { loggedIn } = useLoggedIn()
-  const [LSLoggedIn, setLSLoggedIn] = useState(false)
+  const { currentUser } = useCurrentUser()
   const router = useRouter()
   const { id } = router.query
   const { data, loading, error } = useGetIdeaQuery({
@@ -23,12 +22,6 @@ const IdeaDetail = () => {
   const [idea, setIdea] = useState({})
 
   useEffect(() => {
-    try {
-      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
-    } catch (e) {
-      console.error(e)
-    }
-
     if (data) {
       setIdea(data?.idea)
     }
@@ -41,7 +34,7 @@ const IdeaDetail = () => {
       <Container
         style={{
           height: '100%',
-          ...(loggedIn || LSLoggedIn
+          ...(currentUser
             ? {}
             : {
                 WebkitMaskImage:
@@ -54,11 +47,11 @@ const IdeaDetail = () => {
         <IdeaTitle />
         <UserSection />
         <IdeaTagList />
-        {!(loggedIn || LSLoggedIn) && <IdeaContents />}
+        {!currentUser && <IdeaContents />}
       </Container>
 
       {(() => {
-        if (loggedIn || LSLoggedIn) {
+        if (currentUser) {
           return <HiddenIdeaContent />
         } else {
           return <SignPath />

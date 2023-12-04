@@ -14,8 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     resource = build_resource(sign_up_params)
-    resource.save!
-    if resource.persisted?
+    if resource.save
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
         response.set_header('Authorization', resource.generate_jwt_token)

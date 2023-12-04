@@ -57,7 +57,7 @@ class GraphqlController < ApplicationController
 
     User.find_by(id: decoded_token['id'])
   rescue JWT::DecodeError
-    authenticate_error
+    render_authentication_error
   end
 
   require 'cgi'
@@ -70,13 +70,9 @@ class GraphqlController < ApplicationController
 
   def decode_token(token)
     JWT.decode(token, Rails.application.secrets.secret_key_base, true, { algorithm: 'HS256' }).first
-  rescue JWT::DecodeError => e
-    Rails.logger.debug { "====== Error decoding token: #{e.message} ======" }
-    nil
   end
 
-  def authenticate_error
+  def render_authentication_error
     render json: { error: t('devise.failure.unauthenticated') }, status: :unauthorized
-    nil
   end
 end

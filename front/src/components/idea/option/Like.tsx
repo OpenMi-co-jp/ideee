@@ -1,6 +1,6 @@
 import { IconHeartFilled, IconHeart } from '@tabler/icons-react'
 import { Button } from '@mantine/core'
-import { useToggleLike } from './useToggleLike'
+import { useToggleLike } from '@/components/like/useToggleLike'
 import { useRouter } from 'next/router'
 
 /**

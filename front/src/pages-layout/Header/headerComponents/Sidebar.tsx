@@ -18,8 +18,6 @@ import {
   IconSun,
   IconBook,
   IconBulb,
-  IconUserCircle,
-  IconPencil,
 } from '@tabler/icons-react'
 import { useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
@@ -44,12 +42,7 @@ export const Sidebar = () => {
             onClose={close}
             overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
           >
-            <Divider
-              my="xs"
-              label="Contents"
-              labelPosition="left"
-              color="orange"
-            />
+            <Divider my="xs" label="Idea" labelPosition="left" color="orange" />
             <Link href="/">
               <Anchor underline="never">
                 <NavLink
@@ -73,6 +66,105 @@ export const Sidebar = () => {
             </Link>
             <Space />
 
+            {(() => {
+              if (!loggedIn) {
+                return (
+                  <>
+                    <Divider
+                      my="xs"
+                      label="Login"
+                      labelPosition="left"
+                      color="orange"
+                    />
+                    <Link href="/user/sign_in">
+                      <Anchor underline="never">
+                        <NavLink
+                          px="2rem"
+                          h="4rem"
+                          label="ログイン"
+                          color="black"
+                          leftSection={
+                            <IconLogin2 size="1.3rem" stroke={2.5} />
+                          }
+                          rightSection={
+                            <IconChevronRight
+                              size="0.8rem"
+                              stroke={1.5}
+                              color="black"
+                            />
+                          }
+                          variant="subtle"
+                          active
+                          onClick={close}
+                        />
+                      </Anchor>
+                    </Link>
+                    <Space />
+                    <Link href="/user/sign_up">
+                      <Anchor underline="never">
+                        <NavLink
+                          px="2rem"
+                          h="4rem"
+                          label="新規登録"
+                          color="black"
+                          leftSection={
+                            <IconUserPlus size="1.3rem" stroke={2.5} />
+                          }
+                          rightSection={
+                            <IconChevronRight
+                              size="0.8rem"
+                              stroke={1.5}
+                              color="black"
+                            />
+                          }
+                          variant="subtle"
+                          active
+                          onClick={close}
+                        />
+                      </Anchor>
+                    </Link>
+                  </>
+                )
+              } else {
+                return (
+                  <>
+                    <Divider
+                      my="xs"
+                      label="Logout"
+                      labelPosition="left"
+                      color="orange"
+                    />
+                    <Anchor underline="never">
+                      <NavLink
+                        px="2rem"
+                        h="4rem"
+                        label="ログアウト"
+                        color="black"
+                        leftSection={
+                          <IconLogout2
+                            size="1.3rem"
+                            stroke={2.5}
+                            color="black"
+                          />
+                        }
+                        rightSection={
+                          <IconChevronRight size="0.8rem" stroke={1.5} />
+                        }
+                        variant="subtle"
+                        active
+                        onClick={onSubmit}
+                      />
+                    </Anchor>
+                  </>
+                )
+              }
+            })()}
+            <Divider
+              my="xs"
+              label="Contents"
+              labelPosition="left"
+              color="orange"
+            />
             <Menu width={290} shadow="lg">
               <Menu.Target>
                 <NavLink
@@ -273,148 +365,6 @@ export const Sidebar = () => {
                 </Link>
               </MenuDropdown>
             </Menu>
-
-            {(() => {
-              if (!loggedIn) {
-                return (
-                  <>
-                    <Divider
-                      my="xs"
-                      label="Login"
-                      labelPosition="left"
-                      color="orange"
-                    />
-                    <Link href="/user/sign_in">
-                      <Anchor underline="never">
-                        <NavLink
-                          px="2rem"
-                          h="4rem"
-                          label="ログイン"
-                          color="black"
-                          leftSection={
-                            <IconLogin2 size="1.3rem" stroke={2.5} />
-                          }
-                          rightSection={
-                            <IconChevronRight
-                              size="0.8rem"
-                              stroke={1.5}
-                              color="black"
-                            />
-                          }
-                          variant="subtle"
-                          active
-                          onClick={close}
-                        />
-                      </Anchor>
-                    </Link>
-                    <Space />
-                    <Link href="/user/sign_up">
-                      <Anchor underline="never">
-                        <NavLink
-                          px="2rem"
-                          h="4rem"
-                          label="新規登録"
-                          color="black"
-                          leftSection={
-                            <IconUserPlus size="1.3rem" stroke={2.5} />
-                          }
-                          rightSection={
-                            <IconChevronRight
-                              size="0.8rem"
-                              stroke={1.5}
-                              color="black"
-                            />
-                          }
-                          variant="subtle"
-                          active
-                          onClick={close}
-                        />
-                      </Anchor>
-                    </Link>
-                  </>
-                )
-              } else {
-                return (
-                  <>
-                    <Divider
-                      my="xs"
-                      label="Logout"
-                      labelPosition="left"
-                      color="orange"
-                    />
-                    <Link href="/">
-                      <Anchor underline="never">
-                        <NavLink
-                          px="2rem"
-                          h="4rem"
-                          label="マイページ"
-                          color="black"
-                          leftSection={
-                            <IconUserCircle size="1.6rem" stroke={2.5} />
-                          }
-                          rightSection={
-                            <IconChevronRight
-                              size="0.8rem"
-                              stroke={1.5}
-                              color="black"
-                            />
-                          }
-                          variant="subtle"
-                          active
-                          onClick={close}
-                        />
-                      </Anchor>
-                    </Link>
-
-                    <Link href="user/{userId}/edit">
-                      <Anchor underline="never">
-                        <NavLink
-                          px="2rem"
-                          h="4rem"
-                          label="ユーザー情報編集"
-                          color="black"
-                          leftSection={
-                            <IconPencil size="1.3rem" stroke={2.5} />
-                          }
-                          rightSection={
-                            <IconChevronRight
-                              size="0.8rem"
-                              stroke={1.5}
-                              color="black"
-                            />
-                          }
-                          variant="subtle"
-                          active
-                          onClick={close}
-                        />
-                      </Anchor>
-                    </Link>
-
-                    <Anchor underline="never">
-                      <NavLink
-                        px="2rem"
-                        h="4rem"
-                        label="ログアウト"
-                        color="black"
-                        leftSection={
-                          <IconLogout2
-                            size="1.3rem"
-                            stroke={2.5}
-                            color="black"
-                          />
-                        }
-                        rightSection={
-                          <IconChevronRight size="0.8rem" stroke={1.5} />
-                        }
-                        variant="subtle"
-                        active
-                        onClick={onSubmit}
-                      />
-                    </Anchor>
-                  </>
-                )
-              }
-            })()}
           </Drawer>
           <Button onClick={open} variant="outline" color="orange">
             <IconMenu2 />

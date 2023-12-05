@@ -4,6 +4,7 @@ query GetUser($id: ID!) {
     name
     description
     definition
+    definitionStr
     icon
     point
     remoteUrl

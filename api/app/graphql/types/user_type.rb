@@ -6,6 +6,7 @@ module Types
     field :email, String, description: 'メールアドレス'
     field :defined, Boolean, description: '設定完了フラグ'
     field :definition, Integer, description: 'タイプ'
+    field :definition_str, String, null: true, method: :definition, description: 'ユーザーのタイプを文字列で返す'
     field :description, String, description: '自己紹介'
     field :icon, String, description: 'アイコン'
     field :name, String, null: false, description: 'ユーザー名'

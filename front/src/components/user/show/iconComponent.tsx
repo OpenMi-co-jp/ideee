@@ -19,7 +19,7 @@ export const IconComponent = () => {
       miw="6rem"
     >
       <Image
-        src={icon ? icon : '/img/undefined_user_icon.webp'}
+        src={icon ? icon : process.env.NEXT_PUBLIC_DEFAULT_USER_ICON_PATH}
         alt="ユーザーアイコン"
         radius="50%"
       />

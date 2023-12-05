@@ -22,6 +22,5 @@ export default function UserProfile() {
       <Profile />
       <Divider />
     </UserProvider>
-    
   )
 }

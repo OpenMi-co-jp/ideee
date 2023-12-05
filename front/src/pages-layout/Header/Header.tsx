@@ -38,8 +38,7 @@ export const Header: FC = () => {
           <ServiceIcon />
           <Group justify="center">
             <SearchIcon />
-            { loggedIn &&
-            <Notification />}
+            {loggedIn && <Notification />}
             <UserToggle />
             <IdeaCreateButton />
             <Sidebar />

@@ -28,6 +28,7 @@ export const UserToggle = () => {
                   ユーザー登録
                 </Button>
               </Link>
+              
               {!isMobile && (
                 <>
                   <Space mx="xs" />

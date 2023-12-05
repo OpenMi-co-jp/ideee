@@ -1,31 +1,46 @@
-import { LinkComponent } from '@/components/user/show'
-import { IconComponent } from '@/components/user/show/iconComponent'
+import { LinkComponent, Features } from '@/components/user/show'
 import { useUser } from '@/context/userProfileContext'
-import { Box, Flex, Paper, Text } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { Grid, Flex, Paper, Text, Image, Center } from '@mantine/core'
+import { TextWithLinks } from '@/utils/Text'
 
 export const Profile = () => {
   const user = useUser()
-  const isMobile = useMediaQuery('(min-width: 26em)')
+  const icon =
+    user?.icon ||
+    user?.remoteUrl ||
+    process.env.NEXT_PUBLIC_DEFAULT_USER_ICON_PATH
 
   return (
     <>
-      <Box mx="2rem">
-        <Flex justify={isMobile ? 'flex-start' : 'center'}>
-          <IconComponent />
-        </Flex>
-        <Flex align={isMobile ? 'flex-start' : 'center'} direction={'column'}>
-          <Text style={{ fontWeight: 'bold' }} fz="1.5rem" mx="1rem" mb="xs">
-            {user?.name}
-          </Text>
-          <LinkComponent />
-        </Flex>
-      </Box>
-      <Paper shadow="sm" p="md">
-        <Text p="sm" w="100%">
-          {user?.description}
-        </Text>
-      </Paper>
+      <Grid>
+        <Grid.Col span={{ base: 12, md: 4, lg: 4 }}>
+          <Center>
+            <Flex direction="column" align="center">
+              <Image
+                src={icon}
+                alt="ユーザーアイコン"
+                radius="50%"
+                width={150}
+                height={150}
+              />
+              <Text style={{ fontWeight: 'bold' }} fz="1.5rem" my="xs">
+                {user?.name}
+              </Text>
+              <LinkComponent />
+            </Flex>
+          </Center>
+        </Grid.Col>
+        <Grid.Col span={{ base: 12, md: 8, lg: 8 }}>
+          <Features />
+        </Grid.Col>
+      </Grid>
+      {user?.description && (
+        <Paper shadow="sm" p="md">
+          <TextWithLinks>
+            {user?.description}
+          </TextWithLinks>
+        </Paper>
+      )}
     </>
   )
 }

@@ -38,16 +38,16 @@ export const LinkComponent = () => {
 
   const links = [
     {
+      id: user?.twitterId,
+      url: `https://x.com/${user?.twitterId}`,
+      icon: <IconBrandX />,
+    },
+    { id: user?.siteUrl, url: user?.siteUrl as string, icon: <IconLink /> },
+    {
       id: user?.githubId,
       url: `https://github.com/${user?.githubId}`,
       icon: <IconBrandGithub />,
     },
-    {
-      id: user?.twitterId,
-      url: `https://twitter.com/${user?.twitterId}`,
-      icon: <IconBrandX />,
-    },
-    { id: user?.siteUrl, url: user?.siteUrl as string, icon: <IconLink /> },
   ]
 
   return (

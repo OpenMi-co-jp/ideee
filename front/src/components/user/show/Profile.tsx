@@ -36,9 +36,7 @@ export const Profile = () => {
       </Grid>
       {user?.description && (
         <Paper shadow="sm" p="md">
-          <TextWithLinks>
-            {user?.description}
-          </TextWithLinks>
+          <TextWithLinks>{user?.description}</TextWithLinks>
         </Paper>
       )}
     </>

@@ -13,14 +13,15 @@ const GithubLink = () => {
   const isDisabled = !user?.githubId
   const githubUrl = isDisabled ? '#' : `https://github.com/${user.githubId}`
 
-
   return (
     <ActionIcon variant="transparent">
       <Anchor
         href={user?.githubId ? githubUrl : ''}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={(e) => { if (isDisabled) e.preventDefault(); }}
+        onClick={(e) => {
+          if (isDisabled) e.preventDefault()
+        }}
         style={isDisabled ? { pointerEvents: 'none', opacity: 0.5 } : {}}
       >
         <div ref={ref}>
@@ -50,7 +51,9 @@ const TwitterLink = () => {
         href={user?.twitterId ? twitterUrl : ''}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={(e) => { if (isDisabled) e.preventDefault(); }}
+        onClick={(e) => {
+          if (isDisabled) e.preventDefault()
+        }}
         style={isDisabled ? { pointerEvents: 'none', opacity: 0.5 } : {}}
       >
         <div ref={ref}>
@@ -80,7 +83,9 @@ const SiteUrl = () => {
         href={user?.siteUrl ? SiteUrl : ''}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={(e) => { if (isDisabled) e.preventDefault(); }}
+        onClick={(e) => {
+          if (isDisabled) e.preventDefault()
+        }}
         style={isDisabled ? { pointerEvents: 'none', opacity: 0.5 } : {}}
       >
         <div ref={ref}>

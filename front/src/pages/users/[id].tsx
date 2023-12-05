@@ -4,11 +4,10 @@ import { UserProvider } from '@/context/userProfileContext'
 import { LoaderBox } from '@/components/features/LoaderBox'
 import { AlertError } from '@/components/alert/error'
 import { Profile } from '@/components/user/show'
-import { Divider } from '@mantine/core'
+import { Divider, Container } from '@mantine/core'
 
 export default function UserProfile() {
-  const router = useRouter()
-  const { id } = router.query
+  const { id } = useRouter().query
   const { data, loading, error } = useGetUserQuery({
     variables: {
       id: id as string,
@@ -19,8 +18,11 @@ export default function UserProfile() {
 
   return (
     <UserProvider user={data?.user}>
-      <Profile />
-      <Divider />
+      <Container>
+        <Profile />
+        <Divider />
+        {/* TODO: アイデアのリストなどを表示 */}
+      </Container>
     </UserProvider>
   )
 }

@@ -1,102 +1,32 @@
 import { Anchor, ActionIcon, Group } from '@mantine/core'
-import {
-  IconBrandGithub,
-  IconBrandTwitter,
-  IconLink,
-} from '@tabler/icons-react'
+import { IconBrandGithub, IconBrandX, IconLink } from '@tabler/icons-react'
 import { useHover } from '@mantine/hooks'
 import { useUser } from '@/context/userProfileContext'
+import { cloneElement } from 'react'
 
-const GithubLink = () => {
-  const user = useUser()
-  const { hovered, ref } = useHover()
-  const isDisabled = !user?.githubId
-  const githubUrl = isDisabled ? '#' : `https://github.com/${user.githubId}`
-
-  return (
-    <ActionIcon variant="transparent">
-      <Anchor
-        href={user?.githubId ? githubUrl : ''}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => {
-          if (isDisabled) e.preventDefault()
-        }}
-        style={isDisabled ? { pointerEvents: 'none', opacity: 0.5 } : {}}
-      >
-        <div ref={ref}>
-          <IconBrandGithub
-            color="black"
-            style={
-              hovered
-                ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
-                : {}
-            }
-          />
-        </div>
-      </Anchor>
-    </ActionIcon>
-  )
+type SocialLinkProps = {
+  icon: JSX.Element
+  url: string
+  isDisabled: boolean
 }
 
-const TwitterLink = () => {
-  const user = useUser()
+const SocialLink = ({ icon, url, isDisabled }: SocialLinkProps) => {
   const { hovered, ref } = useHover()
-  const isDisabled = !user?.twitterId
-  const twitterUrl = isDisabled ? '#' : `https://twitter.com/${user.twitterId}`
+
+  if (isDisabled) {
+    return <div style={{ opacity: 0.3 }}>{icon}</div>
+  }
 
   return (
     <ActionIcon variant="transparent">
-      <Anchor
-        href={user?.twitterId ? twitterUrl : ''}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => {
-          if (isDisabled) e.preventDefault()
-        }}
-        style={isDisabled ? { pointerEvents: 'none', opacity: 0.5 } : {}}
-      >
+      <Anchor href={url} target="_blank" rel="noopener noreferrer">
         <div ref={ref}>
-          <IconBrandTwitter
-            color="black"
-            style={
-              hovered
-                ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
-                : {}
-            }
-          />
-        </div>
-      </Anchor>
-    </ActionIcon>
-  )
-}
-
-const SiteUrl = () => {
-  const user = useUser()
-  const { hovered, ref } = useHover()
-  const isDisabled = !user?.siteUrl
-  const SiteUrl = isDisabled ? '#' : '${user.siteUrl}'
-
-  return (
-    <ActionIcon variant="transparent">
-      <Anchor
-        href={user?.siteUrl ? SiteUrl : ''}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => {
-          if (isDisabled) e.preventDefault()
-        }}
-        style={isDisabled ? { pointerEvents: 'none', opacity: 0.5 } : {}}
-      >
-        <div ref={ref}>
-          <IconLink
-            color="black"
-            style={
-              hovered
-                ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
-                : {}
-            }
-          />
+          {cloneElement(icon, {
+            color: 'black',
+            style: hovered
+              ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
+              : {},
+          })}
         </div>
       </Anchor>
     </ActionIcon>
@@ -104,11 +34,32 @@ const SiteUrl = () => {
 }
 
 export const LinkComponent = () => {
+  const user = useUser()
+
+  const links = [
+    {
+      id: user?.githubId,
+      url: `https://github.com/${user?.githubId}`,
+      icon: <IconBrandGithub />,
+    },
+    {
+      id: user?.twitterId,
+      url: `https://twitter.com/${user?.twitterId}`,
+      icon: <IconBrandX />,
+    },
+    { id: user?.siteUrl, url: user?.siteUrl as string, icon: <IconLink /> },
+  ]
+
   return (
-    <Group mx="0.5rem">
-      <GithubLink />
-      <TwitterLink />
-      <SiteUrl />
+    <Group my="sm">
+      {links.map((link) => (
+        <SocialLink
+          key={link.id}
+          icon={link.icon}
+          url={link.url}
+          isDisabled={!link.id}
+        />
+      ))}
     </Group>
   )
 }

@@ -5,10 +5,7 @@ import { TextWithLinks } from '@/utils/Text'
 
 export const Profile = () => {
   const user = useUser()
-  const icon =
-    user?.icon ||
-    user?.remoteUrl ||
-    process.env.NEXT_PUBLIC_DEFAULT_USER_ICON_PATH
+  const icon = user?.icon || user?.remoteUrl || '/img/undefined_user_icon.webp'
 
   return (
     <>

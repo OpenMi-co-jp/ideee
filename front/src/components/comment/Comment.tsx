@@ -2,6 +2,7 @@ import { Group, Text, Paper, Center } from '@mantine/core'
 import { CommentType } from '@/types/idea'
 import { FormatDate } from '@/utils/common'
 import { UserIcon } from '@/components/user'
+import Link from 'next/link'
 import { TextWithLinks } from '@/utils/Text'
 
 export const Comment = ({ comment }: CommentType) => {
@@ -10,7 +11,10 @@ export const Comment = ({ comment }: CommentType) => {
   return (
     <>
       <Center m="lg">
-        <UserIcon userIcon={user.icon} />
+        <Link href={`/users/${user.id}`} passHref>
+          <UserIcon userIcon={user.icon} />
+        </Link>
+
         <Group p="xs">
           <Paper bg="#FFFFFF" maw="30rem" p="md" radius="lg">
             <TextWithLinks>{description}</TextWithLinks>

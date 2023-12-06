@@ -28,6 +28,7 @@ query GetIdea($id: ID!) {
       id
       description
       createdAt
+      userId
       user {
         name
         icon

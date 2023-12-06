@@ -20,7 +20,7 @@ export const UserToggle = () => {
                 display: 'flex',
               }}
             >
-              <Link href="/user/sign_up">
+              <Link href="/users/sign_up">
                 <Button
                   variant="gradient"
                   gradient={{ from: 'red', to: 'orange' }}
@@ -31,7 +31,7 @@ export const UserToggle = () => {
               {!isMobile && (
                 <>
                   <Space mx="xs" />
-                  <Link href="/user/sign_in">
+                  <Link href="/users/sign_in">
                     <Button variant="outline" color="orange">
                       ログイン
                     </Button>

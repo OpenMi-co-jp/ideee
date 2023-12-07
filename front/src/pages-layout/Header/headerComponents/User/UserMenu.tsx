@@ -1,22 +1,35 @@
 import { Menu, Box } from '@mantine/core'
-import { IconSettings, IconLogout, IconUserCircle } from '@tabler/icons-react'
+import {
+  IconSettings,
+  IconLogout,
+  IconUserCircle,
+  IconUserEdit,
+} from '@tabler/icons-react'
 import { SignOutAnchor } from '@/components/Auth'
 import Link from 'next/link'
 import { UserIcon } from '@/components/user'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const UserMenu = () => {
+  const { currentUser } = useCurrentUser()
+
   return (
     <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
         <Box>
-          <UserIcon />
+          <UserIcon userIcon={currentUser?.image} />
         </Box>
       </Menu.Target>
 
       <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
-        <Link href="/user/5/edit">
+        <Link href={`/users/${currentUser?.id}`}>
           <Menu.Item leftSection={<IconUserCircle size={14} />}>
+            マイページ
+          </Menu.Item>
+        </Link>
+        <Link href={`/users/${currentUser?.id}/edit`}>
+          <Menu.Item leftSection={<IconUserEdit size={14} />}>
             ユーザー情報編集
           </Menu.Item>
         </Link>

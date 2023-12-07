@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react'
-import { useLoggedIn } from '@/components/loginContext'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 import { Button, Paper, Anchor } from '@mantine/core'
 import { IconApps, IconBrandGithub } from '@tabler/icons-react'
 import { IdeaContentSet } from './IdeaContentSet'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 import { useIdea } from '@/context/IdeaContext'
 
-const getSections = (idea: GetIdeaQuery['idea'], isLogin: boolean) => {
-  if (isLogin) {
+const getSections = (idea: GetIdeaQuery['idea'], currentUser: boolean) => {
+  if (currentUser) {
     return [
       { label: '背景', content: idea?.background },
       { label: 'ゴール', content: idea?.goal },
@@ -28,20 +27,11 @@ const getSections = (idea: GetIdeaQuery['idea'], isLogin: boolean) => {
 }
 
 export const IdeaContents = () => {
-  const { loggedIn } = useLoggedIn()
-  const [LSLoggedIn, setLSLoggedIn] = useState(false)
+  const { currentUser } = useCurrentUser()
 
   const idea = useIdea()
 
-  useEffect(() => {
-    try {
-      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
-    } catch (e) {
-      console.error(e)
-    }
-  }, [])
-
-  const sections = getSections(idea, LSLoggedIn)
+  const sections = getSections(idea, Boolean(currentUser))
 
   return (
     <>
@@ -49,7 +39,7 @@ export const IdeaContents = () => {
         {sections.map((section, index) => (
           <IdeaContentSet key={index} {...section} />
         ))}
-        {(loggedIn || LSLoggedIn) && (
+        {currentUser && (
           <>
             {idea?.productUrl && (
               <Anchor href={idea?.productUrl} target="_blank">

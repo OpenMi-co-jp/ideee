@@ -1,11 +1,10 @@
 import { Button } from '@mantine/core'
-import { useLoggedIn } from '@/components/loginContext'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const IdeaCreateButton = () => {
-  const { loggedIn } = useLoggedIn()
-  const LSLoggedIn = localStorage.getItem('loggedIn') == 'true'
+  const { currentUser } = useCurrentUser()
 
-  if (LSLoggedIn || loggedIn) {
+  if (currentUser) {
     return (
       <Button variant="gradient" gradient={{ from: 'yellow', to: 'orange' }}>
         アイデア投稿

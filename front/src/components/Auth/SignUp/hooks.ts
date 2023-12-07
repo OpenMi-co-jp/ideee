@@ -1,5 +1,3 @@
-'use client'
-
 import { showSuccess, showError } from '@/components/notifications'
 import { modals } from '@mantine/modals'
 import { signUp } from '@/utils/auth'

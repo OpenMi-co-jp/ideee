@@ -3,11 +3,13 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
-import { useLoggedIn } from '@/components/loginContext'
 import { OmniAuth } from '@/components/Auth/OmniAuth'
 import type { CustomNextPage } from 'next'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 type SignInFormValues = {
   email: string
@@ -15,7 +17,7 @@ type SignInFormValues = {
 }
 
 export const SignInForm: CustomNextPage = () => {
-  const { setLoggedIn } = useLoggedIn()
+  const { currentUser, setCurrentUser } = useCurrentUser()
 
   const signInSchema = z.object({
     email: z
@@ -33,7 +35,15 @@ export const SignInForm: CustomNextPage = () => {
     },
     mode: 'onChange',
   })
-  const onSubmit = (data: SignInFormValues) => handleSignIn(data, setLoggedIn)
+  const onSubmit = (data: SignInFormValues) =>
+    handleSignIn(data, setCurrentUser)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (currentUser) {
+      router.push('/')
+    }
+  }, [currentUser, router])
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

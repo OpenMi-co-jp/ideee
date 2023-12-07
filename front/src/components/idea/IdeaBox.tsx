@@ -26,7 +26,7 @@ export const IdeaBox: FC<IdeaBoxType> = ({ id, name, user }) => {
           <Avatar
             radius="xl"
             size={24}
-            src={user?.remoteUrl || user?.icon}
+            src={user?.icon || user?.remoteUrl}
             mt="xl"
           />
         </Flex>

@@ -816,6 +816,8 @@ export type User = {
   defined?: Maybe<Scalars['Boolean']>
   /** タイプ */
   definition?: Maybe<Scalars['Int']>
+  /** ユーザーのタイプを文字列で返す */
+  definitionStr?: Maybe<Scalars['String']>
   /** 自己紹介 */
   description?: Maybe<Scalars['String']>
   /** メールアドレス */
@@ -967,6 +969,7 @@ export type GetIdeaQuery = {
       id: string
       description: string
       createdAt: any
+      userId: number
       user: { __typename?: 'User'; name: string; icon?: string | null }
     }>
     ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
@@ -1299,6 +1302,14 @@ export type GetUserQuery = {
     name: string
     description?: string | null
     definition?: number | null
+    definitionStr?: string | null
+    icon?: string | null
+    point?: number | null
+    remoteUrl?: string | null
+    siteUrl?: string | null
+    twitterId?: string | null
+    githubId?: string | null
+    ideasNum?: number | null
   }
 }
 
@@ -1724,6 +1735,7 @@ export const GetIdeaDocument = gql`
         id
         description
         createdAt
+        userId
         user {
           name
           icon
@@ -2869,6 +2881,14 @@ export const GetUserDocument = gql`
       name
       description
       definition
+      definitionStr
+      icon
+      point
+      remoteUrl
+      siteUrl
+      twitterId
+      githubId
+      ideasNum
     }
   }
 `

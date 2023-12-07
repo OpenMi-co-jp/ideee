@@ -21,6 +21,7 @@ export type CommentType = {
     description: string
     createdAt: string
     user: {
+      id?: string | null | undefined
       name?: string | null | undefined
       icon?: string | null | undefined
     }

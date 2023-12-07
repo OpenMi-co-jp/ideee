@@ -1,97 +1,9 @@
 # frozen_string_literal: true
 
 class IdeasController < ApplicationController
-  prepend_before_action :set_idea, only: %i[show edit update destroy publish suggest]
-  before_action :authenticate_user!,
-                except: %i[index show search tags most_comment most_liked team_active deployed suggest]
-  before_action :own_user_check, only: %i[edit update destroy]
-  before_action :defined_check, except: %i[index show search tags most_comment most_liked team_active deployed suggest]
-  before_action :own_draft_check, only: %i[show]
-  after_action :update_user_point, only: %i[create]
-
-  def index
-    recent_ideas = Idea.published.recent_select.eager_load([:user])
-    @latest_ideas = recent_ideas.order(published_at: 'DESC').first(10)
-  end
-
-  def show
-    if Rails.env.production?
-      AnalyticsJob::UpdateViewsJob.perform_later(params[:id]) # 本番環境のみ、アイデアに対するView数をAPIで取得
-      # 製作者にのみ見える、アイデアページの滞在時間を設定
-      @time_on_page = Analytics.new.idea_report('avgTimeOnPage', params[:id])
-    else
-      @time_on_page = '-'
-    end
-    @comments = @idea.comments.eager_load(:user).preload(:likes)
-  end
-
-  def new
-    @idea = Idea.new
-  end
-
-  def edit; end
-
-  def create
-    @idea = Idea.new(idea_params)
-    if @idea.save_with_tags(tags_params)
-      if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
-      else
-        destination = if params.dig(
-          :idea,
-                          :stance
-        ) == 'team_project'
-
-                        new_team_path(idea_id: @idea)
-                      else
-                        idea_path(@idea, share: true)
-                      end
-        sidekiq_jobs
-        @idea.update_attribute(:published_at, Time.zone.now)
-        redirect_to destination, notice: t('.success')
-      end
-    else
-      Rails.logger.debug t('.fail')
-      render :new
-    end
-  end
-
-  def update
-    @idea.assign_attributes(idea_params)
-    if @idea.save_with_tags(tags_params)
-      if draft_bool
-        redirect_to @idea, notice: t('.draft_save')
-      else
-        if params[:commit] == t('default.publish')
-          sidekiq_jobs
-          destination = idea_path(@idea, share: true)
-          @idea.update_attribute(:published_at, Time.zone.now)
-        end
-        destination = new_team_path(idea_id: @idea) if params.dig(:idea, :stance) == 'team_project'
-        destination ||= @idea
-        Slack::SendApplyJob.perform_later(@idea, idea_url(@idea.id)) if Rails.env.production?
-        redirect_to destination, notice: t('.success')
-      end
-    else
-      Rails.logger.debug t('.fail')
-      render :edit
-    end
-  end
-
-  def destroy
-    @idea.destroy
-    redirect_to ideas_url, notice: t('.success')
-  end
-
-  def search
-    @q = Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)
-    @q.sorts = 'likes_num desc' if @q.sorts.empty? # 初期はハート数を降順に設定
-    @searched_ideas = @q.result
-    @paged_ideas = Kaminari.paginate_array(@searched_ideas).page(params[:page])
-    current_page = params[:page].nil? ? 1 : params[:page].to_i
-    @rank_num = (current_page - 1) * @paged_ideas.limit_value
-    @deployed_ideas = Idea.deployed.preload(:user).order(published_at: 'DESC').first(10)
-  end
+  prepend_before_action :set_idea, only: %i[suggest]
+  before_action :authenticate_user!, except: %i[tags most_comment suggest]
+  before_action :defined_check, except: %i[tags most_comment suggest]
 
   def publish
     @idea.update!(draft: false, published_at: Time.zone.now)
@@ -119,21 +31,6 @@ class IdeasController < ApplicationController
     render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
   end
 
-  def most_liked
-    idea_list = Idea.published.recent_select.eager_load([:user]).most_liked.first(5)
-    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
-  end
-
-  def team_active
-    idea_list = Idea.eager_load(:team).where(team: { status: :active }).preload(:idea_tags).eager_load(:user).sample(5)
-    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
-  end
-
-  def deployed
-    idea_list = Idea.published.eager_load(:user).preload(:idea_tags).deployed.sample(5)
-    render partial: 'ideas/index/rank_list', locals: { ideas: idea_list }
-  end
-
   def joined_team
     idea_ids = TeamUser.eager_load(:team).where(user_id: params[:user_id]).map(&:team).pluck(:idea_id)
     idea_list = Idea.where(id: idea_ids).eager_load(:user).preload(:idea_tags)
@@ -144,49 +41,6 @@ class IdeasController < ApplicationController
 
   def set_idea
     @idea = Idea.find(params[:id])
-  end
-
-  # ストロングパラメーターを設定
-  def idea_params
-    params.require(:idea)
-          .permit(
-            :name, :icon, :background, :issue, :goal, :wish_function, :hypothesis, :target, :monetize, :similar, :github_url, :note, :view, :stance, :user_id, :commit, :product_url
-          )
-          .merge(user: current_user, draft: draft_bool)
-  end
-
-  def ransack_params
-    if params[:q]
-      day_from = params[:q][:published_at_gteq]
-      params[:q][:published_at_gteq] = day_from.to_date.beginning_of_day if day_from.present?
-
-      day_to = params[:q][:published_at_lteq]
-      params[:q][:published_at_lteq] = day_to.to_date.end_of_day if day_to.present?
-    end
-
-    params[:q]
-  end
-
-  def own_user_check
-    return if current_user.own?(@idea)
-
-    redirect_to root_path
-    Rails.logger.debug t('default.message.unauthorized')
-  end
-
-  def tags_params
-    params.dig(:idea, :tag_list)&.split(',')&.uniq
-  end
-
-  def draft_bool
-    params[:commit] == t('default.save_draft')
-  end
-
-  def own_draft_check
-    return if !@idea.draft || current_user.own?(@idea)
-
-    redirect_to root_path
-    Rails.logger.debug t('default.message.unauthorized')
   end
 
   def sidekiq_jobs

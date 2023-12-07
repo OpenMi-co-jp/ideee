@@ -1,39 +1,9 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  prepend_before_action :set_team, except: %i[new create]
   before_action :authenticate_user!
-  before_action :defined_check, except: %i[show]
-  before_action :set_idea, only: %i[new edit stop join leave activate finish]
-  before_action :check_owner, only: %i[edit update stop activate finish]
-
-  def show
-    @idea = @team.idea
-  end
-
-  def new
-    return redirect_to @idea, notice: t('.exist') if Team.find_by(idea_id: params[:idea_id])
-
-    @team = Team.new
-  end
-
-  def edit; end
-
-  def create
-    @team = Team.new(team_params)
-    if current_user == @team.owner
-      @team.status = :active
-      @team.save!
-      redirect_to idea_path(@team.idea_id, share: true), notice: t('.success')
-    else
-      redirect_to @team, notice: t('.not_owner')
-    end
-  end
-
-  def update
-    @team.update!(team_params)
-    redirect_to @team, notice: t('.success')
-  end
+  before_action :set_idea, only: %i[stop join leave activate finish]
+  before_action :check_owner, only: %i[stop activate finish]
 
   def join
     @team.team_users.create!(user: current_user)
@@ -65,10 +35,6 @@ class TeamsController < ApplicationController
 
   private
 
-  def set_team
-    @team = Team.find(params[:id])
-  end
-
   def set_idea
     @idea =
       if params[:idea_id].present?
@@ -76,10 +42,6 @@ class TeamsController < ApplicationController
       else
         @team.idea
       end
-  end
-
-  def team_params
-    params.require(:team).permit(:offer, :requirement, :status, :idea_id, :owner_id)
   end
 
   def check_owner

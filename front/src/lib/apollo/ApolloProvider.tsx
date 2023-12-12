@@ -4,7 +4,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client'
-import type { FC, ReactNode } from 'react'
+import { type FC, type ReactNode, useEffect, useState } from 'react'
 import { setContext } from '@apollo/client/link/context'
 import Cookies from 'js-cookie'
 
@@ -21,18 +21,24 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       // authorization: token ? `Bearer ${token}` : '',
-      authorization: authorization || '',
+      authorization: authorization ? `Bearer ${authorization}` : '',
     },
   }
-})
-
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
 })
 
 export const ApolloBaseProvider: FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  return <ApolloProvider client={client}>{children}</ApolloProvider>
+  const [client, setClient] = useState<ApolloClient<object>>()
+  useEffect(() => {
+    const apolloClient = new ApolloClient({
+      link: authLink.concat(httpLink),
+      cache: new InMemoryCache(),
+    })
+    setClient(apolloClient)
+  }, [])
+
+  return client ? (
+    <ApolloProvider client={client}>{children}</ApolloProvider>
+  ) : null
 }

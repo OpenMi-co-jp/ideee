@@ -27,7 +27,9 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser')
-    setCurrentUser(storedUser && storedUser !== 'undefined' ? JSON.parse(storedUser) : null)
+    setCurrentUser(
+      storedUser && storedUser !== 'undefined' ? JSON.parse(storedUser) : null
+    )
   }, [])
 
   useEffect(() => {

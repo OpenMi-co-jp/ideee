@@ -23,14 +23,12 @@ type CurrentUserProviderProps = {
 }
 
 export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
-  const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(
-    () => {
-      if (typeof window !== 'undefined') {
-        const storedUser = localStorage.getItem('currentUser')
-        return storedUser ? JSON.parse(storedUser) : null
-      }
-    }
-  )
+  const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null)
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('currentUser')
+    setCurrentUser(storedUser && storedUser !== 'undefined' ? JSON.parse(storedUser) : null)
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('currentUser', JSON.stringify(currentUser))

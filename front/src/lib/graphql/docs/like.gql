@@ -1,5 +1,5 @@
-query GetLikes($userId: ID!) {
-  likes(userId: $userId) {
+query GetLikes {
+  likes {
     id
     userId
     likableType
@@ -10,7 +10,6 @@ query GetLikes($userId: ID!) {
 mutation CreateLike($input: CreateLikeInput!) {
   createLike(input: $input) {
     like {
-      userId
       likableType
       likableId
     }
@@ -21,5 +20,6 @@ mutation CreateLike($input: CreateLikeInput!) {
 mutation DestroyLike($input: DestroyLikeInput!) {
   destroyLike(input: $input) {
     success
+    errors
   }
 }

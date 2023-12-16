@@ -12,6 +12,7 @@ RSpec.describe Mutations::Like::Destroy do
       mutation DestroyLike($input: DestroyLikeInput!) {
         destroyLike(input: $input) {
           success
+          errors
         }
       }
     GQL
@@ -21,7 +22,8 @@ RSpec.describe Mutations::Like::Destroy do
     let(:variables) do
       {
         input: {
-          id: like.id
+          likableType: like.likable_type,
+          likableId: like.likable_id
         }
       }
     end
@@ -42,13 +44,14 @@ RSpec.describe Mutations::Like::Destroy do
       let(:variables) do
         {
           input: {
-            id: 0
+            likableType: 'test',
+            likableId: 0
           }
         }
       end
 
       it 'リクエストが失敗すること' do
-        expect { graphql_post }.to raise_error(NoMethodError)
+        expect { graphql_post }.to raise_error(StandardError)
       end
     end
   end

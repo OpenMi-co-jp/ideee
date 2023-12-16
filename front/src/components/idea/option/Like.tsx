@@ -1,13 +1,19 @@
 import { IconHeartFilled, IconHeart } from '@tabler/icons-react'
 import { Button } from '@mantine/core'
-import { useToggle } from '@mantine/hooks'
+import { useToggleLike } from '@/components/like/useToggleLike'
+import { useRouter } from 'next/router'
 
+/**
+ * Likeコンポーネントは、アイデアに対する「いいね」の切り替え機能を提供します。
+ * @returns Button, IconHeartFilled, IconHeart
+ */
 export const Like = () => {
-  const [like, toggleLike] = useToggle([false, true])
+  const { id } = useRouter().query
+  const { isLike, toggleLike } = useToggleLike(Number(id), 'Idea')
 
   return (
-    <Button onClick={() => toggleLike()} variant="transparent" px="xs">
-      {like ? (
+    <Button onClick={toggleLike} variant="transparent" px="xs">
+      {isLike ? (
         <IconHeartFilled style={{ color: 'black' }} />
       ) : (
         <IconHeart style={{ color: 'black' }} />

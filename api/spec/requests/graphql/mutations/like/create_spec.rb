@@ -12,7 +12,6 @@ RSpec.describe Mutations::Like::Create do
       mutation CreateLike($input: CreateLikeInput!) {
         createLike(input: $input) {
           like {
-            userId
             likableType
             likableId
           }
@@ -25,7 +24,6 @@ RSpec.describe Mutations::Like::Create do
   let(:variables) do
     {
       input: {
-        userId: user.id,
         likableType: likable_type,
         likableId: likable_id
       }

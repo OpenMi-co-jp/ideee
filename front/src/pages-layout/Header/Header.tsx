@@ -7,8 +7,9 @@ import { IdeaCreateButton } from '@/components/idea/createButton'
 import { Sidebar } from './headerComponents/Sidebar'
 import type { CurrentUserProps } from '@/context/CurrentUserContext'
 
-
-export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({currentUser}) => {
+export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
+  currentUser,
+}) => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
   const isNarrowScreen = useMediaQuery('(max-width: 388px)')

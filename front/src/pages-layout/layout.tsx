@@ -5,11 +5,11 @@ import { Container } from '@mantine/core'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { currentUser } = useCurrentUser();
+  const { currentUser } = useCurrentUser()
 
   return (
     <>
-      <Header currentUser={currentUser}/>
+      <Header currentUser={currentUser} />
       <Container mt="7rem" mb="2rem">
         <main>{children}</main>
       </Container>

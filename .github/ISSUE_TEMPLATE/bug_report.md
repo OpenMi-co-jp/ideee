@@ -3,9 +3,6 @@ name: Bug report
 about: ideeeのバグ修正
 title: '【バグ】'
 labels: ''
-assignees:
-  - author
-
 ---
 
 ## As IS

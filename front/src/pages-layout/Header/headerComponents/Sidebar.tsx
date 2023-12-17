@@ -21,15 +21,23 @@ import {
 } from '@tabler/icons-react'
 import { useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
-import { useLoggedIn } from '@/components/loginContext'
-import { handleSignOut } from '@/components/Auth/SignOut/hooks'
+import { CurrentUserProps, useCurrentUser } from '@/context/CurrentUserContext'
+import { HandleSignOut } from '@/components/Auth/SignOut/hooks'
+import { useEffect } from 'react';
 
-export const Sidebar = () => {
+export const Sidebar = ({ currentUser }: {currentUser: CurrentUserProps | null}) => {
   const [opened, { open, close }] = useDisclosure(false)
   const isMobile = useMediaQuery('(max-width: 47.99em)')
-  const { setLoggedIn } = useLoggedIn()
-  const { loggedIn } = useLoggedIn()
-  const onSubmit = () => handleSignOut(setLoggedIn)
+  const { setCurrentUser } = useCurrentUser()
+  const onSubmit = () => HandleSignOut(setCurrentUser)
+  const isCurrentUser = (): boolean => {
+    return currentUser !== null;
+  };
+  
+  useEffect(() => {
+    console.log(isCurrentUser)
+    console.log(currentUser)
+  }, [currentUser]);
 
   return (
     <>
@@ -65,13 +73,11 @@ export const Sidebar = () => {
               </Anchor>
             </Link>
             <Space />
-
-            {(() => {
-              if (!loggedIn) {
-                return (
-                  <>
-                    <Divider
-                      my="xs"
+            
+            { !currentUser && (
+              <>
+                <Divider
+                  my="xs"
                       label="Login"
                       labelPosition="left"
                       color="orange"
@@ -124,9 +130,7 @@ export const Sidebar = () => {
                       </Anchor>
                     </Link>
                   </>
-                )
-              } else {
-                return (
+                  )} else {(
                   <>
                     <Divider
                       my="xs"
@@ -140,6 +144,7 @@ export const Sidebar = () => {
                         h="4rem"
                         label="ログアウト"
                         color="black"
+                        onClick={onSubmit}
                         leftSection={
                           <IconLogout2
                             size="1.3rem"
@@ -152,13 +157,11 @@ export const Sidebar = () => {
                         }
                         variant="subtle"
                         active
-                        onClick={onSubmit}
+                      
                       />
                     </Anchor>
                   </>
-                )
-              }
-            })()}
+                  )}
             <Divider
               my="xs"
               label="Contents"

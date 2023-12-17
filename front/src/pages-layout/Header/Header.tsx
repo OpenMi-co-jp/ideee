@@ -5,13 +5,12 @@ import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification, ServiceIcon } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
 import { Sidebar } from './headerComponents/Sidebar'
-import { useLoggedIn } from '@/components/loginContext'
+import type { CurrentUserProps } from '@/context/CurrentUserContext'
 
-export const Header: FC = () => {
+
+export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({currentUser}) => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  const { setLoggedIn } = useLoggedIn()
-  const { loggedIn } = useLoggedIn()
   const isNarrowScreen = useMediaQuery('(max-width: 388px)')
   const headerHeight = isNarrowScreen ? rem(115) : rem(60)
 
@@ -38,10 +37,10 @@ export const Header: FC = () => {
           <ServiceIcon />
           <Group justify="center">
             <SearchIcon />
-            {loggedIn && <Notification />}
+            <Notification />
             <UserToggle />
             <IdeaCreateButton />
-            <Sidebar />
+            <Sidebar currentUser={currentUser} />
           </Group>
         </Group>
       </Box>

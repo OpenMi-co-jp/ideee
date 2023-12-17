@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: ideeeのバグ修正
-title: "【バグ】"
+title: '【バグ】'
 labels: ''
 assignees:
   - author

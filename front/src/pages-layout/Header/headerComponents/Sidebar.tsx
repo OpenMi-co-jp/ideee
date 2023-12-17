@@ -65,93 +65,93 @@ export const Sidebar = ({ currentUser }: {currentUser: CurrentUserProps | null})
             </Link>
             <Space />
             
-            { !currentUser && (
+            { currentUser ? (
               <>
-                <Divider
-                  my="xs"
-                      label="Login"
-                      labelPosition="left"
-                      color="orange"
+              <Divider
+                my="xs"
+                label="Logout"
+                labelPosition="left"
+                color="orange"
+              />
+              <Anchor underline="never">
+                <NavLink
+                  px="2rem"
+                  h="4rem"
+                  label="ログアウト"
+                  color="black"
+                  onClick={onSubmit}
+                  leftSection={
+                    <IconLogout2
+                      size="1.3rem"
+                      stroke={2.5}
+                      color="black"
                     />
-                    <Link href="/user/sign_in">
-                      <Anchor underline="never">
-                        <NavLink
-                          px="2rem"
-                          h="4rem"
-                          label="ログイン"
-                          color="black"
-                          leftSection={
-                            <IconLogin2 size="1.3rem" stroke={2.5} />
-                          }
-                          rightSection={
-                            <IconChevronRight
-                              size="0.8rem"
-                              stroke={1.5}
-                              color="black"
-                            />
-                          }
-                          variant="subtle"
-                          active
-                          onClick={close}
-                        />
-                      </Anchor>
-                    </Link>
-                    <Space />
-                    <Link href="/user/sign_up">
-                      <Anchor underline="never">
-                        <NavLink
-                          px="2rem"
-                          h="4rem"
-                          label="新規登録"
-                          color="black"
-                          leftSection={
-                            <IconUserPlus size="1.3rem" stroke={2.5} />
-                          }
-                          rightSection={
-                            <IconChevronRight
-                              size="0.8rem"
-                              stroke={1.5}
-                              color="black"
-                            />
-                          }
-                          variant="subtle"
-                          active
-                          onClick={close}
-                        />
-                      </Anchor>
-                    </Link>
-                  </>
-                  )} else {(
+                  }
+                  rightSection={
+                    <IconChevronRight size="0.8rem" stroke={1.5} />
+                  }
+                  variant="subtle"
+                  active
+                
+                />
+              </Anchor>
+            </>
+                  ) : (
                   <>
-                    <Divider
-                      my="xs"
-                      label="Logout"
-                      labelPosition="left"
-                      color="orange"
-                    />
-                    <Anchor underline="never">
-                      <NavLink
-                        px="2rem"
-                        h="4rem"
-                        label="ログアウト"
-                        color="black"
-                        onClick={onSubmit}
-                        leftSection={
-                          <IconLogout2
-                            size="1.3rem"
-                            stroke={2.5}
-                            color="black"
-                          />
-                        }
-                        rightSection={
-                          <IconChevronRight size="0.8rem" stroke={1.5} />
-                        }
-                        variant="subtle"
-                        active
-                      
+                  <Divider
+                    my="xs"
+                        label="Login"
+                        labelPosition="left"
+                        color="orange"
                       />
-                    </Anchor>
-                  </>
+                      <Link href="/users/sign_in">
+                        <Anchor underline="never">
+                          <NavLink
+                            px="2rem"
+                            h="4rem"
+                            label="ログイン"
+                            color="black"
+                            leftSection={
+                              <IconLogin2 size="1.3rem" stroke={2.5} />
+                            }
+                            rightSection={
+                              <IconChevronRight
+                                size="0.8rem"
+                                stroke={1.5}
+                                color="black"
+                              />
+                            }
+                            variant="subtle"
+                            active
+                            onClick={close}
+                          />
+                        </Anchor>
+                      </Link>
+                      <Space />
+                      <Link href="/users/sign_up">
+                        <Anchor underline="never">
+                          <NavLink
+                            px="2rem"
+                            h="4rem"
+                            label="新規登録"
+                            color="black"
+                            leftSection={
+                              <IconUserPlus size="1.3rem" stroke={2.5} />
+                            }
+                            rightSection={
+                              <IconChevronRight
+                                size="0.8rem"
+                                stroke={1.5}
+                                color="black"
+                              />
+                            }
+                            variant="subtle"
+                            active
+                            onClick={close}
+                          />
+                        </Anchor>
+                      </Link>
+                    </>
                   )}
             <Divider
               my="xs"

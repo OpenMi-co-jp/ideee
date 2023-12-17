@@ -3,14 +3,15 @@ name: Feature request
 about: ideeeの機能改善・追加
 title: #
 labels: ''
-assignees: author
+assignees:
+  - author
 
 ---
 
-As IS
+## As IS
 - 
 
-To Be
+## To Be
 - 
 
 

@@ -23,21 +23,12 @@ import { useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
 import { CurrentUserProps, useCurrentUser } from '@/context/CurrentUserContext'
 import { HandleSignOut } from '@/components/Auth/SignOut/hooks'
-import { useEffect } from 'react';
 
 export const Sidebar = ({ currentUser }: {currentUser: CurrentUserProps | null}) => {
   const [opened, { open, close }] = useDisclosure(false)
   const isMobile = useMediaQuery('(max-width: 47.99em)')
   const { setCurrentUser } = useCurrentUser()
   const onSubmit = () => HandleSignOut(setCurrentUser)
-  const isCurrentUser = (): boolean => {
-    return currentUser !== null;
-  };
-  
-  useEffect(() => {
-    console.log(isCurrentUser)
-    console.log(currentUser)
-  }, [currentUser]);
 
   return (
     <>

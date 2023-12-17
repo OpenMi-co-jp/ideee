@@ -22,14 +22,14 @@ export const UserToggle = () => {
               }}
             >
               {!isMobile2 && (
-              <Link href="/users/sign_up">
-                <Button
-                  variant="gradient"
-                  gradient={{ from: 'red', to: 'orange' }}
-                >
-                  ユーザー登録
-                </Button>
-              </Link>
+                <Link href="/users/sign_up">
+                  <Button
+                    variant="gradient"
+                    gradient={{ from: 'red', to: 'orange' }}
+                  >
+                    ユーザー登録
+                  </Button>
+                </Link>
               )}
 
               {!isMobile && (

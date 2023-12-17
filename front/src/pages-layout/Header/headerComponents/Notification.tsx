@@ -7,16 +7,15 @@ export const Notification = ({
 }: {
   currentUser: CurrentUserProps | null
 }) => {
-  
   const { setCurrentUser } = useCurrentUser()
 
   return (
     <>
-    { currentUser && (
-    <Link href="/notifications" passHref>
-      <IconBell size={25} />
-    </Link>
-    )}
-  </>
+      {currentUser && (
+        <Link href="/notifications" passHref>
+          <IconBell size={25} />
+        </Link>
+      )}
+    </>
   )
 }

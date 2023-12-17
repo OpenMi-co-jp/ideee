@@ -38,7 +38,7 @@ export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
           <ServiceIcon />
           <Group justify="center">
             <SearchIcon />
-            <Notification currentUser={currentUser}/>
+            <Notification currentUser={currentUser} />
             <UserToggle />
             <IdeaCreateButton />
             <Sidebar currentUser={currentUser} />

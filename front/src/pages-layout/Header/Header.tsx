@@ -12,7 +12,7 @@ export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
 }) => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  const isNarrowScreen = useMediaQuery('(max-width: 388px)')
+  const isNarrowScreen = useMediaQuery('(max-width: 285px)')
   const headerHeight = isNarrowScreen ? rem(115) : rem(60)
 
   return (
@@ -38,7 +38,7 @@ export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
           <ServiceIcon />
           <Group justify="center">
             <SearchIcon />
-            <Notification />
+            <Notification currentUser={currentUser}/>
             <UserToggle />
             <IdeaCreateButton />
             <Sidebar currentUser={currentUser} />

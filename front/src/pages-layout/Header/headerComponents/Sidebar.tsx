@@ -1,28 +1,18 @@
 import { useDisclosure } from '@mantine/hooks'
-import {
-  Drawer,
-  Button,
-  Space,
-  Divider,
-  NavLink,
-  Menu,
-  MenuDropdown,
-  Anchor,
-} from '@mantine/core'
+import { Drawer, Button, Space, Divider, NavLink, Anchor } from '@mantine/core'
 import {
   IconMenu2,
   IconLogin2,
   IconUserPlus,
   IconLogout2,
   IconChevronRight,
-  IconSun,
-  IconBook,
   IconBulb,
 } from '@tabler/icons-react'
 import { useMediaQuery } from '@mantine/hooks'
 import Link from 'next/link'
 import { CurrentUserProps, useCurrentUser } from '@/context/CurrentUserContext'
 import { HandleSignOut } from '@/components/Auth/SignOut/hooks'
+import { MenuList } from './Sidebar/MenuList'
 
 export const Sidebar = ({
   currentUser,
@@ -33,35 +23,6 @@ export const Sidebar = ({
   const isMobile = useMediaQuery('(max-width: 47.99em)')
   const { setCurrentUser } = useCurrentUser()
   const onSubmit = () => HandleSignOut(setCurrentUser)
-
-  const menuData = [
-    {
-      label: 'About',
-      icon: <IconSun size="1.3rem" stroke={2.5} />,
-      links: [
-        { href: '/about', text: 'ideeeについて' },
-        {
-          href: 'https://www.ideee.tech/how_to_find_idea',
-          text: 'アイデアの探し方',
-        },
-        {
-          href: 'https://qiita.com/naruqiita/items/0ef4b963434226eacb6b',
-          text: '月間トレンドまとめ',
-        },
-        { href: '/avoid_pitfall', text: '個人顔発の落とし穴' },
-      ],
-    },
-    {
-      label: 'Legal',
-      icon: <IconBook size="1.3rem" stroke={2.5} />,
-      links: [
-        { href: '/frequent_questions', text: 'よくある質問' },
-        { href: '/terms_of_service', text: '利用規約' },
-        { href: '/privacy_policy', text: 'プライバシーポリシー' },
-        { href: 'https://naruhiro-portfolio.firebaseapp.com', text: '運営者' },
-      ],
-    },
-  ]
 
   return (
     <>
@@ -183,51 +144,7 @@ export const Sidebar = ({
               labelPosition="left"
               color="orange"
             />
-
-            {menuData.map((menu, index) => (
-              <Menu key={index} width={290} shadow="lg">
-                <Menu.Target>
-                  <NavLink
-                    px="2rem"
-                    h="4rem"
-                    label={menu.label}
-                    color="black"
-                    leftSection={menu.icon}
-                    rightSection={
-                      <IconChevronRight
-                        size="0.8rem"
-                        stroke={1.5}
-                        color="black"
-                      />
-                    }
-                    variant="subtle"
-                    active
-                  />
-                </Menu.Target>
-                <MenuDropdown>
-                  {menu.links.map((link, linkIndex) => (
-                    <Link key={linkIndex} href={link.href}>
-                      <Anchor underline="never">
-                        <Menu.Item
-                          w={280}
-                          h={60}
-                          rightSection={
-                            <IconChevronRight
-                              size="0.8rem"
-                              stroke={1.5}
-                              color="black"
-                            />
-                          }
-                          onClick={close}
-                        >
-                          {link.text}
-                        </Menu.Item>
-                      </Anchor>
-                    </Link>
-                  ))}
-                </MenuDropdown>
-              </Menu>
-            ))}
+            <MenuList close={close} />
           </Drawer>
           <Button onClick={open} variant="outline" color="orange">
             <IconMenu2 />

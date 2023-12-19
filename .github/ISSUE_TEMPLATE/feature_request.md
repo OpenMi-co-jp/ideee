@@ -5,7 +5,7 @@ title: #
 labels: ''
 ---
 
-## As IS
+## As Is
 - 
 
 ## To Be

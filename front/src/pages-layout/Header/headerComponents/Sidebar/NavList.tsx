@@ -9,7 +9,6 @@ import {
 import Link from 'next/link'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { HandleSignOut } from '@/components/Auth/SignOut/hooks'
-import React, { useState } from 'react'
 
 type NavItemProps = {
   item: {
@@ -20,9 +19,13 @@ type NavItemProps = {
   closeDrawer: () => void
 }
 
-const NavItem = ({ item }: NavItemProps) => {
+type NavListProps = {
+  close: () => void
+}
+
+const NavItem = ({ item, closeDrawer }: NavItemProps) => {
   const { label, href, icon: Icon } = item
-  const { currentUser, setCurrentUser } = useCurrentUser()
+  const { setCurrentUser } = useCurrentUser()
   const handleSignOut = () => HandleSignOut(setCurrentUser)
   const handleClick = () => {
     if (label === 'ログアウト') {
@@ -51,12 +54,8 @@ const NavItem = ({ item }: NavItemProps) => {
   )
 }
 
-export const NavList = () => {
+export const NavList = ({ close }: NavListProps) => {
   const { currentUser } = useCurrentUser()
-  const [isDrawerOpen, setDrawerOpen] = useState(true)
-  const closeDrawer = () => {
-    setDrawerOpen(false)
-  }
 
   return (
     <>
@@ -67,7 +66,7 @@ export const NavList = () => {
           href: '/',
           icon: IconBulb,
         }}
-        closeDrawer={closeDrawer}
+        closeDrawer={close}
       />
       {currentUser ? (
         <>
@@ -78,7 +77,7 @@ export const NavList = () => {
               href: '/',
               icon: IconLogout2,
             }}
-            closeDrawer={closeDrawer}
+            closeDrawer={close}
           />
         </>
       ) : (
@@ -90,7 +89,7 @@ export const NavList = () => {
               href: '/users/sign_in',
               icon: IconLogin2,
             }}
-            closeDrawer={closeDrawer}
+            closeDrawer={close}
           />
           <NavItem
             item={{
@@ -98,14 +97,10 @@ export const NavList = () => {
               href: '/users/sign_up',
               icon: IconUserPlus,
             }}
-            closeDrawer={closeDrawer}
+            closeDrawer={close}
           />
         </>
       )}
     </>
   )
-}
-
-function closeDrawer() {
-  throw new Error('Function not implemented.')
 }

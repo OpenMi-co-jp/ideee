@@ -28,7 +28,7 @@ export const Sidebar = ({
             onClose={close}
             overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
           >
-            <NavList />
+            <NavList close={close} />
             <Divider
               my="xs"
               label="Contents"

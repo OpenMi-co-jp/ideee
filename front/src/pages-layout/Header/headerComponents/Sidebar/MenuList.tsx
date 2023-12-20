@@ -9,7 +9,7 @@ type MenuListProps = {
   currentUser: CurrentUserProps | null
 }
 
-export const MenuList = ({ close, currentUser }: MenuListProps) => {
+export const MenuList = ({ close }: MenuListProps) => {
   return (
     <>
       {menuData.map((menu, index) => (

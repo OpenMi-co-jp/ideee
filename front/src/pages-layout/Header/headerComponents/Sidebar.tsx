@@ -33,7 +33,7 @@ export const Sidebar = ({
           >
             <NavList />
             <Divider my="xs" label="Contents" labelPosition="left" color="orange" />
-            <MenuList  />
+            <MenuList close={close} currentUser={currentUser}/>
           </Drawer>
           <Button onClick={open} variant="outline" color="orange">
             <IconMenu2 />

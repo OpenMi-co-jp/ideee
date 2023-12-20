@@ -1,14 +1,11 @@
 import { useDisclosure } from '@mantine/hooks'
 import { Drawer, Button, Divider } from '@mantine/core'
-import {
-  IconMenu2,
-} from '@tabler/icons-react'
+import { IconMenu2 } from '@tabler/icons-react'
 import { useMediaQuery } from '@mantine/hooks'
 import { CurrentUserProps, useCurrentUser } from '@/context/CurrentUserContext'
 import { HandleSignOut } from '@/components/Auth/SignOut/hooks'
 import { NavList } from './Sidebar/NavList'
 import { MenuList } from './Sidebar/MenuList'
-
 
 export const Sidebar = ({
   currentUser,
@@ -32,8 +29,13 @@ export const Sidebar = ({
             overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
           >
             <NavList />
-            <Divider my="xs" label="Contents" labelPosition="left" color="orange" />
-            <MenuList close={close} currentUser={currentUser}/>
+            <Divider
+              my="xs"
+              label="Contents"
+              labelPosition="left"
+              color="orange"
+            />
+            <MenuList close={close} currentUser={currentUser} />
           </Drawer>
           <Button onClick={open} variant="outline" color="orange">
             <IconMenu2 />

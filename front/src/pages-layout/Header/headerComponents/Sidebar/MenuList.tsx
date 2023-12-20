@@ -2,12 +2,14 @@ import { Anchor, Menu, MenuDropdown, NavLink } from '@mantine/core'
 import { menuData } from './MenuData'
 import { IconChevronRight } from '@tabler/icons-react'
 import Link from 'next/link'
+import { CurrentUserProps } from '@/context/CurrentUserContext'
 
-type CloseProps = {
-  close: any
+type MenuListProps = {
+  close: () => void
+  currentUser: CurrentUserProps | null
 }
 
-export const MenuList = ({ close }: CloseProps) => {
+export const MenuList = ({ close, currentUser }: MenuListProps) => {
   return (
     <>
       {menuData.map((menu, index) => (

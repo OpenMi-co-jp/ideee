@@ -35,8 +35,7 @@ const NavItem = ({ item, closeDrawer }: NavItemProps) => {
   }
 
   return (
-    <Link href={href || '/'}>
-      <Anchor underline="never" onClick={handleClick}>
+    <Link href={ href || '/'} passHref onClick={handleClick}>
         <NavLink
           px="2rem"
           h="4rem"
@@ -47,9 +46,7 @@ const NavItem = ({ item, closeDrawer }: NavItemProps) => {
             <IconChevronRight size="0.8rem" stroke={1.5} color="black" />
           }
           variant="subtle"
-          active
         />
-      </Anchor>
     </Link>
   )
 }

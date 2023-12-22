@@ -5,8 +5,8 @@ import { useMediaQuery } from '@mantine/hooks'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const UserToggle = () => {
-  const isMobile = useMediaQuery(`(max-width: 550px)`)
-  const swichUserSignUp = useMediaQuery(`(max-width: 334px)`)
+  const swichLogin = useMediaQuery(`(min-width: 565px)`)
+  const swichUserSignUp = useMediaQuery(`(min-width: 381px)`)
   const { currentUser } = useCurrentUser()
 
   return (
@@ -21,7 +21,7 @@ export const UserToggle = () => {
                 display: 'flex',
               }}
             >
-              {!swichUserSignUp && (
+              {swichUserSignUp && (
                 <Link href="/users/sign_up">
                   <Button
                     variant="gradient"
@@ -32,7 +32,7 @@ export const UserToggle = () => {
                 </Link>
               )}
 
-              {!isMobile && (
+              {swichLogin && (
                 <>
                   <Space mx="xs" />
                   <Link href="/users/sign_in">

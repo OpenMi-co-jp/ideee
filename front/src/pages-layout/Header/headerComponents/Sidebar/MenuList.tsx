@@ -25,7 +25,6 @@ export const MenuList = ({ close }: MenuListProps) => {
                 <IconChevronRight size="0.8rem" stroke={1.5} color="black" />
               }
               variant="subtle"
-              active
             />
           </Menu.Target>
           <MenuDropdown>

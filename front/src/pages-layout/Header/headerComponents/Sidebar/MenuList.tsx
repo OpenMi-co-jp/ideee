@@ -30,8 +30,7 @@ export const MenuList = ({ close }: MenuListProps) => {
               <Link key={linkIndex} href={link.href}>
                 <Anchor underline="never" >
                   <Menu.Item
-                    w={280}
-                    h={60}
+                    style={{ width: '280px', height: '60px' }}
                     rightSection={
                       <IconChevronRight
                         size="0.8rem"

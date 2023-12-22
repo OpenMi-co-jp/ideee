@@ -1,13 +1,9 @@
 import { IconBell } from '@tabler/icons-react'
 import Link from 'next/link'
-import { CurrentUserProps, useCurrentUser } from '@/context/CurrentUserContext'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
-export const Notification = ({
-  currentUser,
-}: {
-  currentUser: CurrentUserProps | null
-}) => {
-  const { setCurrentUser } = useCurrentUser()
+export const Notification = () => {
+  const currentUser = useCurrentUser()
 
   return (
     <>

@@ -6,7 +6,7 @@ import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const UserToggle = () => {
   const isMobile = useMediaQuery(`(max-width: 550px)`)
-  const isMobile2 = useMediaQuery(`(max-width: 334px)`)
+  const swichUserSignUp = useMediaQuery(`(max-width: 334px)`)
   const { currentUser } = useCurrentUser()
 
   return (
@@ -21,7 +21,7 @@ export const UserToggle = () => {
                 display: 'flex',
               }}
             >
-              {!isMobile2 && (
+              {!swichUserSignUp && (
                 <Link href="/users/sign_up">
                   <Button
                     variant="gradient"

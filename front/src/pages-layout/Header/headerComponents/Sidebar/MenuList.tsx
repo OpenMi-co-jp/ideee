@@ -2,11 +2,9 @@ import { Anchor, Menu, MenuDropdown, NavLink } from '@mantine/core'
 import { menuData } from './MenuData'
 import { IconChevronRight } from '@tabler/icons-react'
 import Link from 'next/link'
-import { CurrentUserProps } from '@/context/CurrentUserContext'
 
 type MenuListProps = {
   close: () => void
-  currentUser: CurrentUserProps | null
 }
 
 export const MenuList = ({ close }: MenuListProps) => {
@@ -30,7 +28,7 @@ export const MenuList = ({ close }: MenuListProps) => {
           <MenuDropdown>
             {menu.links.map((link, linkIndex) => (
               <Link key={linkIndex} href={link.href}>
-                <Anchor underline="never">
+                <Anchor underline="never" >
                   <Menu.Item
                     w={280}
                     h={60}

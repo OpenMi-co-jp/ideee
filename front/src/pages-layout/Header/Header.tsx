@@ -1,6 +1,6 @@
 import { useMantineColorScheme, Box, Group, Portal, rem } from '@mantine/core'
 import type { FC } from 'react'
-import { useHeadroom, useMediaQuery } from '@mantine/hooks'
+import { useHeadroom } from '@mantine/hooks'
 import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification, ServiceIcon } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
@@ -12,9 +12,7 @@ export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
 }) => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  const isNarrowScreen = useMediaQuery('(max-width: 285px)')
-  const headerHeight = isNarrowScreen ? rem(115) : rem(60)
-
+  
   return (
     <Portal>
       <Box
@@ -25,7 +23,6 @@ export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
           top: 0,
           left: 0,
           right: 0,
-          height: headerHeight,
           zIndex: 200, // modalのindexがが201のため
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
@@ -41,7 +38,7 @@ export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
             <Notification currentUser={currentUser} />
             <UserToggle />
             <IdeaCreateButton />
-            <Sidebar currentUser={currentUser} />
+            <Sidebar />
           </Group>
         </Group>
       </Box>

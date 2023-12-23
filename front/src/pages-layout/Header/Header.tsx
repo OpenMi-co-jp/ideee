@@ -7,9 +7,7 @@ import { IdeaCreateButton } from '@/components/idea/createButton'
 import { Sidebar } from './headerComponents/Sidebar'
 import type { CurrentUserProps } from '@/context/CurrentUserContext'
 
-export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
-  currentUser,
-}) => {
+export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
   
@@ -35,7 +33,7 @@ export const Header: FC<{ currentUser: CurrentUserProps | null }> = ({
           <ServiceIcon />
           <Group justify="center">
             <SearchIcon />
-            <Notification currentUser={currentUser} />
+            <Notification />
             <UserToggle />
             <IdeaCreateButton />
             <Sidebar />

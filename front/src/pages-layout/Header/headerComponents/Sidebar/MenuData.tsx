@@ -7,6 +7,8 @@ export const menuData = [
     links: [
       { href: '/about', text: 'ideeeについて' },
       {
+        // TODO:
+        // https://github.com/naru20181117/ideee/pull/1220でページ実装後に、ここのリンクを修正する
         href: 'https://www.ideee.tech/how_to_find_idea',
         text: 'アイデアの探し方',
       },

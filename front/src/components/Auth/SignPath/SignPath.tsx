@@ -29,7 +29,7 @@ export const SignPath: CustomNextPage = () => {
                 ユーザー登録
               </Button>
             </Link>
-            <Link href="users/sign_in">
+            <Link href="/users/sign_in">
               <Button m="lg" variant="outline" color="orange">
                 ログイン
               </Button>

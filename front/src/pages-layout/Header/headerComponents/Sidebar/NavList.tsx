@@ -1,4 +1,4 @@
-import { Anchor, NavLink, Divider } from '@mantine/core'
+import { NavLink, Divider } from '@mantine/core'
 import {
   IconBulb,
   IconChevronRight,
@@ -17,25 +17,22 @@ type NavItemProps = {
     icon: any
   }
   closeDrawer: () => void
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
 }
 
 type NavListProps = {
   close: () => void
 }
 
-const NavItem = ({ item, closeDrawer }: NavItemProps) => {
+const NavItem = ({ item, closeDrawer,onClick = () => {}}: NavItemProps) => {
   const { label, href, icon: Icon } = item
-  const { setCurrentUser } = useCurrentUser()
-  const handleSignOut = () => HandleSignOut(setCurrentUser)
-  const handleClick = () => {
-    if (label === 'ログアウト') {
-      handleSignOut()
-    }
-    closeDrawer()
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    onClick(event);
+    closeDrawer();
   }
-
+  
   return (
-    <Link href={ href || '/'} passHref onClick={handleClick}>
+    <Link href={ href || '/'} passHref >
         <NavLink
           px="2rem"
           h="4rem"
@@ -46,14 +43,19 @@ const NavItem = ({ item, closeDrawer }: NavItemProps) => {
             <IconChevronRight size="0.8rem" stroke={1.5} color="black" />
           }
           variant="subtle"
+          onClick={handleClick}
         />
     </Link>
   )
 }
 
 export const NavList = ({ close }: NavListProps) => {
-  const { currentUser } = useCurrentUser()
-
+  const { currentUser, setCurrentUser } = useCurrentUser()
+  const handleSignOut = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    HandleSignOut(setCurrentUser)
+    event.preventDefault()
+  }
+  
   return (
     <>
       <Divider my="xs" label="Idea" labelPosition="left" color="orange" />
@@ -75,6 +77,7 @@ export const NavList = ({ close }: NavListProps) => {
               icon: IconLogout2,
             }}
             closeDrawer={close}
+            onClick={handleSignOut}
           />
         </>
       ) : (

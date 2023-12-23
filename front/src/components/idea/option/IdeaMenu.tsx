@@ -1,8 +1,14 @@
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import { Menu } from '@mantine/core'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useDestroyIdea } from '@/components/idea/useDestroyIdea'
 
 export const IdeaMenu = () => {
+  const router = useRouter()
+  const ideaId = typeof router.query.id === 'string' ? router.query.id : ''
+  const { handleDestroyIdea } = useDestroyIdea(ideaId)
+
   return (
     <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
@@ -17,7 +23,11 @@ export const IdeaMenu = () => {
 
         <Menu.Divider />
 
-        <Menu.Item color="red" leftSection={<IconTrash size={14} />}>
+        <Menu.Item
+          onClick={handleDestroyIdea}
+          color="red"
+          leftSection={<IconTrash size={14} />}
+        >
           Delete
         </Menu.Item>
       </Menu.Dropdown>

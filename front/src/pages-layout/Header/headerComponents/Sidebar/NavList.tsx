@@ -17,17 +17,17 @@ type NavItemProps = {
     icon: any
   }
   closeDrawer: () => void
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+  handleSignOut?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
 }
 
 type NavListProps = {
   close: () => void
 }
 
-const NavItem = ({ item, closeDrawer,onClick = () => {}}: NavItemProps) => {
+const NavItem = ({ item, closeDrawer,handleSignOut = () => {}}: NavItemProps) => {
   const { label, href, icon: Icon } = item
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    onClick(event);
+    handleSignOut(event);
     closeDrawer();
   }
   
@@ -77,7 +77,7 @@ export const NavList = ({ close }: NavListProps) => {
               icon: IconLogout2,
             }}
             closeDrawer={close}
-            onClick={handleSignOut}
+            handleSignOut={handleSignOut}
           />
         </>
       ) : (

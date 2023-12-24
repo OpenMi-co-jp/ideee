@@ -1,6 +1,10 @@
 import { Anchor, Menu, MenuDropdown, NavLink } from '@mantine/core'
 import { menuData } from './MenuData'
-import { IconChevronDown, IconChevronRight, IconChevronUp } from '@tabler/icons-react'
+import {
+  IconChevronDown,
+  IconChevronRight,
+  IconChevronUp,
+} from '@tabler/icons-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -22,17 +26,26 @@ export const MenuList = ({ close }: MenuListProps) => {
               label={menu.label}
               color="black"
               rightSection={
-                isOpen[menu.label] ? <IconChevronUp size="0.8rem" stroke={1.5} color="black" /> : <IconChevronDown size="0.8rem" stroke={1.5} color="black" />
+                isOpen[menu.label] ? (
+                  <IconChevronUp size="0.8rem" stroke={1.5} color="black" />
+                ) : (
+                  <IconChevronDown size="0.8rem" stroke={1.5} color="black" />
+                )
               }
               leftSection={menu.icon}
               variant="subtle"
-              onClick={() => setIsOpen(prevState => ({ ...prevState, [menu.label]: !prevState[menu.label] }))}
+              onClick={() =>
+                setIsOpen((prevState) => ({
+                  ...prevState,
+                  [menu.label]: !prevState[menu.label],
+                }))
+              }
             />
           </Menu.Target>
           <MenuDropdown>
             {menu.links.map((link, linkIndex) => (
               <Link key={linkIndex} href={link.href}>
-                <Anchor underline="never" >
+                <Anchor underline="never">
                   <Menu.Item
                     style={{ width: '280px', height: '60px' }}
                     rightSection={

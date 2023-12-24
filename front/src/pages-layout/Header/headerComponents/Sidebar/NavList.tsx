@@ -17,45 +17,55 @@ type NavItemProps = {
     icon: any
   }
   closeDrawer: () => void
-  handleSignOut?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+  handleSignOut?: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => void
 }
 
 type NavListProps = {
   close: () => void
 }
 
-const NavItem = ({ item, closeDrawer,handleSignOut = () => {}}: NavItemProps) => {
+const NavItem = ({
+  item,
+  closeDrawer,
+  handleSignOut = () => {},
+}: NavItemProps) => {
   const { label, href, icon: Icon } = item
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    handleSignOut(event);
-    closeDrawer();
+  const handleClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    handleSignOut(event)
+    closeDrawer()
   }
-  
+
   return (
-    <Link href={ href } passHref >
-        <NavLink
-          px="2rem"
-          h="4rem"
-          label={label}
-          color="black"
-          leftSection={<Icon size="1.3rem" stroke={2.5} />}
-          rightSection={
-            <IconChevronRight size="0.8rem" stroke={1.5} color="black" />
-          }
-          variant="subtle"
-          onClick={handleClick}
-        />
+    <Link href={href} passHref>
+      <NavLink
+        px="2rem"
+        h="4rem"
+        label={label}
+        color="black"
+        leftSection={<Icon size="1.3rem" stroke={2.5} />}
+        rightSection={
+          <IconChevronRight size="0.8rem" stroke={1.5} color="black" />
+        }
+        variant="subtle"
+        onClick={handleClick}
+      />
     </Link>
   )
 }
 
 export const NavList = ({ close }: NavListProps) => {
   const { currentUser, setCurrentUser } = useCurrentUser()
-  const handleSignOut = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleSignOut = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     HandleSignOut(setCurrentUser)
     event.preventDefault()
   }
-  
+
   return (
     <>
       <Divider my="xs" label="Idea" labelPosition="left" color="orange" />

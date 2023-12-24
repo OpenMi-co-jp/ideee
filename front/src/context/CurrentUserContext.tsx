@@ -45,7 +45,7 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
   const logOut = () => {
     setCurrentUser(null)
-    localStorage.setItem('currentUser', 'null')
+    localStorage.removeItem('currentUser')
   }
 
   return (

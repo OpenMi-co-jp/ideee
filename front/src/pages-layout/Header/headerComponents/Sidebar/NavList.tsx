@@ -13,7 +13,7 @@ import { HandleSignOut } from '@/components/Auth/SignOut/hooks'
 type NavItemProps = {
   item: {
     label: string
-    href?: string
+    href: string
     icon: any
   }
   closeDrawer: () => void
@@ -32,7 +32,7 @@ const NavItem = ({ item, closeDrawer,handleSignOut = () => {}}: NavItemProps) =>
   }
   
   return (
-    <Link href={ href || '/'} passHref >
+    <Link href={ href } passHref >
         <NavLink
           px="2rem"
           h="4rem"

@@ -10,8 +10,8 @@ export type CurrentUserProps = {
 
 export type CurrentUserContextType = {
   currentUser: CurrentUserProps | null
-  logIn: (user: CurrentUserProps) => void;
-  logOut: () => void;
+  logIn: (user: CurrentUserProps) => void
+  logOut: () => void
 }
 
 export const CurrentUserContext = createContext<CurrentUserContextType>({

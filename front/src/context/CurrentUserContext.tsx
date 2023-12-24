@@ -35,7 +35,6 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     const storedUser = localStorage.getItem('currentUser')
     if (storedUser && storedUser !== 'undefined') {
       setCurrentUser(JSON.parse(storedUser))
-      localStorage.setItem('currentUser', storedUser)
     }
   }, [])
 

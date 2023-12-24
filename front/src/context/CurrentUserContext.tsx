@@ -10,14 +10,14 @@ export type CurrentUserProps = {
 
 export type CurrentUserContextType = {
   currentUser: CurrentUserProps | null
-  logIn: (user: CurrentUserProps) => void
-  logOut: () => void
+  storeCurrentUser: (user: CurrentUserProps) => void
+  clearCurrentUser: () => void
 }
 
 export const CurrentUserContext = createContext<CurrentUserContextType>({
   currentUser: null,
-  logIn: () => {},
-  logOut: () => {},
+  storeCurrentUser: () => {},
+  clearCurrentUser: () => {},
 })
 
 type CurrentUserProviderProps = {
@@ -38,18 +38,18 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     }
   }, [])
 
-  const logIn = (user: CurrentUserProps) => {
+  const storeCurrentUser = (user: CurrentUserProps) => {
     setCurrentUser(user)
     localStorage.setItem('currentUser', JSON.stringify(user))
   }
 
-  const logOut = () => {
+  const clearCurrentUser = () => {
     setCurrentUser(null)
     localStorage.removeItem('currentUser')
   }
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, logIn, logOut }}>
+    <CurrentUserContext.Provider value={{ currentUser, storeCurrentUser, clearCurrentUser }}>
       {children}
     </CurrentUserContext.Provider>
   )

@@ -7,7 +7,7 @@ import { useCurrentUser } from '@/context/CurrentUserContext'
 import { DecodeJwt } from '@/utils/auth'
 
 function AuthCallback() {
-  const { logIn } = useCurrentUser()
+  const { storeCurrentUser } = useCurrentUser()
   const router = useRouter()
   const { query } = router
   const token = query.token
@@ -20,7 +20,7 @@ function AuthCallback() {
       })
       try {
         const decodedToken = DecodeJwt(String(token))
-        logIn(decodedToken)
+        storeCurrentUser(decodedToken)
       } catch (error) {
         console.error('Failed to decode JWT:', error)
       }
@@ -30,7 +30,7 @@ function AuthCallback() {
         })
       })
     }
-  }, [token, logIn, router])
+  }, [token, storeCurrentUser, router])
 
   return (
     <LoadingOverlay

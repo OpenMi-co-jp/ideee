@@ -5,7 +5,6 @@ import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification, ServiceIcon } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
 import { Sidebar } from './headerComponents/Sidebar'
-import type { CurrentUserProps } from '@/context/CurrentUserContext'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })

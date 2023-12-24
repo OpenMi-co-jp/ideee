@@ -63,6 +63,7 @@ export const NavList = ({ close }: NavListProps) => {
         item={{
           label: 'アイデア投稿',
           href: '/',
+          // TODO: アイデア投稿ページは未実装なので実装時にリンクを設定
           icon: IconBulb,
         }}
         closeDrawer={close}

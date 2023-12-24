@@ -17,7 +17,7 @@ type SignInFormValues = {
 }
 
 export const SignInForm: CustomNextPage = () => {
-  const { currentUser, setCurrentUser } = useCurrentUser()
+  const { currentUser, logIn } = useCurrentUser()
 
   const signInSchema = z.object({
     email: z
@@ -36,7 +36,7 @@ export const SignInForm: CustomNextPage = () => {
     mode: 'onChange',
   })
   const onSubmit = (data: SignInFormValues) =>
-    handleSignIn(data, setCurrentUser)
+    handleSignIn(data, logIn)
   const router = useRouter()
 
   useEffect(() => {

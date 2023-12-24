@@ -49,7 +49,9 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   }
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, storeCurrentUser, clearCurrentUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, storeCurrentUser, clearCurrentUser }}
+    >
       {children}
     </CurrentUserContext.Provider>
   )

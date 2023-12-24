@@ -35,7 +35,8 @@ export const SignInForm: CustomNextPage = () => {
     },
     mode: 'onChange',
   })
-  const onSubmit = (data: SignInFormValues) => handleSignIn(data, storeCurrentUser)
+  const onSubmit = (data: SignInFormValues) =>
+    handleSignIn(data, storeCurrentUser)
   const router = useRouter()
 
   useEffect(() => {

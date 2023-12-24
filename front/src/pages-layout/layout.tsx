@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import { Container } from '@mantine/core'
 
 export default function Layout({ children }: { children: ReactNode }) {
-
   return (
     <>
       <Header />

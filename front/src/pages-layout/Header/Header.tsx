@@ -9,7 +9,7 @@ import { Sidebar } from './headerComponents/Sidebar'
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  
+
   return (
     <Portal>
       <Box

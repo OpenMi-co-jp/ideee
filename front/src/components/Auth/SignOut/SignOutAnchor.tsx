@@ -3,8 +3,8 @@ import { HandleSignOut } from './hooks'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const SignOutAnchor = () => {
-  const { setCurrentUser } = useCurrentUser()
-  const onSubmit = () => HandleSignOut(setCurrentUser)
+  const { logOut } = useCurrentUser()
+  const onSubmit = () => HandleSignOut(logOut)
 
   return (
     <Anchor c="yellow" onClick={onSubmit}>

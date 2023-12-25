@@ -8,7 +8,6 @@ import {
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { HandleSignOut } from '@/components/Auth/SignOut/hooks'
 
 type NavItemProps = {
   item: {
@@ -17,26 +16,20 @@ type NavItemProps = {
     icon: any
   }
   closeDrawer: () => void
-  handleSignOut?: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => void
+  logOut?: () => void
 }
 
 type NavListProps = {
   close: () => void
 }
 
-const NavItem = ({
-  item,
-  closeDrawer,
-  handleSignOut = () => {},
-}: NavItemProps) => {
+const NavItem = ({ item, closeDrawer, logOut }: NavItemProps) => {
   const { label, href, icon: Icon } = item
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
-    handleSignOut(event)
     closeDrawer()
+    logOut && logOut()
   }
 
   return (
@@ -58,13 +51,7 @@ const NavItem = ({
 }
 
 export const NavList = ({ close }: NavListProps) => {
-  const { currentUser, setCurrentUser } = useCurrentUser()
-  const handleSignOut = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    HandleSignOut(setCurrentUser)
-    event.preventDefault()
-  }
+  const { currentUser, logOut } = useCurrentUser()
 
   return (
     <>
@@ -88,7 +75,7 @@ export const NavList = ({ close }: NavListProps) => {
               icon: IconLogout2,
             }}
             closeDrawer={close}
-            handleSignOut={handleSignOut}
+            logOut={logOut}
           />
         </>
       ) : (

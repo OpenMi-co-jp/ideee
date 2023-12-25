@@ -10,34 +10,48 @@ export type CurrentUserProps = {
 
 export type CurrentUserContextType = {
   currentUser: CurrentUserProps | null
-  setCurrentUser: React.Dispatch<React.SetStateAction<CurrentUserProps | null>>
+  storeCurrentUser: (user: CurrentUserProps) => void
+  clearCurrentUser: () => void
 }
 
 export const CurrentUserContext = createContext<CurrentUserContextType>({
   currentUser: null,
-  setCurrentUser: () => {},
+  storeCurrentUser: () => {},
+  clearCurrentUser: () => {},
 })
 
 type CurrentUserProviderProps = {
   children: ReactNode
 }
 
+// NOTE:
+// 本当は currentUser の useState の初期化時に localStorage から値を設定したい
+// ただ、 localStorage を useState で使ってしまうとハイドレーションエラーが発生する (SSR では localStorage が使えないので)
+// なので useEffect の特性を利用して、ハイドレーションエラーを回避しつつ、この Provider の初期化時に currentUser を設定するようにしている
 export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null)
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser')
-    setCurrentUser(
-      storedUser && storedUser !== 'undefined' ? JSON.parse(storedUser) : null
-    )
+    if (storedUser && storedUser !== 'undefined') {
+      setCurrentUser(JSON.parse(storedUser))
+    }
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('currentUser', JSON.stringify(currentUser))
-  }, [currentUser])
+  const storeCurrentUser = (user: CurrentUserProps) => {
+    setCurrentUser(user)
+    localStorage.setItem('currentUser', JSON.stringify(user))
+  }
+
+  const clearCurrentUser = () => {
+    setCurrentUser(null)
+    localStorage.removeItem('currentUser')
+  }
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, storeCurrentUser, clearCurrentUser }}
+    >
       {children}
     </CurrentUserContext.Provider>
   )

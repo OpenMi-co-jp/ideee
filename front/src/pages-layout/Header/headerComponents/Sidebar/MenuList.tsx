@@ -24,12 +24,11 @@ export const MenuList = ({ close }: MenuListProps) => {
               px="2rem"
               h="4rem"
               label={menu.label}
-              color="black"
               rightSection={
                 isOpen[menu.label] ? (
-                  <IconChevronUp size="0.8rem" stroke={1.5} color="black" />
+                  <IconChevronUp size="0.8rem" stroke={1.5} />
                 ) : (
-                  <IconChevronDown size="0.8rem" stroke={1.5} color="black" />
+                  <IconChevronDown size="0.8rem" stroke={1.5} />
                 )
               }
               leftSection={menu.icon}
@@ -49,15 +48,11 @@ export const MenuList = ({ close }: MenuListProps) => {
                   <Menu.Item
                     style={{ width: '280px', height: '60px' }}
                     rightSection={
-                      <IconChevronRight
-                        size="0.8rem"
-                        stroke={1.5}
-                        color="black"
-                      />
+                      <IconChevronRight size="0.8rem" stroke={1.5} />
                     }
                     onClick={close}
                   >
-                    {link.text}
+                    {link.title}
                   </Menu.Item>
                 </Anchor>
               </Link>

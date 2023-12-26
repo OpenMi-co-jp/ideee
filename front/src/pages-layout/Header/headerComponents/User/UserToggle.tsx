@@ -11,10 +11,10 @@ export const UserToggle = () => {
 
   return (
     <Group>
+      {currentUser && isMobile && <UserMenu />}
+
       {(() => {
-        if (currentUser) {
-          return <UserMenu />
-        } else {
+        if (!currentUser) {
           return (
             <Box
               style={{

@@ -37,7 +37,7 @@ export const Header: FC = () => {
           <Group justify="center">
             <SearchIcon />
             {currentUser && <Notification />}
-            {!isMobile && <UserToggle />}
+            <UserToggle />
             {currentUser && !isMobile && <IdeaCreateButton />}
             {isMobile && <Sidebar />}
           </Group>

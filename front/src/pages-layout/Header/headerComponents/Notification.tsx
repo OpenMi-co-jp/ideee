@@ -7,12 +7,10 @@ export const Notification = () => {
 
   return (
     <>
-      {currentUser ? (
+      {currentUser && (
         <Link href="/notifications" passHref>
           <IconBell size={25} />
         </Link>
-      ) : (
-        <></>
       )}
     </>
   )

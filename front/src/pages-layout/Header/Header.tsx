@@ -4,11 +4,13 @@ import { useHeadroom } from '@mantine/hooks'
 import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification, ServiceIcon } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
-import { Sidebar } from './headerComponents/Sidebar'
+import { Sidebar } from '@/pages-layout/Header/headerComponents/Sidebar'
+import { useMediaQuery } from '@mantine/hooks'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
+  const isMobile = useMediaQuery('(max-width: 48em)')
 
   return (
     <Portal>
@@ -33,9 +35,9 @@ export const Header: FC = () => {
           <Group justify="center">
             <SearchIcon />
             <Notification />
-            <UserToggle />
+            {!isMobile && <UserToggle />}
             <IdeaCreateButton />
-            <Sidebar />
+            {isMobile && <Sidebar />}
           </Group>
         </Group>
       </Box>

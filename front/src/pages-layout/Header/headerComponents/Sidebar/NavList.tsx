@@ -1,86 +1,70 @@
-import { NavLink, Divider } from '@mantine/core'
+import { Divider } from '@mantine/core'
 import {
   IconBulb,
-  IconChevronRight,
-  IconLogin2,
-  IconLogout2,
   IconUserPlus,
+  IconLogout2,
+  IconLogin2,
+  IconUserCircle,
+  IconUserEdit,
+  IconSettings,
 } from '@tabler/icons-react'
-import Link from 'next/link'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-
-type NavItemProps = {
-  item: {
-    label: string
-    href: string
-    icon: any
-  }
-  closeDrawer: () => void
-  logOut?: () => void
-}
+import { MenuList } from './MenuList'
+import { NavItem } from './NavItem'
 
 type NavListProps = {
   close: () => void
 }
 
-const NavItem = ({ item, closeDrawer, logOut }: NavItemProps) => {
-  const { label, href, icon: Icon } = item
-  const handleClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    closeDrawer()
-    logOut && logOut()
-  }
-
-  return (
-    <Link href={href} passHref>
-      <NavLink
-        px="2rem"
-        h="4rem"
-        label={label}
-        color="black"
-        leftSection={<Icon size="1.3rem" stroke={2.5} />}
-        rightSection={
-          <IconChevronRight size="0.8rem" stroke={1.5} color="black" />
-        }
-        variant="subtle"
-        onClick={handleClick}
-      />
-    </Link>
-  )
-}
-
 export const NavList = ({ close }: NavListProps) => {
-  const { currentUser, logOut } = useCurrentUser()
+  const { currentUser, clearCurrentUser } = useCurrentUser()
 
   return (
     <>
-      <Divider my="xs" label="Idea" labelPosition="left" color="orange" />
-      <NavItem
-        item={{
-          label: 'アイデア投稿',
-          href: '/',
-          // TODO: アイデア投稿ページは未実装なので実装時にリンクを設定
-          icon: IconBulb,
-        }}
-        closeDrawer={close}
-      />
-      {currentUser ? (
+      {currentUser && (
         <>
-          <Divider my="xs" label="Logout" labelPosition="left" color="orange" />
           <NavItem
             item={{
-              label: 'ログアウト',
-              href: '/',
-              icon: IconLogout2,
+              label: 'アイデア投稿',
+              href: '/ideas/new',
+              icon: IconBulb,
             }}
             closeDrawer={close}
-            logOut={logOut}
+          />
+
+          <Divider my="xs" label="User" labelPosition="left" color="orange" />
+
+          <NavItem
+            item={{
+              label: 'マイページ',
+              href: `/users/${currentUser?.id}`,
+              icon: IconUserCircle,
+            }}
+            closeDrawer={close}
+          />
+          <NavItem
+            item={{
+              label: 'ユーザー情報編集',
+              href: `/users/${currentUser?.id}/edit`,
+              icon: IconUserEdit,
+            }}
+            closeDrawer={close}
+          />
+          <NavItem
+            item={{
+              label: 'Settings',
+              href: '/settings',
+              icon: IconSettings,
+            }}
+            closeDrawer={close}
           />
         </>
-      ) : (
+      )}
+
+      {!currentUser && (
         <>
           <Divider my="xs" label="Login" labelPosition="left" color="orange" />
+
           <NavItem
             item={{
               label: 'ログイン',
@@ -96,6 +80,25 @@ export const NavList = ({ close }: NavListProps) => {
               icon: IconUserPlus,
             }}
             closeDrawer={close}
+          />
+        </>
+      )}
+
+      <Divider my="xs" label="Contents" labelPosition="left" color="orange" />
+
+      <MenuList close={close} />
+      {currentUser && (
+        <>
+          <Divider my="xs" label="Logout" labelPosition="left" color="orange" />
+
+          <NavItem
+            item={{
+              label: 'ログアウト',
+              href: '/',
+              icon: IconLogout2,
+            }}
+            closeDrawer={close}
+            logOut={clearCurrentUser}
           />
         </>
       )}

@@ -49,10 +49,10 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     localStorage.setItem('currentUser', JSON.stringify(user))
   }, [])
 
-  const clearCurrentUser = useCallback(() => {
+  const clearCurrentUser = () => {
     setCurrentUser(null)
     localStorage.removeItem('currentUser')
-  }, [])
+  }
 
   return (
     <CurrentUserContext.Provider

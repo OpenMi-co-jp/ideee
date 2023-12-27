@@ -18,18 +18,18 @@ const SocialLink = ({ icon, url, isDisabled }: SocialLinkProps) => {
   }
 
   return (
-    <ActionIcon variant="transparent">
-      <Anchor href={url} target="_blank" rel="noopener noreferrer">
-        <div ref={ref}>
+    <Anchor href={url} target="_blank" rel="noopener noreferrer">
+      <div ref={ref}>
+        <ActionIcon variant="transparent">
           {cloneElement(icon, {
             color: 'black',
             style: hovered
               ? { transform: 'scale(1.1)', transition: 'all 0.03s' }
               : {},
           })}
-        </div>
-      </Anchor>
-    </ActionIcon>
+        </ActionIcon>
+      </div>
+    </Anchor>
   )
 }
 
@@ -52,14 +52,17 @@ export const LinkComponent = () => {
 
   return (
     <Group my="sm">
-      {links.map((link) => (
-        <SocialLink
-          key={link.id}
-          icon={link.icon}
-          url={link.url}
-          isDisabled={!link.id}
-        />
-      ))}
+      {links.map(
+        (link) =>
+          link.id && (
+            <SocialLink
+              key={link.id}
+              icon={link.icon}
+              url={link.url}
+              isDisabled={!link.id}
+            />
+          )
+      )}
     </Group>
   )
 }

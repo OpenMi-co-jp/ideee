@@ -13,6 +13,8 @@ const UserEditFormSchema = z.object({
     .string()
     .max(200, { message: '自己紹介は200文字以内で入力してください' })
     .nullish(),
+  twitterId: z.string().nullish(),
+  githubId: z.string().nullish(),
   siteUrl: z.string().url({ message: 'URLの形式で入力してください' }).nullish(),
 })
 
@@ -34,7 +36,6 @@ export const UpdateUser = () => {
   }, [user, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log('submit')
     updateUserMutation({
       variables: {
         input: {

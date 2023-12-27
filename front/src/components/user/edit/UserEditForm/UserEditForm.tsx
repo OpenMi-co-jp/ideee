@@ -13,7 +13,7 @@ import {
 import { TextForm, TextAreaForm } from '@/components/ReactFormSet'
 import {
   IconUpload,
-  IconBrandTwitter,
+  IconBrandX,
   IconBrandGithub,
   IconLink,
 } from '@tabler/icons-react'
@@ -112,7 +112,7 @@ export const Form = () => {
               name="twitterId"
               label="Twitter ID"
               my="lg"
-              leftSection={<IconBrandTwitter size={20} />}
+              leftSection={<IconBrandX size={20} />}
             />
           </Grid.Col>
           <Grid.Col span={{ md: 4 }}>

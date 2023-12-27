@@ -21,7 +21,6 @@ import { UpdateUser } from './hooks'
 import { useEffect } from 'react'
 
 export const Form = () => {
-  const iconRef = '/img/undefined_user_icon.webp'
   const { form, onSubmit, error, loading } = UpdateUser()
 
   const isEngineer = form.watch('isEngineer')
@@ -68,7 +67,7 @@ export const Form = () => {
               radius={50}
               maw={150}
               mah={150}
-              src={iconRef}
+              src={form.getValues('icon') || form.getValues('remoteUrl')}
               alt="user prof"
             />
             <FileInput

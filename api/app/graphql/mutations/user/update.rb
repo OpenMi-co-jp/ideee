@@ -4,7 +4,7 @@ module Mutations
 
     argument :id, required: true, type: ID, description: 'ユーザーID'
     argument :name, required: true, type: String, description: 'ユーザー名'
-    argument :definition, required: true, type: Integer, description: 'タイプ'
+    argument :definition, required: true, type: String, description: 'タイプ'
     argument :description, required: false, type: String, description: '自己紹介'
     argument :remote_url, required: false, type: String, description: 'アイコンURL'
     argument :site_url, required: false, type: String, description: 'サイトURL'

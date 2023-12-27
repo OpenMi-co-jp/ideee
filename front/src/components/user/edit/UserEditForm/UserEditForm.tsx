@@ -18,10 +18,29 @@ import {
   IconLink,
 } from '@tabler/icons-react'
 import { UpdateUser } from './hooks'
+import { useEffect } from 'react'
 
 export const Form = () => {
   const iconRef = '/img/undefined_user_icon.webp'
   const { form, onSubmit, error, loading } = UpdateUser()
+
+  const isEngineer = form.watch('isEngineer')
+  const isIdeaMan = form.watch('isIdeaMan')
+
+  const calculateDefinitionValue = (
+    isEngineer: boolean,
+    isIdeaMan: boolean
+  ) => {
+    if (isEngineer && isIdeaMan) return 'idea_engineer'
+    if (isIdeaMan) return 'idea_man'
+    if (isEngineer) return 'engineer'
+    return null
+  }
+
+  useEffect(() => {
+    const definitionValue = calculateDefinitionValue(isEngineer, isIdeaMan)
+    form.setValue('definition', definitionValue)
+  }, [isEngineer, isIdeaMan, form])
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -85,10 +104,7 @@ export const Form = () => {
               alignItems: 'center',
             }}
           >
-            <Text fz="md" pb={20} size="xl">
-              エンジニア
-            </Text>
-            <Checkbox color="orange" size="lg" label="🛠" />
+            <Checkbox label="エンジニア" {...form.register('isEngineer')} />
           </Grid.Col>
           <Grid.Col
             span={6}
@@ -98,10 +114,16 @@ export const Form = () => {
               alignItems: 'center',
             }}
           >
-            <Text fz="md" pb={20} size="xl">
-              アイデアマン
-            </Text>
-            <Checkbox color="orange" size="lg" label="💡" />
+            <Checkbox label="アイデアマン" {...form.register('isIdeaMan')} />
+          </Grid.Col>
+          <Grid.Col span={12}>
+            <Center>
+              {form.formState.errors.definition?.message && (
+                <Text color="red" size="sm">
+                  {String(form.formState.errors.definition.message)}
+                </Text>
+              )}
+            </Center>
           </Grid.Col>
         </Grid>
 

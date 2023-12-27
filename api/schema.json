@@ -4821,7 +4821,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "Int",
+                  "name": "String",
                   "ofType": null
                 }
               },
@@ -4999,20 +4999,6 @@
             {
               "name": "definition",
               "description": "タイプ",
-              "type": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
-              "name": "definitionStr",
-              "description": "ユーザーのタイプを文字列で返す",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",

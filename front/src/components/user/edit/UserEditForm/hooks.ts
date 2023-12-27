@@ -13,6 +13,7 @@ const UserEditFormSchema = z.object({
     .string()
     .max(200, { message: '自己紹介は200文字以内で入力してください' })
     .nullish(),
+  definition: z.string().max(30, { message: 'タイプを選択してください' }),
   twitterId: z.string().nullish(),
   githubId: z.string().nullish(),
   siteUrl: z.string().url({ message: 'URLの形式で入力してください' }).nullish(),
@@ -29,39 +30,50 @@ export const UpdateUser = () => {
 
   const user = useUser()
 
+  const getRoleFlags = (definition: string) => {
+    const isIdeaMan =
+      definition === 'idea_man' || definition === 'idea_engineer'
+    const isEngineer =
+      definition === 'engineer' || definition === 'idea_engineer'
+    return { isIdeaMan, isEngineer }
+  }
+
   useEffect(() => {
     if (user) {
-      form.reset(user)
+      const { isIdeaMan, isEngineer } = getRoleFlags(user.definition as string)
+      form.reset({
+        ...user,
+        isIdeaMan,
+        isEngineer,
+      })
     }
   }, [user, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    updateUserMutation({
-      variables: {
-        input: {
-          id: String(user?.id),
-          name: data.name,
-          description: data.description,
-          definition: data.definition || 0, // TODO: 仮の値
-          twitterId: data.twitterId,
-          githubId: data.githubId,
-          siteUrl: data.siteUrl,
+    try {
+      const response = await updateUserMutation({
+        variables: {
+          input: {
+            id: String(user?.id),
+            name: data.name,
+            description: data.description,
+            definition: data.definition,
+            twitterId: data.twitterId,
+            githubId: data.githubId,
+            siteUrl: data.siteUrl,
+          },
         },
-      },
-    })
-      .then((res) => {
-        console.log('success')
-        if (res.data?.updateUser?.success) {
-          alert('プロファイルを更新しました')
-          const userId = res.data?.updateUser?.user?.id
-          router.push(`/users/${userId}`)
-        } else {
-          alert('プロファイルの更新に失敗')
-        }
       })
-      .catch((err) => {
-        console.log(err)
-      })
+      if (response.data?.updateUser?.success) {
+        alert('プロファイルを更新しました')
+        router.push(`/users/${response.data.updateUser.user.id}`)
+      } else {
+        alert('プロファイルの更新に失敗')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('更新中にエラーが発生しました')
+    }
   }
 
   return { onSubmit, loading, error, form }

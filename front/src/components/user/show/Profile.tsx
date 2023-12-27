@@ -5,7 +5,8 @@ import { TextWithLinks } from '@/utils/Text'
 
 export const Profile = () => {
   const user = useUser()
-  const icon = user?.icon || user?.remoteUrl || '/img/undefined_user_icon.webp'
+  const iconRef = '/img/undefined_user_icon.webp'
+  const icon = user?.icon || user?.remoteUrl || iconRef
 
   return (
     <>
@@ -17,8 +18,10 @@ export const Profile = () => {
                 src={icon}
                 alt="ユーザーアイコン"
                 radius="50%"
-                width={150}
-                height={150}
+                width={120}
+                height={120}
+                maw={150}
+                mah={150}
               />
               <Text style={{ fontWeight: 'bold' }} fz="1.5rem" my="xs">
                 {user?.name}

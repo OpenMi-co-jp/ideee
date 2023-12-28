@@ -4,10 +4,15 @@ import { useHeadroom } from '@mantine/hooks'
 import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification, ServiceIcon } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
+import { Sidebar } from '@/pages-layout/Header/headerComponents/Sidebar'
+import { useMediaQuery } from '@mantine/hooks'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
+  const isMobile = useMediaQuery('(max-width: 48em)')
+  const { currentUser } = useCurrentUser()
 
   return (
     <Portal>
@@ -19,7 +24,6 @@ export const Header: FC = () => {
           top: 0,
           left: 0,
           right: 0,
-          height: rem(60),
           zIndex: 200, // modalのindexがが201のため
           transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)`,
           transition: 'transform 400ms ease',
@@ -32,9 +36,10 @@ export const Header: FC = () => {
           <ServiceIcon />
           <Group justify="center">
             <SearchIcon />
-            <Notification />
+            {currentUser && <Notification />}
             <UserToggle />
-            <IdeaCreateButton />
+            {currentUser && !isMobile && <IdeaCreateButton />}
+            {isMobile && <Sidebar />}
           </Group>
         </Group>
       </Box>

@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import type { ReactNode } from 'react'
 
 export type CurrentUserProps = {
@@ -38,10 +44,10 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     }
   }, [])
 
-  const storeCurrentUser = (user: CurrentUserProps) => {
+  const storeCurrentUser = useCallback((user: CurrentUserProps) => {
     setCurrentUser(user)
     localStorage.setItem('currentUser', JSON.stringify(user))
-  }
+  }, [])
 
   const clearCurrentUser = () => {
     setCurrentUser(null)

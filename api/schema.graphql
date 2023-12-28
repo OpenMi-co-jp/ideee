@@ -1563,7 +1563,7 @@ type UpdateUserPayload {
   """
   エラーリスト
   """
-  errors: [String!]!
+  errors: [String!]
 
   """
   成功フラグ

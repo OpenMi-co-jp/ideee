@@ -803,7 +803,7 @@ export type UpdateUserPayload = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
   /** エラーリスト */
-  errors: Array<Scalars['String']>
+  errors?: Maybe<Array<Scalars['String']>>
   /** 成功フラグ */
   success: Scalars['Boolean']
   /** ユーザーオブジェクト */
@@ -1344,7 +1344,7 @@ export type UpdateUserMutation = {
   updateUser?: {
     __typename?: 'UpdateUserPayload'
     success: boolean
-    errors: Array<string>
+    errors?: Array<string> | null
     user: {
       __typename?: 'User'
       id: string

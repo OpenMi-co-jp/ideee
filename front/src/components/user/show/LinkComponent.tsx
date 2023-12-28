@@ -7,15 +7,10 @@ import { cloneElement } from 'react'
 type SocialLinkProps = {
   icon: JSX.Element
   url: string
-  isDisabled: boolean
 }
 
-const SocialLink = ({ icon, url, isDisabled }: SocialLinkProps) => {
+const SocialLink = ({ icon, url }: SocialLinkProps) => {
   const { hovered, ref } = useHover()
-
-  if (isDisabled) {
-    return <div style={{ opacity: 0.3 }}>{icon}</div>
-  }
 
   return (
     <Anchor href={url} target="_blank" rel="noopener noreferrer">
@@ -59,7 +54,6 @@ export const LinkComponent = () => {
               key={link.id}
               icon={link.icon}
               url={link.url}
-              isDisabled={!link.id}
             />
           )
       )}

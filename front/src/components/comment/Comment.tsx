@@ -11,6 +11,22 @@ export const Comment = ({ comment }: CommentType) => {
   const { description, createdAt, user } = comment
   const commentCreatedAt = new Date(createdAt)
   const isCurrentUser = currentUser?.id === Number(user.id)
+  const userContents = [
+    <Link key="icon" href={`/users/${user.id}`} passHref>
+      <UserIcon userIcon={user.icon} />
+    </Link>,
+    <Paper
+      key="name"
+      style={{
+        backgroundColor: '#fef6eb',
+        display: 'inline-block',
+      }}
+      mr="0.3rem"
+    >
+      {user.name}
+    </Paper>,
+  ]
+
 
   return (
     <>
@@ -22,42 +38,13 @@ export const Comment = ({ comment }: CommentType) => {
         <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
           <Flex direction="column">
             <Group justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
-              {isCurrentUser
-                ? [
-                    <Link key="icon" href={`/users/${user.id}`} passHref>
-                      <UserIcon userIcon={user.icon} />
-                    </Link>,
-                    <Paper
-                      key="name"
-                      style={{
-                        backgroundColor: '#fef6eb',
-                        display: 'inline-block',
-                      }}
-                      mr="0.3rem"
-                    >
-                      {user.name}
-                    </Paper>,
-                  ].reverse()
-                : [
-                    <Link key="icon" href={`/users/${user.id}`} passHref>
-                      <UserIcon userIcon={user.icon} />
-                    </Link>,
-                    <Paper
-                      key="name"
-                      style={{
-                        backgroundColor: '#fef6eb',
-                        display: 'inline-block',
-                      }}
-                      mr="0.3rem"
-                    >
-                      {user.name}
-                    </Paper>,
-                  ]}
+              {isCurrentUser ? userContents.reverse() : userContents}
             </Group>
             <Paper
               bg="#FFFFFF"
               maw="30rem"
               p="md"
+              mt="3px"
               radius="lg"
               style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}
             >

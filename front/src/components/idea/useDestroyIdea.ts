@@ -4,12 +4,12 @@ import { showSuccess, showError } from '../notifications'
 
 /**
  * CurrentUserのアイデアを削除するための関数
- * @param 
+ * @param
  * @returns  アイデアを削除するための関数。
  */
 export const useDestroyIdea = () => {
   const router = useRouter()
-  const { id : ideaId } = router.query
+  const { id: ideaId } = router.query
   const [destroyIdea] = useDestroyIdeaMutation({
     variables: {
       input: {
@@ -18,16 +18,17 @@ export const useDestroyIdea = () => {
     },
   })
   const handleDestroyIdea = () => {
-    destroyIdea().then(() => {
-      showSuccess({ action: 'アイデア削除' })
-      router.push('/')
-    })
-    .catch((error) => {
-      showError({
-        action: 'アイデア削除',
-        message: error.message as string,
+    destroyIdea()
+      .then(() => {
+        showSuccess({ action: 'アイデア削除' })
+        router.push('/')
       })
-    })
+      .catch((error) => {
+        showError({
+          action: 'アイデア削除',
+          message: error.message as string,
+        })
+      })
   }
 
   return {

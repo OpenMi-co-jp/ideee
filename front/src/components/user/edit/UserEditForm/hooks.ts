@@ -81,7 +81,7 @@ export const UpdateUser = () => {
       } else {
         showError({
           action: 'ユーザー情報の更新',
-          message: response.data?.updateUser?.errors[0] as string,
+          message: String(response.data?.updateUser?.errors),
         })
       }
     } catch (err: any) {

@@ -5,30 +5,34 @@ import { useMediaQuery } from '@mantine/hooks'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const UserToggle = () => {
-  const isMobile = useMediaQuery(`(max-width: 550px)`)
+  const isMobile = useMediaQuery(`(min-width: 565px)`)
+  const isNarrowScreenMobile = useMediaQuery(`(min-width: 381px)`)
   const { currentUser } = useCurrentUser()
 
   return (
     <Group>
+      {currentUser && isMobile && <UserMenu />}
+
       {(() => {
-        if (currentUser) {
-          return <UserMenu />
-        } else {
+        if (!currentUser) {
           return (
             <Box
               style={{
                 display: 'flex',
               }}
             >
-              <Link href="/users/sign_up">
-                <Button
-                  variant="gradient"
-                  gradient={{ from: 'red', to: 'orange' }}
-                >
-                  ユーザー登録
-                </Button>
-              </Link>
-              {!isMobile && (
+              {isNarrowScreenMobile && (
+                <Link href="/users/sign_up">
+                  <Button
+                    variant="gradient"
+                    gradient={{ from: 'red', to: 'orange' }}
+                  >
+                    ユーザー登録
+                  </Button>
+                </Link>
+              )}
+
+              {isMobile && (
                 <>
                   <Space mx="xs" />
                   <Link href="/users/sign_in">

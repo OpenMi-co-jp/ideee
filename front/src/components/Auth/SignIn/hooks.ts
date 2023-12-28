@@ -8,7 +8,7 @@ import { DecodeJwt } from '@/utils/auth'
 
 export const handleSignIn = async (
   props: SignInFormValues,
-  setCurrentUser: CurrentUserContextType['setCurrentUser']
+  storeCurrentUser: CurrentUserContextType['storeCurrentUser']
 ) => {
   try {
     const response = await signIn(props)
@@ -20,7 +20,7 @@ export const handleSignIn = async (
         secure: true,
       })
       const decodedToken = DecodeJwt(String(token))
-      setCurrentUser(decodedToken)
+      storeCurrentUser(decodedToken)
     }
     showSuccess({ action: 'ログイン' })
     modals.closeAll()

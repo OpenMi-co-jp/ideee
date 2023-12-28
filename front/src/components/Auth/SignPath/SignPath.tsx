@@ -20,7 +20,7 @@ export const SignPath: CustomNextPage = () => {
             ログインして続きを確認
           </Title>
           <Flex>
-            <Link href="/user/sign_up">
+            <Link href="/users/sign_up">
               <Button
                 m="lg"
                 variant="gradient"
@@ -29,7 +29,7 @@ export const SignPath: CustomNextPage = () => {
                 ユーザー登録
               </Button>
             </Link>
-            <Link href="/user/sign_in">
+            <Link href="/users/sign_in">
               <Button m="lg" variant="outline" color="orange">
                 ログイン
               </Button>

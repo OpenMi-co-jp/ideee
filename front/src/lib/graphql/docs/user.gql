@@ -35,6 +35,7 @@ mutation UpdateUser($input: UpdateUserInput!) {
       definition
     }
     success
+    errors
   }
 }
 

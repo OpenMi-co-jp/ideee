@@ -802,6 +802,8 @@ export type UpdateUserPayload = {
   __typename?: 'UpdateUserPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors: Array<Scalars['String']>
   /** 成功フラグ */
   success: Scalars['Boolean']
   /** ユーザーオブジェクト */
@@ -1342,6 +1344,7 @@ export type UpdateUserMutation = {
   updateUser?: {
     __typename?: 'UpdateUserPayload'
     success: boolean
+    errors: Array<string>
     user: {
       __typename?: 'User'
       id: string
@@ -3043,6 +3046,7 @@ export const UpdateUserDocument = gql`
         definition
       }
       success
+      errors
     }
   }
 `

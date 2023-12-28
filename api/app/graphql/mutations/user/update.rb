@@ -13,6 +13,7 @@ module Mutations
 
     field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: false, description: 'エラーリスト'
 
     def resolve(**args)
       user = ::User.find(args[:id])
@@ -20,6 +21,11 @@ module Mutations
       {
         user:,
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

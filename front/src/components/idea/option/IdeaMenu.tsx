@@ -5,9 +5,7 @@ import { useRouter } from 'next/router'
 import { useDestroyIdea } from '@/components/idea/useDestroyIdea'
 
 export const IdeaMenu = () => {
-  const router = useRouter()
-  const ideaId = typeof router.query.id === 'string' ? router.query.id : ''
-  const { handleDestroyIdea } = useDestroyIdea(ideaId)
+  const { handleDestroyIdea } = useDestroyIdea()
 
   return (
     <Menu shadow="md" width={200} offset={5}>

@@ -5,9 +5,11 @@ import { IdeaMenu } from './IdeaMenu'
 import { Like } from './Like'
 import { XShare } from './XShare'
 import { UrlCopy } from './UrlCopy'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const IdeaOptions = () => {
   const idea = useIdea()
+  const { currentUser } = useCurrentUser()
 
   const createdAt = new Date(idea?.createdAt)
 
@@ -17,7 +19,7 @@ export const IdeaOptions = () => {
         <Like />
         <XShare />
         <UrlCopy />
-        <IdeaMenu />
+        {currentUser?.id === idea?.userId && <IdeaMenu />}
       </Group>
       <Text size="md" c="gray">
         {FormatDate(createdAt)}

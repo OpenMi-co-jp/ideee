@@ -6,7 +6,7 @@ export const footerData = {
         { label: 'ideeeについて', link: '/about' },
         {
           label: 'アイデアの探し方',
-          link: 'https://www.ideee.tech/how_to_find_idea',
+          link: '/how_to_find_idea',
         },
         {
           label: '月間トレンドまとめ',

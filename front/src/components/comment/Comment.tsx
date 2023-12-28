@@ -27,7 +27,6 @@ export const Comment = ({ comment }: CommentType) => {
     </Paper>,
   ]
 
-
   return (
     <>
       <Flex

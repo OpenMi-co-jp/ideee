@@ -20,7 +20,7 @@ export const useDestroyIdea = () => {
   const handleDestroyIdea = () => {
     destroyIdea().then(() => {
       showSuccess({ action: 'アイデア削除' })
-      router.push('/idea')
+      router.push('/')
     })
     .catch((error) => {
       showError({

@@ -1,7 +1,6 @@
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import { Menu } from '@mantine/core'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useDestroyIdea } from '@/components/idea/useDestroyIdea'
 
 export const IdeaMenu = () => {

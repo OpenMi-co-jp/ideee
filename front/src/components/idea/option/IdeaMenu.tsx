@@ -22,7 +22,8 @@ export const IdeaMenu = () => {
 
         <Menu.Item
           onClick={() => {
-            window.confirm('本当に削除してもよろしいですか？') && handleDestroyIdea()
+            window.confirm('本当に削除してもよろしいですか？') &&
+              handleDestroyIdea()
           }}
           color="red"
           leftSection={<IconTrash size={14} />}

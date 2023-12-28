@@ -64,7 +64,7 @@ export const Form = () => {
             <Image
               height={150}
               width={150}
-              radius={50}
+              radius="50%"
               maw={150}
               mah={150}
               src={form.getValues('icon') || form.getValues('remoteUrl')}

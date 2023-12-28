@@ -50,11 +50,7 @@ export const LinkComponent = () => {
       {links.map(
         (link) =>
           link.id && (
-            <SocialLink
-              key={link.id}
-              icon={link.icon}
-              url={link.url}
-            />
+            <SocialLink key={link.id} icon={link.icon} url={link.url} />
           )
       )}
     </Group>

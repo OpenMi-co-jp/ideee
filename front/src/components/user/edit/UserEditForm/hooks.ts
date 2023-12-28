@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useUpdateUserMutation } from '@/lib/generated/client'
 import { useRouter } from 'next/router'
 import { SubmitHandler, FieldValues } from 'react-hook-form'
+import { useGetUser } from '@/utils/hooks/useGetUser'
 
 const UserEditFormSchema = z.object({
   name: z.string().max(30, { message: '名前は30文字以内で入力してください' }),
@@ -24,6 +25,7 @@ export const UpdateUser = () => {
     resolver: zodResolver(UserEditFormSchema),
     mode: 'onBlur',
   })
+  const { refetch } = useGetUser()
 
   const router = useRouter()
   const [updateUserMutation, { loading, error }] = useUpdateUserMutation()
@@ -66,6 +68,7 @@ export const UpdateUser = () => {
       })
       if (response.data?.updateUser?.success) {
         alert('プロファイルを更新しました')
+        refetch()
         router.push(`/users/${response.data.updateUser.user.id}`)
       } else {
         alert('プロファイルの更新に失敗')

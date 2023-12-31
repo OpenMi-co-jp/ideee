@@ -28,10 +28,9 @@ export const Like = () => {
   })
 
   const createLikeHandler = () => {
-    createLike()
-      .then(() => {
-        console.log(createResult.data?.createLike)
-      })
+    createLike().then(() => {
+      console.log(createResult.data?.createLike)
+    })
   }
 
   return (

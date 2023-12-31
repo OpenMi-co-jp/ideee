@@ -7,7 +7,7 @@ export const menuData = [
     links: [
       { href: '/about', title: 'ideeeについて' },
       {
-        href: '/how_to_find_idea',
+        href: '/src/pages/how_to_find_idea',
         title: 'アイデアの探し方',
       },
       {

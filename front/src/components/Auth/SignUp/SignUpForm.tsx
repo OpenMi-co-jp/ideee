@@ -4,6 +4,11 @@ import { PasswordForm, TextForm } from '../../ReactFormSet'
 import { handleSignUp } from './hooks'
 import type { CustomNextPage } from 'next'
 import { OmniAuth } from '@/components/Auth/OmniAuth'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 type SignUpFormValues = {
   email: string

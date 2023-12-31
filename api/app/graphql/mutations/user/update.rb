@@ -4,7 +4,7 @@ module Mutations
 
     argument :id, required: true, type: ID, description: 'ユーザーID'
     argument :name, required: true, type: String, description: 'ユーザー名'
-    argument :definition, required: true, type: Integer, description: 'タイプ'
+    argument :definition, required: true, type: String, description: 'タイプ'
     argument :description, required: false, type: String, description: '自己紹介'
     argument :remote_url, required: false, type: String, description: 'アイコンURL'
     argument :site_url, required: false, type: String, description: 'サイトURL'
@@ -13,6 +13,7 @@ module Mutations
 
     field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
       user = ::User.find(args[:id])
@@ -20,6 +21,11 @@ module Mutations
       {
         user:,
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

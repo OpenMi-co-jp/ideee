@@ -15,7 +15,7 @@ export const Features = () => {
             <Center>
               <Flex direction="column" align="center" gap="md">
                 <Text c="gray">タイプ</Text>
-                <Text fz="1.4rem">{user?.definitionStr}</Text>
+                <Text fz="1.4rem">{user?.definition}</Text>
               </Flex>
             </Center>
           </Box>

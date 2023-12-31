@@ -575,6 +575,10 @@ export type QueryCommentArgs = {
   id: Scalars['ID']
 }
 
+export type QueryCommentsArgs = {
+  ideaId: Scalars['ID']
+}
+
 export type QueryIdeaArgs = {
   id: Scalars['ID']
 }
@@ -812,6 +816,8 @@ export type User = {
   defined?: Maybe<Scalars['Boolean']>
   /** タイプ */
   definition?: Maybe<Scalars['Int']>
+  /** ユーザーのタイプを文字列で返す */
+  definitionStr?: Maybe<Scalars['String']>
   /** 自己紹介 */
   description?: Maybe<Scalars['String']>
   /** メールアドレス */

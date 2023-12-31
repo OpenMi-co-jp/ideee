@@ -868,7 +868,9 @@ export type GetCommentsQuery = {
   image?: string | null
 }
 
+}>
 }
+
 export type CreateCommentMutationVariables = Exact<{
   input: CreateCommentInput
 }>
@@ -967,9 +969,9 @@ export type GetIdeaQuery = {
 }
 
 export type GetIdeasQueryVariables = Exact<{
-  searchCondition?: InputMaybe<SearchCondition>;
-  sort?: InputMaybe<SortCondition>;
-}>;
+  searchCondition?: InputMaybe<SearchCondition>
+  sort?: InputMaybe<SortCondition>
+}>
 
 export type GetIdeasQuery = {
   __typename?: 'Query'
@@ -2181,7 +2183,11 @@ export type GetHotIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -2193,7 +2199,11 @@ export type GetDeployedIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -2205,7 +2215,11 @@ export type GetActiveTeamIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
+    user: {
+      __typename?: 'User'
+      icon?: string | null
+      remoteUrl?: string | null
+    }
   }>
 }
 
@@ -2433,6 +2447,14 @@ export type GetUserQuery = {
     name: string
     description?: string | null
     definition?: number | null
+    definitionStr?: string | null
+    icon?: string | null
+    point?: number | null
+    remoteUrl?: string | null
+    siteUrl?: string | null
+    twitterId?: string | null
+    githubId?: string | null
+    ideasNum?: number | null
   }
 }
 
@@ -4365,6 +4387,14 @@ export const GetUserDocument = gql`
       name
       description
       definition
+      definitionStr
+      icon
+      point
+      remoteUrl
+      siteUrl
+      twitterId
+      githubId
+      ideasNum
     }
   }
 `

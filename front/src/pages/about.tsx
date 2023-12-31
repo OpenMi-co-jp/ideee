@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
 import { Container, Space } from '@mantine/core'
-import { useLoggedIn } from '@/components/loginContext'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 import {
   Introduction,
   Merits,
@@ -9,17 +8,8 @@ import {
 } from '@/components/about'
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
 
-const AboutPage = () => {
-  const { loggedIn } = useLoggedIn()
-  const [LSLoggedIn, setLSLoggedIn] = useState(false)
-
-  useEffect(() => {
-    try {
-      setLSLoggedIn(localStorage.getItem('loggedIn') === 'true')
-    } catch (e) {
-      console.error(e)
-    }
-  }, [])
+function AboutPage() {
+  const { currentUser } = useCurrentUser()
 
   return (
     <Container my="6rem">
@@ -28,7 +18,7 @@ const AboutPage = () => {
       <Merits />
       <Description />
 
-      {!(loggedIn || LSLoggedIn) && <SignInInvitation />}
+      {!currentUser && <SignInInvitation />}
 
       <ColorsComponent />
     </Container>

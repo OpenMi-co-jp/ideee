@@ -37,6 +37,12 @@ export const SignUpForm: CustomNextPage = () => {
     mode: 'onChange',
   })
   const onSubmit = (data: SignUpFormValues) => handleSignUp(data)
+  const router = useRouter()
+  const { currentUser } = useCurrentUser()
+
+  if (currentUser) {
+    router.push('/')
+  }
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

@@ -12,7 +12,7 @@ const GithubLink = () => {
   const { hovered, ref } = useHover()
 
   return (
-    <ActionIcon variant="subtle" color="transparent" mr="-0.4rem">
+    <ActionIcon variant="subtle" color="transparent">
       <Anchor
         href={user?.githubId ? `https://github.com/${user.githubId}` : ''}
         target="_blank"
@@ -83,9 +83,9 @@ const SiteUrl = () => {
   )
 }
 
-export default function LinkComponent() {
+export const LinkComponent = () => {
   return (
-    <Group ml="-6px">
+    <Group>
       <GithubLink />
       <TwitterLink />
       <SiteUrl />

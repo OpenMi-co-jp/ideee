@@ -49,9 +49,9 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   include DeviseTokenAuth::Concerns::User
   # エラー対処のため二重記述
-  devise :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
+  devise :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -66,6 +66,7 @@ class User < ApplicationRecord
 
   before_save :fix_ids
   after_create :create_notification_config
+  after_create :update_access_token!
 
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
@@ -94,7 +95,6 @@ class User < ApplicationRecord
   class << self
     # omniauthを使ったSNSログイン機能
     def from_omniauth(auth)
-      Rails.logger.debug '---------------form_omniauth'
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
         when 'google_oauth2'
@@ -143,6 +143,19 @@ class User < ApplicationRecord
     end
   end
 
+  def generate_jwt_token
+    payload = {
+      id: self.id,
+      email: self.email,
+      exp: Time.now.to_i + 1.week.to_i
+    }
+
+    secret_key = Rails.application.secrets.secret_key_base
+
+    token = JWT.encode(payload, secret_key, 'HS256')
+    "Bearer #{token}"
+  end
+
   # cookieを使ってログインを保持
   def remember_me
     true
@@ -181,6 +194,11 @@ class User < ApplicationRecord
   def fix_ids
     self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
     self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
+  end
+
+  def update_access_token!
+    self.tokens = "#{self.id}:#{Devise.friendly_token}"
+    save
   end
 
   private

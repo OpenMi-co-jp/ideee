@@ -178,10 +178,6 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.11.0)
       devise (>= 4.9.0)
-    devise_token_auth (1.2.1)
-      bcrypt (~> 3.0)
-      devise (> 3.5.2, < 5)
-      rails (>= 4.2.0, < 7.1)
     diff-lcs (1.5.0)
     docile (1.4.0)
     domain_name (0.5.20190701)
@@ -705,7 +701,6 @@ DEPENDENCIES
   danger
   devise
   devise-i18n
-  devise_token_auth
   dotenv-rails
   enum_help
   factory_bot_rails
@@ -717,6 +712,7 @@ DEPENDENCIES
   graphql
   image_processing (~> 1.12)
   jbuilder (~> 2.7)
+  jwt
   kaminari
   letter_opener_web
   listen (~> 3.3)

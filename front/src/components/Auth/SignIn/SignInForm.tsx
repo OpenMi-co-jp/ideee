@@ -5,6 +5,8 @@ import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
 import { useLoggedIn } from '@/components/loginContext'
 import type { CustomNextPage } from 'next'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 type SignInFormValues = {
   email: string
@@ -13,7 +15,17 @@ type SignInFormValues = {
 
 export const SignInForm: CustomNextPage = () => {
   const { setLoggedIn } = useLoggedIn()
+
+  const signInSchema = z.object({
+    email: z
+      .string()
+      .email({ message: 'メールアドレスの形式で入力してください' }),
+    password: z
+      .string()
+      .min(6, { message: '6文字以上のパスワードを入力してください' }),
+  })
   const form = useForm<SignInFormValues>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: '',
       password: '',

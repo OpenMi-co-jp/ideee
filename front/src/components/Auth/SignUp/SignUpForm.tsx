@@ -12,9 +12,22 @@ type SignUpFormValues = {
   confirmSuccessUrl: string
 }
 
+export const SignUpFormSchema = z.object({
+  email: z
+    .string()
+    .email({ message: 'メールアドレスの形式で入力してください' }),
+  password: z
+    .string()
+    .min(6, { message: '6文字以上のパスワードを入力してください' }),
+  passwordConfirmation: z
+    .string()
+    .min(6, { message: '6文字以上の確認パスワードを入力してください' }),
+})
+
 export const SignUpForm: CustomNextPage = () => {
   const confirmSuccessUrl = process.env.NEXT_PUBLIC_FRONT_URL
   const form = useForm<SignUpFormValues>({
+    resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
       email: '',
       password: '',

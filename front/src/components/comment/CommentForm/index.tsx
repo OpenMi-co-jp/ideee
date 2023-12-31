@@ -5,6 +5,7 @@ import { IconSend } from '@tabler/icons-react'
 
 export const CommentForm = () => {
   const { form, onSubmit } = useCommentAction()
+  const description = form.watch('description')
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -16,7 +17,7 @@ export const CommentForm = () => {
           variant="light"
           size="lg"
           color="orange"
-          disabled={false} // TODO: formのonChangeでfalseにする
+          disabled={!description}
           leftSection={<IconSend />}
         >
           Send

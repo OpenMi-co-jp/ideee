@@ -40,9 +40,11 @@ export const SignUpForm: CustomNextPage = () => {
   const router = useRouter()
   const { currentUser } = useCurrentUser()
 
-  if (currentUser) {
-    router.push('/')
-  }
+  useEffect(() => {
+    if (currentUser) {
+      router.push('/')
+    }
+  }, [currentUser, router])
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

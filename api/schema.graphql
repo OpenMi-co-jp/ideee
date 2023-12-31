@@ -1083,12 +1083,7 @@ type Query {
   """
   ユーザーのいいね一覧
   """
-  likes(
-    """
-    ユーザーID
-    """
-    userId: ID!
-  ): [Like!]!
+  likes: [Like!]!
 
   """
   通知一覧

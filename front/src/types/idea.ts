@@ -20,6 +20,7 @@ export type CommentType = {
     id: string
     description: string
     createdAt: string
+    userId: number
     user: {
       name?: string | null | undefined
       icon?: string | null | undefined

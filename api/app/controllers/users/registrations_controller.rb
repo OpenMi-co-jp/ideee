@@ -3,6 +3,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  before_action :underscore_params!
+
+  respond_to :json
 
   # GET /resource/sign_up
   # def new
@@ -11,8 +14,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
-    Slack::SendNewJob.perform_later(resource, user_url(resource.id)) if Rails.env.production? && resource.present?
+    resource = build_resource(sign_up_params)
+    resource.save!
+    if resource.persisted?
+      if resource.active_for_authentication?
+        sign_up(resource_name, resource)
+        response.set_header('Authorization', resource.generate_jwt_token)
+        render json: { success: true }, status: :created
+      else
+        expire_data_after_sign_in!
+        render json: { success: false, message: 'Signed up but inactive.' }, status: :ok
+      end
+    else
+      clean_up_passwords(resource)
+      set_minimum_password_length
+      render json: { success: false, errors: resource.errors.full_messages }, status: :unprocessable_entity
+    end
+
+    # Slack::SendNewJob.perform_later(resource, user_url(resource.id)) if Rails.env.production? && resource.present?
   end
 
   # GET /resource/edit
@@ -74,9 +93,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user_path(@user.id)
   end
 
-  # def sign_up_params
-  #   params.permit(:name, :email, :password, :password_confirmation, :icon, :description, :definition)
-  # end
+  def sign_up_params
+    params.require(:registration).permit(:email, :password, :password_confirmation)
+  end
+
+  def underscore_params!
+    params.deep_transform_keys!(&:underscore)
+  end
 
   # def account_update_params
   #   params.permit(:name, :email, :icon, :description, :definition)

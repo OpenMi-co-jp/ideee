@@ -88,5 +88,4 @@ const HowToFindIdeaPage = () => {
     </Container>
   )
 }
-
 export default HowToFindIdeaPage

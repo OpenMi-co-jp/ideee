@@ -423,11 +423,6 @@ input DestroyIdeaInput {
   アイデアID
   """
   id: ID!
-
-  """
-  【必須】ユーザーID
-  """
-  userId: ID!
 }
 
 """

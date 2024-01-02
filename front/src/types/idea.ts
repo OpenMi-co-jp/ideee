@@ -23,7 +23,7 @@ export type CommentType = {
     user: {
       id?: string | null | undefined
       name?: string | null | undefined
-      icon?: string | null | undefined
+      image?: string | null | undefined
     }
   }
 }

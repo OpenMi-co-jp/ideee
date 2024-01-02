@@ -15,18 +15,9 @@ export const Comment = ({ comment }: CommentType) => {
 
   const userContents = [
     <Link key="icon" href={`/users/${user.id}`} passHref>
-      <UserIcon userIcon={user.icon} />
+      <UserIcon userIcon={user.image} />
     </Link>,
-    <Paper
-      key="name"
-      style={{
-        backgroundColor: '#fef6eb',
-        display: 'inline-block',
-      }}
-      mr="0.3rem"
-    >
-      {user.name}
-    </Paper>,
+    <Text key="name">{user.name}</Text>,
   ]
 
   return (
@@ -52,7 +43,9 @@ export const Comment = ({ comment }: CommentType) => {
               <TextWithLinks>{description}</TextWithLinks>
             </Paper>
             <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
-              <Text c="gray">{FormatDate(commentCreatedAt)}</Text>
+              <Text c="gray" mx="xs">
+                {FormatDate(commentCreatedAt)}
+              </Text>
             </Flex>
           </Flex>
         </Flex>

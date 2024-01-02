@@ -13,8 +13,7 @@ query GetComments($ideaId: ID!) {
     user {
       id
       name
-      icon
-      remoteUrl
+      image
     }
   }
 }

@@ -13,42 +13,40 @@ export const Comment = ({ comment }: CommentType) => {
     currentUser && user && String(currentUser.id) === String(user.id)
 
   const userContents = [
-    <Link key="icon" href={`/users/${user.id}`} passHref>
-      <UserIcon userIcon={user.image} />
-    </Link>,
+    <UserIcon key="icon" userIcon={user.image} />,
     <Text key="name">{user.name}</Text>,
   ]
 
   return (
-    <>
-      <Flex
-        p="xs"
-        direction="column"
-        wrap={isCurrentUser ? 'wrap' : 'wrap-reverse'}
-      >
-        <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
-          <Flex direction="column">
-            <Group justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
+    <Flex
+      p="xs"
+      direction="column"
+      wrap={isCurrentUser ? 'wrap' : 'wrap-reverse'}
+    >
+      <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
+        <Flex direction="column">
+          <Link href={`/users/${user.id}`} passHref>
+            <Group justify={isCurrentUser ? 'flex-end' : 'flex-start'} gap="xs">
               {isCurrentUser ? userContents.reverse() : userContents}
             </Group>
-            <Paper
-              bg="#FFFFFF"
-              maw="30rem"
-              p="md"
-              mt="3px"
-              radius="lg"
-              style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}
-            >
-              <TextWithLinks>{description}</TextWithLinks>
-            </Paper>
-            <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
-              <Text c="gray" mx="xs">
-                {FormatDate(commentCreatedAt)}
-              </Text>
-            </Flex>
+          </Link>
+          <Paper
+            bg="#FFFFFF"
+            maw="30rem"
+            p="md"
+            mt="3px"
+            radius="lg"
+            style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}
+          >
+            <TextWithLinks>{description}</TextWithLinks>
+          </Paper>
+          <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
+            <Text c="gray" mx="xs">
+              {FormatDate(commentCreatedAt)}
+            </Text>
           </Flex>
         </Flex>
       </Flex>
-    </>
+    </Flex>
   )
 }

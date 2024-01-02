@@ -41,9 +41,6 @@ public/uploads/
 key/
 AWSCLIV2.pkg
 
-# ignore simplecov files
-/coverage/
-
 dump.rdb
 
 # graphqlで作成される.keepを除外

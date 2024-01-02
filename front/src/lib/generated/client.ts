@@ -780,7 +780,7 @@ export type UpdateUserInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>
   /** タイプ */
-  definition: Scalars['Int']
+  definition: Scalars['String']
   /** 自己紹介 */
   description?: InputMaybe<Scalars['String']>
   /** githubID */
@@ -802,6 +802,8 @@ export type UpdateUserPayload = {
   __typename?: 'UpdateUserPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** 成功フラグ */
   success: Scalars['Boolean']
   /** ユーザーオブジェクト */
@@ -815,9 +817,7 @@ export type User = {
   /** 設定完了フラグ */
   defined?: Maybe<Scalars['Boolean']>
   /** タイプ */
-  definition?: Maybe<Scalars['Int']>
-  /** ユーザーのタイプを文字列で返す */
-  definitionStr?: Maybe<Scalars['String']>
+  definition?: Maybe<Scalars['String']>
   /** 自己紹介 */
   description?: Maybe<Scalars['String']>
   /** メールアドレス */
@@ -1298,8 +1298,7 @@ export type GetUserQuery = {
     id: string
     name: string
     description?: string | null
-    definition?: number | null
-    definitionStr?: string | null
+    definition?: string | null
     icon?: string | null
     point?: number | null
     remoteUrl?: string | null
@@ -1319,7 +1318,7 @@ export type GetUsersQuery = {
     id: string
     name: string
     description?: string | null
-    definition?: number | null
+    definition?: string | null
   }>
 }
 
@@ -1345,12 +1344,13 @@ export type UpdateUserMutation = {
   updateUser?: {
     __typename?: 'UpdateUserPayload'
     success: boolean
+    errors?: Array<string> | null
     user: {
       __typename?: 'User'
       id: string
       name: string
       description?: string | null
-      definition?: number | null
+      definition?: string | null
     }
   } | null
 }
@@ -2877,7 +2877,6 @@ export const GetUserDocument = gql`
       name
       description
       definition
-      definitionStr
       icon
       point
       remoteUrl
@@ -3047,6 +3046,7 @@ export const UpdateUserDocument = gql`
         definition
       }
       success
+      errors
     }
   }
 `

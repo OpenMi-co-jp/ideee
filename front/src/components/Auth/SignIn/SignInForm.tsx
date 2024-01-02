@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '@/components/ReactFormSet'
 import { handleSignIn } from './hooks'
-import { useLoggedIn } from '@/components/loginContext'
 import type { CustomNextPage } from 'next'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { OmniAuth } from '../OmniAuth'
 
 type SignInFormValues = {
   email: string

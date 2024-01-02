@@ -10,7 +10,9 @@ export const Comment = ({ comment }: CommentType) => {
   const { currentUser } = useCurrentUser()
   const { description, createdAt, user } = comment
   const commentCreatedAt = new Date(createdAt)
-  const isCurrentUser = currentUser?.id === Number(user.id)
+  const isCurrentUser = currentUser && user && String(currentUser.id) === String(user.id)
+
+
   const userContents = [
     <Link key="icon" href={`/users/${user.id}`} passHref>
       <UserIcon userIcon={user.icon} />

@@ -194,6 +194,10 @@ class User < ApplicationRecord
     self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
   end
 
+  def image
+    self.icon&.url || self.remote_url
+  end
+
   private
 
   def create_notification_config

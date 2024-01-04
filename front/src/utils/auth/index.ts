@@ -1,2 +1,2 @@
 export * from './auth'
-export { DecodeJwt } from './DecodeJwt'
+export { verifyJwt } from './DecodeJwt'

@@ -4,7 +4,7 @@ import { showSuccess } from '@/components/notifications'
 import Cookies from 'js-cookie'
 import { LoadingOverlay } from '@mantine/core'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { DecodeJwt } from '@/utils/auth'
+import { verifyJwt } from '@/utils/auth'
 
 function AuthCallback() {
   const { storeCurrentUser } = useCurrentUser()
@@ -19,8 +19,8 @@ function AuthCallback() {
         secure: true,
       })
       try {
-        const decodedToken = DecodeJwt(String(token))
-        storeCurrentUser(decodedToken)
+        const decodedToken = verifyJwt(String(token))
+        storeCurrentUser(decodedToken as any)
       } catch (error) {
         console.error('Failed to decode JWT:', error)
       }

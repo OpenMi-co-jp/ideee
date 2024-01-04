@@ -4,7 +4,7 @@ import { modals } from '@mantine/modals'
 import type { CurrentUserContextType } from '@/context/CurrentUserContext'
 import { signIn } from '@/utils/auth'
 import type { SignInFormValues } from '@/types/user'
-import { DecodeJwt } from '@/utils/auth'
+import { verifyJwt } from '@/utils/auth'
 
 export const handleSignIn = async (
   props: SignInFormValues,
@@ -19,8 +19,8 @@ export const handleSignIn = async (
         expires: 7,
         secure: true,
       })
-      const decodedToken = DecodeJwt(String(token))
-      storeCurrentUser(decodedToken)
+      const decodedToken = verifyJwt(String(token))
+      storeCurrentUser(decodedToken as any)
     }
     showSuccess({ action: 'ログイン' })
     modals.closeAll()

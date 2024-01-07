@@ -33,7 +33,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     user_url = "#{Rails.application.config.frontend_url}/users/#{resource.id}"
     Slack::SendNewJob.perform_later(resource, user_url)
-  rescue => e # TODO: 後で消す
+  rescue => e
+    # TODO: 後で消す
     render json: { success: false, errors: e.message }, status: :internal_server_error
   end
 

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
   post '/graphql', to: 'graphql#execute'
 
+  post '/test', to: 'test#create'
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount Sidekiq::Web => '/sidekiq'
 end

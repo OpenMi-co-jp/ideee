@@ -14,7 +14,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if user.errors.blank?
       render json: {}, status: :ok
     else
-      render json: { message: user.errors.full_messages.join('') }, status: :unprocessable_entity
+      render json: { message: user.errors.full_messages.join }, status: :unprocessable_entity
     end
   end
 

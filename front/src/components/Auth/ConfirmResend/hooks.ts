@@ -10,17 +10,17 @@ export const useConfirmResend = () => {
   })
 
   const onSubmit = async (props: ConfirmResendFormValues) => {
+    const actionName = '確認用メール再送信'
     try {
-      const response = await confirmResend(props)
-      if (response.status === 200) {
-        showSuccess({ action: '確認用メール再送信' })
-      } else {
-        throw new Error('Request failed with status code: ' + response.status)
-      }
+      await confirmResend(props)
+      showSuccess({
+        action: actionName,
+        message: 'メールをご確認ください',
+      })
     } catch (error: any) {
       showError({
-        action: '確認用メール再送信',
-        message: error.message as string,
+        action: actionName,
+        message: error.response.data.message,
       })
     }
   }

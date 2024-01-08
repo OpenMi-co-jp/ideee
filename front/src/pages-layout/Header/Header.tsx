@@ -4,7 +4,7 @@ import { useHeadroom } from '@mantine/hooks'
 import { SearchIcon } from './headerComponents'
 import { UserToggle, Notification, ServiceIcon } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
-import { Sidebar } from '@/pages-layout/Header/headerComponents/Sidebar'
+import { Sidebar } from '@/pages-layout/Header/headerComponents'
 import { useMediaQuery } from '@mantine/hooks'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 

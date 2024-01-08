@@ -4,6 +4,14 @@ query GetUser($id: ID!) {
     name
     description
     definition
+    icon
+    point
+    remoteUrl
+    siteUrl
+    twitterId
+    githubId
+    ideasNum
+    image
   }
 }
 

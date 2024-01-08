@@ -94,5 +94,7 @@ Rails.application.configure do
   config.hosts = 'localhost'
 
   config.frontend_url = 'http://localhost:3000'
+
+  config.web_console.allowed_ips = '0.0.0.0/0'
   config.host = 'http://localhost:3010/'
 end

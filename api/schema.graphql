@@ -451,12 +451,14 @@ input DestroyLikeInput {
 
   """
   オブジェクトID
+
   """
   likableId: Int!
 
   """
   いいねしたオブジェクトタイプ
   """
+
   likableType: String!
 }
 

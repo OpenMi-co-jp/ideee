@@ -902,7 +902,6 @@ export type DestroyCommentMutationVariables = Exact<{
   input: DestroyCommentInput
 }>
 
-
 export type CreateDifficultyMutationVariables = Exact<{
   input: CreateDifficultyInput
 }>
@@ -2467,7 +2466,7 @@ export type GetUsersQuery = {
     id: string
     name: string
     description?: string | null
-    definition?: number | null
+    definition?: string | null
   }>
 }
 
@@ -2493,12 +2492,13 @@ export type UpdateUserMutation = {
   updateUser?: {
     __typename?: 'UpdateUserPayload'
     success: boolean
+    errors?: Array<string> | null
     user: {
       __typename?: 'User'
       id: string
       name: string
       description?: string | null
-      definition?: number | null
+      definition?: string | null
     }
   } | null
 }
@@ -2635,6 +2635,12 @@ export const GetCommentsDocument = gql`
     comments {
       id
       description
+      createdAt
+      user {
+        id
+        name
+        image
+      }
     }
   }
 `
@@ -3739,6 +3745,7 @@ export const DestroyLikeDocument = gql`
   mutation DestroyLike($input: DestroyLikeInput!) {
     destroyLike(input: $input) {
       success
+      errors
     }
   }
 }
@@ -4619,6 +4626,7 @@ export const UpdateUserDocument = gql`
         definition
       }
       success
+      errors
     }
   }
 `

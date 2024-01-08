@@ -95,7 +95,6 @@ class User < ApplicationRecord
   class << self
     # omniauthを使ったSNSログイン機能
     def from_omniauth(auth)
-      Rails.logger.debug '---------------form_omniauth'
       where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
         case auth.provider
         when 'google_oauth2'
@@ -197,6 +196,11 @@ class User < ApplicationRecord
   def fix_ids
     self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
     self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
+  end
+
+  def update_access_token!
+    self.tokens = "#{self.id}:#{Devise.friendly_token}"
+    save
   end
 
   private

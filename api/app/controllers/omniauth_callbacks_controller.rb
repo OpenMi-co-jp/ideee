@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
+class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Devise::Controllers::Rememberable
 
   def twitter
-    Rails.logger.debug '==============twitter'
+    Rails.logger.info '==========これだよね====twitter'
+    Rails.logger.info params
     callback_for(:twitter)
   end
 
   def google_oauth2
-    Rails.logger.info '==============google_oauth2'
-    Rails.logger.info param
+    Rails.logger.info '=============これ=google_oauth2'
+    Rails.logger.info params
     callback_for(:google)
   end
 
@@ -30,6 +31,7 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   end
 
   def omniauth_failure
+    Rails.logger.debug params
     Rails.logger.debug '==============omniauth_failure'
     super
   end
@@ -59,10 +61,13 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
       # return set_flash_message(:notice, :failure, kind: provider.to_s.capitalize, reason: e.message)
     end
     if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication
+      # sign_in_and_redirect @user, event: :authentication
+      token = @user.generate_jwt_token
+      redirect_to "http://localhost:3000/user/auth_callback?token=#{token}"
       cookies[:devise_provider] = provider
       # set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
     else
+      puts '-==-========not persisted'
       # session["devise.#{provider}_data"] = request.env["omniauth.auth"].except("extra")
       if (data = request.env['omniauth.auth']['extra']['raw_info'])
         session['devise.omniauth_data'] = {
@@ -70,7 +75,9 @@ class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
           name: data['name']
         }
       end
-      redirect_to new_user_registration_url
+      # redirect_to new_user_registration_url
+      token = 'aaaa'
+      redirect_to "http://localhost:3000/user/auth_callback?token=#{token}"
     end
   end
 

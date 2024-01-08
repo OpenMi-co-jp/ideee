@@ -1588,6 +1588,11 @@ type User {
   definition: String
 
   """
+  ユーザーのタイプを文字列で返す
+  """
+  definitionStr: String
+
+  """
   自己紹介
   """
   description: String

@@ -5017,6 +5017,20 @@
               ]
             },
             {
+              "name": "definitionStr",
+              "description": "ユーザーのタイプを文字列で返す",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "description",
               "description": "自己紹介",
               "type": {

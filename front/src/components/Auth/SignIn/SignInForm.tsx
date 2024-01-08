@@ -60,12 +60,12 @@ export const SignInForm: CustomNextPage = () => {
           </Button>
         </Grid>
         <Stack>
-          <Link href="/user/forgot_password" passHref>
-            メールアドレスを忘れた？
+          <Link href="/users/forgot_password" passHref>
+            パスワードを忘れた？
           </Link>
         </Stack>
         <Stack>
-          <Link href="/user/confirm_resend" passHref>
+          <Link href="/users/confirm_resend" passHref>
             確認メールが届いてない？
           </Link>
         </Stack>

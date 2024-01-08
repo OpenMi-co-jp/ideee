@@ -70,8 +70,6 @@ export const SignInForm: CustomNextPage = () => {
           </Link>
         </Stack>
       </Box>
-      {/* <Button component="a" href={urlRef}>Google ログイン</Button> */}
-      <OmniAuth />
     </form>
   )
 }

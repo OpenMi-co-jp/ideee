@@ -7,7 +7,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-    Rails.logger.debug '------------------google but before'
     callback_for(:google)
   end
 
@@ -18,7 +17,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def callback_for(provider)
-    Rails.logger.debug '=============callback_for before'
     begin
       user = User.from_omniauth(request.env['omniauth.auth'])
       if user.created_at > Time.zone.now.ago(5.minutes)

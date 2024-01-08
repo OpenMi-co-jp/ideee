@@ -6,7 +6,7 @@ import { TextWithLinks } from '@/utils/Text'
 import Link from 'next/link'
 
 export const Comment = ({ comment }: CommentType) => {
-  const { description, createdAt, user } = comment
+  const { description, createdAt, user, userId } = comment
   const commentCreatedAt = new Date(createdAt)
   return (
     <>

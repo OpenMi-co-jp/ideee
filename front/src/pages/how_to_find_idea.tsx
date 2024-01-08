@@ -13,8 +13,12 @@ import {
   Anchor,
 } from '@mantine/core'
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
+import { useMediaQuery } from '@mantine/hooks';
 
 const HowToFindIdea = () => {
+
+  const isMobile = useMediaQuery('(max-width: 750px)');
+
   return (
     <Container my="6rem">
       <Title order={1} fw="revert" mb="xl">
@@ -29,12 +33,13 @@ const HowToFindIdea = () => {
       </Text>
 
       <Group mt="5rem">
-        <Flex>
+        <Flex direction={isMobile ? 'column' : 'row'}>
           <Image
             mt="1rem"
             mx="2rem"
-            fit="cover"
-            h="19rem"
+            fit="contain"
+            h="21rem"
+            p="1rem"
             src="/img/1_undraw_absorbed_in_re_ymd6.webp"
             alt="資料を読む男性"
           />
@@ -111,11 +116,12 @@ const HowToFindIdea = () => {
         </Paper>
       </Group>
 
-      <Flex mt="8rem">
+      <Flex mt="8rem"  direction={isMobile ? 'column' : 'row'}>
         <Image
           mt="4rem"
-          fit="cover"
-          h="18rem"
+          fit="contain"
+          h="19rem"
+          p="1rem"
           src="/img/2_undraw_thought_process_re_om58_1.webp"
           alt="データを見る男性"
         />
@@ -190,7 +196,7 @@ const HowToFindIdea = () => {
         </Paper>
       </Flex>
 
-      <Flex mt="8rem">
+      <Flex mt="8rem"  direction={isMobile ? 'column' : 'row'}>
         <Grid mx="xs">
           <Grid.Col>
             <Title order={2} fw="revert">
@@ -223,21 +229,25 @@ const HowToFindIdea = () => {
           </Grid.Col>
         </Grid>
         <Image
-          mx="5rem"
-          mt="4rem"
-          fit="cover"
-          h="18rem"
+          ml="2rem"
+          mt="3rem"
+          fit="contain"
+          h="20rem"
+          p="2rem"
+          pr="5rem"
           src="/img/3_undraw_friends_r511_2.webp"
           alt="猫と戯れる女性"
         />
       </Flex>
 
-      <Flex mt="5rem">
+      <Flex mt="5rem"  direction={isMobile ? 'column' : 'row'}>
         <Image
-          mx="3rem"
-          mt="4rem"
-          fit="cover"
-          h="18rem"
+          ml="2rem"
+          mt="3rem"
+          fit="contain"
+          h="20rem"
+          p="2rem"
+          pr="5rem"
           src="/img/4_undraw_meditation_re_gll0.webp"
           alt="瞑想する女性"
         />
@@ -255,7 +265,7 @@ const HowToFindIdea = () => {
           <Grid.Col>
             <Title order={3}>サービスパターンを意識する</Title>
             <Text mb="lg" bg={'#fdf8eb'} p="2rem">
-              すでにある<b>ビジネスモデルはパターン化されている。</b>
+              すでにある<b>ビジネスモデルはパターン化されている</b>ので
               ビジネスモデルを知っておく事もアイデアを出す上で必要条件です。
               <br />
               <br />
@@ -284,7 +294,7 @@ const HowToFindIdea = () => {
         </Grid>
       </Flex>
 
-      <Flex mt="8rem">
+      <Flex mt="8rem"  direction={isMobile ? 'column' : 'row'}>
         <Grid mx="xs">
           <Grid.Col>
             <Title order={3}>情報をたくさん仕入れる</Title>
@@ -319,7 +329,7 @@ const HowToFindIdea = () => {
           </Grid.Col>
           <Grid.Col>
             <Title order={3}>日頃から考える癖をつける</Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+            <Text mb="lg" bg={'#fdf8eb'} py="2rem" pl="1rem" pr="3rem">
               <List>
                 <List.Item>
                   アイデアは突然出てくるものではなく、日頃の思考の積み上げ
@@ -335,17 +345,19 @@ const HowToFindIdea = () => {
           </Grid.Col>
         </Grid>
         <Image
-          mx="4rem"
-          mt="4rem"
-          fit="cover"
-          h="18rem"
+          ml="3rem"
+          mt="3rem"
+          fit="contain"
+          h="20rem"
+          p="1rem"
+          pr="4rem"
           src="/img/5_undraw_ideation_re_8i2h.webp"
           alt="木を見る女性"
         />
       </Flex>
 
-      <Flex mt="5rem" justify="flex-end">
-        <Grid w="27rem">
+      <Flex mt="5rem" justify={isMobile ? 'flex-start' : 'flex-end'}>
+        <Grid w="30rem">
           <Grid.Col>
             <Title order={2} fw="revert">
               3.アイデアを出す方法
@@ -375,14 +387,13 @@ const HowToFindIdea = () => {
         </Text>
         <Image
           src="/img/9c14bab4-aa27-a9e7-e9c0-1f8dacfd89cc.webp"
-          fit="cover"
-          w="43rem"
+          fit="contain"
           alt="やらない事リスト"
         />
       </Group>
 
       <Flex mt="7rem" justify="flex-start" direction="row">
-        <Grid w="27rem">
+        <Grid w="30rem">
           <Grid.Col>
             <Title order={2} fw="revert">
               4.使えるAPIから逆算する
@@ -413,8 +424,8 @@ const HowToFindIdea = () => {
           </Grid.Col>
         </Grid>
       </Flex>
-      <Flex justify="flex-end">
-        <Grid w="27rem">
+      <Flex justify={isMobile ? 'flex-start' : 'flex-end'}>
+        <Grid w="30rem">
           <Grid.Col>
             <Title order={3}>他にも使えるAPIは沢山ある🚀</Title>
             <Text bg={'#fdf8eb'} p="lg">
@@ -508,11 +519,12 @@ const HowToFindIdea = () => {
           <br />
           アイデアが思いつく人、アイデアを形にできる人。それぞれが才能です。「作ったけど需要がなくて使われない」「アイデアは面白いけどリソースがなくて作れない」才能たちをマッチさせることによって、そんな機会損失を少しでも無くしていけると考えています。
           <br />
-          改善を見つける才能・開発の才能をぜひ活かしましょう
+          改善を見つける才能・開発の才能をぜひ活かしましょう!!
         </Text>
       </Flex>
 
       <Center>
+        {/*TODO: 最新のアイデアページへのリンクを設定する */}
         <Button bg={'#ff862e'}>最新のアイデアを見る</Button>
       </Center>
       <ColorsComponent />

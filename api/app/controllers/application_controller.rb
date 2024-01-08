@@ -25,9 +25,11 @@ class ApplicationController < ActionController::Base
     render file: Rails.public_path.join('404.html'), status: :not_found, layout: false, content_type: 'text/html'
   end
 
-  def render500
-    render file: Rails.public_path.join('500.html'), status: :internal_server_error, layout: false,
-           content_type: 'text/html'
+  def render500(e)
+    # 後で戻す
+    # render file: Rails.public_path.join('500.html'), status: :internal_server_error, layout: false,
+    #        content_type: 'text/html'
+    render json: { message: "問題が発生しました。#{e.message}" }, status: :internal_server_error
   end
 
   protected

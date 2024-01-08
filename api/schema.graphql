@@ -1513,7 +1513,7 @@ input UpdateUserInput {
   """
   タイプ
   """
-  definition: Int!
+  definition: String!
 
   """
   自己紹介
@@ -1585,12 +1585,7 @@ type User {
   """
   タイプ
   """
-  definition: Int
-
-  """
-  ユーザーのタイプを文字列で返す
-  """
-  definitionStr: String
+  definition: String
 
   """
   自己紹介

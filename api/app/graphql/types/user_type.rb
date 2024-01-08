@@ -15,6 +15,7 @@ module Types
     field :twitter_id, String, description: 'TwitterID'
     field :github_id, String, description: 'githubID'
     field :ideas_num, Integer, description: 'アイデア数'
+    field :image, String, description: 'アイコン'
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'
   end
 end

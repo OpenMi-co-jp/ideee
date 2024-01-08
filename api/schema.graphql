@@ -1618,6 +1618,11 @@ type User {
   ideasNum: Int
 
   """
+  アイコン
+  """
+  image: String
+
+  """
   ユーザー名
   """
   name: String!

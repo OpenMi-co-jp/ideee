@@ -828,6 +828,8 @@ export type User = {
   id: Scalars['ID']
   /** アイデア数 */
   ideasNum?: Maybe<Scalars['Int']>
+  /** アイコン */
+  image?: Maybe<Scalars['String']>
   /** ユーザー名 */
   name: Scalars['String']
   /** ポイント数 */
@@ -864,8 +866,7 @@ export type GetCommentsQuery = {
       __typename?: 'User'
       id: string
       name: string
-      icon?: string | null
-      remoteUrl?: string | null
+      image?: string | null
     }
   }>
 }
@@ -1980,8 +1981,7 @@ export const GetCommentsDocument = gql`
       user {
         id
         name
-        icon
-        remoteUrl
+        image
       }
     }
   }

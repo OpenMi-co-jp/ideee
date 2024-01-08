@@ -573,6 +573,10 @@ export type Query = {
   users: Array<User>
 }
 
+export type QueryCommentArgs = {
+  id: Scalars['ID']
+}
+
 export type QueryCommentsArgs = {
   ideaId: Scalars['ID']
 }
@@ -582,11 +586,11 @@ export type QueryIdeaArgs = {
 }
 
 export type QueryIdeasArgs = {
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
-  searchCondition?: InputMaybe<SearchCondition>;
-  sort?: InputMaybe<SortCondition>;
-};
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+  searchCondition?: InputMaybe<SearchCondition>
+  sort?: InputMaybe<SortCondition>
+}
 
 export type QueryRoomArgs = {
   id: Scalars['ID']
@@ -811,10 +815,7 @@ export type User = {
   /** 設定完了フラグ */
   defined?: Maybe<Scalars['Boolean']>
   /** タイプ */
-
-  /** ユーザーのタイプを文字列で返す */
-  definitionStr?: Maybe<Scalars['String']>
-
+  definition?: Maybe<Scalars['String']>
   /** 自己紹介 */
   description?: Maybe<Scalars['String']>
   /** メールアドレス */
@@ -864,11 +865,10 @@ export type GetCommentsQuery = {
     user: {
       __typename?: 'User'
       id: string
-  name: string
-  image?: string | null
-}
-
-}>
+      name: string
+      image?: string | null
+    }
+  }>
 }
 
 export type CreateCommentMutationVariables = Exact<{
@@ -923,8 +923,8 @@ export type CreateDifficultyMutation = {
 }
 
 export type GetIdeaQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
+  id: Scalars['ID']
+}>
 
 export type GetIdeaQuery = {
   __typename?: 'Query'
@@ -992,1166 +992,6 @@ export type GetIdeasQuery = {
         name: string
         icon?: string | null
         remoteUrl?: string | null
-      }
-      ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
-      team?: {
-        __typename?: 'Team'
-        status: string
-        membersNum?: number | null
-      } | null
-    }>
-    pageInfo?: {
-      __typename?: 'Pagination'
-      currentPage: number
-      isFirst?: boolean | null
-      isLast?: boolean | null
-      nextPage?: number | null
-      per: number
-      prevPage?: number | null
-      totalCount?: number | null
-      totalPages?: number | null
-    } | null
-  }
-}
-
-export type GetIdeasQuery = { __typename?: 'Query', ideas: { __typename?: 'Ideas', nodes: Array<{ __typename?: 'Idea', id: string, name?: string | null, commentsNum?: number | null, difficulty?: string | null, likesNum?: number | null, view?: number | null, updatedAt: any, publishedAt?: any | null, user: { __typename?: 'User', id: string, name: string, icon?: string | null }, ideaTags?: Array<{ __typename?: 'Tag', name: string }> | null, team?: { __typename?: 'Team', status: string, membersNum?: number | null } | null }>, pageInfo?: { __typename?: 'Pagination', currentPage: number, isFirst?: boolean | null, isLast?: boolean | null, nextPage?: number | null, per: number, prevPage?: number | null, totalCount?: number | null, totalPages?: number | null } | null } };
-
-export type GetHotIdeasQuery = {
-  __typename?: 'Query'
-  hotIdeas: Array<{
-    __typename?: 'Idea'
-    id: string
-    name?: string | null
-    user: {
-      __typename?: 'User'
-      icon?: string | null
-      remoteUrl?: string | null
-    }
-  }>
-}
-
-
-export type GetDeployedIdeasQuery = {
-  __typename?: 'Query'
-  deployedIdeas: Array<{
-    __typename?: 'Idea'
-    id: string
-    name?: string | null
-    user: {
-      __typename?: 'User'
-      icon?: string | null
-      remoteUrl?: string | null
-    }
-  }>
-}
-
-export type GetDeployedIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-export type GetActiveTeamIdeasQuery = {
-  __typename?: 'Query'
-  activeTeamIdeas: Array<{
-    __typename?: 'Idea'
-    id: string
-    name?: string | null
-    user: {
-      __typename?: 'User'
-      icon?: string | null
-      remoteUrl?: string | null
-    }
-  }>
-}
-
-export type CreateIdeaMutationVariables = Exact<{
-  input: CreateIdeaInput;
-}>;
-
-
-export type CreateIdeaMutation = { __typename?: 'Mutation', createIdea?: { __typename?: 'CreateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', userId: number, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type UpdateIdeaMutationVariables = Exact<{
-  input: UpdateIdeaInput;
-}>;
-
-
-export type UpdateIdeaMutation = { __typename?: 'Mutation', updateIdea?: { __typename?: 'UpdateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', id: string, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type DestroyIdeaMutationVariables = Exact<{
-  input: DestroyIdeaInput;
-}>;
-
-
-export type DestroyIdeaMutation = { __typename?: 'Mutation', destroyIdea?: { __typename?: 'DestroyIdeaPayload', success: boolean } | null };
-
-export type GetLikesQueryVariables = Exact<{ [key: string]: never }>
-
-
-export type GetLikesQuery = { __typename?: 'Query', likes: Array<{ __typename?: 'Like', id: string, userId?: number | null, likableType: string, likableId: number }> };
-
-export type CreateLikeMutationVariables = Exact<{
-  input: CreateLikeInput;
-}>;
-
-export type CreateLikeMutation = {
-  __typename?: 'Mutation'
-  createLike?: {
-    __typename?: 'CreateLikePayload'
-    success: boolean
-    like: { __typename?: 'Like'; likableType: string; likableId: number }
-  } | null
-}
-
-export type DestroyLikeMutationVariables = Exact<{
-  input: DestroyLikeInput;
-}>;
-
-export type DestroyLikeMutation = {
-  __typename?: 'Mutation'
-  destroyLike?: {
-    __typename?: 'DestroyLikePayload'
-    success: boolean
-    errors?: Array<string> | null
-  } | null
-}
-
-export type DestroyLikeMutation = { __typename?: 'Mutation', destroyLike?: { __typename?: 'DestroyLikePayload', success: boolean } | null };
-
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, visitedId?: number | null, checked: boolean, notificatableId?: number | null, notificatableType?: string | null }> };
-
-export type GetRoomQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetRoomQuery = { __typename?: 'Query', room: { __typename?: 'Room', id: string, teamId?: number | null, createdAt: any, updatedAt: any } };
-
-export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', name: string }> };
-
-export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPopularTagsQuery = { __typename?: 'Query', popularTags: Array<{ __typename?: 'Tag', id: string, name: string }> };
-
-export type GetTeamQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetTeamQuery = { __typename?: 'Query', team: { __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null } };
-
-export type GetTeamsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null }> };
-
-export type CreateTeamMutationVariables = Exact<{
-  input: CreateTeamInput;
-}>;
-
-
-export type CreateTeamMutation = { __typename?: 'Mutation', createTeam?: { __typename?: 'CreateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type UpdateTeamMutationVariables = Exact<{
-  input: UpdateTeamInput;
-}>;
-
-
-export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam?: { __typename?: 'UpdateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type DestroyTeamMutationVariables = Exact<{
-  input: DestroyTeamInput;
-}>;
-
-
-export type DestroyTeamMutation = { __typename?: 'Mutation', destroyTeam?: { __typename?: 'DestroyTeamPayload', success: boolean } | null };
-
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-export type GetUserQuery = {
-  __typename?: 'Query'
-  user: {
-    __typename?: 'User'
-    id: string
-    name: string
-    description?: string | null
-    definition?: number | null
-    definitionStr?: string | null
-    icon?: string | null
-    point?: number | null
-    remoteUrl?: string | null
-    siteUrl?: string | null
-    twitterId?: string | null
-    githubId?: string | null
-    ideasNum?: number | null
-  }
-}
-
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } };
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null }> };
-
-export type CreateUserMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', success: boolean, user: { __typename?: 'User', id: string, email?: string | null } } | null };
-
-export type UpdateUserMutationVariables = Exact<{
-  input: UpdateUserInput;
-}>;
-
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UpdateUserPayload', success: boolean, user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } } | null };
-
-export type DestroyUserMutationVariables = Exact<{
-  input: DestroyUserInput;
-}>;
-
-
-export type DestroyUserMutation = { __typename?: 'Mutation', destroyUser?: { __typename?: 'DestroyUserPayload', success: boolean } | null };
-
-
-export const GetCommentDocument = gql`
-    query GetComment($id: ID!) {
-  comment(id: $id) {
-    id
-    description
-  }
-}
-
-export type GetIdeasQueryVariables = Exact<{
-  searchCondition?: InputMaybe<SearchCondition>
-  sort?: InputMaybe<SortCondition>
-}>
-
-
-export type GetIdeasQuery = { __typename?: 'Query', ideas: { __typename?: 'Ideas', nodes: Array<{ __typename?: 'Idea', id: string, name?: string | null, commentsNum?: number | null, difficulty?: string | null, likesNum?: number | null, view?: number | null, updatedAt: any, publishedAt?: any | null, user: { __typename?: 'User', id: string, name: string, icon?: string | null }, ideaTags?: Array<{ __typename?: 'Tag', name: string }> | null, team?: { __typename?: 'Team', status: string, membersNum?: number | null } | null }>, pageInfo?: { __typename?: 'Pagination', currentPage: number, isFirst?: boolean | null, isLast?: boolean | null, nextPage?: number | null, per: number, prevPage?: number | null, totalCount?: number | null, totalPages?: number | null } | null } };
-
-export type GetHotIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHotIdeasQuery = { __typename?: 'Query', hotIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetDeployedIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetDeployedIdeasQuery = { __typename?: 'Query', deployedIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetActiveTeamIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetActiveTeamIdeasQuery = { __typename?: 'Query', activeTeamIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type CreateIdeaMutationVariables = Exact<{
-  input: CreateIdeaInput;
-}>;
-
-
-export type CreateIdeaMutation = { __typename?: 'Mutation', createIdea?: { __typename?: 'CreateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', userId: number, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type UpdateIdeaMutationVariables = Exact<{
-  input: UpdateIdeaInput;
-}>;
-
-
-export type UpdateIdeaMutation = { __typename?: 'Mutation', updateIdea?: { __typename?: 'UpdateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', id: string, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type DestroyIdeaMutationVariables = Exact<{
-  input: DestroyIdeaInput;
-}>;
-
-
-export type DestroyIdeaMutation = { __typename?: 'Mutation', destroyIdea?: { __typename?: 'DestroyIdeaPayload', success: boolean } | null };
-
-export type GetLikesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetLikesQuery = { __typename?: 'Query', likes: Array<{ __typename?: 'Like', id: string, userId?: number | null, likableType: string, likableId: number }> };
-
-export type CreateLikeMutationVariables = Exact<{
-  input: CreateLikeInput;
-}>;
-
-
-export type CreateLikeMutation = { __typename?: 'Mutation', createLike?: { __typename?: 'CreateLikePayload', success: boolean, like: { __typename?: 'Like', likableType: string, likableId: number } } | null };
-
-export type DestroyLikeMutationVariables = Exact<{
-  input: DestroyLikeInput;
-}>;
-
-
-export type DestroyLikeMutation = { __typename?: 'Mutation', destroyLike?: { __typename?: 'DestroyLikePayload', success: boolean } | null };
-
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, visitedId?: number | null, checked: boolean, notificatableId?: number | null, notificatableType?: string | null }> };
-
-export type GetRoomQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetRoomQuery = { __typename?: 'Query', room: { __typename?: 'Room', id: string, teamId?: number | null, createdAt: any, updatedAt: any } };
-
-export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', name: string }> };
-
-export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPopularTagsQuery = { __typename?: 'Query', popularTags: Array<{ __typename?: 'Tag', id: string, name: string }> };
-
-export type GetTeamQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetTeamQuery = { __typename?: 'Query', team: { __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null } };
-
-export type GetTeamsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null }> };
-
-export type CreateTeamMutationVariables = Exact<{
-  input: CreateTeamInput;
-}>;
-
-
-export type CreateTeamMutation = { __typename?: 'Mutation', createTeam?: { __typename?: 'CreateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type UpdateTeamMutationVariables = Exact<{
-  input: UpdateTeamInput;
-}>;
-
-
-export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam?: { __typename?: 'UpdateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type DestroyTeamMutationVariables = Exact<{
-  input: DestroyTeamInput;
-}>;
-
-
-export type DestroyTeamMutation = { __typename?: 'Mutation', destroyTeam?: { __typename?: 'DestroyTeamPayload', success: boolean } | null };
-
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } };
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null }> };
-
-export type CreateUserMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', success: boolean, user: { __typename?: 'User', id: string, email?: string | null } } | null };
-
-export type UpdateUserMutationVariables = Exact<{
-  input: UpdateUserInput;
-}>;
-
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UpdateUserPayload', success: boolean, user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } } | null };
-
-export type DestroyUserMutationVariables = Exact<{
-  input: DestroyUserInput;
-}>;
-
-
-export type DestroyUserMutation = { __typename?: 'Mutation', destroyUser?: { __typename?: 'DestroyUserPayload', success: boolean } | null };
-
-
-export const GetCommentDocument = gql`
-    query GetComment($id: ID!) {
-  comment(id: $id) {
-    id
-    description
-  }
-}
-
-export type GetIdeasQueryVariables = Exact<{
-  searchCondition?: InputMaybe<SearchCondition>
-  sort?: InputMaybe<SortCondition>
-}>
-
-
-export type GetIdeasQuery = { __typename?: 'Query', ideas: { __typename?: 'Ideas', nodes: Array<{ __typename?: 'Idea', id: string, name?: string | null, commentsNum?: number | null, difficulty?: string | null, likesNum?: number | null, view?: number | null, updatedAt: any, publishedAt?: any | null, user: { __typename?: 'User', id: string, name: string, icon?: string | null }, ideaTags?: Array<{ __typename?: 'Tag', name: string }> | null, team?: { __typename?: 'Team', status: string, membersNum?: number | null } | null }>, pageInfo?: { __typename?: 'Pagination', currentPage: number, isFirst?: boolean | null, isLast?: boolean | null, nextPage?: number | null, per: number, prevPage?: number | null, totalCount?: number | null, totalPages?: number | null } | null } };
-
-export type GetHotIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHotIdeasQuery = { __typename?: 'Query', hotIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetDeployedIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetDeployedIdeasQuery = { __typename?: 'Query', deployedIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetActiveTeamIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetActiveTeamIdeasQuery = { __typename?: 'Query', activeTeamIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type CreateIdeaMutationVariables = Exact<{
-  input: CreateIdeaInput;
-}>;
-
-
-export type CreateIdeaMutation = { __typename?: 'Mutation', createIdea?: { __typename?: 'CreateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', userId: number, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type UpdateIdeaMutationVariables = Exact<{
-  input: UpdateIdeaInput;
-}>;
-
-
-export type UpdateIdeaMutation = { __typename?: 'Mutation', updateIdea?: { __typename?: 'UpdateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', id: string, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type DestroyIdeaMutationVariables = Exact<{
-  input: DestroyIdeaInput;
-}>;
-
-
-export type DestroyIdeaMutation = { __typename?: 'Mutation', destroyIdea?: { __typename?: 'DestroyIdeaPayload', success: boolean } | null };
-
-export type GetLikesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetLikesQuery = { __typename?: 'Query', likes: Array<{ __typename?: 'Like', id: string, userId?: number | null, likableType: string, likableId: number }> };
-
-export type CreateLikeMutationVariables = Exact<{
-  input: CreateLikeInput;
-}>;
-
-
-export type CreateLikeMutation = { __typename?: 'Mutation', createLike?: { __typename?: 'CreateLikePayload', success: boolean, like: { __typename?: 'Like', likableType: string, likableId: number } } | null };
-
-export type DestroyLikeMutationVariables = Exact<{
-  input: DestroyLikeInput;
-}>;
-
-
-export type DestroyLikeMutation = { __typename?: 'Mutation', destroyLike?: { __typename?: 'DestroyLikePayload', success: boolean } | null };
-
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, visitedId?: number | null, checked: boolean, notificatableId?: number | null, notificatableType?: string | null }> };
-
-export type GetRoomQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetRoomQuery = { __typename?: 'Query', room: { __typename?: 'Room', id: string, teamId?: number | null, createdAt: any, updatedAt: any } };
-
-export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', name: string }> };
-
-export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPopularTagsQuery = { __typename?: 'Query', popularTags: Array<{ __typename?: 'Tag', id: string, name: string }> };
-
-export type GetTeamQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetTeamQuery = { __typename?: 'Query', team: { __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null } };
-
-export type GetTeamsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null }> };
-
-export type CreateTeamMutationVariables = Exact<{
-  input: CreateTeamInput;
-}>;
-
-
-export type CreateTeamMutation = { __typename?: 'Mutation', createTeam?: { __typename?: 'CreateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type UpdateTeamMutationVariables = Exact<{
-  input: UpdateTeamInput;
-}>;
-
-
-export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam?: { __typename?: 'UpdateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type DestroyTeamMutationVariables = Exact<{
-  input: DestroyTeamInput;
-}>;
-
-
-export type DestroyTeamMutation = { __typename?: 'Mutation', destroyTeam?: { __typename?: 'DestroyTeamPayload', success: boolean } | null };
-
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } };
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null }> };
-
-export type CreateUserMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', success: boolean, user: { __typename?: 'User', id: string, email?: string | null } } | null };
-
-export type UpdateUserMutationVariables = Exact<{
-  input: UpdateUserInput;
-}>;
-
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UpdateUserPayload', success: boolean, user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } } | null };
-
-export type DestroyUserMutationVariables = Exact<{
-  input: DestroyUserInput;
-}>;
-
-
-export type DestroyUserMutation = { __typename?: 'Mutation', destroyUser?: { __typename?: 'DestroyUserPayload', success: boolean } | null };
-
-
-export const GetCommentDocument = gql`
-    query GetComment($id: ID!) {
-  comment(id: $id) {
-    id
-    description
-  }
-}
-
-export type GetIdeasQueryVariables = Exact<{
-  searchCondition?: InputMaybe<SearchCondition>
-  sort?: InputMaybe<SortCondition>
-}>
-
-export type GetIdeasQuery = {
-  __typename?: 'Query'
-  ideas: {
-    __typename?: 'Ideas'
-    nodes: Array<{
-      __typename?: 'Idea'
-      id: string
-      name?: string | null
-      commentsNum?: number | null
-      difficulty?: string | null
-      likesNum?: number | null
-      view?: number | null
-      updatedAt: any
-      publishedAt?: any | null
-      user: {
-        __typename?: 'User'
-        id: string
-        name: string
-        icon?: string | null
-      }
-      ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
-      team?: {
-        __typename?: 'Team'
-        status: string
-        membersNum?: number | null
-      } | null
-    }>
-    pageInfo?: {
-      __typename?: 'Pagination'
-      currentPage: number
-      isFirst?: boolean | null
-      isLast?: boolean | null
-      nextPage?: number | null
-      per: number
-      prevPage?: number | null
-      totalCount?: number | null
-      totalPages?: number | null
-    } | null
-  }
-}
-
-export type GetHotIdeasQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetHotIdeasQuery = {
-  __typename?: 'Query'
-  hotIdeas: Array<{
-    __typename?: 'Idea'
-    id: string
-    name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
-  }>
-}
-
-export type GetDeployedIdeasQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetDeployedIdeasQuery = {
-  __typename?: 'Query'
-  deployedIdeas: Array<{
-    __typename?: 'Idea'
-    id: string
-    name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
-  }>
-}
-
-export type GetActiveTeamIdeasQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetActiveTeamIdeasQuery = {
-  __typename?: 'Query'
-  activeTeamIdeas: Array<{
-    __typename?: 'Idea'
-    id: string
-    name?: string | null
-    user: { __typename?: 'User'; icon?: string | null }
-  }>
-}
-
-export type CreateIdeaMutationVariables = Exact<{
-  input: CreateIdeaInput
-}>
-
-
-export type CreateIdeaMutation = { __typename?: 'Mutation', createIdea?: { __typename?: 'CreateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', userId: number, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type UpdateIdeaMutationVariables = Exact<{
-  input: UpdateIdeaInput;
-}>;
-
-
-export type UpdateIdeaMutation = { __typename?: 'Mutation', updateIdea?: { __typename?: 'UpdateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', id: string, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type DestroyIdeaMutationVariables = Exact<{
-  input: DestroyIdeaInput;
-}>;
-
-
-export type DestroyIdeaMutation = { __typename?: 'Mutation', destroyIdea?: { __typename?: 'DestroyIdeaPayload', success: boolean } | null };
-
-export type GetLikesQueryVariables = Exact<{ [key: string]: never }>
-
-
-export type GetLikesQuery = { __typename?: 'Query', likes: Array<{ __typename?: 'Like', id: string, userId?: number | null, likableType: string, likableId: number }> };
-
-export type CreateLikeMutationVariables = Exact<{
-  input: CreateLikeInput;
-}>;
-
-export type CreateLikeMutation = {
-  __typename?: 'Mutation'
-  createLike?: {
-    __typename?: 'CreateLikePayload'
-    success: boolean
-    like: { __typename?: 'Like'; likableType: string; likableId: number }
-  } | null
-}
-
-export type DestroyLikeMutationVariables = Exact<{
-  input: DestroyLikeInput;
-}>;
-
-export type DestroyLikeMutation = {
-  __typename?: 'Mutation'
-  destroyLike?: { __typename?: 'DestroyLikePayload'; success: boolean } | null
-}
-
-export type DestroyLikeMutation = { __typename?: 'Mutation', destroyLike?: { __typename?: 'DestroyLikePayload', success: boolean } | null };
-
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, visitedId?: number | null, checked: boolean, notificatableId?: number | null, notificatableType?: string | null }> };
-
-export type GetRoomQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetRoomQuery = { __typename?: 'Query', room: { __typename?: 'Room', id: string, teamId?: number | null, createdAt: any, updatedAt: any } };
-
-export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', name: string }> };
-
-export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPopularTagsQuery = { __typename?: 'Query', popularTags: Array<{ __typename?: 'Tag', id: string, name: string }> };
-
-export type GetTeamQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetTeamQuery = { __typename?: 'Query', team: { __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null } };
-
-export type GetTeamsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null }> };
-
-export type CreateTeamMutationVariables = Exact<{
-  input: CreateTeamInput;
-}>;
-
-
-export type CreateTeamMutation = { __typename?: 'Mutation', createTeam?: { __typename?: 'CreateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type UpdateTeamMutationVariables = Exact<{
-  input: UpdateTeamInput;
-}>;
-
-
-export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam?: { __typename?: 'UpdateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type DestroyTeamMutationVariables = Exact<{
-  input: DestroyTeamInput;
-}>;
-
-
-export type DestroyTeamMutation = { __typename?: 'Mutation', destroyTeam?: { __typename?: 'DestroyTeamPayload', success: boolean } | null };
-
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-export type GetUserQuery = {
-  __typename?: 'Query'
-  user: {
-    __typename?: 'User'
-    id: string
-    name: string
-    description?: string | null
-    definition?: number | null
-  }
-}
-
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } };
-
-export type GetUsersQuery = {
-  __typename?: 'Query'
-  users: Array<{
-    __typename?: 'User'
-    id: string
-    name: string
-    description?: string | null
-    definition?: string | null
-  }>
-}
-
-export type CreateUserMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', success: boolean, user: { __typename?: 'User', id: string, email?: string | null } } | null };
-
-export type UpdateUserMutationVariables = Exact<{
-  input: UpdateUserInput;
-}>;
-
-export type UpdateUserMutation = {
-  __typename?: 'Mutation'
-  updateUser?: {
-    __typename?: 'UpdateUserPayload'
-    success: boolean
-    errors?: Array<string> | null
-    user: {
-      __typename?: 'User'
-      id: string
-      name: string
-      description?: string | null
-      definition?: string | null
-    }
-  } | null
-}
-
-export type DestroyUserMutationVariables = Exact<{
-  input: DestroyUserInput;
-}>;
-
-
-export type DestroyUserMutation = { __typename?: 'Mutation', destroyUser?: { __typename?: 'DestroyUserPayload', success: boolean } | null };
-
-
-export const GetCommentDocument = gql`
-    query GetComment($id: ID!) {
-  comment(id: $id) {
-    id
-    description
-  }
-}
-
-export type GetIdeasQueryVariables = Exact<{
-  searchCondition?: InputMaybe<SearchCondition>
-  sort?: InputMaybe<SortCondition>
-}>
-
-
-export type GetIdeasQuery = { __typename?: 'Query', ideas: { __typename?: 'Ideas', nodes: Array<{ __typename?: 'Idea', id: string, name?: string | null, commentsNum?: number | null, difficulty?: string | null, likesNum?: number | null, view?: number | null, updatedAt: any, publishedAt?: any | null, user: { __typename?: 'User', id: string, name: string, icon?: string | null }, ideaTags?: Array<{ __typename?: 'Tag', name: string }> | null, team?: { __typename?: 'Team', status: string, membersNum?: number | null } | null }>, pageInfo?: { __typename?: 'Pagination', currentPage: number, isFirst?: boolean | null, isLast?: boolean | null, nextPage?: number | null, per: number, prevPage?: number | null, totalCount?: number | null, totalPages?: number | null } | null } };
-
-export type GetHotIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHotIdeasQuery = { __typename?: 'Query', hotIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetDeployedIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetDeployedIdeasQuery = { __typename?: 'Query', deployedIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetActiveTeamIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetActiveTeamIdeasQuery = { __typename?: 'Query', activeTeamIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type CreateIdeaMutationVariables = Exact<{
-  input: CreateIdeaInput;
-}>;
-
-
-export type CreateIdeaMutation = { __typename?: 'Mutation', createIdea?: { __typename?: 'CreateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', userId: number, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type UpdateIdeaMutationVariables = Exact<{
-  input: UpdateIdeaInput;
-}>;
-
-
-export type UpdateIdeaMutation = { __typename?: 'Mutation', updateIdea?: { __typename?: 'UpdateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', id: string, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type DestroyIdeaMutationVariables = Exact<{
-  input: DestroyIdeaInput;
-}>;
-
-
-export type DestroyIdeaMutation = { __typename?: 'Mutation', destroyIdea?: { __typename?: 'DestroyIdeaPayload', success: boolean } | null };
-
-export type GetLikesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetLikesQuery = { __typename?: 'Query', likes: Array<{ __typename?: 'Like', id: string, userId?: number | null, likableType: string, likableId: number }> };
-
-export type CreateLikeMutationVariables = Exact<{
-  input: CreateLikeInput;
-}>;
-
-
-export type CreateLikeMutation = { __typename?: 'Mutation', createLike?: { __typename?: 'CreateLikePayload', success: boolean, like: { __typename?: 'Like', likableType: string, likableId: number } } | null };
-
-export type DestroyLikeMutationVariables = Exact<{
-  input: DestroyLikeInput;
-}>;
-
-
-export type DestroyLikeMutation = { __typename?: 'Mutation', destroyLike?: { __typename?: 'DestroyLikePayload', success: boolean } | null };
-
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, visitedId?: number | null, checked: boolean, notificatableId?: number | null, notificatableType?: string | null }> };
-
-export type GetRoomQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetRoomQuery = { __typename?: 'Query', room: { __typename?: 'Room', id: string, teamId?: number | null, createdAt: any, updatedAt: any } };
-
-export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', name: string }> };
-
-export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPopularTagsQuery = { __typename?: 'Query', popularTags: Array<{ __typename?: 'Tag', id: string, name: string }> };
-
-export type GetTeamQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetTeamQuery = { __typename?: 'Query', team: { __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null } };
-
-export type GetTeamsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null }> };
-
-export type CreateTeamMutationVariables = Exact<{
-  input: CreateTeamInput;
-}>;
-
-
-export type CreateTeamMutation = { __typename?: 'Mutation', createTeam?: { __typename?: 'CreateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type UpdateTeamMutationVariables = Exact<{
-  input: UpdateTeamInput;
-}>;
-
-
-export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam?: { __typename?: 'UpdateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type DestroyTeamMutationVariables = Exact<{
-  input: DestroyTeamInput;
-}>;
-
-
-export type DestroyTeamMutation = { __typename?: 'Mutation', destroyTeam?: { __typename?: 'DestroyTeamPayload', success: boolean } | null };
-
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } };
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null }> };
-
-export type CreateUserMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', success: boolean, user: { __typename?: 'User', id: string, email?: string | null } } | null };
-
-export type UpdateUserMutationVariables = Exact<{
-  input: UpdateUserInput;
-}>;
-
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UpdateUserPayload', success: boolean, user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } } | null };
-
-export type DestroyUserMutationVariables = Exact<{
-  input: DestroyUserInput;
-}>;
-
-
-export type DestroyUserMutation = { __typename?: 'Mutation', destroyUser?: { __typename?: 'DestroyUserPayload', success: boolean } | null };
-
-
-export const GetCommentDocument = gql`
-    query GetComment($id: ID!) {
-  comment(id: $id) {
-    id
-    description
-  }
-}
-
-export type GetIdeasQueryVariables = Exact<{
-  searchCondition?: InputMaybe<SearchCondition>
-  sort?: InputMaybe<SortCondition>
-}>
-
-
-export type GetIdeasQuery = { __typename?: 'Query', ideas: { __typename?: 'Ideas', nodes: Array<{ __typename?: 'Idea', id: string, name?: string | null, commentsNum?: number | null, difficulty?: string | null, likesNum?: number | null, view?: number | null, updatedAt: any, publishedAt?: any | null, user: { __typename?: 'User', id: string, name: string, icon?: string | null }, ideaTags?: Array<{ __typename?: 'Tag', name: string }> | null, team?: { __typename?: 'Team', status: string, membersNum?: number | null } | null }>, pageInfo?: { __typename?: 'Pagination', currentPage: number, isFirst?: boolean | null, isLast?: boolean | null, nextPage?: number | null, per: number, prevPage?: number | null, totalCount?: number | null, totalPages?: number | null } | null } };
-
-export type GetHotIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHotIdeasQuery = { __typename?: 'Query', hotIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetDeployedIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetDeployedIdeasQuery = { __typename?: 'Query', deployedIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type GetActiveTeamIdeasQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetActiveTeamIdeasQuery = { __typename?: 'Query', activeTeamIdeas: Array<{ __typename?: 'Idea', id: string, name?: string | null, user: { __typename?: 'User', icon?: string | null } }> };
-
-export type CreateIdeaMutationVariables = Exact<{
-  input: CreateIdeaInput;
-}>;
-
-
-export type CreateIdeaMutation = { __typename?: 'Mutation', createIdea?: { __typename?: 'CreateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', userId: number, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type UpdateIdeaMutationVariables = Exact<{
-  input: UpdateIdeaInput;
-}>;
-
-
-export type UpdateIdeaMutation = { __typename?: 'Mutation', updateIdea?: { __typename?: 'UpdateIdeaPayload', success: boolean, idea: { __typename?: 'Idea', id: string, name?: string | null, background?: string | null, goal?: string | null, target?: string | null } } | null };
-
-export type DestroyIdeaMutationVariables = Exact<{
-  input: DestroyIdeaInput;
-}>;
-
-
-export type DestroyIdeaMutation = { __typename?: 'Mutation', destroyIdea?: { __typename?: 'DestroyIdeaPayload', success: boolean } | null };
-
-export type GetLikesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetLikesQuery = { __typename?: 'Query', likes: Array<{ __typename?: 'Like', id: string, userId?: number | null, likableType: string, likableId: number }> };
-
-export type CreateLikeMutationVariables = Exact<{
-  input: CreateLikeInput;
-}>;
-
-
-export type CreateLikeMutation = { __typename?: 'Mutation', createLike?: { __typename?: 'CreateLikePayload', success: boolean, like: { __typename?: 'Like', likableType: string, likableId: number } } | null };
-
-export type DestroyLikeMutationVariables = Exact<{
-  input: DestroyLikeInput;
-}>;
-
-
-export type DestroyLikeMutation = { __typename?: 'Mutation', destroyLike?: { __typename?: 'DestroyLikePayload', success: boolean } | null };
-
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, visitedId?: number | null, checked: boolean, notificatableId?: number | null, notificatableType?: string | null }> };
-
-export type GetRoomQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetRoomQuery = { __typename?: 'Query', room: { __typename?: 'Room', id: string, teamId?: number | null, createdAt: any, updatedAt: any } };
-
-export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTagsQuery = { __typename?: 'Query', tags: Array<{ __typename?: 'Tag', name: string }> };
-
-export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPopularTagsQuery = { __typename?: 'Query', popularTags: Array<{ __typename?: 'Tag', id: string, name: string }> };
-
-export type GetTeamQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetTeamQuery = { __typename?: 'Query', team: { __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null } };
-
-export type GetTeamsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', id: string, ownerId: number, ideaId: number, status: string, requirement: string, offer: string, membersNum?: number | null }> };
-
-export type CreateTeamMutationVariables = Exact<{
-  input: CreateTeamInput;
-}>;
-
-
-export type CreateTeamMutation = { __typename?: 'Mutation', createTeam?: { __typename?: 'CreateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type UpdateTeamMutationVariables = Exact<{
-  input: UpdateTeamInput;
-}>;
-
-
-export type UpdateTeamMutation = { __typename?: 'Mutation', updateTeam?: { __typename?: 'UpdateTeamPayload', success: boolean, team: { __typename?: 'Team', id: string, ownerId: number, status: string, requirement: string, offer: string, membersNum?: number | null } } | null };
-
-export type DestroyTeamMutationVariables = Exact<{
-  input: DestroyTeamInput;
-}>;
-
-
-export type DestroyTeamMutation = { __typename?: 'Mutation', destroyTeam?: { __typename?: 'DestroyTeamPayload', success: boolean } | null };
-
-export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } };
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null }> };
-
-export type CreateUserMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', success: boolean, user: { __typename?: 'User', id: string, email?: string | null } } | null };
-
-export type UpdateUserMutationVariables = Exact<{
-  input: UpdateUserInput;
-}>;
-
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UpdateUserPayload', success: boolean, user: { __typename?: 'User', id: string, name: string, description?: string | null, definition?: number | null } } | null };
-
-export type DestroyUserMutationVariables = Exact<{
-  input: DestroyUserInput;
-}>;
-
-
-export type DestroyUserMutation = { __typename?: 'Mutation', destroyUser?: { __typename?: 'DestroyUserPayload', success: boolean } | null };
-
-
-export const GetCommentDocument = gql`
-    query GetComment($id: ID!) {
-  comment(id: $id) {
-    id
-    description
-  }
-}
-
-export type GetIdeasQueryVariables = Exact<{
-  searchCondition?: InputMaybe<SearchCondition>
-  sort?: InputMaybe<SortCondition>
-}>
-
-export type GetIdeasQuery = {
-  __typename?: 'Query'
-  ideas: {
-    __typename?: 'Ideas'
-    nodes: Array<{
-      __typename?: 'Idea'
-      id: string
-      name?: string | null
-      commentsNum?: number | null
-      difficulty?: string | null
-      likesNum?: number | null
-      view?: number | null
-      updatedAt: any
-      publishedAt?: any | null
-      user: {
-        __typename?: 'User'
-        id: string
-        name: string
-        icon?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
       team?: {
@@ -2303,7 +1143,11 @@ export type DestroyLikeMutationVariables = Exact<{
 
 export type DestroyLikeMutation = {
   __typename?: 'Mutation'
-  destroyLike?: { __typename?: 'DestroyLikePayload'; success: boolean } | null
+  destroyLike?: {
+    __typename?: 'DestroyLikePayload'
+    success: boolean
+    errors?: Array<string> | null
+  } | null
 }
 
 export type GetNotificationsQueryVariables = Exact<{ [key: string]: never }>
@@ -2445,8 +1289,7 @@ export type GetUserQuery = {
     id: string
     name: string
     description?: string | null
-    definition?: number | null
-    definitionStr?: string | null
+    definition?: string | null
     icon?: string | null
     point?: number | null
     remoteUrl?: string | null
@@ -2454,6 +1297,7 @@ export type GetUserQuery = {
     twitterId?: string | null
     githubId?: string | null
     ideasNum?: number | null
+    image?: string | null
   }
 }
 
@@ -2703,12 +1547,12 @@ export const CreateCommentDocument = gql`
       success
       errors
     }
-    success
-    errors
   }
-}
-    `;
-export type CreateCommentMutationFn = Apollo.MutationFunction<CreateCommentMutation, CreateCommentMutationVariables>;
+`
+export type CreateCommentMutationFn = Apollo.MutationFunction<
+  CreateCommentMutation,
+  CreateCommentMutationVariables
+>
 
 /**
  * __useCreateCommentMutation__
@@ -3089,51 +1933,6 @@ export const GetHotIdeasDocument = gql`
         icon
         remoteUrl
       }
-export function useGetIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetIdeasQuery, GetIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetIdeasQuery, GetIdeasQueryVariables>(GetIdeasDocument, options);
-        }
-export type GetIdeasQueryHookResult = ReturnType<typeof useGetIdeasQuery>;
-export type GetIdeasLazyQueryHookResult = ReturnType<typeof useGetIdeasLazyQuery>;
-export type GetIdeasQueryResult = Apollo.QueryResult<GetIdeasQuery, GetIdeasQueryVariables>;
-export const GetHotIdeasDocument = gql`
-  query GetHotIdeas {
-    hotIdeas {
-      id
-      name
-      user {
-        icon
-      }
-export function useGetIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetIdeasQuery, GetIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetIdeasQuery, GetIdeasQueryVariables>(GetIdeasDocument, options);
-        }
-export type GetIdeasQueryHookResult = ReturnType<typeof useGetIdeasQuery>;
-export type GetIdeasLazyQueryHookResult = ReturnType<typeof useGetIdeasLazyQuery>;
-export type GetIdeasQueryResult = Apollo.QueryResult<GetIdeasQuery, GetIdeasQueryVariables>;
-export const GetHotIdeasDocument = gql`
-  query GetHotIdeas {
-    hotIdeas {
-      id
-      name
-      user {
-        icon
-      }
-export function useGetIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetIdeasQuery, GetIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetIdeasQuery, GetIdeasQueryVariables>(GetIdeasDocument, options);
-        }
-export type GetIdeasQueryHookResult = ReturnType<typeof useGetIdeasQuery>;
-export type GetIdeasLazyQueryHookResult = ReturnType<typeof useGetIdeasLazyQuery>;
-export type GetIdeasQueryResult = Apollo.QueryResult<GetIdeasQuery, GetIdeasQueryVariables>;
-export const GetHotIdeasDocument = gql`
-  query GetHotIdeas {
-    hotIdeas {
-      id
-      name
-      user {
-        icon
-      }
     }
   }
 `
@@ -3193,51 +1992,6 @@ export const GetDeployedIdeasDocument = gql`
       user {
         icon
         remoteUrl
-      }
-export function useGetHotIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetHotIdeasQuery, GetHotIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetHotIdeasQuery, GetHotIdeasQueryVariables>(GetHotIdeasDocument, options);
-        }
-export type GetHotIdeasQueryHookResult = ReturnType<typeof useGetHotIdeasQuery>;
-export type GetHotIdeasLazyQueryHookResult = ReturnType<typeof useGetHotIdeasLazyQuery>;
-export type GetHotIdeasQueryResult = Apollo.QueryResult<GetHotIdeasQuery, GetHotIdeasQueryVariables>;
-export const GetDeployedIdeasDocument = gql`
-  query GetDeployedIdeas {
-    deployedIdeas {
-      id
-      name
-      user {
-        icon
-      }
-export function useGetHotIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetHotIdeasQuery, GetHotIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetHotIdeasQuery, GetHotIdeasQueryVariables>(GetHotIdeasDocument, options);
-        }
-export type GetHotIdeasQueryHookResult = ReturnType<typeof useGetHotIdeasQuery>;
-export type GetHotIdeasLazyQueryHookResult = ReturnType<typeof useGetHotIdeasLazyQuery>;
-export type GetHotIdeasQueryResult = Apollo.QueryResult<GetHotIdeasQuery, GetHotIdeasQueryVariables>;
-export const GetDeployedIdeasDocument = gql`
-  query GetDeployedIdeas {
-    deployedIdeas {
-      id
-      name
-      user {
-        icon
-      }
-export function useGetHotIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetHotIdeasQuery, GetHotIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetHotIdeasQuery, GetHotIdeasQueryVariables>(GetHotIdeasDocument, options);
-        }
-export type GetHotIdeasQueryHookResult = ReturnType<typeof useGetHotIdeasQuery>;
-export type GetHotIdeasLazyQueryHookResult = ReturnType<typeof useGetHotIdeasLazyQuery>;
-export type GetHotIdeasQueryResult = Apollo.QueryResult<GetHotIdeasQuery, GetHotIdeasQueryVariables>;
-export const GetDeployedIdeasDocument = gql`
-  query GetDeployedIdeas {
-    deployedIdeas {
-      id
-      name
-      user {
-        icon
       }
     }
   }
@@ -3300,51 +2054,6 @@ export const GetActiveTeamIdeasDocument = gql`
       user {
         icon
         remoteUrl
-      }
-export function useGetDeployedIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>(GetDeployedIdeasDocument, options);
-        }
-export type GetDeployedIdeasQueryHookResult = ReturnType<typeof useGetDeployedIdeasQuery>;
-export type GetDeployedIdeasLazyQueryHookResult = ReturnType<typeof useGetDeployedIdeasLazyQuery>;
-export type GetDeployedIdeasQueryResult = Apollo.QueryResult<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>;
-export const GetActiveTeamIdeasDocument = gql`
-  query GetActiveTeamIdeas {
-    activeTeamIdeas {
-      id
-      name
-      user {
-        icon
-      }
-export function useGetDeployedIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>(GetDeployedIdeasDocument, options);
-        }
-export type GetDeployedIdeasQueryHookResult = ReturnType<typeof useGetDeployedIdeasQuery>;
-export type GetDeployedIdeasLazyQueryHookResult = ReturnType<typeof useGetDeployedIdeasLazyQuery>;
-export type GetDeployedIdeasQueryResult = Apollo.QueryResult<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>;
-export const GetActiveTeamIdeasDocument = gql`
-  query GetActiveTeamIdeas {
-    activeTeamIdeas {
-      id
-      name
-      user {
-        icon
-      }
-export function useGetDeployedIdeasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>(GetDeployedIdeasDocument, options);
-        }
-export type GetDeployedIdeasQueryHookResult = ReturnType<typeof useGetDeployedIdeasQuery>;
-export type GetDeployedIdeasLazyQueryHookResult = ReturnType<typeof useGetDeployedIdeasLazyQuery>;
-export type GetDeployedIdeasQueryResult = Apollo.QueryResult<GetDeployedIdeasQuery, GetDeployedIdeasQueryVariables>;
-export const GetActiveTeamIdeasDocument = gql`
-  query GetActiveTeamIdeas {
-    activeTeamIdeas {
-      id
-      name
-      user {
-        icon
       }
     }
   }
@@ -3540,58 +2249,17 @@ export type DestroyIdeaMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useDestroyIdeaMutation(baseOptions?: Apollo.MutationHookOptions<DestroyIdeaMutation, DestroyIdeaMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DestroyIdeaMutation, DestroyIdeaMutationVariables>(DestroyIdeaDocument, options);
-      }
-export type DestroyIdeaMutationHookResult = ReturnType<typeof useDestroyIdeaMutation>;
-export type DestroyIdeaMutationResult = Apollo.MutationResult<DestroyIdeaMutation>;
-export type DestroyIdeaMutationOptions = Apollo.BaseMutationOptions<DestroyIdeaMutation, DestroyIdeaMutationVariables>;
-export const GetLikesDocument = gql`
-  query GetLikes {
-    likes {
-      id
-      userId
-      likableType
-      likableId
-    }
-  }
-}
-export type DestroyIdeaMutationHookResult = ReturnType<
-  typeof useDestroyIdeaMutation
->
-export type DestroyIdeaMutationResult =
-  Apollo.MutationResult<DestroyIdeaMutation>
-export type DestroyIdeaMutationOptions = Apollo.BaseMutationOptions<
-  DestroyIdeaMutation,
-  DestroyIdeaMutationVariables
->
-export const GetLikesDocument = gql`
-    query GetLikes {
-  likes {
-    id
-    userId
-    likableType
-    likableId
-  }
-}
-export type DestroyIdeaMutationHookResult = ReturnType<
-  typeof useDestroyIdeaMutation
->
-export type DestroyIdeaMutationResult =
-  Apollo.MutationResult<DestroyIdeaMutation>
-export type DestroyIdeaMutationOptions = Apollo.BaseMutationOptions<
-  DestroyIdeaMutation,
-  DestroyIdeaMutationVariables
->
-export const GetLikesDocument = gql`
-    query GetLikes {
-  likes {
-    id
-    userId
-    likableType
-    likableId
-  }
+export function useDestroyIdeaMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DestroyIdeaMutation,
+    DestroyIdeaMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<DestroyIdeaMutation, DestroyIdeaMutationVariables>(
+    DestroyIdeaDocument,
+    options
+  )
 }
 export type DestroyIdeaMutationHookResult = ReturnType<
   typeof useDestroyIdeaMutation
@@ -3611,8 +2279,7 @@ export const GetLikesDocument = gql`
       likableId
     }
   }
-}
-    `;
+`
 
 /**
  * __useGetLikesQuery__
@@ -3667,11 +2334,12 @@ export const CreateLikeDocument = gql`
       }
       success
     }
-    success
   }
-}
-    `;
-export type CreateLikeMutationFn = Apollo.MutationFunction<CreateLikeMutation, CreateLikeMutationVariables>;
+`
+export type CreateLikeMutationFn = Apollo.MutationFunction<
+  CreateLikeMutation,
+  CreateLikeMutationVariables
+>
 
 /**
  * __useCreateLikeMutation__
@@ -3690,13 +2358,26 @@ export type CreateLikeMutationFn = Apollo.MutationFunction<CreateLikeMutation, C
  *   },
  * });
  */
-export function useCreateLikeMutation(baseOptions?: Apollo.MutationHookOptions<CreateLikeMutation, CreateLikeMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateLikeMutation, CreateLikeMutationVariables>(CreateLikeDocument, options);
-      }
-export type CreateLikeMutationHookResult = ReturnType<typeof useCreateLikeMutation>;
-export type CreateLikeMutationResult = Apollo.MutationResult<CreateLikeMutation>;
-export type CreateLikeMutationOptions = Apollo.BaseMutationOptions<CreateLikeMutation, CreateLikeMutationVariables>;
+export function useCreateLikeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateLikeMutation,
+    CreateLikeMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<CreateLikeMutation, CreateLikeMutationVariables>(
+    CreateLikeDocument,
+    options
+  )
+}
+export type CreateLikeMutationHookResult = ReturnType<
+  typeof useCreateLikeMutation
+>
+export type CreateLikeMutationResult = Apollo.MutationResult<CreateLikeMutation>
+export type CreateLikeMutationOptions = Apollo.BaseMutationOptions<
+  CreateLikeMutation,
+  CreateLikeMutationVariables
+>
 export const DestroyLikeDocument = gql`
   mutation DestroyLike($input: DestroyLikeInput!) {
     destroyLike(input: $input) {
@@ -3704,9 +2385,10 @@ export const DestroyLikeDocument = gql`
       errors
     }
   }
-}
-export type CreateLikeMutationHookResult = ReturnType<
-  typeof useCreateLikeMutation
+`
+export type DestroyLikeMutationFn = Apollo.MutationFunction<
+  DestroyLikeMutation,
+  DestroyLikeMutationVariables
 >
 export type CreateLikeMutationResult = Apollo.MutationResult<CreateLikeMutation>
 export type CreateLikeMutationOptions = Apollo.BaseMutationOptions<
@@ -4262,13 +2944,27 @@ export type DestroyTeamMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useDestroyTeamMutation(baseOptions?: Apollo.MutationHookOptions<DestroyTeamMutation, DestroyTeamMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DestroyTeamMutation, DestroyTeamMutationVariables>(DestroyTeamDocument, options);
-      }
-export type DestroyTeamMutationHookResult = ReturnType<typeof useDestroyTeamMutation>;
-export type DestroyTeamMutationResult = Apollo.MutationResult<DestroyTeamMutation>;
-export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<DestroyTeamMutation, DestroyTeamMutationVariables>;
+export function useDestroyTeamMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DestroyTeamMutation,
+    DestroyTeamMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<DestroyTeamMutation, DestroyTeamMutationVariables>(
+    DestroyTeamDocument,
+    options
+  )
+}
+export type DestroyTeamMutationHookResult = ReturnType<
+  typeof useDestroyTeamMutation
+>
+export type DestroyTeamMutationResult =
+  Apollo.MutationResult<DestroyTeamMutation>
+export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
+  DestroyTeamMutation,
+  DestroyTeamMutationVariables
+>
 export const GetUserDocument = gql`
   query GetUser($id: ID!) {
     user(id: $id) {
@@ -4276,7 +2972,6 @@ export const GetUserDocument = gql`
       name
       description
       definition
-      definitionStr
       icon
       point
       remoteUrl
@@ -4284,124 +2979,7 @@ export const GetUserDocument = gql`
       twitterId
       githubId
       ideasNum
-    }
-  }
-}
-export type DestroyTeamMutationHookResult = ReturnType<
-  typeof useDestroyTeamMutation
->
-export type DestroyTeamMutationResult =
-  Apollo.MutationResult<DestroyTeamMutation>
-export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
-  DestroyTeamMutation,
-  DestroyTeamMutationVariables
->
-export const GetUserDocument = gql`
-    query GetUser($id: ID!) {
-  user(id: $id) {
-    id
-    name
-    description
-    definition
-  }
-}
-export type DestroyTeamMutationHookResult = ReturnType<
-  typeof useDestroyTeamMutation
->
-export type DestroyTeamMutationResult =
-  Apollo.MutationResult<DestroyTeamMutation>
-export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
-  DestroyTeamMutation,
-  DestroyTeamMutationVariables
->
-export const GetUserDocument = gql`
-    query GetUser($id: ID!) {
-  user(id: $id) {
-    id
-    name
-    description
-    definition
-  }
-}
-export type DestroyTeamMutationHookResult = ReturnType<
-  typeof useDestroyTeamMutation
->
-export type DestroyTeamMutationResult =
-  Apollo.MutationResult<DestroyTeamMutation>
-export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
-  DestroyTeamMutation,
-  DestroyTeamMutationVariables
->
-export const GetUserDocument = gql`
-  query GetUser($id: ID!) {
-    user(id: $id) {
-      id
-      name
-      description
-      definition
-    }
-  }
-}
-export type DestroyTeamMutationHookResult = ReturnType<
-  typeof useDestroyTeamMutation
->
-export type DestroyTeamMutationResult =
-  Apollo.MutationResult<DestroyTeamMutation>
-export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
-  DestroyTeamMutation,
-  DestroyTeamMutationVariables
->
-export const GetUserDocument = gql`
-    query GetUser($id: ID!) {
-  user(id: $id) {
-    id
-    name
-    description
-    definition
-  }
-}
-export type DestroyTeamMutationHookResult = ReturnType<
-  typeof useDestroyTeamMutation
->
-export type DestroyTeamMutationResult =
-  Apollo.MutationResult<DestroyTeamMutation>
-export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
-  DestroyTeamMutation,
-  DestroyTeamMutationVariables
->
-export const GetUserDocument = gql`
-    query GetUser($id: ID!) {
-  user(id: $id) {
-    id
-    name
-    description
-    definition
-  }
-}
-export type DestroyTeamMutationHookResult = ReturnType<
-  typeof useDestroyTeamMutation
->
-export type DestroyTeamMutationResult =
-  Apollo.MutationResult<DestroyTeamMutation>
-export type DestroyTeamMutationOptions = Apollo.BaseMutationOptions<
-  DestroyTeamMutation,
-  DestroyTeamMutationVariables
->
-export const GetUserDocument = gql`
-  query GetUser($id: ID!) {
-    user(id: $id) {
-      id
-      name
-      description
-      definition
-      definitionStr
-      icon
-      point
-      remoteUrl
-      siteUrl
-      twitterId
-      githubId
-      ideasNum
+      image
     }
   }
 `
@@ -4534,9 +3112,34 @@ export type CreateUserMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+export function useCreateUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(
+    CreateUserDocument,
+    options
+  )
+}
+export type CreateUserMutationHookResult = ReturnType<
+  typeof useCreateUserMutation
+>
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<
+  CreateUserMutation,
+  CreateUserMutationVariables
+>
+export const UpdateUserDocument = gql`
+  mutation UpdateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+      user {
+        id
+        name
+        description
+        definition
       }
       success
       errors

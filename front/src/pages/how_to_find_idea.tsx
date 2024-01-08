@@ -13,11 +13,10 @@ import {
   Anchor,
 } from '@mantine/core'
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
-import { useMediaQuery } from '@mantine/hooks';
+import { useMediaQuery } from '@mantine/hooks'
 
 const HowToFindIdea = () => {
-
-  const isMobile = useMediaQuery('(max-width: 750px)');
+  const isMobile = useMediaQuery('(max-width: 750px)')
 
   return (
     <Container my="6rem">
@@ -116,7 +115,7 @@ const HowToFindIdea = () => {
         </Paper>
       </Group>
 
-      <Flex mt="8rem"  direction={isMobile ? 'column' : 'row'}>
+      <Flex mt="8rem" direction={isMobile ? 'column' : 'row'}>
         <Image
           mt="4rem"
           fit="contain"
@@ -196,7 +195,7 @@ const HowToFindIdea = () => {
         </Paper>
       </Flex>
 
-      <Flex mt="8rem"  direction={isMobile ? 'column' : 'row'}>
+      <Flex mt="8rem" direction={isMobile ? 'column' : 'row'}>
         <Grid mx="xs">
           <Grid.Col>
             <Title order={2} fw="revert">
@@ -240,7 +239,7 @@ const HowToFindIdea = () => {
         />
       </Flex>
 
-      <Flex mt="5rem"  direction={isMobile ? 'column' : 'row'}>
+      <Flex mt="5rem" direction={isMobile ? 'column' : 'row'}>
         <Image
           ml="2rem"
           mt="3rem"
@@ -294,7 +293,7 @@ const HowToFindIdea = () => {
         </Grid>
       </Flex>
 
-      <Flex mt="8rem"  direction={isMobile ? 'column' : 'row'}>
+      <Flex mt="8rem" direction={isMobile ? 'column' : 'row'}>
         <Grid mx="xs">
           <Grid.Col>
             <Title order={3}>情報をたくさん仕入れる</Title>

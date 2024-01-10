@@ -38,9 +38,9 @@ const IdeaDetail = () => {
             ? {}
             : {
                 WebkitMaskImage:
-                  'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
+                  'linear-gradient(to bottom, transparent, white 2%, white 4%, transparent)',
                 maskImage:
-                  'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
+                  'linear-gradient(to right, transparent, white 20%, white 0%, transparent)',
               }),
         }}
       >

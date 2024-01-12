@@ -16,9 +16,9 @@ function AvoidPitfall() {
             ...(!currentUser
               ? {
                   WebkitMaskImage:
-                  'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
+                    'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
                   maskImage:
-                  'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
+                    'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
                 }
               : {}),
           }}

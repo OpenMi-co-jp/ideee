@@ -19,31 +19,44 @@ module Mutations
     argument :product_url, String, required: false, description: '作っているアプリのURL'
     argument :draft, Boolean, required: false, description: '下書きフラグ'
 
-    field :idea, Types::Idea::IdeaType, null: false, description: 'アイデアオブジェクト'
+    field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
-      idea = ::Idea.find(args[:id])
-      idea.update!(
-        icon: args[:icon],
-        name: args[:name],
-        background: args[:background],
-        goal: args[:goal],
-        issue: args[:issue],
-        wish_function: args[:wish_function],
-        hypothesis: args[:hypothesis],
-        target: args[:target],
-        monetize: args[:monetize],
-        similar: args[:similar],
-        github_url: args[:github_url],
-        stance: args[:stance],
-        product_url: args[:product_url],
-        draft: args[:draft]
-        # user_id: context[:current_user].id
-      )
+      if context[:current_user].id == args[:user_id].to_i
+        idea = ::Idea.find(args[:id])
+        idea.update!(
+          icon: args[:icon],
+          name: args[:name],
+          background: args[:background],
+          goal: args[:goal],
+          issue: args[:issue],
+          wish_function: args[:wish_function],
+          hypothesis: args[:hypothesis],
+          target: args[:target],
+          monetize: args[:monetize],
+          similar: args[:similar],
+          github_url: args[:github_url],
+          stance: args[:stance],
+          product_url: args[:product_url],
+          draft: args[:draft],
+          user_id: context[:current_user].id
+        )
+        {
+          idea:,
+          success: true
+        }
+      else
+        {
+          success: false,
+          errors: ['ユーザーの権限がありません']
+        }
+      end
+    rescue ActiveRecord::RecordInvalid => e
       {
-        idea:,
-        success: true
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

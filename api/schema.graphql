@@ -225,9 +225,14 @@ type CreateIdeaPayload {
   clientMutationId: String
 
   """
+  エラーリスト
+  """
+  errors: [String!]
+
+  """
   アイデアオブジェクト
   """
-  idea: Idea!
+  idea: Idea
 
   """
   成功フラグ
@@ -1421,9 +1426,14 @@ type UpdateIdeaPayload {
   clientMutationId: String
 
   """
+  エラーリスト
+  """
+  errors: [String!]
+
+  """
   アイデアオブジェクト
   """
-  idea: Idea!
+  idea: Idea
 
   """
   成功フラグ

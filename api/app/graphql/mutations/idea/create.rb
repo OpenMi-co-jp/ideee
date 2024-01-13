@@ -18,8 +18,9 @@ module Mutations
     argument :product_url, String, required: false, description: '作っているアプリのURL'
     argument :draft, Boolean, required: false, description: '下書きフラグ'
 
-    field :idea, Types::Idea::IdeaType, null: false, description: 'アイデアオブジェクト'
+    field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
       idea = ::Idea.new(
@@ -40,14 +41,25 @@ module Mutations
         user_id: args[:user_id]
         # user_id: context[:current_user].id
       )
-      idea.save!
-      if idea.save && ApplicationHelper.full_url == 'https://www.ideee.tech'
-        url = "#{Rails.application.config.host}/ideas/#{idea.id}"
-        TwitterJob::Tweet.new.perform(idea, url)
+      if idea.save
+        if ApplicationHelper.full_url == 'https://www.ideee.tech'
+          url = "#{Rails.application.config.host}/ideas/#{idea.id}"
+          TwitterJob::Tweet.new.perform(idea, url)
+        end
+        {
+          idea:,
+          success: true
+        }
+      else
+        {
+          success: false,
+          errors: idea.errors.full_messages
+        }
       end
+    rescue ActiveRecord::RecordInvalid => e
       {
-        idea:,
-        success: true
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
 

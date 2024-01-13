@@ -693,16 +693,34 @@
               ]
             },
             {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "idea",
               "description": "アイデアオブジェクト",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Idea",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "Idea",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -4524,16 +4542,34 @@
               ]
             },
             {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "idea",
               "description": "アイデアオブジェクト",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Idea",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "Idea",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,

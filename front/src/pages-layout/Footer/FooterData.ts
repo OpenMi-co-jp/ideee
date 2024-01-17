@@ -5,10 +5,8 @@ export const footerData = {
       links: [
         { label: 'ideeeについて', link: '/about' },
         {
-          // TODO:
-          // https://github.com/naru20181117/ideee/pull/1220でページ実装後に、ここのリンクを修正する
           label: 'アイデアの探し方',
-          link: 'https://www.ideee.tech/how_to_find_idea',
+          link: '/how_to_find_idea',
         },
         {
           label: '月間トレンドまとめ',

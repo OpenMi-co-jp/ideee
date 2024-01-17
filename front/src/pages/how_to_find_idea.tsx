@@ -323,7 +323,7 @@ const HowToFindIdea = () => {
                 <List.Item>ページの構造の背景</List.Item>
               </List>
               <br />
-              「なぜこのボタンが大きいか、どんな印象を持たせようとしているのか？」など実装内容の理由が理解出来るようになる。
+              「なぜこのボタンが大きいか、どんな印象を持たせようとしているのか？」など実装内容の理由が理解出来るようになります。
             </Text>
           </Grid.Col>
           <Grid.Col>
@@ -391,7 +391,7 @@ const HowToFindIdea = () => {
         />
       </Group>
 
-      <Flex mt="7rem" justify="flex-start" direction="row">
+      <Flex mt="10rem" justify="flex-start" direction="row">
         <Grid w="30rem">
           <Grid.Col>
             <Title order={2} fw="revert">

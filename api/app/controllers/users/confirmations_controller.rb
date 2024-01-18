@@ -14,12 +14,11 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     if user.errors.empty?
       head :ok
     else
-      # NOTE:
-      # 普通に user.errors.full_messages を返したいが、それだと以下のように状況に応じたメッセージが出てしまい、
-      # 他人のメールアドレスが ideee に存在することを確認できてしまうので、どっちとも取れないようなメッセージを固定で返している
-      # - 未登録の場合:         Eメールは見つかりませんでした。
-      # - 登録済かつ確認済の場合: メールは既に登録済みです。ログインしてください。
-      # ref. https://github.com/naru20181117/ideee/pull/1264#discussion_r1457285509
+      # NOTE: 普通に user.errors.full_messages を返したいが、それだと以下のように状況に応じたメッセージが出てしまい、
+      #       他人のメールアドレスが ideee に存在することを確認できてしまうので、どっちとも取れないようなメッセージを固定で返している
+      #       - 未登録の場合:         Eメールは見つかりませんでした。
+      #       - 登録済かつ確認済の場合: メールは既に登録済みです。ログインしてください。
+      #       ref. https://github.com/naru20181117/ideee/pull/1264#discussion_r1457285509
       render json: { message: '送信できませんでした。既に確認済み、もしくはメールアドレスに誤りがあります。' }, status: :unprocessable_entity
     end
   end

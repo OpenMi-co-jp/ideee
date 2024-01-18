@@ -12,7 +12,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     user = User.send_confirmation_instructions(create_params)
 
     if user.errors.empty?
-      render json: {}, status: :ok
+      head :ok
     else
       render json: { message: user.errors.full_messages.join }, status: :unprocessable_entity
     end

@@ -12,7 +12,7 @@ module Mutations
     argument :hypothesis, String, required: false, description: '仮説'
     argument :monetize, String, required: false, description: 'マネタイズ方法'
     argument :similar, String, required: false, description: '類似サービス'
-    argument :stance, Integer, required: false, description: '権利スタンス'
+    argument :stance, String, required: false, description: '権利スタンス'
     argument :target, String, required: false, description: 'ターゲット'
     argument :wish_function, String, required: false, description: '欲しい機能'
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'

@@ -2141,7 +2141,7 @@
               "description": "権利スタンス",
               "type": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -4448,7 +4448,7 @@
               "description": "権利スタンス",
               "type": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "String",
                 "ofType": null
               },
               "defaultValue": null,

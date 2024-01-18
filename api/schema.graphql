@@ -696,7 +696,7 @@ type Idea {
   """
   権利スタンス
   """
-  stance: Int
+  stance: String
 
   """
   ターゲット
@@ -1398,7 +1398,7 @@ input UpdateIdeaInput {
   """
   権利スタンス
   """
-  stance: Int
+  stance: String
 
   """
   ターゲット

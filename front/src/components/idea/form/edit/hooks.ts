@@ -29,12 +29,12 @@ const IdeaEditFormSchema = z.object({
     .string()
     .max(255, { message: '類似製品は255文字以内で入力してください' })
     .nullish(),
-  // stance: z
-  //   .enum(['free_right', 'personal_project', 'team_project'])
-  //   .nullish()
-  //   .refine((data) => data !== undefined, {
-  //     message: 'スタンスを選択してください',
-  //   }),
+  stance: z
+    .enum(['free_right', 'personal_project', 'team_project'])
+    .nullish()
+    .refine((data) => data !== null, {
+      message: 'スタンスを選択してください',
+    }),
   target: z
     .string()
     .max(255, { message: 'ターゲットは255文字以内で入力してください' })
@@ -73,6 +73,7 @@ export const UseEditIdea = () => {
   }, [idea, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log(data.stance)
     try {
       const response = await updateIdeaMutation({
         variables: {

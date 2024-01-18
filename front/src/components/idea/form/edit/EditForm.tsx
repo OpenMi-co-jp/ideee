@@ -1,6 +1,7 @@
 import {
   Image,
-  Stack,
+  Radio,
+  Group,
   Paper,
   Title,
   rem,
@@ -13,6 +14,7 @@ import {
 import { IconBulb, IconBrandGithub, IconApps } from '@tabler/icons-react'
 import { TextForm, TextAreaForm } from '@/components/ReactFormSet'
 import { UseEditIdea } from './hooks'
+import { Controller } from 'react-hook-form'
 
 export const EditForm = () => {
   const { form, onSubmit } = UseEditIdea()
@@ -26,7 +28,6 @@ export const EditForm = () => {
         <Grid.Col
           span="content"
           style={{
-            // display: 'flex',
             flexFlow: 'column',
             alignItems: 'center',
           }}
@@ -54,7 +55,6 @@ export const EditForm = () => {
                 required
                 my="lg"
               />
-              {/* <Accordion variant="separated" chevronPosition="left"> */}
               <Accordion
                 variant="separated"
                 chevronPosition="left"
@@ -128,6 +128,27 @@ export const EditForm = () => {
                 label="サービスのURL"
                 my="lg"
                 leftSection={<IconApps />}
+              />
+              <Controller
+                name={'stance'}
+                control={form.control}
+                render={({ field }) => {
+                  return (
+                    <Radio.Group
+                      label="スタンス"
+                      description="チーム開発の場合、アイデアがより注目されます"
+                      {...field}
+                      error={form.formState.errors['stance']?.message as string}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio value="free_right" label="アイデア権フリー" />
+                        <Radio value="personal_project" label="個人開発中" />
+                        <Radio value="team_project" label="チーム開発募集" />
+                      </Group>
+                    </Radio.Group>
+                  )
+                }}
               />
             </Paper>
             <Center>

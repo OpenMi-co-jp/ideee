@@ -362,7 +362,7 @@ export type Idea = {
   /** 類似サービス */
   similar?: Maybe<Scalars['String']>
   /** 権利スタンス */
-  stance?: Maybe<Scalars['Int']>
+  stance?: Maybe<Scalars['String']>
   /** ターゲット */
   target?: Maybe<Scalars['String']>
   /** チームオブジェクト */
@@ -724,7 +724,7 @@ export type UpdateIdeaInput = {
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */
-  stance?: InputMaybe<Scalars['Int']>
+  stance?: InputMaybe<Scalars['String']>
   /** ターゲット */
   target?: InputMaybe<Scalars['String']>
   /** 【必須】ユーザーID */
@@ -953,6 +953,7 @@ export type GetIdeaQuery = {
     target?: string | null
     monetize?: string | null
     similar?: string | null
+    stance?: string | null
     note?: string | null
     createdAt: any
     updatedAt: any
@@ -1116,7 +1117,7 @@ export type UpdateIdeaMutation = {
       hypothesis?: string | null
       monetize?: string | null
       similar?: string | null
-      stance?: number | null
+      stance?: string | null
       target?: string | null
       wishFunction?: string | null
       githubUrl?: string | null
@@ -1731,6 +1732,7 @@ export const GetIdeaDocument = gql`
       target
       monetize
       similar
+      stance
       note
       createdAt
       updatedAt

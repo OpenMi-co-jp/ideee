@@ -42,7 +42,7 @@ module Mutations
           stance: args[:stance],
           product_url: args[:product_url],
           draft: args[:draft],
-          user_id: context[:current_user].id,
+          user_id: context[:current_user].id
         )
         idea.save_with_tags(args[:idea_list])
         {

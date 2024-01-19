@@ -18,6 +18,7 @@ module Mutations
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
     argument :draft, Boolean, required: false, description: '下書きフラグ'
+    argument :idea_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
@@ -26,7 +27,7 @@ module Mutations
     def resolve(**args)
       if context[:current_user].id == args[:user_id].to_i
         idea = ::Idea.find(args[:id])
-        idea.update!(
+        idea.assign_attributes(
           icon: args[:icon],
           name: args[:name],
           background: args[:background],
@@ -41,8 +42,9 @@ module Mutations
           stance: args[:stance],
           product_url: args[:product_url],
           draft: args[:draft],
-          user_id: context[:current_user].id
+          user_id: context[:current_user].id,
         )
+        idea.save_with_tags(args[:idea_list])
         {
           idea:,
           success: true

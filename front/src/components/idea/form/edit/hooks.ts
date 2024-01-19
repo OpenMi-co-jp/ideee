@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useUpdateIdeaMutation } from '@/lib/generated/client'
 import { showSuccess, showError } from '@/components/notifications'
 import { useRouter } from 'next/router'
+import { useGetIdea } from '@/utils/hooks/useGetIdea'
 
 const IdeaEditFormSchema = z.object({
   name: z.string().max(50, { message: '名前は50文字以内で入力してください' }),
@@ -53,6 +54,9 @@ const IdeaEditFormSchema = z.object({
     .nullish(),
   draft: z.boolean().nullish(),
   icon: z.string().nullish(),
+  ideaList: z.array(
+    z.string().max(50, { message: 'タグは50文字以内で入力してください' })
+  ).nonempty({ message: '1つ以上のタグを設定してください' }),
 })
 
 export const UseEditIdea = () => {
@@ -63,17 +67,18 @@ export const UseEditIdea = () => {
   const idea = useIdea()
   const [updateIdeaMutation] = useUpdateIdeaMutation()
   const router = useRouter()
+  const { refetch } = useGetIdea()
 
   useEffect(() => {
     if (idea) {
       form.reset({
         ...idea,
+        ideaList: idea.ideaTags?.map((tag) => String(tag.name)),
       })
     }
   }, [idea, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data.stance)
     try {
       const response = await updateIdeaMutation({
         variables: {
@@ -94,11 +99,13 @@ export const UseEditIdea = () => {
             draft: data.draft,
             icon: data.icon,
             userId: String(idea?.userId),
+            ideaList: data.ideaList,
           },
         },
       })
       if (response.data?.updateIdea?.success) {
         showSuccess({ action: 'ユーザー情報の更新' })
+        refetch()
         router.push(`/ideas/${response.data.updateIdea.idea?.id}`)
       } else {
         showError({

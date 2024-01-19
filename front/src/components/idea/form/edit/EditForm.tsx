@@ -12,7 +12,7 @@ import {
   getGradient,
 } from '@mantine/core'
 import { IconBulb, IconBrandGithub, IconApps } from '@tabler/icons-react'
-import { TextForm, TextAreaForm } from '@/components/ReactFormSet'
+import { TextForm, TextAreaForm, TagsForm } from '@/components/ReactFormSet'
 import { UseEditIdea } from './hooks'
 import { Controller } from 'react-hook-form'
 
@@ -41,6 +41,7 @@ export const EditForm = () => {
                 required
                 my="lg"
               />
+              <TagsForm form={form} name="ideaList" label="タグ" />
               <TextAreaForm
                 form={form}
                 name="background"

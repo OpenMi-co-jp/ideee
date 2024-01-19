@@ -1216,12 +1216,12 @@ type Tag {
   """
   作成日
   """
-  createdAt: ISO8601DateTime!
+  createdAt: ISO8601DateTime
 
   """
   タグID
   """
-  id: ID!
+  id: ID
 
   """
   タグ名
@@ -1231,7 +1231,7 @@ type Tag {
   """
   更新日
   """
-  updatedAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime
 }
 
 type Team {
@@ -1369,6 +1369,11 @@ input UpdateIdeaInput {
   アイデアID
   """
   id: ID!
+
+  """
+  タグリスト
+  """
+  ideaList: [String!]!
 
   """
   課題・困っていること

@@ -641,13 +641,13 @@ export type SortCondition = {
 export type Tag = {
   __typename?: 'Tag'
   /** 作成日 */
-  createdAt: Scalars['ISO8601DateTime']
+  createdAt?: Maybe<Scalars['ISO8601DateTime']>
   /** タグID */
-  id: Scalars['ID']
+  id?: Maybe<Scalars['ID']>
   /** タグ名 */
   name: Scalars['String']
   /** 更新日 */
-  updatedAt: Scalars['ISO8601DateTime']
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>
 }
 
 export type Team = {
@@ -713,6 +713,8 @@ export type UpdateIdeaInput = {
   icon?: InputMaybe<Scalars['String']>
   /** アイデアID */
   id: Scalars['ID']
+  /** タグリスト */
+  ideaList: Array<Scalars['String']>
   /** 課題・困っていること */
   issue?: InputMaybe<Scalars['String']>
   /** マネタイズ方法 */
@@ -976,7 +978,11 @@ export type GetIdeaQuery = {
       userId: number
       user: { __typename?: 'User'; name: string; icon?: string | null }
     }>
-    ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
+    ideaTags?: Array<{
+      __typename?: 'Tag'
+      id?: string | null
+      name: string
+    }> | null
   }
 }
 
@@ -1216,7 +1222,7 @@ export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetPopularTagsQuery = {
   __typename?: 'Query'
-  popularTags: Array<{ __typename?: 'Tag'; id: string; name: string }>
+  popularTags: Array<{ __typename?: 'Tag'; id?: string | null; name: string }>
 }
 
 export type GetTeamQueryVariables = Exact<{

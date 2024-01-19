@@ -5,36 +5,41 @@ import { EditForm } from '@/components/idea/form'
 import { IdeaProvider } from '@/context/IdeaContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
 import type { GetIdeaQuery } from '@/lib/generated/client'
+import { showError } from '@/components/notifications'
+import { useRouter } from 'next/router'
 
 const IdeaEdit = () => {
   const { currentUser } = useCurrentUser()
   const { data, loading, error } = useGetIdea()
-
   const [idea, setIdea] = useState({})
+  const router = useRouter()
 
   useEffect(() => {
-    if (data) {
-      setIdea(data?.idea)
+    if (!currentUser) {
+      showError({ action: 'アイデアの編集', message: 'ログインしてください' })
+      router.push('/')
+      return
     }
-  }, [data])
+
+    if (data && data.idea.user.id !== String(currentUser.id)) {
+      showError({
+        action: 'アイデアの編集',
+        message: '他人のアイデアは編集できません',
+      })
+      router.push('/')
+      return
+    }
+
+    if (data) {
+      setIdea(data.idea)
+    }
+  }, [currentUser, data, router])
 
   if (loading) return <Loader color="yellow" />
 
   return (
     <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
-      <Container
-        style={{
-          height: '100%',
-          ...(currentUser
-            ? {}
-            : {
-                WebkitMaskImage:
-                  'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
-                maskImage:
-                  'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
-              }),
-        }}
-      >
+      <Container>
         <EditForm />
       </Container>
     </IdeaProvider>

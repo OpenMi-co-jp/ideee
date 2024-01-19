@@ -39,11 +39,7 @@ export const TagsForm = <T extends FieldValues>(props: TagsInputProps<T>) => {
             {...field}
             {...rest}
             {...{ style, label, disabled, placeholder }}
-            error={
-              field.value?.length > (maxTags || 3)
-                ? [`タグは最大${maxTags || 3}個までです`]
-                : (form.formState.errors[name]?.message as string | undefined)
-            }
+            error={form.formState.errors[name]?.message as string | undefined}
             withAsterisk={required}
             value={field.value || []}
             onChange={(tags) => field.onChange(tags)}

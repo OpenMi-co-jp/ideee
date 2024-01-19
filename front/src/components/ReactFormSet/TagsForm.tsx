@@ -28,6 +28,7 @@ export const TagsForm = <T extends FieldValues>(props: TagsInputProps<T>) => {
     maxTags,
     ...rest
   } = props
+  const DEFAULT_MAX_TAGS = 3
 
   return (
     <Controller
@@ -44,10 +45,10 @@ export const TagsForm = <T extends FieldValues>(props: TagsInputProps<T>) => {
             value={field.value || []}
             onChange={(tags) => field.onChange(tags)}
             onSearchChange={(_) => {
-              if (field.value?.length >= (maxTags || 3)) {
+              if (field.value?.length >= (maxTags || DEFAULT_MAX_TAGS)) {
                 form.setError(name, {
                   type: 'manual',
-                  message: `タグは最大${maxTags || 3}個までです`,
+                  message: `タグは最大${maxTags || DEFAULT_MAX_TAGS}個までです`,
                 })
               } else {
                 if (form.formState.errors[name]) {
@@ -56,7 +57,7 @@ export const TagsForm = <T extends FieldValues>(props: TagsInputProps<T>) => {
               }
             }}
             data={suggestions}
-            maxTags={maxTags || 3}
+            maxTags={maxTags || DEFAULT_MAX_TAGS}
           />
         )
       }}

@@ -18,7 +18,7 @@ module Mutations
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
     argument :draft, Boolean, required: false, description: '下書きフラグ'
-    argument :idea_list, [String], required: true, description: 'タグリスト'
+    argument :tag_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
@@ -44,7 +44,7 @@ module Mutations
           draft: args[:draft],
           user_id: context[:current_user].id
         )
-        idea.save_with_tags(args[:idea_list])
+        idea.save_with_tags(args[:tag_list])
         {
           idea:,
           success: true

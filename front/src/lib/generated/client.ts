@@ -713,8 +713,6 @@ export type UpdateIdeaInput = {
   icon?: InputMaybe<Scalars['String']>
   /** アイデアID */
   id: Scalars['ID']
-  /** タグリスト */
-  ideaList: Array<Scalars['String']>
   /** 課題・困っていること */
   issue?: InputMaybe<Scalars['String']>
   /** マネタイズ方法 */
@@ -727,6 +725,8 @@ export type UpdateIdeaInput = {
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */
   stance?: InputMaybe<Scalars['String']>
+  /** タグリスト */
+  tagList: Array<Scalars['String']>
   /** ターゲット */
   target?: InputMaybe<Scalars['String']>
   /** 【必須】ユーザーID */

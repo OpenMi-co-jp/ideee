@@ -54,7 +54,7 @@ const IdeaEditFormSchema = z.object({
     .nullish(),
   draft: z.boolean().nullish(),
   icon: z.string().nullish(),
-  ideaList: z
+  tagList: z
     .array(
       z.string().max(50, { message: 'タグは50文字以内で入力してください' })
     )
@@ -75,7 +75,7 @@ export const UseEditIdea = () => {
     if (idea) {
       form.reset({
         ...idea,
-        ideaList: idea.ideaTags?.map((tag) => String(tag.name)),
+        tagList: idea.ideaTags?.map((tag) => String(tag.name)),
       })
     }
   }, [idea, form])
@@ -101,7 +101,7 @@ export const UseEditIdea = () => {
             draft: data.draft,
             icon: data.icon,
             userId: String(idea?.userId),
-            ideaList: data.ideaList,
+            tagList: data.tagList,
           },
         },
       })

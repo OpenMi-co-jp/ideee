@@ -32,7 +32,7 @@ export const EditForm = () => {
             alignItems: 'center',
           }}
         >
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form onSubmit={form.handleSubmit(onSubmit)} role="form">
             <Paper bg="#FCFCFC" radius="md" p="xl">
               <TextForm
                 form={form}
@@ -41,7 +41,7 @@ export const EditForm = () => {
                 required
                 my="lg"
               />
-              <TagsForm form={form} name="ideaList" label="タグ" />
+              <TagsForm form={form} name="tagList" label="タグ" />
               <TextAreaForm
                 form={form}
                 name="background"

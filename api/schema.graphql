@@ -1371,11 +1371,6 @@ input UpdateIdeaInput {
   id: ID!
 
   """
-  タグリスト
-  """
-  ideaList: [String!]!
-
-  """
   課題・困っていること
   """
   issue: String
@@ -1404,6 +1399,11 @@ input UpdateIdeaInput {
   権利スタンス
   """
   stance: String
+
+  """
+  タグリスト
+  """
+  tagList: [String!]!
 
   """
   ターゲット

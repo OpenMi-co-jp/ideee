@@ -4504,7 +4504,7 @@
               "deprecationReason": null
             },
             {
-              "name": "ideaList",
+              "name": "tagList",
               "description": "タグリスト",
               "type": {
                 "kind": "NON_NULL",

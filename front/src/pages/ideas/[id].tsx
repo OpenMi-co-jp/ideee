@@ -5,19 +5,12 @@ import { Container, Loader } from '@mantine/core'
 import { SignPath } from '@/components/Auth/SignPath'
 import { UserSection, IdeaTagList, IdeaTitle } from '@/components/idea'
 import { IdeaProvider } from '@/context/IdeaContext'
-import { useGetIdeaQuery } from '@/lib/generated/client'
-import { useRouter } from 'next/router'
+import { useGetIdea } from '@/utils/hooks/useGetIdea'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
-  const router = useRouter()
-  const { id } = router.query
-  const { data, loading, error } = useGetIdeaQuery({
-    variables: {
-      id: id as string,
-    },
-  })
+  const { data, loading, error } = useGetIdea()
 
   const [idea, setIdea] = useState({})
 

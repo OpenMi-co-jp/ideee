@@ -54,9 +54,11 @@ const IdeaEditFormSchema = z.object({
     .nullish(),
   draft: z.boolean().nullish(),
   icon: z.string().nullish(),
-  ideaList: z.array(
-    z.string().max(50, { message: 'タグは50文字以内で入力してください' })
-  ).nonempty({ message: '1つ以上のタグを設定してください' }),
+  ideaList: z
+    .array(
+      z.string().max(50, { message: 'タグは50文字以内で入力してください' })
+    )
+    .nonempty({ message: '1つ以上のタグを設定してください' }),
 })
 
 export const UseEditIdea = () => {

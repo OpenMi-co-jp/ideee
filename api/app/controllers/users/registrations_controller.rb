@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # CSRF 対策
-  skip_before_action :verify_authenticity_token, only: %i[create update destroy]
+  skip_before_action :verify_authenticity_token, only: %i[create update]
   prepend_before_action :verify_xhr_for_csrf_protection
 
   before_action :configure_sign_up_params, only: [:create]

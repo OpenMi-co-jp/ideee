@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Users::UnlocksController < Devise::UnlocksController
+  # TODO: 各アクションを実装したらコメントアウトを外す
   # CSRF 対策
-  skip_before_action :verify_authenticity_token, only: %i[create]
-  prepend_before_action :verify_xhr_for_csrf_protection
+  # skip_before_action :verify_authenticity_token, only: %i[create]
+  # prepend_before_action :verify_xhr_for_csrf_protection
 
   respond_to :json
 

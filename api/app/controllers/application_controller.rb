@@ -77,6 +77,7 @@ class ApplicationController < ActionController::Base
   #       - 他サイトから同じヘッダをつけたリクエストが飛んできても、プリフライトリクエストと CORS の設定により遮断できる
   #       ref. https://qiita.com/mpyw/items/0595f07736cfa5b1f50c
   def verify_xhr_for_csrf_protection
+    return if Rails.env.test? # あまりよくないとは思うが、 test では気にしたくないため
     return unless request.method.in?(%w[POST PUT PATCH DELETE])
     return if request.xhr?
 

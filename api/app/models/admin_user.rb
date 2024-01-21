@@ -20,8 +20,4 @@ class AdminUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[email created_at].map(&:to_s) + _ransackers.keys
-  end
 end

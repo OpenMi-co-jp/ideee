@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include ActionController::RequestForgeryProtection
+
   # before_action :store_user_location!, if: :storable_location?
   # before_action :get_notifications, if: :defined_user?
   protect_from_forgery with: :exception
@@ -66,5 +68,18 @@ class ApplicationController < ActionController::Base
 
   def update_user_point
     UserJob::UpdatePointJob.perform_later(current_user) # Contributionの計算/更新
+  end
+
+  # NOTE: CSRF 対策
+  #       ログイン時は JWT で対策ができているが、未ログイン時は対策できていないので対応
+  #       フロントで固有の HTTP ヘッダを付与することで、以下のように対策する (もっといいやり方があれば変更してください)
+  #       - 他サイトから HTML フォーム送信されても、 HTTP ヘッダを付与できないので、 xhr ではなくなる
+  #       - 他サイトから同じヘッダをつけたリクエストが飛んできても、プリフライトリクエストと CORS の設定により遮断できる
+  #       ref. https://qiita.com/mpyw/items/0595f07736cfa5b1f50c
+  def verify_xhr_for_csrf_protection
+    return unless request.method.in?(%w[POST PUT PATCH DELETE])
+    return if request.xhr?
+
+    render json: { message: '操作が許可されていません。' }, status: :forbidden
   end
 end

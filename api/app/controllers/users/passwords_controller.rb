@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
+  # CSRF 対策
+  skip_before_action :verify_authenticity_token, only: %i[create update]
+  prepend_before_action :verify_xhr_for_csrf_protection
+
   respond_to :json
+
   # GET /resource/password/new
   # def new
   #   super

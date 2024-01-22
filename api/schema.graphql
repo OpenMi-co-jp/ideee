@@ -423,11 +423,6 @@ input DestroyIdeaInput {
   アイデアID
   """
   id: ID!
-
-  """
-  【必須】ユーザーID
-  """
-  userId: ID!
 }
 
 """
@@ -1621,6 +1616,11 @@ type User {
   アイデア数
   """
   ideasNum: Int
+
+  """
+  アイコン
+  """
+  image: String
 
   """
   ユーザー名

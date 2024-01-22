@@ -1,10 +1,14 @@
 import { useMantineColorScheme, Box, Group, Portal, rem } from '@mantine/core'
 import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
-import { SearchIcon } from './headerComponents'
-import { UserToggle, Notification, ServiceIcon } from './headerComponents'
+import {
+  UserToggle,
+  Notification,
+  ServiceIcon,
+  SearchIcon,
+  Sidebar,
+} from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
-import { Sidebar } from '@/pages-layout/Header/headerComponents/Sidebar'
 import { useMediaQuery } from '@mantine/hooks'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 

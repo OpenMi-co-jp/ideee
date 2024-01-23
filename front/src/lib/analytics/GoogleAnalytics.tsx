@@ -1,20 +1,7 @@
 import Script from 'next/script'
 import * as gtag from './gtag'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 
 export const GoogleAnalytics = () => {
-  const router = useRouter()
-  useEffect(() => {
-    const handleRouterChange = (url: any) => {
-      gtag.pageview(url)
-    }
-    router.events.on('routeChangeComplete', handleRouterChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouterChange)
-    }
-  }, [router.events])
-
   return (
     <>
       <Script

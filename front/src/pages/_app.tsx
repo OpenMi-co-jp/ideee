@@ -6,8 +6,23 @@ import { ApolloBaseProvider } from '@/lib/apollo'
 import { CurrentUserProvider } from '@/context/CurrentUserContext'
 import { CustomMantineProvider } from '@/lib/mantine/CustomMantineProvider'
 import { HeadBlock } from '@/pages-layout/Head'
+import { Analytics } from '@vercel/analytics/react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import * as gtag from '@/lib/analytics/gtag'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
+  const router = useRouter()
+  useEffect(() => {
+    const handleRouterChange = (url: any) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouterChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouterChange)
+    }
+  }, [router.events])
+
   const getLayout =
     Component.getLayout ||
     ((page) => {
@@ -23,6 +38,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
           </CustomMantineProvider>
         </ApolloBaseProvider>
       </CurrentUserProvider>
+      <Analytics />
     </>
   )
 }

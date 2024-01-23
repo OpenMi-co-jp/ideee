@@ -1,3 +1,4 @@
+import { useScreenQuery } from '@/utils/hooks/useScreenQuery'
 import {
   Title,
   Text,
@@ -11,7 +12,7 @@ import {
 import { useMediaQuery } from '@mantine/hooks'
 
 export const Introduction = () => {
-  const isMobile = useMediaQuery(`(max-width: ${rem(380)})`)
+  const { isMobile } = useScreenQuery()
 
   return (
     <Center>

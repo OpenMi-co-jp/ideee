@@ -9,13 +9,13 @@ import {
   Sidebar,
 } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
-import { useMediaQuery } from '@mantine/hooks'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useScreenQuery } from '@/utils/hooks/useScreenQuery'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  const isMobile = useMediaQuery('(max-width: 48em)')
+  const { isMobile } = useScreenQuery()
   const { currentUser } = useCurrentUser()
 
   return (

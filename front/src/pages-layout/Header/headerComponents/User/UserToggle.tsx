@@ -1,12 +1,11 @@
 import { Button, Group, Space, Box } from '@mantine/core'
 import { UserMenu } from './UserMenu'
 import Link from 'next/link'
-import { useMediaQuery } from '@mantine/hooks'
+import { useScreenQuery } from '@/utils/hooks/useScreenQuery'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const UserToggle = () => {
-  const isMobile = useMediaQuery(`(min-width: 565px)`)
-  const isNarrowScreenMobile = useMediaQuery(`(min-width: 381px)`)
+  const { isMobile, isNarrowScreenMobile } = useScreenQuery()
   const { currentUser } = useCurrentUser()
 
   return (

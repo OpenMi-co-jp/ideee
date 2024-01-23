@@ -6,6 +6,7 @@ import { ApolloBaseProvider } from '@/lib/apollo'
 import { CurrentUserProvider } from '@/context/CurrentUserContext'
 import { CustomMantineProvider } from '@/lib/mantine/CustomMantineProvider'
 import { HeadBlock } from '@/pages-layout/Head'
+import { Analytics } from '@vercel/analytics/react'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const getLayout =
@@ -23,6 +24,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
           </CustomMantineProvider>
         </ApolloBaseProvider>
       </CurrentUserProvider>
+      <Analytics />
     </>
   )
 }

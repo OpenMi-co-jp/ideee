@@ -2,7 +2,7 @@ import { Image } from '@mantine/core'
 import Link from 'next/link'
 import { useScreenQuery } from '@/utils/hooks/useScreenQuery'
 export const ServiceIcon = () => {
-  const {isMobile} = useScreenQuery()
+  const { isMobile } = useScreenQuery()
   return (
     <Link href="/">
       <Image

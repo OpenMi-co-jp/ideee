@@ -9,7 +9,7 @@ export const UserSection = () => {
   return (
     <Group py="lg" pl="xl">
       <Link href={`/users/${idea.userId}`} passHref>
-        <UserIcon userIcon={String(idea.user?.icon)} />
+        <UserIcon userIcon={String(idea.user?.image)} />
         <Text size="xl">{idea.user?.name}</Text>
       </Link>
     </Group>

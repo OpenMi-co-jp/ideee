@@ -1521,6 +1521,11 @@ input UpdateUserInput {
   githubId: String
 
   """
+  アイデアアイコン
+  """
+  icon: String
+
+  """
   ユーザーID
   """
   id: ID!
@@ -1603,11 +1608,6 @@ type User {
   githubId: String
 
   """
-  アイコン
-  """
-  icon: String
-
-  """
   ユーザーID
   """
   id: ID!
@@ -1631,11 +1631,6 @@ type User {
   ポイント数
   """
   point: Int
-
-  """
-  アイコンURL
-  """
-  remoteUrl: String
 
   """
   サイトURL

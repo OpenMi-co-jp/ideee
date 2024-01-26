@@ -783,6 +783,8 @@ export type UpdateUserInput = {
   description?: InputMaybe<Scalars['String']>
   /** githubID */
   githubId?: InputMaybe<Scalars['String']>
+  /** アイデアアイコン */
+  icon?: InputMaybe<Scalars['String']>
   /** ユーザーID */
   id: Scalars['ID']
   /** ユーザー名 */
@@ -822,8 +824,6 @@ export type User = {
   email?: Maybe<Scalars['String']>
   /** githubID */
   githubId?: Maybe<Scalars['String']>
-  /** アイコン */
-  icon?: Maybe<Scalars['String']>
   /** ユーザーID */
   id: Scalars['ID']
   /** アイデア数 */
@@ -834,8 +834,6 @@ export type User = {
   name: Scalars['String']
   /** ポイント数 */
   point?: Maybe<Scalars['Int']>
-  /** アイコンURL */
-  remoteUrl?: Maybe<Scalars['String']>
   /** サイトURL */
   siteUrl?: Maybe<Scalars['String']>
   /** TwitterID */
@@ -959,9 +957,8 @@ export type GetIdeaQuery = {
       __typename?: 'User'
       id: string
       name: string
-      icon?: string | null
+      image?: string | null
       twitterId?: string | null
-      remoteUrl?: string | null
     }
     comments: Array<{
       __typename?: 'Comment'
@@ -969,7 +966,7 @@ export type GetIdeaQuery = {
       description: string
       createdAt: any
       userId: number
-      user: { __typename?: 'User'; name: string; icon?: string | null }
+      user: { __typename?: 'User'; name: string; image?: string | null }
     }>
     ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
   }
@@ -998,8 +995,7 @@ export type GetIdeasQuery = {
         __typename?: 'User'
         id: string
         name: string
-        icon?: string | null
-        remoteUrl?: string | null
+        image?: string | null
       }
       ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
       team?: {
@@ -1030,11 +1026,7 @@ export type GetHotIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: {
-      __typename?: 'User'
-      icon?: string | null
-      remoteUrl?: string | null
-    }
+    user: { __typename?: 'User'; image?: string | null }
   }>
 }
 
@@ -1046,11 +1038,7 @@ export type GetDeployedIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: {
-      __typename?: 'User'
-      icon?: string | null
-      remoteUrl?: string | null
-    }
+    user: { __typename?: 'User'; image?: string | null }
   }>
 }
 
@@ -1062,11 +1050,7 @@ export type GetActiveTeamIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    user: {
-      __typename?: 'User'
-      icon?: string | null
-      remoteUrl?: string | null
-    }
+    user: { __typename?: 'User'; image?: string | null }
   }>
 }
 
@@ -1298,9 +1282,7 @@ export type GetUserQuery = {
     name: string
     description?: string | null
     definition?: string | null
-    icon?: string | null
     point?: number | null
-    remoteUrl?: string | null
     siteUrl?: string | null
     twitterId?: string | null
     githubId?: string | null
@@ -1723,9 +1705,8 @@ export const GetIdeaDocument = gql`
       user {
         id
         name
-        icon
+        image
         twitterId
-        remoteUrl
       }
       comments {
         id
@@ -1734,7 +1715,7 @@ export const GetIdeaDocument = gql`
         userId
         user {
           name
-          icon
+          image
         }
       }
       ideaTags {
@@ -1800,8 +1781,7 @@ export const GetIdeasDocument = gql`
         user {
           id
           name
-          icon
-          remoteUrl
+          image
         }
         ideaTags {
           name
@@ -1877,8 +1857,7 @@ export const GetHotIdeasDocument = gql`
       id
       name
       user {
-        icon
-        remoteUrl
+        image
       }
     }
   }
@@ -1937,8 +1916,7 @@ export const GetDeployedIdeasDocument = gql`
       id
       name
       user {
-        icon
-        remoteUrl
+        image
       }
     }
   }
@@ -1999,8 +1977,7 @@ export const GetActiveTeamIdeasDocument = gql`
       id
       name
       user {
-        icon
-        remoteUrl
+        image
       }
     }
   }
@@ -2876,9 +2853,7 @@ export const GetUserDocument = gql`
       name
       description
       definition
-      icon
       point
-      remoteUrl
       siteUrl
       twitterId
       githubId

@@ -20,9 +20,8 @@ query GetIdea($id: ID!) {
     user {
       id
       name
-      icon
+      image
       twitterId
-      remoteUrl
     }
     comments {
       id
@@ -31,7 +30,7 @@ query GetIdea($id: ID!) {
       userId
       user {
         name
-        icon
+        image
       }
     }
     ideaTags {
@@ -55,8 +54,7 @@ query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
       user {
         id
         name
-        icon
-        remoteUrl
+        image
       }
       ideaTags {
         name
@@ -84,8 +82,7 @@ query GetHotIdeas {
     id
     name
     user {
-      icon
-      remoteUrl
+      image
     }
   }
 }
@@ -95,8 +92,7 @@ query GetDeployedIdeas {
     id
     name
     user {
-      icon
-      remoteUrl
+      image
     }
   }
 }
@@ -106,8 +102,7 @@ query GetActiveTeamIdeas {
     id
     name
     user {
-      icon
-      remoteUrl
+      image
     }
   }
 }

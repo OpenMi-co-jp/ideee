@@ -24,6 +24,8 @@ gem 'image_processing', '~> 1.12'
 
 gem 'aws-sdk-s3', require: false
 gem 'carrierwave'
+# GraphqlがデフォルトでFormDataを送れないのでbase64に対応
+gem 'carrierwave-base64'
 gem 'fog-aws'
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -47,7 +47,7 @@ const HowToFindIdea = () => {
               <Title order={2} fw="revert">
                 この記事のターゲット
               </Title>
-              <Text mb="lg" bg={'#fdf8eb'} p="1rem">
+              <Text mb="lg" bg="#fdf8eb" p="1rem">
                 ・アプリのアイデアが思いつかない人
                 <br />
                 ・以前作ったアプリに物足りなさを感じている人
@@ -59,7 +59,7 @@ const HowToFindIdea = () => {
               <Title order={2} fw="revert">
                 アイデアを出すときにありがちな勘違い
               </Title>
-              <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+              <Text mb="lg" bg="#fdf8eb" p="2rem">
                 いざアイデアを出そうと思っても何から考えればいいか分からず、思いついてもありきたりでチープな物しか思いつかない。
                 <br />
                 <br />
@@ -97,7 +97,7 @@ const HowToFindIdea = () => {
         </Text>
 
         <Paper
-          bg={'#fdf8eb'}
+          bg="#fdf8eb"
           py="lg"
           px="lg"
           style={{
@@ -129,7 +129,7 @@ const HowToFindIdea = () => {
             <Title order={2} fw="revert">
               アイデアを出すときの考え方
             </Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem" fw="bold">
+            <Text mb="lg" bg="#fdf8eb" p="2rem" fw="bold">
               1. 「アイデアは既存概念の掛け合わせ」だと思う
               <br />
               2.「アイデア出すための必要条件」を意識しよう
@@ -141,7 +141,7 @@ const HowToFindIdea = () => {
             <Title order={2} fw="revert">
               1.アイデアは掛け合わせ
             </Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+            <Text mb="lg" bg="#fdf8eb" p="2rem">
               <b>全く新しいものは生まなくていい</b>
               <br />
               正しい方法で情報を集め、関連付けするだけでアイデアを生むことが出来る。
@@ -166,7 +166,7 @@ const HowToFindIdea = () => {
         </Text>
         <Paper
           mt="1rem"
-          bg={'#fdf8eb'}
+          bg="#fdf8eb"
           py="lg"
           px="lg"
           style={{
@@ -201,7 +201,7 @@ const HowToFindIdea = () => {
             <Title order={2} fw="revert">
               2.アイデアを出すための必要条件
             </Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+            <Text mb="lg" bg="#fdf8eb" p="2rem">
               <List>
                 <List.Item>心身がリラックスした状態を作る</List.Item>
                 <List.Item>脳内のメモリーを解放する</List.Item>
@@ -217,7 +217,7 @@ const HowToFindIdea = () => {
           </Grid.Col>
           <Grid.Col>
             <Title order={3}>リラックスした状態を作る</Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+            <Text mb="lg" bg="#fdf8eb" p="2rem">
               意外と見落としがちですが精神の安定もかなり重要な必要条件です。
               仕事に追われている状態や過度なストレス下では、頭の中のメモリーが一杯に、、、
               <br />
@@ -253,7 +253,7 @@ const HowToFindIdea = () => {
         <Grid>
           <Grid.Col>
             <Title order={3}>脳内のメモリーを解放する</Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+            <Text mb="lg" bg="#fdf8eb" p="2rem">
               多くの考え事や悩み事、感情を抱える事で脳内は無意識に容量を消費してしまいます。
               <br />
               そのような状態だと質の高い思考に当てる脳内のメモリーが足りず、良質なアイデアを出すのは困難になります。
@@ -263,7 +263,7 @@ const HowToFindIdea = () => {
           </Grid.Col>
           <Grid.Col>
             <Title order={3}>サービスパターンを意識する</Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+            <Text mb="lg" bg="#fdf8eb" p="2rem">
               すでにある<b>ビジネスモデルはパターン化されている</b>ので
               ビジネスモデルを知っておく事もアイデアを出す上での必要条件です。
               <br />
@@ -310,7 +310,7 @@ const HowToFindIdea = () => {
               <br />
               ある一つのことを意識することで、それに関する情報が無意識に自分の手元にたくさん集まるようになる現象のこと。
             </Paper>
-            <Text mb="lg" bg={'#fdf8eb'} p="2rem">
+            <Text mb="lg" bg="#fdf8eb" p="2rem">
               <List>
                 <List.Item>フリーミアムモデル</List.Item>
                 <List.Item>マッチングモデル</List.Item>
@@ -328,7 +328,7 @@ const HowToFindIdea = () => {
           </Grid.Col>
           <Grid.Col>
             <Title order={3}>日頃から考える癖をつける</Title>
-            <Text mb="lg" bg={'#fdf8eb'} py="2rem" pl="1rem" pr="3rem">
+            <Text mb="lg" bg="#fdf8eb" py="2rem" pl="1rem" pr="3rem">
               <List>
                 <List.Item>
                   アイデアは突然出てくるものではなく、日頃の思考の積み上げ
@@ -362,14 +362,14 @@ const HowToFindIdea = () => {
               3.アイデアを出す方法
             </Title>
             <Title order={3}>自分に聞いてみる</Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="lg">
+            <Text mb="lg" bg="#fdf8eb" p="lg">
               人は作りたいもの、やりたいことよりも
               <b>やりたくないものの方が簡単に言語化出来る</b>。
             </Text>
           </Grid.Col>
           <Grid.Col>
             <Title order={3}>人に聞いてみる</Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="lg">
+            <Text mb="lg" bg="#fdf8eb" p="lg">
               一人で触れられる情報には限りがある。
               <br />
               数多くの人生からえられた経験や趣向から、たくさんのアイデアが得られる。
@@ -380,7 +380,7 @@ const HowToFindIdea = () => {
 
       <Group mt="5rem">
         <Title order={2}>例）自分のやりたくないアイデア</Title>
-        <Text bg={'#fdf8eb'} p="lg">
+        <Text bg="#fdf8eb" p="lg">
           アイデア出しの方法として、先にやらない事を決めてしまう事で採用するアイデアの選定をスムーズに行うことが出来ます。
           以下は、やらない事を事前に書き出した例です。
         </Text>
@@ -398,7 +398,7 @@ const HowToFindIdea = () => {
               4.使えるAPIから逆算する
             </Title>
             <Title order={3}>APIはアイデアの宝庫</Title>
-            <Text mb="lg" bg={'#fdf8eb'} p="lg">
+            <Text mb="lg" bg="#fdf8eb" p="lg">
               スピード感のあるサービス開発を行う上でAPIの活用は不可欠である。世の中に存在するAPIはどんなものがあるか先にを知っておいてそこから逆算する事でスムーズにサービスのアイデア出しに繋げられる。
               <br />
               <br />
@@ -427,7 +427,7 @@ const HowToFindIdea = () => {
         <Grid w="30rem">
           <Grid.Col>
             <Title order={3}>他にも使えるAPIは沢山ある🚀</Title>
-            <Text bg={'#fdf8eb'} p="lg">
+            <Text bg="#fdf8eb" p="lg">
               <Anchor
                 fw="bold"
                 href="https://developers.google.com/youtube/v3/docs?hl=ja"
@@ -507,7 +507,7 @@ const HowToFindIdea = () => {
         <Title order={3} mt="4.5rem">
           まとめ
         </Title>
-        <Text mb="lg" bg={'#fdf8eb'} p="xs">
+        <Text mb="lg" bg="#fdf8eb" p="xs">
           アイデア出し = スキル ≠ 才能
           <br />
           日頃から視野を広げてアイデア探しをすれば、既存のモノから簡単に新しいアイデアを生み出せる！
@@ -526,7 +526,7 @@ const HowToFindIdea = () => {
 
       <Center>
         {/*TODO: 最新のアイデアページへのリンクを設定する */}
-        <Button bg={'#ff862e'}>最新のアイデアを見る</Button>
+        <Button bg="#ff862e">最新のアイデアを見る</Button>
       </Center>
       <ColorsComponent />
     </Container>

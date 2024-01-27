@@ -14,6 +14,7 @@ import {
 } from '@mantine/core'
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
 import { useMediaQuery } from '@mantine/hooks'
+import Link from 'next/link'
 
 const HowToFindIdea = () => {
   const isMobile = useMediaQuery('(max-width: 750px)')
@@ -525,8 +526,9 @@ const HowToFindIdea = () => {
       </Flex>
 
       <Center>
-        {/*TODO: 最新のアイデアページへのリンクを設定する */}
+        <Link href="/">
         <Button bg="#ff862e">最新のアイデアを見る</Button>
+        </Link>
       </Center>
       <ColorsComponent />
     </Container>

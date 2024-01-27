@@ -386,7 +386,7 @@ const HowToFindIdea = () => {
           以下は、やらない事を事前に書き出した例です。
         </Text>
         <Image
-          src="/img/9c14bab4-aa27-a9e7-e9c0-1f8dacfd89cc.webp"
+          src="/img/list_of_unimplemented_ideas.webp"
           fit="contain"
           alt="やらない事リスト"
         />
@@ -417,7 +417,7 @@ const HowToFindIdea = () => {
               アイデアを応用してる例がたくさん見られて参考になる。
             </Text>
             <Image
-              src="/img/8b8bff0c-74e9-feb3-810a-7c082945610f.webp"
+              src="/img/list_of_api_services.webp"
               fit="cover"
               alt="connpass APIを使って作られたアプリ達"
             />

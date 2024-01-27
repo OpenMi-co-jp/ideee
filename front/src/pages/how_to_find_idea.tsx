@@ -39,7 +39,7 @@ const HowToFindIdea = () => {
             fit="contain"
             h="21rem"
             p="1rem"
-            src="/img/1_undraw_absorbed_in_re_ymd6.webp"
+            src="/img/1_man_reading_material.webp"
             alt="資料を読む男性"
           />
           <Grid>
@@ -121,7 +121,7 @@ const HowToFindIdea = () => {
           fit="contain"
           h="19rem"
           p="1rem"
-          src="/img/2_undraw_thought_process_re_om58.webp"
+          src="/img/2_man_viewing_data.webp"
           alt="データを見る男性"
         />
         <Grid mt="4rem" mx="xs">
@@ -234,7 +234,7 @@ const HowToFindIdea = () => {
           h="20rem"
           p="2rem"
           pr="5rem"
-          src="/img/3_undraw_friends_r511.webp"
+          src="/img/3_woman_playing_with_a_cat.webp"
           alt="猫と戯れる女性"
         />
       </Flex>
@@ -247,7 +247,7 @@ const HowToFindIdea = () => {
           h="20rem"
           p="2rem"
           pr="5rem"
-          src="/img/4_undraw_meditation_re_gll0.webp"
+          src="/img/4_woman_maditating.webp"
           alt="瞑想する女性"
         />
         <Grid>
@@ -350,7 +350,7 @@ const HowToFindIdea = () => {
           h="20rem"
           p="1rem"
           pr="4rem"
-          src="/img/5_undraw_ideation_re_8i2h.webp"
+          src="/img/5_woman_looking_tree.webp"
           alt="木を見る女性"
         />
       </Flex>

@@ -527,7 +527,7 @@ const HowToFindIdea = () => {
 
       <Center>
         <Link href="/">
-        <Button bg="#ff862e">最新のアイデアを見る</Button>
+          <Button bg="#ff862e">最新のアイデアを見る</Button>
         </Link>
       </Center>
       <ColorsComponent />

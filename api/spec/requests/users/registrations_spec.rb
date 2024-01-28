@@ -14,7 +14,7 @@ RSpec.describe 'セッション' do
 
     it '新規ユーザーを作成する' do
       register = expect do
-        post user_registration_path, params: user_params
+        post user_registration_path, params: user_params, xhr: true
       end
       register.to change(User, :count).by(1)
 
@@ -27,7 +27,8 @@ RSpec.describe 'セッション' do
       post user_session_path, params: {
         email: 'user@example.com',
         password: auth_password
-      }
+      },
+      xhr: true
     end
 
     before { create(:user, email: 'user@example.com', password:) }
@@ -70,7 +71,7 @@ RSpec.describe 'セッション' do
     let(:tokens) { sign_in(user) }
 
     it 'ユーザーをログアウトする' do
-      delete destroy_user_session_path, headers: tokens
+      delete destroy_user_session_path, headers: tokens, xhr: true
       expect(response).to have_http_status(:ok)
     end
   end

@@ -5,7 +5,8 @@ module AuthorizationSpecHelper
     post user_session_path, params: {
       email: user.email,
       password: user.password
-    }
+    },
+    xhr: true
 
     response.headers.slice('client', 'access-token', 'uid', 'authorization')
   end

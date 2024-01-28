@@ -24,11 +24,12 @@ RSpec.describe 'セッション' do
 
   describe 'POST /users/sign_in' do
     subject(:auth_sign_in) do
-      post user_session_path, params: {
-        email: 'user@example.com',
-        password: auth_password
-      },
-      xhr: true
+      post user_session_path,
+           params: {
+             email: 'user@example.com',
+             password: auth_password
+           },
+           xhr: true
     end
 
     before { create(:user, email: 'user@example.com', password:) }

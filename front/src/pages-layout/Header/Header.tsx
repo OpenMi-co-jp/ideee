@@ -10,12 +10,12 @@ import {
 } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { useBreackPoint } from '@/utils/hooks/useBreackPoint'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  const { isMobile } = useBreackPoint()
+  const { isMobile } = useBreakPoint()
   const { currentUser } = useCurrentUser()
 
   return (

@@ -1,8 +1,8 @@
 import { Image } from '@mantine/core'
 import Link from 'next/link'
-import { useBreackPoint } from '@/utils/hooks/useBreackPoint'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 export const ServiceIcon = () => {
-  const { isMobile } = useBreackPoint()
+  const { isMobile } = useBreakPoint()
   return (
     <Link href="/">
       <Image

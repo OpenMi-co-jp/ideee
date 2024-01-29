@@ -1,4 +1,4 @@
-import { useBreackPoint } from '@/utils/hooks/useBreackPoint'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 import {
   Title,
   Text,
@@ -12,7 +12,7 @@ import {
 import { useMediaQuery } from '@mantine/hooks'
 
 export const Introduction = () => {
-  const { isMobile } = useBreackPoint()
+  const { isMobile } = useBreakPoint()
 
   return (
     <Center>

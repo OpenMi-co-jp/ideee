@@ -4,7 +4,7 @@ import { useMediaQuery } from '@mantine/hooks'
  * モバイルデバイスかどうか、または狭いスクリーンのモバイルデバイスかどうかを判断するカスタムフック
  * @returns {Object} isMobileとisNarrowScreenMobileの2つの値を持つオブジェクトを返す
  */
-export const useBreackPoint = (): {
+export const useBreakPoint = (): {
   isMobile: boolean
   isNarrowScreenMobile: boolean
 } => {

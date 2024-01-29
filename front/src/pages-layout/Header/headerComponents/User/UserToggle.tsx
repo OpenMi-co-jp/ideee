@@ -1,11 +1,11 @@
 import { Button, Group, Space, Box } from '@mantine/core'
 import { UserMenu } from './UserMenu'
 import Link from 'next/link'
-import { useBreakPoint } from '@/utils/hooks/useBreackPoint'
+import { useBreackPoint } from '@/utils/hooks/useBreackPoint'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const UserToggle = () => {
-  const { isMobile, isNarrowScreenMobile } = useBreakPoint()
+  const { isMobile, isNarrowScreenMobile } = useBreackPoint()
   const { currentUser } = useCurrentUser()
 
   return (

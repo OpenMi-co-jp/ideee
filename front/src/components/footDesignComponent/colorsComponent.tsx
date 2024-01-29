@@ -1,4 +1,4 @@
-import { useBreakPoint } from "@/utils/hooks/useBreackPoint"
+import { useBreakPoint } from '@/utils/hooks/useBreackPoint'
 import { Flex, Box } from '@mantine/core'
 
 export const ColorsComponent = () => {

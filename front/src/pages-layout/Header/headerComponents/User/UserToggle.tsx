@@ -20,7 +20,7 @@ export const UserToggle = () => {
                 display: 'flex',
               }}
             >
-              {isNarrowScreenMobile && (
+              {!isNarrowScreenMobile && (
                 <Link href="/users/sign_up">
                   <Button
                     variant="gradient"

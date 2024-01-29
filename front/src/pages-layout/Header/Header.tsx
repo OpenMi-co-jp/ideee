@@ -10,12 +10,12 @@ import {
 } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { useScreenQuery } from '@/utils/hooks/useScreenQuery'
+import { useBreakPoint } from '@/utils/hooks/useBreackPoint'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  const { isMobile } = useScreenQuery()
+  const { isMobile } = useBreakPoint()
   const { currentUser } = useCurrentUser()
 
   return (
@@ -42,8 +42,8 @@ export const Header: FC = () => {
             <SearchIcon />
             {currentUser && <Notification />}
             <UserToggle />
-            {currentUser && !isMobile && <IdeaCreateButton />}
-            {isMobile && <Sidebar />}
+            {currentUser && isMobile && <IdeaCreateButton />}
+            {!isMobile && <Sidebar />}
           </Group>
         </Group>
       </Box>

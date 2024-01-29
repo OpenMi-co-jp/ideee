@@ -1,4 +1,4 @@
-import { useScreenQuery } from '@/utils/hooks/useScreenQuery'
+import { useBreakPoint } from '@/utils/hooks/useBreackPoint'
 import {
   Title,
   Text,
@@ -12,7 +12,7 @@ import {
 import { useMediaQuery } from '@mantine/hooks'
 
 export const Introduction = () => {
-  const { isMobile } = useScreenQuery()
+  const { isMobile } = useBreakPoint()
 
   return (
     <Center>
@@ -23,19 +23,19 @@ export const Introduction = () => {
               order={1}
               size="h3"
               style={{
-                textAlign: isMobile ? 'center' : 'left',
+                textAlign: !isMobile ? 'center' : 'left',
               }}
             >
               ideeeとは
             </Title>
             <Space my="lg" />
-            <Text style={{ textAlign: isMobile ? 'center' : 'left' }}>
+            <Text style={{ textAlign: !isMobile ? 'center' : 'left' }}>
               アイデアとエンジニアの
               <br />
               マッチングプラットフォーム
             </Text>
             <Space my="xs" />
-            <Text style={{ textAlign: isMobile ? 'center' : 'left' }}>
+            <Text style={{ textAlign: !isMobile ? 'center' : 'left' }}>
               アイデアをアイデアで終わらせない。
               <br />
               つくれる人と繋がり、アイデアを実現しよう

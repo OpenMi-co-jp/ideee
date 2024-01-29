@@ -9,6 +9,24 @@ import { SubmitHandler, FieldValues } from 'react-hook-form'
 import { useGetUser } from '@/utils/hooks/useGetUser'
 import { showSuccess, showError } from '@/components/notifications'
 
+// バリデーションパターンを関数に抽出
+const base64ImageValidation = (message: string) =>
+  z
+    .string()
+    .optional()
+    .nullable()
+    .refine(
+      (data) => {
+        if (typeof data === 'undefined' || data === null) {
+          return true
+        }
+        const base64Regex =
+          /^data:image\/[a-zA-Z]+;base64,[A-Za-z0-9+/]+={0,2}$/
+        return base64Regex.test(String(data))
+      },
+      { message }
+    )
+
 const UserEditFormSchema = z.object({
   name: z.string().max(30, { message: '名前は30文字以内で入力してください' }),
   description: z
@@ -26,6 +44,9 @@ const UserEditFormSchema = z.object({
     z.string().url({ message: 'URLの形式で入力してください' }).nullish(),
     z.literal(''),
   ]),
+  icon: base64ImageValidation(
+    'アイコンはBase64形式の文字列である必要があります'
+  ),
 })
 
 export const UpdateUser = () => {
@@ -71,6 +92,7 @@ export const UpdateUser = () => {
             twitterId: data.twitterId,
             githubId: data.githubId,
             siteUrl: data.siteUrl,
+            icon: data.icon,
           },
         },
       })

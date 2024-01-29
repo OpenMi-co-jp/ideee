@@ -5,12 +5,10 @@ import {
   Grid,
   Text,
   Checkbox,
-  Image,
-  FileInput,
   rem,
   Center,
 } from '@mantine/core'
-import { TextForm, TextAreaForm } from '@/components/ReactFormSet'
+import { TextForm, TextAreaForm, DropzoneForm } from '@/components/ReactFormSet'
 import {
   IconUpload,
   IconBrandX,
@@ -61,21 +59,11 @@ export const Form = () => {
               alignItems: 'center',
             }}
           >
-            <Image
-              height={150}
-              width={150}
-              radius="50%"
-              maw={150}
-              mah={150}
-              src={form.getValues('icon') || form.getValues('remoteUrl')}
-              alt="user prof"
-            />
-            <FileInput
-              placeholder="画像をアップロード"
+            <DropzoneForm
+              form={form}
+              name="icon"
+              fetchName="image"
               label="ユーザーアイコン"
-              radius="md"
-              mt="xl"
-              leftSection={<IconUpload size={14} />}
             />
           </Grid.Col>
           <Grid.Col span={7}>

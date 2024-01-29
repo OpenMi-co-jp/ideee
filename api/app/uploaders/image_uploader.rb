@@ -19,7 +19,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def url(*args)
     if Rails.env.development?
-      Rails.application.config.host + super
+      "#{Rails.application.config.host}#{super}"
     else
       super
     end

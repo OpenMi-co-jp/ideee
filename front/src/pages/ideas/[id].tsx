@@ -7,6 +7,7 @@ import { useGetIdea } from '@/utils/hooks/useGetIdea'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 import { Container, Loader } from '@mantine/core'
 import { useEffect, useState } from 'react'
+import classes from '@/styles/mask.module.css'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
@@ -25,17 +26,7 @@ const IdeaDetail = () => {
   return (
     <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
       <Container
-        style={{
-          height: '100%',
-          ...(currentUser
-            ? {}
-            : {
-                WebkitMaskImage:
-                  'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
-                maskImage:
-                  'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
-              }),
-        }}
+        className={currentUser ? classes.container : `${classes.maskImage}`}
       >
         <IdeaTitle />
         <UserSection />

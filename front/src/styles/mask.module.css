@@ -1,0 +1,10 @@
+
+.container {
+  height: '100%'
+}
+
+.maskImage {
+  height: '100%';
+  -webkit-mask-image: linear-gradient(to bottom, transparent, white 0%, white 3%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, white 0%, white 3%, transparent);
+}

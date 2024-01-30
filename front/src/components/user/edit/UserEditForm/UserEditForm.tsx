@@ -10,7 +10,6 @@ import {
 } from '@mantine/core'
 import { TextForm, TextAreaForm, DropzoneForm } from '@/components/ReactFormSet'
 import {
-  IconUpload,
   IconBrandX,
   IconBrandGithub,
   IconLink,

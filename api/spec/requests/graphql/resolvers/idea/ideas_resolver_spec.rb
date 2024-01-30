@@ -20,7 +20,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
               user {
                 id
                 name
-                icon
+                image
               }
               ideaTags {
                 name

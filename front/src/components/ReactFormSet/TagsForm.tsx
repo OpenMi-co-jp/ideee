@@ -6,7 +6,7 @@ import { TagsInput as MantineTagsInput } from '@mantine/core'
 type TagsInputProps<T extends FieldValues> = {
   label?: string
   name: Path<T>
-  form: UseFormReturn<T, any>
+  form: UseFormReturn<T>
   style?: CSSProperties
   required?: boolean
   disabled?: boolean

@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
-import { useCurrentUser } from '@/context/CurrentUserContext'
-import { HiddenIdeaContent, IdeaContents } from '@/components/idea/show'
-import { Container, Loader } from '@mantine/core'
 import { SignPath } from '@/components/Auth/SignPath'
-import { UserSection, IdeaTagList, IdeaTitle } from '@/components/idea'
+import { IdeaTagList, IdeaTitle, UserSection } from '@/components/idea'
+import { HiddenIdeaContent, IdeaContents } from '@/components/idea/show'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 import { IdeaProvider } from '@/context/IdeaContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
 import type { GetIdeaQuery } from '@/lib/generated/client'
+import { Container, Loader } from '@mantine/core'
+import { useEffect, useState } from 'react'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
@@ -31,9 +31,9 @@ const IdeaDetail = () => {
             ? {}
             : {
                 WebkitMaskImage:
-                  'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
+                  'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
                 maskImage:
-                  'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
+                  'linear-gradient(to bottom, transparent, white 0%, white 3%, transparent)',
               }),
         }}
       >

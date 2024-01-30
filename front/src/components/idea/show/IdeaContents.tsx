@@ -4,8 +4,8 @@ import { IconApps, IconBrandGithub } from '@tabler/icons-react'
 import { IdeaContentSet } from './IdeaContentSet'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 import { useIdea } from '@/context/IdeaContext'
-import { StanceBudge } from '@/utils/StanceBudge'
-import type { StanceBudgeProps } from '@/utils/StanceBudge'
+import { StanceBadge } from '@/utils/StanceBadge'
+import type { StanceBadgeProps } from '@/utils/StanceBadge'
 
 const getSections = (idea: GetIdeaQuery['idea'], currentUser: boolean) => {
   if (currentUser) {
@@ -35,7 +35,7 @@ export const IdeaContents = () => {
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
-      <StanceBudge stance={idea?.stance as StanceBudgeProps['stance']} />
+      <StanceBadge stance={idea?.stance as StanceBadgeProps['stance']} />
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}

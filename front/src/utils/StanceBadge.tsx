@@ -1,10 +1,10 @@
 import { Badge } from '@mantine/core'
 
-export type StanceBudgeProps = {
+export type StanceBadgeProps = {
   stance: 'free_right' | 'personal_project' | 'team_project'
 }
 
-export const StanceBudge = ({ stance }: StanceBudgeProps) => {
+export const StanceBadge = ({ stance }: StanceBadgeProps) => {
   const stanceList = {
     free_right: {
       gradient: { from: 'teal', to: 'green' },

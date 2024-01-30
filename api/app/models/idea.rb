@@ -96,7 +96,7 @@ class Idea < ApplicationRecord
     update_column(:likes_num, likes.size)
   end
 
-  def save_with_tags(tag_list)
+  def save_with_tags!(tag_list)
     raise ActiveRecord::RecordInvalid if tag_list.nil?
 
     ActiveRecord::Base.transaction do

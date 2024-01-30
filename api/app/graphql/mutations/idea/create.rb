@@ -42,7 +42,7 @@ module Mutations
         # user_id: context[:current_user].id
       )
       if idea.save
-        if ApplicationHelper.full_url == 'https://www.ideee.tech'
+        if Rails.env.production?
           url = "#{Rails.application.config.host}/ideas/#{idea.id}"
           TwitterJob::Tweet.new.perform(idea, url)
         end
@@ -56,11 +56,6 @@ module Mutations
           errors: idea.errors.full_messages
         }
       end
-    rescue ActiveRecord::RecordInvalid => e
-      {
-        success: false,
-        errors: e.record.errors.full_messages
-      }
     end
 
     # def resolve(**args, context:)

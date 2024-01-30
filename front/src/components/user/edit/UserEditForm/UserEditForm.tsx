@@ -9,11 +9,7 @@ import {
   Center,
 } from '@mantine/core'
 import { TextForm, TextAreaForm, DropzoneForm } from '@/components/ReactFormSet'
-import {
-  IconBrandX,
-  IconBrandGithub,
-  IconLink,
-} from '@tabler/icons-react'
+import { IconBrandX, IconBrandGithub, IconLink } from '@tabler/icons-react'
 import { UpdateUser } from './hooks'
 import { useEffect } from 'react'
 

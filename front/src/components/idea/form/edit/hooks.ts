@@ -89,9 +89,6 @@ export const UseEditIdea = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      console.log('---------start---------')
-      console.log(data)
-      console.log(data.name)
       const response = await updateIdeaMutation({
         variables: {
           input: {

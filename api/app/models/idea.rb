@@ -97,15 +97,10 @@ class Idea < ApplicationRecord
   end
 
   def save_with_tags!(tag_list)
-    raise ActiveRecord::RecordInvalid if tag_list.nil?
+    raise ActiveRecord::RecordInvalid, self if tag_list.nil?
 
-    ActiveRecord::Base.transaction do
-      self.idea_tags = tag_list.map { |name| Tag.find_or_initialize_by(name: name.strip) }
-      save!
-    end
-    true
-  rescue StandardError
-    false
+    self.idea_tags = tag_list.map { |name| Tag.find_or_initialize_by(name: name.strip) }
+    save!
   end
 
   def tag_list

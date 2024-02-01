@@ -41,7 +41,7 @@ export const EditForm = () => {
                 required
                 my="lg"
               />
-              <TagsForm form={form} name="tagList" label="タグ" />
+              <TagsForm form={form} name="tagList" label="タグ" required />
               <TextAreaForm
                 form={form}
                 name="background"
@@ -80,7 +80,7 @@ export const EditForm = () => {
                     <TextAreaForm
                       form={form}
                       name="issue"
-                      label="問題点"
+                      label="ユーザーの課題"
                       my="lg"
                     />
                     <TextAreaForm

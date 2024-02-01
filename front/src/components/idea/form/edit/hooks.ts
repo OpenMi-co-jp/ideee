@@ -9,14 +9,21 @@ import { useRouter } from 'next/router'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
 
 const IdeaEditFormSchema = z.object({
-  name: z.string().max(50, { message: '名前は50文字以内で入力してください' }),
+  name: z
+    .string()
+    .min(1, { message: '名前を入力してください' })
+    .max(50, { message: '名前は50文字以内で入力してください' }),
   background: z
     .string()
+    .min(1, { message: '背景を入力してください' })
     .max(255, { message: '背景は255文字以内で入力してください' }),
-  goal: z.string().max(255, { message: '目標は255文字以内で入力してください' }),
+  goal: z
+    .string()
+    .min(1, { message: 'ゴールを入力してください' })
+    .max(255, { message: 'ゴールは255文字以内で入力してください' }),
   issue: z
     .string()
-    .max(255, { message: '問題点は255文字以内で入力してください' })
+    .max(255, { message: 'ユーザーの課題は255文字以内で入力してください' })
     .nullish(),
   hypothesis: z
     .string()
@@ -82,6 +89,9 @@ export const UseEditIdea = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
+      console.log('---------start---------')
+      console.log(data)
+      console.log(data.name)
       const response = await updateIdeaMutation({
         variables: {
           input: {
@@ -106,18 +116,18 @@ export const UseEditIdea = () => {
         },
       })
       if (response.data?.updateIdea?.success) {
-        showSuccess({ action: 'ユーザー情報の更新' })
+        showSuccess({ action: 'アイデアの更新' })
         refetch()
         router.push(`/ideas/${response.data.updateIdea.idea?.id}`)
       } else {
         showError({
-          action: 'ユーザー情報の更新',
+          action: 'アイデアの更新',
           message: String(response.data?.updateIdea?.errors),
         })
       }
     } catch (err: any) {
       showError({
-        action: 'ユーザー情報の更新',
+        action: 'アイデアの更新',
         message: err.message as string,
       })
     }

@@ -225,9 +225,14 @@ type CreateIdeaPayload {
   clientMutationId: String
 
   """
+  エラーリスト
+  """
+  errors: [String!]
+
+  """
   アイデアオブジェクト
   """
-  idea: Idea!
+  idea: Idea
 
   """
   成功フラグ
@@ -691,7 +696,7 @@ type Idea {
   """
   権利スタンス
   """
-  stance: Int
+  stance: String
 
   """
   ターゲット
@@ -1211,12 +1216,12 @@ type Tag {
   """
   作成日
   """
-  createdAt: ISO8601DateTime!
+  createdAt: ISO8601DateTime
 
   """
   タグID
   """
-  id: ID!
+  id: ID
 
   """
   タグ名
@@ -1226,7 +1231,7 @@ type Tag {
   """
   更新日
   """
-  updatedAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime
 }
 
 type Team {
@@ -1393,7 +1398,12 @@ input UpdateIdeaInput {
   """
   権利スタンス
   """
-  stance: Int
+  stance: String
+
+  """
+  タグリスト
+  """
+  tagList: [String!]!
 
   """
   ターゲット
@@ -1421,9 +1431,14 @@ type UpdateIdeaPayload {
   clientMutationId: String
 
   """
+  エラーリスト
+  """
+  errors: [String!]
+
+  """
   アイデアオブジェクト
   """
-  idea: Idea!
+  idea: Idea
 
   """
   成功フラグ

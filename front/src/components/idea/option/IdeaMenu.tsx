@@ -2,9 +2,11 @@ import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import { Menu } from '@mantine/core'
 import Link from 'next/link'
 import { useDestroyIdea } from '@/components/idea/useDestroyIdea'
+import { useIdea } from '@/context/IdeaContext'
 
 export const IdeaMenu = () => {
   const { handleDestroyIdea } = useDestroyIdea()
+  const idea = useIdea()
 
   return (
     <Menu shadow="md" width={200} offset={5}>
@@ -14,7 +16,7 @@ export const IdeaMenu = () => {
 
       <Menu.Dropdown>
         <Menu.Label>アイデア管理</Menu.Label>
-        <Link href="/idea/5/edit">
+        <Link href={`/ideas/${idea.id}/edit`}>
           <Menu.Item leftSection={<IconPencil size={14} />}>Edit</Menu.Item>
         </Link>
 

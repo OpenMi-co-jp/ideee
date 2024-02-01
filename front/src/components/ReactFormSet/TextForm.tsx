@@ -8,7 +8,7 @@ import { Controller } from 'react-hook-form'
 type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   label?: string
   name: Path<T>
-  form: UseFormReturn<T, any>
+  form: UseFormReturn<T>
   style?: CSSProperties
   required?: boolean
   disabled?: boolean

@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  # CSRF 対策
+  skip_before_action :verify_authenticity_token, only: %i[create destroy]
+  prepend_before_action :verify_xhr_for_csrf_protection
+
+  prepend_before_action :verify_signed_out_user, only: :destroy
   before_action :underscore_params!, only: %i[create]
   after_action :set_login_cookie, only: %i[create]
-  prepend_before_action :verify_signed_out_user, only: :destroy
   respond_to :json
 
   # POST /resource/sign_in

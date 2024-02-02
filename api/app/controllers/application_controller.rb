@@ -17,12 +17,6 @@ class ApplicationController < ActionController::Base
   #   end
   # end
 
-  # 本番環境でのエラーハンドリング
-  if Rails.env.production?
-    rescue_from StandardError, with: :render500
-    rescue_from ActiveRecord::RecordNotFound, with: :render404
-  end
-
   def render404
     render file: Rails.public_path.join('404.html'), status: :not_found, layout: false, content_type: 'text/html'
   end

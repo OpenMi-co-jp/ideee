@@ -66,5 +66,28 @@ RSpec.describe Mutations::Idea::Update do
         expect(updated_idea_tags.map { |tag| tag['name'] }).to match_array(['tag1', 'tag2'])  
       end
     end
+
+    context 'ideaのユーザー以外の場合更新できない' do
+      let(:other_user) { create(:user) }
+      let(:variables) do
+        {
+          input: {
+            id: idea.id,
+            userId: other_user.id, # Providing a different user ID
+            name: 'updated idea',
+            background: 'updated background',
+            goal: 'updated goal',
+            tagList: ['tag1', 'tag2'],
+          }
+        }
+      end
+
+      it '更新に失敗すること' do
+        graphql_post
+        res = response.parsed_body
+        expect(res['data']['updateIdea']['success']).to be_falsey
+        expect(res['data']['updateIdea']['errors']).to include('ユーザーの権限がありません')
+      end
+    end
   end
 end

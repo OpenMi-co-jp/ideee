@@ -5,6 +5,8 @@ module TwitterJob
     queue_as :default
 
     def perform(idea, url)
+      return unless Rails.env.production?
+
       Twitter.new.tweet(idea, url)
     end
   end

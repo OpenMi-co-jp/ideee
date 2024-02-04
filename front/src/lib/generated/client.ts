@@ -129,8 +129,10 @@ export type CreateIdeaPayload = {
   __typename?: 'CreateIdeaPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** アイデアオブジェクト */
-  idea: Idea
+  idea?: Maybe<Idea>
   /** 成功フラグ */
   success: Scalars['Boolean']
 }
@@ -360,7 +362,7 @@ export type Idea = {
   /** 類似サービス */
   similar?: Maybe<Scalars['String']>
   /** 権利スタンス */
-  stance?: Maybe<Scalars['Int']>
+  stance?: Maybe<Scalars['String']>
   /** ターゲット */
   target?: Maybe<Scalars['String']>
   /** チームオブジェクト */
@@ -639,13 +641,13 @@ export type SortCondition = {
 export type Tag = {
   __typename?: 'Tag'
   /** 作成日 */
-  createdAt: Scalars['ISO8601DateTime']
+  createdAt?: Maybe<Scalars['ISO8601DateTime']>
   /** タグID */
-  id: Scalars['ID']
+  id?: Maybe<Scalars['ID']>
   /** タグ名 */
   name: Scalars['String']
   /** 更新日 */
-  updatedAt: Scalars['ISO8601DateTime']
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']>
 }
 
 export type Team = {
@@ -722,7 +724,9 @@ export type UpdateIdeaInput = {
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */
-  stance?: InputMaybe<Scalars['Int']>
+  stance?: InputMaybe<Scalars['String']>
+  /** タグリスト */
+  tagList: Array<Scalars['String']>
   /** ターゲット */
   target?: InputMaybe<Scalars['String']>
   /** 【必須】ユーザーID */
@@ -736,8 +740,10 @@ export type UpdateIdeaPayload = {
   __typename?: 'UpdateIdeaPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** アイデアオブジェクト */
-  idea: Idea
+  idea?: Maybe<Idea>
   /** 成功フラグ */
   success: Scalars['Boolean']
 }
@@ -947,6 +953,7 @@ export type GetIdeaQuery = {
     target?: string | null
     monetize?: string | null
     similar?: string | null
+    stance?: string | null
     note?: string | null
     createdAt: any
     updatedAt: any
@@ -968,7 +975,11 @@ export type GetIdeaQuery = {
       userId: number
       user: { __typename?: 'User'; name: string; image?: string | null }
     }>
-    ideaTags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null
+    ideaTags?: Array<{
+      __typename?: 'Tag'
+      id?: string | null
+      name: string
+    }> | null
   }
 }
 
@@ -1063,14 +1074,16 @@ export type CreateIdeaMutation = {
   createIdea?: {
     __typename?: 'CreateIdeaPayload'
     success: boolean
-    idea: {
+    errors?: Array<string> | null
+    idea?: {
       __typename?: 'Idea'
       userId: number
+      id: string
       name?: string | null
       background?: string | null
       goal?: string | null
       target?: string | null
-    }
+    } | null
   } | null
 }
 
@@ -1083,14 +1096,25 @@ export type UpdateIdeaMutation = {
   updateIdea?: {
     __typename?: 'UpdateIdeaPayload'
     success: boolean
-    idea: {
+    errors?: Array<string> | null
+    idea?: {
       __typename?: 'Idea'
       id: string
       name?: string | null
       background?: string | null
       goal?: string | null
+      issue?: string | null
+      hypothesis?: string | null
+      monetize?: string | null
+      similar?: string | null
+      stance?: string | null
       target?: string | null
-    }
+      wishFunction?: string | null
+      githubUrl?: string | null
+      productUrl?: string | null
+      draft?: boolean | null
+      icon?: string | null
+    } | null
   } | null
 }
 
@@ -1182,7 +1206,7 @@ export type GetPopularTagsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetPopularTagsQuery = {
   __typename?: 'Query'
-  popularTags: Array<{ __typename?: 'Tag'; id: string; name: string }>
+  popularTags: Array<{ __typename?: 'Tag'; id?: string | null; name: string }>
 }
 
 export type GetTeamQueryVariables = Exact<{
@@ -1696,6 +1720,7 @@ export const GetIdeaDocument = gql`
       target
       monetize
       similar
+      stance
       note
       createdAt
       updatedAt
@@ -2037,12 +2062,14 @@ export const CreateIdeaDocument = gql`
     createIdea(input: $input) {
       idea {
         userId
+        id
         name
         background
         goal
         target
       }
       success
+      errors
     }
   }
 `
@@ -2096,9 +2123,20 @@ export const UpdateIdeaDocument = gql`
         name
         background
         goal
+        issue
+        hypothesis
+        monetize
+        similar
+        stance
         target
+        wishFunction
+        githubUrl
+        productUrl
+        draft
+        icon
       }
       success
+      errors
     }
   }
 `

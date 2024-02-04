@@ -3,6 +3,7 @@ import { SignPath } from '@/components/Auth/SignPath'
 import { PreviewContent } from '@/components/avoidPitfall'
 import { HiddenContent } from '@/components/avoidPitfall'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import classes from '@/styles/mask.module.css'
 
 function AvoidPitfall() {
   const { currentUser } = useCurrentUser()
@@ -11,17 +12,7 @@ function AvoidPitfall() {
     <Container>
       <Paper p="xl" shadow="xl">
         <Container
-          style={{
-            height: '100%',
-            ...(!currentUser
-              ? {
-                  WebkitMaskImage:
-                    'linear-gradient(to bottom, transparent, white 0%, white 0%, transparent)',
-                  maskImage:
-                    'linear-gradient(to right, transparent, white 2%, white 0%, transparent)',
-                }
-              : {}),
-          }}
+          className={currentUser ? classes.container : `${classes.maskImage}`}
         >
           <PreviewContent />
         </Container>

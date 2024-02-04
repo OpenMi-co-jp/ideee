@@ -1,4 +1,5 @@
-import { Title, Text, Space, Paper, Stack } from '@mantine/core'
+import { Title, Space, Paper, Stack } from '@mantine/core'
+import { TextWithLinks } from '@/utils/Text'
 
 export const IdeaContentSet = ({
   label,
@@ -16,7 +17,7 @@ export const IdeaContentSet = ({
         {label}
       </Title>
       <Paper shadow="xs" p="md">
-        <Text>{content}</Text>
+        <TextWithLinks>{content}</TextWithLinks>
       </Paper>
     </Stack>
   )

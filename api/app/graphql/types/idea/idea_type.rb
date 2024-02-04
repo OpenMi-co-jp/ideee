@@ -21,7 +21,7 @@ module Types
     field :github_url, String, description: 'GithubリポジトリURL'
     field :product_url, String, description: '作っているアプリのURL'
     field :similar, String, description: '類似サービス'
-    field :stance, Integer, description: '権利スタンス'
+    field :stance, String, description: '権利スタンス'
     field :target, String, description: 'ターゲット'
     field :view, Integer, description: 'ビュー数'
     field :wish_function, String, description: '欲しい機能'

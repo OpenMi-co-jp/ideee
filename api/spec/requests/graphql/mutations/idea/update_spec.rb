@@ -89,5 +89,27 @@ RSpec.describe Mutations::Idea::Update do
         expect(res['data']['updateIdea']['errors']).to include('ユーザーの権限がありません')
       end
     end
+
+    context 'nameがnullの場合アイディアを更新できない' do
+      let(:variables) do
+        {
+          input: {
+            id: idea.id,
+            userId: current_user.id,
+            name: '', 
+            background: 'updated background',
+            goal: 'updated goal',
+            tagList: ['tag1', 'tag2'],
+          }
+        }
+      end
+
+      it '更新に失敗しレスポンスにエラー内容が含まれること' do
+        graphql_post
+        res = response.parsed_body
+        expect(res['data']['updateIdea']['success']).to be_falsey
+        expect(res['data']['updateIdea']['errors']).to include("アイデア名を入力してください")
+      end
+    end
   end
 end

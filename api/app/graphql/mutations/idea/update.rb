@@ -48,7 +48,7 @@ module Mutations
         )
         idea.save_with_tags!(args[:tag_list])
         {
-          idea: idea,
+          idea: ,
           success: true,
           user: context[:current_user],
           ideaTags: idea.idea_tags

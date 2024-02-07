@@ -49,7 +49,7 @@ module Mutations
         idea_tags = ::Tag.where(name: args[:tag_list])
         {
           idea:,
-          idea_tags: idea_tags,
+          idea_tags:,
           success: true
         }
       else

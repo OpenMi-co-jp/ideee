@@ -744,6 +744,8 @@ export type UpdateIdeaPayload = {
   errors?: Maybe<Array<Scalars['String']>>
   /** アイデアオブジェクト */
   idea?: Maybe<Idea>
+  /** アイデアタグオブジェクト */
+  ideaTags?: Maybe<Array<Tag>>
   /** 成功フラグ */
   success: Scalars['Boolean']
 }
@@ -1130,6 +1132,8 @@ export type UpdateIdeaMutation = {
       productUrl?: string | null
       draft?: boolean | null
       icon?: string | null
+      userId: number
+      ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
     } | null
   } | null
 }
@@ -2157,6 +2161,10 @@ export const UpdateIdeaDocument = gql`
         productUrl
         draft
         icon
+        userId
+        ideaTags {
+          name
+        }
       }
       success
       errors

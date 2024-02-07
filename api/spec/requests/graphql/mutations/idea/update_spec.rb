@@ -16,9 +16,7 @@ RSpec.describe Mutations::Idea::Update do
           name
           background
           goal
-        }
-        user {
-          id
+          userId
         }
         ideaTags {
           name
@@ -54,9 +52,8 @@ RSpec.describe Mutations::Idea::Update do
       it '正しい更新内容が反映されていること' do
         graphql_post
         res = response.parsed_body
-        updated_user = res['data']['updateIdea']['user']
         updated_idea_tags = res['data']['updateIdea']['ideaTags']
-        expect(updated_user['id']).to eq(current_user.id.to_s)
+        expect(res['data']['updateIdea']['idea']['userId']).to eq(current_user.id)
         expect(updated_idea_tags.pluck('name')).to match_array(%w[tag1 tag2])
       end
     end

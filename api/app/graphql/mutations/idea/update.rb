@@ -23,7 +23,6 @@ module Mutations
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラーリスト'
-    field :idea_tags, [Types::TagType], null: true, description: 'アイデアタグオブジェクト'
 
     def resolve(**args)
       if context[:current_user].id == args[:user_id].to_i
@@ -46,10 +45,9 @@ module Mutations
           user_id: context[:current_user].id
         )
         idea.save_with_tags!(args[:tag_list])
-        idea_tags = ::Tag.where(name: args[:tag_list])
+        idea_tags = idea.idea_tags
         {
           idea:,
-          idea_tags:,
           success: true
         }
       else

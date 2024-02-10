@@ -146,10 +146,6 @@ mutation UpdateIdea($input: UpdateIdeaInput!) {
       productUrl
       draft
       icon
-      userId
-      ideaTags {
-        name
-      }
     }
     success
     errors

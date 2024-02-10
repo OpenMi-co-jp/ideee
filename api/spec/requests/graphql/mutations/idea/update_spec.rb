@@ -55,13 +55,13 @@ RSpec.describe Mutations::Idea::Update do
         graphql_post
         res = response.parsed_body
         expect(res['data']['updateIdea']['idea']['userId']).to eq(current_user.id)
-        expect(res['data']['updateIdea']['idea']['ideaTags'].map { |tag| tag['name'] }).to match_array(%w[tag1 tag2])
+        expect(res['data']['updateIdea']['idea']['ideaTags'].pluck('name')).to match_array(%w[tag1 tag2])
       end
     end
 
     context 'ideaの作成者以外のユーザーの場合' do
       let(:other_user) { create(:user) }
-      let(:variables) { base_variables.deep_merge(input: { userId: other_user.id }) }
+      let(:variables)  { base_variables.deep_merge(input: { userId: other_user.id }) }
 
       it '更新に失敗すること' do
         graphql_post

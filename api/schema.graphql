@@ -1441,11 +1441,6 @@ type UpdateIdeaPayload {
   idea: Idea
 
   """
-  アイデアタグオブジェクト
-  """
-  ideaTags: [Tag!]
-
-  """
   成功フラグ
   """
   success: Boolean!

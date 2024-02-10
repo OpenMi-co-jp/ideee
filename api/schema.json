@@ -4590,28 +4590,6 @@
               ]
             },
             {
-              "name": "ideaTags",
-              "description": "アイデアタグオブジェクト",
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Tag",
-                    "ofType": null
-                  }
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
               "name": "success",
               "description": "成功フラグ",
               "type": {

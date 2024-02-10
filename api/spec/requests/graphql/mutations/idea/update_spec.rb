@@ -7,6 +7,19 @@ RSpec.describe Mutations::Idea::Update do
   let(:tokens)       { sign_in(current_user) }
   let(:idea)         { FactoryBot.create(:idea, user: current_user) }
 
+  let(:base_variables) do
+    {
+      input: {
+        id: idea.id,
+        userId: current_user.id,
+        name: 'updated idea',
+        background: 'updated background',
+        goal: 'updated goal',
+        tagList: %w[tag1 tag2]
+      }
+    }
+  end
+
   let(:query) do
     <<-GQL
     mutation UpdateIdea($input: UpdateIdeaInput!) {
@@ -17,9 +30,9 @@ RSpec.describe Mutations::Idea::Update do
           background
           goal
           userId
-        }
-        ideaTags {
-          name
+          ideaTags {
+            name
+          }
         }
         success
         errors
@@ -29,19 +42,8 @@ RSpec.describe Mutations::Idea::Update do
   end
 
   describe 'アイデアの更新' do
-    context 'when ユーザーがideaのユーザーの場合更新できる' do
-      let(:variables) do
-        {
-          input: {
-            id: idea.id,
-            userId: current_user.id,
-            name: 'updated idea',
-            background: 'updated background',
-            goal: 'updated goal',
-            tagList: %w[tag1 tag2]
-          }
-        }
-      end
+    context 'ideaのユーザーの場合' do
+      let(:variables) { base_variables }
 
       it '更新に成功すること' do
         graphql_post
@@ -52,26 +54,14 @@ RSpec.describe Mutations::Idea::Update do
       it '正しい更新内容が反映されていること' do
         graphql_post
         res = response.parsed_body
-        updated_idea_tags = res['data']['updateIdea']['ideaTags']
         expect(res['data']['updateIdea']['idea']['userId']).to eq(current_user.id)
-        expect(updated_idea_tags.pluck('name')).to match_array(%w[tag1 tag2])
+        expect(res['data']['updateIdea']['idea']['ideaTags'].map { |tag| tag['name'] }).to match_array(%w[tag1 tag2])
       end
     end
 
-    context 'when ideaのユーザー以外の場合更新できない' do
+    context 'ideaの作成者以外のユーザーの場合' do
       let(:other_user) { create(:user) }
-      let(:variables) do
-        {
-          input: {
-            id: idea.id,
-            userId: other_user.id,
-            name: 'updated idea',
-            background: 'updated background',
-            goal: 'updated goal',
-            tagList: %w[tag1 tag2]
-          }
-        }
-      end
+      let(:variables) { base_variables.deep_merge(input: { userId: other_user.id }) }
 
       it '更新に失敗すること' do
         graphql_post
@@ -81,19 +71,8 @@ RSpec.describe Mutations::Idea::Update do
       end
     end
 
-    context 'when nameがnullの場合アイディアを更新できない' do
-      let(:variables) do
-        {
-          input: {
-            id: idea.id,
-            userId: current_user.id,
-            name: '',
-            background: 'updated background',
-            goal: 'updated goal',
-            tagList: %w[tag1 tag2]
-          }
-        }
-      end
+    context 'ideaのnameがnullの場合' do
+      let(:variables) { base_variables.deep_merge(input: { name: '' }) }
 
       it '更新に失敗しレスポンスにエラー内容が含まれること' do
         graphql_post

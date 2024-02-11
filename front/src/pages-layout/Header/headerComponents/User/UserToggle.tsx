@@ -1,17 +1,16 @@
 import { Button, Group, Space, Box } from '@mantine/core'
 import { UserMenu } from './UserMenu'
 import Link from 'next/link'
-import { useMediaQuery } from '@mantine/hooks'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const UserToggle = () => {
-  const isMobile = useMediaQuery(`(min-width: 565px)`)
-  const isNarrowScreenMobile = useMediaQuery(`(min-width: 381px)`)
+  const { isMobile, isNarrowScreenMobile } = useBreakPoint()
   const { currentUser } = useCurrentUser()
 
   return (
     <Group>
-      {currentUser && isMobile && <UserMenu />}
+      {currentUser && !isMobile && <UserMenu />}
 
       {(() => {
         if (!currentUser) {
@@ -21,7 +20,7 @@ export const UserToggle = () => {
                 display: 'flex',
               }}
             >
-              {isNarrowScreenMobile && (
+              {!isNarrowScreenMobile && (
                 <Link href="/users/sign_up">
                   <Button
                     variant="gradient"
@@ -32,7 +31,7 @@ export const UserToggle = () => {
                 </Link>
               )}
 
-              {isMobile && (
+              {!isMobile && (
                 <>
                   <Space mx="xs" />
                   <Link href="/users/sign_in">

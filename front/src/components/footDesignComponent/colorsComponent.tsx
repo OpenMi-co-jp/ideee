@@ -1,8 +1,8 @@
-import { Flex, Box, rem } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
+import { Flex, Box } from '@mantine/core'
 
 export const ColorsComponent = () => {
-  const isMobile = useMediaQuery(`(max-width: ${rem(600)})`)
+  const { isMobile } = useBreakPoint()
 
   return (
     <Flex
@@ -12,18 +12,18 @@ export const ColorsComponent = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
       }}
-      ml={isMobile ? '5px' : '-20px'}
+      ml={isMobile ? '-20px' : '5px'}
       w="100%"
     >
       <Box
         style={{
           flex: 1,
-          width: isMobile ? '330px' : '500px',
-          height: isMobile ? '290px' : '445px',
+          width: isMobile ? '500px' : '330px',
+          height: isMobile ? '445px' : '290px',
           borderRadius: '50%',
           background: 'rgba(239, 213, 120, 0.49)',
           top: 0,
-          left: isMobile ? '-5%' : '25px',
+          left: isMobile ? '25px' : '-5%',
           position: 'relative',
           transition: 'all 0.3s',
         }}
@@ -31,13 +31,13 @@ export const ColorsComponent = () => {
       <Box
         style={{
           flex: 1,
-          width: isMobile ? '330px' : '500px',
-          height: isMobile ? '290px' : '445px',
+          width: isMobile ? '500px' : '330px',
+          height: isMobile ? '445px' : '290px',
           borderRadius: '50%',
           background: 'rgba(215, 145, 145, 0.50)',
           position: 'relative',
           top: '50px',
-          left: isMobile ? '-10%' : '-5px',
+          left: isMobile ? '-5px' : '-10%',
         }}
       />
     </Flex>

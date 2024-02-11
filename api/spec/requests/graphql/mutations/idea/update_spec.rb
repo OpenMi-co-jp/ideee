@@ -51,6 +51,12 @@ RSpec.describe Mutations::Idea::Update do
         expect(res['data']['updateIdea']['success']).to be_truthy
       end
 
+      it 'tag_listが含まれること' do
+        graphql_post
+        res = response.parsed_body
+        expect(res['data']['updateIdea']['idea']).to include('ideaTags')
+      end
+
       it '正しい更新内容が反映されていること' do
         graphql_post
         res = response.parsed_body

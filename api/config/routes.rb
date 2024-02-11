@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   end
   post '/graphql', to: 'graphql#execute'
 
+  get '/csrf_token', to: 'csrf_token#show'
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   mount Sidekiq::Web => '/sidekiq'
 end

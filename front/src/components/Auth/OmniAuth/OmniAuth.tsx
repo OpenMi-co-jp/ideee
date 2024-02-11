@@ -1,10 +1,19 @@
 import { Button, Stack } from '@mantine/core'
 import { handleSignIn } from './hooks'
 import { IconBrandX, IconBrandGoogleFilled } from '@tabler/icons-react'
+import { useGetCsrfToken } from '../../../utils/hooks/useGetCsrfToken'
+import { useCallback } from 'react'
 
 export const OmniAuth = () => {
-  const onGoogleLogin = () => handleSignIn({ provider: 'google_oauth2' })
-  const onTwitterLogin = () => handleSignIn({ provider: 'twitter' })
+  const csrfToken = useGetCsrfToken()
+
+  const onGoogleLogin = useCallback(() => {
+    if (csrfToken) handleSignIn({ provider: 'google_oauth2', authenticity_token: csrfToken })
+  }, [csrfToken])
+
+  const onTwitterLogin = useCallback(() => {
+    if (csrfToken) handleSignIn({ provider: 'twitter', authenticity_token: csrfToken })
+  }, [csrfToken])
 
   return (
     <Stack my="xl" gap="lg">

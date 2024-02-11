@@ -8,11 +8,15 @@ export const OmniAuth = () => {
   const csrfToken = useGetCsrfToken()
 
   const onGoogleLogin = useCallback(() => {
-    if (csrfToken) handleSignIn({ provider: 'google_oauth2', authenticity_token: csrfToken })
+    if (csrfToken) {
+      handleSignIn({ provider: 'google_oauth2', authenticity_token: csrfToken })
+    }
   }, [csrfToken])
 
   const onTwitterLogin = useCallback(() => {
-    if (csrfToken) handleSignIn({ provider: 'twitter', authenticity_token: csrfToken })
+    if (csrfToken) {
+      handleSignIn({ provider: 'twitter', authenticity_token: csrfToken })
+    }
   }, [csrfToken])
 
   return (

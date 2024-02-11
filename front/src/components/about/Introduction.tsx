@@ -1,15 +1,5 @@
 import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
-import {
-  Title,
-  Text,
-  Center,
-  Image,
-  Grid,
-  Flex,
-  Space,
-  rem,
-} from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
+import { Title, Text, Center, Image, Grid, Flex, Space } from '@mantine/core'
 
 export const Introduction = () => {
   const { isMobile } = useBreakPoint()

@@ -148,7 +148,7 @@ class User < ApplicationRecord
       exp: Time.now.to_i + 1.week.to_i
     }
 
-    secret_key = Rails.application.secrets.secret_key_base
+    secret_key = Rails.application.credentials.secret_key_base
 
     token = JWT.encode(payload, secret_key, 'HS256')
     "Bearer #{token}"

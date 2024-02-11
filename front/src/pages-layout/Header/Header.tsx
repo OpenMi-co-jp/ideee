@@ -9,13 +9,13 @@ import {
   Sidebar,
 } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
-import { useMediaQuery } from '@mantine/hooks'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 
 export const Header: FC = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
-  const isMobile = useMediaQuery('(max-width: 48em)')
+  const { isMobile } = useBreakPoint()
   const { currentUser } = useCurrentUser()
 
   return (
@@ -42,8 +42,8 @@ export const Header: FC = () => {
             <SearchIcon />
             {currentUser && <Notification />}
             <UserToggle />
-            {currentUser && !isMobile && <IdeaCreateButton />}
-            {isMobile && <Sidebar />}
+            {currentUser && isMobile && <IdeaCreateButton />}
+            {!isMobile && <Sidebar />}
           </Group>
         </Group>
       </Box>

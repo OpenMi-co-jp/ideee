@@ -1,8 +1,8 @@
 import { Image } from '@mantine/core'
 import Link from 'next/link'
-import { useMediaQuery } from '@mantine/hooks'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 export const ServiceIcon = () => {
-  const isMobile = useMediaQuery(`(max-width: 550px)`)
+  const { isMobile } = useBreakPoint()
   return (
     <Link href="/">
       <Image

@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   include ActionController::RequestForgeryProtection
 
+  prepend_before_action :valid_allowed_request_origin
   # before_action :store_user_location!, if: :storable_location?
   # before_action :get_notifications, if: :defined_user?
   protect_from_forgery with: :exception
@@ -75,5 +76,24 @@ class ApplicationController < ActionController::Base
     return if request.xhr?
 
     render json: { message: '操作が許可されていません。' }, status: :forbidden
+  end
+
+  # NOTE:
+  # RequestForgeryProtection#valid_request_origin? を拡張したチェックをしている
+  # ※ 許可する origin は cors.rb に揃える
+  #
+  # 拡張している理由は以下。
+  # - API モードのため、別 origin だと RequestForgeryProtection#valid_request_origin? が必ず false になる
+  # - このため、 config.action_controller.forgery_protection_origin_check = false としている
+  # - これだと CSRF 検証のなかでは origin チェックが全くされなくなる
+  # - それは避けたいため、別 origin でも cors.rb で許可している origin だけ許容するようにしたい
+  def valid_allowed_request_origin
+    return if request.get? || request.head?
+    return if valid_request_origin?
+    return if request.origin.in?(%w[http://localhost:3010 https://ideee.vercel.app])
+    return if request.origin.match?(/ideee-(.*)-narucel\.vercel\.app/)
+
+    render json: { message: "HTTP Origin header (#{request.origin}) didn't match request.base_url (#{request.base_url})" },
+           status: :forbidden
   end
 end

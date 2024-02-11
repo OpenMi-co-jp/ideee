@@ -51,7 +51,7 @@ const UserEditFormSchema = z.object({
     z.literal(''),
   ]),
   icon: base64ImageValidation(
-    'アイコンはBase64形式の文字列である必要があります'
+    '登録できない画像形式です。別の形式でもう一度お試しください。'
   ),
 })
 

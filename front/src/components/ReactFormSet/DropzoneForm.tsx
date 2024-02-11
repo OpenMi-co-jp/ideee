@@ -25,7 +25,7 @@ type DropzoneFormProps<T extends FieldValues> = {
   required?: boolean
   disabled?: boolean
   style?: CSSProperties
-  fetchName?: Path<T>
+  existingImagePath?: Path<T>
 }
 
 export const DropzoneForm = <T extends FieldValues>({
@@ -34,17 +34,19 @@ export const DropzoneForm = <T extends FieldValues>({
   label,
   name,
   style,
-  fetchName,
+  existingImagePath,
   ...rest
 }: DropzoneFormProps<T>) => {
   const [files, setFiles] = useState<FileWithPath[]>([])
   const [existingImage, setExistingImage] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!fetchName) return
-    const value = form.getValues(fetchName)
+    console.log('existingImagePath', existingImagePath)
+    if (!existingImagePath) return
+    const value = form.getValues(existingImagePath)
+    console.log('existingImagePath', value)
     setExistingImage(typeof value === 'string' ? value : null)
-  }, [form, fetchName])
+  }, [form, existingImagePath])
 
   const imageUrl =
     files.length > 0 ? URL.createObjectURL(files[0]) : existingImage
@@ -78,25 +80,28 @@ export const DropzoneForm = <T extends FieldValues>({
 
   const handleError = useCallback(
     (rejectedFiles: FileRejection[]) => {
-      if (rejectedFiles.length > 0) {
-        form.setError(name, {
-          type: 'manual',
-          message: 'ファイルサイズが大きすぎます。最大3MBまでです。',
-        })
-      }
+      const message =
+        rejectedFiles[0]?.errors[0]?.message ||
+        'ファイルのアップロードに失敗しました。'
+      form.setError(name, {
+        type: 'manual',
+        message: message,
+      })
     },
     [form, name]
   )
 
   const preview = imageUrl && (
-    <Image
-      height={150}
-      width={150}
-      radius="50%"
-      style={{ maxWidth: 150, maxHeight: 150 }}
-      alt={label}
-      src={imageUrl}
-    />
+    <Center mb={10}>
+      <Image
+        height={150}
+        width={150}
+        radius="50%"
+        style={{ maxWidth: 150, maxHeight: 150 }}
+        alt={label}
+        src={imageUrl}
+      />
+    </Center>
   )
 
   return (
@@ -105,7 +110,7 @@ export const DropzoneForm = <T extends FieldValues>({
       control={form.control}
       render={({ fieldState: { error } }) => (
         <div>
-          <Center mb={10}>{preview}</Center>
+          {preview}
           {(form.formState.errors[name]?.message || error?.message) && (
             <Text c="red" size="sm">
               {form.formState.errors[name]?.message?.toString() ||

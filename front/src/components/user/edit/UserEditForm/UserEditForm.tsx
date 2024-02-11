@@ -57,7 +57,7 @@ export const Form = () => {
             <DropzoneForm
               form={form}
               name="icon"
-              fetchName="image"
+              existingImagePath="image"
               label="ユーザーアイコン"
             />
           </Grid.Col>

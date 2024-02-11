@@ -195,7 +195,8 @@ class User < ApplicationRecord
   end
 
   def image
-    self.icon&.url || self.remote_url
+    # urlメソッドを上書きしたので file.present? でファイルの有無を確認する
+    self.icon.file.present? ? self.icon&.url : self.remote_url
   end
 
   private

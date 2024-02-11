@@ -16,12 +16,18 @@ const UserEditFormSchema = z.object({
     .max(200, { message: '自己紹介は200文字以内で入力してください' })
     .nullish(),
   definition: z.string({ invalid_type_error: 'タイプを選択してください' }),
-  twitterId: z.string().regex(/^[a-zA-Z0-9_]*$/, {
-    message: '英数字またはアンダースコアで入力してください',
-  }),
-  githubId: z.string().regex(/^[a-zA-Z0-9-]*$/, {
-    message: '英数字またはハイフンで入力してください',
-  }),
+  twitterId: z
+    .string()
+    .regex(/^[a-zA-Z0-9_]*$/, {
+      message: '英数字またはアンダースコアで入力してください',
+    })
+    .nullish(),
+  githubId: z
+    .string()
+    .regex(/^[a-zA-Z0-9-]*$/, {
+      message: '英数字またはハイフンで入力してください',
+    })
+    .nullish(),
   siteUrl: z.union([
     z.string().url({ message: 'URLの形式で入力してください' }).nullish(),
     z.literal(''),

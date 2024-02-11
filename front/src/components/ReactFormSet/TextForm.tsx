@@ -8,12 +8,13 @@ import { Controller } from 'react-hook-form'
 type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   label?: string
   name: Path<T>
-  form: UseFormReturn<T, any>
+  form: UseFormReturn<T>
   style?: CSSProperties
   required?: boolean
   disabled?: boolean
   searchIcon?: boolean
   leftSection?: React.ReactNode
+  placeholder?: string
 }
 
 // react-hook-form対応済みのMantineのInputText
@@ -26,6 +27,7 @@ export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
     required,
     searchIcon,
     leftSection,
+    placeholder,
     style,
     ...rest
   } = props
@@ -37,6 +39,7 @@ export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
         return (
           <MantineTextInput
             leftSection={searchIcon ? <IconSearch /> : leftSection || undefined}
+            placeholder={placeholder}
             {...field}
             {...rest}
             {...{ style, label, disabled }}

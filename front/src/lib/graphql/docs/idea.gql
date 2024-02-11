@@ -11,6 +11,7 @@ query GetIdea($id: ID!) {
     target
     monetize
     similar
+    stance
 		note
     createdAt
     updatedAt
@@ -116,12 +117,14 @@ mutation CreateIdea($input: CreateIdeaInput!) {
   createIdea(input: $input) {
     idea {
       userId
+      id
       name
       background
       goal
       target
     }
     success
+    errors
   }
 }
 
@@ -132,9 +135,20 @@ mutation UpdateIdea($input: UpdateIdeaInput!) {
       name
       background
       goal
+      issue
+      hypothesis
+      monetize
+      similar
+      stance
       target
+      wishFunction
+      githubUrl
+      productUrl
+      draft
+      icon
     }
     success
+    errors
   }
 }
 

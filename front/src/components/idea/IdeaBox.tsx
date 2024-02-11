@@ -5,7 +5,7 @@ import { IdeaBoxType } from '@/types/idea'
 
 export const IdeaBox: FC<IdeaBoxType> = ({ id, name, user }) => {
   return (
-    <Link href={`/idea/${id}`}>
+    <Link href={`/ideas/${id}`}>
       <Paper shadow="md" radius="md" p="md" withBorder>
         <Flex justify="center" direction="row" wrap="wrap" gap="md">
           <Avatar

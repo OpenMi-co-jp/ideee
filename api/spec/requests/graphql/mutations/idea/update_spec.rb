@@ -22,22 +22,22 @@ RSpec.describe Mutations::Idea::Update do
 
   let(:query) do
     <<-GQL
-    mutation UpdateIdea($input: UpdateIdeaInput!) {
-      updateIdea(input: $input) {
-        idea {
-          id
-          name
-          background
-          goal
-          userId
-          ideaTags {
+      mutation UpdateIdea($input: UpdateIdeaInput!) {
+        updateIdea(input: $input) {
+          idea {
+            id
             name
+            background
+            goal
+            userId
+            ideaTags {
+              name
+            }
           }
+          success
+          errors
         }
-        success
-        errors
       }
-    }
     GQL
   end
 

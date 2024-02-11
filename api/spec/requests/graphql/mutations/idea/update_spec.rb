@@ -5,7 +5,7 @@ RSpec.describe Mutations::Idea::Update do
 
   let(:current_user) { create(:user) }
   let(:tokens)       { sign_in(current_user) }
-  let(:idea)         { FactoryBot.create(:idea, user: current_user) }
+  let(:idea)         { create(:idea, user: current_user) }
 
   let(:base_variables) do
     {

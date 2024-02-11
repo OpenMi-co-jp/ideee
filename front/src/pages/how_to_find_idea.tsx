@@ -15,11 +15,9 @@ import {
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
 import Link from 'next/link'
 import { FC, ReactNode } from 'react'
-import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 
+// TODO: 画像をS3にアップロードしてファイルとして持たない
 const HowToFindIdea = () => {
-  const { isMobile } = useBreakPoint()
-
   const TextBox: FC<{ children: ReactNode; style?: React.CSSProperties }> = ({
     children,
     style,

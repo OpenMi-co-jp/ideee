@@ -11,7 +11,7 @@ export const useGetCsrfToken = () => {
       baseURL: process.env.NEXT_PUBLIC_API_URL,
       withCredentials: true,
     })
-    client.get('/csrf_token').then((response) => {
+    client.post('/csrf_token').then((response) => {
       setCsrfToken(response.data.csrf_token)
     })
   }, [csrfToken])

@@ -89,6 +89,7 @@ class ApplicationController < ActionController::Base
   def valid_allowed_request_origin
     return if request.get? || request.head?
     return if valid_request_origin?
+    # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)
     return if request.origin.in?(%w[http://localhost:3010 https://ideee.vercel.app])
     return if request.origin.match?(/ideee-(.*)-narucel\.vercel\.app/)
 

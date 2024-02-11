@@ -7,9 +7,9 @@ export const useGetCsrfToken = () => {
   useEffect(() => {
     const client = axios.create({
       baseURL: process.env.NEXT_PUBLIC_API_URL,
-      withCredentials: true
+      withCredentials: true,
     })
-    client.get('/csrf_token').then(response => {
+    client.get('/csrf_token').then((response) => {
       setCsrfToken(response.data.csrf_token)
     })
   }, [])

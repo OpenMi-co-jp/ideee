@@ -1,7 +1,7 @@
 import { Button, Stack } from '@mantine/core'
 import { handleSignIn } from './hooks'
 import { IconBrandX, IconBrandGoogleFilled } from '@tabler/icons-react'
-import { useGetCsrfToken } from '../../../utils/hooks/useGetCsrfToken'
+import { useGetCsrfToken } from '@/utils/hooks/useGetCsrfToken'
 import { useCallback } from 'react'
 
 export const OmniAuth = () => {

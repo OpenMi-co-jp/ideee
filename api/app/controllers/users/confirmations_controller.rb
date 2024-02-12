@@ -12,7 +12,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   #   super
   # end
 
-  # POST users/confirmation
+  # POST /users/confirmation
   def create
     user = User.send_confirmation_instructions(create_params)
 

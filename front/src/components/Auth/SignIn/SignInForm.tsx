@@ -56,7 +56,8 @@ export const SignInForm: CustomNextPage = () => {
     } else {
       showError({
         action: actionName,
-        message: '既に確認済みの場合はログインしてください。未確認の場合は再度確認用メールを送信してください。'
+        message:
+          '既に確認済みの場合はログインしてください。未確認の場合は再度確認用メールを送信してください。',
       })
     }
   }, [router])

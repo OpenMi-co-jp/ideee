@@ -67,7 +67,7 @@ class User < ApplicationRecord
   enum definition: {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
-  mount_uploader :icon, ImageUploader
+  mount_base64_uploader :icon, ImageUploader
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
@@ -195,7 +195,8 @@ class User < ApplicationRecord
   end
 
   def image
-    self.icon&.url || self.remote_url
+    # urlメソッドを上書きしたので file.present? でファイルの有無を確認する
+    self.icon.file.present? ? self.icon&.url : self.remote_url
   end
 
   private

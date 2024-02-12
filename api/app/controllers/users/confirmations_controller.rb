@@ -15,7 +15,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # GET /users/confirmation?confirmation_token=abcdef
   def show
     user = User.confirm_by_token(params[:confirmation_token])
-    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in?confirmed=#{user.valid?}"
+    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in?confirmed=#{user.errors.empty?}"
   end
 
   # POST /users/confirmation

@@ -47,6 +47,8 @@ export const SignInForm: CustomNextPage = () => {
   }, [currentUser, router])
 
   useEffect(() => {
+    if (!router.isReady) return
+
     const { confirmed } = router.query
     if (confirmed === undefined) return
 
@@ -60,7 +62,7 @@ export const SignInForm: CustomNextPage = () => {
           '既に確認済みの場合はログインしてください。未確認の場合は再度確認用メールを送信してください。',
       })
     }
-  }, [router])
+  }, [router, router.isReady])
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

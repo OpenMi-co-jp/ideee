@@ -8,7 +8,7 @@ export const useGetCsrfToken = () => {
     if (csrfToken) return
 
     client.post('/csrf_token').then((response) => {
-      setCsrfToken(response.data.csrf_token)
+      setCsrfToken(response.headers['x-csrf-token'])
     })
   }, [csrfToken])
 

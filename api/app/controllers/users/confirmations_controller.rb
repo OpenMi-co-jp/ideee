@@ -29,9 +29,10 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   end
 
   # GET /users/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
+  def show
+    user = User.confirm_by_token(params[:confirmation_token])
+    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in?confirmed=#{user.errors.empty?}"
+  end
 
   # protected
 

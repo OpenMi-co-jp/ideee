@@ -88,7 +88,8 @@ class ApplicationController < ActionController::Base
   #       - それは避けたいため、別 origin でも cors.rb で許可している origin だけ許容するようにしたい
   def valid_allowed_request_origin
     return if request.get? || request.head?
-    return if valid_request_origin?
+    # CsrfTokenController では、 valid_request_origin? が必ず true になり、別 origin からのリクエストしかないため
+    return if valid_request_origin? && controller_name != 'csrf_token'
     # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)
     return if request.origin.in?(%w[http://localhost:3000 https://ideee.vercel.app])
     return if request.origin.match?(/ideee-(.*)-narucel\.vercel\.app/)

@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
     return if request.get? || request.head?
     return if valid_request_origin?
     # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)
-    return if request.origin.in?(%w[http://localhost:3010 https://ideee.vercel.app])
+    return if request.origin.in?(%w[http://localhost:3000 https://ideee.vercel.app])
     return if request.origin.match?(/ideee-(.*)-narucel\.vercel\.app/)
 
     render json: { message: "HTTP Origin header (#{request.origin}) didn't match request.base_url (#{request.base_url})" },

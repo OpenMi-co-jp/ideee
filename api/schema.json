@@ -1931,8 +1931,8 @@
               ]
             },
             {
-              "name": "icon",
-              "description": "アイコン",
+              "name": "iconUrl",
+              "description": "アイコンURL",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",

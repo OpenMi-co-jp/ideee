@@ -335,8 +335,8 @@ export type Idea = {
   goal?: Maybe<Scalars['String']>
   /** 仮説 */
   hypothesis?: Maybe<Scalars['String']>
-  /** アイコン */
-  icon?: Maybe<Scalars['String']>
+  /** アイコンURL */
+  iconUrl?: Maybe<Scalars['String']>
   /** アイデアID */
   id: Scalars['ID']
   /** タグオブジェクト */
@@ -944,7 +944,7 @@ export type GetIdeaQuery = {
     __typename?: 'Idea'
     id: string
     name?: string | null
-    icon?: string | null
+    iconUrl?: string | null
     background?: string | null
     goal?: string | null
     issue?: string | null
@@ -1113,7 +1113,7 @@ export type UpdateIdeaMutation = {
       githubUrl?: string | null
       productUrl?: string | null
       draft?: boolean | null
-      icon?: string | null
+      iconUrl?: string | null
     } | null
   } | null
 }
@@ -1711,7 +1711,7 @@ export const GetIdeaDocument = gql`
     idea(id: $id) {
       id
       name
-      icon
+      iconUrl
       background
       goal
       issue
@@ -2133,7 +2133,7 @@ export const UpdateIdeaDocument = gql`
         githubUrl
         productUrl
         draft
-        icon
+        iconUrl
       }
       success
       errors

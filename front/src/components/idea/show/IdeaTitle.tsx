@@ -14,7 +14,7 @@ export const IdeaTitle = () => {
       wrap="wrap"
     >
       <Title order={1}>{idea?.name}</Title>
-      {idea?.iconUrl && <IdeaImage src={idea?.iconUrl} />}
+      {idea?.iconUrl && <IdeaImage src={idea.iconUrl} />}
     </Flex>
   )
 }

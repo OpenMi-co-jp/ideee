@@ -1,5 +1,4 @@
 import {
-  Image,
   Radio,
   Group,
   Paper,
@@ -12,16 +11,22 @@ import {
   getGradient,
 } from '@mantine/core'
 import { IconBulb, IconBrandGithub, IconApps } from '@tabler/icons-react'
-import { TextForm, TextAreaForm, TagsForm } from '@/components/ReactFormSet'
+import {
+  TextForm,
+  TextAreaForm,
+  TagsForm,
+  DropzoneForm,
+} from '@/components/ReactFormSet'
 import { UseEditIdea } from './hooks'
 import { Controller } from 'react-hook-form'
+import { IdeaImage } from '@/components/image'
 
 export const EditForm = () => {
   const { form, onSubmit } = UseEditIdea()
 
   return (
     <Paper p={rem(40)}>
-      <Title order={2} mb={30} fw={500} ta="center">
+      <Title order={2} mb={20} fw={500} ta="center">
         アイデア編集
       </Title>
       <Grid grow>
@@ -33,6 +38,12 @@ export const EditForm = () => {
           }}
         >
           <form onSubmit={form.handleSubmit(onSubmit)} role="form">
+            <DropzoneForm
+              form={form}
+              name="icon"
+              existingImagePath="image"
+              ImageComponent={IdeaImage}
+            />
             <Paper bg="#FCFCFC" radius="md" p="xl">
               <TextForm
                 form={form}

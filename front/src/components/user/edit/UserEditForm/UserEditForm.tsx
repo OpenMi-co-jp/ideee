@@ -12,6 +12,7 @@ import { TextForm, TextAreaForm, DropzoneForm } from '@/components/ReactFormSet'
 import { IconBrandX, IconBrandGithub, IconLink } from '@tabler/icons-react'
 import { UpdateUser } from './hooks'
 import { useEffect } from 'react'
+import { UserImage } from '@/components/image'
 
 export const Form = () => {
   const { form, onSubmit, error, loading } = UpdateUser()
@@ -58,7 +59,7 @@ export const Form = () => {
               form={form}
               name="icon"
               existingImagePath="image"
-              label="ユーザーアイコン"
+              ImageComponent={UserImage}
             />
           </Grid.Col>
           <Grid.Col span={7}>

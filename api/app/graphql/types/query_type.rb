@@ -27,5 +27,7 @@ module Types
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'
 
     field :likes, resolver: Resolvers::Like::LikesResolver, description: 'ユーザーのいいね一覧'
+
+    field :notification_config, resolver: Resolvers::NotificationConfig::NotificationConfigResolver, description: '通知設定'
   end
 end

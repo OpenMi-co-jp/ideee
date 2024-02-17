@@ -977,6 +977,23 @@ type Notification {
   visitorId: Int
 }
 
+type NotificationConfig {
+  commentEmail: Boolean!
+  commentWeb: Boolean!
+  draftRemindEmail: Boolean!
+  eventEmail: Boolean!
+  heartEmail: Boolean!
+  heartToCommentWeb: Boolean!
+  heartWeb: Boolean!
+  id: ID!
+  teamJoinEmail: Boolean!
+  teamJoinWeb: Boolean!
+  teamMessageEmail: Boolean!
+  userId: ID!
+  voteWeb: Boolean!
+  weeklyEmail: Boolean!
+}
+
 type Pagination {
   """
   現在のページ
@@ -1094,6 +1111,11 @@ type Query {
   ユーザーのいいね一覧
   """
   likes: [Like!]!
+
+  """
+  通知設定
+  """
+  notificationConfig(userId: ID!): NotificationConfig!
 
   """
   通知一覧

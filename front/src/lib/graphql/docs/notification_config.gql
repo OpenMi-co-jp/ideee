@@ -1,0 +1,17 @@
+query GetNotificationConfig($userId:ID!){
+  notificationConfig(userId: $userId){
+    userId
+    commentEmail
+    commentWeb
+    draftRemindEmail
+    eventEmail
+    heartEmail
+    heartToCommentWeb
+    heartWeb
+    teamJoinEmail
+    teamJoinWeb
+    teamMessageEmail
+    voteWeb
+    weeklyEmail
+  }
+}

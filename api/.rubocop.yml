@@ -252,7 +252,3 @@ RSpec/MultipleExpectations:
 # describe, context ブロックなど）内での let または let! の使用回数を制限しない
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
-
-# インスタンス変数を使用できるように設定
-RSpec/InstanceVariable:
-  Enabled: false

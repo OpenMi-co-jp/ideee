@@ -16,6 +16,7 @@ export const IdeaNotFound = () => {
             variant="gradient"
             gradient={{ from: 'yellow', to: 'orange' }}
             m="lg"
+            component="a"
           >
             アイデア投稿してみる
           </Button>

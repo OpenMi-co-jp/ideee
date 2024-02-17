@@ -40,35 +40,34 @@ RSpec.describe Mutations::Idea::Create do
     GQL
   end
 
-  before do
-    graphql_post
-    @res = response.parsed_body['data']['createIdea']
-  end
+  before { graphql_post }
 
-  describe 'アイデアの更新' do
+  let(:response_data) { response.parsed_body['data']['createIdea'] }
+
+  describe 'アイデアの作成' do
     context 'ideaのユーザーの場合' do
       let(:variables) { base_variables }
 
-      it '更新に成功すること' do
-        expect(@res['success']).to be_truthy
+      it '作成に成功すること' do
+        expect(response_data['success']).to be_truthy
       end
 
       it 'tag_listが含まれること' do
-        expect(@res['idea']).to include('ideaTags')
+        expect(response_data['idea']).to include('ideaTags')
       end
 
-      it '正しい更新内容が反映されていること' do
-        expect(@res['idea']['userId']).to eq(current_user.id)
-        expect(@res['idea']['ideaTags'].pluck('name')).to match_array(%w[tag1 tag2])
+      it '正しい作成内容が反映されていること' do
+        expect(response_data['idea']['userId']).to eq(current_user.id)
+        expect(response_data['idea']['ideaTags'].pluck('name')).to match_array(%w[tag1 tag2])
       end
     end
 
     context 'ideaのnameがnullの場合' do
       let(:variables) { base_variables.deep_merge(input: { name: '' }) }
 
-      it '更新に失敗しレスポンスにエラー内容が含まれること' do
-        expect(@res['success']).to be_falsey
-        expect(@res['errors']).to include('アイデア名を入力してください')
+      it '作成に失敗しレスポンスにエラー内容が含まれること' do
+        expect(response_data['success']).to be_falsey
+        expect(response_data['errors']).to include('アイデア名を入力してください')
       end
     end
   end

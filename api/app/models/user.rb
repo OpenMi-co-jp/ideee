@@ -210,7 +210,7 @@ class User < ApplicationRecord
     save!
   end
 
-  def get_notification_config
+  def notification_config
     notification_config
   end
 

@@ -16,8 +16,8 @@ module Mutations
     argument :vote_web, Boolean, required: true, description: '投票通知'
     argument :team_join_web, Boolean, required: true, description: 'チーム参加通知'
 
-    field :notification_config, Types::NotificationConfigType, null: false
-    field :success, Boolean, null: false
+    field :notification_config, Types::NotificationConfigType, null: false, description: '通知設定'
+    field :success, Boolean, null: false, description: '成功'
     field :errors, [String], null: true, description: 'エラー'
 
     def resolve(**args)

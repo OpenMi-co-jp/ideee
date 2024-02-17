@@ -1253,6 +1253,30 @@ export type GetNotificationsQuery = {
   }>
 }
 
+export type GetNotificationConfigQueryVariables = Exact<{
+  userId: Scalars['ID']
+}>
+
+export type GetNotificationConfigQuery = {
+  __typename?: 'Query'
+  notificationConfig: {
+    __typename?: 'NotificationConfig'
+    userId: string
+    commentEmail: boolean
+    commentWeb: boolean
+    draftRemindEmail: boolean
+    eventEmail: boolean
+    heartEmail: boolean
+    heartToCommentWeb: boolean
+    heartWeb: boolean
+    teamJoinEmail: boolean
+    teamJoinWeb: boolean
+    teamMessageEmail: boolean
+    voteWeb: boolean
+    weeklyEmail: boolean
+  }
+}
+
 export type UpdateNotificationConfigMutationVariables = Exact<{
   input: UpdateNotificationConfigInput
 }>
@@ -1278,30 +1302,6 @@ export type UpdateNotificationConfigMutation = {
       weeklyEmail: boolean
     }
   } | null
-}
-
-export type GetNotificationConfigQueryVariables = Exact<{
-  userId: Scalars['ID']
-}>
-
-export type GetNotificationConfigQuery = {
-  __typename?: 'Query'
-  notificationConfig: {
-    __typename?: 'NotificationConfig'
-    userId: string
-    commentEmail: boolean
-    commentWeb: boolean
-    draftRemindEmail: boolean
-    eventEmail: boolean
-    heartEmail: boolean
-    heartToCommentWeb: boolean
-    heartWeb: boolean
-    teamJoinEmail: boolean
-    teamJoinWeb: boolean
-    teamMessageEmail: boolean
-    voteWeb: boolean
-    weeklyEmail: boolean
-  }
 }
 
 export type GetRoomQueryVariables = Exact<{
@@ -2576,71 +2576,6 @@ export type GetNotificationsQueryResult = Apollo.QueryResult<
   GetNotificationsQuery,
   GetNotificationsQueryVariables
 >
-export const UpdateNotificationConfigDocument = gql`
-  mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!) {
-    updateNotificationConfig(input: $input) {
-      success
-      notificationConfig {
-        commentEmail
-        commentWeb
-        draftRemindEmail
-        eventEmail
-        heartEmail
-        heartToCommentWeb
-        heartWeb
-        teamJoinEmail
-        teamJoinWeb
-        teamMessageEmail
-        voteWeb
-        weeklyEmail
-      }
-    }
-  }
-`
-export type UpdateNotificationConfigMutationFn = Apollo.MutationFunction<
-  UpdateNotificationConfigMutation,
-  UpdateNotificationConfigMutationVariables
->
-
-/**
- * __useUpdateNotificationConfigMutation__
- *
- * To run a mutation, you first call `useUpdateNotificationConfigMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateNotificationConfigMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateNotificationConfigMutation, { data, loading, error }] = useUpdateNotificationConfigMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateNotificationConfigMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateNotificationConfigMutation,
-    UpdateNotificationConfigMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<
-    UpdateNotificationConfigMutation,
-    UpdateNotificationConfigMutationVariables
-  >(UpdateNotificationConfigDocument, options)
-}
-export type UpdateNotificationConfigMutationHookResult = ReturnType<
-  typeof useUpdateNotificationConfigMutation
->
-export type UpdateNotificationConfigMutationResult =
-  Apollo.MutationResult<UpdateNotificationConfigMutation>
-export type UpdateNotificationConfigMutationOptions =
-  Apollo.BaseMutationOptions<
-    UpdateNotificationConfigMutation,
-    UpdateNotificationConfigMutationVariables
-  >
 export const GetNotificationConfigDocument = gql`
   query GetNotificationConfig($userId: ID!) {
     notificationConfig(userId: $userId) {
@@ -2711,6 +2646,71 @@ export type GetNotificationConfigQueryResult = Apollo.QueryResult<
   GetNotificationConfigQuery,
   GetNotificationConfigQueryVariables
 >
+export const UpdateNotificationConfigDocument = gql`
+  mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!) {
+    updateNotificationConfig(input: $input) {
+      success
+      notificationConfig {
+        commentEmail
+        commentWeb
+        draftRemindEmail
+        eventEmail
+        heartEmail
+        heartToCommentWeb
+        heartWeb
+        teamJoinEmail
+        teamJoinWeb
+        teamMessageEmail
+        voteWeb
+        weeklyEmail
+      }
+    }
+  }
+`
+export type UpdateNotificationConfigMutationFn = Apollo.MutationFunction<
+  UpdateNotificationConfigMutation,
+  UpdateNotificationConfigMutationVariables
+>
+
+/**
+ * __useUpdateNotificationConfigMutation__
+ *
+ * To run a mutation, you first call `useUpdateNotificationConfigMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateNotificationConfigMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateNotificationConfigMutation, { data, loading, error }] = useUpdateNotificationConfigMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateNotificationConfigMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateNotificationConfigMutation,
+    UpdateNotificationConfigMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    UpdateNotificationConfigMutation,
+    UpdateNotificationConfigMutationVariables
+  >(UpdateNotificationConfigDocument, options)
+}
+export type UpdateNotificationConfigMutationHookResult = ReturnType<
+  typeof useUpdateNotificationConfigMutation
+>
+export type UpdateNotificationConfigMutationResult =
+  Apollo.MutationResult<UpdateNotificationConfigMutation>
+export type UpdateNotificationConfigMutationOptions =
+  Apollo.BaseMutationOptions<
+    UpdateNotificationConfigMutation,
+    UpdateNotificationConfigMutationVariables
+  >
 export const GetRoomDocument = gql`
   query GetRoom($id: ID!) {
     room(id: $id) {

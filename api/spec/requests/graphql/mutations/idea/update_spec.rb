@@ -6,6 +6,7 @@ RSpec.describe Mutations::Idea::Update do
   let(:current_user) { create(:user) }
   let(:tokens)       { sign_in(current_user) }
   let(:idea)         { create(:idea, user: current_user) }
+  let(:other_user)   { create(:user) }
 
   let(:base_variables) do
     {
@@ -15,6 +16,7 @@ RSpec.describe Mutations::Idea::Update do
         name: 'updated idea',
         background: 'updated background',
         goal: 'updated goal',
+        stance: 'free_right',
         tagList: %w[tag1 tag2]
       }
     }
@@ -41,39 +43,35 @@ RSpec.describe Mutations::Idea::Update do
     GQL
   end
 
+  before do
+    graphql_post
+    @res = response.parsed_body['data']['updateIdea']
+  end
+
   describe 'アイデアの更新' do
     context 'ideaのユーザーの場合' do
       let(:variables) { base_variables }
 
       it '更新に成功すること' do
-        graphql_post
-        res = response.parsed_body
-        expect(res['data']['updateIdea']['success']).to be_truthy
+        expect(@res['success']).to be_truthy
       end
 
       it 'tag_listが含まれること' do
-        graphql_post
-        res = response.parsed_body
-        expect(res['data']['updateIdea']['idea']).to include('ideaTags')
+        expect(@res['idea']).to include('ideaTags')
       end
 
       it '正しい更新内容が反映されていること' do
-        graphql_post
-        res = response.parsed_body
-        expect(res['data']['updateIdea']['idea']['userId']).to eq(current_user.id)
-        expect(res['data']['updateIdea']['idea']['ideaTags'].pluck('name')).to match_array(%w[tag1 tag2])
+        expect(@res['idea']['userId']).to eq(current_user.id)
+        expect(@res['idea']['ideaTags'].pluck('name')).to match_array(%w[tag1 tag2])
       end
     end
 
     context 'ideaの作成者以外のユーザーの場合' do
-      let(:other_user) { create(:user) }
-      let(:variables)  { base_variables.deep_merge(input: { userId: other_user.id }) }
+      let(:variables) { base_variables.deep_merge(input: { userId: other_user.id }) }
 
       it '更新に失敗すること' do
-        graphql_post
-        res = response.parsed_body
-        expect(res['data']['updateIdea']['success']).to be_falsey
-        expect(res['data']['updateIdea']['errors']).to include('ユーザーの権限がありません')
+        expect(@res['success']).to be_falsey
+        expect(@res['errors']).to include('ユーザーの権限がありません')
       end
     end
 
@@ -81,10 +79,8 @@ RSpec.describe Mutations::Idea::Update do
       let(:variables) { base_variables.deep_merge(input: { name: '' }) }
 
       it '更新に失敗しレスポンスにエラー内容が含まれること' do
-        graphql_post
-        res = response.parsed_body
-        expect(res['data']['updateIdea']['success']).to be_falsey
-        expect(res['data']['updateIdea']['errors']).to include('アイデア名を入力してください')
+        expect(@res['success']).to be_falsey
+        expect(@res['errors']).to include('アイデア名を入力してください')
       end
     end
   end

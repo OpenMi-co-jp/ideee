@@ -7,3 +7,23 @@ query GetNotifications {
     notificatableType
   }
 }
+
+mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!){
+  updateNotificationConfig(input: $input){
+    success
+    notificationConfig{
+      commentEmail
+      commentWeb
+      draftRemindEmail
+      eventEmail
+      heartEmail
+      heartToCommentWeb
+      heartWeb
+      teamJoinEmail
+      teamJoinWeb
+      teamMessageEmail
+      voteWeb
+      weeklyEmail
+    }
+  }
+}

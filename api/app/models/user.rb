@@ -209,4 +209,12 @@ class User < ApplicationRecord
     self.tokens = "#{self.id}:#{Devise.friendly_token}"
     save!
   end
+
+  def get_notification_config
+    notification_config
+  end
+
+  def update_notification_config(params)
+    notification_config.update(params)
+  end
 end

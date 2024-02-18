@@ -34,7 +34,7 @@
     "axios": "^1.4.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "js-cookie": "^3.0.5",
     "next": "^13.2.4",
     "prettier": "^3.1.0",

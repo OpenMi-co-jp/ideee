@@ -35,22 +35,12 @@ module Ideee
     config.api_only = true
 
     # OmniAuthのエラーに対処
-    config.session_store :cookie_store, key: '_interslice_session', secure: Rails.env.production?
+    config.session_store :cookie_store, key: '_interslice_session'
     # Required for all session management
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
     # TODO: materializeなどを削除してFlashの使用がなくなったら削除
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
-    config.action_dispatch.cookies_same_site_protection = lambda do |request|
-      # NOTE: ローカルでも Secure 属性をつけれるなら、この return 文は不要
-      #       ref. https://github.com/pschinis/rails_same_site_cookie?tab=readme-ov-file#note-about-http-requests-and-local-testing
-      return unless Rails.env.production?
-      return if request.origin.nil? || request.origin == request.base_url
-      # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)
-      return :none if request.origin.in?(%w[http://localhost:3000 https://ideee.vercel.app])
-
-      :none if request.origin.match?(/ideee-(.*)-narucel\.vercel\.app/)
-    end
   end
 end

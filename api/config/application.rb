@@ -35,10 +35,12 @@ module Ideee
     config.api_only = true
 
     # OmniAuthのエラーに対処
-    config.session_store :cookie_store, key: '_interslice_session', secure: Rails.env.production?
+    config.session_store :cookie_store, key: '_interslice_session'
     # Required for all session management
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+    config.middleware.use ActionDispatch::Session::CookieStore,
+                            config.session_options,
+                            secure: Rails.env.production?
     # TODO: materializeなどを削除してFlashの使用がなくなったら削除
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride

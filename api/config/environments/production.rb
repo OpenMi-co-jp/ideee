@@ -118,4 +118,12 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.frontend_url = ENV.fetch('FRONTEND_URL', nil)
+
+  config.action_dispatch.cookies_same_site_protection = lambda do |request|
+    return if request.origin.nil? || request.origin == request.base_url
+    # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)
+    return :none if request.origin.in?(%w[http://localhost:3000 https://ideee.vercel.app])
+
+    :none if request.origin.match?(/ideee-(.*)-narucel\.vercel\.app/)
+  end
 end

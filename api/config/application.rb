@@ -42,5 +42,11 @@ module Ideee
     # TODO: materializeなどを削除してFlashの使用がなくなったら削除
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
+    config.action_dispatch.cookies_same_site_protection = ->(request) do
+      return if request.origin.nil?
+      # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)
+      return :none if request.origin.in?(%w[http://localhost:3000 https://ideee.vercel.app])
+      :none if request.origin.match?(/ideee-(.*)-narucel\.vercel\.app/)
+    end
   end
 end

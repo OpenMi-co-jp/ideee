@@ -41,7 +41,7 @@ module Ideee
     if Rails.env.production?
       config.middleware.use ActionDispatch::Session::CookieStore,
                             config.session_options,
-                            domain: :all,
+                            domain: %w(ideee-demo.herokuapp.com .vercel.app), # TODO: 本番移行時に正しいドメインを設定
                             secure: true
     else
       config.middleware.use ActionDispatch::Session::CookieStore, config.session_options

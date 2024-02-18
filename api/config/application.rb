@@ -46,6 +46,7 @@ module Ideee
       # NOTE: ローカルでも Secure 属性をつけれるなら、この return 文は不要
       #       ref. https://github.com/pschinis/rails_same_site_cookie?tab=readme-ov-file#note-about-http-requests-and-local-testing
       return unless Rails.env.production?
+      return if request.origin.nil? || request.origin == request.base_url
       # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)
       return :none if request.origin.in?(%w[http://localhost:3000 https://ideee.vercel.app])
 

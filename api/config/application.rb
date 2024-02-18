@@ -43,8 +43,7 @@ module Ideee
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
     config.action_dispatch.cookies_same_site_protection = lambda do |request|
-      # NOTE: ローカルでも Secure 属性をつけれるなら、この return 文は不要
-      #       ref. https://github.com/pschinis/rails_same_site_cookie?tab=readme-ov-file#note-about-http-requests-and-local-testing
+      # NOTE: ローカルでも Secure 属性をつける場合は、この return 文は不要
       return unless Rails.env.production?
       return if request.origin.nil? || request.origin == request.base_url
       # TODO: 本番へ移行時にドメイン設定を変更 (cors.rb と同様)

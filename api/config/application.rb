@@ -42,7 +42,7 @@ module Ideee
       config.middleware.use ActionDispatch::Session::CookieStore,
                             config.session_options,
                             # TODO: 本番移行時に正しいドメインを設定
-                            domain: %w(ideee-demo.herokuapp.com .vercel.app),
+                            domain: %w[ideee-demo.herokuapp.com .vercel.app],
                             secure: true
     else
       config.middleware.use ActionDispatch::Session::CookieStore, config.session_options

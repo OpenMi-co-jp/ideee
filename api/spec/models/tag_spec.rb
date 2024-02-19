@@ -23,7 +23,7 @@ RSpec.describe Tag do
     describe 'recent_tags' do
       subject(:recent_tags) { described_class.recent_tags }
 
-      let!(:old_tag) { FactoryBot.create(:tag, created_at: 5.months.ago) }
+      let!(:old_tag) { FactoryBot.create(:tag, created_at: 13.months.ago) }
 
       it '最近のタグに絞る' do
         expect(recent_tags).not_to include(old_tag)

@@ -35,18 +35,18 @@ module Ideee
     config.api_only = true
 
     # OmniAuthのエラーに対処
-    config.session_store :cookie_store, key: '_interslice_session'
+    if Rails.env.production?
+      config.session_store :cookie_store,
+                           key: '_interslice_session',
+                           # TODO: 本番移行時に正しいドメインを設定
+                           domain: %w[ideee-demo.herokuapp.com .vercel.app],
+                           secure: true
+    else
+      config.session_store :cookie_store, key: '_interslice_session'
+    end
     # Required for all session management
     config.middleware.use ActionDispatch::Cookies
-    if Rails.env.production?
-      config.middleware.use ActionDispatch::Session::CookieStore,
-                            config.session_options,
-                            # TODO: 本番移行時に正しいドメインを設定
-                            domain: %w[ideee-demo.herokuapp.com .vercel.app],
-                            secure: true
-    else
-      config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
-    end
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
     # TODO: materializeなどを削除してFlashの使用がなくなったら削除
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride

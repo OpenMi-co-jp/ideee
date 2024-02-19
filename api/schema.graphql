@@ -1091,6 +1091,11 @@ type Query {
   ): Ideas!
 
   """
+  最新の5件の通知一覧
+  """
+  latestNotifications: [Notification!]!
+
+  """
   ユーザーのいいね一覧
   """
   likes: [Like!]!

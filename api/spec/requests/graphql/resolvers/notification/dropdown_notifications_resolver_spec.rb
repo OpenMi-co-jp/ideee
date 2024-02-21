@@ -33,8 +33,8 @@ RSpec.describe Resolvers::Notification::DropdownNotificationsResolver do
       result = res_json['data']['latestNotifications']
 
       created_at_values = result.map { |notification| Time.zone.parse(notification['createdAt']) }
-      created_at_values.sort
-      sorted_created_at_values = created_at_values.reverse!
+      created_at_values = created_at_values.sort
+      sorted_created_at_values = created_at_values.reverse
 
       expect(created_at_values).to eq(sorted_created_at_values)
     end

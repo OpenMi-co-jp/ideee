@@ -52,11 +52,13 @@ const IdeaCreateFormSchema = z.object({
   githubUrl: z
     .string()
     .url({ message: 'URLの形式で入力してください' })
-    .nullish(),
+    .optional()
+    .or(z.literal('')),
   productUrl: z
     .string()
     .url({ message: 'URLの形式で入力してください' })
-    .nullish(),
+    .optional()
+    .or(z.literal('')),
   draft: z.boolean().nullish(),
   icon: z.string().nullish(),
   tagList: z

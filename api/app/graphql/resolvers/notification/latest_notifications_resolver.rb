@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Resolvers
-  class Notification::DropdownNotificationsResolver < BaseResolver
-    graphql_name 'DropdownNotifications'
+  class Notification::LatestNotificationsResolver < BaseResolver
+    graphql_name 'LatestNotifications'
 
     type [Types::NotificationType], null: false
 

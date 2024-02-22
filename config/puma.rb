@@ -59,3 +59,17 @@ end
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+before_fork do
+  require 'puma_worker_killer'
+  PumaWorkerKiller.config do |config|
+    # HerokuのダイノのRAMサイズに合わせてください
+    config.ram           = 512
+    # チェックの頻度（分）
+    config.frequency     = 5
+    config.percent_usage = 0.98
+    # 12時間ごとにローリングリスタート
+    config.rolling_restart_frequency = 12 * 3600
+  end
+  PumaWorkerKiller.start
+end

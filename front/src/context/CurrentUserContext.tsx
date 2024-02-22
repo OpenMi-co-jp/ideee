@@ -36,12 +36,14 @@ type CurrentUserProviderProps = {
 // なので useEffect の特性を利用して、ハイドレーションエラーを回避しつつ、この Provider の初期化時に currentUser を設定するようにしている
 export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null)
+  const [loading, setLoading] = useState(true) // ローディング状態を追加
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser')
     if (storedUser && storedUser !== 'undefined') {
       setCurrentUser(JSON.parse(storedUser))
     }
+    setLoading(false)
   }, [])
 
   const storeCurrentUser = useCallback((user: CurrentUserProps) => {
@@ -53,6 +55,8 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     setCurrentUser(null)
     localStorage.removeItem('currentUser')
   }
+
+  if (loading) return null
 
   return (
     <CurrentUserContext.Provider

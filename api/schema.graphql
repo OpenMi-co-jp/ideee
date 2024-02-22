@@ -197,17 +197,17 @@ input CreateIdeaInput {
   """
   権利スタンス
   """
-  stance: Int
+  stance: String!
+
+  """
+  タグリスト
+  """
+  tagList: [String!]!
 
   """
   ターゲット
   """
   target: String
-
-  """
-  【必須】ユーザーID
-  """
-  userId: ID!
 
   """
   欲しい機能
@@ -1398,7 +1398,7 @@ input UpdateIdeaInput {
   """
   権利スタンス
   """
-  stance: String
+  stance: String!
 
   """
   タグリスト

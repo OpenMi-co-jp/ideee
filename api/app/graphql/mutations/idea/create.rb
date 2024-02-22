@@ -3,7 +3,6 @@ module Mutations
     graphql_name 'CreateIdea'
 
     argument :icon, String, required: false, description: 'アイデアアイコン'
-    argument :user_id, ID, required: true, description: '【必須】ユーザーID'
     argument :name, String, required: true, description: '【必須】アイデア名'
     argument :background, String, required: true, description: '【必須】背景'
     argument :goal, String, required: true, description: '【必須】ゴール'
@@ -11,12 +10,13 @@ module Mutations
     argument :hypothesis, String, required: false, description: '仮説'
     argument :monetize, String, required: false, description: 'マネタイズ方法'
     argument :similar, String, required: false, description: '類似サービス'
-    argument :stance, Integer, required: false, description: '権利スタンス'
+    argument :stance, String, required: true, description: '権利スタンス'
     argument :target, String, required: false, description: 'ターゲット'
     argument :wish_function, String, required: false, description: '欲しい機能'
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
     argument :draft, Boolean, required: false, description: '下書きフラグ'
+    argument :tag_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
@@ -38,29 +38,22 @@ module Mutations
         stance: args[:stance],
         product_url: args[:product_url],
         draft: args[:draft],
-        user_id: args[:user_id]
-        # user_id: context[:current_user].id
+        user_id: context[:current_user].id
       )
-      if idea.save
-        if Rails.env.production?
-          url = "#{Rails.application.config.host}/ideas/#{idea.id}"
-          TwitterJob::Tweet.new.perform(idea, url)
-        end
-        {
-          idea:,
-          success: true
-        }
-      else
-        {
-          success: false,
-          errors: idea.errors.full_messages
-        }
+      idea.save_with_tags!(args[:tag_list])
+      if Rails.env.production?
+        url = "#{Rails.application.config.host}/ideas/#{idea.id}"
+        TwitterJob::Tweet.new.perform(idea, url)
       end
+      {
+        idea:,
+        success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
+      }
     end
-
-    # def resolve(**args, context:)
-    #   idea = context[:current_user].ideas.create!(args)
-    #   { idea: idea }
-    # end
   end
 end

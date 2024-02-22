@@ -115,11 +115,11 @@ export type CreateIdeaInput = {
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */
-  stance?: InputMaybe<Scalars['Int']>
+  stance: Scalars['String']
+  /** タグリスト */
+  tagList: Array<Scalars['String']>
   /** ターゲット */
   target?: InputMaybe<Scalars['String']>
-  /** 【必須】ユーザーID */
-  userId: Scalars['ID']
   /** 欲しい機能 */
   wishFunction?: InputMaybe<Scalars['String']>
 }
@@ -724,7 +724,7 @@ export type UpdateIdeaInput = {
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */
-  stance?: InputMaybe<Scalars['String']>
+  stance: Scalars['String']
   /** タグリスト */
   tagList: Array<Scalars['String']>
   /** ターゲット */

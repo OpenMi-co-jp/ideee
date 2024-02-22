@@ -1,15 +1,12 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useIdea } from '@/context/IdeaContext'
-import { useEffect } from 'react'
-import { useUpdateIdeaMutation } from '@/lib/generated/client'
+import { useCreateIdeaMutation } from '@/lib/generated/client'
 import { showSuccess, showError } from '@/components/notifications'
 import { useRouter } from 'next/router'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
-import { base64ImageValidation } from '@/utils/CustomValidation'
 
-const IdeaEditFormSchema = z.object({
+const IdeaCreateFormSchema = z.object({
   name: z
     .string()
     .min(1, { message: '名前を入力してください' })
@@ -63,9 +60,7 @@ const IdeaEditFormSchema = z.object({
     .optional()
     .or(z.literal('')),
   draft: z.boolean().nullish(),
-  icon: base64ImageValidation(
-    '登録できない画像形式です。別の形式でもう一度お試しください。'
-  ),
+  icon: z.string().nullish(),
   tagList: z
     .array(
       z.string().max(50, { message: 'タグは50文字以内で入力してください' })
@@ -73,31 +68,23 @@ const IdeaEditFormSchema = z.object({
     .nonempty({ message: '1つ以上のタグを設定してください' }),
 })
 
-export const UseEditIdea = () => {
+export const UseCreateIdea = () => {
   const form = useForm({
-    resolver: zodResolver(IdeaEditFormSchema),
+    resolver: zodResolver(IdeaCreateFormSchema),
     mode: 'onBlur',
+    defaultValues: {
+      stance: 'free_right',
+    },
   })
-  const idea = useIdea()
-  const [updateIdeaMutation] = useUpdateIdeaMutation()
+  const [createIdeaMutation] = useCreateIdeaMutation()
   const router = useRouter()
   const { refetch } = useGetIdea()
 
-  useEffect(() => {
-    if (idea) {
-      form.reset({
-        ...idea,
-        tagList: idea.ideaTags?.map((tag) => String(tag.name)),
-      })
-    }
-  }, [idea, form])
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
-      const response = await updateIdeaMutation({
+      const response = await createIdeaMutation({
         variables: {
           input: {
-            id: idea?.id,
             name: data.name,
             background: data.background,
             goal: data.goal,
@@ -112,24 +99,23 @@ export const UseEditIdea = () => {
             productUrl: data.productUrl,
             draft: data.draft,
             icon: data.icon,
-            userId: String(idea?.userId),
             tagList: data.tagList,
           },
         },
       })
-      if (response.data?.updateIdea?.success) {
-        showSuccess({ action: 'アイデアの更新' })
+      if (response.data?.createIdea?.success) {
+        showSuccess({ action: 'アイデアの作成' })
         refetch()
-        router.push(`/ideas/${response.data.updateIdea.idea?.id}`)
+        router.push(`/ideas/${response.data.createIdea.idea?.id}`)
       } else {
         showError({
-          action: 'アイデアの更新',
-          message: String(response.data?.updateIdea?.errors),
+          action: 'アイデアの作成',
+          message: String(response.data?.createIdea?.errors),
         })
       }
     } catch (err: any) {
       showError({
-        action: 'アイデアの更新',
+        action: 'アイデアの作成',
         message: err.message as string,
       })
     }

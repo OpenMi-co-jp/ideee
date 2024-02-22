@@ -16,8 +16,11 @@
     flex-direction: column;
   }
   .image_default {
-    width: 40%;
-    height: 40%;
+    width: 200px;
+    height: 200px;
+  }
+  .x_timeline {
+    width: 22rem;
   }
 </style>
 <body>
@@ -25,7 +28,11 @@
     <img src="/assets/ideee-tech-logo" alt="ideee" loading="lazy">
     <h2>問題が発生してますね。。<br>個人開発だから限界あるのかな。。<br>(500エラー)</h2>
     <img src="/error500.svg" loading="lazy" class="image_default" alt="500エラー">
-    <a href='https://www.ideee.tech/' title="ideeeに戻る">アプリケーションに戻る</a>
+    <a href='https://www.ideee.tech/' title="ideeeに戻る" style="margin: 1rem 0;">アプリケーションに戻る</a>
+    <div class="x_timeline">
+      <a class="twitter-timeline" href="https://twitter.com/ideee_tech?ref_src=twsrc%5Etfw">アプリ状況を確認する</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
   </div>
 </body>
 </html>

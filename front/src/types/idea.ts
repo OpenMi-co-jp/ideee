@@ -13,16 +13,3 @@ export type AccompaniedTagType = {
     name: string
   }
 }
-
-export type CommentType = {
-  comment: {
-    id: string
-    description: string
-    createdAt: string
-    user: {
-      id?: string | null | undefined
-      name?: string | null | undefined
-      image?: string | null | undefined
-    }
-  }
-}

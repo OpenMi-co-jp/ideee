@@ -35,7 +35,9 @@ gem 'dotenv-rails'
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-rails_csrf_protection'
+# TODO: Cookie がブラウザに保存できるようになったら、コメントアウトを外す
+#       ref. https://github.com/naru20181117/ideee/issues/1280#issuecomment-1958388475
+# gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-twitter'
 
 gem 'google-api-client'

@@ -50,5 +50,9 @@ module Ideee
     # TODO: materializeなどを削除してFlashの使用がなくなったら削除
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
+
+    # TODO: Cookie がブラウザに保存できるようになったら、この設定を削除する
+    #       ref. https://github.com/naru20181117/ideee/issues/1280#issuecomment-1958388475
+    OmniAuth.config.request_validation_phase = nil
   end
 end

@@ -3095,7 +3095,7 @@
           "fields": [
             {
               "name": "commentEmail",
-              "description": null,
+              "description": "ユーザーのアイデアに「コメント」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3113,7 +3113,7 @@
             },
             {
               "name": "commentWeb",
-              "description": null,
+              "description": "ユーザーのアイデアに「コメント」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3131,7 +3131,7 @@
             },
             {
               "name": "draftRemindEmail",
-              "description": null,
+              "description": "下書きアイデアに「下書きアイデアあり」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3149,7 +3149,7 @@
             },
             {
               "name": "eventEmail",
-              "description": null,
+              "description": "ユーザーのアイデアに「イベント」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3167,7 +3167,7 @@
             },
             {
               "name": "heartEmail",
-              "description": null,
+              "description": "ユーザーのアイデアに「いいね!」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3185,7 +3185,7 @@
             },
             {
               "name": "heartToCommentWeb",
-              "description": null,
+              "description": "ユーザーのアイデアに「いいね!」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3203,7 +3203,7 @@
             },
             {
               "name": "heartWeb",
-              "description": null,
+              "description": "ユーザーのアイデアに「いいね!」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3221,7 +3221,7 @@
             },
             {
               "name": "id",
-              "description": null,
+              "description": "通知設定ID",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3239,7 +3239,7 @@
             },
             {
               "name": "teamJoinEmail",
-              "description": null,
+              "description": "ユーザーのチームに「参加」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3257,7 +3257,7 @@
             },
             {
               "name": "teamJoinWeb",
-              "description": null,
+              "description": "ユーザーのチームに「参加」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3275,7 +3275,7 @@
             },
             {
               "name": "teamMessageEmail",
-              "description": null,
+              "description": "ユーザーのチームに「メッセージ」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3293,7 +3293,7 @@
             },
             {
               "name": "userId",
-              "description": null,
+              "description": "ユーザーID",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3311,7 +3311,7 @@
             },
             {
               "name": "voteWeb",
-              "description": null,
+              "description": "ユーザーのアイデアに「投票」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3329,7 +3329,7 @@
             },
             {
               "name": "weeklyEmail",
-              "description": null,
+              "description": "ユーザーのアイデアに「週間アイデアあり」を送信する",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3784,7 +3784,7 @@
               "args": [
                 {
                   "name": "userId",
-                  "description": null,
+                  "description": "ユーザーID",
                   "type": {
                     "kind": "NON_NULL",
                     "name": null,
@@ -5232,7 +5232,7 @@
             },
             {
               "name": "notificationConfig",
-              "description": null,
+              "description": "通知設定",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -5250,7 +5250,7 @@
             },
             {
               "name": "success",
-              "description": null,
+              "description": "成功",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,

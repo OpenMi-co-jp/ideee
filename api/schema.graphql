@@ -988,19 +988,74 @@ type Notification {
 }
 
 type NotificationConfig {
+  """
+  ユーザーのアイデアに「コメント」を送信する
+  """
   commentEmail: Boolean!
+
+  """
+  ユーザーのアイデアに「コメント」を送信する
+  """
   commentWeb: Boolean!
+
+  """
+  下書きアイデアに「下書きアイデアあり」を送信する
+  """
   draftRemindEmail: Boolean!
+
+  """
+  ユーザーのアイデアに「イベント」を送信する
+  """
   eventEmail: Boolean!
+
+  """
+  ユーザーのアイデアに「いいね!」を送信する
+  """
   heartEmail: Boolean!
+
+  """
+  ユーザーのアイデアに「いいね!」を送信する
+  """
   heartToCommentWeb: Boolean!
+
+  """
+  ユーザーのアイデアに「いいね!」を送信する
+  """
   heartWeb: Boolean!
+
+  """
+  通知設定ID
+  """
   id: ID!
+
+  """
+  ユーザーのチームに「参加」を送信する
+  """
   teamJoinEmail: Boolean!
+
+  """
+  ユーザーのチームに「参加」を送信する
+  """
   teamJoinWeb: Boolean!
+
+  """
+  ユーザーのチームに「メッセージ」を送信する
+  """
   teamMessageEmail: Boolean!
+
+  """
+  ユーザーID
+  """
   userId: ID!
+
+  """
+  ユーザーのアイデアに「投票」を送信する
+  """
   voteWeb: Boolean!
+
+  """
+  ユーザーのアイデアに「週間アイデアあり」を送信する
+  """
   weeklyEmail: Boolean!
 }
 
@@ -1125,7 +1180,12 @@ type Query {
   """
   通知設定
   """
-  notificationConfig(userId: ID!): NotificationConfig!
+  notificationConfig(
+    """
+    ユーザーID
+    """
+    userId: ID!
+  ): NotificationConfig!
 
   """
   通知一覧
@@ -1566,7 +1626,15 @@ type UpdateNotificationConfigPayload {
   エラー
   """
   errors: [String!]
+
+  """
+  通知設定
+  """
   notificationConfig: NotificationConfig!
+
+  """
+  成功
+  """
   success: Boolean!
 }
 

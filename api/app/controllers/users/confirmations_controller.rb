@@ -12,7 +12,13 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   #   super
   # end
 
-  # POST users/confirmation
+  # GET /users/confirmation?confirmation_token=abcdef
+  def show
+    user = User.confirm_by_token(params[:confirmation_token])
+    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in?confirmed=#{user.errors.empty?}"
+  end
+
+  # POST /users/confirmation
   def create
     user = User.send_confirmation_instructions(create_params)
 
@@ -27,11 +33,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       render json: { message: '送信できませんでした。既に確認済み、もしくはメールアドレスに誤りがあります。' }, status: :unprocessable_entity
     end
   end
-
-  # GET /users/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
 
   # protected
 

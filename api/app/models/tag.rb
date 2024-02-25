@@ -19,7 +19,7 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  scope :recent_tags, -> { where created_at: 4.months.ago..Time.zone.now }
+  scope :recent_tags, -> { where created_at: 1.year.ago..Time.zone.now }
   scope :popular_tags, lambda {
                          preload(:tagged_ideas).max(15) do |x, y|
                            x.tagged_ideas.length <=> y.tagged_ideas.length

@@ -1,5 +1,6 @@
 import { Image, Title, Flex } from '@mantine/core'
 import { useIdea } from '@/context/IdeaContext'
+import { IdeaImage } from '@/components/image'
 
 export const IdeaTitle = () => {
   const idea = useIdea()
@@ -13,15 +14,7 @@ export const IdeaTitle = () => {
       wrap="wrap"
     >
       <Title order={1}>{idea?.name}</Title>
-      {idea?.icon && (
-        <Image
-          src={idea?.icon}
-          height={200}
-          radius="sm"
-          fit="contain"
-          alt="アイデアイメージ"
-        />
-      )}
+      {idea?.iconUrl && <IdeaImage src={idea.iconUrl} />}
     </Flex>
   )
 }

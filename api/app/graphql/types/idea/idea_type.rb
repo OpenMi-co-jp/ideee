@@ -11,7 +11,7 @@ module Types
     field :draft, Boolean, description: '下書きフラグ'
     field :emailed_at, GraphQL::Types::ISO8601DateTime, description: 'メール送信日'
     field :hypothesis, String, description: '仮説'
-    field :icon, String, description: 'アイコン'
+    field :icon_url, String, description: 'アイコンURL'
     field :issue, String, description: '課題・困っていること'
     field :likes_num, Integer, description: 'ハート数'
     field :monetize, String, description: 'マネタイズ方法'

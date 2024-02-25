@@ -51,7 +51,7 @@ class Idea < ApplicationRecord
   has_one :team, dependent: :destroy
   counter_culture :user, column_name: 'ideas_num'
   has_rich_text :note
-  mount_uploader :icon, ImageUploader
+  mount_base64_uploader :icon, ImageUploader
   after_create :send_draft_remind
 
   validates :name, presence: true, length: { maximum: 50 }
@@ -136,5 +136,9 @@ class Idea < ApplicationRecord
 
   def enough_view?
     view > 10
+  end
+
+  def icon_url
+    self.icon&.url
   end
 end

@@ -2,6 +2,7 @@ import { LinkComponent, Features } from '@/components/user/show'
 import { useUser } from '@/context/userProfileContext'
 import { Grid, Flex, Paper, Text, Image, Center } from '@mantine/core'
 import { TextWithLinks } from '@/utils/Text'
+import { UserImage } from '@/components/image'
 
 export const Profile = () => {
   const user = useUser()
@@ -14,15 +15,7 @@ export const Profile = () => {
         <Grid.Col span={{ base: 12, md: 4, lg: 4 }}>
           <Center>
             <Flex direction="column" align="center">
-              <Image
-                src={icon}
-                alt="ユーザーアイコン"
-                radius="50%"
-                width={120}
-                height={120}
-                maw={150}
-                mah={150}
-              />
+              <UserImage src={icon} />
               <Text style={{ fontWeight: 'bold' }} fz="1.5rem" my="xs">
                 {user?.name}
               </Text>

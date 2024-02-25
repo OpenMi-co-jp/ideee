@@ -1,5 +1,6 @@
 import { Divider, Title, Button, Center } from '@mantine/core'
 import { DeployedIdeas } from '@/components/idea'
+import Link from 'next/link'
 
 export const IdeaNotFound = () => {
   return (
@@ -10,13 +11,16 @@ export const IdeaNotFound = () => {
         </Title>
       </Center>
       <Center>
-        <Button
-          variant="gradient"
-          gradient={{ from: 'yellow', to: 'orange' }}
-          m="lg"
-        >
-          アイデア投稿してみる
-        </Button>
+        <Link href="/ideas/new">
+          <Button
+            variant="gradient"
+            gradient={{ from: 'yellow', to: 'orange' }}
+            m="lg"
+            component="a"
+          >
+            アイデア投稿してみる
+          </Button>
+        </Link>
       </Center>
       <Divider my="xl" py="xl" />
       <DeployedIdeas />

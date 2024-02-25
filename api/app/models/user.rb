@@ -143,7 +143,7 @@ class User < ApplicationRecord
     payload = {
       id: self.id,
       name: self.name,
-      image: self.icon&.url || self.remote_url,
+      image: self.image,
       defined: self.defined,
       exp: Time.now.to_i + 1.week.to_i
     }

@@ -483,22 +483,6 @@
               "deprecationReason": null
             },
             {
-              "name": "userId",
-              "description": "【必須】ユーザーID",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "name",
               "description": "【必須】アイデア名",
               "type": {
@@ -598,9 +582,13 @@
               "name": "stance",
               "description": "権利スタンス",
               "type": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "defaultValue": null,
               "isDeprecated": false,
@@ -661,6 +649,30 @@
                 "kind": "SCALAR",
                 "name": "Boolean",
                 "ofType": null
+              },
+              "defaultValue": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagList",
+              "description": "タグリスト",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  }
+                }
               },
               "defaultValue": null,
               "isDeprecated": false,
@@ -1931,8 +1943,8 @@
               ]
             },
             {
-              "name": "icon",
-              "description": "アイコン",
+              "name": "iconUrl",
+              "description": "アイコンURL",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -4762,9 +4774,13 @@
               "name": "stance",
               "description": "権利スタンス",
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "defaultValue": null,
               "isDeprecated": false,

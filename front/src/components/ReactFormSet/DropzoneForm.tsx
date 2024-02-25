@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Controller } from 'react-hook-form'
-import { Center, Text, Image, Group } from '@mantine/core'
+import { Center, Text, Group } from '@mantine/core'
 import type {
   FieldValues,
   Path,
@@ -17,9 +17,14 @@ import '@mantine/dropzone/styles.css'
 import type { CSSProperties } from 'react'
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react'
 import { rem } from '@mantine/core'
+import { FC } from 'react'
+
+export type ImageComponentProps = {
+  src: string
+}
 
 type DropzoneFormProps<T extends FieldValues> = {
-  label?: string
+  ImageComponent: FC<ImageComponentProps>
   name: Path<T>
   form: UseFormReturn<T, any>
   required?: boolean
@@ -31,22 +36,16 @@ type DropzoneFormProps<T extends FieldValues> = {
 export const DropzoneForm = <T extends FieldValues>({
   disabled,
   form,
-  label,
+  ImageComponent,
   name,
   style,
   existingImagePath,
   ...rest
 }: DropzoneFormProps<T>) => {
   const [files, setFiles] = useState<FileWithPath[]>([])
-  const [existingImage, setExistingImage] = useState<string | null>(null)
 
-  useEffect(() => {
-    console.log('existingImagePath', existingImagePath)
-    if (!existingImagePath) return
-    const value = form.getValues(existingImagePath)
-    console.log('existingImagePath', value)
-    setExistingImage(typeof value === 'string' ? value : null)
-  }, [form, existingImagePath])
+  const imagePath = existingImagePath || name
+  const existingImage = form.getValues(imagePath)
 
   const imageUrl =
     files.length > 0 ? URL.createObjectURL(files[0]) : existingImage
@@ -93,14 +92,7 @@ export const DropzoneForm = <T extends FieldValues>({
 
   const preview = imageUrl && (
     <Center mb={10}>
-      <Image
-        height={150}
-        width={150}
-        radius="50%"
-        style={{ maxWidth: 150, maxHeight: 150 }}
-        alt={label}
-        src={imageUrl}
-      />
+      <ImageComponent src={imageUrl} />
     </Center>
   )
 

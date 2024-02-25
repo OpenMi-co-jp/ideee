@@ -42,8 +42,8 @@ export const Header: FC = () => {
             <SearchIcon />
             {currentUser && <Notification />}
             <UserToggle />
-            {currentUser && isMobile && <IdeaCreateButton />}
-            {!isMobile && <Sidebar />}
+            {currentUser && !isMobile && <IdeaCreateButton />}
+            {isMobile && <Sidebar />}
           </Group>
         </Group>
       </Box>

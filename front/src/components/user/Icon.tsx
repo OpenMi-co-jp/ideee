@@ -14,9 +14,11 @@ export const UserIcon = ({ height = 30, userIcon = '' }: UserIconProps) => {
     <Image
       height={height}
       width={height}
-      radius={height / 2}
+      mah={height}
+      maw={height}
+      radius="50%"
       src={userIcon}
-      alt="user profile"
+      alt="ユーザーアイコン"
     />
   )
 }

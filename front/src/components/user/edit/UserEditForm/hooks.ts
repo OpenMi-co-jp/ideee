@@ -8,24 +8,7 @@ import { useRouter } from 'next/router'
 import { SubmitHandler, FieldValues } from 'react-hook-form'
 import { useGetUser } from '@/utils/hooks/useGetUser'
 import { showSuccess, showError } from '@/components/notifications'
-
-// バリデーションパターンを関数に抽出
-const base64ImageValidation = (message: string) =>
-  z
-    .string()
-    .optional()
-    .nullable()
-    .refine(
-      (data) => {
-        if (typeof data === 'undefined' || data === null) {
-          return true
-        }
-        const base64Regex =
-          /^data:image\/[a-zA-Z]+;base64,[A-Za-z0-9+/]+={0,2}$/
-        return base64Regex.test(String(data))
-      },
-      { message }
-    )
+import { base64ImageValidation } from '@/utils/CustomValidation'
 
 const UserEditFormSchema = z.object({
   name: z.string().max(30, { message: '名前は30文字以内で入力してください' }),

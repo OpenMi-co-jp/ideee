@@ -7,6 +7,7 @@ import { useUpdateIdeaMutation } from '@/lib/generated/client'
 import { showSuccess, showError } from '@/components/notifications'
 import { useRouter } from 'next/router'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
+import { base64ImageValidation } from '@/utils/CustomValidation'
 
 const IdeaEditFormSchema = z.object({
   name: z
@@ -62,7 +63,9 @@ const IdeaEditFormSchema = z.object({
     .optional()
     .or(z.literal('')),
   draft: z.boolean().nullish(),
-  icon: z.string().nullish(),
+  icon: base64ImageValidation(
+    '登録できない画像形式です。別の形式でもう一度お試しください。'
+  ),
   tagList: z
     .array(
       z.string().max(50, { message: 'タグは50文字以内で入力してください' })

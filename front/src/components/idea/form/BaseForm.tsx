@@ -12,13 +12,19 @@ import {
   getGradient,
 } from '@mantine/core'
 import { IconBulb, IconBrandGithub, IconApps } from '@tabler/icons-react'
-import { TextForm, TextAreaForm, TagsForm } from '@/components/ReactFormSet'
+import {
+  TextForm,
+  TextAreaForm,
+  TagsForm,
+  DropzoneForm,
+} from '@/components/ReactFormSet'
 import {
   UseFormReturn,
   Controller,
   FieldValues,
   SubmitHandler,
 } from 'react-hook-form'
+import { IdeaImage } from '@/components/image'
 
 type IdeaFormProps = {
   title: 'アイデア作成' | 'アイデア編集'
@@ -41,6 +47,12 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
           }}
         >
           <form onSubmit={form.handleSubmit(onSubmit)} role="form">
+            <DropzoneForm
+              form={form}
+              name="icon"
+              existingImagePath="iconUrl"
+              ImageComponent={IdeaImage}
+            />
             <Paper bg="#FCFCFC" radius="md" p="xl">
               <TextForm
                 form={form}

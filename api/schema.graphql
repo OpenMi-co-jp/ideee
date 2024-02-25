@@ -629,9 +629,9 @@ type Idea {
   hypothesis: String
 
   """
-  アイコン
+  アイコンURL
   """
-  icon: String
+  iconUrl: String
 
   """
   アイデアID

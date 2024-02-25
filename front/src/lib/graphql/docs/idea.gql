@@ -2,7 +2,7 @@ query GetIdea($id: ID!) {
   idea(id: $id) {
     id
     name
-    icon
+    iconUrl
     background
     goal
     issue
@@ -140,7 +140,7 @@ mutation UpdateIdea($input: UpdateIdeaInput!) {
       githubUrl
       productUrl
       draft
-      icon
+      iconUrl
     }
     success
     errors

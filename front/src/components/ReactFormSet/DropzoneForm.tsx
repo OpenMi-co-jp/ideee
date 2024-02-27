@@ -44,8 +44,16 @@ export const DropzoneForm = <T extends FieldValues>({
 }: DropzoneFormProps<T>) => {
   const [files, setFiles] = useState<FileWithPath[]>([])
 
+<<<<<<< HEAD
   const imagePath = existingImagePath || name
   const existingImage = form.getValues(imagePath)
+=======
+  useEffect(() => {
+    if (!existingImagePath) return
+    const value = form.getValues(existingImagePath)
+    setExistingImage(typeof value === 'string' ? value : null)
+  }, [form, existingImagePath])
+>>>>>>> 8ee9fe22 (fix: 不必要なconsoleの削除)
 
   const imageUrl =
     files.length > 0 ? URL.createObjectURL(files[0]) : existingImage

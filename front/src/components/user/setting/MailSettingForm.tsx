@@ -1,6 +1,9 @@
 import { Button, Flex, Group, Switch } from '@mantine/core'
 import { useState } from 'react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useGetNotificationConfigQuery } from '@/lib/generated/client'
+import { LoaderBox } from '@/components/features'
+import { AlertError } from '@/components/alert'
 
 const contents = [
   { id: 1, label: '項目 1', checked: false },
@@ -16,6 +19,16 @@ const contents = [
 export const MailSettingForm = () => {
   const [items, setItems] = useState(contents)
   const { currentUser } = useCurrentUser()
+  const { data, loading, error } = useGetNotificationConfigQuery({
+    variables: {
+      userId: currentUser?.id.toString() || '', 
+    }
+  })
+
+  if (loading) return <LoaderBox />
+  if (error) return <AlertError />
+
+  console.log(data)
 
   const handleSwitchChange = (id: number) => {
     setItems((prevItems) =>

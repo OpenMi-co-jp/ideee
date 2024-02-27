@@ -21,8 +21,8 @@ export const MailSettingForm = () => {
   const { currentUser } = useCurrentUser()
   const { data, loading, error } = useGetNotificationConfigQuery({
     variables: {
-      userId: currentUser?.id.toString() || '', 
-    }
+      userId: currentUser?.id.toString() || '',
+    },
   })
 
   if (loading) return <LoaderBox />

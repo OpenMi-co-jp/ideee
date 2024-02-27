@@ -1171,6 +1171,7 @@ export type DestroyLikeMutation = {
 export type GetNotificationsQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetNotificationsQuery = {
+  getNotifications: any
   __typename?: 'Query'
   notifications: Array<{
     __typename?: 'Notification'
@@ -2401,6 +2402,10 @@ export const GetNotificationsDocument = gql`
       checked
       notificatableId
       notificatableType
+      visitor {
+        id
+        name
+      }
     }
   }
 `

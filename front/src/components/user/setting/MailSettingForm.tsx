@@ -5,25 +5,78 @@ import { useGetNotificationConfigQuery } from '@/lib/generated/client'
 import { LoaderBox } from '@/components/features'
 import { AlertError } from '@/components/alert'
 
-const contents = [
-  { id: 1, label: '項目 1', checked: false },
-  { id: 2, label: '項目 2', checked: false },
-  { id: 3, label: '項目 3', checked: false },
-  { id: 4, label: '項目 4', checked: false },
-  { id: 5, label: '項目 5', checked: false },
-  { id: 6, label: '項目 6', checked: false },
-  { id: 7, label: '項目 7', checked: false },
-  { id: 8, label: '項目 8', checked: false },
-]
-
 export const MailSettingForm = () => {
-  const [items, setItems] = useState(contents)
   const { currentUser } = useCurrentUser()
   const { data, loading, error } = useGetNotificationConfigQuery({
     variables: {
       userId: currentUser?.id.toString() || '',
     },
   })
+
+  const initailContents = [
+    {
+      id: 1,
+      label: 'アイデアへのコメント',
+      checked: data?.notificationConfig.commentEmail,
+    },
+    {
+      id: 2,
+      label: 'コメントのお知らせ',
+      checked: data?.notificationConfig.commentWeb,
+    },
+    {
+      id: 3,
+      label: '下書きへのリマインド',
+      checked: data?.notificationConfig.draftRemindEmail,
+    },
+    {
+      id: 4,
+      label: 'イベントのお知らせ',
+      checked: data?.notificationConfig.eventEmail,
+    },
+    {
+      id: 5,
+      label: 'ハートのお知らせ',
+      checked: data?.notificationConfig.heartEmail,
+    },
+    {
+      id: 6,
+      label: 'ハートへのコメント',
+      checked: data?.notificationConfig.heartToCommentWeb,
+    },
+    {
+      id: 7,
+      label: 'ハートのお知らせ(Web)',
+      checked: data?.notificationConfig.heartWeb,
+    },
+    {
+      id: 8,
+      label: 'チーム開発参加のお知らせ',
+      checked: data?.notificationConfig.teamJoinEmail,
+    },
+    {
+      id: 9,
+      label: 'チーム開発参加のお知らせ(Web)',
+      checked: data?.notificationConfig.teamJoinWeb,
+    },
+    {
+      id: 10,
+      label: 'チーム開発のメッセージ',
+      checked: data?.notificationConfig.teamMessageEmail,
+    },
+    {
+      id: 11,
+      label: '投票のお知らせ',
+      checked: data?.notificationConfig.voteWeb,
+    },
+    {
+      id: 12,
+      label: '週間ランキング',
+      checked: data?.notificationConfig.weeklyEmail,
+    },
+  ]
+
+  const [items, setItems] = useState(initailContents)
 
   if (loading) return <LoaderBox />
   if (error) return <AlertError />

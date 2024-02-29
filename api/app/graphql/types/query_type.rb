@@ -14,6 +14,7 @@ module Types
     field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'
 
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'
+    field :latest_notifications, resolver: Resolvers::Notification::LatestNotificationsResolver, description: '最新の5件の通知一覧'
 
     field :team, resolver: Resolvers::Team::TeamResolver, description: 'チームオブジェクト'
     field :teams, resolver: Resolvers::Team::TeamsResolver, description: 'チーム一覧'

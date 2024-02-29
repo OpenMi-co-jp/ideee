@@ -555,6 +555,8 @@ export type Query = {
   idea: Idea
   /** アイデア一覧 */
   ideas: Ideas
+  /** 最新の5件の通知一覧 */
+  latestNotifications: Array<Notification>
   /** ユーザーのいいね一覧 */
   likes: Array<Like>
   /** 通知一覧 */

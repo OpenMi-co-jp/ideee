@@ -36,17 +36,12 @@ class NotificationConfig < ApplicationRecord
   def self.default
     new(
       comment_email: true,
-      comment_web: true,
       draft_remind_email: true,
       event_email: true,
       heart_email: true,
-      heart_to_comment_web: true,
-      heart_web: true,
       team_join_email: true,
-      team_join_web: true,
       team_leave_email: true,
       team_message_email: true,
-      vote_web: true,
       weekly_email: true
     )
   end

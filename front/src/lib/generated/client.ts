@@ -957,6 +957,7 @@ export type GetIdeaQuery = {
     similar?: string | null
     stance?: string | null
     note?: string | null
+    draft?: boolean | null
     createdAt: any
     updatedAt: any
     userId: number
@@ -1724,6 +1725,7 @@ export const GetIdeaDocument = gql`
       similar
       stance
       note
+      draft
       createdAt
       updatedAt
       userId

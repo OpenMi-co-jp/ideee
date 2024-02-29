@@ -2,16 +2,12 @@ query GetNotificationConfig($userId:ID!){
   notificationConfig(userId: $userId){
     userId
     commentEmail
-    commentWeb
     draftRemindEmail
     eventEmail
     heartEmail
-    heartToCommentWeb
-    heartWeb
     teamJoinEmail
-    teamJoinWeb
+    teamLeaveEmail
     teamMessageEmail
-    voteWeb
     weeklyEmail
   }
 }
@@ -21,16 +17,12 @@ mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!){
     success
     notificationConfig{
       commentEmail
-      commentWeb
       draftRemindEmail
       eventEmail
       heartEmail
-      heartToCommentWeb
-      heartWeb
       teamJoinEmail
-      teamJoinWeb
+      teamLeaveEmail
       teamMessageEmail
-      voteWeb
       weeklyEmail
     }
   }

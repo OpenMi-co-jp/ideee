@@ -989,39 +989,24 @@ type Notification {
 
 type NotificationConfig {
   """
-  ユーザーのアイデアに「コメント」を送信する
+  アイデアへのコメント
   """
   commentEmail: Boolean!
 
   """
-  ユーザーのアイデアに「コメント」を送信する
-  """
-  commentWeb: Boolean!
-
-  """
-  下書きアイデアに「下書きアイデアあり」を送信する
+  下書きへのリマインド
   """
   draftRemindEmail: Boolean!
 
   """
-  ユーザーのアイデアに「イベント」を送信する
+  イベントのお知らせ
   """
   eventEmail: Boolean!
 
   """
-  ユーザーのアイデアに「いいね!」を送信する
+  ハートのお知らせ
   """
   heartEmail: Boolean!
-
-  """
-  ユーザーのアイデアに「いいね!」を送信する
-  """
-  heartToCommentWeb: Boolean!
-
-  """
-  ユーザーのアイデアに「いいね!」を送信する
-  """
-  heartWeb: Boolean!
 
   """
   通知設定ID
@@ -1029,17 +1014,17 @@ type NotificationConfig {
   id: ID!
 
   """
-  ユーザーのチームに「参加」を送信する
+  チーム開発参加のお知らせ
   """
   teamJoinEmail: Boolean!
 
   """
-  ユーザーのチームに「参加」を送信する
+  チーム開発脱退のお知らせ
   """
-  teamJoinWeb: Boolean!
+  teamLeaveEmail: Boolean!
 
   """
-  ユーザーのチームに「メッセージ」を送信する
+  チーム開発のメッセージ
   """
   teamMessageEmail: Boolean!
 
@@ -1049,12 +1034,7 @@ type NotificationConfig {
   userId: ID!
 
   """
-  ユーザーのアイデアに「投票」を送信する
-  """
-  voteWeb: Boolean!
-
-  """
-  ユーザーのアイデアに「週間アイデアあり」を送信する
+  週間ランキング
   """
   weeklyEmail: Boolean!
 }
@@ -1553,11 +1533,6 @@ input UpdateNotificationConfigInput {
   commentEmail: Boolean!
 
   """
-  コメント通知
-  """
-  commentWeb: Boolean!
-
-  """
   下書き通知
   """
   draftRemindEmail: Boolean!
@@ -1573,24 +1548,14 @@ input UpdateNotificationConfigInput {
   heartEmail: Boolean!
 
   """
-  ハート通知
-  """
-  heartToCommentWeb: Boolean!
-
-  """
-  ハート通知
-  """
-  heartWeb: Boolean!
-
-  """
   チーム参加通知
   """
   teamJoinEmail: Boolean!
 
   """
-  チーム参加通知
+  チーム退出通知
   """
-  teamJoinWeb: Boolean!
+  teamLeaveEmail: Boolean!
 
   """
   チームメッセージ通知
@@ -1601,11 +1566,6 @@ input UpdateNotificationConfigInput {
   ユーザーID
   """
   userId: ID!
-
-  """
-  投票通知
-  """
-  voteWeb: Boolean!
 
   """
   毎週メール通知

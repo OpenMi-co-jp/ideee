@@ -3095,25 +3095,7 @@
           "fields": [
             {
               "name": "commentEmail",
-              "description": "ユーザーのアイデアに「コメント」を送信する",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
-              "name": "commentWeb",
-              "description": "ユーザーのアイデアに「コメント」を送信する",
+              "description": "アイデアへのコメント",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3131,7 +3113,7 @@
             },
             {
               "name": "draftRemindEmail",
-              "description": "下書きアイデアに「下書きアイデアあり」を送信する",
+              "description": "下書きへのリマインド",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3149,7 +3131,7 @@
             },
             {
               "name": "eventEmail",
-              "description": "ユーザーのアイデアに「イベント」を送信する",
+              "description": "イベントのお知らせ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3167,43 +3149,7 @@
             },
             {
               "name": "heartEmail",
-              "description": "ユーザーのアイデアに「いいね!」を送信する",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
-              "name": "heartToCommentWeb",
-              "description": "ユーザーのアイデアに「いいね!」を送信する",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
-              "name": "heartWeb",
-              "description": "ユーザーのアイデアに「いいね!」を送信する",
+              "description": "ハートのお知らせ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3239,7 +3185,7 @@
             },
             {
               "name": "teamJoinEmail",
-              "description": "ユーザーのチームに「参加」を送信する",
+              "description": "チーム開発参加のお知らせ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3256,8 +3202,8 @@
               ]
             },
             {
-              "name": "teamJoinWeb",
-              "description": "ユーザーのチームに「参加」を送信する",
+              "name": "teamLeaveEmail",
+              "description": "チーム開発脱退のお知らせ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3275,7 +3221,7 @@
             },
             {
               "name": "teamMessageEmail",
-              "description": "ユーザーのチームに「メッセージ」を送信する",
+              "description": "チーム開発のメッセージ",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3310,26 +3256,8 @@
               ]
             },
             {
-              "name": "voteWeb",
-              "description": "ユーザーのアイデアに「投票」を送信する",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null,
-              "args": [
-
-              ]
-            },
-            {
               "name": "weeklyEmail",
-              "description": "ユーザーのアイデアに「週間アイデアあり」を送信する",
+              "description": "週間ランキング",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -4991,22 +4919,6 @@
               "deprecationReason": null
             },
             {
-              "name": "heartEmail",
-              "description": "ハート通知",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "commentEmail",
               "description": "コメント通知",
               "type": {
@@ -5039,8 +4951,56 @@
               "deprecationReason": null
             },
             {
+              "name": "eventEmail",
+              "description": "イベント通知",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "heartEmail",
+              "description": "ハート通知",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "teamJoinEmail",
               "description": "チーム参加通知",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "teamLeaveEmail",
+              "description": "チーム退出通知",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -5073,102 +5033,6 @@
             {
               "name": "weeklyEmail",
               "description": "毎週メール通知",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "eventEmail",
-              "description": "イベント通知",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "heartWeb",
-              "description": "ハート通知",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "commentWeb",
-              "description": "コメント通知",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "heartToCommentWeb",
-              "description": "ハート通知",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "voteWeb",
-              "description": "投票通知",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "teamJoinWeb",
-              "description": "チーム参加通知",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,

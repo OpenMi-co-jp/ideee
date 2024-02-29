@@ -139,6 +139,8 @@ class Idea < ApplicationRecord
   end
 
   def icon_url
+    return unless self.icon.file.present?
+
     self.icon&.url
   end
 end

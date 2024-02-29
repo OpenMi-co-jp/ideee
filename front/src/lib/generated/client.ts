@@ -527,33 +527,25 @@ export type Notification = {
 
 export type NotificationConfig = {
   __typename?: 'NotificationConfig'
-  /** ユーザーのアイデアに「コメント」を送信する */
+  /** アイデアへのコメント */
   commentEmail: Scalars['Boolean']
-  /** ユーザーのアイデアに「コメント」を送信する */
-  commentWeb: Scalars['Boolean']
-  /** 下書きアイデアに「下書きアイデアあり」を送信する */
+  /** 下書きへのリマインド */
   draftRemindEmail: Scalars['Boolean']
-  /** ユーザーのアイデアに「イベント」を送信する */
+  /** イベントのお知らせ */
   eventEmail: Scalars['Boolean']
-  /** ユーザーのアイデアに「いいね!」を送信する */
+  /** ハートのお知らせ */
   heartEmail: Scalars['Boolean']
-  /** ユーザーのアイデアに「いいね!」を送信する */
-  heartToCommentWeb: Scalars['Boolean']
-  /** ユーザーのアイデアに「いいね!」を送信する */
-  heartWeb: Scalars['Boolean']
   /** 通知設定ID */
   id: Scalars['ID']
-  /** ユーザーのチームに「参加」を送信する */
+  /** チーム開発参加のお知らせ */
   teamJoinEmail: Scalars['Boolean']
-  /** ユーザーのチームに「参加」を送信する */
-  teamJoinWeb: Scalars['Boolean']
-  /** ユーザーのチームに「メッセージ」を送信する */
+  /** チーム開発脱退のお知らせ */
+  teamLeaveEmail: Scalars['Boolean']
+  /** チーム開発のメッセージ */
   teamMessageEmail: Scalars['Boolean']
   /** ユーザーID */
   userId: Scalars['ID']
-  /** ユーザーのアイデアに「投票」を送信する */
-  voteWeb: Scalars['Boolean']
-  /** ユーザーのアイデアに「週間アイデアあり」を送信する */
+  /** 週間ランキング */
   weeklyEmail: Scalars['Boolean']
 }
 
@@ -798,28 +790,20 @@ export type UpdateNotificationConfigInput = {
   clientMutationId?: InputMaybe<Scalars['String']>
   /** コメント通知 */
   commentEmail: Scalars['Boolean']
-  /** コメント通知 */
-  commentWeb: Scalars['Boolean']
   /** 下書き通知 */
   draftRemindEmail: Scalars['Boolean']
   /** イベント通知 */
   eventEmail: Scalars['Boolean']
   /** ハート通知 */
   heartEmail: Scalars['Boolean']
-  /** ハート通知 */
-  heartToCommentWeb: Scalars['Boolean']
-  /** ハート通知 */
-  heartWeb: Scalars['Boolean']
   /** チーム参加通知 */
   teamJoinEmail: Scalars['Boolean']
-  /** チーム参加通知 */
-  teamJoinWeb: Scalars['Boolean']
+  /** チーム退出通知 */
+  teamLeaveEmail: Scalars['Boolean']
   /** チームメッセージ通知 */
   teamMessageEmail: Scalars['Boolean']
   /** ユーザーID */
   userId: Scalars['ID']
-  /** 投票通知 */
-  voteWeb: Scalars['Boolean']
   /** 毎週メール通知 */
   weeklyEmail: Scalars['Boolean']
 }
@@ -1279,16 +1263,12 @@ export type GetNotificationConfigQuery = {
     __typename?: 'NotificationConfig'
     userId: string
     commentEmail: boolean
-    commentWeb: boolean
     draftRemindEmail: boolean
     eventEmail: boolean
     heartEmail: boolean
-    heartToCommentWeb: boolean
-    heartWeb: boolean
     teamJoinEmail: boolean
-    teamJoinWeb: boolean
+    teamLeaveEmail: boolean
     teamMessageEmail: boolean
-    voteWeb: boolean
     weeklyEmail: boolean
   }
 }
@@ -1305,16 +1285,12 @@ export type UpdateNotificationConfigMutation = {
     notificationConfig: {
       __typename?: 'NotificationConfig'
       commentEmail: boolean
-      commentWeb: boolean
       draftRemindEmail: boolean
       eventEmail: boolean
       heartEmail: boolean
-      heartToCommentWeb: boolean
-      heartWeb: boolean
       teamJoinEmail: boolean
-      teamJoinWeb: boolean
+      teamLeaveEmail: boolean
       teamMessageEmail: boolean
-      voteWeb: boolean
       weeklyEmail: boolean
     }
   } | null
@@ -2597,16 +2573,12 @@ export const GetNotificationConfigDocument = gql`
     notificationConfig(userId: $userId) {
       userId
       commentEmail
-      commentWeb
       draftRemindEmail
       eventEmail
       heartEmail
-      heartToCommentWeb
-      heartWeb
       teamJoinEmail
-      teamJoinWeb
+      teamLeaveEmail
       teamMessageEmail
-      voteWeb
       weeklyEmail
     }
   }
@@ -2668,16 +2640,12 @@ export const UpdateNotificationConfigDocument = gql`
       success
       notificationConfig {
         commentEmail
-        commentWeb
         draftRemindEmail
         eventEmail
         heartEmail
-        heartToCommentWeb
-        heartWeb
         teamJoinEmail
-        teamJoinWeb
+        teamLeaveEmail
         teamMessageEmail
-        voteWeb
         weeklyEmail
       }
     }

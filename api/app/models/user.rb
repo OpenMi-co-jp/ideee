@@ -209,5 +209,4 @@ class User < ApplicationRecord
     self.tokens = "#{self.id}:#{Devise.friendly_token}"
     save!
   end
-
 end

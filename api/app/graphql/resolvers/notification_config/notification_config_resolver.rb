@@ -7,7 +7,7 @@ module Resolvers
 
       argument :user_id, ID, required: true, description: 'ユーザーID'
 
-      def resolve(**args)
+      def resolve(**_args)
         current_user.notification_config
       end
     end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Resolvers
-  class User::UserNumResolver < BaseResolver
-    graphql_name 'GetUserNum'
+  class User::UserCountResolver < BaseResolver
+    graphql_name 'GetUserCount'
 
     type Integer, null: false
 

@@ -573,6 +573,8 @@ export type Query = {
   teams: Array<Team>
   /** ユーザーオブジェクト */
   user: User
+  /** ユーザー数 */
+  userNum: Scalars['Int']
   /** ユーザー一覧 */
   users: Array<User>
 }
@@ -1329,6 +1331,10 @@ export type GetUsersQuery = {
     definition?: string | null
   }>
 }
+
+export type GetUserNumQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetUserNumQuery = { __typename?: 'Query'; userNum: number }
 
 export type CreateUserMutationVariables = Exact<{
   input: CreateUserInput
@@ -2997,6 +3003,59 @@ export type GetUsersLazyQueryHookResult = ReturnType<
 export type GetUsersQueryResult = Apollo.QueryResult<
   GetUsersQuery,
   GetUsersQueryVariables
+>
+export const GetUserNumDocument = gql`
+  query GetUserNum {
+    userNum
+  }
+`
+
+/**
+ * __useGetUserNumQuery__
+ *
+ * To run a query within a React component, call `useGetUserNumQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserNumQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserNumQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserNumQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetUserNumQuery,
+    GetUserNumQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetUserNumQuery, GetUserNumQueryVariables>(
+    GetUserNumDocument,
+    options
+  )
+}
+export function useGetUserNumLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUserNumQuery,
+    GetUserNumQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetUserNumQuery, GetUserNumQueryVariables>(
+    GetUserNumDocument,
+    options
+  )
+}
+export type GetUserNumQueryHookResult = ReturnType<typeof useGetUserNumQuery>
+export type GetUserNumLazyQueryHookResult = ReturnType<
+  typeof useGetUserNumLazyQuery
+>
+export type GetUserNumQueryResult = Apollo.QueryResult<
+  GetUserNumQuery,
+  GetUserNumQueryVariables
 >
 export const CreateUserDocument = gql`
   mutation CreateUser($input: CreateUserInput!) {

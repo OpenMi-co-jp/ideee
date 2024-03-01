@@ -643,7 +643,7 @@
               "deprecationReason": null
             },
             {
-              "name": "draft",
+              "name": "publish",
               "description": "下書きフラグ",
               "type": {
                 "kind": "SCALAR",
@@ -4534,7 +4534,7 @@
               "deprecationReason": null
             },
             {
-              "name": "draft",
+              "name": "publish",
               "description": "下書きフラグ",
               "type": {
                 "kind": "SCALAR",

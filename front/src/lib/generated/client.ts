@@ -94,8 +94,6 @@ export type CreateIdeaInput = {
   background: Scalars['String']
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>
-  /** 下書きフラグ */
-  draft?: InputMaybe<Scalars['Boolean']>
   /** GithubリポジトリURL */
   githubUrl?: InputMaybe<Scalars['String']>
   /** 【必須】ゴール */
@@ -112,6 +110,8 @@ export type CreateIdeaInput = {
   name: Scalars['String']
   /** 作っているアプリのURL */
   productUrl?: InputMaybe<Scalars['String']>
+  /** 下書きフラグ */
+  publish?: InputMaybe<Scalars['Boolean']>
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */
@@ -703,8 +703,6 @@ export type UpdateIdeaInput = {
   background: Scalars['String']
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']>
-  /** 下書きフラグ */
-  draft?: InputMaybe<Scalars['Boolean']>
   /** GithubリポジトリURL */
   githubUrl?: InputMaybe<Scalars['String']>
   /** 【必須】ゴール */
@@ -723,6 +721,8 @@ export type UpdateIdeaInput = {
   name: Scalars['String']
   /** 作っているアプリのURL */
   productUrl?: InputMaybe<Scalars['String']>
+  /** 下書きフラグ */
+  publish?: InputMaybe<Scalars['Boolean']>
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */

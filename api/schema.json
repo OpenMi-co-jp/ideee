@@ -3703,7 +3703,7 @@
               ]
             },
             {
-              "name": "userNum",
+              "name": "userCount",
               "description": "ユーザー数",
               "type": {
                 "kind": "NON_NULL",

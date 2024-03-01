@@ -1,9 +1,15 @@
 import { Title, Text, Button, Box, BackgroundImage } from '@mantine/core'
 import Link from 'next/link'
+import { useGetUserNumQuery } from '@/lib/generated/client'
 
 export const TopVision = () => {
-  // TODO: 現在のユーザー数を設定予定
-  const userNum = 937
+  const { data, loading, error } = useGetUserNumQuery()
+
+  if (loading) return <p>取得中...</p>
+  if (error) return <p>エラー: {error.message}</p>
+
+  const userNum = data?.userNum
+
   return (
     <div
       style={{

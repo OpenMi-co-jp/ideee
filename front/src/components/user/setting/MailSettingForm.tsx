@@ -11,7 +11,6 @@ export const MailSettingForm = () => {
   if (error) return <AlertError />
 
   return (
-    <form onSubmit={handleSubmit}>
       <Group p="md">
         <Flex direction="column" gap="xl">
           {items.map((item) => (
@@ -23,9 +22,8 @@ export const MailSettingForm = () => {
               onChange={() => handleSwitchChange(item.id)}
             />
           ))}
-          <Button type="submit">送信</Button>
+          <Button type="button" onClick={handleSubmit}>更新</Button>
         </Flex>
       </Group>
-    </form>
   )
 }

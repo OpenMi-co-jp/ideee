@@ -72,8 +72,7 @@ export const useNotificationConfig = () => {
     )
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = () => {
     updateNotificationConfigMutation({
       variables: {
         input: {

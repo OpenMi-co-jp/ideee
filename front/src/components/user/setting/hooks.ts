@@ -78,14 +78,14 @@ export const useNotificationConfig = () => {
       variables: {
         input: {
           userId: currentUser?.id.toString() || '',
-          commentEmail: items[0].checked || false,
-          draftRemindEmail: items[1].checked || false,
-          eventEmail: items[2].checked || false,
-          heartEmail: items[3].checked || false,
-          teamJoinEmail: items[4].checked || false,
-          teamLeaveEmail: items[5].checked || false,
-          teamMessageEmail: items[6].checked || false,
-          weeklyEmail: items[7].checked || false,
+          commentEmail: items[0].checked,
+          draftRemindEmail: items[1].checked,
+          eventEmail: items[2].checked,
+          heartEmail: items[3].checked,
+          teamJoinEmail: items[4].checked,
+          teamLeaveEmail: items[5].checked,
+          teamMessageEmail: items[6].checked,
+          weeklyEmail: items[7].checked,
         },
       },
     })

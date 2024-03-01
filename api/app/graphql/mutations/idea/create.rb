@@ -1,5 +1,7 @@
 module Mutations
   class Idea::Create < BaseMutation
+    include Concerns::Idea::Publish
+
     graphql_name 'CreateIdea'
 
     argument :icon, String, required: false, description: 'アイデアアイコン'
@@ -41,10 +43,7 @@ module Mutations
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
-      if Rails.env.production?
-        url = "#{Rails.application.config.host}/ideas/#{idea.id}"
-        TwitterJob::Tweet.new.perform(idea, url)
-      end
+      sidekiq_jobs(idea) unless idea.draft
       {
         idea:,
         success: true

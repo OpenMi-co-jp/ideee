@@ -1,5 +1,7 @@
 module Mutations
   class Idea::Update < BaseMutation
+    include Concerns::Idea::Publish
+
     graphql_name 'UpdateIdea'
 
     argument :id, ID, required: true, description: 'アイデアID'
@@ -30,6 +32,7 @@ module Mutations
       end
 
       idea = ::Idea.find(args[:id])
+      from_draft = idea.draft
       idea.assign_attributes(
         icon: args[:icon],
         name: args[:name],
@@ -48,6 +51,7 @@ module Mutations
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
+      sidekiq_jobs(idea) if from_draft && !idea.draft
       {
         idea:,
         success: true

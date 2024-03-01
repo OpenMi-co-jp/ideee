@@ -33,16 +33,4 @@
 class NotificationConfig < ApplicationRecord
   belongs_to :user
 
-  def self.default
-    new(
-      comment_email: true,
-      draft_remind_email: true,
-      event_email: true,
-      heart_email: true,
-      team_join_email: true,
-      team_leave_email: true,
-      team_message_email: true,
-      weekly_email: true
-    )
-  end
 end

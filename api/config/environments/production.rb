@@ -79,7 +79,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   # TODO: 本番へ移行時にドメイン設定を変更
-  config.action_mailer.default_url_options = { host: 'https://ideee-demo.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'https://demo.ideee.tech/' }
   # config.action_mailer.default_url_options = { host: 'https://www.ideee.tech/' }
 
   config.action_mailer.delivery_method = :smtp

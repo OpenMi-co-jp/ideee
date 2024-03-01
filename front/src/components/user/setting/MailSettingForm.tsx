@@ -11,7 +11,7 @@ export const MailSettingForm = () => {
   if (error) return <AlertError />
 
   return (
-    <Group p="md">
+    <Group p="md" justify="center">
       <Flex direction="column" gap="xl">
         {items.map((item) => (
           <Switch

@@ -17,7 +17,6 @@ RSpec.describe Resolvers::User::UserNumResolver do
 
     it '現在のユーザー数を取得する' do
       res_json = response.parsed_body
-      puts res_json
       result = res_json['data']['userNum']
 
       expect(result).to eq(5)

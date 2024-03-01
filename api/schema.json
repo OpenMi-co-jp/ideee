@@ -3703,6 +3703,24 @@
               ]
             },
             {
+              "name": "userNum",
+              "description": "ユーザー数",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "users",
               "description": "ユーザー一覧",
               "type": {

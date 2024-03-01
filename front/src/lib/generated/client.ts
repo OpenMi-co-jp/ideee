@@ -802,8 +802,6 @@ export type UpdateNotificationConfigInput = {
   teamLeaveEmail: Scalars['Boolean']
   /** チームメッセージ通知 */
   teamMessageEmail: Scalars['Boolean']
-  /** ユーザーID */
-  userId: Scalars['ID']
   /** 毎週メール通知 */
   weeklyEmail: Scalars['Boolean']
 }

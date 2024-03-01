@@ -33,8 +33,11 @@ export const UserMenu = () => {
             ユーザー情報編集
           </Menu.Item>
         </Link>
-        <Menu.Item leftSection={<IconSettings size={14} />}>Settings</Menu.Item>
-
+        <Link href="/settings">
+          <Menu.Item leftSection={<IconSettings size={14} />}>
+            Settings
+          </Menu.Item>
+        </Link>
         <Menu.Divider />
 
         <Menu.Item color="red" leftSection={<IconLogout size={14} />}>

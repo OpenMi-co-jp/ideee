@@ -8,7 +8,7 @@ module Resolvers
       argument :user_id, ID, required: true, description: 'ユーザーID'
 
       def resolve(**args)
-        ::NotificationConfig.find_by(user_id: args[:user_id])
+        current_user.notification_config
       end
     end
   end

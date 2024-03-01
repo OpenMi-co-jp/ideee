@@ -10,8 +10,8 @@ module Resolvers
 
     def resolve(**args)
       idea = ::Idea.find(args[:id])
-      if idea.draft? && context[:current_user] != idea.user
-        raise GraphQL::ExecutionError.new('権限がありません', options: { status: :unauthorized })
+      if idea.draft? && (context[:current_user].nil? || context[:current_user] != idea.user)
+        raise GraphQL::ExecutionError, '権限がありません'
       end
 
       idea

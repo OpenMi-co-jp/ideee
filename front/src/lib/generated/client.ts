@@ -110,7 +110,7 @@ export type CreateIdeaInput = {
   name: Scalars['String']
   /** 作っているアプリのURL */
   productUrl?: InputMaybe<Scalars['String']>
-  /** 下書きフラグ */
+  /** 公開フラグ */
   publish?: InputMaybe<Scalars['Boolean']>
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
@@ -721,7 +721,7 @@ export type UpdateIdeaInput = {
   name: Scalars['String']
   /** 作っているアプリのURL */
   productUrl?: InputMaybe<Scalars['String']>
-  /** 下書きフラグ */
+  /** 公開フラグ */
   publish?: InputMaybe<Scalars['Boolean']>
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>

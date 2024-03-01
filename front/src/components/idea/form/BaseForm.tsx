@@ -172,8 +172,7 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
                   )
                 }}
               />
-              {(!form.getValues('publish') ||
-                form.getValues('publish') === undefined) && (
+              {!form.getValues('publish') && (
                 <SwitchForm
                   form={form}
                   name="publish"

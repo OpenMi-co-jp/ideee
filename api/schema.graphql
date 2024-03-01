@@ -185,7 +185,7 @@ input CreateIdeaInput {
   productUrl: String
 
   """
-  下書きフラグ
+  公開フラグ
   """
   publish: Boolean
 
@@ -1391,7 +1391,7 @@ input UpdateIdeaInput {
   productUrl: String
 
   """
-  下書きフラグ
+  公開フラグ
   """
   publish: Boolean
 

@@ -644,7 +644,7 @@
             },
             {
               "name": "publish",
-              "description": "下書きフラグ",
+              "description": "公開フラグ",
               "type": {
                 "kind": "SCALAR",
                 "name": "Boolean",
@@ -4535,7 +4535,7 @@
             },
             {
               "name": "publish",
-              "description": "下書きフラグ",
+              "description": "公開フラグ",
               "type": {
                 "kind": "SCALAR",
                 "name": "Boolean",

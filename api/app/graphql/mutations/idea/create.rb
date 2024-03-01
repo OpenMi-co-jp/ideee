@@ -17,7 +17,7 @@ module Mutations
     argument :wish_function, String, required: false, description: '欲しい機能'
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
-    argument :publish, Boolean, required: false, description: '下書きフラグ'
+    argument :publish, Boolean, required: false, description: '公開フラグ'
     argument :tag_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'

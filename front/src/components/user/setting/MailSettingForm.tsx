@@ -11,19 +11,21 @@ export const MailSettingForm = () => {
   if (error) return <AlertError />
 
   return (
-      <Group p="md">
-        <Flex direction="column" gap="xl">
-          {items.map((item) => (
-            <Switch
-              key={item.id}
-              label={item.label}
-              name={`switch-${item.id}`}
-              checked={item.checked}
-              onChange={() => handleSwitchChange(item.id)}
-            />
-          ))}
-          <Button type="button" onClick={handleSubmit}>更新</Button>
-        </Flex>
-      </Group>
+    <Group p="md">
+      <Flex direction="column" gap="xl">
+        {items.map((item) => (
+          <Switch
+            key={item.id}
+            label={item.label}
+            name={`switch-${item.id}`}
+            checked={item.checked}
+            onChange={() => handleSwitchChange(item.id)}
+          />
+        ))}
+        <Button type="button" onClick={handleSubmit}>
+          更新
+        </Button>
+      </Flex>
+    </Group>
   )
 }

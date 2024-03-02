@@ -10,6 +10,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
+  def failure
+    Rails.logger.error "omniauth_failure_message=#{failure_message}"
+    # TODO: フロントでエラーメッセージ出す
+    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in"
+  end
+
   private
 
   def callback_for(provider)
@@ -20,14 +26,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         Slack::SendNewJob.perform_later(user, user_url)
       end
     rescue StandardError => e
-      Rails.logger.debug e.message
+      Rails.logger.error e.message
+      # TODO: エラーの出し方を考える
       render json: { action: 'ログイン', message: e.message }, status: :unauthorized
+      return
     end
     if user.persisted?
       sign_in user, event: :authentication
       cookies[:devise_provider] = provider
       access_token = user.generate_jwt_token
-      redirect_to Rails.application.config.frontend_url + "/user/auth_callback?token=#{access_token}"
+      redirect_to "#{Rails.application.config.frontend_url}/user/auth_callback?token=#{access_token}", allow_other_host: true
     else
       if (data = request.env['omniauth.auth']['extra']['raw_info'])
         session['devise.omniauth_data'] = {

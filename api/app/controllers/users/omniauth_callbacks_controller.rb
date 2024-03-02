@@ -26,8 +26,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         Slack::SendNewJob.perform_later(user, user_url)
       end
     rescue StandardError => e
-      Rails.logger.debug e.message
-      render json: { action: 'ログイン', message: e.message }, status: :unauthorized
+      Rails.logger.error e.message
+      # TODO: エラーの出し方を考える
+      return render json: { action: 'ログイン', message: e.message }, status: :unauthorized
     end
     if user.persisted?
       sign_in user, event: :authentication

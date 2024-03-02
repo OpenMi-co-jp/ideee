@@ -13,7 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def failure
     Rails.logger.error "omniauth_failure_message=#{failure_message}"
     # TODO: フロントでエラーメッセージ出す
-    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in"
+    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in", allow_other_host: true
   end
 
   private
@@ -28,7 +28,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     rescue StandardError => e
       Rails.logger.error e.message
       # TODO: エラーの出し方を考える
-      render json: { action: 'ログイン', message: e.message }, status: :unauthorized
+      render json: { action: 'ログfaイン', message: e.message }, status: :unauthorized
       return
     end
     if user.persisted?

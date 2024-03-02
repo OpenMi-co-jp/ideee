@@ -10,6 +10,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
+  def failure
+    Rails.logger.error "omniauth_failure_message=#{failure_message}"
+    # TODO: フロントでエラーメッセージ出す
+    redirect_to "#{Rails.application.config.frontend_url}/users/sign_in"
+  end
+
   private
 
   def callback_for(provider)

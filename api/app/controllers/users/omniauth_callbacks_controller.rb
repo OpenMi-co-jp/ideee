@@ -27,7 +27,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in user, event: :authentication
       cookies[:devise_provider] = provider
       access_token = user.generate_jwt_token
-      redirect_to Rails.application.config.frontend_url + "/user/auth_callback?token=#{access_token}"
+      redirect_to "#{Rails.application.config.frontend_url}user/auth_callback?token=#{access_token}", allow_other_host: true
+
     else
       if (data = request.env['omniauth.auth']['extra']['raw_info'])
         session['devise.omniauth_data'] = {

@@ -6,7 +6,7 @@ module Resolvers
       type Types::NotificationConfigType, null: false
 
       def resolve
-        ::NotificationConfig.find_by(user_id: context[:current_user].notification_config)
+        context[:current_user].notification_config
       end
     end
   end

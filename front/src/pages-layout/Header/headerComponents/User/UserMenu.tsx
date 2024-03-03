@@ -35,7 +35,7 @@ export const UserMenu = () => {
         </Link>
         <Link href="/settings">
           <Menu.Item leftSection={<IconSettings size={14} />}>
-            Settings
+            通知設定
           </Menu.Item>
         </Link>
         <Menu.Divider />

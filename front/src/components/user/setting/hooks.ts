@@ -4,6 +4,7 @@ import {
   useGetNotificationConfigQuery,
   useUpdateNotificationConfigMutation,
 } from '@/lib/generated/client'
+import { showError, showSuccess } from '@/components/notifications'
 
 export const useNotificationConfig = () => {
   const { currentUser } = useCurrentUser()
@@ -88,11 +89,11 @@ export const useNotificationConfig = () => {
     })
       .then((res) => {
         if (res.data?.updateNotificationConfig?.success) {
-          console.log({ action: '通知設定更新' })
+          showSuccess({ action: '通知設定更新' })
         }
       })
       .catch((error) => {
-        console.log({
+        showError({
           action: '通知設定更新',
           message: error.message.toString(),
         })

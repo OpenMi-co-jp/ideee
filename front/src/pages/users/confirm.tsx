@@ -13,7 +13,7 @@ function Confirm() {
         message: 'ログインしてください',
       })
     })
-  }, [])
+  }, [router])
 
   return (
     <LoadingOverlay

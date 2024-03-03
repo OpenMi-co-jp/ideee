@@ -5,10 +5,8 @@ module Resolvers
 
       type Types::NotificationConfigType, null: false
 
-      argument :user_id, ID, required: true, description: 'ユーザーID'
-
-      def resolve(**_args)
-        current_user.notification_config
+      def resolve
+        ::NotificationConfig.find_by(user_id: context[:current_user].id)
       end
     end
   end

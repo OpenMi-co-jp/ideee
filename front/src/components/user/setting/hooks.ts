@@ -7,9 +7,7 @@ import {
 
 export const useNotificationConfig = () => {
   const { currentUser } = useCurrentUser()
-  const { data, loading, error } = useGetNotificationConfigQuery({
-    variables: { userId: currentUser?.id.toString() || '' },
-  })
+  const { data, loading, error } = useGetNotificationConfigQuery()
   const [updateNotificationConfigMutation] =
     useUpdateNotificationConfigMutation()
   const [items, setItems] = useState<
@@ -76,6 +74,7 @@ export const useNotificationConfig = () => {
     updateNotificationConfigMutation({
       variables: {
         input: {
+          userId: currentUser?.id.toString() || '',
           commentEmail: items[0].checked,
           draftRemindEmail: items[1].checked,
           eventEmail: items[2].checked,
@@ -87,6 +86,17 @@ export const useNotificationConfig = () => {
         },
       },
     })
+      .then((res) => {
+        if (res.data?.updateNotificationConfig?.success) {
+          console.log({ action: '通知設定更新' })
+        }
+      })
+      .catch((error) => {
+        console.log({
+          action: '通知設定更新',
+          message: error.message.toString(),
+        })
+      })
   }
 
   return { items, handleSwitchChange, handleSubmit, loading, error }

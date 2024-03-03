@@ -1,5 +1,5 @@
-query GetNotificationConfig($userId:ID!){
-  notificationConfig(userId: $userId){
+query GetNotificationConfig {
+  notificationConfig {
     userId
     commentEmail
     draftRemindEmail
@@ -12,10 +12,10 @@ query GetNotificationConfig($userId:ID!){
   }
 }
 
-mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!){
-  updateNotificationConfig(input: $input){
+mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!) {
+  updateNotificationConfig(input: $input) {
     success
-    notificationConfig{
+    notificationConfig {
       commentEmail
       draftRemindEmail
       eventEmail

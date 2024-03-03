@@ -626,10 +626,6 @@ export type QueryIdeasArgs = {
   sort?: InputMaybe<SortCondition>
 }
 
-export type QueryNotificationConfigArgs = {
-  userId: Scalars['ID']
-}
-
 export type QueryRoomArgs = {
   id: Scalars['ID']
 }
@@ -802,6 +798,8 @@ export type UpdateNotificationConfigInput = {
   teamLeaveEmail: Scalars['Boolean']
   /** チームメッセージ通知 */
   teamMessageEmail: Scalars['Boolean']
+  /** ユーザーID */
+  userId: Scalars['ID']
   /** 毎週メール通知 */
   weeklyEmail: Scalars['Boolean']
 }
@@ -1252,7 +1250,7 @@ export type GetNotificationsQuery = {
 }
 
 export type GetNotificationConfigQueryVariables = Exact<{
-  userId: Scalars['ID']
+  [key: string]: never
 }>
 
 export type GetNotificationConfigQuery = {
@@ -2567,8 +2565,8 @@ export type GetNotificationsQueryResult = Apollo.QueryResult<
   GetNotificationsQueryVariables
 >
 export const GetNotificationConfigDocument = gql`
-  query GetNotificationConfig($userId: ID!) {
-    notificationConfig(userId: $userId) {
+  query GetNotificationConfig {
+    notificationConfig {
       userId
       commentEmail
       draftRemindEmail
@@ -2594,12 +2592,11 @@ export const GetNotificationConfigDocument = gql`
  * @example
  * const { data, loading, error } = useGetNotificationConfigQuery({
  *   variables: {
- *      userId: // value for 'userId'
  *   },
  * });
  */
 export function useGetNotificationConfigQuery(
-  baseOptions: Apollo.QueryHookOptions<
+  baseOptions?: Apollo.QueryHookOptions<
     GetNotificationConfigQuery,
     GetNotificationConfigQueryVariables
   >

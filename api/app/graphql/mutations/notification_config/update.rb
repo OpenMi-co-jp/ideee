@@ -18,7 +18,7 @@ module Mutations
 
     def resolve(**args)
       if context[:current_user].id != args[:user_id].to_i
-        return { success: false, errors: ['ユーザーの権限がありません'] }
+        return { success: false, errors: ['ログインしてください'] }
       end
 
       notification_config = ::NotificationConfig.find_by(user_id: args[:user_id])

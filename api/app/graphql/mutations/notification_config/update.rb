@@ -2,7 +2,6 @@ module Mutations
   class NotificationConfig::Update < BaseMutation
     graphql_name 'UpdateNotificationConfig'
 
-    argument :user_id, ID, required: true, description: 'ユーザーID'
     argument :comment_email, Boolean, required: true, description: 'コメント通知'
     argument :draft_remind_email, Boolean, required: true, description: '下書き通知'
     argument :event_email, Boolean, required: true, description: 'イベント通知'
@@ -17,11 +16,11 @@ module Mutations
     field :errors, [String], null: true, description: 'エラー'
 
     def resolve(**args)
-      if context[:current_user].id != args[:user_id].to_i
+      if context[:current_user].blank?
         return { success: false, errors: ['ログインしてください'] }
       end
 
-      notification_config = ::NotificationConfig.find_by(user_id: args[:user_id])
+      notification_config = context[:current_user].notification_config
       notification_config.assign_attributes(args.except(:user_id))
       notification_config.save!
       {

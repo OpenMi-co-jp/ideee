@@ -1558,11 +1558,6 @@ input UpdateNotificationConfigInput {
   teamMessageEmail: Boolean!
 
   """
-  ユーザーID
-  """
-  userId: ID!
-
-  """
   毎週メール通知
   """
   weeklyEmail: Boolean!

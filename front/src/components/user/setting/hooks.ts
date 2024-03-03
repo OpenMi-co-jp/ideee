@@ -75,7 +75,6 @@ export const useNotificationConfig = () => {
     updateNotificationConfigMutation({
       variables: {
         input: {
-          userId: currentUser?.id.toString() || '',
           commentEmail: items[0].checked,
           draftRemindEmail: items[1].checked,
           eventEmail: items[2].checked,

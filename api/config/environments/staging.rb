@@ -88,8 +88,6 @@ Rails.application.configure do
   config.frontend_url = ENV.fetch('FRONTEND_URL', nil)
 
   config.action_dispatch.cookies_same_site_protection = lambda do |request|
-    if request.origin == 'https://demo.ideee.tech'
-      :none
-    end
+    :none if request.origin == 'https://demo.ideee.tech'
   end
 end

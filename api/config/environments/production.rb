@@ -91,8 +91,6 @@ Rails.application.configure do
 
   config.action_dispatch.cookies_same_site_protection = lambda do |request|
     # TODO: 本番へ移行時にドメイン設定を変更
-    if request.origin == 'https://demo.ideee.tech'
-      :none
-    end
+    :none if request.origin == 'https://demo.ideee.tech'
   end
 end

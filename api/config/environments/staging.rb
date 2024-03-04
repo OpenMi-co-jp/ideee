@@ -54,6 +54,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'https://demo.ideee.tech' }
 
+  # TODO: staging 環境 (demo 環境) のデータをダミーに置き換えたら、 prodution.rb と同じ設定にする
   config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {

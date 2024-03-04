@@ -2,7 +2,7 @@ type Comment {
   """
   作成日
   """
-  createdAt: ISO8601DateTime!
+  createdAt: ISO8601DateTime
 
   """
   本文
@@ -12,27 +12,27 @@ type Comment {
   """
   コメントID
   """
-  id: ID!
+  id: ID
 
   """
   アイデアID
   """
-  ideaId: Int!
+  ideaId: Int
 
   """
   更新日
   """
-  updatedAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime
 
   """
   ユーザーオブジェクト
   """
-  user: User!
+  user: User
 
   """
   ユーザーID
   """
-  userId: Int!
+  userId: Int
 }
 
 """
@@ -1299,16 +1299,6 @@ input UpdateCommentInput {
   コメントID
   """
   id: ID!
-
-  """
-  【必須】アイデアID
-  """
-  ideaId: Int!
-
-  """
-  【必須】ユーザーID
-  """
-  userId: Int!
 }
 
 """
@@ -1323,7 +1313,12 @@ type UpdateCommentPayload {
   """
   コメントオブジェクト
   """
-  comment: Comment!
+  comment: Comment
+
+  """
+  エラーメッセージのリスト
+  """
+  errors: [String!]
 
   """
   成功フラグ

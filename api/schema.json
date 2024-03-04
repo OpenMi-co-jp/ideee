@@ -32,13 +32,9 @@
               "name": "createdAt",
               "description": "作成日",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ISO8601DateTime",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "ISO8601DateTime",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -68,13 +64,9 @@
               "name": "id",
               "description": "コメントID",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -86,13 +78,9 @@
               "name": "ideaId",
               "description": "アイデアID",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -104,13 +92,9 @@
               "name": "updatedAt",
               "description": "更新日",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ISO8601DateTime",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "ISO8601DateTime",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -122,13 +106,9 @@
               "name": "user",
               "description": "ユーザーオブジェクト",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "User",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -140,13 +120,9 @@
               "name": "userId",
               "description": "ユーザーID",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -4210,38 +4186,6 @@
               "defaultValue": null,
               "isDeprecated": false,
               "deprecationReason": null
-            },
-            {
-              "name": "userId",
-              "description": "【必須】ユーザーID",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "ideaId",
-              "description": "【必須】アイデアID",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
             }
           ],
           "enumValues": null
@@ -4273,12 +4217,30 @@
               "name": "comment",
               "description": "コメントオブジェクト",
               "type": {
-                "kind": "NON_NULL",
+                "kind": "OBJECT",
+                "name": "Comment",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "errors",
+              "description": "エラーメッセージのリスト",
+              "type": {
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Comment",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 }
               },
               "isDeprecated": false,

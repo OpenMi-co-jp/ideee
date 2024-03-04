@@ -2,6 +2,12 @@ query GetComment($id: ID!) {
   comment(id: $id) {
     id
     description
+    createdAt
+    user {
+      id
+      name
+      image
+    }
   }
 }
 

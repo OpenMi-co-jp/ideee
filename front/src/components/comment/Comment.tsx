@@ -1,14 +1,15 @@
 import { Group, Text, Paper, Flex } from '@mantine/core'
-import { CommentType } from '@/types/idea'
 import { FormatDate } from '@/utils/common'
 import { UserIcon } from '@/components/user'
 import Link from 'next/link'
 import { TextWithLinks } from '@/utils/Text'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { GetCommentQuery } from '@/lib/generated/client'
 
-export const Comment = ({ comment }: CommentType) => {
+export const Comment = ({ comment }: GetCommentQuery) => {
   const { currentUser } = useCurrentUser()
   const { description, createdAt, user } = comment
+  if (!user) return null
   const commentCreatedAt = new Date(createdAt)
   const isCurrentUser =
     currentUser && user && String(currentUser.id) === String(user.id)

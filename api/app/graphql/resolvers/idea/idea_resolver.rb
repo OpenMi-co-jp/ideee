@@ -10,7 +10,7 @@ module Resolvers
 
     def resolve(**args)
       idea = ::Idea.find(args[:id])
-      if idea.draft? && context[:current_user]&.id != idea.user.id)
+      if idea.draft? && (context[:current_user]&.id != idea.user.id)
         raise GraphQL::ExecutionError, '権限がありません'
       end
 

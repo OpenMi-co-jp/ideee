@@ -19,7 +19,7 @@ RSpec.describe Resolvers::User::UserCountResolver do
       res_json = response.parsed_body
       result = res_json['data']['userCount']
 
-      expect(result).to eq(User.count)
+      expect(result).to eq(5)
     end
   end
 end

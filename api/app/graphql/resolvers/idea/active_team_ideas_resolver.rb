@@ -8,8 +8,7 @@ module Resolvers
 
     def resolve
       ::Idea.published
-            .eager_load(:team)
-            .where(team: { status: :active })
+            .team_active
             .preload(:idea_tags)
             .eager_load(:user)
             .sample(4)

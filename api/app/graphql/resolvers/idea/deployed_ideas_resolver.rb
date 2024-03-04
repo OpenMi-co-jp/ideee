@@ -7,7 +7,7 @@ module Resolvers
     type [Types::Idea::IdeaType], null: false
 
     def resolve
-      ::Idea.eager_load(:user).published.preload(:idea_tags).deployed.sample(4)
+      ::Idea.published.eager_load(:user).preload(:idea_tags).deployed.sample(4)
     end
   end
 end

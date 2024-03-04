@@ -722,7 +722,7 @@ export type UpdateIdeaInput = {
   /** 作っているアプリのURL */
   productUrl?: InputMaybe<Scalars['String']>
   /** 公開フラグ */
-  publish?: InputMaybe<Scalars['Boolean']>
+  publish: Scalars['Boolean']
   /** 類似サービス */
   similar?: InputMaybe<Scalars['String']>
   /** 権利スタンス */

@@ -2,7 +2,7 @@ module Mutations
   module Concerns
     module Idea
       module Publish
-        def sidekiq_jobs(idea)
+        def idea_publish_notify(idea)
           return unless Rails.env.production?
 
           idea_url = "#{Rails.application.config.frontend_url}/ideas/#{idea.id}"

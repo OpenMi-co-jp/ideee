@@ -176,7 +176,7 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
                 <SwitchForm
                   form={form}
                   name="publish"
-                  label="公開する"
+                  label="公開ステータス"
                   mt="xl"
                   onLabel="公開"
                   offLabel="下書き"

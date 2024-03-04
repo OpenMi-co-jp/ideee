@@ -7,7 +7,7 @@ module Resolvers
     type [Types::Idea::IdeaType], null: false
 
     def resolve
-      new_ideas = ::Idea.eager_load(:user).published.last(4)
+      new_ideas = ::Idea.published.eager_load(:user).last(4)
       hot_ideas = ::Idea.published.recent_select.eager_load([:user]).most_liked.first(6)
       new_ideas.concat(hot_ideas).shuffle
     end

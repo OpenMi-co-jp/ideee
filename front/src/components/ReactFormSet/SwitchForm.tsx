@@ -27,7 +27,7 @@ export const SwitchForm = <T extends FieldValues>(props: SwitchProps<T>) => {
           onChange={onChange}
           onBlur={onBlur}
           ref={ref}
-          label={<span style={{ fontSize: 'medium' }}>{label}</span>}
+          label={<span style={{ fontSize: 'small' }}>{label}</span>}
           labelPosition="left"
           disabled={disabled}
           size="xl"

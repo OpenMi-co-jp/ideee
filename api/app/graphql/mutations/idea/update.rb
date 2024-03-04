@@ -19,7 +19,7 @@ module Mutations
     argument :wish_function, String, required: false, description: '欲しい機能'
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
-    argument :publish, Boolean, required: false, description: '公開フラグ'
+    argument :publish, Boolean, required: true, description: '公開フラグ'
     argument :tag_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
@@ -51,7 +51,7 @@ module Mutations
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
-      sidekiq_jobs(idea) if from_draft && !idea.draft
+      idea_publish_notify(idea) if from_draft && !idea.draft
       {
         idea:,
         success: true

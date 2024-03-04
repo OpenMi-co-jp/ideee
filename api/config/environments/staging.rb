@@ -52,19 +52,18 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
 
-  # TODO: 本番へ移行時にドメイン設定を変更
-  config.action_mailer.default_url_options = { host: 'https://demo.ideee.tech/' }
-  # config.action_mailer.default_url_options = { host: 'https://www.ideee.tech/' }
+  config.action_mailer.default_url_options = { host: 'https://demo.ideee.tech' }
 
-  config.action_mailer.delivery_method = :smtp
-
+  # TODO: staging 環境 (demo 環境) のデータをダミーに置き換えたら、 prodution.rb と同じ設定にする
+  config.action_mailer.delivery_method = :letter_opener_web
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
     port: 587,
-    address: 'smtp.sendgrid.net',
-    domain: 'heroku.com',
-    user_name: 'apikey',
-    password: Rails.application.credentials.dig(:sendgrid, :api_key),
-    authentication: 'plain',
+    address: 'smtp.gmail.com',
+    domain: 'smtp.gmail.com',
+    user_name: Rails.application.credentials.dig(:email, :address),
+    password: Rails.application.credentials.dig(:email, :pass),
+    authentication: 'login',
     enable_starttls_auto: true
   }
 
@@ -90,7 +89,6 @@ Rails.application.configure do
   config.frontend_url = ENV.fetch('FRONTEND_URL', nil)
 
   config.action_dispatch.cookies_same_site_protection = lambda do |request|
-    # TODO: 本番へ移行時にドメイン設定を変更
     :none if request.origin == 'https://demo.ideee.tech'
   end
 end

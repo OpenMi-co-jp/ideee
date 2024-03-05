@@ -12,10 +12,10 @@ RSpec.describe Resolvers::User::UserCountResolver do
 
     before do
       create_list(:user, 5)
-      post graphql_path, params: { query: }
     end
 
     it '現在のユーザー数を取得する' do
+      post graphql_path, params: { query: }
       res_json = response.parsed_body
       result = res_json['data']['userCount']
 

@@ -1,9 +1,14 @@
 import { Title, Text, Button, Box, BackgroundImage } from '@mantine/core'
 import Link from 'next/link'
+import { useGetUserCountQuery } from '@/lib/generated/client'
 
 export const TopVision = () => {
-  // TODO: 現在のユーザー数を設定予定
-  const userNum = 937
+  const { data, loading, error } = useGetUserCountQuery()
+
+  if (loading) return <p>取得中...</p>
+
+  const userCount = data?.userCount
+
   return (
     <div
       style={{
@@ -68,7 +73,10 @@ export const TopVision = () => {
         </Link>
         <Text c="#818181" pt="30px" fz="20px" fw="bold">
           現在のユーザー数:{' '}
-          <b style={{ color: '#FF862F', fontSize: '2rem' }}>{userNum}</b>人
+          <b style={{ color: '#FF862F', fontSize: '2rem' }}>
+            {userCount !== undefined ? userCount : '-'}
+          </b>
+          人
         </Text>
       </Box>
     </div>

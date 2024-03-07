@@ -32,7 +32,7 @@ module Mutations
       end
 
       idea = ::Idea.find(args[:id])
-      from_draft = idea.draft
+      from_draft = idea.draft?
       idea.assign_attributes(
         icon: args[:icon],
         name: args[:name],

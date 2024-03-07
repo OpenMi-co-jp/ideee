@@ -156,7 +156,10 @@ export const FooterForm = (footerData: FooterLinksProps) => {
                   <IconBrandTwitter size="1.05rem" stroke={1.5} />
                 </ActionIcon>
               </Link>
-              <Link href="https://qiita.com/naruqiita/items/0ef4b963434226eacb6b" target="_blank">
+              <Link
+                href="https://qiita.com/naruqiita/items/0ef4b963434226eacb6b"
+                target="_blank"
+              >
                 <ActionIcon
                   size="lg"
                   c="dimmed"

@@ -619,8 +619,8 @@
               "deprecationReason": null
             },
             {
-              "name": "draft",
-              "description": "下書きフラグ",
+              "name": "publish",
+              "description": "公開フラグ",
               "type": {
                 "kind": "SCALAR",
                 "name": "Boolean",
@@ -4514,12 +4514,16 @@
               "deprecationReason": null
             },
             {
-              "name": "draft",
-              "description": "下書きフラグ",
+              "name": "publish",
+              "description": "公開フラグ",
               "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
               },
               "defaultValue": null,
               "isDeprecated": false,

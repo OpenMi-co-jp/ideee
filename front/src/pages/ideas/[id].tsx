@@ -8,18 +8,26 @@ import type { GetIdeaQuery } from '@/lib/generated/client'
 import { Container, Loader } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import classes from '@/styles/mask.module.css'
+import { showError } from '@/components/notifications'
+import { useRouter } from 'next/router'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
   const { data, loading, error } = useGetIdea()
-
+  const router = useRouter()
   const [idea, setIdea] = useState({})
 
   useEffect(() => {
+    if (error) {
+      showError({ action: 'アイデアの表示', message: error.message })
+      router.push('/')
+      return
+    }
+
     if (data) {
       setIdea(data?.idea)
     }
-  }, [data])
+  }, [data, error])
 
   if (loading) return <Loader color="yellow" />
 

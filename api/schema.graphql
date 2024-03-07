@@ -145,11 +145,6 @@ input CreateIdeaInput {
   clientMutationId: String
 
   """
-  下書きフラグ
-  """
-  draft: Boolean
-
-  """
   GithubリポジトリURL
   """
   githubUrl: String
@@ -188,6 +183,11 @@ input CreateIdeaInput {
   作っているアプリのURL
   """
   productUrl: String
+
+  """
+  公開フラグ
+  """
+  publish: Boolean
 
   """
   類似サービス
@@ -1346,11 +1346,6 @@ input UpdateIdeaInput {
   clientMutationId: String
 
   """
-  下書きフラグ
-  """
-  draft: Boolean
-
-  """
   GithubリポジトリURL
   """
   githubUrl: String
@@ -1394,6 +1389,11 @@ input UpdateIdeaInput {
   作っているアプリのURL
   """
   productUrl: String
+
+  """
+  公開フラグ
+  """
+  publish: Boolean!
 
   """
   類似サービス

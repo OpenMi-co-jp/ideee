@@ -67,10 +67,14 @@ const IdeaEditFormSchema = z.object({
     '登録できない画像形式です。別の形式でもう一度お試しください。'
   ),
   tagList: z
-    .array(
-      z.string().max(50, { message: 'タグは50文字以内で入力してください' })
-    )
-    .nonempty({ message: '1つ以上のタグを設定してください' }),
+    .string()
+    .trim()
+    .array()
+    .max(50, { message: 'タグは50文字以内で入力してください' })
+    .nonempty({ message: '1つ以上のタグを設定してください' })
+    .refine((tags) => tags.every((tag) => tag.match(/[\s\u3000]/)), {
+      message: 'タグにはスペースを含めないでください',
+    }),
 })
 
 export const UseEditIdea = () => {

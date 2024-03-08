@@ -24,7 +24,12 @@ export const FooterForm = (footerData: FooterLinksProps) => {
   const { colorScheme } = useMantineColorScheme()
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
-      <Link key={index} href={link.link} target="_blank">
+      <Link
+        key={index}
+        href={link.link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Text
           style={(theme) => ({
             display: 'block',
@@ -142,7 +147,11 @@ export const FooterForm = (footerData: FooterLinksProps) => {
               align="start"
               mt={{ base: 'xs', sm: 0 }}
             >
-              <Link href="https://twitter.com/ideee_tech" target="_blank">
+              <Link
+                href="https://twitter.com/ideee_tech"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ActionIcon
                   size="lg"
                   c="dimmed"
@@ -159,6 +168,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
               <Link
                 href="https://qiita.com/naruqiita/items/0ef4b963434226eacb6b"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <ActionIcon
                   size="lg"

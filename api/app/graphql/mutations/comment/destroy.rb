@@ -8,6 +8,10 @@ module Mutations
 
     def resolve(**args)
       comment = ::Comment.find_by(id: args[:id])
+      unless comment.user_id == context[:current_user].id
+        raise GraphQL::ExecutionError, '権限がありません'
+      end
+
       comment.destroy!
       {
         success: true

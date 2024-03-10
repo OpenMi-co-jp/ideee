@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { TextWithLinks } from '@/utils/Text'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { GetCommentQuery } from '@/lib/generated/client'
+import { CommentAction } from '@/components/comment/CommentAction'
 
 export const Comment = ({ comment }: GetCommentQuery) => {
   const { currentUser } = useCurrentUser()
@@ -46,6 +47,7 @@ export const Comment = ({ comment }: GetCommentQuery) => {
             <Text c="gray" mx="xs">
               {FormatDate(commentCreatedAt)}
             </Text>
+            <CommentAction comment={comment} />
           </Flex>
         </Flex>
       </Flex>

@@ -16,7 +16,7 @@ import Link from 'next/link'
 interface FooterLinksProps {
   data: {
     title: string
-    links: { label: string; link: string }[]
+    links: { label: string; link: string; isExternal: boolean }[]
   }[]
 }
 
@@ -27,8 +27,9 @@ export const FooterForm = (footerData: FooterLinksProps) => {
       <Link
         key={index}
         href={link.link}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(link.isExternal
+          ? { target: '_blank', rel: 'noopener noreferrer' }
+          : {})}
       >
         <Text
           style={(theme) => ({

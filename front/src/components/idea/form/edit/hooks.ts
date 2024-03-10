@@ -56,13 +56,15 @@ const IdeaEditFormSchema = z.object({
     .string()
     .url({ message: 'URLの形式で入力してください' })
     .optional()
-    .or(z.literal('')),
+    .or(z.literal(''))
+    .nullable(),
   productUrl: z
     .string()
     .url({ message: 'URLの形式で入力してください' })
     .optional()
-    .or(z.literal('')),
-  draft: z.boolean().nullish(),
+    .or(z.literal(''))
+    .nullable(),
+  publish: z.boolean().nullish(),
   icon: base64ImageValidation(
     '登録できない画像形式です。別の形式でもう一度お試しください。'
   ),
@@ -87,6 +89,7 @@ export const UseEditIdea = () => {
     if (idea) {
       form.reset({
         ...idea,
+        publish: !idea.draft,
         tagList: idea.ideaTags?.map((tag) => String(tag.name)),
       })
     }
@@ -110,7 +113,7 @@ export const UseEditIdea = () => {
             wishFunction: data.wishFunction,
             githubUrl: data.githubUrl,
             productUrl: data.productUrl,
-            draft: data.draft,
+            publish: data.publish,
             icon: data.icon,
             userId: String(idea?.userId),
             tagList: data.tagList,

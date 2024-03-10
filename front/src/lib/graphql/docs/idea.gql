@@ -13,6 +13,7 @@ query GetIdea($id: ID!) {
     similar
     stance
 		note
+    draft
     createdAt
     updatedAt
     userId

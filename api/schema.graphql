@@ -2,7 +2,7 @@ type Comment {
   """
   作成日
   """
-  createdAt: ISO8601DateTime!
+  createdAt: ISO8601DateTime
 
   """
   本文
@@ -12,27 +12,27 @@ type Comment {
   """
   コメントID
   """
-  id: ID!
+  id: ID
 
   """
   アイデアID
   """
-  ideaId: Int!
+  ideaId: Int
 
   """
   更新日
   """
-  updatedAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime
 
   """
   ユーザーオブジェクト
   """
-  user: User!
+  user: User
 
   """
   ユーザーID
   """
-  userId: Int!
+  userId: Int
 }
 
 """
@@ -145,11 +145,6 @@ input CreateIdeaInput {
   clientMutationId: String
 
   """
-  下書きフラグ
-  """
-  draft: Boolean
-
-  """
   GithubリポジトリURL
   """
   githubUrl: String
@@ -188,6 +183,11 @@ input CreateIdeaInput {
   作っているアプリのURL
   """
   productUrl: String
+
+  """
+  公開フラグ
+  """
+  publish: Boolean
 
   """
   類似サービス
@@ -1153,6 +1153,11 @@ type Query {
   ): Ideas!
 
   """
+  最新の5件の通知一覧
+  """
+  latestNotifications: [Notification!]!
+
+  """
   ユーザーのいいね一覧
   """
   likes: [Like!]!
@@ -1211,6 +1216,11 @@ type Query {
     """
     id: ID!
   ): User!
+
+  """
+  ユーザー数
+  """
+  userCount: Int!
 
   """
   ユーザー一覧
@@ -1361,16 +1371,6 @@ input UpdateCommentInput {
   コメントID
   """
   id: ID!
-
-  """
-  【必須】アイデアID
-  """
-  ideaId: Int!
-
-  """
-  【必須】ユーザーID
-  """
-  userId: Int!
 }
 
 """
@@ -1385,7 +1385,12 @@ type UpdateCommentPayload {
   """
   コメントオブジェクト
   """
-  comment: Comment!
+  comment: Comment
+
+  """
+  エラーメッセージのリスト
+  """
+  errors: [String!]
 
   """
   成功フラグ
@@ -1406,11 +1411,6 @@ input UpdateIdeaInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-
-  """
-  下書きフラグ
-  """
-  draft: Boolean
 
   """
   GithubリポジトリURL
@@ -1456,6 +1456,11 @@ input UpdateIdeaInput {
   作っているアプリのURL
   """
   productUrl: String
+
+  """
+  公開フラグ
+  """
+  publish: Boolean!
 
   """
   類似サービス

@@ -1,0 +1,29 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "bf74f0f8f6d06d27cc6fe12cd9760651d4b420e88439f556638f1ef1870aeb51",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/users/omniauth_callbacks_controller.rb",
+      "line": 38,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(\"#{Rails.application.config.frontend_url}/user/auth_callback?token=#{User.from_omniauth(request.env[\"omniauth.auth\"]).generate_jwt_token}\", :allow_other_host => true)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Users::OmniauthCallbacksController",
+        "method": "callback_for"
+      },
+      "user_input": "User.from_omniauth(request.env[\"omniauth.auth\"]).generate_jwt_token",
+      "confidence": "Weak",
+      "cwe_id": [
+        601
+      ],
+      "note": "無視しても特に問題なさそう"
+    }
+  ],
+  "updated": "2024-03-02 07:11:40 +0000",
+  "brakeman_version": "6.0.1"
+}

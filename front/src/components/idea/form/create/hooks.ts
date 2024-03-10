@@ -58,8 +58,9 @@ const IdeaCreateFormSchema = z.object({
     .string()
     .url({ message: 'URLの形式で入力してください' })
     .optional()
-    .or(z.literal('')),
-  draft: z.boolean().nullish(),
+    .or(z.literal(''))
+    .nullable(),
+  publish: z.boolean().nullish(),
   icon: z.string().nullish(),
   tagList: z
     .array(
@@ -97,7 +98,7 @@ export const UseCreateIdea = () => {
             wishFunction: data.wishFunction,
             githubUrl: data.githubUrl,
             productUrl: data.productUrl,
-            draft: data.draft,
+            publish: data.publish,
             icon: data.icon,
             tagList: data.tagList,
           },

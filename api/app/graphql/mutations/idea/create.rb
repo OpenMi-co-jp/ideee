@@ -1,5 +1,7 @@
 module Mutations
   class Idea::Create < BaseMutation
+    include Concerns::Idea::Publish
+
     graphql_name 'CreateIdea'
 
     argument :icon, String, required: false, description: 'アイデアアイコン'
@@ -15,7 +17,7 @@ module Mutations
     argument :wish_function, String, required: false, description: '欲しい機能'
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
-    argument :draft, Boolean, required: false, description: '下書きフラグ'
+    argument :publish, Boolean, required: false, description: '公開フラグ'
     argument :tag_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
@@ -37,14 +39,11 @@ module Mutations
         github_url: args[:github_url],
         stance: args[:stance],
         product_url: args[:product_url],
-        draft: args[:draft],
+        draft: !args[:publish],
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
-      if Rails.env.production?
-        url = "#{Rails.application.config.host}/ideas/#{idea.id}"
-        TwitterJob::Tweet.new.perform(idea, url)
-      end
+      idea_publish_notify(idea) unless idea.draft
       {
         idea:,
         success: true

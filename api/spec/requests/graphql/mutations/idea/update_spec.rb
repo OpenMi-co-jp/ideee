@@ -17,7 +17,8 @@ RSpec.describe Mutations::Idea::Update do
         background: 'updated background',
         goal: 'updated goal',
         stance: 'free_right',
-        tagList: %w[tag1 tag2]
+        tagList: %w[tag1 tag2],
+        publish: true
       }
     }
   end

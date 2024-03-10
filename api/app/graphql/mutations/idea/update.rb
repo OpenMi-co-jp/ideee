@@ -1,5 +1,7 @@
 module Mutations
   class Idea::Update < BaseMutation
+    include Concerns::Idea::Publish
+
     graphql_name 'UpdateIdea'
 
     argument :id, ID, required: true, description: 'アイデアID'
@@ -17,7 +19,7 @@ module Mutations
     argument :wish_function, String, required: false, description: '欲しい機能'
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
-    argument :draft, Boolean, required: false, description: '下書きフラグ'
+    argument :publish, Boolean, required: true, description: '公開フラグ'
     argument :tag_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
@@ -30,6 +32,7 @@ module Mutations
       end
 
       idea = ::Idea.find(args[:id])
+      from_draft = idea.draft?
       idea.assign_attributes(
         icon: args[:icon],
         name: args[:name],
@@ -44,10 +47,11 @@ module Mutations
         github_url: args[:github_url],
         stance: args[:stance],
         product_url: args[:product_url],
-        draft: args[:draft],
+        draft: !args[:publish],
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
+      idea_publish_notify(idea) if from_draft && !idea.draft
       {
         idea:,
         success: true

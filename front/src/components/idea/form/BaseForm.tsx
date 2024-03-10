@@ -17,6 +17,7 @@ import {
   TextAreaForm,
   TagsForm,
   DropzoneForm,
+  SwitchForm,
 } from '@/components/ReactFormSet'
 import {
   UseFormReturn,
@@ -171,6 +172,16 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
                   )
                 }}
               />
+              {!form.getValues('publish') && (
+                <SwitchForm
+                  form={form}
+                  name="publish"
+                  label="公開ステータス"
+                  mt="xl"
+                  onLabel="公開"
+                  offLabel="下書き"
+                />
+              )}
             </Paper>
             <Center>
               <Button

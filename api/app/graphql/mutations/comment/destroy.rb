@@ -7,7 +7,7 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
 
     def resolve(**args)
-      comment = ::Comment.find_by(id: args[:id])
+      comment = ::Comment.find(args[:id])
       unless comment.user_id == context[:current_user].id
         raise GraphQL::ExecutionError, '権限がありません'
       end

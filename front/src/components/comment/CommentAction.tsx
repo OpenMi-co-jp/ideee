@@ -8,7 +8,7 @@ export const CommentAction = ({ comment }: GetCommentQuery) => {
   const [destroyComment] = useDestroyCommentMutation({
     variables: {
       input: {
-        id: comment.id as string,
+        id: comment?.id ?? '',
       },
     },
   })

@@ -27,9 +27,8 @@ export const FooterForm = (footerData: FooterLinksProps) => {
       <Link
         key={index}
         href={link.link}
-        {...(link.isExternal
-          ? { target: '_blank', rel: 'noopener noreferrer' }
-          : {})}
+        target="_blank"
+        {...(link.isExternal && { rel: 'noopener noreferrer' })}
       >
         <Text
           style={(theme) => ({

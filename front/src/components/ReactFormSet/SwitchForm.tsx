@@ -9,8 +9,8 @@ type SwitchProps<T extends FieldValues> = MantineStyleProps & {
   form: UseFormReturn<T>
   required?: boolean
   disabled?: boolean
-  onLabel: string
-  offLabel: string
+  onLabel?: string
+  offLabel?: string
 }
 
 export const SwitchForm = <T extends FieldValues>(props: SwitchProps<T>) => {
@@ -31,8 +31,8 @@ export const SwitchForm = <T extends FieldValues>(props: SwitchProps<T>) => {
           labelPosition="left"
           disabled={disabled}
           size="xl"
-          onLabel={onLabel}
-          offLabel={offLabel}
+          onLabel={onLabel || 'オン'}
+          offLabel={offLabel || 'オフ'}
           error={form.formState.errors[name]?.message as string | undefined}
         />
       )}

@@ -20,5 +20,7 @@ module Types
     field :destroy_like, mutation: Mutations::Like::Destroy, description: 'いいね削除'
 
     field :create_difficulty, mutation: Mutations::Difficulty::Create, description: '難易度作成'
+
+    field :update_notification_config, mutation: Mutations::NotificationConfig::Update, description: '通知設定更新'
   end
 end

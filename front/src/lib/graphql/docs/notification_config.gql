@@ -1,0 +1,29 @@
+query GetNotificationConfig {
+  notificationConfig {
+    userId
+    commentEmail
+    draftRemindEmail
+    eventEmail
+    heartEmail
+    teamJoinEmail
+    teamLeaveEmail
+    teamMessageEmail
+    weeklyEmail
+  }
+}
+
+mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!) {
+  updateNotificationConfig(input: $input) {
+    success
+    notificationConfig {
+      commentEmail
+      draftRemindEmail
+      eventEmail
+      heartEmail
+      teamJoinEmail
+      teamLeaveEmail
+      teamMessageEmail
+      weeklyEmail
+    }
+  }
+}

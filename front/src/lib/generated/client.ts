@@ -223,6 +223,8 @@ export type DestroyCommentPayload = {
   __typename?: 'DestroyCommentPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** 成功フラグ */
   success: Scalars['Boolean']
 }

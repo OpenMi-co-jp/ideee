@@ -16,7 +16,7 @@ import Link from 'next/link'
 interface FooterLinksProps {
   data: {
     title: string
-    links: { label: string; link: string }[]
+    links: { label: string; link: string; isExternal: boolean }[]
   }[]
 }
 
@@ -24,7 +24,12 @@ export const FooterForm = (footerData: FooterLinksProps) => {
   const { colorScheme } = useMantineColorScheme()
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
-      <Link key={index} href={link.link}>
+      <Link
+        key={index}
+        href={link.link}
+        target="_blank"
+        {...(link.isExternal && { rel: 'noopener noreferrer' })}
+      >
         <Text
           style={(theme) => ({
             display: 'block',
@@ -142,30 +147,42 @@ export const FooterForm = (footerData: FooterLinksProps) => {
               align="start"
               mt={{ base: 'xs', sm: 0 }}
             >
-              <ActionIcon
-                size="lg"
-                c="dimmed"
-                style={(theme) => ({
-                  backgroundColor:
-                    colorScheme === 'dark'
-                      ? theme.colors.dark[6]
-                      : theme.colors.gray[0],
-                })}
+              <Link
+                href="https://twitter.com/ideee_tech"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <IconBrandTwitter size="1.05rem" stroke={1.5} />
-              </ActionIcon>
-              <ActionIcon
-                size="lg"
-                c="dimmed"
-                style={(theme) => ({
-                  backgroundColor:
-                    colorScheme === 'dark'
-                      ? theme.colors.dark[6]
-                      : theme.colors.gray[0],
-                })}
+                <ActionIcon
+                  size="lg"
+                  c="dimmed"
+                  style={(theme) => ({
+                    backgroundColor:
+                      colorScheme === 'dark'
+                        ? theme.colors.dark[6]
+                        : theme.colors.gray[0],
+                  })}
+                >
+                  <IconBrandTwitter size="1.05rem" stroke={1.5} />
+                </ActionIcon>
+              </Link>
+              <Link
+                href="https://qiita.com/naruqiita/items/0ef4b963434226eacb6b"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <IconNews size="1.05rem" stroke={1.5} />
-              </ActionIcon>
+                <ActionIcon
+                  size="lg"
+                  c="dimmed"
+                  style={(theme) => ({
+                    backgroundColor:
+                      colorScheme === 'dark'
+                        ? theme.colors.dark[6]
+                        : theme.colors.gray[0],
+                  })}
+                >
+                  <IconNews size="1.05rem" stroke={1.5} />
+                </ActionIcon>
+              </Link>
             </Group>
           </Flex>
         </Container>

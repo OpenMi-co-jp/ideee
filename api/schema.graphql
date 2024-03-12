@@ -410,6 +410,11 @@ type DestroyCommentPayload {
   clientMutationId: String
 
   """
+  エラーリスト
+  """
+  errors: [String!]
+
+  """
   成功フラグ
   """
   success: Boolean!

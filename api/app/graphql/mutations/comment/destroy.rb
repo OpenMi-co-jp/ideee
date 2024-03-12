@@ -5,6 +5,7 @@ module Mutations
     argument :id, ID, required: true, description: 'コメントID'
 
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
       comment = ::Comment.find(args[:id])
@@ -15,6 +16,11 @@ module Mutations
       comment.destroy!
       {
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

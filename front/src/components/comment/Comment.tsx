@@ -47,7 +47,7 @@ export const Comment = ({ comment }: GetCommentQuery) => {
             <Text c="gray" mx="xs">
               {FormatDate(commentCreatedAt)}
             </Text>
-            <CommentAction comment={comment} />
+            {isCurrentUser && <CommentAction comment={comment} />}
           </Flex>
         </Flex>
       </Flex>

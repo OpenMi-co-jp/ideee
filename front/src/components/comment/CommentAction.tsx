@@ -15,6 +15,15 @@ export const CommentAction = ({ comment }: GetCommentQuery) => {
   const { refetch } = useCommentsInstance()
 
   const handleDestroyComment = () => {
+    if (!comment?.id) {
+      showError({
+        action: 'コメント削除',
+        message: 'コメントIDが見つかりません。',
+      })
+
+      return
+    }
+
     destroyComment()
       .then(() => {
         showSuccess({ action: 'コメント削除' })

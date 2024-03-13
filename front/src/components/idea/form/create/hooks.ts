@@ -66,7 +66,10 @@ const IdeaCreateFormSchema = z.object({
     .array(
       z.string().max(50, { message: 'タグは50文字以内で入力してください' })
     )
-    .nonempty({ message: '1つ以上のタグを設定してください' }),
+    .nonempty({ message: '1つ以上のタグを設定してください' })
+    .refine((tags) => tags.every((tag) => !tag.match(/[\s\u3000]/)), {
+      message: 'タグにはスペースを含めないでください',
+    }),
 })
 
 export const UseCreateIdea = () => {

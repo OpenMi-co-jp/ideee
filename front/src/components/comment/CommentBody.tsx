@@ -1,20 +1,14 @@
 import { Text, Paper, Flex } from '@mantine/core'
 import { FormatDate } from '@/utils/common'
 import { TextWithLinks } from '@/utils/Text'
-import { useCurrentUser } from '@/context/CurrentUserContext'
 import { CommentAction } from '@/components/comment/CommentAction'
 import { useComment } from '@/context/CommentContext'
 
-export const CommentBody = () => {
-  const { currentUser } = useCurrentUser()
+export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   const { comment } = useComment()
   const { description, createdAt, user } = comment
 
-  if (!user) return null
-
   const commentCreatedAt = new Date(createdAt)
-  const isCurrentUser =
-    currentUser && user && String(currentUser.id) === String(user.id)
 
   return (
     <>

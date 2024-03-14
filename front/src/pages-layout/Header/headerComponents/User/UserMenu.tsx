@@ -28,7 +28,7 @@ export const UserMenu = () => {
             マイページ
           </Menu.Item>
         </Link>
-        <Link href={`/users/${currentUser?.id}/edit`}>
+        <Link href={'/mypage/edit'}>
           <Menu.Item leftSection={<IconUserEdit size={14} />}>
             ユーザー情報編集
           </Menu.Item>

@@ -20,7 +20,7 @@ export const CommentForm = () => {
           disabled={!description}
           leftSection={<IconSend />}
         >
-          Send
+          保存
         </Button>
       </Center>
     </form>

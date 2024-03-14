@@ -1,5 +1,6 @@
 import { Paper, Title, Divider } from '@mantine/core'
 import { Comment } from '../Comment'
+import { CommentProvider } from '@/context/CommentContext'
 
 import { useCommentsInstance } from './useCommentsInstance'
 
@@ -13,7 +14,9 @@ export const CommentList = () => {
       </Title>
       <Divider size="sm" my="xs" color="gray" />
       {data?.comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
+        <CommentProvider comment={comment} key={comment.id}>
+          <Comment />
+        </CommentProvider>
       ))}
     </Paper>
   )

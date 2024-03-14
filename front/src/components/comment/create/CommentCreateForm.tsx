@@ -1,9 +1,9 @@
 import { Button, Center } from '@mantine/core'
 import { TextAreaForm } from '@/components/ReactFormSet'
-import { useCommentAction } from './hooks'
+import { useCommentAction } from './create'
 import { IconSend } from '@tabler/icons-react'
 
-export const CommentForm = () => {
+export const CommentCreateForm = () => {
   const { form, onSubmit } = useCommentAction()
   const description = form.watch('description')
 

@@ -18,7 +18,7 @@ const getSections = (idea: GetIdeaQuery['idea'], currentUser: boolean) => {
       { label: 'ターゲット(ペルソナ)', content: idea?.target },
       { label: 'マネタイズ方法', content: idea?.monetize },
       { label: '類似サービス', content: idea?.similar },
-      { label: '補足', content: idea?.note },
+      // { label: '補足', content: idea?.note }, TODO: 後で表示 see: https://github.com/naru20181117/ideee/issues/1368
     ]
   } else {
     return [

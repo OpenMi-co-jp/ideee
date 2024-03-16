@@ -1,10 +1,11 @@
 import { ActionMenu } from '@/components/action/Menu'
-import { GetCommentQuery } from '@/lib/generated/client'
 import { showSuccess, showError } from '../notifications'
 import { useDestroyCommentMutation } from '@/lib/generated/client'
 import { useCommentsInstance } from '@/components/comment/CommentList/useCommentsInstance'
+import { useComment } from '@/context/CommentContext'
 
-export const CommentAction = ({ comment }: GetCommentQuery) => {
+export const CommentAction = () => {
+  const { comment, setIsEditing } = useComment()
   const [destroyComment] = useDestroyCommentMutation({
     variables: {
       input: {
@@ -20,7 +21,6 @@ export const CommentAction = ({ comment }: GetCommentQuery) => {
         action: 'コメント削除',
         message: 'コメントIDが見つかりません。',
       })
-
       return
     }
 
@@ -41,7 +41,7 @@ export const CommentAction = ({ comment }: GetCommentQuery) => {
     <ActionMenu
       title="コメント管理"
       onEdit={() => {
-        console.log('edit', comment.id)
+        setIsEditing(true)
       }}
       onDelete={() => {
         handleDestroyComment()

@@ -1,6 +1,7 @@
 import { Paper, Title, Divider } from '@mantine/core'
 import { Comment } from '../Comment'
-
+import { CommentProvider } from '@/context/CommentContext'
+import React from 'react'
 import { useCommentsInstance } from './useCommentsInstance'
 
 export const CommentList = () => {
@@ -13,7 +14,11 @@ export const CommentList = () => {
       </Title>
       <Divider size="sm" my="xs" color="gray" />
       {data?.comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
+        <React.Fragment key={comment.id}>
+          <CommentProvider comment={comment}>
+            <Comment />
+          </CommentProvider>
+        </React.Fragment>
       ))}
     </Paper>
   )

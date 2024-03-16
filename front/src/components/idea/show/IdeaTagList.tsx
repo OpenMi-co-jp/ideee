@@ -1,4 +1,4 @@
-import { Flex, Loader } from '@mantine/core'
+import { Flex } from '@mantine/core'
 import { useIdea } from '@/context/IdeaContext'
 import { Tag } from '@/components/tag'
 

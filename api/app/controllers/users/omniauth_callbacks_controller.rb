@@ -28,7 +28,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     rescue StandardError => e
       Rails.logger.error e.message
       # TODO: エラーの出し方を考える
-      render json: { action: 'ログfaイン', message: e.message }, status: :unauthorized
+      render json: { action: 'ログイン', message: e.message }, status: :unauthorized
       return
     end
     if user.persisted?

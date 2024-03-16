@@ -3,16 +3,17 @@ import Link from 'next/link'
 
 type TagProps = {
   tagName: string
+  size?: string
 }
 
-export const Tag = ({ tagName }: TagProps) => {
+export const Tag = ({ tagName, size }: TagProps) => {
   return (
     <Link href={`/search?name_or_idea_tags_name_cont=${tagName}`}>
       <Badge
         c="gray"
-        size="lg"
+        size={size || 'lg'}
         radius="lg"
-        m="xs"
+        mr="xs"
         variant="gradient"
         gradient={{ from: '#f7eac0', to: '#ebcaca' }}
       >

@@ -73,7 +73,7 @@ const IdeaEditFormSchema = z.object({
       z.string().max(50, { message: 'タグは50文字以内で入力してください' })
     )
     .nonempty({ message: '1つ以上のタグを設定してください' })
-    .refine((tags) => tags.every((tag) => tag.match(/[\s\u3000]/)), {
+    .refine((tags) => tags.every((tag) => !/\s/.test(tag)), {
       message: 'タグにはスペースを含めないでください',
     }),
 })

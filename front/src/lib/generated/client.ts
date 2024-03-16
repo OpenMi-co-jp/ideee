@@ -1099,7 +1099,11 @@ export type GetIdeasQuery = {
         name: string
         image?: string | null
       }
-      ideaTags?: Array<{ __typename?: 'Tag'; name: string }> | null
+      ideaTags?: Array<{
+        __typename?: 'Tag'
+        id?: string | null
+        name: string
+      }> | null
       team?: {
         __typename?: 'Team'
         status: string
@@ -1129,6 +1133,11 @@ export type GetHotIdeasQuery = {
     id: string
     name?: string | null
     user: { __typename?: 'User'; image?: string | null }
+    ideaTags?: Array<{
+      __typename?: 'Tag'
+      id?: string | null
+      name: string
+    }> | null
   }>
 }
 
@@ -1141,6 +1150,11 @@ export type GetDeployedIdeasQuery = {
     id: string
     name?: string | null
     user: { __typename?: 'User'; image?: string | null }
+    ideaTags?: Array<{
+      __typename?: 'Tag'
+      id?: string | null
+      name: string
+    }> | null
   }>
 }
 
@@ -1153,6 +1167,11 @@ export type GetActiveTeamIdeasQuery = {
     id: string
     name?: string | null
     user: { __typename?: 'User'; image?: string | null }
+    ideaTags?: Array<{
+      __typename?: 'Tag'
+      id?: string | null
+      name: string
+    }> | null
   }>
 }
 
@@ -1954,6 +1973,7 @@ export const GetIdeasDocument = gql`
           image
         }
         ideaTags {
+          id
           name
         }
         team {
@@ -2029,6 +2049,10 @@ export const GetHotIdeasDocument = gql`
       user {
         image
       }
+      ideaTags {
+        id
+        name
+      }
     }
   }
 `
@@ -2087,6 +2111,10 @@ export const GetDeployedIdeasDocument = gql`
       name
       user {
         image
+      }
+      ideaTags {
+        id
+        name
       }
     }
   }
@@ -2148,6 +2176,10 @@ export const GetActiveTeamIdeasDocument = gql`
       name
       user {
         image
+      }
+      ideaTags {
+        id
+        name
       }
     }
   }

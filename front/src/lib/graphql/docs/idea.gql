@@ -59,6 +59,7 @@ query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
         image
       }
       ideaTags {
+        id
         name
       }
       team {
@@ -86,6 +87,10 @@ query GetHotIdeas {
     user {
       image
     }
+    ideaTags {
+      id
+      name
+    }
   }
 }
 
@@ -96,6 +101,10 @@ query GetDeployedIdeas {
     user {
       image
     }
+    ideaTags {
+      id
+      name
+    }
   }
 }
 
@@ -105,6 +114,10 @@ query GetActiveTeamIdeas {
     name
     user {
       image
+    }
+    ideaTags {
+      id
+      name
     }
   }
 }

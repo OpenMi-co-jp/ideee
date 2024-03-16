@@ -1,4 +1,4 @@
-import { Paper, Title, Flex, Skeleton } from '@mantine/core'
+import { Paper, Title, Flex, Skeleton, Box } from '@mantine/core'
 import { useGetPopularTagsQuery } from '@/lib/generated/client'
 import { IconRocket } from '@tabler/icons-react'
 import { AlertError } from '@/components/alert'
@@ -22,7 +22,11 @@ export const PopularTags = () => {
       </Flex>
       <Flex justify="center" align="center" wrap="wrap" py="md">
         {tags?.map((tag) => {
-          return <Tag tagName={tag.name} key={tag.id} />
+          return (
+            <Box key={tag.id} m="xs">
+              <Tag tagName={tag.name} />
+            </Box>
+          )
         })}
       </Flex>
     </Paper>

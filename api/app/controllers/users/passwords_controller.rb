@@ -3,39 +3,37 @@
 class Users::PasswordsController < Devise::PasswordsController
   # TODO: 各アクションを実装したらコメントアウトを外す
   # CSRF 対策
-  # skip_before_action :verify_authenticity_token, only: %i[create update]
-  # prepend_before_action :verify_xhr_for_csrf_protection
+  skip_before_action :verify_authenticity_token, only: %i[create update]
+  prepend_before_action :verify_xhr_for_csrf_protection
 
   respond_to :json
 
-  # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  # POST /users/password
+  def create
+    user = User.find_by(email: params[:email])
+    if user.present?
+      self.resource = user
+      user.send_reset_password_instructions
+      render json: { action: 'パスワードリセット用メール送信', message: 'メールをご確認ください' }, status: :ok
+    else
+      render json: { message: '送信できませんでした。' }, status: :unprocessable_entity
+    end
+  end
 
-  # POST /resource/password
-  # def create
-  #   super
-  # end
+  # PUT /users/password
+  def update
+    self.resource = resource_class.reset_password_by_token(update_resource_params)
 
-  # GET /resource/password/edit?reset_password_token=abcdef
-  # def edit
-  #   super
-  # end
+    if resource.errors.empty?
+      render json: { action: 'パスワードリセット', message: 'ログインしてください' }, status: :ok
+    else
+      render json: { action: 'パスワードリセット', message: 'やり直してください' }, status: :unprocessable_entity
+    end
+  end
 
-  # PUT /resource/password
-  # def update
-  #   super
-  # end
+  protected
 
-  # protected
-
-  # def after_resetting_password_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
+  def update_resource_params
+    params.permit(:password, :password_confirmation, :reset_password_token)
+  end
 end

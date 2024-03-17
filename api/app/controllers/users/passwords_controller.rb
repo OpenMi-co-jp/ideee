@@ -3,8 +3,8 @@
 class Users::PasswordsController < Devise::PasswordsController
   # TODO: 各アクションを実装したらコメントアウトを外す
   # CSRF 対策
-  # skip_before_action :verify_authenticity_token, only: %i[create update]
-  # prepend_before_action :verify_xhr_for_csrf_protection
+  skip_before_action :verify_authenticity_token, only: %i[create update]
+  prepend_before_action :verify_xhr_for_csrf_protection
 
   respond_to :json
 
@@ -14,9 +14,16 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # POST /resource/password
-  # def create
-  #   super
-  # end
+  def create
+    super
+    user = User.find_by(email: params[:email])
+    if user.present?
+      user.send_reset_password_insturction
+      render json: { action: 'パスワードリセット用メール送信', message: 'メールをご確認ください' }, status: :ok
+    else
+      render json: { message: '送信できませんでした。' }, status: :unprocessable_entity
+    end
+  end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit

@@ -8,41 +8,32 @@ class Users::PasswordsController < Devise::PasswordsController
 
   respond_to :json
 
-  # GET /resource/password/new
-  # def new
-  #   super
-  # end
-
-  # POST /resource/password
+  # POST /users/password
   def create
-    super
     user = User.find_by(email: params[:email])
     if user.present?
-      user.send_reset_password_insturction
+      self.resource = user
+      user.send_reset_password_instructions
       render json: { action: 'パスワードリセット用メール送信', message: 'メールをご確認ください' }, status: :ok
     else
       render json: { message: '送信できませんでした。' }, status: :unprocessable_entity
     end
   end
 
-  # GET /resource/password/edit?reset_password_token=abcdef
-  # def edit
-  #   super
-  # end
+  # PUT /users/password
+  def update
+    self.resource = resource_class.reset_password_by_token(update_resource_params)
 
-  # PUT /resource/password
-  # def update
-  #   super
-  # end
+    if resource.errors.empty?
+      render json: { action: 'パスワードリセット', message: 'ログインしてください' }, status: :ok
+    else
+      render json: { action: 'パスワードリセット', message: 'やり直してください' }, status: :unprocessable_entity
+    end
+  end
 
-  # protected
+  protected
 
-  # def after_resetting_password_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
+  def update_resource_params
+    params.permit(:password, :password_confirmation, :reset_password_token)
+  end
 end

@@ -53,7 +53,7 @@ export const passwordReset = (props: ResetPasswordFormValues) => {
 
 export const passwordForgot = (props: ForgotPasswordFormValues) => {
   const { email } = props
-  const redirect_url = process.env.NEXT_PUBLIC_FRONT_URL + 'reset_password'
+  const redirect_url = process.env.NEXT_PUBLIC_FRONT_URL + '/reset_password'
 
   return client.post(
     '/users/password',

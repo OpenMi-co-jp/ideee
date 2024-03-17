@@ -52,9 +52,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
 
-  # TODO: 本番へ移行時にドメイン設定を変更
-  config.action_mailer.default_url_options = { host: 'https://demo.ideee.tech/' }
-  # config.action_mailer.default_url_options = { host: 'https://www.ideee.tech/' }
+  config.action_mailer.default_url_options = { host: 'https://www.ideee.tech/' }
 
   config.action_mailer.delivery_method = :smtp
 
@@ -90,7 +88,6 @@ Rails.application.configure do
   config.frontend_url = ENV.fetch('FRONTEND_URL', nil)
 
   config.action_dispatch.cookies_same_site_protection = lambda do |request|
-    # TODO: 本番へ移行時にドメイン設定を変更
-    :none if request.origin == 'https://demo.ideee.tech'
+    :none if request.origin == 'https://ideee.tech'
   end
 end

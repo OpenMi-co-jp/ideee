@@ -38,8 +38,7 @@ module Ideee
     if Rails.env.production?
       config.session_store :cookie_store,
                            key: '_interslice_session',
-                           # TODO: 本番移行時に正しいドメインを設定
-                           domain: %w[ideee-demo.herokuapp.com api.ideee.tech .vercel.app demo.ideee.tech],
+                           domain: %w[api.ideee.tech .vercel.app ideee.tech],
                            secure: true
     else
       config.session_store :cookie_store, key: '_interslice_session'

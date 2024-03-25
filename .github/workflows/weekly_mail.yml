@@ -1,0 +1,28 @@
+name: send weekly mail at Monday 12 AM
+
+on:
+  schedule:
+    - cron: '0 3 * * 1' # 日本時間に調整
+
+jobs:
+  send_weekly_mail:
+    name: Run send weekly mail
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.3
+        bundler-cache: true
+
+    # Run the Heroku command
+    - name: Run send weekly mail on Heroku
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        heroku run rake weekly_mail:send -a ideee-tech

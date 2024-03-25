@@ -101,6 +101,7 @@ class User < ApplicationRecord
           user.twitter_id = auth.info.nickname
           user.site_url = auth.info.urls['Website']
         end
+        user.provider = 'email' if user.provider.nil?
         user.email = auth.info.email || ''
         user.password = Devise.friendly_token[0, 20]
         user.remote_url = auth.info.image

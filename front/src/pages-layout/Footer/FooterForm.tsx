@@ -12,6 +12,7 @@ import {
 import { IconBrandTwitter, IconNews } from '@tabler/icons-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 
 interface FooterLinksProps {
   data: {
@@ -22,6 +23,7 @@ interface FooterLinksProps {
 
 export const FooterForm = (footerData: FooterLinksProps) => {
   const { colorScheme } = useMantineColorScheme()
+  const currentYear = new Date().getFullYear()
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
       <Link
@@ -101,12 +103,14 @@ export const FooterForm = (footerData: FooterLinksProps) => {
               direction={'column'}
               align={{ base: 'center', sm: 'flex-start' }}
             >
-              <Image
-                src="/img/IdeeeLogo.webp"
-                alt="ideeeのロゴ"
-                width={150}
-                height={50}
-              />
+              <Link href="/">
+                <Image
+                  src="/img/IdeeeLogo.webp"
+                  alt="ideeeのロゴ"
+                  width={150}
+                  height={50}
+                />
+              </Link>
               <Text
                 size="xs"
                 c="dimmed"
@@ -139,7 +143,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
             direction={{ base: 'column', sm: 'row' }}
           >
             <Text c="dimmed" size="sm">
-              © 2022 ideee.tech All rights reserved.
+              © {currentYear} ideee.tech All rights reserved.
             </Text>
             <Group
               gap={0}

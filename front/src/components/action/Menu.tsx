@@ -1,5 +1,6 @@
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import { Menu } from '@mantine/core'
+import { EDIT_TEXT, DLT_TEXT } from '@/utils/constant'
 
 interface ActionMenuProps {
   title: string
@@ -17,7 +18,7 @@ export const ActionMenu = ({ onEdit, onDelete, title }: ActionMenuProps) => {
       <Menu.Dropdown>
         <Menu.Label>{title}</Menu.Label>
         <Menu.Item onClick={onEdit} leftSection={<IconPencil size={14} />}>
-          Edit
+          {EDIT_TEXT}
         </Menu.Item>
 
         <Menu.Divider />
@@ -29,7 +30,7 @@ export const ActionMenu = ({ onEdit, onDelete, title }: ActionMenuProps) => {
           color="red"
           leftSection={<IconTrash size={14} />}
         >
-          Delete
+          {DLT_TEXT}
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

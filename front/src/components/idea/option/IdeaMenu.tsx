@@ -3,6 +3,7 @@ import { Menu } from '@mantine/core'
 import Link from 'next/link'
 import { useDestroyIdea } from '@/components/idea/useDestroyIdea'
 import { useIdea } from '@/context/IdeaContext'
+import { EDIT_TEXT, DLT_TEXT } from '@/utils/constant'
 
 export const IdeaMenu = () => {
   const { handleDestroyIdea } = useDestroyIdea()
@@ -17,7 +18,9 @@ export const IdeaMenu = () => {
       <Menu.Dropdown>
         <Menu.Label>アイデア管理</Menu.Label>
         <Link href={`/ideas/${idea.id}/edit`}>
-          <Menu.Item leftSection={<IconPencil size={14} />}>Edit</Menu.Item>
+          <Menu.Item leftSection={<IconPencil size={14} />}>
+            {EDIT_TEXT}
+          </Menu.Item>
         </Link>
 
         <Menu.Divider />
@@ -30,7 +33,7 @@ export const IdeaMenu = () => {
           color="red"
           leftSection={<IconTrash size={14} />}
         >
-          Delete
+          {DLT_TEXT}
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

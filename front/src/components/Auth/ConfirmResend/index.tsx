@@ -3,6 +3,12 @@ import { TextForm } from '@/components/ReactFormSet'
 import type { CustomNextPage } from 'next'
 import { useConfirmResend } from './hooks'
 import Link from 'next/link'
+import {
+  SIGNUP_TEXT,
+  SIGNUP_URL,
+  LOGIN_TEXT,
+  LOGIN_URL,
+} from '@/utils/constant'
 
 export const ConfirmResend: CustomNextPage = () => {
   const { form, onSubmit } = useConfirmResend()
@@ -30,10 +36,10 @@ export const ConfirmResend: CustomNextPage = () => {
       </form>
       <Box mt={'1rem'}>
         <Stack>
-          <Link href="/users/sign_in">ログイン</Link>
+          <Link href={LOGIN_URL}>{LOGIN_URL}</Link>
         </Stack>
         <Stack>
-          <Link href="/users/sign_up">ユーザー登録</Link>
+          <Link href={SIGNUP_URL}>{SIGNUP_TEXT}</Link>
         </Stack>
         <Stack>
           <Link href="/users/forgot_password">パスワードを忘れた？</Link>

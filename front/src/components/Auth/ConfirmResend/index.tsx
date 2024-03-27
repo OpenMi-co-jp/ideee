@@ -36,7 +36,7 @@ export const ConfirmResend: CustomNextPage = () => {
       </form>
       <Box mt={'1rem'}>
         <Stack>
-          <Link href={LOGIN_URL}>{LOGIN_URL}</Link>
+          <Link href={LOGIN_URL}>{LOGIN_TEXT}</Link>
         </Stack>
         <Stack>
           <Link href={SIGNUP_URL}>{SIGNUP_TEXT}</Link>

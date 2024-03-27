@@ -32,7 +32,7 @@ export const UserToggle = () => {
                     variant="gradient"
                     gradient={{ from: 'red', to: 'orange' }}
                   >
-                    {SIGNUP_URL}
+                    {SIGNUP_TEXT}
                   </Button>
                 </Link>
               )}

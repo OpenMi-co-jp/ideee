@@ -10,7 +10,7 @@ export const CommentList = () => {
   return (
     <Paper bg="#fef6eb" radius="md" p="xs" m="lg">
       <Title order={3} size="xl" p="sm" c="gray">
-        Comment
+        コメント
       </Title>
       <Divider size="sm" my="xs" color="gray" />
       {data?.comments.map((comment) => (

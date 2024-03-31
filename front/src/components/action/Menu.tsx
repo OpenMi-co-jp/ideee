@@ -1,6 +1,6 @@
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import { Menu } from '@mantine/core'
-import { EDIT_TEXT, DLT_TEXT } from '@/utils/constant'
+import { EDIT_TEXT, DELETE_TEXT } from '@/utils/constant'
 
 interface ActionMenuProps {
   title: string
@@ -30,7 +30,7 @@ export const ActionMenu = ({ onEdit, onDelete, title }: ActionMenuProps) => {
           color="red"
           leftSection={<IconTrash size={14} />}
         >
-          {DLT_TEXT}
+          {DELETE_TEXT}
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

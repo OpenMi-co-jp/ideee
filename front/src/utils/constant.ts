@@ -7,7 +7,7 @@ export const SIGNUP_TEXT = 'ユーザー登録'
 
 // CRUD
 export const EDIT_TEXT = '編集'
-export const DLT_TEXT = '削除'
+export const DELETE_TEXT = '削除'
 
 // フッター、サイドバー
 export const ABOUT_URL = '/about'

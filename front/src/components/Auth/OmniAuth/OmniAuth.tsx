@@ -3,7 +3,6 @@ import { handleSignIn } from './hooks'
 import { IconBrandX, IconBrandGoogleFilled } from '@tabler/icons-react'
 import { useGetCsrfToken } from '@/utils/auth/useGetCsrfToken'
 import { useCallback } from 'react'
-import { showError } from '@/components/notifications'
 
 export const OmniAuth = () => {
   const csrfToken = useGetCsrfToken()
@@ -32,11 +31,7 @@ export const OmniAuth = () => {
       </Button>
       <Button
         leftSection={<IconBrandX />}
-        // TODO: Twitterのログインを実装する
-        // onClick={onTwitterLogin}
-        onClick={() =>
-          showError({ action: 'ログイン', message: '準備中の機能です' })
-        }
+        onClick={onTwitterLogin}
         style={{ backgroundColor: '#0f1419' }}
       >
         Twitter ログイン

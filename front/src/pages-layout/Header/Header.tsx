@@ -9,7 +9,7 @@ import {
   Sidebar,
 } from './headerComponents'
 import { IdeaCreateButton } from '@/components/idea/createButton'
-import { IdeaCreateSpButton } from '@/components/idea/createSpButton'
+import { CreateSpButton } from '@/components/idea/createSpButton'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 
@@ -44,7 +44,7 @@ export const Header: FC = () => {
             {currentUser && <Notification />}
             <UserToggle />
             {currentUser && !isMobile && <IdeaCreateButton />}
-            {currentUser && isMobile && <IdeaCreateSpButton />}
+            {currentUser && isMobile && <CreateSpButton />}
             {isMobile && <Sidebar />}
           </Group>
         </Group>

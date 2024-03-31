@@ -1,22 +1,28 @@
+import * as constant from '@/utils/constant'
+
 export const footerData = {
   data: [
     {
       title: 'About',
       links: [
-        { label: 'ideeeについて', link: '/about', isExternal: false },
         {
-          label: 'アイデアの探し方',
-          link: '/how_to_find_idea',
+          label: constant.ABOUT_TEXT,
+          link: constant.ABOUT_URL,
           isExternal: false,
         },
         {
-          label: '月間トレンドまとめ',
-          link: 'https://qiita.com/naruqiita/items/0ef4b963434226eacb6b',
+          label: constant.FIND_IDEA_TEXT,
+          link: constant.FIND_IDEA_URL,
+          isExternal: false,
+        },
+        {
+          label: constant.TREND_TEXT,
+          link: constant.TREND_URL,
           isExternal: true,
         },
         {
-          label: '個人開発の落とし穴',
-          link: '/avoid_pitfall',
+          label: constant.AVOID_PITFALL_TEXT,
+          link: constant.AVOID_PITFALL_URL,
           isExternal: false,
         },
       ],
@@ -25,19 +31,19 @@ export const footerData = {
       title: 'Legal',
       links: [
         {
-          label: 'よくある質問',
-          link: '/frequent_questions',
+          label: constant.FAQ_TEXT,
+          link: constant.FAQ_URL,
           isExternal: false,
         },
-        { label: '利用規約', link: '/terms_of_service', isExternal: false },
+        { label: constant.TOS_TEXT, link: constant.TOS_URL, isExternal: false },
         {
-          label: 'プライバシーポリシー',
-          link: '/privacy_policy',
+          label: constant.PRIVACY_POLICY_TEXT,
+          link: constant.PRIVACY_POLICY_URL,
           isExternal: false,
         },
         {
-          label: '運営者',
-          link: 'https://naruhiro-portfolio.firebaseapp.com',
+          label: constant.NARU_TEXT,
+          link: constant.NARU_URL,
           isExternal: true,
         },
       ],

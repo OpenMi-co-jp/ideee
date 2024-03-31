@@ -12,6 +12,7 @@ export const UserIcon = ({ height = 30, userIcon = '' }: UserIconProps) => {
 
   return (
     <Image
+      style={{ flex: 'none' }}
       height={height}
       width={height}
       mah={height}

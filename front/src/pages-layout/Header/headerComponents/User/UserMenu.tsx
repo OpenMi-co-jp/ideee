@@ -22,7 +22,6 @@ export const UserMenu = () => {
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Application</Menu.Label>
         <Link href={`/users/${currentUser?.id}`}>
           <Menu.Item leftSection={<IconUserCircle size={14} />}>
             マイページ

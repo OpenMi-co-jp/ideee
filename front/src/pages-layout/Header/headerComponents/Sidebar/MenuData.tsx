@@ -1,30 +1,45 @@
 import { IconBook, IconSun } from '@tabler/icons-react'
+import * as constant from '@/utils/constant'
 
 export const menuData = [
   {
     label: 'About',
     icon: <IconSun size="1.3rem" stroke={2.5} />,
     links: [
-      { href: '/about', title: 'ideeeについて' },
       {
-        href: '/how_to_find_idea',
-        title: 'アイデアの探し方',
+        href: constant.ABOUT_URL,
+        title: constant.ABOUT_TEXT,
+        isExternal: false,
       },
       {
-        href: 'https://qiita.com/naruqiita/items/0ef4b963434226eacb6b',
-        title: '月間トレンドまとめ',
+        href: constant.FIND_IDEA_URL,
+        title: constant.FIND_IDEA_TEXT,
+        isExternal: false,
       },
-      { href: '/avoid_pitfall', title: '個人顔発の落とし穴' },
+      {
+        href: constant.TREND_URL,
+        title: constant.TREND_TEXT,
+        isExternal: true,
+      },
+      {
+        href: constant.AVOID_PITFALL_URL,
+        title: constant.AVOID_PITFALL_TEXT,
+        isExternal: false,
+      },
     ],
   },
   {
     label: 'Legal',
     icon: <IconBook size="1.3rem" stroke={2.5} />,
     links: [
-      { href: '/frequent_questions', title: 'よくある質問' },
-      { href: '/terms_of_service', title: '利用規約' },
-      { href: '/privacy_policy', title: 'プライバシーポリシー' },
-      { href: 'https://naruhiro-portfolio.firebaseapp.com', title: '運営者' },
+      { href: constant.FAQ_URL, title: constant.FAQ_TEXT, isExternal: false },
+      { href: constant.TOS_URL, title: constant.TOS_TEXT, isExternal: false },
+      {
+        href: constant.PRIVACY_POLICY_URL,
+        title: constant.PRIVACY_POLICY_TEXT,
+        isExternal: false,
+      },
+      { href: constant.NARU_URL, title: constant.NARU_TEXT, isExternal: true },
     ],
   },
 ]

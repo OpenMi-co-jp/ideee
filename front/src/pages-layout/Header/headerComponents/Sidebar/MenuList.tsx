@@ -43,7 +43,12 @@ export const MenuList = ({ close }: MenuListProps) => {
           </Menu.Target>
           <MenuDropdown>
             {menu.links.map((link, linkIndex) => (
-              <Link key={linkIndex} href={link.href}>
+              <Link
+                key={linkIndex}
+                href={link.href}
+                target="_blank"
+                {...(link.isExternal && { rel: 'noopener noreferrer' })}
+              >
                 <Anchor underline="never">
                   <Menu.Item
                     style={{ width: '280px', height: '60px' }}

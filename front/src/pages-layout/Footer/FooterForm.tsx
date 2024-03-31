@@ -12,6 +12,7 @@ import {
 import { IconBrandTwitter, IconNews } from '@tabler/icons-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FormatTimeStamp } from '@/utils/formatTimeStamp'
 
 interface FooterLinksProps {
   data: {
@@ -22,7 +23,7 @@ interface FooterLinksProps {
 
 export const FooterForm = (footerData: FooterLinksProps) => {
   const { colorScheme } = useMantineColorScheme()
-  const currentYear = new Date().getFullYear()
+  const currentYear = FormatTimeStamp()
   const groups = footerData.data.map((data) => {
     const links = data.links.map((link, index) => (
       <Link

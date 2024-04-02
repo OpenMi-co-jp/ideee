@@ -27,7 +27,7 @@ export const UserToggle = () => {
               }}
             >
               {!isNarrowScreenMobile && (
-                <Link href={SIGNUP_TEXT}>
+                <Link href={SIGNUP_URL}>
                   <Button
                     variant="gradient"
                     gradient={{ from: 'red', to: 'orange' }}

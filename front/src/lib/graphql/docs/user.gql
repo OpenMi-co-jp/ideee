@@ -22,6 +22,10 @@ query GetUsers {
   }
 }
 
+query GetUserCount {
+  userCount
+}
+
 mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     user {

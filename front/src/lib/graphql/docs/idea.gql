@@ -2,7 +2,7 @@ query GetIdea($id: ID!) {
   idea(id: $id) {
     id
     name
-    icon
+    iconUrl
     background
     goal
     issue
@@ -13,6 +13,7 @@ query GetIdea($id: ID!) {
     similar
     stance
 		note
+    draft
     createdAt
     updatedAt
     userId
@@ -58,6 +59,7 @@ query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
         image
       }
       ideaTags {
+        id
         name
       }
       team {
@@ -85,6 +87,10 @@ query GetHotIdeas {
     user {
       image
     }
+    ideaTags {
+      id
+      name
+    }
   }
 }
 
@@ -95,6 +101,10 @@ query GetDeployedIdeas {
     user {
       image
     }
+    ideaTags {
+      id
+      name
+    }
   }
 }
 
@@ -104,6 +114,10 @@ query GetActiveTeamIdeas {
     name
     user {
       image
+    }
+    ideaTags {
+      id
+      name
     }
   }
 }
@@ -140,7 +154,7 @@ mutation UpdateIdea($input: UpdateIdeaInput!) {
       githubUrl
       productUrl
       draft
-      icon
+      iconUrl
     }
     success
     errors

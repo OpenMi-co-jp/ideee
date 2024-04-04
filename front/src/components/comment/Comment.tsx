@@ -1,17 +1,18 @@
-import { Group, Text, Paper, Flex } from '@mantine/core'
-import { CommentType } from '@/types/idea'
-import { FormatDate } from '@/utils/common'
+import { Group, Text, Flex } from '@mantine/core'
 import { UserIcon } from '@/components/user'
 import Link from 'next/link'
-import { TextWithLinks } from '@/utils/Text'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { CommentBody } from '@/components/comment/CommentBody'
+import { CommentEditForm } from '@/components/comment'
+import { useComment } from '@/context/CommentContext'
 
-export const Comment = ({ comment }: CommentType) => {
+export const Comment = () => {
   const { currentUser } = useCurrentUser()
-  const { description, createdAt, user } = comment
-  const commentCreatedAt = new Date(createdAt)
-  const isCurrentUser =
-    currentUser && user && String(currentUser.id) === String(user.id)
+  const { comment, isEditing } = useComment()
+  const { user } = comment
+  if (!user || !currentUser) return null
+
+  const isCurrentUser = String(currentUser.id) === user.id
 
   const userContents = [
     <UserIcon key="icon" userIcon={user.image} />,
@@ -31,21 +32,12 @@ export const Comment = ({ comment }: CommentType) => {
               {isCurrentUser ? userContents.reverse() : userContents}
             </Group>
           </Link>
-          <Paper
-            bg="#FFFFFF"
-            maw="30rem"
-            p="md"
-            mt="3px"
-            radius="lg"
-            style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}
-          >
-            <TextWithLinks>{description}</TextWithLinks>
-          </Paper>
-          <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
-            <Text c="gray" mx="xs">
-              {FormatDate(commentCreatedAt)}
-            </Text>
-          </Flex>
+          {/* 編集中か否かによって表示を切り替え */}
+          {isEditing ? (
+            <CommentEditForm />
+          ) : (
+            <CommentBody isCurrentUser={isCurrentUser} />
+          )}
         </Flex>
       </Flex>
     </Flex>

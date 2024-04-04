@@ -7,6 +7,7 @@ import { useUpdateIdeaMutation } from '@/lib/generated/client'
 import { showSuccess, showError } from '@/components/notifications'
 import { useRouter } from 'next/router'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
+import { base64ImageValidation } from '@/utils/CustomValidation'
 
 const IdeaEditFormSchema = z.object({
   name: z
@@ -54,18 +55,27 @@ const IdeaEditFormSchema = z.object({
   githubUrl: z
     .string()
     .url({ message: 'URLの形式で入力してください' })
-    .nullish(),
+    .optional()
+    .or(z.literal(''))
+    .nullable(),
   productUrl: z
     .string()
     .url({ message: 'URLの形式で入力してください' })
-    .nullish(),
-  draft: z.boolean().nullish(),
-  icon: z.string().nullish(),
+    .optional()
+    .or(z.literal(''))
+    .nullable(),
+  publish: z.boolean().nullish(),
+  icon: base64ImageValidation(
+    '登録できない画像形式です。別の形式でもう一度お試しください。'
+  ),
   tagList: z
     .array(
       z.string().max(50, { message: 'タグは50文字以内で入力してください' })
     )
-    .nonempty({ message: '1つ以上のタグを設定してください' }),
+    .nonempty({ message: '1つ以上のタグを設定してください' })
+    .refine((tags) => tags.every((tag) => !/\s/.test(tag)), {
+      message: 'タグにはスペースを含めないでください',
+    }),
 })
 
 export const UseEditIdea = () => {
@@ -82,6 +92,7 @@ export const UseEditIdea = () => {
     if (idea) {
       form.reset({
         ...idea,
+        publish: !idea.draft,
         tagList: idea.ideaTags?.map((tag) => String(tag.name)),
       })
     }
@@ -105,7 +116,7 @@ export const UseEditIdea = () => {
             wishFunction: data.wishFunction,
             githubUrl: data.githubUrl,
             productUrl: data.productUrl,
-            draft: data.draft,
+            publish: data.publish,
             icon: data.icon,
             userId: String(idea?.userId),
             tagList: data.tagList,

@@ -10,13 +10,13 @@ export default function Home() {
   return (
     <>
       {!currentUser && <TopVision />}
-      <Space h="10rem" />
+      {!currentUser && <Space h="5rem" />}
       <HotIdeas />
       <Space h="lg" />
       <PopularTags />
       <Space h="lg" />
       <ActiveTeamIdeas />
-      <Space h="xl" />
+      <Space h="lg" />
       <DeployedIdeas />
       {!currentUser && <Philosophy />}
     </>

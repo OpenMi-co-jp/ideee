@@ -1,5 +1,6 @@
 import { Center, Paper, Title, Button } from '@mantine/core'
 import Link from 'next/link'
+import { SIGNUP_TEXT, SIGNUP_URL } from '@/utils/constant'
 
 export const SignInInvitation = () => {
   return (
@@ -11,13 +12,13 @@ export const SignInInvitation = () => {
           </Title>
         </Center>
         <Center>
-          <Link href="/user/sign_up">
+          <Link href={SIGNUP_URL}>
             <Button
               w="13rem"
               variant="gradient"
               gradient={{ from: 'red', to: 'orange' }}
             >
-              ユーザー登録
+              {SIGNUP_TEXT}
             </Button>
           </Link>
         </Center>

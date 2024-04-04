@@ -3,6 +3,12 @@ import { UserMenu } from './UserMenu'
 import Link from 'next/link'
 import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import {
+  LOGIN_URL,
+  LOGIN_TEXT,
+  SIGNUP_URL,
+  SIGNUP_TEXT,
+} from '@/utils/constant'
 
 export const UserToggle = () => {
   const { isMobile, isNarrowScreenMobile } = useBreakPoint()
@@ -21,12 +27,12 @@ export const UserToggle = () => {
               }}
             >
               {!isNarrowScreenMobile && (
-                <Link href="/users/sign_up">
+                <Link href={SIGNUP_URL}>
                   <Button
                     variant="gradient"
                     gradient={{ from: 'red', to: 'orange' }}
                   >
-                    ユーザー登録
+                    {SIGNUP_TEXT}
                   </Button>
                 </Link>
               )}
@@ -34,9 +40,9 @@ export const UserToggle = () => {
               {!isMobile && (
                 <>
                   <Space mx="xs" />
-                  <Link href="/users/sign_in">
+                  <Link href={LOGIN_URL}>
                     <Button variant="outline" color="orange">
-                      ログイン
+                      {LOGIN_TEXT}
                     </Button>
                   </Link>
                 </>

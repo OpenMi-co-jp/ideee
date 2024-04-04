@@ -1,6 +1,12 @@
 import { Title, Card, Image, Button, Grid, Flex } from '@mantine/core'
 import Link from 'next/link'
 import type { CustomNextPage } from 'next'
+import {
+  SIGNUP_TEXT,
+  SIGNUP_URL,
+  LOGIN_TEXT,
+  LOGIN_URL,
+} from '@/utils/constant'
 
 export const SignPath: CustomNextPage = () => {
   return (
@@ -20,18 +26,18 @@ export const SignPath: CustomNextPage = () => {
             ログインして続きを確認
           </Title>
           <Flex>
-            <Link href="/users/sign_up">
+            <Link href={SIGNUP_URL}>
               <Button
                 m="lg"
                 variant="gradient"
                 gradient={{ from: 'yellow', to: 'orange' }}
               >
-                ユーザー登録
+                {SIGNUP_TEXT}
               </Button>
             </Link>
-            <Link href="/users/sign_in">
+            <Link href={LOGIN_URL}>
               <Button m="lg" variant="outline" color="orange">
-                ログイン
+                {LOGIN_TEXT}
               </Button>
             </Link>
           </Flex>

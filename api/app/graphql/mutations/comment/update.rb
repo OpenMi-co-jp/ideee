@@ -4,22 +4,27 @@ module Mutations
 
     argument :id, ID, required: true, description: 'コメントID'
     argument :description, String, required: true, description: 'コメント'
-    argument :user_id, Integer, required: true, description: '【必須】ユーザーID'
-    argument :idea_id, Integer, required: true, description: '【必須】アイデアID'
 
-    field :comment, Types::CommentType, null: false, description: 'コメントオブジェクト'
+    field :comment, Types::CommentType, null: true, description: 'コメントオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーメッセージのリスト'
 
     def resolve(**args)
-      comment = ::Comment.find(args[:id])
-      comment.update!(
-        description: args[:description],
-        user_id: args[:user_id],
-        idea_id: args[:idea_id]
-      )
+      comment = ::Comment.find_by(id: args[:id])
+      raise GraphQL::ExecutionError, 'コメントが見つかりません' if comment.nil?
+      unless comment.user_id == context[:current_user].id
+        raise GraphQL::ExecutionError, '権限がありません'
+      end
+
+      comment.update!(description: args[:description])
       {
         comment:,
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

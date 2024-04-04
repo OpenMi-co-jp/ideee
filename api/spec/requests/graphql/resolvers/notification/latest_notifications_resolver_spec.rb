@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Resolvers::Notification::LatestNotificationsResolver do
-  describe 'LatestNotifications' do
+  describe 'GetLatestNotifications' do
     let(:query) do
       <<~GRAPHQL
-        query LatestNotifications {
+        query GetLatestNotifications {
           latestNotifications {
             id
             createdAt

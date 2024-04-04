@@ -3,9 +3,20 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import type { ResetPasswordFormValues } from '@/types/user'
 import { passwordReset } from '@/utils/auth'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useResetPassword = () => {
+  const PasswordResetFormSchema = z.object({
+    password: z
+      .string()
+      .min(6, { message: '6文字以上のパスワードを入力してください' }),
+    passwordConfirmation: z
+      .string()
+      .min(6, { message: '6文字以上の確認パスワードを入力してください' }),
+  })
   const form = useForm<ResetPasswordFormValues>({
+    resolver: zodResolver(PasswordResetFormSchema),
     defaultValues: {
       password: '',
       passwordConfirmation: '',

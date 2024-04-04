@@ -16,6 +16,9 @@ module Mutations
         idea_id: args[:idea_id]
       )
       comment.save!
+      idea = comment.idea
+      context[:current_user].create_notification_comment(idea, comment)
+      SendCommentEmailJob.perform_later(context[:current_user], idea, args[:description])
       {
         comment:,
         success: true

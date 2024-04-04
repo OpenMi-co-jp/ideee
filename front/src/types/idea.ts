@@ -5,24 +5,16 @@ export type IdeaBoxType = {
     __typename?: 'User'
     image?: string | null
   }
+  ideaTags?: Array<{
+    __typename?: 'Tag'
+    id?: string | null
+    name: string
+  }> | null
 }
 
 export type AccompaniedTagType = {
   tag: {
     id: string
     name: string
-  }
-}
-
-export type CommentType = {
-  comment: {
-    id: string
-    description: string
-    createdAt: string
-    user: {
-      id?: string | null | undefined
-      name?: string | null | undefined
-      image?: string | null | undefined
-    }
   }
 }

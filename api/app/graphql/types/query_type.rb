@@ -12,6 +12,7 @@ module Types
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
     field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'
+    field :user_count, resolver: Resolvers::User::UserCountResolver, description: 'ユーザー数'
 
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'
     field :latest_notifications, resolver: Resolvers::Notification::LatestNotificationsResolver, description: '最新の5件の通知一覧'
@@ -28,5 +29,7 @@ module Types
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'
 
     field :likes, resolver: Resolvers::Like::LikesResolver, description: 'ユーザーのいいね一覧'
+
+    field :notification_config, resolver: Resolvers::NotificationConfig::NotificationConfigResolver, description: '通知設定'
   end
 end

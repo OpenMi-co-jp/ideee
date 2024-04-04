@@ -34,7 +34,7 @@ export const OmniAuth = () => {
         onClick={onTwitterLogin}
         style={{ backgroundColor: '#0f1419' }}
       >
-        Twitter ログイン
+        X ログイン
       </Button>
     </Stack>
   )

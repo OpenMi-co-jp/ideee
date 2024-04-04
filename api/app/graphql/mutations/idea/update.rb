@@ -1,5 +1,7 @@
 module Mutations
   class Idea::Update < BaseMutation
+    include Concerns::Idea::Publish
+
     graphql_name 'UpdateIdea'
 
     argument :id, ID, required: true, description: 'アイデアID'
@@ -12,12 +14,12 @@ module Mutations
     argument :hypothesis, String, required: false, description: '仮説'
     argument :monetize, String, required: false, description: 'マネタイズ方法'
     argument :similar, String, required: false, description: '類似サービス'
-    argument :stance, String, required: false, description: '権利スタンス'
+    argument :stance, String, required: true, description: '権利スタンス'
     argument :target, String, required: false, description: 'ターゲット'
     argument :wish_function, String, required: false, description: '欲しい機能'
     argument :github_url, String, required: false, description: 'GithubリポジトリURL'
     argument :product_url, String, required: false, description: '作っているアプリのURL'
-    argument :draft, Boolean, required: false, description: '下書きフラグ'
+    argument :publish, Boolean, required: true, description: '公開フラグ'
     argument :tag_list, [String], required: true, description: 'タグリスト'
 
     field :idea, Types::Idea::IdeaType, null: true, description: 'アイデアオブジェクト'
@@ -25,36 +27,35 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
-      if context[:current_user].id == args[:user_id].to_i
-        idea = ::Idea.find(args[:id])
-        idea.assign_attributes(
-          icon: args[:icon],
-          name: args[:name],
-          background: args[:background],
-          goal: args[:goal],
-          issue: args[:issue],
-          wish_function: args[:wish_function],
-          hypothesis: args[:hypothesis],
-          target: args[:target],
-          monetize: args[:monetize],
-          similar: args[:similar],
-          github_url: args[:github_url],
-          stance: args[:stance],
-          product_url: args[:product_url],
-          draft: args[:draft],
-          user_id: context[:current_user].id
-        )
-        idea.save_with_tags!(args[:tag_list])
-        {
-          idea:,
-          success: true
-        }
-      else
-        {
-          success: false,
-          errors: ['ユーザーの権限がありません']
-        }
+      if context[:current_user].id != args[:user_id].to_i
+        return { success: false, errors: ['ユーザーの権限がありません'] }
       end
+
+      idea = ::Idea.find(args[:id])
+      from_draft = idea.draft?
+      idea.assign_attributes(
+        icon: args[:icon],
+        name: args[:name],
+        background: args[:background],
+        goal: args[:goal],
+        issue: args[:issue],
+        wish_function: args[:wish_function],
+        hypothesis: args[:hypothesis],
+        target: args[:target],
+        monetize: args[:monetize],
+        similar: args[:similar],
+        github_url: args[:github_url],
+        stance: args[:stance],
+        product_url: args[:product_url],
+        draft: !args[:publish],
+        user_id: context[:current_user].id
+      )
+      idea.save_with_tags!(args[:tag_list])
+      idea_publish_notify(idea) if from_draft && !idea.draft
+      {
+        idea:,
+        success: true
+      }
     rescue ActiveRecord::RecordInvalid => e
       {
         success: false,

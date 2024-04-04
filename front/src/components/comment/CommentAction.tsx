@@ -1,0 +1,51 @@
+import { ActionMenu } from '@/components/action/Menu'
+import { showSuccess, showError } from '../notifications'
+import { useDestroyCommentMutation } from '@/lib/generated/client'
+import { useCommentsInstance } from '@/components/comment/CommentList/useCommentsInstance'
+import { useComment } from '@/context/CommentContext'
+
+export const CommentAction = () => {
+  const { comment, setIsEditing } = useComment()
+  const [destroyComment] = useDestroyCommentMutation({
+    variables: {
+      input: {
+        id: comment?.id ?? '',
+      },
+    },
+  })
+  const { refetch } = useCommentsInstance()
+
+  const handleDestroyComment = () => {
+    if (!comment?.id) {
+      showError({
+        action: 'コメント削除',
+        message: 'コメントIDが見つかりません。',
+      })
+      return
+    }
+
+    destroyComment()
+      .then(() => {
+        showSuccess({ action: 'コメント削除' })
+        refetch()
+      })
+      .catch((error) => {
+        showError({
+          action: 'コメント削除',
+          message: error.message as string,
+        })
+      })
+  }
+
+  return (
+    <ActionMenu
+      title="コメント管理"
+      onEdit={() => {
+        setIsEditing(true)
+      }}
+      onDelete={() => {
+        handleDestroyComment()
+      }}
+    />
+  )
+}

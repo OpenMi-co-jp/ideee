@@ -51,7 +51,7 @@ class Idea < ApplicationRecord
   has_one :team, dependent: :destroy
   counter_culture :user, column_name: 'ideas_num'
   has_rich_text :note
-  mount_uploader :icon, ImageUploader
+  mount_base64_uploader :icon, ImageUploader
   after_create :send_draft_remind
 
   validates :name, presence: true, length: { maximum: 50 }
@@ -75,6 +75,7 @@ class Idea < ApplicationRecord
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }
   scope :pickup_user_nums, ->(num) { group_by(&:user_id).transform_values(&:size).max(num) { |x, y| x[1] <=> y[1] } }
   scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id:).uniq }
+  scope :team_active, -> { eager_load(:team).where(team: { status: :active }) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[id name published_at difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
@@ -136,5 +137,11 @@ class Idea < ApplicationRecord
 
   def enough_view?
     view > 10
+  end
+
+  def icon_url
+    return if icon.file.blank?
+
+    icon&.url
   end
 end

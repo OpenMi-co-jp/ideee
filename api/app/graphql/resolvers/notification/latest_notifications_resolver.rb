@@ -2,7 +2,7 @@
 
 module Resolvers
   class Notification::LatestNotificationsResolver < BaseResolver
-    graphql_name 'LatestNotifications'
+    graphql_name 'GetLatestNotifications'
 
     type [Types::NotificationType], null: false
 

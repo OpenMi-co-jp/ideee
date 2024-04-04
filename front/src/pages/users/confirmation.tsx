@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { showSuccess } from '@/components/notifications'
 import { LoadingOverlay } from '@mantine/core'
 
-function Confirm() {
+function Confirmation() {
   const router = useRouter()
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function Confirm() {
         message: 'ログインしてください',
       })
     })
-  }, [])
+  }, [router])
 
   return (
     <LoadingOverlay
@@ -27,4 +27,4 @@ function Confirm() {
   )
 }
 
-export default Confirm
+export default Confirmation

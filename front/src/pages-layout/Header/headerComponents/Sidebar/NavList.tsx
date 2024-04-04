@@ -45,7 +45,7 @@ export const NavList = ({ close }: NavListProps) => {
           <NavItem
             item={{
               label: 'ユーザー情報編集',
-              href: `/users/${currentUser?.id}/edit`,
+              href: '/mypage/edit',
               icon: IconUserEdit,
             }}
             closeDrawer={close}

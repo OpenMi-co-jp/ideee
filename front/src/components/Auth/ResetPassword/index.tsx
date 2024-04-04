@@ -7,12 +7,12 @@ import Cookies from 'js-cookie'
 
 export const ResetPassword: CustomNextPage = () => {
   const router = useRouter()
-  const { client, uid, 'access-token': accessToken } = router.query
+  const { reset_password_token } = router.query
 
-  Cookies.set('client', String(client), { expires: 1, secure: true })
-  Cookies.set('uid', String(uid), { expires: 1, secure: true })
-  Cookies.set('accessToken', String(accessToken), { expires: 1, secure: true })
-
+  Cookies.set('reset_password_token', String(reset_password_token), {
+    expires: 1 / 2 / 24, // 30分間に設定
+    secure: true,
+  })
   const { form, onSubmit } = useResetPassword()
 
   return (

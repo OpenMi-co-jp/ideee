@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { showSuccess, showError } from '@/components/notifications'
 
 type SignInFormValues = {
   email: string
@@ -44,6 +45,24 @@ export const SignInForm: CustomNextPage = () => {
       router.push('/')
     }
   }, [currentUser, router])
+
+  useEffect(() => {
+    if (!router.isReady) return
+
+    const { confirmed } = router.query
+    if (confirmed === undefined) return
+
+    const actionName = 'メールアドレスの確認'
+    if (confirmed === 'true') {
+      showSuccess({ action: actionName })
+    } else {
+      showError({
+        action: actionName,
+        message:
+          '既に確認済みの場合はログインしてください。未確認の場合は再度確認用メールを送信してください。',
+      })
+    }
+  }, [router, router.isReady])
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>

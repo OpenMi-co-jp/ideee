@@ -7,8 +7,8 @@ module Resolvers
     type [Types::Idea::IdeaType], null: false
 
     def resolve
-      ::Idea.eager_load(:team)
-            .where(team: { status: :active })
+      ::Idea.published
+            .team_active
             .preload(:idea_tags)
             .eager_load(:user)
             .sample(4)

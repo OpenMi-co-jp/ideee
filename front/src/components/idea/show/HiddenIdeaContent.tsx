@@ -1,7 +1,7 @@
 import { Space } from '@mantine/core'
 import { IdeaContents } from '@/components/idea/show'
 import { IdeaOptions } from '@/components/idea/option'
-import { CommentList, CommentForm } from '@/components/comment'
+import { CommentList, CommentCreateForm } from '@/components/comment'
 
 export const HiddenIdeaContent = () => {
   return (
@@ -10,7 +10,7 @@ export const HiddenIdeaContent = () => {
       <IdeaOptions />
       <Space h="xl" />
       <CommentList />
-      <CommentForm />
+      <CommentCreateForm />
     </>
   )
 }

@@ -22,19 +22,21 @@ export const UserMenu = () => {
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>Application</Menu.Label>
         <Link href={`/users/${currentUser?.id}`}>
           <Menu.Item leftSection={<IconUserCircle size={14} />}>
             マイページ
           </Menu.Item>
         </Link>
-        <Link href={`/users/${currentUser?.id}/edit`}>
+        <Link href={'/mypage/edit'}>
           <Menu.Item leftSection={<IconUserEdit size={14} />}>
             ユーザー情報編集
           </Menu.Item>
         </Link>
-        <Menu.Item leftSection={<IconSettings size={14} />}>Settings</Menu.Item>
-
+        <Link href="/settings">
+          <Menu.Item leftSection={<IconSettings size={14} />}>
+            通知設定
+          </Menu.Item>
+        </Link>
         <Menu.Divider />
 
         <Menu.Item color="red" leftSection={<IconLogout size={14} />}>

@@ -101,6 +101,7 @@ class User < ApplicationRecord
           user.twitter_id = auth.info.nickname
           user.site_url = auth.info.urls['Website']
         end
+        user.provider = 'email' if user.provider.nil?
         user.email = auth.info.email || ''
         user.password = Devise.friendly_token[0, 20]
         user.remote_url = auth.info.image
@@ -143,7 +144,7 @@ class User < ApplicationRecord
     payload = {
       id: self.id,
       name: self.name,
-      image: self.icon&.url || self.remote_url,
+      image: self.image,
       defined: self.defined,
       exp: Time.now.to_i + 1.week.to_i
     }

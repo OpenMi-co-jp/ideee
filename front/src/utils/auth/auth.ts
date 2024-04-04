@@ -32,20 +32,19 @@ export const signOut = () => {
 }
 
 export const passwordReset = (props: ResetPasswordFormValues) => {
-  const userClient = Cookies.get('client')
-  const uid = Cookies.get('uid')
-  const accessToken = Cookies.get('accessToken')
+  const resetPasswordToken = Cookies.get('reset_password_token')
   const { password, passwordConfirmation } = props
 
   return client.put(
     '/users/password',
-    { password, password_confirmation: passwordConfirmation },
+    {
+      password,
+      password_confirmation: passwordConfirmation,
+      reset_password_token: resetPasswordToken,
+    },
     {
       headers: {
         'Content-Type': 'application/json',
-        'access-token': accessToken,
-        client: userClient,
-        uid,
       },
     }
   )
@@ -53,7 +52,7 @@ export const passwordReset = (props: ResetPasswordFormValues) => {
 
 export const passwordForgot = (props: ForgotPasswordFormValues) => {
   const { email } = props
-  const redirect_url = process.env.NEXT_PUBLIC_FRONT_URL + 'reset_password'
+  const redirect_url = process.env.NEXT_PUBLIC_FRONT_URL + '/reset_password'
 
   return client.post(
     '/users/password',

@@ -962,6 +962,11 @@ type Notification {
   id: ID!
 
   """
+  アイデア
+  """
+  idea: Idea!
+
+  """
   アイデアID
   """
   ideaId: Int
@@ -982,9 +987,19 @@ type Notification {
   sendAt: ISO8601DateTime
 
   """
+  受信者
+  """
+  visited: User!
+
+  """
   受信者ID
   """
   visitedId: Int
+
+  """
+  通知者
+  """
+  visitor: User!
 
   """
   通知者ID
@@ -1175,7 +1190,7 @@ type Query {
   """
   通知一覧
   """
-  notifications: [Notification!]!
+  notifications(page: Int): [Notification!]!
 
   """
   人気のタグ一覧

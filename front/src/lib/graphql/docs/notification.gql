@@ -1,9 +1,37 @@
 query GetNotifications {
   notifications {
     id
-    visitedId
     checked
     notificatableId
     notificatableType
+    createdAt
+    ideaId
+    idea {
+      id
+      name
+    }
+    visitor {
+      name
+      image
+    }
+  }
+}
+
+query GetLatestNotifications {
+  latestNotifications {
+    id
+    checked
+    notificatableId
+    notificatableType
+    createdAt
+    ideaId
+    idea {
+      id
+      name
+    }
+    visitor {
+      name
+      image
+    }
   }
 }

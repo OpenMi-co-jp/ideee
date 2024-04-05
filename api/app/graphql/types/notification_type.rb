@@ -11,5 +11,9 @@ module Types
     field :notificatable_type, String, description: 'ポリモーフィックタイプ'
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'
     field :send_at, GraphQL::Types::ISO8601DateTime, description: 'メール送信日'
+
+    field :visitor, Types::UserType, description: '通知者'
+    field :visited, Types::UserType, description: '受信者'
+    field :idea, Types::Idea::IdeaType, description: 'アイデア'
   end
 end

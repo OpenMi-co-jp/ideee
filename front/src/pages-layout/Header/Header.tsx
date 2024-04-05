@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
 import {
   UserToggle,
-  Notification,
+  LatestNotifications,
   ServiceIcon,
   SearchIcon,
   Sidebar,
@@ -41,7 +41,7 @@ export const Header: FC = () => {
           <ServiceIcon />
           <Group justify="center">
             <SearchIcon />
-            {currentUser && <Notification />}
+            {currentUser && <LatestNotifications />}
             <UserToggle />
             {currentUser && !isMobile && <IdeaCreateButton />}
             {currentUser && isMobile && <CreateSpButton />}

@@ -15,10 +15,23 @@ module Mutations
         likable_id: args[:likable_id]
       )
       like.save!
+      notify_user(like)
       {
         like:,
         success: true
       }
+    end
+
+    private
+
+    def notify_user(like)
+      notification_type = "Like#{like.likable_type}"
+      context[:current_user].create_notification_with_notificationable_type(likable_item(like), notification_type)
+    end
+
+    def likable_item(like)
+      klass = like.likable_type.constantize
+      klass.find(like.likable_id)
     end
   end
 end

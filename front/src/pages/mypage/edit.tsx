@@ -5,7 +5,7 @@ import { UserEditForm } from '@/components/user/edit/UserEditForm'
 import { useGetUserQuery } from '@/lib/generated/client'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
-import { showError } from '@/components/notifications'
+import { showError } from '@/components/showNotification'
 import { useEffect } from 'react'
 
 export default function UserEdit() {

@@ -1,4 +1,4 @@
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import { modals } from '@mantine/modals'
 import { signUp } from '@/utils/auth'
 import type { SignUpFormValues } from '@/types/user'

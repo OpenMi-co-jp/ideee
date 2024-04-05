@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { showSuccess } from '@/components/notifications'
+import { showSuccess } from '@/components/showNotification'
 import Cookies from 'js-cookie'
 import { LoadingOverlay } from '@mantine/core'
 import { useCurrentUser } from '@/context/CurrentUserContext'

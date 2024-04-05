@@ -1,6 +1,6 @@
 import { useDestroyIdeaMutation } from '@/lib/generated/client'
 import { useRouter } from 'next/router'
-import { showSuccess, showError } from '../notifications'
+import { showSuccess, showError } from '../showNotification'
 
 /**
  * CurrentUserのアイデアを削除するための関数

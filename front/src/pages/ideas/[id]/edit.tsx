@@ -5,7 +5,7 @@ import { EditForm } from '@/components/idea/form'
 import { IdeaProvider } from '@/context/IdeaContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
 import type { GetIdeaQuery } from '@/lib/generated/client'
-import { showError } from '@/components/notifications'
+import { showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
 
 const IdeaEdit = () => {

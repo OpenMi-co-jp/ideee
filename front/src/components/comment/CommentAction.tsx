@@ -1,5 +1,5 @@
 import { ActionMenu } from '@/components/action/Menu'
-import { showSuccess, showError } from '../notifications'
+import { showSuccess, showError } from '../showNotification'
 import { useDestroyCommentMutation } from '@/lib/generated/client'
 import { useCommentsInstance } from '@/components/comment/CommentList/useCommentsInstance'
 import { useComment } from '@/context/CommentContext'

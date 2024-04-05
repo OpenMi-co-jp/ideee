@@ -10,7 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 
 type SignInFormValues = {
   email: string

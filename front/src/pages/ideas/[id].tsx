@@ -8,7 +8,7 @@ import type { GetIdeaQuery } from '@/lib/generated/client'
 import { Container, Loader } from '@mantine/core'
 import { useEffect, useState } from 'react'
 import classes from '@/styles/mask.module.css'
-import { showError } from '@/components/notifications'
+import { showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
 
 const IdeaDetail = () => {

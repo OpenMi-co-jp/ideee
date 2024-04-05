@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { Container } from '@mantine/core'
 import { CreateForm } from '@/components/idea/form'
-import { showError } from '@/components/notifications'
+import { showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
 
 const IdeaCreate = () => {

@@ -1,4 +1,4 @@
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import { useForm } from 'react-hook-form'
 import type { UpdateCommentInput } from '@/lib/generated/client'
 import { useUpdateCommentMutation } from '@/lib/generated/client'

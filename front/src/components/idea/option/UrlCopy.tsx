@@ -1,7 +1,7 @@
 import { IconCopy, IconSquareRoundedCheckFilled } from '@tabler/icons-react'
 import { CopyButton, Button } from '@mantine/core'
 import { useRouter } from 'next/router'
-import { showSuccess } from '@/components/notifications'
+import { showSuccess } from '@/components/showNotification'
 
 export const UrlCopy = () => {
   const router = useRouter()

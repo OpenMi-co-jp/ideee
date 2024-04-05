@@ -6,7 +6,7 @@ import {
   useGetNotificationConfigQuery,
   useUpdateNotificationConfigMutation,
 } from '@/lib/generated/client'
-import { showError, showSuccess } from '@/components/notifications'
+import { showError, showSuccess } from '@/components/showNotification'
 import { SubmitHandler, FieldValues } from 'react-hook-form'
 
 const NotificationConfigSchema = z.object({

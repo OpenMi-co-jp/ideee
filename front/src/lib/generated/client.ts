@@ -559,7 +559,9 @@ export type NotificationConfig = {
 
 export type Notifications = {
   __typename?: 'Notifications'
+  /** 通知オブジェクト一覧 */
   nodes: Array<Notification>
+  /** ページネーション情報 */
   pageInfo?: Maybe<Pagination>
 }
 

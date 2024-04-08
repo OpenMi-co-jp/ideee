@@ -3328,7 +3328,7 @@
           "fields": [
             {
               "name": "nodes",
-              "description": null,
+              "description": "通知オブジェクト一覧",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -3354,7 +3354,7 @@
             },
             {
               "name": "pageInfo",
-              "description": null,
+              "description": "ページネーション情報",
               "type": {
                 "kind": "OBJECT",
                 "name": "Pagination",

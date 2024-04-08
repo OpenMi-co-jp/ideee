@@ -1060,7 +1060,14 @@ type NotificationConfig {
 }
 
 type Notifications {
+  """
+  通知オブジェクト一覧
+  """
   nodes: [Notification!]!
+
+  """
+  ページネーション情報
+  """
   pageInfo: Pagination
 }
 

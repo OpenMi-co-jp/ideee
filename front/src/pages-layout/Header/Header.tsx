@@ -39,7 +39,7 @@ export const Header: FC = () => {
       >
         <Group justify="space-between">
           <ServiceIcon />
-          <Group justify="center">
+          <Group justify="center" align="center">
             <SearchIcon />
             {currentUser && <LatestNotifications />}
             <UserToggle />

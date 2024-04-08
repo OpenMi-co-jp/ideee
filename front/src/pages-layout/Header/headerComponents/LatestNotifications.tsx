@@ -15,6 +15,8 @@ export const LatestNotifications = () => {
 
   return (
     <Menu
+      shadow="md"
+      width={280}
       // TODO: 既読をつける機能を設定
       // onOpen={() => console.log('opened')}
     >
@@ -45,7 +47,7 @@ export const LatestNotifications = () => {
           </Menu.Item>
         )}
         <Divider />
-        <Menu.Item>
+        <Menu.Item style={{ textAlign: 'center' }}>
           <Link href="/notifications">
             <Text size="sm">通知一覧を見る</Text>
           </Link>

@@ -1,18 +1,24 @@
-query GetNotifications {
-  notifications {
-    id
-    checked
-    notificatableId
-    notificatableType
-    createdAt
-    ideaId
-    idea {
+query GetNotifications($page: Int, $per: Int) {
+  notifications(page: $page, per: $per) {
+    nodes {
       id
-      name
+      checked
+      notificatableId
+      notificatableType
+      createdAt
+      ideaId
+      idea {
+        id
+        name
+      }
+      visitor {
+        name
+        image
+      }
     }
-    visitor {
-      name
-      image
+    pageInfo {
+      totalCount
+      totalPages
     }
   }
 }

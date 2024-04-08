@@ -4,7 +4,7 @@ module Resolvers
   class Notification::LatestNotificationsResolver < BaseResolver
     graphql_name 'GetLatestNotifications'
 
-    type [Types::NotificationType], null: false
+    type [Types::Notification::NotificationType], null: false
 
     def resolve
       current_user = context[:current_user]

@@ -557,6 +557,12 @@ export type NotificationConfig = {
   weeklyEmail: Scalars['Boolean']
 }
 
+export type Notifications = {
+  __typename?: 'Notifications'
+  nodes: Array<Notification>
+  pageInfo?: Maybe<Pagination>
+}
+
 export type Pagination = {
   __typename?: 'Pagination'
   /** 現在のページ */
@@ -600,7 +606,7 @@ export type Query = {
   /** 通知設定 */
   notificationConfig: NotificationConfig
   /** 通知一覧 */
-  notifications: Array<Notification>
+  notifications: Notifications
   /** 人気のタグ一覧 */
   popularTags: Array<Tag>
   /** ルームオブジェクト */
@@ -640,6 +646,7 @@ export type QueryIdeasArgs = {
 
 export type QueryNotificationsArgs = {
   page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryRoomArgs = {
@@ -1286,25 +1293,36 @@ export type DestroyLikeMutation = {
   } | null
 }
 
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never }>
+export type GetNotificationsQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+}>
 
 export type GetNotificationsQuery = {
   __typename?: 'Query'
-  notifications: Array<{
-    __typename?: 'Notification'
-    id: string
-    checked: boolean
-    notificatableId?: number | null
-    notificatableType?: string | null
-    createdAt: any
-    ideaId?: number | null
-    idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
-    visitor?: {
-      __typename?: 'User'
-      name: string
-      image?: string | null
+  notifications: {
+    __typename?: 'Notifications'
+    nodes: Array<{
+      __typename?: 'Notification'
+      id: string
+      checked: boolean
+      notificatableId?: number | null
+      notificatableType?: string | null
+      createdAt: any
+      ideaId?: number | null
+      idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
+      visitor?: {
+        __typename?: 'User'
+        name: string
+        image?: string | null
+      } | null
+    }>
+    pageInfo?: {
+      __typename?: 'Pagination'
+      totalCount?: number | null
+      totalPages?: number | null
     } | null
-  }>
+  }
 }
 
 export type GetLatestNotificationsQueryVariables = Exact<{
@@ -2609,21 +2627,27 @@ export type DestroyLikeMutationOptions = Apollo.BaseMutationOptions<
   DestroyLikeMutationVariables
 >
 export const GetNotificationsDocument = gql`
-  query GetNotifications {
-    notifications {
-      id
-      checked
-      notificatableId
-      notificatableType
-      createdAt
-      ideaId
-      idea {
+  query GetNotifications($page: Int, $per: Int) {
+    notifications(page: $page, per: $per) {
+      nodes {
         id
-        name
+        checked
+        notificatableId
+        notificatableType
+        createdAt
+        ideaId
+        idea {
+          id
+          name
+        }
+        visitor {
+          name
+          image
+        }
       }
-      visitor {
-        name
-        image
+      pageInfo {
+        totalCount
+        totalPages
       }
     }
   }
@@ -2641,6 +2665,8 @@ export const GetNotificationsDocument = gql`
  * @example
  * const { data, loading, error } = useGetNotificationsQuery({
  *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
  *   },
  * });
  */

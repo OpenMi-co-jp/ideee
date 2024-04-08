@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class NotificationType < Types::BaseObject
+  class Notification::NotificationType < Types::BaseObject
     field :id, ID, null: false, description: '通知ID'
     field :visitor_id, Integer, description: '通知者ID'
     field :visited_id, Integer, description: '受信者ID'

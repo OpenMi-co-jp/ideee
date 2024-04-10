@@ -9,6 +9,7 @@ import {
   IconSettings,
 } from '@tabler/icons-react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useSignOut } from '@/components/Auth/SignOut/hooks'
 import { MenuList } from './MenuList'
 import { NavItem } from './NavItem'
 
@@ -17,7 +18,8 @@ type NavListProps = {
 }
 
 export const NavList = ({ close }: NavListProps) => {
-  const { currentUser, clearCurrentUser } = useCurrentUser()
+  const { currentUser } = useCurrentUser()
+  const handleSignOut = useSignOut()
 
   return (
     <>
@@ -96,9 +98,12 @@ export const NavList = ({ close }: NavListProps) => {
               label: 'ログアウト',
               href: '/',
               icon: IconLogout2,
+              onClick: (e) => {
+                e.preventDefault()
+                handleSignOut()
+              }
             }}
             closeDrawer={close}
-            logOut={clearCurrentUser}
           />
         </>
       )}

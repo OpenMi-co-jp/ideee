@@ -101,7 +101,7 @@ export const NavList = ({ close }: NavListProps) => {
               onClick: (e) => {
                 e.preventDefault()
                 handleSignOut()
-              }
+              },
             }}
             closeDrawer={close}
           />

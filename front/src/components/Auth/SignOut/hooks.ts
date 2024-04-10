@@ -1,17 +1,22 @@
 import { showSuccess, showError } from '@/components/notifications'
 import Cookies from 'js-cookie'
 import { signOut } from '@/utils/auth'
-import type { CurrentUserContextType } from '@/context/CurrentUserContext'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
-export const HandleSignOut = async (
-  clearCurrentUser: CurrentUserContextType['clearCurrentUser']
-) => {
-  try {
-    await signOut()
-    Cookies.remove('authToken')
-    clearCurrentUser()
-    showSuccess({ action: 'ログアウト' })
-  } catch (error: any) {
-    showError({ action: 'ログアウト', message: error.message })
+export const useSignOut = () => {
+  const { clearCurrentUser } = useCurrentUser()
+
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+      Cookies.remove('authToken')
+      clearCurrentUser()
+      showSuccess({ action: 'ログアウト' })
+    } catch (error: any) {
+      // TODO: error.messageをそのまま出すのはよくないので、ここ以外も含めてエラーハンドリングを考える
+      showError({ action: 'ログアウト', message: error.message })
+    }
   }
+
+  return handleSignOut
 }

@@ -9,9 +9,7 @@ export const UserEditForm = () => {
         fit="scale-down"
         alt="user edit header img"
       />
-      <Card padding="xl" style={{ backgroundColor: '#fff' }}>
-        <Form />
-      </Card>
+      <Form />
     </>
   )
 }

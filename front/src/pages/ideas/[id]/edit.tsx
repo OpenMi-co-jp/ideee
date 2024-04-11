@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { Container, Loader } from '@mantine/core'
+import { Loader } from '@mantine/core'
 import { EditForm } from '@/components/idea/form'
 import { IdeaProvider } from '@/context/IdeaContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
@@ -39,9 +39,7 @@ const IdeaEdit = () => {
 
   return (
     <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
-      <Container>
-        <EditForm />
-      </Container>
+      <EditForm />
     </IdeaProvider>
   )
 }

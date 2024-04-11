@@ -37,13 +37,7 @@ export const Form = () => {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
-      <Paper
-        my="lg"
-        py={rem(40)}
-        px={rem(30)}
-        shadow="md"
-        style={{ backgroundColor: '#F2F2F2' }}
-      >
+      <Paper my="lg" p="lg" shadow="md" style={{ backgroundColor: '#F2F2F2' }}>
         <Title order={2} mb={30} fw={500} ta="center">
           ユーザー情報編集
         </Title>

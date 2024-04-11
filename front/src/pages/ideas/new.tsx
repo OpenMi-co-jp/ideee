@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { Container } from '@mantine/core'
 import { CreateForm } from '@/components/idea/form'
 import { showError } from '@/components/notifications'
 import { useRouter } from 'next/router'
@@ -17,11 +16,7 @@ const IdeaCreate = () => {
     }
   }, [currentUser, router])
 
-  return (
-    <Container>
-      <CreateForm />
-    </Container>
-  )
+  return <CreateForm />
 }
 
 export default IdeaCreate

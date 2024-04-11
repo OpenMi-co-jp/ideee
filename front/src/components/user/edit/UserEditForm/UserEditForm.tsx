@@ -37,18 +37,13 @@ export const Form = () => {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
-      <Paper
-        m="lg"
-        p={rem(40)}
-        shadow="md"
-        style={{ backgroundColor: '#F2F2F2' }}
-      >
+      <Paper my="lg" p="lg" shadow="md" style={{ backgroundColor: '#F2F2F2' }}>
         <Title order={2} mb={30} fw={500} ta="center">
           ユーザー情報編集
         </Title>
         <Grid grow>
           <Grid.Col
-            span={2}
+            span={{ sm: 12, md: 2 }}
             style={{
               display: 'flex',
               flexFlow: 'column',
@@ -62,7 +57,7 @@ export const Form = () => {
               ImageComponent={UserImage}
             />
           </Grid.Col>
-          <Grid.Col span={7}>
+          <Grid.Col span={{ sm: 12, md: 7 }}>
             <TextForm
               form={form}
               name="name"

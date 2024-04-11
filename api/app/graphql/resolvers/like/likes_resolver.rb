@@ -7,6 +7,8 @@ module Resolvers
     type [Types::LikeType], null: false
 
     def resolve
+      return [] if context[:current_user].nil?
+
       ::Like.where(user_id: context[:current_user].id)
     end
   end

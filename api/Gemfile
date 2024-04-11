@@ -140,3 +140,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+group :production do
+  # stackprof: プロファイリングツール
+  gem 'stackprof'
+  # sentry-ruby: SentryのRuby用ライブラリ
+  gem 'sentry-ruby'
+  # sentry-rails: SentryのRails用ライブラリ
+  gem 'sentry-rails'
+end

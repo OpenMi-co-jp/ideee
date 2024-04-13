@@ -10,6 +10,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import * as gtag from '@/lib/analytics/gtag'
+import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const router = useRouter()
@@ -31,6 +32,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
   return (
     <>
       <HeadBlock />
+      <GoogleAnalytics />
       <CurrentUserProvider>
         <ApolloBaseProvider>
           <CustomMantineProvider>

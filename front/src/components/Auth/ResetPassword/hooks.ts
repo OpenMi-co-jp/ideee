@@ -1,4 +1,4 @@
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import type { ResetPasswordFormValues } from '@/types/user'

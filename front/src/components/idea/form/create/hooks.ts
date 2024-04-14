@@ -2,7 +2,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useCreateIdeaMutation } from '@/lib/generated/client'
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
 

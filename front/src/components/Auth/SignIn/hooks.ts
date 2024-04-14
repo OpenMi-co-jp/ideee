@@ -1,4 +1,4 @@
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import Cookies from 'js-cookie'
 import { modals } from '@mantine/modals'
 import type { CurrentUserContextType } from '@/context/CurrentUserContext'

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { showSuccess } from '@/components/notifications'
+import { showSuccess } from '@/components/showNotification'
 import { LoadingOverlay } from '@mantine/core'
 
 function Confirmation() {

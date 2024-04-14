@@ -1,4 +1,4 @@
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import { useForm } from 'react-hook-form'
 import type { ForgotPasswordFormValues } from '@/types/user'
 import { passwordForgot } from '@/utils/auth'

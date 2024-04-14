@@ -513,6 +513,8 @@ export type Notification = {
   createdAt: Scalars['ISO8601DateTime']
   /** 通知ID */
   id: Scalars['ID']
+  /** アイデア */
+  idea?: Maybe<Idea>
   /** アイデアID */
   ideaId?: Maybe<Scalars['Int']>
   /** ポリモーフィックID */
@@ -521,8 +523,12 @@ export type Notification = {
   notificatableType?: Maybe<Scalars['String']>
   /** メール送信日 */
   sendAt?: Maybe<Scalars['ISO8601DateTime']>
+  /** 受信者 */
+  visited?: Maybe<User>
   /** 受信者ID */
   visitedId?: Maybe<Scalars['Int']>
+  /** 通知者 */
+  visitor?: Maybe<User>
   /** 通知者ID */
   visitorId?: Maybe<Scalars['Int']>
 }
@@ -549,6 +555,14 @@ export type NotificationConfig = {
   userId: Scalars['ID']
   /** 週間ランキング */
   weeklyEmail: Scalars['Boolean']
+}
+
+export type Notifications = {
+  __typename?: 'Notifications'
+  /** 通知オブジェクト一覧 */
+  nodes: Array<Notification>
+  /** ページネーション情報 */
+  pageInfo?: Maybe<Pagination>
 }
 
 export type Pagination = {
@@ -594,7 +608,7 @@ export type Query = {
   /** 通知設定 */
   notificationConfig: NotificationConfig
   /** 通知一覧 */
-  notifications: Array<Notification>
+  notifications: Notifications
   /** 人気のタグ一覧 */
   popularTags: Array<Tag>
   /** ルームオブジェクト */
@@ -630,6 +644,11 @@ export type QueryIdeasArgs = {
   per?: InputMaybe<Scalars['Int']>
   searchCondition?: InputMaybe<SearchCondition>
   sort?: InputMaybe<SortCondition>
+}
+
+export type QueryNotificationsArgs = {
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryRoomArgs = {
@@ -1276,17 +1295,58 @@ export type DestroyLikeMutation = {
   } | null
 }
 
-export type GetNotificationsQueryVariables = Exact<{ [key: string]: never }>
+export type GetNotificationsQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+}>
 
 export type GetNotificationsQuery = {
   __typename?: 'Query'
-  notifications: Array<{
+  notifications: {
+    __typename?: 'Notifications'
+    nodes: Array<{
+      __typename?: 'Notification'
+      id: string
+      checked: boolean
+      notificatableId?: number | null
+      notificatableType?: string | null
+      createdAt: any
+      ideaId?: number | null
+      idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
+      visitor?: {
+        __typename?: 'User'
+        name: string
+        image?: string | null
+      } | null
+    }>
+    pageInfo?: {
+      __typename?: 'Pagination'
+      totalCount?: number | null
+      totalPages?: number | null
+    } | null
+  }
+}
+
+export type GetLatestNotificationsQueryVariables = Exact<{
+  [key: string]: never
+}>
+
+export type GetLatestNotificationsQuery = {
+  __typename?: 'Query'
+  latestNotifications: Array<{
     __typename?: 'Notification'
     id: string
-    visitedId?: number | null
     checked: boolean
     notificatableId?: number | null
     notificatableType?: string | null
+    createdAt: any
+    ideaId?: number | null
+    idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
+    visitor?: {
+      __typename?: 'User'
+      name: string
+      image?: string | null
+    } | null
   }>
 }
 
@@ -2569,13 +2629,28 @@ export type DestroyLikeMutationOptions = Apollo.BaseMutationOptions<
   DestroyLikeMutationVariables
 >
 export const GetNotificationsDocument = gql`
-  query GetNotifications {
-    notifications {
-      id
-      visitedId
-      checked
-      notificatableId
-      notificatableType
+  query GetNotifications($page: Int, $per: Int) {
+    notifications(page: $page, per: $per) {
+      nodes {
+        id
+        checked
+        notificatableId
+        notificatableType
+        createdAt
+        ideaId
+        idea {
+          id
+          name
+        }
+        visitor {
+          name
+          image
+        }
+      }
+      pageInfo {
+        totalCount
+        totalPages
+      }
     }
   }
 `
@@ -2592,6 +2667,8 @@ export const GetNotificationsDocument = gql`
  * @example
  * const { data, loading, error } = useGetNotificationsQuery({
  *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
  *   },
  * });
  */
@@ -2628,6 +2705,76 @@ export type GetNotificationsLazyQueryHookResult = ReturnType<
 export type GetNotificationsQueryResult = Apollo.QueryResult<
   GetNotificationsQuery,
   GetNotificationsQueryVariables
+>
+export const GetLatestNotificationsDocument = gql`
+  query GetLatestNotifications {
+    latestNotifications {
+      id
+      checked
+      notificatableId
+      notificatableType
+      createdAt
+      ideaId
+      idea {
+        id
+        name
+      }
+      visitor {
+        name
+        image
+      }
+    }
+  }
+`
+
+/**
+ * __useGetLatestNotificationsQuery__
+ *
+ * To run a query within a React component, call `useGetLatestNotificationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLatestNotificationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLatestNotificationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetLatestNotificationsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetLatestNotificationsQuery,
+    GetLatestNotificationsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<
+    GetLatestNotificationsQuery,
+    GetLatestNotificationsQueryVariables
+  >(GetLatestNotificationsDocument, options)
+}
+export function useGetLatestNotificationsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetLatestNotificationsQuery,
+    GetLatestNotificationsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    GetLatestNotificationsQuery,
+    GetLatestNotificationsQueryVariables
+  >(GetLatestNotificationsDocument, options)
+}
+export type GetLatestNotificationsQueryHookResult = ReturnType<
+  typeof useGetLatestNotificationsQuery
+>
+export type GetLatestNotificationsLazyQueryHookResult = ReturnType<
+  typeof useGetLatestNotificationsLazyQuery
+>
+export type GetLatestNotificationsQueryResult = Apollo.QueryResult<
+  GetLatestNotificationsQuery,
+  GetLatestNotificationsQueryVariables
 >
 export const GetNotificationConfigDocument = gql`
   query GetNotificationConfig {

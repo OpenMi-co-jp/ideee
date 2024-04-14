@@ -962,6 +962,11 @@ type Notification {
   id: ID!
 
   """
+  アイデア
+  """
+  idea: Idea
+
+  """
   アイデアID
   """
   ideaId: Int
@@ -982,9 +987,19 @@ type Notification {
   sendAt: ISO8601DateTime
 
   """
+  受信者
+  """
+  visited: User
+
+  """
   受信者ID
   """
   visitedId: Int
+
+  """
+  通知者
+  """
+  visitor: User
 
   """
   通知者ID
@@ -1042,6 +1057,18 @@ type NotificationConfig {
   週間ランキング
   """
   weeklyEmail: Boolean!
+}
+
+type Notifications {
+  """
+  通知オブジェクト一覧
+  """
+  nodes: [Notification!]!
+
+  """
+  ページネーション情報
+  """
+  pageInfo: Pagination
 }
 
 type Pagination {
@@ -1175,7 +1202,17 @@ type Query {
   """
   通知一覧
   """
-  notifications: [Notification!]!
+  notifications(
+    """
+    ページ番号
+    """
+    page: Int = 1
+
+    """
+    1ページに表示するアイデア数
+    """
+    per: Int = 30
+  ): Notifications!
 
   """
   人気のタグ一覧

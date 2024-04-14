@@ -1,5 +1,5 @@
 export { UserToggle } from './User'
-export { Notification } from './Notification'
+export { LatestNotifications } from './LatestNotifications'
 export { SearchIcon } from './SearchIcon'
 export { ServiceIcon } from './ServiceIcon'
 export { Sidebar } from './Sidebar'

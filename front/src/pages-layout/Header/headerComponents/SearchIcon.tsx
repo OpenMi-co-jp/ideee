@@ -4,7 +4,9 @@ import Link from 'next/link'
 export const SearchIcon = () => {
   return (
     <Link href="/search" passHref>
-      <IconSearch size={25} />
+      <span style={{ display: 'flex', alignItems: 'center' }}>
+        <IconSearch size={25} />
+      </span>
     </Link>
   )
 }

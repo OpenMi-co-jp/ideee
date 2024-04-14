@@ -1,4 +1,4 @@
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import Cookies from 'js-cookie'
 import { signOut } from '@/utils/auth'
 import type { CurrentUserContextType } from '@/context/CurrentUserContext'

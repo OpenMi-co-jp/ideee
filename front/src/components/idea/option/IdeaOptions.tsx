@@ -1,5 +1,5 @@
 import { Flex, Group, Text } from '@mantine/core'
-import { FormatDate } from '@/utils/common'
+import dayjs from '@/lib/format/dayjs'
 import { useIdea } from '@/context/IdeaContext'
 import { IdeaMenu } from './IdeaMenu'
 import { Like } from './Like'
@@ -22,7 +22,7 @@ export const IdeaOptions = () => {
         {currentUser?.id === idea?.userId && <IdeaMenu />}
       </Group>
       <Text size="md" c="gray">
-        {FormatDate(createdAt)}
+        {dayjs(createdAt).format('YYYY-MM-DD HH:mm')}
       </Text>
     </Flex>
   )

@@ -7,7 +7,7 @@ import { useUpdateUserMutation } from '@/lib/generated/client'
 import { useRouter } from 'next/router'
 import { SubmitHandler, FieldValues } from 'react-hook-form'
 import { useGetUser } from '@/utils/hooks/useGetUser'
-import { showSuccess, showError } from '@/components/notifications'
+import { showSuccess, showError } from '@/components/showNotification'
 import { base64ImageValidation } from '@/utils/CustomValidation'
 
 const UserEditFormSchema = z.object({

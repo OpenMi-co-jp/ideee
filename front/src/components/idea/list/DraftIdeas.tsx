@@ -5,6 +5,7 @@ import { AlertError } from '@/components/alert'
 import { LoaderBox } from '@/components/features'
 import { useState } from 'react'
 
+const PAGE_SIZE = 10
 export const DraftIdeas = () => {
   const { loading, data, error, refetch } = useGetDraftIdeasQuery()
   const { pageInfo, nodes } = data?.draftIdeas || {}
@@ -12,7 +13,7 @@ export const DraftIdeas = () => {
   const [page, setPage] = useState(1)
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
-    refetch({ page: newPage, per: 15 })
+    refetch({ page: newPage, per: PAGE_SIZE })
   }
 
   if (loading) return <LoaderBox />

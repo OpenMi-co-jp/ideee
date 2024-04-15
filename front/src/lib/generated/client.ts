@@ -595,6 +595,8 @@ export type Query = {
   comments: Array<Comment>
   /** 実現したアイデア一覧 */
   deployedIdeas: Array<Idea>
+  /** 下書きアイデア一覧 */
+  draftIdeas: Ideas
   /** ホットなアイデア一覧 */
   hotIdeas: Array<Idea>
   /** アイデアオブジェクト */
@@ -633,6 +635,11 @@ export type QueryCommentArgs = {
 
 export type QueryCommentsArgs = {
   ideaId: Scalars['ID']
+}
+
+export type QueryDraftIdeasArgs = {
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
 }
 
 export type QueryIdeaArgs = {
@@ -1254,6 +1261,40 @@ export type DestroyIdeaMutationVariables = Exact<{
 export type DestroyIdeaMutation = {
   __typename?: 'Mutation'
   destroyIdea?: { __typename?: 'DestroyIdeaPayload'; success: boolean } | null
+}
+
+export type GetDraftIdeasQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+}>
+
+export type GetDraftIdeasQuery = {
+  __typename?: 'Query'
+  draftIdeas: {
+    __typename?: 'Ideas'
+    nodes: Array<{
+      __typename?: 'Idea'
+      id: string
+      name?: string | null
+      user: { __typename?: 'User'; image?: string | null }
+      ideaTags?: Array<{
+        __typename?: 'Tag'
+        id?: string | null
+        name: string
+      }> | null
+    }>
+    pageInfo?: {
+      __typename?: 'Pagination'
+      currentPage: number
+      isFirst?: boolean | null
+      isLast?: boolean | null
+      nextPage?: number | null
+      per: number
+      prevPage?: number | null
+      totalCount?: number | null
+      totalPages?: number | null
+    } | null
+  }
 }
 
 export type GetLikesQueryVariables = Exact<{ [key: string]: never }>
@@ -2468,6 +2509,85 @@ export type DestroyIdeaMutationResult =
 export type DestroyIdeaMutationOptions = Apollo.BaseMutationOptions<
   DestroyIdeaMutation,
   DestroyIdeaMutationVariables
+>
+export const GetDraftIdeasDocument = gql`
+  query GetDraftIdeas($page: Int, $per: Int) {
+    draftIdeas(page: $page, per: $per) {
+      nodes {
+        id
+        name
+        user {
+          image
+        }
+        ideaTags {
+          id
+          name
+        }
+      }
+      pageInfo {
+        currentPage
+        isFirst
+        isLast
+        nextPage
+        per
+        prevPage
+        totalCount
+        totalPages
+      }
+    }
+  }
+`
+
+/**
+ * __useGetDraftIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetDraftIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDraftIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDraftIdeasQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
+ *   },
+ * });
+ */
+export function useGetDraftIdeasQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetDraftIdeasQuery,
+    GetDraftIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetDraftIdeasQuery, GetDraftIdeasQueryVariables>(
+    GetDraftIdeasDocument,
+    options
+  )
+}
+export function useGetDraftIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetDraftIdeasQuery,
+    GetDraftIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetDraftIdeasQuery, GetDraftIdeasQueryVariables>(
+    GetDraftIdeasDocument,
+    options
+  )
+}
+export type GetDraftIdeasQueryHookResult = ReturnType<
+  typeof useGetDraftIdeasQuery
+>
+export type GetDraftIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetDraftIdeasLazyQuery
+>
+export type GetDraftIdeasQueryResult = Apollo.QueryResult<
+  GetDraftIdeasQuery,
+  GetDraftIdeasQueryVariables
 >
 export const GetLikesDocument = gql`
   query GetLikes {

@@ -1145,6 +1145,21 @@ type Query {
   deployedIdeas: [Idea!]!
 
   """
+  下書きアイデア一覧
+  """
+  draftIdeas(
+    """
+    ページ番号
+    """
+    page: Int = 1
+
+    """
+    1ページに表示するアイデア数
+    """
+    per: Int = 30
+  ): Ideas!
+
+  """
   ホットなアイデア一覧
   """
   hotIdeas: [Idea!]!

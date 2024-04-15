@@ -166,3 +166,29 @@ mutation DestroyIdea($input: DestroyIdeaInput!) {
     success
   }
 }
+
+query GetDraftIdeas($page: Int, $per: Int) {
+  draftIdeas(page: $page, per: $per) {
+    nodes {
+    id
+    name
+    user {
+      image
+    }
+    ideaTags {
+      id
+      name
+    }
+    }
+    pageInfo {
+      currentPage
+      isFirst
+      isLast
+      nextPage
+      per
+      prevPage
+      totalCount
+      totalPages
+    }
+  }
+}

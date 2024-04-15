@@ -1,5 +1,5 @@
 import { Divider, Title, Button, Center } from '@mantine/core'
-import { DeployedIdeas } from '@/components/idea'
+import { DeployedIdeas } from '@/components/idea/list'
 import Link from 'next/link'
 
 export const IdeaNotFound = () => {

@@ -11,6 +11,7 @@ import {
   IconPencil,
 } from '@tabler/icons-react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { DraftIdeas } from '@/components/idea/list'
 
 export const Profile = () => {
   const user = useUser()
@@ -81,7 +82,7 @@ export const Profile = () => {
 
         {isMyPage && (
           <Tabs.Panel value="draft">
-            Coming Soon <IconPencil />
+            <DraftIdeas />
           </Tabs.Panel>
         )}
       </Tabs>

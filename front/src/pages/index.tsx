@@ -1,6 +1,10 @@
 import { TopVision, Philosophy } from '@/components/features'
 import { Space } from '@mantine/core'
-import { HotIdeas, ActiveTeamIdeas, DeployedIdeas } from '@/components/idea'
+import {
+  HotIdeas,
+  ActiveTeamIdeas,
+  DeployedIdeas,
+} from '@/components/idea/list'
 import { PopularTags } from '@/components/tag'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 

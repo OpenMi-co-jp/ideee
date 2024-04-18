@@ -15,7 +15,7 @@ function AuthCallback() {
   useEffect(() => {
     if (token) {
       Cookies.set('authToken', String(token), {
-        expires: 7,
+        // expires: 7, TODO: deviseでtimeoutを設定していないので、ここも無期限にしたが、後でちゃんと考える see: https://github.com/naru20181117/ideee/issues/1300
         secure: true,
       })
       try {

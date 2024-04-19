@@ -50,7 +50,8 @@ const IdeaDetail = () => {
           return <SignPath />
         }
       })()}
-      <SuggestIdeas />
+      {/* 後悔しているアイデアのみサジェストを表示 */}
+      {data?.idea && !data?.idea?.draft && <SuggestIdeas />}
     </IdeaProvider>
   )
 }

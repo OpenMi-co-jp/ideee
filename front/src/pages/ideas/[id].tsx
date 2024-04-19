@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import classes from '@/styles/mask.module.css'
 import { showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
+import { SuggestIdeas } from '@/components/idea/list'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
@@ -49,6 +50,7 @@ const IdeaDetail = () => {
           return <SignPath />
         }
       })()}
+      <SuggestIdeas />
     </IdeaProvider>
   )
 }

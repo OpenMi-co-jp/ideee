@@ -145,7 +145,7 @@ class User < ApplicationRecord
       id: self.id,
       name: self.name,
       image: self.image,
-      defined: self.defined,
+      defined: self.defined
       # exp: Time.now.to_i + 1.week.to_i TODO: deviseでtimeoutを設定していないので、ここも無期限にしたが、後でちゃんと考える see: https://github.com/naru20181117/ideee/issues/1300
     }
 

@@ -170,15 +170,15 @@ mutation DestroyIdea($input: DestroyIdeaInput!) {
 query GetDraftIdeas($page: Int, $per: Int) {
   draftIdeas(page: $page, per: $per) {
     nodes {
-    id
-    name
-    user {
-      image
-    }
-    ideaTags {
       id
       name
-    }
+      user {
+        image
+      }
+      ideaTags {
+        id
+        name
+      }
     }
     pageInfo {
       currentPage
@@ -190,5 +190,22 @@ query GetDraftIdeas($page: Int, $per: Int) {
       totalCount
       totalPages
     }
+  }
+}
+
+query GetSuggestIdeas($ideaId: ID!) {
+  suggestIdeas(ideaId: $ideaId) {
+    nodes {
+      id
+      name
+      user {
+        image
+      }
+      ideaTags {
+        id
+        name
+      }
+    }
+    title
   }
 }

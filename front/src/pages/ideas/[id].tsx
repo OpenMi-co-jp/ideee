@@ -32,9 +32,7 @@ const IdeaDetail = () => {
   }, [data, error])
 
   if (loading) return <Loader color="yellow" />
-  const tags =
-    data?.idea?.ideaTags &&
-    data?.idea?.ideaTags.map((tag) => tag.name).join(',')
+  const tags = data?.idea?.ideaTags?.map((tag) => tag.name).join(',') || ''
 
   return (
     <>

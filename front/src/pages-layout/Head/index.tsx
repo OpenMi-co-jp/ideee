@@ -17,7 +17,7 @@ export const HeadBlock: FC<MetaData> = ({
   pageImg,
   pageKeywords,
 }) => {
-  const title = pageTitle ? `${pageTitle} | ideee` : 'アイディー | ideee'
+  const title = `${pageTitle || 'アイディー'} | ideee`
   const description = pageDescription
   const url = pagePath || 'https://ideee.tech'
   const imgUrl =

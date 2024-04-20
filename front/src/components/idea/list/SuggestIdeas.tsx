@@ -4,13 +4,13 @@ import { IdeaList } from '@/components/idea'
 import { IconBrowser } from '@tabler/icons-react'
 import { AlertError } from '@/components/alert'
 import { LoaderBox } from '@/components/features'
-import { useIdea } from '@/context/IdeaContext'
+import { useRouter } from 'next/router'
 
 export const SuggestIdeas = () => {
-  const { id } = useIdea()
+  const { id } = useRouter().query
   const { loading, data, error } = useGetSuggestIdeasQuery({
     variables: {
-      ideaId: id,
+      ideaId: id as string,
     },
   })
   if (loading) return <LoaderBox />

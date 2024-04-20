@@ -671,7 +671,7 @@ type Idea {
   """
   アイデア名
   """
-  name: String
+  name: String!
 
   """
   補足

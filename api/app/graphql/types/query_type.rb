@@ -10,6 +10,7 @@ module Types
     field :deployed_ideas, resolver: Resolvers::Idea::DeployedIdeasResolver, description: '実現したアイデア一覧'
     field :active_team_ideas, resolver: Resolvers::Idea::ActiveTeamIdeasResolver, description: 'チーム開発募集中のアイデア一覧'
     field :draft_ideas, resolver: Resolvers::Idea::DraftIdeasResolver, description: '下書きアイデア一覧'
+    field :suggest_ideas, resolver: Resolvers::Idea::SuggestIdeasResolver, description: 'サジェストアイデア一覧'
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
     field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'

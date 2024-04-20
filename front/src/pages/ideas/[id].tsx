@@ -12,6 +12,7 @@ import { showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
 import { HeadBlock } from '@/pages-layout/Head'
 import { truncateText } from '@/utils/truncateText'
+import { SuggestIdeas } from '@/components/idea/list'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
@@ -62,6 +63,8 @@ const IdeaDetail = () => {
             return <SignPath />
           }
         })()}
+        {/* 公開しているアイデアのみサジェストを表示 */}
+        {data?.idea && !data?.idea?.draft && <SuggestIdeas />}
       </IdeaProvider>
     </>
   )

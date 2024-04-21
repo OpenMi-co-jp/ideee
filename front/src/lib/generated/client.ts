@@ -613,6 +613,8 @@ export type Query = {
   notifications: Notifications
   /** 人気のタグ一覧 */
   popularTags: Array<Tag>
+  /** 公開アイデア一覧 */
+  publishedIdeas: Ideas
   /** ルームオブジェクト */
   room: Room
   /** サジェストアイデア一覧 */
@@ -656,6 +658,11 @@ export type QueryIdeasArgs = {
 }
 
 export type QueryNotificationsArgs = {
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+}
+
+export type QueryPublishedIdeasArgs = {
   page?: InputMaybe<Scalars['Int']>
   per?: InputMaybe<Scalars['Int']>
 }
@@ -1285,6 +1292,40 @@ export type GetDraftIdeasQueryVariables = Exact<{
 export type GetDraftIdeasQuery = {
   __typename?: 'Query'
   draftIdeas: {
+    __typename?: 'Ideas'
+    nodes: Array<{
+      __typename?: 'Idea'
+      id: string
+      name?: string | null
+      user: { __typename?: 'User'; image?: string | null }
+      ideaTags?: Array<{
+        __typename?: 'Tag'
+        id?: string | null
+        name: string
+      }> | null
+    }>
+    pageInfo?: {
+      __typename?: 'Pagination'
+      currentPage: number
+      isFirst?: boolean | null
+      isLast?: boolean | null
+      nextPage?: number | null
+      per: number
+      prevPage?: number | null
+      totalCount?: number | null
+      totalPages?: number | null
+    } | null
+  }
+}
+
+export type GetPublishedIdeasQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+}>
+
+export type GetPublishedIdeasQuery = {
+  __typename?: 'Query'
+  publishedIdeas: {
     __typename?: 'Ideas'
     nodes: Array<{
       __typename?: 'Idea'
@@ -2625,6 +2666,85 @@ export type GetDraftIdeasLazyQueryHookResult = ReturnType<
 export type GetDraftIdeasQueryResult = Apollo.QueryResult<
   GetDraftIdeasQuery,
   GetDraftIdeasQueryVariables
+>
+export const GetPublishedIdeasDocument = gql`
+  query GetPublishedIdeas($page: Int, $per: Int) {
+    publishedIdeas(page: $page, per: $per) {
+      nodes {
+        id
+        name
+        user {
+          image
+        }
+        ideaTags {
+          id
+          name
+        }
+      }
+      pageInfo {
+        currentPage
+        isFirst
+        isLast
+        nextPage
+        per
+        prevPage
+        totalCount
+        totalPages
+      }
+    }
+  }
+`
+
+/**
+ * __useGetPublishedIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetPublishedIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPublishedIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPublishedIdeasQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
+ *   },
+ * });
+ */
+export function useGetPublishedIdeasQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetPublishedIdeasQuery,
+    GetPublishedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<
+    GetPublishedIdeasQuery,
+    GetPublishedIdeasQueryVariables
+  >(GetPublishedIdeasDocument, options)
+}
+export function useGetPublishedIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetPublishedIdeasQuery,
+    GetPublishedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    GetPublishedIdeasQuery,
+    GetPublishedIdeasQueryVariables
+  >(GetPublishedIdeasDocument, options)
+}
+export type GetPublishedIdeasQueryHookResult = ReturnType<
+  typeof useGetPublishedIdeasQuery
+>
+export type GetPublishedIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetPublishedIdeasLazyQuery
+>
+export type GetPublishedIdeasQueryResult = Apollo.QueryResult<
+  GetPublishedIdeasQuery,
+  GetPublishedIdeasQueryVariables
 >
 export const GetSuggestIdeasDocument = gql`
   query GetSuggestIdeas($ideaId: ID!) {

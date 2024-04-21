@@ -20,7 +20,7 @@ export const IdeaCard: FC<IdeasType> = ({ ideas }) => {
       my="xl"
       mx="md"
     >
-      {ideas?.map((idea: any) => (
+      {ideas?.map((idea: IdeaBoxType) => (
         <Paper shadow="md" radius="md" p="md" withBorder key={idea.id}>
           <Stack gap="xs" align="flex-start" w={{ base: 220, md: 280 }}>
             <Flex
@@ -32,7 +32,7 @@ export const IdeaCard: FC<IdeasType> = ({ ideas }) => {
                 justifyContent: 'space-between',
               }}
             >
-              <Link href={`/ideas/${idea.id}`} key={idea.id}>
+              <Link href={`/ideas/${idea.id}`}>
                 <Text
                   style={{
                     overflowWrap: 'break-word',
@@ -44,7 +44,7 @@ export const IdeaCard: FC<IdeasType> = ({ ideas }) => {
               <IdeaMenu ideaId={idea.id} />
             </Flex>
             <Flex justify="flex-start" align="center" wrap="wrap">
-              {idea.ideaTags?.map((tag: any) => (
+              {idea.ideaTags?.map((tag) => (
                 <Tag tagName={tag.name} key={tag.id} size="sm" />
               ))}
             </Flex>

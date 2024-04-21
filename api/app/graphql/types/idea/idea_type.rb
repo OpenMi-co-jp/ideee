@@ -15,7 +15,7 @@ module Types
     field :issue, String, description: '課題・困っていること'
     field :likes_num, Integer, description: 'ハート数'
     field :monetize, String, description: 'マネタイズ方法'
-    field :name, String, description: 'アイデア名'
+    field :name, String, null: false, description: 'アイデア名'
     field :note, String, description: '補足'
     field :product_apply, Integer, description: 'アプリ審査状況'
     field :github_url, String, description: 'GithubリポジトリURL'

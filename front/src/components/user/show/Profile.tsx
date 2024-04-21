@@ -11,7 +11,7 @@ import {
   IconPencil,
 } from '@tabler/icons-react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { DraftIdeas } from '@/components/idea/list'
+import { DraftIdeas, PublishedIdeas } from '@/components/idea/list'
 
 export const Profile = () => {
   const user = useUser()
@@ -65,7 +65,7 @@ export const Profile = () => {
         </Tabs.List>
 
         <Tabs.Panel value="idea_list">
-          Coming Soon <IconBulb />
+          <PublishedIdeas />
         </Tabs.Panel>
 
         <Tabs.Panel value="heart_list">

@@ -28,7 +28,7 @@ const IdeaDetail = () => {
     if (data) {
       setIdea(data?.idea)
     }
-  }, [data, error])
+  }, [data, error, router])
 
   if (loading) return <Loader color="yellow" />
 

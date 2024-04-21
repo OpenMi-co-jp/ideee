@@ -5,7 +5,11 @@ import { useDestroyIdea } from '@/components/idea/useDestroyIdea'
 import { useIdea } from '@/context/IdeaContext'
 import { EDIT_TEXT, DELETE_TEXT } from '@/utils/constant'
 
-export const IdeaMenu = () => {
+interface IdeaMenuProps {
+  ideaId: string
+}
+
+export const IdeaMenu: React.FC<IdeaMenuProps> = ({ ideaId }) => {
   const { handleDestroyIdea } = useDestroyIdea()
   const idea = useIdea()
 
@@ -17,7 +21,7 @@ export const IdeaMenu = () => {
 
       <Menu.Dropdown>
         <Menu.Label>アイデア管理</Menu.Label>
-        <Link href={`/ideas/${idea.id}/edit`}>
+        <Link href={`/ideas/${ideaId}/edit`}>
           <Menu.Item leftSection={<IconPencil size={14} />}>
             {EDIT_TEXT}
           </Menu.Item>
@@ -28,7 +32,7 @@ export const IdeaMenu = () => {
         <Menu.Item
           onClick={() => {
             window.confirm('本当に削除してもよろしいですか？') &&
-              handleDestroyIdea()
+              handleDestroyIdea(ideaId)
           }}
           color="red"
           leftSection={<IconTrash size={14} />}

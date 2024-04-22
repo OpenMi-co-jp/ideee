@@ -39,9 +39,10 @@ module Ideee
       config.session_store :cookie_store,
                            key: '_interslice_session',
                            domain: %w[api.ideee.tech .vercel.app ideee.tech],
-                           secure: true
+                           secure: true,
+                           expire_after: 5.weeks # devise.rbのtimeout_inと同じ期間にする
     else
-      config.session_store :cookie_store, key: '_interslice_session'
+      config.session_store :cookie_store, key: '_interslice_session', expire_after: 5.weeks
     end
     # Required for all session management
     config.middleware.use ActionDispatch::Cookies

@@ -46,8 +46,8 @@ class User < ApplicationRecord
   extend Devise::Models
   # エラー対処のため二重記述
   devise :confirmable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable,
-         :omniauthable, omniauth_providers: %i[twitter google_oauth2]
+         :recoverable, :rememberable, :timeoutable, :validatable,
+         :trackable, :omniauthable, omniauth_providers: %i[twitter google_oauth2]
   has_many :ideas, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -146,7 +146,7 @@ class User < ApplicationRecord
       name: self.name,
       image: self.image,
       defined: self.defined,
-      exp: Time.now.to_i + 1.week.to_i
+      exp: Time.now.to_i + 5.weeks.to_i # TODO: devise.rbのtimeout_inと同じ時間に設定しているが厳密ではないため、もっといい方法があれば修正する
     }
 
     secret_key = Rails.application.credentials.secret_key_base

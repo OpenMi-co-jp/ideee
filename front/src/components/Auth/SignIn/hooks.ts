@@ -16,7 +16,7 @@ export const handleSignIn = async (
     // TODO: validateTokenメソッドを設定
     if (token) {
       Cookies.set('authToken', String(token), {
-        expires: 7,
+        expires: 35, // TODO: User#generate_jwt_tokenと同様の理由で修正したい
         secure: true,
       })
       const decodedToken = DecodeJwt(String(token))

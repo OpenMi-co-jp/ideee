@@ -14,16 +14,16 @@ function AuthCallback() {
 
   useEffect(() => {
     if (token) {
-      Cookies.set('authToken', String(token), {
-        expires: 7,
-        secure: true,
-      })
       try {
         const decodedToken = DecodeJwt(String(token))
         storeCurrentUser(decodedToken)
       } catch (error) {
         console.error('Failed to decode JWT:', error)
       }
+      Cookies.set('authToken', String(token), {
+        expires: 35, // TODO: User#generate_jwt_tokenと同様の理由で修正したい
+        secure: true,
+      })
       router.push('/').then(() => {
         showSuccess({
           action: 'ログイン',

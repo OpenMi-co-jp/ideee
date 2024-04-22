@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
 import React, {
   createContext,
   useContext,
@@ -37,6 +39,13 @@ type CurrentUserProviderProps = {
 export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null)
   const [loading, setLoading] = useState(true) // ローディング状態を追加
+  const router = useRouter()
+
+  useEffect(() => {
+    if (currentUser && !Cookies.get('authToken')) {
+      clearCurrentUser()
+    }
+  }, [router.asPath])
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser')

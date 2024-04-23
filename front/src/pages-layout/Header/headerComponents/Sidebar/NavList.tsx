@@ -97,7 +97,7 @@ export const NavList = ({ close }: NavListProps) => {
             item={{
               label: 'ログアウト',
               // FIXME: hrefはrequiredになっているので仕方なく設定していますが、実質は不要です。hrefの指定がなくなれば、onClickのpreventDefaultもいらなくなります。
-              href: '/',
+              href: '#',
               icon: IconLogout2,
               onClick: (e) => {
                 e.preventDefault()

@@ -352,7 +352,7 @@ export type Idea = {
   /** マネタイズ方法 */
   monetize?: Maybe<Scalars['String']>
   /** アイデア名 */
-  name?: Maybe<Scalars['String']>
+  name: Scalars['String']
   /** 補足 */
   note?: Maybe<Scalars['String']>
   /** アプリ審査状況 */
@@ -615,6 +615,8 @@ export type Query = {
   popularTags: Array<Tag>
   /** ルームオブジェクト */
   room: Room
+  /** サジェストアイデア一覧 */
+  suggestIdeas: SuggestIdeas
   /** タグ一覧 */
   tags: Array<Tag>
   /** チームオブジェクト */
@@ -662,6 +664,10 @@ export type QueryRoomArgs = {
   id: Scalars['ID']
 }
 
+export type QuerySuggestIdeasArgs = {
+  ideaId: Scalars['ID']
+}
+
 export type QueryTeamArgs = {
   id: Scalars['ID']
 }
@@ -700,6 +706,14 @@ export type SortCondition = {
   columnName: Scalars['String']
   /** ソート順 */
   order?: InputMaybe<Scalars['String']>
+}
+
+export type SuggestIdeas = {
+  __typename?: 'SuggestIdeas'
+  /** アイデアオブジェクト */
+  nodes: Array<Idea>
+  /** サジェストアイデアタイトル */
+  title: Scalars['String']
 }
 
 export type Tag = {
@@ -1059,7 +1073,7 @@ export type GetIdeaQuery = {
   idea: {
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     iconUrl?: string | null
     background?: string | null
     goal?: string | null
@@ -1112,7 +1126,7 @@ export type GetIdeasQuery = {
     nodes: Array<{
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       commentsNum?: number | null
       difficulty?: string | null
       likesNum?: number | null
@@ -1157,7 +1171,7 @@ export type GetHotIdeasQuery = {
   hotIdeas: Array<{
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1174,7 +1188,7 @@ export type GetDeployedIdeasQuery = {
   deployedIdeas: Array<{
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1191,7 +1205,7 @@ export type GetActiveTeamIdeasQuery = {
   activeTeamIdeas: Array<{
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1215,7 +1229,7 @@ export type CreateIdeaMutation = {
       __typename?: 'Idea'
       userId: number
       id: string
-      name?: string | null
+      name: string
       background?: string | null
       goal?: string | null
       target?: string | null
@@ -1236,7 +1250,7 @@ export type UpdateIdeaMutation = {
     idea?: {
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       background?: string | null
       goal?: string | null
       issue?: string | null
@@ -1275,7 +1289,7 @@ export type GetDraftIdeasQuery = {
     nodes: Array<{
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       user: { __typename?: 'User'; image?: string | null }
       ideaTags?: Array<{
         __typename?: 'Tag'
@@ -1294,6 +1308,29 @@ export type GetDraftIdeasQuery = {
       totalCount?: number | null
       totalPages?: number | null
     } | null
+  }
+}
+
+export type GetSuggestIdeasQueryVariables = Exact<{
+  ideaId: Scalars['ID']
+}>
+
+export type GetSuggestIdeasQuery = {
+  __typename?: 'Query'
+  suggestIdeas: {
+    __typename?: 'SuggestIdeas'
+    title: string
+    nodes: Array<{
+      __typename?: 'Idea'
+      id: string
+      name?: string | null
+      user: { __typename?: 'User'; image?: string | null }
+      ideaTags?: Array<{
+        __typename?: 'Tag'
+        id?: string | null
+        name: string
+      }> | null
+    }>
   }
 }
 
@@ -1353,7 +1390,7 @@ export type GetNotificationsQuery = {
       notificatableType?: string | null
       createdAt: any
       ideaId?: number | null
-      idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
+      idea?: { __typename?: 'Idea'; id: string; name: string } | null
       visitor?: {
         __typename?: 'User'
         name: string
@@ -1382,7 +1419,7 @@ export type GetLatestNotificationsQuery = {
     notificatableType?: string | null
     createdAt: any
     ideaId?: number | null
-    idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
+    idea?: { __typename?: 'Idea'; id: string; name: string } | null
     visitor?: {
       __typename?: 'User'
       name: string
@@ -2588,6 +2625,75 @@ export type GetDraftIdeasLazyQueryHookResult = ReturnType<
 export type GetDraftIdeasQueryResult = Apollo.QueryResult<
   GetDraftIdeasQuery,
   GetDraftIdeasQueryVariables
+>
+export const GetSuggestIdeasDocument = gql`
+  query GetSuggestIdeas($ideaId: ID!) {
+    suggestIdeas(ideaId: $ideaId) {
+      nodes {
+        id
+        name
+        user {
+          image
+        }
+        ideaTags {
+          id
+          name
+        }
+      }
+      title
+    }
+  }
+`
+
+/**
+ * __useGetSuggestIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetSuggestIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSuggestIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSuggestIdeasQuery({
+ *   variables: {
+ *      ideaId: // value for 'ideaId'
+ *   },
+ * });
+ */
+export function useGetSuggestIdeasQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetSuggestIdeasQuery,
+    GetSuggestIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetSuggestIdeasQuery, GetSuggestIdeasQueryVariables>(
+    GetSuggestIdeasDocument,
+    options
+  )
+}
+export function useGetSuggestIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetSuggestIdeasQuery,
+    GetSuggestIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    GetSuggestIdeasQuery,
+    GetSuggestIdeasQueryVariables
+  >(GetSuggestIdeasDocument, options)
+}
+export type GetSuggestIdeasQueryHookResult = ReturnType<
+  typeof useGetSuggestIdeasQuery
+>
+export type GetSuggestIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetSuggestIdeasLazyQuery
+>
+export type GetSuggestIdeasQueryResult = Apollo.QueryResult<
+  GetSuggestIdeasQuery,
+  GetSuggestIdeasQueryVariables
 >
 export const GetLikesDocument = gql`
   query GetLikes {

@@ -671,7 +671,7 @@ type Idea {
   """
   アイデア名
   """
-  name: String
+  name: String!
 
   """
   補足
@@ -1245,6 +1245,16 @@ type Query {
   ): Room!
 
   """
+  サジェストアイデア一覧
+  """
+  suggestIdeas(
+    """
+    【必須】アイデアID
+    """
+    ideaId: ID!
+  ): SuggestIdeas!
+
+  """
   タグ一覧
   """
   tags: [Tag!]!
@@ -1344,6 +1354,18 @@ input SortCondition {
   ソート順
   """
   order: String = "desc"
+}
+
+type SuggestIdeas {
+  """
+  アイデアオブジェクト
+  """
+  nodes: [Idea!]!
+
+  """
+  サジェストアイデアタイトル
+  """
+  title: String!
 }
 
 type Tag {

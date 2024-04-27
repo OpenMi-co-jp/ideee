@@ -1239,6 +1239,11 @@ type Query {
   """
   publishedIdeas(
     """
+    ユーザーID
+    """
+    id: ID!
+
+    """
     ページ番号
     """
     page: Int = 1

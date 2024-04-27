@@ -65,7 +65,7 @@ export const Profile = () => {
         </Tabs.List>
 
         <Tabs.Panel value="idea_list">
-          <PublishedIdeas />
+          <PublishedIdeas userId={user!.id} />
         </Tabs.Panel>
 
         <Tabs.Panel value="heart_list">

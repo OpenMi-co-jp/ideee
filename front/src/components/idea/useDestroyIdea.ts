@@ -1,7 +1,6 @@
 import { useDestroyIdeaMutation } from '@/lib/generated/client'
 import { useRouter } from 'next/router'
 import { showSuccess, showError } from '../showNotification'
-
 /**
  * CurrentUserのアイデアを削除するための関数
  * @param
@@ -9,9 +8,10 @@ import { showSuccess, showError } from '../showNotification'
  */
 export const useDestroyIdea = () => {
   const router = useRouter()
+  const { id: ideaId } = router.query
   const [destroyIdea] = useDestroyIdeaMutation()
 
-  const handleDestroyIdea = (ideaId: string) => {
+  const handleDestroyIdea = () => {
     destroyIdea({
       variables: {
         input: {

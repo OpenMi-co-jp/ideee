@@ -19,7 +19,7 @@ export const IdeaOptions = () => {
         <Like />
         <XShare />
         <UrlCopy />
-        {currentUser?.id === idea?.userId && <IdeaMenu ideaId={idea.id} />}
+        {currentUser?.id === idea?.userId && <IdeaMenu />}
       </Group>
       <Text size="md" c="gray">
         {dayjs(createdAt).format('YYYY-MM-DD HH:mm')}

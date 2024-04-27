@@ -6,12 +6,20 @@ import { AlertError } from '@/components/alert'
 import { LoaderBox } from '@/components/features'
 import { useState } from 'react'
 
-const PAGE_SIZE = 10
-export const PublishedIdeas = () => {
-  const { loading, data, error, refetch } = useGetPublishedIdeasQuery()
-  const { pageInfo, nodes } = data?.publishedIdeas || {}
+interface PublishedIdeasProps {
+  userId: string
+}
 
+const PAGE_SIZE = 10
+
+export const PublishedIdeas = ({ userId }: PublishedIdeasProps) => {
+  const { loading, data, error, refetch } = useGetPublishedIdeasQuery({
+    variables: { userId: userId },
+  })
+
+  const { pageInfo, nodes } = data?.publishedIdeas || {}
   const [page, setPage] = useState(1)
+
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
     refetch({ page: newPage, per: PAGE_SIZE })

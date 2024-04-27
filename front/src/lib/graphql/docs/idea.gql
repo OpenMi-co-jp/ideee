@@ -193,8 +193,8 @@ query GetDraftIdeas($page: Int, $per: Int) {
   }
 }
 
-query GetPublishedIdeas($page: Int, $per: Int) {
-  publishedIdeas(page: $page, per: $per) {
+query GetPublishedIdeas($page: Int, $per: Int, $userId: ID!) {
+  publishedIdeas(page: $page, per: $per, id: $userId) {
     nodes {
       id
       name

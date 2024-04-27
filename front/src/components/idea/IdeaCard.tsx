@@ -20,8 +20,8 @@ export const IdeaCard: FC<IdeasType> = ({ ideas }) => {
       mx="md"
     >
       {ideas?.map((idea: IdeaBoxType) => (
-        <Link href={`/ideas/${idea.id}`}>
-          <Paper shadow="md" radius="md" p="md" withBorder key={idea.id}>
+        <Link href={`/ideas/${idea.id}`} key={idea.id}>
+          <Paper shadow="md" radius="md" p="md" withBorder>
             <Stack gap="xs" align="flex-start" w={{ base: 220, md: 280 }}>
               <Flex
                 direction="row"

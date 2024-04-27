@@ -663,6 +663,7 @@ export type QueryNotificationsArgs = {
 }
 
 export type QueryPublishedIdeasArgs = {
+  id: Scalars['ID']
   page?: InputMaybe<Scalars['Int']>
   per?: InputMaybe<Scalars['Int']>
 }
@@ -1321,6 +1322,7 @@ export type GetDraftIdeasQuery = {
 export type GetPublishedIdeasQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>
   per?: InputMaybe<Scalars['Int']>
+  userId: Scalars['ID']
 }>
 
 export type GetPublishedIdeasQuery = {
@@ -2668,8 +2670,8 @@ export type GetDraftIdeasQueryResult = Apollo.QueryResult<
   GetDraftIdeasQueryVariables
 >
 export const GetPublishedIdeasDocument = gql`
-  query GetPublishedIdeas($page: Int, $per: Int) {
-    publishedIdeas(page: $page, per: $per) {
+  query GetPublishedIdeas($page: Int, $per: Int, $userId: ID!) {
+    publishedIdeas(page: $page, per: $per, id: $userId) {
       nodes {
         id
         name
@@ -2709,11 +2711,12 @@ export const GetPublishedIdeasDocument = gql`
  *   variables: {
  *      page: // value for 'page'
  *      per: // value for 'per'
+ *      userId: // value for 'userId'
  *   },
  * });
  */
 export function useGetPublishedIdeasQuery(
-  baseOptions?: Apollo.QueryHookOptions<
+  baseOptions: Apollo.QueryHookOptions<
     GetPublishedIdeasQuery,
     GetPublishedIdeasQueryVariables
   >

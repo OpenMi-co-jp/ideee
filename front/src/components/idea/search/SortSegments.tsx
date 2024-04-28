@@ -1,0 +1,39 @@
+import { SegmentedControl, Flex } from '@mantine/core'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+
+export const SortSegments = () => {
+  const router = useRouter()
+  const { column_name, ...otherParams } = router.query
+  const [selectedSort, setSelectedSort] = useState<string>('')
+
+  useEffect(() => {
+    setSelectedSort(String(column_name) || 'likes_num')
+  }, [router.query])
+
+  const handleSortChange = (value: string) => {
+    if (value !== selectedSort) {
+      setSelectedSort(value)
+      router.push({
+        pathname: '/search',
+        query: { ...otherParams, column_name: value, order: 'desc' },
+      })
+    }
+  }
+
+  return (
+    <Flex mt={'lg'} justify="flex-end" align="center" wrap="wrap">
+      <SegmentedControl
+        value={selectedSort}
+        onChange={handleSortChange}
+        radius="xl"
+        color="yellow"
+        data={[
+          { value: 'likes_num', label: 'ほしい！順' },
+          { value: 'comments_num', label: 'コメント順' },
+          { value: 'published_at', label: '公開順' },
+        ]}
+      />
+    </Flex>
+  )
+}

@@ -21,7 +21,7 @@ const PAGE_SIZE = 16
 export const SearchedIdeas = () => {
   const router = useRouter()
   const { query } = router
-  const searchQuery = {
+  const searchCondition = {
     nameOrIdeaTagsNameCont:
       (query.name_or_idea_tags_name_cont as string) || null,
     difficultyEq: (query.difficulty_eq as string) || null,
@@ -30,9 +30,13 @@ export const SearchedIdeas = () => {
     publishedAtGteq: (query.published_at_gteq as string) || null,
     publishedAtLteq: (query.published_at_lteq as string) || null,
   }
+  const sort = {
+    columnName: (query.column_name as string) || '',
+    order: (query.order as string) || '',
+  }
 
   const { loading, data, error, refetch } = useGetIdeasQuery({
-    variables: { searchCondition: searchQuery, page: 1, per: PAGE_SIZE },
+    variables: { searchCondition, sort, page: 1, per: PAGE_SIZE },
   })
   const [page, setPage] = useState(1)
 

@@ -194,13 +194,10 @@ query GetDraftIdeas($page: Int, $per: Int) {
 }
 
 query GetPublishedIdeas($page: Int, $per: Int, $userId: ID!) {
-  publishedIdeas(page: $page, per: $per, id: $userId) {
+  publishedIdeas(page: $page, per: $per, userId: $userId) {
     nodes {
       id
       name
-      user {
-        image
-      }
       ideaTags {
         id
         name

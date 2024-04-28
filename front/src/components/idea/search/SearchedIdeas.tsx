@@ -24,7 +24,8 @@ export const SearchedIdeas = () => {
   const searchQuery = {
     nameOrIdeaTagsNameCont:
       (query.name_or_idea_tags_name_cont as string) || null,
-    difficultyEq: Number(query.difficulty_eq) || null,
+    difficultyEq: (query.difficulty_eq as string) || null,
+    stanceEq: (query.stance_eq as string) || null,
     teamStatusEq: Number(query.team_status_eq) || null,
     publishedAtGteq: (query.published_at_gteq as string) || null,
     publishedAtLteq: (query.published_at_lteq as string) || null,

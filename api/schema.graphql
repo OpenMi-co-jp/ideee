@@ -1239,11 +1239,6 @@ type Query {
   """
   publishedIdeas(
     """
-    ユーザーID
-    """
-    id: ID!
-
-    """
     ページ番号
     """
     page: Int = 1
@@ -1252,6 +1247,11 @@ type Query {
     1ページに表示するアイデア数
     """
     per: Int = 30
+
+    """
+    ユーザーID
+    """
+    userId: ID!
   ): Ideas!
 
   """

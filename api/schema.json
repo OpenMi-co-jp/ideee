@@ -3980,7 +3980,7 @@
                   "deprecationReason": null
                 },
                 {
-                  "name": "id",
+                  "name": "userId",
                   "description": "ユーザーID",
                   "type": {
                     "kind": "NON_NULL",

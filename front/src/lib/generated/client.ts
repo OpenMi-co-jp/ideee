@@ -1117,6 +1117,8 @@ export type GetIdeaQuery = {
 export type GetIdeasQueryVariables = Exact<{
   searchCondition?: InputMaybe<SearchCondition>
   sort?: InputMaybe<SortCondition>
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
 }>
 
 export type GetIdeasQuery = {
@@ -1323,7 +1325,7 @@ export type GetSuggestIdeasQuery = {
     nodes: Array<{
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       user: { __typename?: 'User'; image?: string | null }
       ideaTags?: Array<{
         __typename?: 'Tag'
@@ -2094,8 +2096,18 @@ export type GetIdeaQueryResult = Apollo.QueryResult<
   GetIdeaQueryVariables
 >
 export const GetIdeasDocument = gql`
-  query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
-    ideas(searchCondition: $searchCondition, sort: $sort) {
+  query GetIdeas(
+    $searchCondition: SearchCondition
+    $sort: SortCondition
+    $page: Int
+    $per: Int
+  ) {
+    ideas(
+      searchCondition: $searchCondition
+      sort: $sort
+      page: $page
+      per: $per
+    ) {
       nodes {
         id
         name
@@ -2147,6 +2159,8 @@ export const GetIdeasDocument = gql`
  *   variables: {
  *      searchCondition: // value for 'searchCondition'
  *      sort: // value for 'sort'
+ *      page: // value for 'page'
+ *      per: // value for 'per'
  *   },
  * });
  */

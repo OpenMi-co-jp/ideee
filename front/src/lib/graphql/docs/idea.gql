@@ -42,8 +42,8 @@ query GetIdea($id: ID!) {
   }
 }
 
-query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
-  ideas(searchCondition: $searchCondition, sort: $sort) {
+query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition, $page: Int, $per: Int) {
+  ideas(searchCondition: $searchCondition, sort: $sort, page: $page, per: $per) {
     nodes {
       id
       name

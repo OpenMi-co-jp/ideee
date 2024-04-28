@@ -1,4 +1,12 @@
-import { Paper, Text, Divider, Flex, Title } from '@mantine/core'
+import {
+  Paper,
+  Text,
+  Divider,
+  Flex,
+  Title,
+  Center,
+  Pagination,
+} from '@mantine/core'
 import { useGetIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
 import { AlertError } from '@/components/alert'
@@ -6,6 +14,9 @@ import { IconSearch } from '@tabler/icons-react'
 import { IdeaNotFound } from '@/components/idea'
 import { useRouter } from 'next/router'
 import { LoaderBox } from '@/components/features'
+import { useState } from 'react'
+
+const PAGE_SIZE = 16
 
 export const SearchedIdeas = () => {
   const router = useRouter()
@@ -18,12 +29,21 @@ export const SearchedIdeas = () => {
     publishedAtGteq: (query.published_at_gteq as string) || null,
     publishedAtLteq: (query.published_at_lteq as string) || null,
   }
-  const { loading, data, error } = useGetIdeasQuery({
-    variables: { searchCondition: searchQuery },
+
+  const { loading, data, error, refetch } = useGetIdeasQuery({
+    variables: { searchCondition: searchQuery, page: 1, per: PAGE_SIZE },
   })
+  const [page, setPage] = useState(1)
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage)
+    refetch({ page: newPage, per: PAGE_SIZE })
+  }
+
   if (loading) return <LoaderBox />
   if (error) return <AlertError />
-  const totalCount = data?.ideas.pageInfo?.totalCount
+
+  const { totalPages, totalCount } = data?.ideas.pageInfo || {}
 
   return (
     <>
@@ -40,7 +60,7 @@ export const SearchedIdeas = () => {
           </>
         }
       />
-      {totalCount == 0 ? (
+      {totalCount === 0 ? (
         <IdeaNotFound />
       ) : (
         <>
@@ -53,6 +73,11 @@ export const SearchedIdeas = () => {
           <Paper shadow="md" py="lg" my="xl">
             <IdeaList ideas={data?.ideas.nodes} />
           </Paper>
+          <Center my="xl">
+            {totalPages && totalPages > 1 && (
+              <Pagination total={totalPages} onChange={handlePageChange} />
+            )}
+          </Center>
         </>
       )}
     </>

@@ -31,7 +31,7 @@ export const notificationItem = (notification: Notification) => {
   return (
     <>
       <Group>
-        <Link href={`/users/${notification?.visitor?.id}`}>
+        <Link href={`/users/${notification?.visitor?.id}`} passHref>
           <UserIcon userIcon={notification?.visitor?.image} />
         </Link>
         <Text size="sm" maw={'80%'}>

@@ -663,9 +663,9 @@ export type QueryNotificationsArgs = {
 }
 
 export type QueryPublishedIdeasArgs = {
-  id: Scalars['ID']
   page?: InputMaybe<Scalars['Int']>
   per?: InputMaybe<Scalars['Int']>
+  userId: Scalars['ID']
 }
 
 export type QueryRoomArgs = {
@@ -1333,7 +1333,6 @@ export type GetPublishedIdeasQuery = {
       __typename?: 'Idea'
       id: string
       name?: string | null
-      user: { __typename?: 'User'; image?: string | null }
       ideaTags?: Array<{
         __typename?: 'Tag'
         id?: string | null
@@ -2671,13 +2670,10 @@ export type GetDraftIdeasQueryResult = Apollo.QueryResult<
 >
 export const GetPublishedIdeasDocument = gql`
   query GetPublishedIdeas($page: Int, $per: Int, $userId: ID!) {
-    publishedIdeas(page: $page, per: $per, id: $userId) {
+    publishedIdeas(page: $page, per: $per, userId: $userId) {
       nodes {
         id
         name
-        user {
-          image
-        }
         ideaTags {
           id
           name

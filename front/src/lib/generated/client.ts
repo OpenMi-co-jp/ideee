@@ -690,13 +690,15 @@ export type Room = {
 
 export type SearchCondition = {
   /** 難易度で検索 */
-  difficultyEq?: InputMaybe<Scalars['Int']>
+  difficultyEq?: InputMaybe<Scalars['String']>
   /** 名前かタグ名で検索 */
   nameOrIdeaTagsNameCont?: InputMaybe<Scalars['String']>
   /** 指定公開日以降で検索 */
   publishedAtGteq?: InputMaybe<Scalars['ISO8601DateTime']>
   /** 指定公開日で以前で検索 */
   publishedAtLteq?: InputMaybe<Scalars['ISO8601DateTime']>
+  /** スタンスで検索 */
+  stanceEq?: InputMaybe<Scalars['String']>
   /** チーム状態で検索 */
   teamStatusEq?: InputMaybe<Scalars['Int']>
 }

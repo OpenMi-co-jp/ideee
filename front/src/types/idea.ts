@@ -1,7 +1,7 @@
 export type IdeaBoxType = {
   id: string
   name?: string | null
-  user: {
+  user?: {
     __typename?: 'User'
     image?: string | null
   }

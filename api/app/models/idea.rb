@@ -78,7 +78,7 @@ class Idea < ApplicationRecord
   scope :team_active, -> { eager_load(:team).where(team: { status: :active }) }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[id name published_at difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
+    %w[id name published_at stance difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
   end
 
   def self.ransackable_associations(_auth_object = nil)

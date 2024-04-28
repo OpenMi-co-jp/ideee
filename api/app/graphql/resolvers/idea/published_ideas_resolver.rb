@@ -4,10 +4,10 @@ module Resolvers
     include Resolvers::Concerns::Pagination
     type Types::Idea::IdeasType, null: false
 
-    argument :id, ID, required: true, description: 'ユーザーID'
+    argument :user_id, ID, required: true, description: 'ユーザーID'
 
     def resolve(**args)
-      user = ::User.find(args[:id])
+      user = ::User.find(args[:user_id])
       raise GraphQL::ExecutionError, 'ユーザーが見つかりません' if user.nil?
 
       published_ideas = user.ideas.published.eager_load(:user).preload(:idea_tags).order(created_at: :desc)

@@ -14,7 +14,10 @@ const PAGE_SIZE = 10
 
 export const PublishedIdeas = ({ userId }: PublishedIdeasProps) => {
   const { loading, data, error, refetch } = useGetPublishedIdeasQuery({
-    variables: { userId: userId },
+    variables: {
+      userId: userId,
+      per: PAGE_SIZE,
+    },
   })
 
   const { pageInfo, nodes } = data?.publishedIdeas || {}
@@ -37,6 +40,7 @@ export const PublishedIdeas = ({ userId }: PublishedIdeasProps) => {
             {pageInfo?.totalPages && pageInfo?.totalPages > 1 && (
               <Pagination
                 total={pageInfo?.totalPages}
+                value={page}
                 onChange={handlePageChange}
               />
             )}

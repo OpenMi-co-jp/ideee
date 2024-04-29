@@ -7,7 +7,11 @@ import { useState } from 'react'
 
 const PAGE_SIZE = 10
 export const DraftIdeas = () => {
-  const { loading, data, error, refetch } = useGetDraftIdeasQuery()
+  const { loading, data, error, refetch } = useGetDraftIdeasQuery({
+    variables: {
+      per: PAGE_SIZE,
+    },
+  })
   const { pageInfo, nodes } = data?.draftIdeas || {}
 
   const [page, setPage] = useState(1)

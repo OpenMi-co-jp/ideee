@@ -1,6 +1,6 @@
 import { Center, Flex, Pagination, Text } from '@mantine/core'
 import { useGetPublishedIdeasQuery } from '@/lib/generated/client'
-import { IdeaCard } from '@/components/idea'
+import { IdeaList } from '@/components/idea'
 import { IdeaCreateButton } from '@/components/idea/createButton'
 import { AlertError } from '@/components/alert'
 import { LoaderBox } from '@/components/features'
@@ -35,7 +35,7 @@ export const PublishedIdeas = ({ userId }: PublishedIdeasProps) => {
     <>
       {pageInfo?.totalCount && pageInfo?.totalCount > 0 ? (
         <>
-          <IdeaCard ideas={nodes} />
+          <IdeaList ideas={nodes} />
           <Center my="xl">
             {pageInfo?.totalPages && pageInfo?.totalPages > 1 && (
               <Pagination

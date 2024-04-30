@@ -1298,7 +1298,6 @@ export type GetDraftIdeasQuery = {
       __typename?: 'Idea'
       id: string
       name?: string | null
-      user: { __typename?: 'User'; image?: string | null }
       ideaTags?: Array<{
         __typename?: 'Tag'
         id?: string | null
@@ -2595,9 +2594,6 @@ export const GetDraftIdeasDocument = gql`
       nodes {
         id
         name
-        user {
-          image
-        }
         ideaTags {
           id
           name

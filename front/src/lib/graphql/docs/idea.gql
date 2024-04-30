@@ -172,9 +172,6 @@ query GetDraftIdeas($page: Int, $per: Int) {
     nodes {
       id
       name
-      user {
-        image
-      }
       ideaTags {
         id
         name

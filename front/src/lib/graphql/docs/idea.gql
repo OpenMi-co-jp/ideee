@@ -172,9 +172,29 @@ query GetDraftIdeas($page: Int, $per: Int) {
     nodes {
       id
       name
-      user {
-        image
+      ideaTags {
+        id
+        name
       }
+    }
+    pageInfo {
+      currentPage
+      isFirst
+      isLast
+      nextPage
+      per
+      prevPage
+      totalCount
+      totalPages
+    }
+  }
+}
+
+query GetPublishedIdeas($page: Int, $per: Int, $userId: ID!) {
+  publishedIdeas(page: $page, per: $per, userId: $userId) {
+    nodes {
+      id
+      name
       ideaTags {
         id
         name

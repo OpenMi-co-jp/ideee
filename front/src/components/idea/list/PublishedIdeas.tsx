@@ -1,20 +1,28 @@
-import { Center, Pagination, Text } from '@mantine/core'
-import { useGetDraftIdeasQuery } from '@/lib/generated/client'
+import { Center, Flex, Pagination, Text } from '@mantine/core'
+import { useGetPublishedIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
+import { IdeaCreateButton } from '@/components/idea/createButton'
 import { AlertError } from '@/components/alert'
 import { LoaderBox } from '@/components/features'
 import { useState } from 'react'
 
+interface PublishedIdeasProps {
+  userId: string
+}
+
 const PAGE_SIZE = 10
-export const DraftIdeas = () => {
-  const { loading, data, error, refetch } = useGetDraftIdeasQuery({
+
+export const PublishedIdeas = ({ userId }: PublishedIdeasProps) => {
+  const { loading, data, error, refetch } = useGetPublishedIdeasQuery({
     variables: {
+      userId: userId,
       per: PAGE_SIZE,
     },
   })
-  const { pageInfo, nodes } = data?.draftIdeas || {}
 
+  const { pageInfo, nodes } = data?.publishedIdeas || {}
   const [page, setPage] = useState(1)
+
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
     refetch({ page: newPage, per: PAGE_SIZE })
@@ -27,21 +35,22 @@ export const DraftIdeas = () => {
     <>
       {pageInfo?.totalCount && pageInfo?.totalCount > 0 ? (
         <>
-          {/* TODO 下書きはuserのアイコン表示が必要ないのでリファクタ予定 */}
           <IdeaList ideas={nodes} />
           <Center my="xl">
             {pageInfo?.totalPages && pageInfo?.totalPages > 1 && (
               <Pagination
                 total={pageInfo?.totalPages}
+                value={page}
                 onChange={handlePageChange}
               />
             )}
           </Center>
         </>
       ) : (
-        <Center my="xl">
-          <Text size="lg">下書きがありません</Text>
-        </Center>
+        <Flex my="xl" wrap="wrap" align="center" justify="center" gap="sm">
+          <Text size="lg">公開中のアイディアがありません</Text>
+          <IdeaCreateButton />
+        </Flex>
       )}
     </>
   )

@@ -23,9 +23,11 @@ export const IdeaBox: FC<IdeaBoxType> = ({ id, name, user, ideaTags }) => {
               })}
             </Flex>
           </Stack>
-          <Flex justify="flex-end" direction="column">
-            <Avatar radius="xl" size={24} src={user?.image} mt="" />
-          </Flex>
+          {user?.image && (
+            <Flex justify="flex-end" direction="column">
+              <Avatar radius="xl" size={24} src={user?.image} mt="" />
+            </Flex>
+          )}
         </Flex>
       </Paper>
     </Link>

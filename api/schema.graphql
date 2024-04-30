@@ -1235,6 +1235,26 @@ type Query {
   popularTags: [Tag!]!
 
   """
+  公開アイデア一覧
+  """
+  publishedIdeas(
+    """
+    ページ番号
+    """
+    page: Int = 1
+
+    """
+    1ページに表示するアイデア数
+    """
+    per: Int = 30
+
+    """
+    ユーザーID
+    """
+    userId: ID!
+  ): Ideas!
+
+  """
   ルームオブジェクト
   """
   room(

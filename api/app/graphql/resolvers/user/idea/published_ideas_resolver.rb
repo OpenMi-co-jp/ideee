@@ -1,5 +1,5 @@
 module Resolvers
-  class Idea::PublishedIdeasResolver < BaseResolver
+  class User::Idea::PublishedIdeasResolver < BaseResolver
     graphql_name 'GetPublishedIdeas'
     include Resolvers::Concerns::Pagination
     type Types::Idea::IdeasType, null: false

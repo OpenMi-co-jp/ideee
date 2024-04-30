@@ -4,7 +4,7 @@ class RemindDraftJob < ApplicationJob
   queue_as :default
 
   def perform(id)
-    idea = Idea.find(id)
+    idea = ::Idea.find(id)
     return unless idea.draft
     return unless idea.user.draft_remind_email
 

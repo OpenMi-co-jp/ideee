@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react'
 import classes from '@/styles/mask.module.css'
 import { showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
+import { HeadBlock } from '@/pages-layout/Head'
+import { truncateText } from '@/utils/truncateText'
 import { SuggestIdeas } from '@/components/idea/list'
 
 const IdeaDetail = () => {
@@ -31,28 +33,41 @@ const IdeaDetail = () => {
   }, [data, error, router])
 
   if (loading) return <Loader color="yellow" />
+  const tags = data?.idea?.ideaTags?.map((tag) => tag.name).join(',') || ''
 
   return (
-    <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
-      <Container
-        className={currentUser ? classes.container : `${classes.maskImage}`}
-      >
-        <IdeaTitle />
-        <UserSection />
-        <IdeaTagList />
-        {!currentUser && <IdeaContents />}
-      </Container>
+    <>
+      {!data?.idea.draft && (
+        <HeadBlock
+          pageTitle={data?.idea.name}
+          // TODO: pageImgを動的画像で設定
+          pageDescription={truncateText(data?.idea?.goal as string)}
+          pagePath={process.env.NEXT_PUBLIC_FRONT_URL + router.asPath}
+          pageKeywords={tags || ''}
+        />
+      )}
 
-      {(() => {
-        if (currentUser) {
-          return <HiddenIdeaContent />
-        } else {
-          return <SignPath />
-        }
-      })()}
-      {/* 公開しているアイデアのみサジェストを表示 */}
-      {data?.idea && !data?.idea?.draft && <SuggestIdeas />}
-    </IdeaProvider>
+      <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
+        <Container
+          className={currentUser ? classes.container : `${classes.maskImage}`}
+        >
+          <IdeaTitle />
+          <UserSection />
+          <IdeaTagList />
+          {!currentUser && <IdeaContents />}
+        </Container>
+
+        {(() => {
+          if (currentUser) {
+            return <HiddenIdeaContent />
+          } else {
+            return <SignPath />
+          }
+        })()}
+        {/* 公開しているアイデアのみサジェストを表示 */}
+        {data?.idea && !data?.idea?.draft && <SuggestIdeas />}
+      </IdeaProvider>
+    </>
   )
 }
 

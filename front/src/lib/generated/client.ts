@@ -352,7 +352,7 @@ export type Idea = {
   /** マネタイズ方法 */
   monetize?: Maybe<Scalars['String']>
   /** アイデア名 */
-  name?: Maybe<Scalars['String']>
+  name: Scalars['String']
   /** 補足 */
   note?: Maybe<Scalars['String']>
   /** アプリ審査状況 */
@@ -1081,7 +1081,7 @@ export type GetIdeaQuery = {
   idea: {
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     iconUrl?: string | null
     background?: string | null
     goal?: string | null
@@ -1134,7 +1134,7 @@ export type GetIdeasQuery = {
     nodes: Array<{
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       commentsNum?: number | null
       difficulty?: string | null
       likesNum?: number | null
@@ -1179,7 +1179,7 @@ export type GetHotIdeasQuery = {
   hotIdeas: Array<{
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1196,7 +1196,7 @@ export type GetDeployedIdeasQuery = {
   deployedIdeas: Array<{
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1213,7 +1213,7 @@ export type GetActiveTeamIdeasQuery = {
   activeTeamIdeas: Array<{
     __typename?: 'Idea'
     id: string
-    name?: string | null
+    name: string
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1237,7 +1237,7 @@ export type CreateIdeaMutation = {
       __typename?: 'Idea'
       userId: number
       id: string
-      name?: string | null
+      name: string
       background?: string | null
       goal?: string | null
       target?: string | null
@@ -1258,7 +1258,7 @@ export type UpdateIdeaMutation = {
     idea?: {
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       background?: string | null
       goal?: string | null
       issue?: string | null
@@ -1297,7 +1297,7 @@ export type GetDraftIdeasQuery = {
     nodes: Array<{
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       ideaTags?: Array<{
         __typename?: 'Tag'
         id?: string | null
@@ -1331,7 +1331,7 @@ export type GetPublishedIdeasQuery = {
     nodes: Array<{
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       ideaTags?: Array<{
         __typename?: 'Tag'
         id?: string | null
@@ -1364,7 +1364,7 @@ export type GetSuggestIdeasQuery = {
     nodes: Array<{
       __typename?: 'Idea'
       id: string
-      name?: string | null
+      name: string
       user: { __typename?: 'User'; image?: string | null }
       ideaTags?: Array<{
         __typename?: 'Tag'
@@ -1431,7 +1431,7 @@ export type GetNotificationsQuery = {
       notificatableType?: string | null
       createdAt: any
       ideaId?: number | null
-      idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
+      idea?: { __typename?: 'Idea'; id: string; name: string } | null
       visitor?: {
         __typename?: 'User'
         name: string
@@ -1460,7 +1460,7 @@ export type GetLatestNotificationsQuery = {
     notificatableType?: string | null
     createdAt: any
     ideaId?: number | null
-    idea?: { __typename?: 'Idea'; id: string; name?: string | null } | null
+    idea?: { __typename?: 'Idea'; id: string; name: string } | null
     visitor?: {
       __typename?: 'User'
       name: string

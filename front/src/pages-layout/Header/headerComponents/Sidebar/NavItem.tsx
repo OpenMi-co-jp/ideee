@@ -8,18 +8,20 @@ type NavItemProps = {
     label: string
     href: string
     icon: (props: TablerIconsProps) => React.ReactElement
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   }
   closeDrawer: () => void
-  logOut?: () => void
 }
 
-export const NavItem = ({ item, closeDrawer, logOut }: NavItemProps) => {
-  const { label, href, icon: Icon } = item
+export const NavItem = ({ item, closeDrawer }: NavItemProps) => {
+  const { label, href, icon: Icon, onClick } = item
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
+    if (onClick) {
+      onClick(event)
+    }
     closeDrawer()
-    logOut && logOut()
   }
 
   return (

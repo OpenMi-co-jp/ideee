@@ -15,7 +15,7 @@ function AuthCallback() {
   useEffect(() => {
     if (token) {
       Cookies.set('authToken', String(token), {
-        expires: 7,
+        // expires: 7, TODO: 本当は期限を設定するなどしたい see: https://github.com/naru20181117/ideee/issues/1300#issuecomment-2078364010
         secure: true,
       })
       try {

@@ -17,7 +17,6 @@ module Resolvers
 
       # stanceをenumの値に変換
       ransack_params[:stance_eq] = ::Idea.stances[search_params&.fetch(:stance_eq, nil)] if search_params&.key?(:stance_eq)
-      # stanceをenumの値に変換
       ransack_params.merge!(search_params.except(:stance_eq)) if search_params.present?
 
       search = ::Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)

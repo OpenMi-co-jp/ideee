@@ -32,7 +32,7 @@ class Like < ApplicationRecord
   def count_likes
     return unless likable_type == 'Idea'
 
-    idea = Idea.find(likable_id)
+    idea = ::Idea.find(likable_id)
     idea.count_likes
   end
 end

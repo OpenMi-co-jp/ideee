@@ -8,13 +8,13 @@ export const SortSegments = () => {
   const [selectedSort, setSelectedSort] = useState<string>('')
 
   useEffect(() => {
-    setSelectedSort(String(column_name) || 'likes_num')
+    setSelectedSort(column_name ? String(column_name) : 'likes_num')
   }, [router.query])
 
   const handleSortChange = (value: string) => {
     if (value !== selectedSort) {
       setSelectedSort(value)
-      router.push({
+      router.replace({
         pathname: '/search',
         query: { ...otherParams, column_name: value, order: 'desc' },
       })

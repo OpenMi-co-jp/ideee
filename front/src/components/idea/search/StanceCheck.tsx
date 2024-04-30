@@ -8,13 +8,13 @@ export const StanceCheck = () => {
   const [stance, setStance] = useState<string>('')
 
   useEffect(() => {
-    setStance(String(stance_eq) || '')
-  }, [router.query])
+    setStance(String(stance_eq))
+  }, [stance_eq])
 
   const handleStanceChange = (value: string) => {
     if (value !== stance) {
       setStance(value)
-      router.push({
+      router.replace({
         pathname: '/search',
         query: { ...otherParams, stance_eq: value },
       })

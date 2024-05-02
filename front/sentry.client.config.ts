@@ -27,5 +27,9 @@ Sentry.init({
       blockAllMedia: true,
     }),
     new Sentry.BrowserProfilingIntegration(),
+    Sentry.feedbackIntegration({
+      colorScheme: "system",
+      isEmailRequired: true,
+    }),
   ],
 });

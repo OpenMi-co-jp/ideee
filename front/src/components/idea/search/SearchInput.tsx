@@ -13,13 +13,13 @@ export const SearchInput = () => {
     loading || !data?.tags ? [] : data.tags.map((tag) => tag.name)
 
   const router = useRouter()
-  const { query } = router
+  const { name_or_idea_tags_name_cont, ...otherParams } = router.query
 
   useEffect(() => {
     if (loading) {
-      setSearchValue(query.name_or_idea_tags_name_cont as string)
+      setSearchValue(name_or_idea_tags_name_cont as string)
     }
-  }, [query, loading])
+  }, [name_or_idea_tags_name_cont, loading])
 
   return (
     <Autocomplete
@@ -43,7 +43,10 @@ export const SearchInput = () => {
       }}
       value={searchValue}
       onOptionSubmit={(value) => {
-        router.push(`/search?name_or_idea_tags_name_cont=${value}`)
+        router.push({
+          pathname: '/search',
+          query: { ...otherParams, name_or_idea_tags_name_cont: value },
+        })
         setSearchTrigger(false)
       }}
       onChange={(value) => {

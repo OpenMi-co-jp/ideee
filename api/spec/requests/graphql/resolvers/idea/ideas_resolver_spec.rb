@@ -12,7 +12,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
               id
               name
               commentsNum
-              difficulty
+              stance
               likesNum
               view
               updatedAt
@@ -70,22 +70,22 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
         end
       end
 
-      context '難易度で検索する場合' do
-        let!(:idea) { create(:idea, difficulty: 2) }
+      context 'スタンスで検索する場合' do
+        let!(:idea) { create(:idea, stance: 2) }
 
         let(:variables) do
           {
             searchCondition: {
-              difficultyEq: 2
+              stanceEq: 'team_project'
             }
           }
         end
 
-        it '指定した難易度のアイデアを取得すること' do
+        it '指定したスタンスのアイデアを取得すること' do
           expect(graphql_post).to eq 200
           res_json = response.parsed_body
           expect(res_json['data']['ideas']['nodes'].length).to eq 1
-          expect(res_json['data']['ideas']['nodes'].first['difficulty']).to eq idea[:difficulty]
+          expect(res_json['data']['ideas']['nodes'].first['stance']).to eq idea[:stance]
         end
       end
 
@@ -104,7 +104,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
           }
         end
 
-        it '指定した難易度のアイデアを取得すること' do
+        it '指定したスタンスのアイデアを取得すること' do
           expect(graphql_post).to eq 200
           res_json = response.parsed_body
           expect(res_json['data']['ideas']['nodes'].length).to eq 1

@@ -698,13 +698,15 @@ export type Room = {
 
 export type SearchCondition = {
   /** 難易度で検索 */
-  difficultyEq?: InputMaybe<Scalars['Int']>
+  difficultyEq?: InputMaybe<Scalars['String']>
   /** 名前かタグ名で検索 */
   nameOrIdeaTagsNameCont?: InputMaybe<Scalars['String']>
   /** 指定公開日以降で検索 */
   publishedAtGteq?: InputMaybe<Scalars['ISO8601DateTime']>
   /** 指定公開日で以前で検索 */
   publishedAtLteq?: InputMaybe<Scalars['ISO8601DateTime']>
+  /** スタンスで検索 */
+  stanceEq?: InputMaybe<Scalars['String']>
   /** チーム状態で検索 */
   teamStatusEq?: InputMaybe<Scalars['Int']>
 }
@@ -1125,6 +1127,8 @@ export type GetIdeaQuery = {
 export type GetIdeasQueryVariables = Exact<{
   searchCondition?: InputMaybe<SearchCondition>
   sort?: InputMaybe<SortCondition>
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
 }>
 
 export type GetIdeasQuery = {
@@ -2135,8 +2139,18 @@ export type GetIdeaQueryResult = Apollo.QueryResult<
   GetIdeaQueryVariables
 >
 export const GetIdeasDocument = gql`
-  query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition) {
-    ideas(searchCondition: $searchCondition, sort: $sort) {
+  query GetIdeas(
+    $searchCondition: SearchCondition
+    $sort: SortCondition
+    $page: Int
+    $per: Int
+  ) {
+    ideas(
+      searchCondition: $searchCondition
+      sort: $sort
+      page: $page
+      per: $per
+    ) {
       nodes {
         id
         name
@@ -2188,6 +2202,8 @@ export const GetIdeasDocument = gql`
  *   variables: {
  *      searchCondition: // value for 'searchCondition'
  *      sort: // value for 'sort'
+ *      page: // value for 'page'
+ *      per: // value for 'per'
  *   },
  * });
  */

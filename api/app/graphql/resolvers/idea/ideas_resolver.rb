@@ -12,8 +12,12 @@ module Resolvers
     type Types::Idea::IdeasType, null: false
 
     def resolve(**args)
-      Rails.logger.info args
-      ransack_params = args[:search_condition]&.arguments&.keyword_arguments
+      search_params = args[:search_condition]&.arguments&.keyword_arguments
+      ransack_params = {}
+
+      # stanceをenumの値に変換
+      ransack_params[:stance_eq] = ::Idea.stances[search_params&.fetch(:stance_eq, nil)] if search_params&.key?(:stance_eq)
+      ransack_params.merge!(search_params.except(:stance_eq)) if search_params.present?
 
       search = ::Idea.published.eager_load(%i[idea_tags taggings]).preload(:user).ransack(ransack_params)
       search.sorts = args[:sort].to_ransack_condition

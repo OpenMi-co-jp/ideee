@@ -12,6 +12,7 @@ query GetNotifications($page: Int, $per: Int) {
         name
       }
       visitor {
+        id
         name
         image
       }

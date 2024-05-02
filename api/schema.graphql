@@ -1341,7 +1341,7 @@ input SearchCondition {
   """
   難易度で検索
   """
-  difficultyEq: Int
+  difficultyEq: String
 
   """
   名前かタグ名で検索
@@ -1357,6 +1357,11 @@ input SearchCondition {
   指定公開日で以前で検索
   """
   publishedAtLteq: ISO8601DateTime
+
+  """
+  スタンスで検索
+  """
+  stanceEq: String
 
   """
   チーム状態で検索

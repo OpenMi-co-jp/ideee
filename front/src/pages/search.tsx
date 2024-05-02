@@ -1,5 +1,10 @@
 import { PopularTags } from '@/components/tag'
-import { SearchedIdeas, SearchInput } from '@/components/idea'
+import {
+  SearchedIdeas,
+  SearchInput,
+  StanceCheck,
+  SortSegments,
+} from '@/components/idea'
 import { useRouter } from 'next/router'
 
 export default function Search() {
@@ -10,6 +15,8 @@ export default function Search() {
   return (
     <>
       <SearchInput />
+      <StanceCheck />
+      <SortSegments />
       {queryExist ? <SearchedIdeas /> : <PopularTags />}
     </>
   )

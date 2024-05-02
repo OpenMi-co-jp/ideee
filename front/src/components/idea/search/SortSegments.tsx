@@ -29,9 +29,9 @@ export const SortSegments = () => {
         radius="xl"
         color="yellow"
         data={[
-          { value: 'likes_num', label: 'ほしい！順' },
-          { value: 'comments_num', label: 'コメント順' },
-          { value: 'published_at', label: '公開順' },
+          { value: 'likes_num', label: 'いいね数' },
+          { value: 'comments_num', label: 'コメント数' },
+          { value: 'published_at', label: '公開時間' },
         ]}
       />
     </Flex>

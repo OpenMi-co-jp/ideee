@@ -37,15 +37,13 @@ const IdeaDetail = () => {
 
   return (
     <>
-      {!data?.idea.draft && (
-        <HeadBlock
-          pageTitle={data?.idea.name}
-          // TODO: pageImgを動的画像で設定
-          pageDescription={truncateText(data?.idea?.goal as string)}
-          pagePath={process.env.NEXT_PUBLIC_FRONT_URL + router.asPath}
-          pageKeywords={tags || ''}
-        />
-      )}
+      <HeadBlock
+        pageTitle={data?.idea.name}
+        // TODO: pageImgを動的画像で設定
+        pageDescription={truncateText(data?.idea?.goal as string)}
+        pagePath={process.env.NEXT_PUBLIC_FRONT_URL + router.asPath}
+        pageKeywords={tags || ''}
+      />
 
       <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
         <Container

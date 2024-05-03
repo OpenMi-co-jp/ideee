@@ -29,9 +29,11 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
     ((page) => {
       return page
     })
+  const isCustomOgpPage = /^\/ideas\/|^\/users\//.test(router.pathname);
+
   return (
     <>
-      <HeadBlock />
+      <HeadBlock customOgp={isCustomOgpPage} />
       <GoogleAnalytics />
       <CurrentUserProvider>
         <ApolloBaseProvider>

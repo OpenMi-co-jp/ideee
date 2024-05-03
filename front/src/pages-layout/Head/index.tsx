@@ -8,7 +8,6 @@ interface MetaData {
   pagePath?: string
   pageImg?: string
   pageKeywords?: string
-  customOgp?: boolean
 }
 
 export const HeadBlock: FC<MetaData> = ({
@@ -17,9 +16,7 @@ export const HeadBlock: FC<MetaData> = ({
   pagePath,
   pageImg,
   pageKeywords,
-  customOgp
 }) => {
-
   const title = `${pageTitle || 'アイディー'} | ideee`
   const description = pageDescription || 'エンジニアとアイデアのマッチングプラットフォーム'
   const url = pagePath || 'https://ideee.tech'
@@ -33,20 +30,16 @@ export const HeadBlock: FC<MetaData> = ({
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-      {!customOgp && (
-        <>
-          <meta name="keywords" content={keywords} />
-          <meta name="description" content={description} />
-          <link rel="canonical" href={url} />
-          <meta property="og:url" content={url} />
-          <meta property="og:title" content={title} />
-          <meta property="og:site_name" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="og:image" content={imgUrl} />
-        </>
-      )}
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <link rel="canonical" href={url} />
+      <meta property="og:url" content={url} />
+      <meta property="og:title" content={title} />
+      <meta property="og:site_name" content={title} />
+      <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="ja_JP" />
+      <meta property="og:image" content={imgUrl} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@ideee_tech" />
       <link rel="icon" href="/favicon.ico" />

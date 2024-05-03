@@ -18,7 +18,8 @@ export const HeadBlock: FC<MetaData> = ({
   pageKeywords,
 }) => {
   const title = `${pageTitle || 'アイディー'} | ideee`
-  const description = pageDescription || 'エンジニアとアイデアのマッチングプラットフォーム'
+  const description =
+    pageDescription || 'エンジニアとアイデアのマッチングプラットフォーム'
   const url = pagePath || 'https://ideee.tech'
   const imgUrl =
     pageImg ||

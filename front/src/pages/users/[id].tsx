@@ -1,7 +1,7 @@
 import { UserProvider } from '@/context/userProfileContext'
 import { LoaderBox } from '@/components/features/LoaderBox'
 import { AlertError } from '@/components/alert/error'
-import { Profile } from '@/components/user/show'
+import { Profile, IdeaList } from '@/components/user/show'
 import { Divider, Container } from '@mantine/core'
 import { useGetUser } from '@/utils/hooks/useGetUser'
 import { HeadBlock } from '@/pages-layout/Head'
@@ -21,7 +21,7 @@ export default function UserProfile() {
       <HeadBlock
         pageTitle={data?.user.name}
         pageImg={imageUrl}
-        pageDescription={truncateText(data?.user?.description as string)}
+        pageDescription={truncateText(data?.user?.description || '')}
         pagePath={process.env.NEXT_PUBLIC_FRONT_URL + router.asPath}
         pageKeywords={data?.user.definition as string}
       />
@@ -29,7 +29,7 @@ export default function UserProfile() {
         <Container>
           <Profile />
           <Divider />
-          {/* TODO: アイデアのリストなどを表示 */}
+          <IdeaList />
         </Container>
       </UserProvider>
     </>

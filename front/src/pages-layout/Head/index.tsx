@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import Head from 'next/head'
 import { ColorSchemeScript } from '@mantine/core'
+import { defaultOgp } from '@/lib/cloudinary/ogpImage'
 
 interface MetaData {
   pageTitle?: string
@@ -21,9 +22,7 @@ export const HeadBlock: FC<MetaData> = ({
   const description =
     pageDescription || 'エンジニアとアイデアのマッチングプラットフォーム'
   const url = pagePath || 'https://ideee.tech'
-  const imgUrl =
-    pageImg ||
-    'https://res.cloudinary.com/dnltqdyfu/image/authenticated/s--ffmUz0gR--/v1645150327/default_ogp.webp'
+  const imgUrl = pageImg || defaultOgp()
   const keywords = pageKeywords || 'アイデア,エンジニア,マッチング'
 
   return (

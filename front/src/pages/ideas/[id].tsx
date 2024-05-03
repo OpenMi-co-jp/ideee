@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import { HeadBlock } from '@/pages-layout/Head'
 import { truncateText } from '@/utils/truncateText'
 import { SuggestIdeas } from '@/components/idea/list'
+import { getOgpImageUrl } from '@/lib/cloudinary/ogpImage'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
@@ -34,15 +35,15 @@ const IdeaDetail = () => {
 
   if (loading) return <Loader color="yellow" />
   const tags = data?.idea?.ideaTags?.map((tag) => tag.name).join(',') || ''
-
+  const imageUrl = getOgpImageUrl({ title: data?.idea.name as string })
   return (
     <>
       <HeadBlock
         pageTitle={data?.idea.name}
-        // TODO: pageImgを動的画像で設定
+        pageImg={imageUrl}
         pageDescription={truncateText(data?.idea?.goal as string)}
         pagePath={process.env.NEXT_PUBLIC_FRONT_URL + router.asPath}
-        pageKeywords={tags || ''}
+        pageKeywords={tags}
       />
 
       <IdeaProvider idea={idea as GetIdeaQuery['idea']}>

@@ -608,6 +608,46 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
+"@cloudinary-util/types@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.0.2.tgz#3ebc14f01f3c113183ad47cc5a9c69e65d06f762"
+  integrity sha512-j3xUfN4uMFDMSvoQeOMxqKYsGZovlRFr8niOQXfcqoHp7NVBiJm8oy6y2HDGQhxH63irmFt8VtzJEnYwGYsGXg==
+
+"@cloudinary-util/url-loader@5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.2.2.tgz#c22fdb13b738af820d9c363cf576feeaffc26c4f"
+  integrity sha512-gwoBuyoJBriUvmX3jk6Q1k5NdziloEhIp/4InLB6yBNe88K7bVbR/V8dJRhba0ZvlYDOOPjIiJLAa5J7xAnUlw==
+  dependencies:
+    "@cloudinary-util/util" "3.0.0"
+    "@cloudinary/url-gen" "1.15.0"
+    zod "^3.22.4"
+
+"@cloudinary-util/util@3.0.0", "@cloudinary-util/util@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-3.0.0.tgz#4096e0190108b2680c0027bf9afaeca039cea6cc"
+  integrity sha512-o6cJsN49OIelLcSkqUf4WzgefpePDFsAaeQfJbpcKhVdtvmWv71K0oZwMXuX62IY1OolqIg0etMiHtWZPhvPNA==
+
+"@cloudinary/transformation-builder-sdk@^1.10.0", "@cloudinary/transformation-builder-sdk@^1.13.0":
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/@cloudinary/transformation-builder-sdk/-/transformation-builder-sdk-1.13.3.tgz#d87be3176fc0883fd2f66dddd935b15f422eee33"
+  integrity sha512-tBMpjcwBjUgINGm2lKodb1fe32yBeq2KTSD7TrrFPm2/dQOb7lKmVuDaDe89IPcV+QZbb1JY/ZWL9pZjUV4aKw==
+  dependencies:
+    "@cloudinary/url-gen" "^1.7.0"
+
+"@cloudinary/url-gen@1.15.0":
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary/url-gen/-/url-gen-1.15.0.tgz#a55c9b51cb27301e0bdc4d60e44a7e73d13db103"
+  integrity sha512-bjU67eZxLUgoRy/Plli4TQio7q6P31OYqnEgXxeN9TKXrzr6h0DeEdIUhKI9gy3HkEBWXWWJIPh7j7gkOJPnyA==
+  dependencies:
+    "@cloudinary/transformation-builder-sdk" "^1.10.0"
+
+"@cloudinary/url-gen@^1.7.0":
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary/url-gen/-/url-gen-1.19.0.tgz#da8b0ec12a33301482a71e309a19401d241b1770"
+  integrity sha512-3WSqYAMEe8lcYMFmkNPhOfv6Ql76mpf8O7YEC+CCaoIYrfBubzzeF8yENCaZK9tFJEHvMepI+uWWfilNrz48XA==
+  dependencies:
+    "@cloudinary/transformation-builder-sdk" "^1.13.0"
+
 "@emotion/babel-plugin@^11.10.6":
   version "11.10.6"
   resolved "https://registry.npmjs.org/@emotion/babel-plugin/-/babel-plugin-11.10.6.tgz"
@@ -1633,6 +1673,11 @@
   version "2.42.0"
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.42.0.tgz#306a444d18c6cf2966ee9d30262d41da4746fb01"
   integrity sha512-ynV4iaC1c1mUhuAr9HRaoq8KrWYmZ0bJEpOh7qTBE+OfdDsdvQUe+0S7FW+DHkJ4RuxQMdO8djrZK7HrUw9YMA==
+
+"@tsconfig/recommended@^1.0.3":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@tsconfig/recommended/-/recommended-1.0.6.tgz#217b78f9601215939d566a79d202a760ae185114"
+  integrity sha512-0IKu9GHYF1NGTJiYgfWwqnOQSlnE9V9R7YohHNNf0/fj/SyOZWzdd06JFr0fLpg1Mqw0kGbYg8w5xdkSqLKM9g==
 
 "@types/estree@*", "@types/estree@^1.0.0":
   version "1.0.5"
@@ -4112,6 +4157,16 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/natural-compare/-/natural-compare-1.4.0.tgz"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
+
+next-cloudinary@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.5.1.tgz#72778806a115122a23bd3a19dd53bfc7c6c16bf9"
+  integrity sha512-YxZevyfDBmEa/nThq6HCKaFuvfZldTXrA1nCbGyOcf5tZ/ms5yQSNkJimwz0qApWyqKt/jBC8UfqG8wrRNnD/A==
+  dependencies:
+    "@cloudinary-util/types" "1.0.2"
+    "@cloudinary-util/url-loader" "5.2.2"
+    "@cloudinary-util/util" "^3.0.0"
+    "@tsconfig/recommended" "^1.0.3"
 
 next@^13.5.1:
   version "13.5.1"

@@ -40,8 +40,6 @@ gem 'omniauth-twitter'
 
 gem 'google-api-client'
 
-gem 'cloudinary'
-
 gem 'devise-i18n'
 gem 'rails-i18n'
 

@@ -3,9 +3,11 @@ import { Box, Text, Title, Divider, Flex, Image } from '@mantine/core'
 import { useMediaQuery } from '@mantine/hooks'
 
 export const Philosophy = () => {
-  const smallScreen = useMediaQuery('(max-width: 767px)');
-  const mediumScreen = useMediaQuery('(min-width: 768px) and (max-width: 991px)');
-  const largeScreen = useMediaQuery('(min-width: 992px)');
+  const smallScreen = useMediaQuery('(max-width: 767px)')
+  const mediumScreen = useMediaQuery(
+    '(min-width: 768px) and (max-width: 991px)'
+  )
+  const largeScreen = useMediaQuery('(min-width: 992px)')
   return (
     <>
       <Box py="50px" px="0px">
@@ -104,7 +106,13 @@ export const Philosophy = () => {
             style={{
               borderRadius: '50%',
               position: 'absolute',
-              left: smallScreen ? '37%' : mediumScreen ? '35%' : (largeScreen ? '25%' : '25%'),
+              left: smallScreen
+                ? '37%'
+                : mediumScreen
+                  ? '35%'
+                  : largeScreen
+                    ? '25%'
+                    : '25%',
               transform: 'translateX(-50%)',
             }}
           />
@@ -116,7 +124,13 @@ export const Philosophy = () => {
             style={{
               borderRadius: '50%',
               position: 'absolute',
-              left: smallScreen ? '63%' : mediumScreen ? '65%' : (largeScreen ? '75%' : '75%'),
+              left: smallScreen
+                ? '63%'
+                : mediumScreen
+                  ? '65%'
+                  : largeScreen
+                    ? '75%'
+                    : '75%',
               transform: 'translateX(-50%)',
             }}
           />

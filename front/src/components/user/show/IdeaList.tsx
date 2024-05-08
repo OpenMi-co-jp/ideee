@@ -32,9 +32,10 @@ export const IdeaList = () => {
         <Tabs.Tab value="comment_list" leftSection={<IconMessageCircle />}>
           コメント
         </Tabs.Tab>
-        <Tabs.Tab value="team_list" leftSection={<IconUsers />}>
+        {/* TODO: チーム開発の設定後表示 */}
+        {/* <Tabs.Tab value="team_list" leftSection={<IconUsers />}>
           チーム開発
-        </Tabs.Tab>
+        </Tabs.Tab> */}
         {isMyPage && (
           <Tabs.Tab value="draft" leftSection={<IconPencil />}>
             下書き
@@ -54,9 +55,10 @@ export const IdeaList = () => {
         <CommentedIdeas />
       </Tabs.Panel>
 
-      <Tabs.Panel value="team_list">
+      {/* TODO: チーム開発の設定後表示 */}
+      {/* <Tabs.Panel value="team_list">
         Coming Soon <IconUsers />
-      </Tabs.Panel>
+      </Tabs.Panel> */}
 
       {isMyPage && (
         <Tabs.Panel value="draft">

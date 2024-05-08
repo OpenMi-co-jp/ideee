@@ -10,7 +10,7 @@ module Resolvers
       user = ::User.find(args[:user_id])
       raise GraphQL::ExecutionError, 'ユーザーが見つかりません' if user.nil?
 
-      published_ideas = user.ideas.published.eager_load(:user).preload(:idea_tags).order(created_at: :desc)
+      published_ideas = user.ideas.published.eager_load(:user).preload(:idea_tags)
       to_paged_result(Kaminari.paginate_array(published_ideas).page(args[:page]).per(args[:per]))
     end
   end

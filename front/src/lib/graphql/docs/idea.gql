@@ -218,6 +218,54 @@ query GetPublishedIdeas($page: Int, $per: Int, $userId: ID!) {
   }
 }
 
+query GetCommentedIdeas($page: Int, $per: Int, $userId: ID!) {
+  commentedIdeas(page: $page, per: $per, userId: $userId) {
+    nodes {
+      id
+      name
+      publishedAt
+      ideaTags {
+        id
+        name
+      }
+    }
+    pageInfo {
+      currentPage
+      isFirst
+      isLast
+      nextPage
+      per
+      prevPage
+      totalCount
+      totalPages
+    }
+  }
+}
+
+query GetLikedIdeas($page: Int, $per: Int, $userId: ID!) {
+  likedIdeas(page: $page, per: $per, userId: $userId) {
+    nodes {
+      id
+      name
+      publishedAt
+      ideaTags {
+        id
+        name
+      }
+    }
+    pageInfo {
+      currentPage
+      isFirst
+      isLast
+      nextPage
+      per
+      prevPage
+      totalCount
+      totalPages
+    }
+  }
+}
+
 query GetSuggestIdeas($ideaId: ID!) {
   suggestIdeas(ideaId: $ideaId) {
     nodes {

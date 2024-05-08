@@ -16,6 +16,7 @@ query GetIdea($id: ID!) {
     draft
     createdAt
     updatedAt
+    publishedAt
     userId
     productUrl
     githubUrl
@@ -84,6 +85,7 @@ query GetHotIdeas {
   hotIdeas {
     id
     name
+    publishedAt
     user {
       image
     }
@@ -98,6 +100,7 @@ query GetDeployedIdeas {
   deployedIdeas {
     id
     name
+    publishedAt
     user {
       image
     }
@@ -112,6 +115,7 @@ query GetActiveTeamIdeas {
   activeTeamIdeas {
     id
     name
+    publishedAt
     user {
       image
     }
@@ -195,6 +199,7 @@ query GetPublishedIdeas($page: Int, $per: Int, $userId: ID!) {
     nodes {
       id
       name
+      publishedAt
       ideaTags {
         id
         name
@@ -218,6 +223,7 @@ query GetSuggestIdeas($ideaId: ID!) {
     nodes {
       id
       name
+      publishedAt
       user {
         image
       }

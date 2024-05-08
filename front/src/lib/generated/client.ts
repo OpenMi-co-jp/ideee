@@ -1098,6 +1098,7 @@ export type GetIdeaQuery = {
     draft?: boolean | null
     createdAt: any
     updatedAt: any
+    publishedAt?: any | null
     userId: number
     productUrl?: string | null
     githubUrl?: string | null
@@ -1184,6 +1185,7 @@ export type GetHotIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name: string
+    publishedAt?: any | null
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1201,6 +1203,7 @@ export type GetDeployedIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name: string
+    publishedAt?: any | null
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1218,6 +1221,7 @@ export type GetActiveTeamIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name: string
+    publishedAt?: any | null
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1336,6 +1340,7 @@ export type GetPublishedIdeasQuery = {
       __typename?: 'Idea'
       id: string
       name: string
+      publishedAt?: any | null
       ideaTags?: Array<{
         __typename?: 'Tag'
         id?: string | null
@@ -1369,6 +1374,7 @@ export type GetSuggestIdeasQuery = {
       __typename?: 'Idea'
       id: string
       name: string
+      publishedAt?: any | null
       user: { __typename?: 'User'; image?: string | null }
       ideaTags?: Array<{
         __typename?: 'Tag'
@@ -1438,6 +1444,7 @@ export type GetNotificationsQuery = {
       idea?: { __typename?: 'Idea'; id: string; name: string } | null
       visitor?: {
         __typename?: 'User'
+        id: string
         name: string
         image?: string | null
       } | null
@@ -2071,6 +2078,7 @@ export const GetIdeaDocument = gql`
       draft
       createdAt
       updatedAt
+      publishedAt
       userId
       productUrl
       githubUrl
@@ -2241,6 +2249,7 @@ export const GetHotIdeasDocument = gql`
     hotIdeas {
       id
       name
+      publishedAt
       user {
         image
       }
@@ -2304,6 +2313,7 @@ export const GetDeployedIdeasDocument = gql`
     deployedIdeas {
       id
       name
+      publishedAt
       user {
         image
       }
@@ -2369,6 +2379,7 @@ export const GetActiveTeamIdeasDocument = gql`
     activeTeamIdeas {
       id
       name
+      publishedAt
       user {
         image
       }
@@ -2686,6 +2697,7 @@ export const GetPublishedIdeasDocument = gql`
       nodes {
         id
         name
+        publishedAt
         ideaTags {
           id
           name
@@ -2763,6 +2775,7 @@ export const GetSuggestIdeasDocument = gql`
       nodes {
         id
         name
+        publishedAt
         user {
           image
         }
@@ -3000,6 +3013,7 @@ export const GetNotificationsDocument = gql`
           name
         }
         visitor {
+          id
           name
           image
         }

@@ -10,6 +10,7 @@ export type IdeaBoxType = {
     id?: string | null
     name: string
   }> | null
+  publishedAt?: string | null
 }
 
 export type AccompaniedTagType = {

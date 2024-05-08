@@ -1,12 +1,10 @@
 import {
-  Image,
   Radio,
   Group,
   Paper,
   Title,
   rem,
   Accordion,
-  Grid,
   Button,
   Center,
   getGradient,
@@ -27,6 +25,7 @@ import {
 } from 'react-hook-form'
 import { IdeaImage } from '@/components/image'
 import { useState } from 'react'
+import { useFormState } from 'react-hook-form'
 
 type IdeaFormProps = {
   title: 'アイデア作成' | 'アイデア編集'
@@ -42,6 +41,7 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
     await form.handleSubmit(onSubmit)(event)
     setIsSubmitting(false)
   }
+  const { errors } = useFormState({ control: form.control })
 
   return (
     <Paper py={rem(40)}>
@@ -192,9 +192,7 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
               size="lg"
               variant="gradient"
               gradient={{ from: 'yellow', to: 'orange' }}
-              disabled={
-                isSubmitting || Object.keys(form.formState.errors).length > 0
-              }
+              disabled={isSubmitting || Object.keys(errors).length > 0}
             >
               保存
             </Button>

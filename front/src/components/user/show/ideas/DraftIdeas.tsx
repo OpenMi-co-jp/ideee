@@ -17,7 +17,7 @@ export const DraftIdeas = () => {
       error={error}
       refetch={refetch}
       pageSize={PAGE_SIZE}
-      emptyMessage="公開中のアイデアがありません"
+      emptyMessage="下書きのアイデアがありません"
     />
   )
 }

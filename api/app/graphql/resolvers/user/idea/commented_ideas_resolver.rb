@@ -8,7 +8,7 @@ module Resolvers
 
     def resolve(**args)
       user = ::User.find(args[:user_id])
-      commented_ideas = user.comment_ideas.preload(:user).preload(:idea_tags).others_ideas(user)
+      commented_ideas = user.comment_ideas.preload(:user, :idea_tags).others_ideas(user)
       to_paged_result(Kaminari.paginate_array(commented_ideas).page(args[:page]).per(args[:per]))
     end
   end

@@ -8,7 +8,7 @@ module Resolvers
 
     def resolve(**args)
       user = ::User.find(args[:user_id])
-      published_ideas = user.ideas.published.eager_load(:user).preload(:idea_tags)
+      published_ideas = user.ideas.published.includes(:user, :idea_tags)
       to_paged_result(Kaminari.paginate_array(published_ideas).page(args[:page]).per(args[:per]))
     end
   end

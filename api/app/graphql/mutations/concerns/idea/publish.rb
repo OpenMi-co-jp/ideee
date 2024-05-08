@@ -2,7 +2,9 @@ module Mutations
   module Concerns
     module Idea
       module Publish
-        def idea_publish_notify(idea)
+        def idea_publish(idea)
+          idea.update!(published_at: Time.zone.now)
+
           return unless Rails.env.production?
 
           idea_url = "#{Rails.application.config.frontend_url}/ideas/#{idea.id}"

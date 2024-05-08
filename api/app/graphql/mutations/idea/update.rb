@@ -51,7 +51,7 @@ module Mutations
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
-      idea_publish_notify(idea) if from_draft && !idea.draft
+      idea_publish(idea) if from_draft && !idea.draft
       {
         idea:,
         success: true

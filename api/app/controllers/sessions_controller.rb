@@ -4,4 +4,3 @@ class SessionsController < ApplicationController
     head :ok
   end
 end
-

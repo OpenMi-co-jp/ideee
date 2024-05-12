@@ -25,7 +25,7 @@ export const useRefetchAuthToken = () => {
       .catch(() => {
         return false
       })
-    }
+  }
 
-      return refetchAuthToken
+  return refetchAuthToken
 }

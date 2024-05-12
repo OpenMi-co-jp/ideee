@@ -22,7 +22,9 @@ export const useSignOut = () => {
 
   const forceSignOut = async () => {
     await signOut()
-    showInformation({ title: '一定時間操作がなかった等の理由によりログアウトしました' })
+    showInformation({
+      title: '一定時間操作がなかった等の理由によりログアウトしました',
+    })
   }
 
   return { handleSignOut, forceSignOut }

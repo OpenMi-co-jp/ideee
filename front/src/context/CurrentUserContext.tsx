@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import React, {
   createContext,
   useContext,
@@ -6,6 +7,8 @@ import React, {
   useCallback,
 } from 'react'
 import type { ReactNode } from 'react'
+import { useSignOut } from '@/components/Auth/SignOut/hooks'
+import { Router } from 'next/router'
 
 export type CurrentUserProps = {
   id: number
@@ -37,6 +40,7 @@ type CurrentUserProviderProps = {
 export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null)
   const [loading, setLoading] = useState(true) // ローディング状態を追加
+  const { forceSignOut } = useSignOut()
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser')
@@ -45,6 +49,22 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     }
     setLoading(false)
   }, [])
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (currentUser && !Cookies.get('authToken')) {
+        forceSignOut()
+        // FIXME: clearCurrentUserはforceSignOut内で処理したいが、なぜか呼ばれないのでここで呼び出しています。解決法がわかれば修正してください。
+        clearCurrentUser()
+      }
+    }
+
+    Router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      Router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [currentUser, forceSignOut])
 
   const storeCurrentUser = useCallback((user: CurrentUserProps) => {
     setCurrentUser(user)

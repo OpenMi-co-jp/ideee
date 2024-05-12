@@ -3576,6 +3576,63 @@
               ]
             },
             {
+              "name": "commentedIdeas",
+              "description": "コメントアイデア一覧",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Ideas",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+                {
+                  "name": "page",
+                  "description": "ページ番号",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": "1",
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                },
+                {
+                  "name": "per",
+                  "description": "1ページに表示するアイデア数",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": "30",
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                },
+                {
+                  "name": "userId",
+                  "description": "ユーザーID",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                }
+              ]
+            },
+            {
               "name": "comments",
               "description": "コメント一覧",
               "type": {
@@ -3831,6 +3888,63 @@
               "deprecationReason": null,
               "args": [
 
+              ]
+            },
+            {
+              "name": "likedIdeas",
+              "description": "いいねしたアイデア一覧",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Ideas",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+                {
+                  "name": "page",
+                  "description": "ページ番号",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": "1",
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                },
+                {
+                  "name": "per",
+                  "description": "1ページに表示するアイデア数",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": "30",
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                },
+                {
+                  "name": "userId",
+                  "description": "ユーザーID",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null,
+                  "isDeprecated": false,
+                  "deprecationReason": null
+                }
               ]
             },
             {

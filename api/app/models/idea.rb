@@ -144,4 +144,16 @@ class Idea < ApplicationRecord
 
     icon&.url
   end
+
+  def publish!
+    update!(published_at: Time.zone.now)
+
+    return unless Rails.env.production?
+
+    idea_url = "#{Rails.application.config.frontend_url}/ideas/#{self.id}"
+
+    TwitterJob::Tweet.perform_later(self, idea_url)
+    Slack::SendNewJob.perform_later(self, idea_url)
+    Slack::SendApplyJob.perform_later(self, idea_url)
+  end
 end

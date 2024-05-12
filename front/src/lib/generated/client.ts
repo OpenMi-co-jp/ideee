@@ -591,6 +591,8 @@ export type Query = {
   activeTeamIdeas: Array<Idea>
   /** コメントオブジェクト */
   comment: Comment
+  /** コメントアイデア一覧 */
+  commentedIdeas: Ideas
   /** コメント一覧 */
   comments: Array<Comment>
   /** 実現したアイデア一覧 */
@@ -605,6 +607,8 @@ export type Query = {
   ideas: Ideas
   /** 最新の5件の通知一覧 */
   latestNotifications: Array<Notification>
+  /** いいねしたアイデア一覧 */
+  likedIdeas: Ideas
   /** ユーザーのいいね一覧 */
   likes: Array<Like>
   /** 通知設定 */
@@ -637,6 +641,12 @@ export type QueryCommentArgs = {
   id: Scalars['ID']
 }
 
+export type QueryCommentedIdeasArgs = {
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+  userId: Scalars['ID']
+}
+
 export type QueryCommentsArgs = {
   ideaId: Scalars['ID']
 }
@@ -655,6 +665,12 @@ export type QueryIdeasArgs = {
   per?: InputMaybe<Scalars['Int']>
   searchCondition?: InputMaybe<SearchCondition>
   sort?: InputMaybe<SortCondition>
+}
+
+export type QueryLikedIdeasArgs = {
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+  userId: Scalars['ID']
 }
 
 export type QueryNotificationsArgs = {
@@ -1098,6 +1114,7 @@ export type GetIdeaQuery = {
     draft?: boolean | null
     createdAt: any
     updatedAt: any
+    publishedAt?: any | null
     userId: number
     productUrl?: string | null
     githubUrl?: string | null
@@ -1184,6 +1201,7 @@ export type GetHotIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name: string
+    publishedAt?: any | null
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1201,6 +1219,7 @@ export type GetDeployedIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name: string
+    publishedAt?: any | null
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1218,6 +1237,7 @@ export type GetActiveTeamIdeasQuery = {
     __typename?: 'Idea'
     id: string
     name: string
+    publishedAt?: any | null
     user: { __typename?: 'User'; image?: string | null }
     ideaTags?: Array<{
       __typename?: 'Tag'
@@ -1336,6 +1356,77 @@ export type GetPublishedIdeasQuery = {
       __typename?: 'Idea'
       id: string
       name: string
+      publishedAt?: any | null
+      ideaTags?: Array<{
+        __typename?: 'Tag'
+        id?: string | null
+        name: string
+      }> | null
+    }>
+    pageInfo?: {
+      __typename?: 'Pagination'
+      currentPage: number
+      isFirst?: boolean | null
+      isLast?: boolean | null
+      nextPage?: number | null
+      per: number
+      prevPage?: number | null
+      totalCount?: number | null
+      totalPages?: number | null
+    } | null
+  }
+}
+
+export type GetCommentedIdeasQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+  userId: Scalars['ID']
+}>
+
+export type GetCommentedIdeasQuery = {
+  __typename?: 'Query'
+  commentedIdeas: {
+    __typename?: 'Ideas'
+    nodes: Array<{
+      __typename?: 'Idea'
+      id: string
+      name: string
+      publishedAt?: any | null
+      ideaTags?: Array<{
+        __typename?: 'Tag'
+        id?: string | null
+        name: string
+      }> | null
+    }>
+    pageInfo?: {
+      __typename?: 'Pagination'
+      currentPage: number
+      isFirst?: boolean | null
+      isLast?: boolean | null
+      nextPage?: number | null
+      per: number
+      prevPage?: number | null
+      totalCount?: number | null
+      totalPages?: number | null
+    } | null
+  }
+}
+
+export type GetLikedIdeasQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>
+  per?: InputMaybe<Scalars['Int']>
+  userId: Scalars['ID']
+}>
+
+export type GetLikedIdeasQuery = {
+  __typename?: 'Query'
+  likedIdeas: {
+    __typename?: 'Ideas'
+    nodes: Array<{
+      __typename?: 'Idea'
+      id: string
+      name: string
+      publishedAt?: any | null
       ideaTags?: Array<{
         __typename?: 'Tag'
         id?: string | null
@@ -1369,6 +1460,7 @@ export type GetSuggestIdeasQuery = {
       __typename?: 'Idea'
       id: string
       name: string
+      publishedAt?: any | null
       user: { __typename?: 'User'; image?: string | null }
       ideaTags?: Array<{
         __typename?: 'Tag'
@@ -1438,6 +1530,7 @@ export type GetNotificationsQuery = {
       idea?: { __typename?: 'Idea'; id: string; name: string } | null
       visitor?: {
         __typename?: 'User'
+        id: string
         name: string
         image?: string | null
       } | null
@@ -2071,6 +2164,7 @@ export const GetIdeaDocument = gql`
       draft
       createdAt
       updatedAt
+      publishedAt
       userId
       productUrl
       githubUrl
@@ -2241,6 +2335,7 @@ export const GetHotIdeasDocument = gql`
     hotIdeas {
       id
       name
+      publishedAt
       user {
         image
       }
@@ -2304,6 +2399,7 @@ export const GetDeployedIdeasDocument = gql`
     deployedIdeas {
       id
       name
+      publishedAt
       user {
         image
       }
@@ -2369,6 +2465,7 @@ export const GetActiveTeamIdeasDocument = gql`
     activeTeamIdeas {
       id
       name
+      publishedAt
       user {
         image
       }
@@ -2686,6 +2783,7 @@ export const GetPublishedIdeasDocument = gql`
       nodes {
         id
         name
+        publishedAt
         ideaTags {
           id
           name
@@ -2757,12 +2855,169 @@ export type GetPublishedIdeasQueryResult = Apollo.QueryResult<
   GetPublishedIdeasQuery,
   GetPublishedIdeasQueryVariables
 >
+export const GetCommentedIdeasDocument = gql`
+  query GetCommentedIdeas($page: Int, $per: Int, $userId: ID!) {
+    commentedIdeas(page: $page, per: $per, userId: $userId) {
+      nodes {
+        id
+        name
+        publishedAt
+        ideaTags {
+          id
+          name
+        }
+      }
+      pageInfo {
+        currentPage
+        isFirst
+        isLast
+        nextPage
+        per
+        prevPage
+        totalCount
+        totalPages
+      }
+    }
+  }
+`
+
+/**
+ * __useGetCommentedIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetCommentedIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCommentedIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCommentedIdeasQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useGetCommentedIdeasQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetCommentedIdeasQuery,
+    GetCommentedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<
+    GetCommentedIdeasQuery,
+    GetCommentedIdeasQueryVariables
+  >(GetCommentedIdeasDocument, options)
+}
+export function useGetCommentedIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetCommentedIdeasQuery,
+    GetCommentedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    GetCommentedIdeasQuery,
+    GetCommentedIdeasQueryVariables
+  >(GetCommentedIdeasDocument, options)
+}
+export type GetCommentedIdeasQueryHookResult = ReturnType<
+  typeof useGetCommentedIdeasQuery
+>
+export type GetCommentedIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetCommentedIdeasLazyQuery
+>
+export type GetCommentedIdeasQueryResult = Apollo.QueryResult<
+  GetCommentedIdeasQuery,
+  GetCommentedIdeasQueryVariables
+>
+export const GetLikedIdeasDocument = gql`
+  query GetLikedIdeas($page: Int, $per: Int, $userId: ID!) {
+    likedIdeas(page: $page, per: $per, userId: $userId) {
+      nodes {
+        id
+        name
+        publishedAt
+        ideaTags {
+          id
+          name
+        }
+      }
+      pageInfo {
+        currentPage
+        isFirst
+        isLast
+        nextPage
+        per
+        prevPage
+        totalCount
+        totalPages
+      }
+    }
+  }
+`
+
+/**
+ * __useGetLikedIdeasQuery__
+ *
+ * To run a query within a React component, call `useGetLikedIdeasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLikedIdeasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLikedIdeasQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useGetLikedIdeasQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetLikedIdeasQuery,
+    GetLikedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetLikedIdeasQuery, GetLikedIdeasQueryVariables>(
+    GetLikedIdeasDocument,
+    options
+  )
+}
+export function useGetLikedIdeasLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetLikedIdeasQuery,
+    GetLikedIdeasQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetLikedIdeasQuery, GetLikedIdeasQueryVariables>(
+    GetLikedIdeasDocument,
+    options
+  )
+}
+export type GetLikedIdeasQueryHookResult = ReturnType<
+  typeof useGetLikedIdeasQuery
+>
+export type GetLikedIdeasLazyQueryHookResult = ReturnType<
+  typeof useGetLikedIdeasLazyQuery
+>
+export type GetLikedIdeasQueryResult = Apollo.QueryResult<
+  GetLikedIdeasQuery,
+  GetLikedIdeasQueryVariables
+>
 export const GetSuggestIdeasDocument = gql`
   query GetSuggestIdeas($ideaId: ID!) {
     suggestIdeas(ideaId: $ideaId) {
       nodes {
         id
         name
+        publishedAt
         user {
           image
         }
@@ -3000,6 +3255,7 @@ export const GetNotificationsDocument = gql`
           name
         }
         visitor {
+          id
           name
           image
         }

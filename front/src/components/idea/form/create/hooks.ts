@@ -12,6 +12,7 @@ export const UseCreateIdea = () => {
     mode: 'onChange',
     defaultValues: {
       stance: 'free_right',
+      publish: true,
     },
   })
   const [createIdeaMutation] = useCreateIdeaMutation()

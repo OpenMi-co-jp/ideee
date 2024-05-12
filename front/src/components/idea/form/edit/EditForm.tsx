@@ -4,5 +4,5 @@ import { IdeaBaseForm } from '@/components/idea/form/BaseForm'
 export const EditForm = () => {
   const { form, onSubmit } = UseEditIdea()
 
-  return <IdeaBaseForm title="アイデア編集" form={form} onSubmit={onSubmit} />
+  return <IdeaBaseForm type="update" form={form} onSubmit={onSubmit} />
 }

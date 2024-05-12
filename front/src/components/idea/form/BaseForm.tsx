@@ -28,12 +28,12 @@ import { useState } from 'react'
 import { useFormState } from 'react-hook-form'
 
 type IdeaFormProps = {
-  title: 'アイデア作成' | 'アイデア編集'
+  type: 'create' | 'update'
   form: UseFormReturn<any>
   onSubmit: SubmitHandler<FieldValues>
 }
 
-export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
+export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -46,7 +46,7 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
   return (
     <Paper py={rem(40)}>
       <Title order={2} mb={30} fw={500} ta="center">
-        {title}
+        アイデア{type === 'create' ? '作成' : '編集'}
       </Title>
       <Center>
         <form onSubmit={handleSubmit} role="form">
@@ -174,7 +174,7 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
                 )
               }}
             />
-            {!form.getValues('publish') && (
+            {(type === 'create' || !form.getValues('publish')) && (
               <SwitchForm
                 form={form}
                 name="publish"

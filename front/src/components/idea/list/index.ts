@@ -1,6 +1,4 @@
 export { HotIdeas } from './HotIdeas'
 export { ActiveTeamIdeas } from './ActiveTeamIdeas'
 export { DeployedIdeas } from './DeployedIdeas'
-export { DraftIdeas } from './DraftIdeas'
 export { SuggestIdeas } from './SuggestIdeas'
-export { PublishedIdeas } from './PublishedIdeas'

@@ -54,11 +54,12 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
   useEffect(() => {
     const handleRouteChange = () => {
+      // FIXME: authTokenの期限が切れてからだけでなく、期限が切れる少し前にもrefetchしたほうがUX的にはよいため、よい方法があれば修正してください。
       if (currentUser && !Cookies.get('authToken')) {
         refetchAuthToken().then(async (isFetched) => {
           if (!isFetched) {
             await forceSignOut()
-            // FIXME: clearCurrentUserはforceSignOut内で処理したいが、なぜか呼ばれないのでここで呼び出しています。解決法がわかれば修正してください。
+            // FIXME: clearCurrentUserはforceSignOut内で処理したかったですが、なぜか呼ばれないのでここで呼び出しています。解決法がわかれば修正してください。
             clearCurrentUser()
           }
         })

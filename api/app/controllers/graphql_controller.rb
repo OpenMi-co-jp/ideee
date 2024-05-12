@@ -47,8 +47,6 @@ class GraphqlController < ApplicationController
   end
 
   def current_user_from_token
-    return current_user if current_user.present?
-
     token = extract_token_from_authorization
     return unless token
 

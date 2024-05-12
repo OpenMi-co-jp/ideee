@@ -5,7 +5,7 @@ import { SIGNUP_TEXT, SIGNUP_URL } from '@/utils/constant'
 export const SignInInvitation = () => {
   return (
     <Center>
-      <Paper shadow="md" radius="xs" p="xl" m="7rem">
+      <Paper shadow="md" radius="xs" p="xl" m="5rem">
         <Center>
           <Title order={5} fw="normal" my="lg">
             無料登録してアイデアを見に行く💡

@@ -78,6 +78,7 @@ export const UseCreateIdea = () => {
     mode: 'onBlur',
     defaultValues: {
       stance: 'free_right',
+      publish: true,
     },
   })
   const [createIdeaMutation] = useCreateIdeaMutation()

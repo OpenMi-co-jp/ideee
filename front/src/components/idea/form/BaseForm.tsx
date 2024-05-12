@@ -28,16 +28,16 @@ import {
 import { IdeaImage } from '@/components/image'
 
 type IdeaFormProps = {
-  title: 'アイデア作成' | 'アイデア編集'
+  type: 'create' | 'update'
   form: UseFormReturn<any>
   onSubmit: SubmitHandler<FieldValues>
 }
 
-export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
+export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
   return (
     <Paper py={rem(40)}>
       <Title order={2} mb={30} fw={500} ta="center">
-        {title}
+        アイデア{type === 'create' ? '作成' : '編集'}
       </Title>
       <Center>
         <form onSubmit={form.handleSubmit(onSubmit)} role="form">
@@ -165,7 +165,7 @@ export const IdeaBaseForm = ({ title, form, onSubmit }: IdeaFormProps) => {
                 )
               }}
             />
-            {!form.getValues('publish') && (
+            {(type === 'create' || !form.getValues('publish')) && (
               <SwitchForm
                 form={form}
                 name="publish"

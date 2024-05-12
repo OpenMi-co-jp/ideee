@@ -7,6 +7,7 @@ import React, {
   useCallback,
 } from 'react'
 import type { ReactNode } from 'react'
+import { useRefetchAuthToken } from '@/utils/auth/useRefetchAuthToken'
 import { useSignOut } from '@/components/Auth/SignOut/hooks'
 import { Router } from 'next/router'
 
@@ -40,6 +41,7 @@ type CurrentUserProviderProps = {
 export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const [currentUser, setCurrentUser] = useState<CurrentUserProps | null>(null)
   const [loading, setLoading] = useState(true) // ローディング状態を追加
+  const refetchAuthToken = useRefetchAuthToken()
   const { forceSignOut } = useSignOut()
 
   useEffect(() => {
@@ -53,9 +55,13 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   useEffect(() => {
     const handleRouteChange = () => {
       if (currentUser && !Cookies.get('authToken')) {
-        forceSignOut()
-        // FIXME: clearCurrentUserはforceSignOut内で処理したいが、なぜか呼ばれないのでここで呼び出しています。解決法がわかれば修正してください。
-        clearCurrentUser()
+        refetchAuthToken().then(async (isFetched) => {
+          if (!isFetched) {
+            await forceSignOut()
+            // FIXME: clearCurrentUserはforceSignOut内で処理したいが、なぜか呼ばれないのでここで呼び出しています。解決法がわかれば修正してください。
+            clearCurrentUser()
+          }
+        })
       }
     }
 
@@ -64,7 +70,7 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     return () => {
       Router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [currentUser, forceSignOut])
+  }, [currentUser, refetchAuthToken, forceSignOut])
 
   const storeCurrentUser = useCallback((user: CurrentUserProps) => {
     setCurrentUser(user)

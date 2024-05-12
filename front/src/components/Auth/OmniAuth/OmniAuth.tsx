@@ -1,11 +1,11 @@
 import { Button, Stack } from '@mantine/core'
 import { handleSignIn } from './hooks'
 import { IconBrandX, IconBrandGoogleFilled } from '@tabler/icons-react'
-import { useGetCsrfToken } from '@/utils/auth/useGetCsrfToken'
+import { useFetchCsrfToken } from '@/utils/auth/useFetchCsrfToken'
 import { useCallback } from 'react'
 
 export const OmniAuth = () => {
-  const csrfToken = useGetCsrfToken()
+  const csrfToken = useFetchCsrfToken()
 
   const onGoogleLogin = useCallback(() => {
     if (csrfToken) {

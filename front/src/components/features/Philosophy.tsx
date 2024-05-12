@@ -1,7 +1,13 @@
 import NextImage from 'next/image'
 import { Box, Text, Title, Divider, Flex, Image } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 
 export const Philosophy = () => {
+  const smallScreen = useMediaQuery('(max-width: 767px)')
+  const mediumScreen = useMediaQuery(
+    '(min-width: 768px) and (max-width: 991px)'
+  )
+  const largeScreen = useMediaQuery('(min-width: 992px)')
   return (
     <>
       <Box py="50px" px="0px">
@@ -86,7 +92,7 @@ export const Philosophy = () => {
               height={350}
               w={{ base: '286px', sm: '357px', md: '430px' }}
               h={{ base: '200px', sm: '250px', md: '350px' }}
-              mt={{ base: '100px', md: '150px' }}
+              mt={{ base: '60px', md: '150px' }}
               mx="auto"
               style={{
                 zIndex: 100,
@@ -96,23 +102,36 @@ export const Philosophy = () => {
           <Box
             w={{ base: '220px', sm: '333px', md: '500px' }}
             h={{ base: '170px', sm: '290px', md: '435px' }}
-            top={0}
-            left={{ base: '10px', xs: '150px', md: '0px' }}
             bg={'rgba(239, 213, 120, 0.49)'}
             style={{
               borderRadius: '50%',
               position: 'absolute',
+              left: smallScreen
+                ? '37%'
+                : mediumScreen
+                  ? '35%'
+                  : largeScreen
+                    ? '25%'
+                    : '25%',
+              transform: 'translateX(-50%)',
             }}
           />
           <Box
             w={{ base: '220px', sm: '333px', md: '500px' }}
             h={{ base: '170px', sm: '290px', md: '435px' }}
-            bg={'rgba(215, 145, 145, 0.50)'}
             top={{ base: '30px', sm: '50px' }}
-            left={{ base: '120px', xs: '365px', md: '450px' }}
+            bg={'rgba(215, 145, 145, 0.50)'}
             style={{
               borderRadius: '50%',
               position: 'absolute',
+              left: smallScreen
+                ? '63%'
+                : mediumScreen
+                  ? '65%'
+                  : largeScreen
+                    ? '75%'
+                    : '75%',
+              transform: 'translateX(-50%)',
             }}
           />
         </Flex>

@@ -11,23 +11,27 @@ import {
 import { TextForm, TextAreaForm, DropzoneForm } from '@/components/ReactFormSet'
 import { IconBrandX, IconBrandGithub, IconLink } from '@tabler/icons-react'
 import { UpdateUser } from './hooks'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { UserImage } from '@/components/image'
+
+const calculateDefinitionValue = (isEngineer: boolean, isIdeaMan: boolean) => {
+  if (isEngineer && isIdeaMan) return 'idea_engineer'
+  if (isIdeaMan) return 'idea_man'
+  if (isEngineer) return 'engineer'
+  return null
+}
 
 export const Form = () => {
   const { form, onSubmit, error, loading } = UpdateUser()
-
   const isEngineer = form.watch('isEngineer')
   const isIdeaMan = form.watch('isIdeaMan')
 
-  const calculateDefinitionValue = (
-    isEngineer: boolean,
-    isIdeaMan: boolean
-  ) => {
-    if (isEngineer && isIdeaMan) return 'idea_engineer'
-    if (isIdeaMan) return 'idea_man'
-    if (isEngineer) return 'engineer'
-    return null
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    await form.handleSubmit(onSubmit)(event)
+    setIsSubmitting(false)
   }
 
   useEffect(() => {
@@ -36,7 +40,7 @@ export const Form = () => {
   }, [isEngineer, isIdeaMan, form])
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
       <Paper my="lg" p="lg" shadow="md" style={{ backgroundColor: '#F2F2F2' }}>
         <Title order={2} mb={30} fw={500} ta="center">
           ユーザー情報編集
@@ -142,6 +146,7 @@ export const Form = () => {
           size="lg"
           variant="gradient"
           gradient={{ from: 'yellow', to: 'orange' }}
+          disabled={isSubmitting}
         >
           保存
         </Button>

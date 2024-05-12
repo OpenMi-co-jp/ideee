@@ -1,12 +1,10 @@
 import {
-  Image,
   Radio,
   Group,
   Paper,
   Title,
   rem,
   Accordion,
-  Grid,
   Button,
   Center,
   getGradient,
@@ -26,6 +24,8 @@ import {
   SubmitHandler,
 } from 'react-hook-form'
 import { IdeaImage } from '@/components/image'
+import { useState } from 'react'
+import { useFormState } from 'react-hook-form'
 
 type IdeaFormProps = {
   type: 'create' | 'update'
@@ -34,13 +34,22 @@ type IdeaFormProps = {
 }
 
 export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    await form.handleSubmit(onSubmit)(event)
+    setIsSubmitting(false)
+  }
+  const { errors } = useFormState({ control: form.control })
+
   return (
     <Paper py={rem(40)}>
       <Title order={2} mb={30} fw={500} ta="center">
         アイデア{type === 'create' ? '作成' : '編集'}
       </Title>
       <Center>
-        <form onSubmit={form.handleSubmit(onSubmit)} role="form">
+        <form onSubmit={handleSubmit} role="form">
           <DropzoneForm
             form={form}
             name="icon"
@@ -183,6 +192,7 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
               size="lg"
               variant="gradient"
               gradient={{ from: 'yellow', to: 'orange' }}
+              disabled={isSubmitting || Object.keys(errors).length > 0}
             >
               保存
             </Button>

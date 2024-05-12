@@ -74,6 +74,7 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const clearCurrentUser = () => {
     setCurrentUser(null)
     localStorage.removeItem('currentUser')
+    Cookies.remove('authToken')
   }
 
   if (loading) return null

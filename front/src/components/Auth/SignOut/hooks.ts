@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie'
 import {
   showSuccess,
   showError,
@@ -13,7 +12,6 @@ export const useSignOut = () => {
   const handleSignOut = async () => {
     try {
       await signOut()
-      Cookies.remove('authToken')
       clearCurrentUser()
       showSuccess({ action: 'ログアウト' })
     } catch (error: any) {
@@ -24,7 +22,6 @@ export const useSignOut = () => {
 
   const forceSignOut = async () => {
     await signOut()
-    Cookies.remove('authToken')
     showInformation({ title: '一定時間操作がなかった等の理由によりログアウトしました' })
   }
 

@@ -1,31 +1,35 @@
 import { Center, Flex, Pagination, Text } from '@mantine/core'
-import { useGetPublishedIdeasQuery } from '@/lib/generated/client'
 import { IdeaList } from '@/components/idea'
 import { IdeaCreateButton } from '@/components/idea/createButton'
 import { AlertError } from '@/components/alert'
 import { LoaderBox } from '@/components/features'
 import { useState } from 'react'
+import { IdeasType } from '@/types/idea'
+import type { ApolloError } from '@apollo/client'
 
-interface PublishedIdeasProps {
-  userId: string
+interface BaseUserIdeasProps {
+  loading: boolean
+  ideas: Pick<IdeasType, 'nodes' | 'pageInfo'> | null
+  error: ApolloError | undefined
+  refetch: (variables?: { page: number; per: number }) => void
+  emptyMessage: string
+  pageSize: number
 }
 
-const PAGE_SIZE = 10
-
-export const PublishedIdeas = ({ userId }: PublishedIdeasProps) => {
-  const { loading, data, error, refetch } = useGetPublishedIdeasQuery({
-    variables: {
-      userId: userId,
-      per: PAGE_SIZE,
-    },
-  })
-
-  const { pageInfo, nodes } = data?.publishedIdeas || {}
+export const BaseUserIdeas = ({
+  loading,
+  ideas,
+  error,
+  refetch,
+  emptyMessage,
+  pageSize,
+}: BaseUserIdeasProps) => {
+  const { pageInfo, nodes } = ideas || { pageInfo: null, nodes: [] }
   const [page, setPage] = useState(1)
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage)
-    refetch({ page: newPage, per: PAGE_SIZE })
+    refetch({ page: newPage, per: pageSize })
   }
 
   if (loading) return <LoaderBox />
@@ -48,7 +52,7 @@ export const PublishedIdeas = ({ userId }: PublishedIdeasProps) => {
         </>
       ) : (
         <Flex my="xl" wrap="wrap" align="center" justify="center" gap="sm">
-          <Text size="lg">公開中のアイディアがありません</Text>
+          <Text size="lg">{emptyMessage}</Text>
           <IdeaCreateButton />
         </Flex>
       )}

@@ -1130,6 +1130,26 @@ type Query {
   ): Comment!
 
   """
+  コメントアイデア一覧
+  """
+  commentedIdeas(
+    """
+    ページ番号
+    """
+    page: Int = 1
+
+    """
+    1ページに表示するアイデア数
+    """
+    per: Int = 30
+
+    """
+    ユーザーID
+    """
+    userId: ID!
+  ): Ideas!
+
+  """
   コメント一覧
   """
   comments(
@@ -1203,6 +1223,26 @@ type Query {
   最新の5件の通知一覧
   """
   latestNotifications: [Notification!]!
+
+  """
+  いいねしたアイデア一覧
+  """
+  likedIdeas(
+    """
+    ページ番号
+    """
+    page: Int = 1
+
+    """
+    1ページに表示するアイデア数
+    """
+    per: Int = 30
+
+    """
+    ユーザーID
+    """
+    userId: ID!
+  ): Ideas!
 
   """
   ユーザーのいいね一覧

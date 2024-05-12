@@ -7,11 +7,7 @@ module Resolvers
     type [Types::Idea::IdeaType], null: false
 
     def resolve
-      ::Idea.published
-            .team_active
-            .preload(:idea_tags)
-            .eager_load(:user)
-            .sample(4)
+      ::Idea.published.team_active.includes(:user, :idea_tags).sample(4)
     end
   end
 end

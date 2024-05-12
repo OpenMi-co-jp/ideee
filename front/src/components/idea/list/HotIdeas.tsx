@@ -23,7 +23,7 @@ export const HotIdeas = () => {
           <IconConfetti size={30} stroke={1.5} />
         </Paper>
         <Title order={2} mx="md" my="md" c="orange">
-          新しいアイデア
+          ホットなアイデア
         </Title>
       </Flex>
       <IdeaList ideas={data?.hotIdeas} />

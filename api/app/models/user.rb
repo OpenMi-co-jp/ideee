@@ -145,8 +145,8 @@ class User < ApplicationRecord
       id: self.id,
       name: self.name,
       image: self.image,
-      defined: self.defined
-      # exp: time.now.to_i + 1.week.to_i TODO: 本当は期限を設定するなどしたい see: https://github.com/naru20181117/ideee/issues/1300#issuecomment-2078364010
+      defined: self.defined,
+      exp: Time.now.to_i + 1.week.to_i
     }
 
     secret_key = Rails.application.credentials.secret_key_base

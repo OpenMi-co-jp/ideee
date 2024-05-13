@@ -146,7 +146,7 @@ class User < ApplicationRecord
       name: self.name,
       image: self.image,
       defined: self.defined,
-      exp: Time.now.to_i + 1.week.to_i
+      exp: 1.week.since.to_i 
     }
 
     secret_key = Rails.application.credentials.secret_key_base

@@ -1,7 +1,5 @@
 module Mutations
   class Idea::Update < BaseMutation
-    include Concerns::Idea::Publish
-
     graphql_name 'UpdateIdea'
 
     argument :id, ID, required: true, description: 'アイデアID'
@@ -51,7 +49,7 @@ module Mutations
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
-      idea_publish_notify(idea) if from_draft && !idea.draft
+      idea.publish! if from_draft && !idea.draft
       {
         idea:,
         success: true

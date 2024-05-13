@@ -15,7 +15,7 @@ export const IdeaList = ({ ideas }: IdeasType) => {
       wrap="wrap"
       gap="md"
       my="xl"
-      mx="md"
+      mx="sm"
     >
       {ideas?.map((idea) => {
         return <IdeaBox key={idea.id} {...idea} />

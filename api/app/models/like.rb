@@ -18,7 +18,6 @@
 #
 class Like < ApplicationRecord
   belongs_to :user
-  belongs_to :idea, optional: true # TODO: データ移行後削除
   belongs_to :likable, polymorphic: true, optional: true
 
   after_create :count_likes

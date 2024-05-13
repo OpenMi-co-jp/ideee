@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 type SignUpFormValues = {
   email: string
@@ -17,7 +17,7 @@ type SignUpFormValues = {
   confirmSuccessUrl: string
 }
 
-export const SignUpFormSchema = z.object({
+const SignUpFormSchema = z.object({
   email: z
     .string()
     .email({ message: 'メールアドレスの形式で入力してください' }),
@@ -29,8 +29,10 @@ export const SignUpFormSchema = z.object({
     .min(6, { message: '6文字以上の確認パスワードを入力してください' }),
 })
 
+const confirmSuccessUrl = process.env.NEXT_PUBLIC_FRONT_URL
+const onSubmit = (data: SignUpFormValues) => handleSignUp(data)
+
 export const SignUpForm: CustomNextPage = () => {
-  const confirmSuccessUrl = process.env.NEXT_PUBLIC_FRONT_URL
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(SignUpFormSchema),
     defaultValues: {
@@ -41,9 +43,16 @@ export const SignUpForm: CustomNextPage = () => {
     },
     mode: 'onChange',
   })
-  const onSubmit = (data: SignUpFormValues) => handleSignUp(data)
+
   const router = useRouter()
   const { currentUser } = useCurrentUser()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    await form.handleSubmit(onSubmit)(event)
+    setIsSubmitting(false)
+  }
 
   useEffect(() => {
     if (currentUser) {
@@ -52,7 +61,7 @@ export const SignUpForm: CustomNextPage = () => {
   }, [currentUser, router])
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
       <Box maw={300} mx="auto">
         <Title order={2} mb={30}>
           ユーザー登録
@@ -67,7 +76,7 @@ export const SignUpForm: CustomNextPage = () => {
           required
         />
         <Grid style={{ marginTop: '1rem' }}>
-          <Button type="submit" fullWidth m={10}>
+          <Button type="submit" fullWidth m={10} disabled={isSubmitting}>
             無料ユーザー作成
           </Button>
         </Grid>

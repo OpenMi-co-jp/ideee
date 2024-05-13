@@ -3,12 +3,30 @@ import Link from 'next/link'
 import type { FC } from 'react'
 import { IdeaBoxType } from '@/types/idea'
 import { Tag } from '@/components/tag'
+import { NewBadge } from '@/components/idea/option/NewBadge'
 
-export const IdeaBox: FC<IdeaBoxType> = ({ id, name, user, ideaTags }) => {
+export const IdeaBox: FC<IdeaBoxType> = ({
+  id,
+  name,
+  user,
+  ideaTags,
+  publishedAt,
+}) => {
+  // 1ヶ月以内に公開されたアイデア
+  const isNew =
+    publishedAt &&
+    new Date(publishedAt).getTime() >= Date.now() - 30 * 24 * 60 * 60 * 1000
+
   return (
     <Link href={`/ideas/${id}`}>
       <Paper shadow="md" radius="md" p="md" withBorder>
-        <Flex justify="center" direction="row" wrap="wrap" gap="md">
+        <Flex
+          justify="space-between"
+          direction="row"
+          wrap="wrap"
+          gap="xs"
+          w={{ base: 280, md: 340 }}
+        >
           <Stack gap="xs" align="flex-start" w={{ base: 220, md: 280 }}>
             <Text
               style={{
@@ -23,11 +41,15 @@ export const IdeaBox: FC<IdeaBoxType> = ({ id, name, user, ideaTags }) => {
               })}
             </Flex>
           </Stack>
-          {user?.image && (
-            <Flex justify="flex-end" direction="column">
-              <Avatar radius="xl" size={24} src={user?.image} mt="" />
-            </Flex>
-          )}
+          <Flex
+            justify="space-between"
+            align="flex-end"
+            direction="column"
+            gap="md"
+          >
+            {isNew && <NewBadge />}
+            {user?.image && <Avatar radius="xl" size={24} src={user?.image} />}
+          </Flex>
         </Flex>
       </Paper>
     </Link>

@@ -1,7 +1,5 @@
 module Mutations
   class Idea::Create < BaseMutation
-    include Concerns::Idea::Publish
-
     graphql_name 'CreateIdea'
 
     argument :icon, String, required: false, description: 'アイデアアイコン'
@@ -42,8 +40,10 @@ module Mutations
         draft: !args[:publish],
         user_id: context[:current_user].id
       )
-      idea.save_with_tags!(args[:tag_list])
-      idea_publish_notify(idea) unless idea.draft
+      idea.transaction do
+        idea.save_with_tags!(args[:tag_list])
+        idea.publish! unless idea.draft
+      end
       {
         idea:,
         success: true

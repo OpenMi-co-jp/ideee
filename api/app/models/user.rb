@@ -48,14 +48,14 @@ class User < ApplicationRecord
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable,
          :omniauthable, omniauth_providers: %i[twitter google_oauth2]
-  has_many :ideas, dependent: :destroy
+  has_many :ideas, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :comment_ideas, through: :comments, source: :idea
+  has_many :comment_ideas, -> { order(published_at: :desc) }, through: :comments, source: :idea
   has_many :difficultys, dependent: :destroy
   has_many :difficulty_ideas, through: :difficultys, source: :idea
-  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
-  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  has_many :active_notifications, -> { order(created_at: :desc) }, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, -> { order(created_at: :desc) }, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   # settings relation
   has_one :notification_config, dependent: :destroy

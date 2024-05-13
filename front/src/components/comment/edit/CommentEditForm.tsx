@@ -3,14 +3,23 @@ import { TextAreaForm } from '@/components/ReactFormSet'
 import { useCommentAction } from './edit'
 import { IconSend } from '@tabler/icons-react'
 import { useComment } from '@/context/CommentContext'
+import { useState } from 'react'
 
 export const CommentEditForm = () => {
   const { form, onSubmit } = useCommentAction()
   const description = form.watch('description')
-  const { comment, setIsEditing } = useComment()
+  const { setIsEditing } = useComment()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    await form.handleSubmit(onSubmit)(event)
+    setIsSubmitting(false)
+  }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
       <Paper
         maw="30rem"
         mt="3px"
@@ -33,7 +42,7 @@ export const CommentEditForm = () => {
           variant="light"
           size="xs"
           color="orange"
-          disabled={!description}
+          disabled={isSubmitting || !description}
           leftSection={<IconSend />}
         >
           保存

@@ -8,7 +8,12 @@ import {
   IconPencil,
 } from '@tabler/icons-react'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { DraftIdeas, PublishedIdeas } from '@/components/idea/list'
+import {
+  DraftIdeas,
+  PublishedIdeas,
+  CommentedIdeas,
+  LikedIdeas,
+} from '@/components/user/show/ideas'
 
 export const IdeaList = () => {
   const user = useUser()
@@ -27,9 +32,10 @@ export const IdeaList = () => {
         <Tabs.Tab value="comment_list" leftSection={<IconMessageCircle />}>
           コメント
         </Tabs.Tab>
-        <Tabs.Tab value="team_list" leftSection={<IconUsers />}>
+        {/* TODO: チーム開発の設定後表示 */}
+        {/* <Tabs.Tab value="team_list" leftSection={<IconUsers />}>
           チーム開発
-        </Tabs.Tab>
+        </Tabs.Tab> */}
         {isMyPage && (
           <Tabs.Tab value="draft" leftSection={<IconPencil />}>
             下書き
@@ -38,20 +44,21 @@ export const IdeaList = () => {
       </Tabs.List>
 
       <Tabs.Panel value="idea_list">
-        <PublishedIdeas userId={user!.id} />
+        <PublishedIdeas />
       </Tabs.Panel>
 
       <Tabs.Panel value="heart_list">
-        Coming Soon <IconHeart />
+        <LikedIdeas />
       </Tabs.Panel>
 
       <Tabs.Panel value="comment_list">
-        Coming Soon <IconMessageCircle />
+        <CommentedIdeas />
       </Tabs.Panel>
 
-      <Tabs.Panel value="team_list">
+      {/* TODO: チーム開発の設定後表示 */}
+      {/* <Tabs.Panel value="team_list">
         Coming Soon <IconUsers />
-      </Tabs.Panel>
+      </Tabs.Panel> */}
 
       {isMyPage && (
         <Tabs.Panel value="draft">

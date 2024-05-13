@@ -7,7 +7,7 @@ export const useRefetchAuthToken = () => {
 
   const refetchAuthToken = async (): Promise<boolean> => {
     return client
-      .post('/sessions', {
+      .post('/auth_token', {
         headers: { 'X-CSRF-Token': csrfToken },
         authenticity_token: csrfToken,
       })

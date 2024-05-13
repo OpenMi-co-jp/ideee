@@ -1,6 +1,10 @@
 class AuthTokenController < ApplicationController
   def create
-    response.set_header('Authorization', current_user.generate_jwt_token) if signed_in?
-    head :ok
+    if signed_in?
+      response.set_header('Authorization', current_user.generate_jwt_token)
+      head :ok
+    else
+      head :unauthorized
+    end
   end
 end

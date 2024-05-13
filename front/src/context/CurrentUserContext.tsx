@@ -52,26 +52,37 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
     setLoading(false)
   }, [])
 
-  useEffect(() => {
-    const handleRouteChange = () => {
-      // FIXME: authTokenの期限が切れてからだけでなく、期限が切れる少し前にもrefetchしたほうがUX的にはよいため、よい方法があれば修正してください。
-      if (currentUser && !Cookies.get('authToken')) {
-        refetchAuthToken().then(async (isFetched) => {
-          if (!isFetched) {
-            await forceSignOut()
-            // FIXME: clearCurrentUserはforceSignOut内で処理したかったですが、なぜか呼ばれないのでここで呼び出しています。解決法がわかれば修正してください。
-            clearCurrentUser()
-          }
-        })
-      }
-    }
-
-    Router.events.on('routeChangeComplete', handleRouteChange)
-
-    return () => {
-      Router.events.off('routeChangeComplete', handleRouteChange)
+  const checkSignInStatus = useCallback(() => {
+    // FIXME: authTokenの期限が切れてからだけでなく、期限が切れる少し前にもrefetchしたほうがUX的にはよいため、よい方法があれば修正してください。
+    if (!!currentUser && !Cookies.get('authToken')) {
+      refetchAuthToken().then(async (isFetched: boolean) => {
+        if (!isFetched) {
+          await forceSignOut()
+          // FIXME: clearCurrentUserはforceSignOut内で処理したかったですが、なぜか呼ばれないのでここで呼び出しています。解決法がわかれば修正してください。
+          clearCurrentUser()
+        }
+      })
     }
   }, [currentUser, refetchAuthToken, forceSignOut])
+
+  // 初期表示時、リロード時用
+  useEffect(() => {
+    // NOTE: タイミングによってはcurrentUserが設定されていない場合があるため
+    if (!currentUser) return
+
+    checkSignInStatus()
+    // NOTE: checkSignInStatusにも依存すると何度も実行されてしまうため、checkSignInStatusは依存配列に含めない
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser])
+
+  // 画面遷移時用
+  useEffect(() => {
+    Router.events.on('routeChangeComplete', checkSignInStatus)
+
+    return () => {
+      Router.events.off('routeChangeComplete', checkSignInStatus)
+    }
+  }, [checkSignInStatus])
 
   const storeCurrentUser = useCallback((user: CurrentUserProps) => {
     setCurrentUser(user)

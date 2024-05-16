@@ -1,7 +1,7 @@
 import {
   showSuccess,
   showError,
-  showInformation,
+  showInfo,
 } from '@/components/showNotification'
 import { signOut } from '@/utils/auth'
 import { useCurrentUser } from '@/context/CurrentUserContext'
@@ -22,7 +22,7 @@ export const useSignOut = () => {
 
   const forceSignOut = async () => {
     await signOut()
-    showInformation({
+    showInfo({
       title: '一定時間操作がなかった等の理由によりログアウトしました',
     })
   }

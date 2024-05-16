@@ -5,7 +5,7 @@ type NotificationProps = {
   message?: string
 }
 
-export const showInformation = ({ title, message }: NotificationProps) => {
+export const showInfo = ({ title, message }: NotificationProps) => {
   showNotification({
     color: 'green',
     title,

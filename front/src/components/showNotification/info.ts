@@ -7,7 +7,7 @@ type NotificationProps = {
 
 export const showInfo = ({ title, message }: NotificationProps) => {
   showNotification({
-    color: 'green',
+    color: 'gray',
     title,
     message,
     withCloseButton: true,

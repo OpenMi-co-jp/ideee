@@ -681,7 +681,7 @@ type Idea {
   """
   アプリ審査状況
   """
-  productApply: Int
+  productApply: String
 
   """
   作っているアプリのURL

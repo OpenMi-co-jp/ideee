@@ -23,7 +23,8 @@ export const useSignOut = () => {
   const forceSignOut = async () => {
     await signOut()
     showInfo({
-      title: '一定時間操作がなかった等の理由によりログアウトしました',
+      title: 'ログインし直してください',
+      message: 'ログインセッションが切れました',
     })
   }
 

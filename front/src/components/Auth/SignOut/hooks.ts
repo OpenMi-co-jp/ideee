@@ -1,8 +1,4 @@
-import {
-  showSuccess,
-  showError,
-  showInfo,
-} from '@/components/showNotification'
+import { showSuccess, showError, showInfo } from '@/components/showNotification'
 import { signOut } from '@/utils/auth'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 

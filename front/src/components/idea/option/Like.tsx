@@ -19,12 +19,12 @@ export const Like = () => {
     if (currentUser) {
       toggleLike()
     } else {
-      // ログインしていない場合は、ログインページに遷移する
-      router.push('/users/sign_in')
       showError({
         action: 'ハート追加',
         message: 'ログインしてください',
       })
+      // ログインしていない場合は、ログインページに遷移する
+      router.push('/users/sign_in')
     }
   }
 

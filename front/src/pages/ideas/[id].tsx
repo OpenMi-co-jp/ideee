@@ -1,6 +1,6 @@
 import { SignPath } from '@/components/Auth/SignPath'
 import { IdeaTagList, IdeaTitle, UserSection } from '@/components/idea'
-import { HiddenIdeaContent, IdeaContents } from '@/components/idea/show'
+import { HiddenIdeaContent, MinIdeaContents } from '@/components/idea/show'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { IdeaProvider } from '@/context/IdeaContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
@@ -54,7 +54,7 @@ const IdeaDetail = () => {
           <IdeaTitle />
           <UserSection />
           <IdeaTagList />
-          {!viewable && <IdeaContents />}
+          {!viewable && <MinIdeaContents />}
         </Container>
 
         {(() => {

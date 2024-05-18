@@ -25,7 +25,7 @@ export const Like = () => {
   }, [likesNum])
 
   useEffect(() => {
-    setLikesNumState(likesNumState + addCount)
+    setLikesNumState((prev) => prev + addCount)
   }, [addCount])
 
   if (isOwnUser)

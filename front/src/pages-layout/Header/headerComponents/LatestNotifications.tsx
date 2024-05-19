@@ -42,8 +42,6 @@ export const LatestNotifications = () => {
       shadow="md"
       width={280}
       onOpen={handleNotificationCheck}
-      // TODO: 既読をつける機能を設定
-      // onOpen={() => console.log('opened')}
     >
       <Menu.Target>
         <Indicator

@@ -1,6 +1,6 @@
 import { useGetNotificationsQuery } from '@/lib/generated/client'
 import { Text, Loader, Paper, Title, Center, Pagination } from '@mantine/core'
-import { notificationItem } from '@/components/notification/notificationItem'
+import { NotificationItem } from '@/components/notification/NotificationItem'
 import type {
   Notification,
   GetNotificationsQuery,
@@ -37,7 +37,7 @@ function Notifications() {
         <>
           {notifications.nodes.map((notification) => (
             <Paper shadow="xs" radius="sm" p="xs" mb="xs" key={notification.id}>
-              {notificationItem(notification as Notification)}
+              {NotificationItem(notification as Notification)}
             </Paper>
           ))}
           <Center my="xl">

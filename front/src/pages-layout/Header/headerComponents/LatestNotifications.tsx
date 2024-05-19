@@ -4,7 +4,7 @@ import {
 } from '@/lib/generated/client'
 import { Divider, Menu, Text, Loader, Indicator } from '@mantine/core'
 import { IconBell } from '@tabler/icons-react'
-import { notificationItem } from '@/components/notification/notificationItem'
+import { NotificationItem } from '@/components/notification/NotificationItem'
 import Link from 'next/link'
 import type {
   Notification,
@@ -65,7 +65,7 @@ export const LatestNotifications = () => {
         {notifications && notifications.length > 0 ? (
           notifications.map((notification) => (
             <Menu.Item key={notification.id}>
-              {notificationItem(notification as Notification)}
+              {NotificationItem(notification as Notification)}
             </Menu.Item>
           ))
         ) : (

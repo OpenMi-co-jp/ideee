@@ -38,11 +38,7 @@ export const LatestNotifications = () => {
   }
 
   return (
-    <Menu
-      shadow="md"
-      width={280}
-      onOpen={handleNotificationCheck}
-    >
+    <Menu shadow="md" width={280} onOpen={handleNotificationCheck}>
       <Menu.Target>
         <Indicator
           disabled={isNotificationChecked}

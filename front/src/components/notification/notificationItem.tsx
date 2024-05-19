@@ -1,4 +1,4 @@
-import { Group, Text } from '@mantine/core'
+import { Group, Text, Indicator } from '@mantine/core'
 import { UserIcon } from '@/components/user'
 import Link from 'next/link'
 import dayjs from '@/lib/format/dayjs'
@@ -29,7 +29,13 @@ const getNotificationMessage = (type?: string | null) => {
 
 export const notificationItem = (notification: Notification) => {
   return (
-    <>
+    <Indicator
+      color="orange"
+      label="New"
+      position="top-start"
+      size={14}
+      disabled={notification?.checked}
+    >
       <Group>
         <Link href={`/users/${notification?.visitor?.id}`} passHref>
           <UserIcon userIcon={notification?.visitor?.image} />
@@ -45,6 +51,6 @@ export const notificationItem = (notification: Notification) => {
       <Text size="xs" c="gray" style={{ textAlign: 'right' }}>
         {dayjs(notification.createdAt).format('YYYY/MM/DD HH:mm')}
       </Text>
-    </>
+    </Indicator>
   )
 }

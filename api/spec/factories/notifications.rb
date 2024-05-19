@@ -22,7 +22,7 @@
 FactoryBot.define do
   factory :notification do
     visitor_id { 1 }
-    visited_id { 1 }
+    visited_id { 2 }
     idea_id { 1 }
     checked { false }
     notificatable_id { 1 }

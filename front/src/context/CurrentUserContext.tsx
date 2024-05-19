@@ -54,7 +54,7 @@ export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
 
   const checkSignInStatus = useCallback(() => {
     // FIXME: authTokenの期限が切れてからだけでなく、期限が切れる少し前にもrefetchしたほうがUX的にはよいため、よい方法があれば修正してください。
-    if (!!currentUser && !Cookies.get('authToken')) {
+    if (currentUser && !Cookies.get('authToken')) {
       refetchAuthToken().then(async (isFetched: boolean) => {
         if (!isFetched) {
           await forceSignOut()

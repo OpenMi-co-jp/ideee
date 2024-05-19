@@ -5,15 +5,14 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラー'
 
-    def resolve()
+    def resolve
       if context[:current_user].blank?
         return { success: false, errors: ['ログインしてください'] }
       end
 
-      context[:current_user].passive_notifications.where(checked: false).update_all(checked: true)
-      {
-        success: true
-      }
+      notifications = context[:current_user].passive_notifications.where(checked: false)
+      notifications.update!(checked: true)
+      { success: true }
     rescue ActiveRecord::RecordInvalid => e
       {
         success: false,

@@ -50,7 +50,7 @@ export const Like = () => {
   }
 
   return (
-    <Button onClick={handleLikeClick} variant="transparent">
+    <Button onClick={handleLikeClick} variant="transparent" px={0}>
       <Flex align="center" gap="xs">
         <Transition mounted={isLike} duration={300} transition="fade-left">
           {(styles) => (
@@ -70,7 +70,7 @@ export const Like = () => {
             </div>
           )}
         </Transition>
-        <Text c="gray">{likesNumState}</Text>
+        {likesNumState > 0 && <Text c="gray">{likesNumState}</Text>}
       </Flex>
     </Button>
   )

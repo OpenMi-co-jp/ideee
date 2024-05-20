@@ -1117,6 +1117,7 @@ export type GetIdeaQuery = {
     updatedAt: any
     publishedAt?: any | null
     userId: number
+    likesNum?: number | null
     productUrl?: string | null
     githubUrl?: string | null
     user: {
@@ -2168,6 +2169,7 @@ export const GetIdeaDocument = gql`
       updatedAt
       publishedAt
       userId
+      likesNum
       productUrl
       githubUrl
       user {

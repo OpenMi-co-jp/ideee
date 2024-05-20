@@ -4,7 +4,7 @@ import {
 } from '@/lib/generated/client'
 import { Divider, Menu, Text, Loader, Indicator } from '@mantine/core'
 import { IconBell } from '@tabler/icons-react'
-import { NotificationItem } from '@/components/notification/NotificationItem'
+import { NotificationItem } from '@/components/notification/Item'
 import Link from 'next/link'
 import type {
   Notification,

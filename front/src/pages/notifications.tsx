@@ -1,6 +1,6 @@
 import { useGetNotificationsQuery } from '@/lib/generated/client'
 import { Text, Loader, Paper, Title, Center, Pagination } from '@mantine/core'
-import { NotificationItem } from '@/components/notification/NotificationItem'
+import { NotificationItem } from '@/components/notification/Item'
 import type {
   Notification,
   GetNotificationsQuery,

@@ -356,7 +356,7 @@ export type Idea = {
   /** 補足 */
   note?: Maybe<Scalars['String']>
   /** アプリ審査状況 */
-  productApply?: Maybe<Scalars['Int']>
+  productApply?: Maybe<Scalars['String']>
   /** 作っているアプリのURL */
   productUrl?: Maybe<Scalars['String']>
   /** 公開日 */
@@ -1112,6 +1112,7 @@ export type GetIdeaQuery = {
     stance?: string | null
     note?: string | null
     draft?: boolean | null
+    productApply?: string | null
     createdAt: any
     updatedAt: any
     publishedAt?: any | null
@@ -2162,6 +2163,7 @@ export const GetIdeaDocument = gql`
       stance
       note
       draft
+      productApply
       createdAt
       updatedAt
       publishedAt

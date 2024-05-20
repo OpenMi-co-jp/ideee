@@ -12,4 +12,6 @@ Sentry.init do |config|
   # of sampled transactions.
   # We recommend adjusting this value in production.
   config.profiles_sample_rate = 0.05
+
+  config.background_worker_threads = 5
 end

@@ -1,6 +1,6 @@
 import { SignPath } from '@/components/Auth/SignPath'
 import { IdeaTagList, IdeaTitle, UserSection } from '@/components/idea'
-import { HiddenIdeaContent, IdeaContents } from '@/components/idea/show'
+import { HiddenIdeaContent, MinIdeaContents } from '@/components/idea/show'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { IdeaProvider } from '@/context/IdeaContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
@@ -20,6 +20,7 @@ const IdeaDetail = () => {
   const { data, loading, error } = useGetIdea()
   const router = useRouter()
   const [idea, setIdea] = useState({})
+  const viewable = data?.idea.productApply == 'approved' || currentUser
 
   useEffect(() => {
     if (error) {
@@ -48,16 +49,16 @@ const IdeaDetail = () => {
 
       <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
         <Container
-          className={currentUser ? classes.container : `${classes.maskImage}`}
+          className={viewable ? classes.container : `${classes.maskImage}`}
         >
           <IdeaTitle />
           <UserSection />
           <IdeaTagList />
-          {!currentUser && <IdeaContents />}
+          {!viewable && <MinIdeaContents />}
         </Container>
 
         {(() => {
-          if (currentUser) {
+          if (viewable) {
             return <HiddenIdeaContent />
           } else {
             return <SignPath />

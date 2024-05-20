@@ -2099,7 +2099,7 @@
               "description": "アプリ審査状況",
               "type": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,

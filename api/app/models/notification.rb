@@ -26,5 +26,15 @@ class Notification < ApplicationRecord
   # visitedは活用事例が無ければ削除予定
   belongs_to :visited, class_name: 'User', optional: true
 
+  validate :not_actioned_by_current_user
+
   scope :not_sent_likes, -> { where(notificatable_type: 'LikeIdea').where(send_at: nil) }
+
+  private
+
+  def not_actioned_by_current_user
+    return unless visitor_id == visited_id
+
+    errors.add(:base, '自分には通知を送れません')
+  end
 end

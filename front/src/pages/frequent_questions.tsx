@@ -179,6 +179,7 @@ const FrequentQuestions = () => {
 
       <Paper mt="xl" py="lg">
         <iframe
+          loading="lazy"
           src="https://docs.google.com/forms/d/e/1FAIpQLSfZGyqfRpT0UgCjxPjZd3Ez30G-23veIGRoGuWHm59v9E4tpw/viewform?embedded=true"
           height="1250"
           width="100%"

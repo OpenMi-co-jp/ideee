@@ -12,7 +12,7 @@ module Mutations
     argument :weekly_email, Boolean, required: true, description: '毎週メール通知'
 
     field :notification_config, Types::NotificationConfigType, null: false, description: '通知設定'
-    field :success, Boolean, null: false, description: '成功'
+    field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラー'
 
     def resolve(**args)

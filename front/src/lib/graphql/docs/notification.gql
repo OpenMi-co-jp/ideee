@@ -37,8 +37,17 @@ query GetLatestNotifications {
       name
     }
     visitor {
+      id
       name
       image
     }
+  }
+}
+
+# 引数なしのmutationの定義
+mutation CheckNotifications($input: CheckNotificationsInput!) {
+  checkNotifications(input: $input) {
+    success
+    errors
   }
 }

@@ -7,17 +7,17 @@ import type { Notification } from '@/lib/generated/client'
 const getNotificationMessage = (type?: string | null) => {
   switch (type) {
     case 'LikeIdea':
-      return 'にハートを送りました'
+      return 'にハート❤️を送りました'
     case 'LikeComment':
       return 'のコメントにハートを送りました'
     case 'Comment':
-      return 'にコメントしました'
+      return 'にコメント💬しました'
     case 'Like':
       return 'にハートを送りました' // TODO: 削除予定
     case 'Difficulty':
       return 'に難易度の投票をしました'
     case 'product_apply':
-      return 'のプロダクトURLを承認しました'
+      return 'のプロダクトURLを承認✅しました'
     case 'join_team_user':
       return 'のチーム開発に参加しました'
     case 'leave_team_user':
@@ -42,8 +42,10 @@ export const NotificationItem = (notification: Notification) => {
         </Link>
         <Text size="sm" maw={'80%'}>
           {notification.visitor?.name}さんが
-          <Link href={`/ideas/${notification.ideaId}`}>
-            {notification.idea?.name}
+          <Link href={`/ideas/${notification.ideaId}`} passHref>
+            <Text component="a" fw={700} td="underline">
+              {notification.idea?.name}
+            </Text>
           </Link>
           {getNotificationMessage(notification?.notificatableType)}
         </Text>

@@ -13,7 +13,7 @@ namespace :ai_commit do
   private
 
   def existing_tags
-    Rails.cache.fetch('existing_tags') do
+    Rails.cache.fetch('existing_tags', expires_in: 1.hour) do
       Tag.all.pluck(:name)
     end
   end

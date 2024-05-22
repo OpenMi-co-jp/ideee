@@ -38,7 +38,7 @@ const getFontSize = (titleLength: number): number => {
 
 export const getOgpImageUrl = ({ title }: { title: string }) => {
   const formattedTitle = getOgpText(title)
-  const lineCount = (formattedTitle.match(/\n/g) || []).length + 1
+  const lineCount = (formattedTitle.match(/\n/g) || [])?.length + 1
   const fontSize = getFontSize(title.length)
 
   return getCldOgImageUrl({

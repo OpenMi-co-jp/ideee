@@ -12,6 +12,9 @@ namespace :ai_commit do
         proposed_keys = parse_response(response)
         idea.save_with_tags!(proposed_keys)
       end
+    rescue StandardError => e
+      Sentry.capture_exception(e)
+      raise e
     end
   end
 

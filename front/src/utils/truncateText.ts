@@ -1,5 +1,5 @@
 export function truncateText(input: string, length?: number) {
-  if (!input) return
+  if (!input) return ''
 
   const textLength = length || 120
   const strippedInput = input

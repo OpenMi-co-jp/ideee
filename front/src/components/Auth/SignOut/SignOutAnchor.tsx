@@ -1,12 +1,17 @@
-import { Anchor } from '@mantine/core'
+import { Menu } from '@mantine/core'
 import { useSignOut } from './hooks'
+import { IconLogout } from '@tabler/icons-react'
 
 export const SignOutAnchor = () => {
   const handleSignOut = useSignOut()
 
   return (
-    <Anchor c="yellow" onClick={handleSignOut}>
+    <Menu.Item
+      color="red"
+      leftSection={<IconLogout size={14} />}
+      onClick={handleSignOut}
+    >
       ログアウト
-    </Anchor>
+    </Menu.Item>
   )
 }

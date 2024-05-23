@@ -1,10 +1,5 @@
 import { Menu, Box } from '@mantine/core'
-import {
-  IconSettings,
-  IconLogout,
-  IconUserCircle,
-  IconUserEdit,
-} from '@tabler/icons-react'
+import { IconSettings, IconUserCircle, IconUserEdit } from '@tabler/icons-react'
 import { SignOutAnchor } from '@/components/Auth'
 import Link from 'next/link'
 import { UserIcon } from '@/components/user'

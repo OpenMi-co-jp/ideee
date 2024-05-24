@@ -11,18 +11,30 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import * as gtag from '@/lib/analytics/gtag'
 import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
+  const { currentUser } = useCurrentUser()
   const router = useRouter()
   useEffect(() => {
     const handleRouterChange = (url: any) => {
       gtag.pageview(url)
+
+      const currentPage = sessionStorage.getItem('currentPage')
+      if (
+        !currentUser &&
+        url !== '/users/sign_in' &&
+        url !== '/users/sign_up'
+      ) {
+        sessionStorage.setItem('previousPage', currentPage || '/')
+        sessionStorage.setItem('currentPage', url)
+      }
     }
     router.events.on('routeChangeComplete', handleRouterChange)
     return () => {
       router.events.off('routeChangeComplete', handleRouterChange)
     }
-  }, [router.events])
+  }, [router.events, currentUser])
 
   const getLayout =
     Component.getLayout ||

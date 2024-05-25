@@ -143,7 +143,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
             direction={{ base: 'column', sm: 'row' }}
           >
             <Text c="dimmed" size="sm">
-              © {currentYear} ideee.tech All rights reserved.
+              © {currentYear} ideee All rights reserved.
             </Text>
             <Group
               gap={0}

@@ -68,7 +68,7 @@ export const TopVision = () => {
             variant="gradient"
             gradient={{ from: 'orange', to: 'yellow' }}
           >
-            IDEEEについて｜⇢
+            ideeeについて｜⇢
           </Button>
         </Link>
         <Text c="#818181" pt="30px" fz="20px" fw="bold">

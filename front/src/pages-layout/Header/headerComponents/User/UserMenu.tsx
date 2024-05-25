@@ -1,12 +1,18 @@
 import { Menu, Box } from '@mantine/core'
-import { IconSettings, IconUserCircle, IconUserEdit } from '@tabler/icons-react'
-import { SignOutAnchor } from '@/components/Auth'
+import {
+  IconLogout,
+  IconSettings,
+  IconUserCircle,
+  IconUserEdit,
+} from '@tabler/icons-react'
 import Link from 'next/link'
 import { UserIcon } from '@/components/user'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useSignOut } from '@/components/Auth/SignOut/hooks'
 
 export const UserMenu = () => {
   const { currentUser } = useCurrentUser()
+  const handleSignOut = useSignOut()
 
   return (
     <Menu shadow="md" width={200} offset={5}>
@@ -34,7 +40,13 @@ export const UserMenu = () => {
         </Link>
         <Menu.Divider />
 
-        <SignOutAnchor />
+        <Menu.Item
+          color="red"
+          leftSection={<IconLogout size={14} />}
+          onClick={handleSignOut}
+        >
+          ログアウト
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   )

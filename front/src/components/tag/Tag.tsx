@@ -16,6 +16,7 @@ export const Tag = ({ tagName, size }: TagProps) => {
         mr="xs"
         variant="gradient"
         gradient={{ from: '#f7eac0', to: '#ebcaca' }}
+        style={{ textTransform: 'none' }}
       >
         # {tagName}
       </Badge>

@@ -8,6 +8,7 @@ import {
   Button,
   Center,
   getGradient,
+  Container,
 } from '@mantine/core'
 import { IconBulb, IconBrandGithub, IconApps } from '@tabler/icons-react'
 import {
@@ -48,7 +49,7 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
       <Title order={2} mb={30} fw={500} ta="center">
         アイデア{type === 'create' ? '作成' : '編集'}
       </Title>
-      <Center>
+      <Container size="sm">
         <form onSubmit={handleSubmit} role="form">
           <DropzoneForm
             form={form}
@@ -198,7 +199,7 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
             </Button>
           </Center>
         </form>
-      </Center>
+      </Container>
     </Paper>
   )
 }

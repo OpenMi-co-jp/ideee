@@ -10,11 +10,7 @@ export const useHandleRouteChange = () => {
     const handleRouterChange = (url: any) => {
       gtag.pageview(url)
       const currentUser = localStorage.getItem('currentUser')
-      if (
-        !currentUser &&
-        url !== LOGIN_URL &&
-        url !== SIGNUP_URL
-      ) {
+      if (!currentUser && url !== LOGIN_URL && url !== SIGNUP_URL) {
         sessionStorage.setItem('previousPage', url || '/')
       }
     }

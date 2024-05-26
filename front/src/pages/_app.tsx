@@ -11,7 +11,6 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import * as gtag from '@/lib/analytics/gtag'
 import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
-import { useCurrentUser } from '@/context/CurrentUserContext'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const router = useRouter()

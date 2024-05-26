@@ -12,7 +12,7 @@ import { useSignOut } from '@/components/Auth/SignOut/hooks'
 
 export const UserMenu = () => {
   const { currentUser } = useCurrentUser()
-  const handleSignOut = useSignOut()
+  const { handleSignOut } = useSignOut()
 
   return (
     <Menu shadow="md" width={200} offset={5}>

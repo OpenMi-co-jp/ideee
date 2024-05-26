@@ -20,13 +20,10 @@ export const signIn = (props: SignInFormValues) => {
 }
 
 export const signOut = () => {
-  const authorization = Cookies.get('authToken')
-
   return client.delete('users/sign_out', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      authorization: authorization,
     },
   })
 }

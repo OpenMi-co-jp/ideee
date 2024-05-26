@@ -19,7 +19,7 @@ type NavListProps = {
 
 export const NavList = ({ close }: NavListProps) => {
   const { currentUser } = useCurrentUser()
-  const handleSignOut = useSignOut()
+  const { handleSignOut } = useSignOut()
 
   return (
     <>

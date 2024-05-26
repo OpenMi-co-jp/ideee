@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import client from './client'
 
-export const useGetCsrfToken = () => {
+export const useFetchCsrfToken = () => {
   const [csrfToken, setCsrfToken] = useState('')
 
   useEffect(() => {

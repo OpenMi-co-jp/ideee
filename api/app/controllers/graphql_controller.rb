@@ -47,6 +47,7 @@ class GraphqlController < ApplicationController
   end
 
   def current_user_from_token
+    # NOTE: フロントからはCookieが渡されていないため必ずnilになるが、ここのコードがないとrspecの色んなところが落ちてしまうため残している(rspecのほうを修正したいがすぐにはわからなかったので)
     return current_user if current_user.present?
 
     token = extract_token_from_authorization

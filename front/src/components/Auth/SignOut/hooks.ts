@@ -1,5 +1,4 @@
-import { showSuccess, showError } from '@/components/showNotification'
-import Cookies from 'js-cookie'
+import { showSuccess, showError, showInfo } from '@/components/showNotification'
 import { signOut } from '@/utils/auth'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
@@ -9,7 +8,6 @@ export const useSignOut = () => {
   const handleSignOut = async () => {
     try {
       await signOut()
-      Cookies.remove('authToken')
       clearCurrentUser()
       showSuccess({ action: 'ログアウト' })
     } catch (error: any) {
@@ -18,5 +16,13 @@ export const useSignOut = () => {
     }
   }
 
-  return handleSignOut
+  const forceSignOut = async () => {
+    await signOut()
+    showInfo({
+      title: 'ログインし直してください',
+      message: 'ログインセッションが切れました',
+    })
+  }
+
+  return { handleSignOut, forceSignOut }
 }

@@ -8,35 +8,12 @@ import { CustomMantineProvider } from '@/lib/mantine/CustomMantineProvider'
 import { HeadBlock } from '@/pages-layout/Head'
 import { Analytics } from '@vercel/analytics/react'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import * as gtag from '@/lib/analytics/gtag'
 import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
+import { useHandleRouteChange } from '@/utils/hooks/useHandleRouteChange'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const router = useRouter()
-  useEffect(() => {
-    const handleRouterChange = (url: any) => {
-      gtag.pageview(url)
-
-      const currentUser = localStorage.getItem('currentUser')
-      const currentPage = sessionStorage.getItem('currentPage')
-      if (
-        !currentUser &&
-        url !== '/users/sign_in' &&
-        url !== '/users/sign_up'
-      ) {
-        sessionStorage.setItem('previousPage', currentPage || '/')
-        sessionStorage.setItem('currentPage', url)
-      } else if (currentUser) {
-        sessionStorage.removeItem('previousPage')
-        sessionStorage.removeItem('currentPage')
-      }
-    }
-    router.events.on('routeChangeComplete', handleRouterChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouterChange)
-    }
-  }, [router.events])
+  useHandleRouteChange()
 
   const getLayout =
     Component.getLayout ||

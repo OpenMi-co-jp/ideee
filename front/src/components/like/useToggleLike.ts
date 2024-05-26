@@ -14,18 +14,17 @@ import {
 export const useToggleLike = (
   id: number,
   likableType: string
-): { isLike: boolean; toggleLike: () => void } => {
-  const { data: likes } = useGetLikesQuery()
+): { isLike: boolean; toggleLike: () => void; addCount: number } => {
+  const { likes } = useGetLikesQuery().data || {}
   const [isLike, setLike] = useState(false)
+  const [addCount, setAddCount] = useState(0)
 
   useEffect(() => {
-    if (likes) {
-      setLike(
-        likes.likes.some(
-          (like) => like.likableId === id && like.likableType === likableType
-        )
-      )
-    }
+    setLike(
+      likes?.some(
+        (like) => like.likableId === id && like.likableType === likableType
+      ) ?? false
+    )
   }, [id, likes, likableType])
 
   const [createLike] = useCreateLikeMutation({
@@ -47,12 +46,12 @@ export const useToggleLike = (
   })
 
   const toggleLike = useCallback(() => {
-    if (isLike) {
-      destroyLike().then(() => setLike(false))
-    } else {
-      createLike().then(() => setLike(true))
-    }
+    const mutation = isLike ? destroyLike : createLike
+    mutation().then(() => {
+      setLike(!isLike)
+      setAddCount(isLike ? -1 : 1)
+    })
   }, [createLike, destroyLike, isLike])
 
-  return { isLike, toggleLike }
+  return { isLike, toggleLike, addCount }
 }

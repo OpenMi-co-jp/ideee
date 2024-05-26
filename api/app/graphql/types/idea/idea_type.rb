@@ -17,7 +17,7 @@ module Types
     field :monetize, String, description: 'マネタイズ方法'
     field :name, String, null: false, description: 'アイデア名'
     field :note, String, description: '補足'
-    field :product_apply, Integer, description: 'アプリ審査状況'
+    field :product_apply, String, description: 'アプリ審査状況'
     field :github_url, String, description: 'GithubリポジトリURL'
     field :product_url, String, description: '作っているアプリのURL'
     field :similar, String, description: '類似サービス'

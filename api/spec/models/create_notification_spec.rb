@@ -4,13 +4,14 @@ require 'rails_helper'
 
 RSpec.describe CreateNotification, type: :helper do
   describe 'create_notification' do
-    let(:idea) { FactoryBot.create(:idea) }
-    let(:user) { FactoryBot.create(:user) }
+    let(:user)       { FactoryBot.create(:user) }
+    let(:other_user) { FactoryBot.create(:user) }
+    let(:idea)       { FactoryBot.create(:idea) }
 
     describe 'create_notification_with_notificationable_type' do
       context 'Likeideaのとき' do
         subject(:idea_like_notification) do
-          user.create_notification_with_notificationable_type(idea, "Like#{like.likable_type}")
+          other_user.create_notification_with_notificationable_type(idea, "Like#{like.likable_type}")
         end
 
         let(:like) { FactoryBot.create(:like, :idea) }
@@ -28,7 +29,7 @@ RSpec.describe CreateNotification, type: :helper do
 
       context 'product_applyのとき' do
         subject(:product_apply_notification) do
-          user.create_notification_with_notificationable_type(idea, 'product_apply')
+          other_user.create_notification_with_notificationable_type(idea, 'product_apply')
         end
 
         it '通知を作成する' do
@@ -61,7 +62,7 @@ RSpec.describe CreateNotification, type: :helper do
       end
 
       context 'コメントの中身を確認するとき' do
-        before { user.create_notification_comment(idea, comment) }
+        before { other_user.create_notification_comment(idea, comment) }
 
         it 'notificatableが正しく設定される' do
           expect(Notification.last.notificatable_type).to eq('Comment')
@@ -72,7 +73,7 @@ RSpec.describe CreateNotification, type: :helper do
 
     describe 'create_notification Idea' do
       context 'ideaのとき' do
-        subject(:idea_notification) { user.create_notification(idea:, visited_id: user.id, notificatable: idea) }
+        subject(:idea_notification) { other_user.create_notification(idea:, visited_id: user.id, notificatable: idea) }
 
         it '通知を作成する' do
           expect do
@@ -88,7 +89,7 @@ RSpec.describe CreateNotification, type: :helper do
 
       context 'team_userのとき' do
         subject(:team_user_notification) do
-          user.create_notification(idea:, visited_id: user.id, notificatable: team_user)
+          other_user.create_notification(idea:, visited_id: user.id, notificatable: team_user)
         end
 
         let(:team) { FactoryBot.create(:team) }
@@ -108,7 +109,7 @@ RSpec.describe CreateNotification, type: :helper do
 
       context 'difficultyのとき' do
         subject(:difficulty_notification) do
-          user.create_notification(
+          other_user.create_notification(
             idea: difficulty.idea, visited_id: difficulty.idea.user.id,
             notificatable: difficulty
           )

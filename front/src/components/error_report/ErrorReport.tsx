@@ -21,6 +21,7 @@ export const ErrorReport = () => {
         </Button>
         <Modal opened={opened} onClose={handleClose} size="lg">
           <iframe
+            loading="lazy"
             src="https://docs.google.com/forms/d/e/1FAIpQLSetH18i6ElIfhbyV1ExEfYwXP852sSHfph_Qmr1UFg_Z1SqvQ/viewform?embedded=true"
             width="100%"
             height="600"

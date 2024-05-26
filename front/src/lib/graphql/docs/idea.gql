@@ -14,10 +14,12 @@ query GetIdea($id: ID!) {
     stance
 		note
     draft
+    productApply
     createdAt
     updatedAt
     publishedAt
     userId
+    likesNum
     productUrl
     githubUrl
     user {

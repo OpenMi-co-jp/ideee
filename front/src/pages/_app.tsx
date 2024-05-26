@@ -14,12 +14,12 @@ import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
-  const { currentUser } = useCurrentUser()
   const router = useRouter()
   useEffect(() => {
     const handleRouterChange = (url: any) => {
       gtag.pageview(url)
 
+      const currentUser = localStorage.getItem('currentUser')
       const currentPage = sessionStorage.getItem('currentPage')
       if (
         !currentUser &&
@@ -28,13 +28,16 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
       ) {
         sessionStorage.setItem('previousPage', currentPage || '/')
         sessionStorage.setItem('currentPage', url)
+      } else if (currentUser) {
+        sessionStorage.removeItem('previousPage')
+        sessionStorage.removeItem('currentPage')
       }
     }
     router.events.on('routeChangeComplete', handleRouterChange)
     return () => {
       router.events.off('routeChangeComplete', handleRouterChange)
     }
-  }, [router.events, currentUser])
+  }, [router.events])
 
   const getLayout =
     Component.getLayout ||

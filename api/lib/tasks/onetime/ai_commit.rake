@@ -22,10 +22,10 @@ namespace :ai_commit do
 
   desc 'AIによるgoal,background更新'
   task update_nil_content: :environment do
-    batch_size = 10
+    batch_size = 5
     ideas = Idea.where(goal: '_', background: '_')
     ideas.each_slice(batch_size) do |idea_batch|
-      content_batch = idea_batch.map { |idea| build_nil_content(idea) }
+      content_batch = idea_batch.map { |idea| build_nil_content(idea) if idea.note.to_s.present? }
       response_batch = AIResponse.fetch_openai_responses(content_batch)
       idea_batch.zip(response_batch).each do |idea, response|
         proposed_keys = JSON.parse(response)
@@ -60,6 +60,12 @@ namespace :ai_commit do
       提案されたキーワードはSEO対策のためにmetaタグのkeywordsに使用されます。
       JSON形式で{ keys: ['keys1', 'keys2', 'keys3'] }と返してください。
     CONTENT
+  end
+
+  def existing_tags
+    Rails.cache.fetch('existing_tags', expires_in: 1.hour) do
+      Tag.all.pluck(:name)
+    end
   end
 
   def build_nil_content(idea)

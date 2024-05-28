@@ -25,7 +25,7 @@ namespace :ai_commit do
     batch_size = 5
     ideas = Idea.where(goal: '_', background: '_')
     ideas.each_slice(batch_size) do |idea_batch|
-      content_batch = idea_batch.map { |idea| build_nil_content(idea) if idea.note.to_s.present? }
+      content_batch = idea_batch.filter_map { |idea| build_nil_content(idea) if idea.note.to_s.present? }
       response_batch = AIResponse.fetch_openai_responses(content_batch)
       idea_batch.zip(response_batch).each do |idea, response|
         proposed_keys = JSON.parse(response)

@@ -36,13 +36,12 @@ namespace :ai_commit do
         idea.update!(
           goal: proposed_keys['goal'],
           background: proposed_keys['background'],
-          note: proposed_keys['note'],
+          note: proposed_keys['note'] || idea.note,
           wish_function: proposed_keys['wish_function'],
           target: proposed_keys['target'],
           monetize: proposed_keys['monetize'],
           similar: proposed_keys['similar']
         )
-        idea.update!(note: proposed_keys['note']) if proposed_keys['note']
       end
     rescue StandardError => e
       Sentry.capture_exception(e)

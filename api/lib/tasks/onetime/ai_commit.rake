@@ -22,30 +22,26 @@ namespace :ai_commit do
 
   desc 'AIによるgoal,background更新'
   task update_nil_content: :environment do
-    batch_size = 5
-    ideas = Idea.where(goal: '_', background: '_')
+    batch_size = 10
+    ideas = Idea.where(goal: '_', background: '_').filter_map { |idea| idea if idea.note.present? }
     ideas.each_slice(batch_size) do |idea_batch|
-      content_batch = idea_batch.filter_map { |idea| build_nil_content(idea) if idea.note.to_s.present? }
+      Rails.logger.info idea_batch.pluck(:id, :name)
+      content_batch = idea_batch.map { |idea| build_nil_content(idea) }
       response_batch = AIResponse.fetch_openai_responses(content_batch)
       idea_batch.zip(response_batch).each do |idea, response|
         proposed_keys = JSON.parse(response)
-        puts '--------------------proposed_keys'
-        puts idea.id
-        puts idea.name
-        puts proposed_keys
         idea.update!(
           goal: proposed_keys['goal'],
           background: proposed_keys['background'],
-          note: proposed_keys['note'] || idea.note,
           wish_function: proposed_keys['wish_function'],
           target: proposed_keys['target'],
           monetize: proposed_keys['monetize'],
           similar: proposed_keys['similar']
         )
+        idea.update!(note: proposed_keys['note']) if proposed_keys['note'].present?
       end
     rescue StandardError => e
       Sentry.capture_exception(e)
-      raise e
     end
   end
 

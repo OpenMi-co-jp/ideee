@@ -114,7 +114,7 @@ export const Form = () => {
             <TextForm
               form={form}
               name="twitterId"
-              label="Twitter ID"
+              label="X ID"
               my="lg"
               leftSection={<IconBrandX size={20} />}
             />

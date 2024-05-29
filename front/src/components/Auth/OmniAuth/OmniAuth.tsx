@@ -1,10 +1,15 @@
-import { Button, Stack } from '@mantine/core'
-import { handleSignIn } from './hooks'
-import { IconBrandX, IconBrandGoogleFilled } from '@tabler/icons-react'
+import { SpeechBubble } from '@/components/SpeechBubble/SpeechBubble'
 import { useFetchCsrfToken } from '@/utils/auth/useFetchCsrfToken'
+import { Button, Stack } from '@mantine/core'
+import { IconBrandGoogleFilled, IconBrandX } from '@tabler/icons-react'
 import { useCallback } from 'react'
+import { handleSignIn } from './hooks'
 
-export const OmniAuth = () => {
+type OmniAuthProps = {
+  deviceProvider?: string
+}
+
+export const OmniAuth = ({ deviceProvider }: OmniAuthProps) => {
   const csrfToken = useFetchCsrfToken()
 
   const onGoogleLogin = useCallback(() => {
@@ -21,6 +26,7 @@ export const OmniAuth = () => {
 
   return (
     <Stack my="xl" gap="lg">
+      {deviceProvider === 'google' && <SpeechBubble />}
       <Button
         leftSection={<IconBrandGoogleFilled />}
         onClick={onGoogleLogin}
@@ -29,6 +35,7 @@ export const OmniAuth = () => {
       >
         Google ログイン
       </Button>
+      {deviceProvider === 'twitter' && <SpeechBubble />}
       <Button
         leftSection={<IconBrandX />}
         onClick={onTwitterLogin}

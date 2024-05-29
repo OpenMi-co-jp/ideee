@@ -11,6 +11,8 @@ import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { showSuccess, showError } from '@/components/showNotification'
+import Cookies from 'js-cookie'
+import { SpeechBubble } from '@/components/SpeechBubble/SpeechBubble'
 
 type SignInFormValues = {
   email: string
@@ -18,6 +20,7 @@ type SignInFormValues = {
 }
 
 export const SignInForm: CustomNextPage = () => {
+  const deviceProvider = Cookies.get('devise_provider')
   const { currentUser, storeCurrentUser } = useCurrentUser()
 
   const signInSchema = z.object({
@@ -70,7 +73,12 @@ export const SignInForm: CustomNextPage = () => {
         <Title order={2} mb={30}>
           ログイン
         </Title>
-        <OmniAuth />
+        <OmniAuth deviceProvider={deviceProvider} />
+        {deviceProvider === 'mail' && (
+          <Box mb={'0.5rem'}>
+            <SpeechBubble />
+          </Box>
+        )}
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <Grid mt={'1rem'} mb={'0.5rem'}>

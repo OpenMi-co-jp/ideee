@@ -8,12 +8,28 @@ import { CustomMantineProvider } from '@/lib/mantine/CustomMantineProvider'
 import { HeadBlock } from '@/pages-layout/Head'
 import { Analytics } from '@vercel/analytics/react'
 import { useRouter } from 'next/router'
-import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
-import { useHandleRouteChange } from '@/utils/hooks/useHandleRouteChange'
+import * as gtag from '@/lib/analytics/gtag'
+import { LOGIN_URL, SIGNUP_URL } from '@/utils/constant'
+import { useEffect } from 'react'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const router = useRouter()
-  useHandleRouteChange()
+
+  useEffect(() => {
+    const handleRouterChange = (url: any) => {
+      gtag.pageview(url)
+
+      // ログイン後に元のいた場所にリダイレクトされる設定
+      const currentUser = localStorage.getItem('currentUser')
+      if (!currentUser && url !== LOGIN_URL && url !== SIGNUP_URL) {
+        sessionStorage.setItem('previousPage', url || '/')
+      }
+    }
+    router.events.on('routeChangeComplete', handleRouterChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouterChange)
+    }
+  }, [router.events])
 
   const getLayout =
     Component.getLayout ||
@@ -25,7 +41,6 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
   return (
     <>
       {!isCustomOgpPage && <HeadBlock />}
-      <GoogleAnalytics />
       <CurrentUserProvider>
         <ApolloBaseProvider>
           <CustomMantineProvider>

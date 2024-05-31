@@ -1,4 +1,4 @@
-import { Text, Paper, Avatar, Flex, Stack } from '@mantine/core'
+import { Text, Paper, Avatar, Flex, Stack, Box } from '@mantine/core'
 import Link from 'next/link'
 import type { FC } from 'react'
 import { IdeaBoxType } from '@/types/idea'
@@ -28,13 +28,9 @@ export const IdeaBox: FC<IdeaBoxType> = ({
           w={{ base: 280, md: 340 }}
         >
           <Stack gap="xs" align="flex-start" w={{ base: 220, md: 280 }}>
-            <Text
-              style={{
-                overflowWrap: 'break-word',
-              }}
-            >
-              {name}
-            </Text>
+            <Box w={'100%'}>
+              <Text truncate="end">{name}</Text>
+            </Box>
             <Flex justify="flex-start" align="center" wrap="wrap">
               {ideaTags?.map((tag) => {
                 return <Tag tagName={tag.name} key={tag.id} size="sm" />

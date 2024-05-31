@@ -140,7 +140,7 @@ const FrequentQuestions = () => {
               <List>
                 <List.Item>
                   アイデアを投稿すると
-                  <Anchor href="https://twitter.com/ideee_tech" target="_blank">
+                  <Anchor href="https://x.com/ideee_tech" target="_blank">
                     公式 X アカウント
                   </Anchor>
                   でアイデアをツイート

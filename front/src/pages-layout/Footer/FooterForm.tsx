@@ -9,7 +9,7 @@ import {
   Flex,
 } from '@mantine/core'
 
-import { IconBrandTwitter, IconNews } from '@tabler/icons-react'
+import { IconBrandX, IconNews } from '@tabler/icons-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FormatTimeStamp } from '@/utils/formatTimeStamp'
@@ -152,7 +152,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
               mt={{ base: 'xs', sm: 0 }}
             >
               <Link
-                href="https://twitter.com/ideee_tech"
+                href="https://x.com/ideee_tech"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -166,7 +166,7 @@ export const FooterForm = (footerData: FooterLinksProps) => {
                         : theme.colors.gray[0],
                   })}
                 >
-                  <IconBrandTwitter size="1.05rem" stroke={1.5} />
+                  <IconBrandX size="1.05rem" stroke={1.5} />
                 </ActionIcon>
               </Link>
               <Link

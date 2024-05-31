@@ -18,13 +18,12 @@ ja:
         description: 自己紹介
         definition: タイプ
         point: コントリビュート数
-        icon: プロフィール画像
         twitter_id: Twitter ID
         github_id: Github ID
         remote_url: リモート画像
         site_url: サイトURL
         provider: プロバイダー
-        twitter: Twitter
+        twitter: X
         google: Google
         mail: メール
       idea:
@@ -63,15 +62,3 @@ ja:
         team_leave_email: チーム開発脱退のお知らせ
         team_message_email: チーム開発のメッセージ
         weekly_email: 週間ランキング
-    sorts:
-      ideas:
-        likes_num: ハート数
-        comments_num: コメント数
-        view: ビュー数
-        published_at: 公開日
-        updated_at: 更新日
-        team_members_num: チームメンバー数
-      users:
-        created_at: 参加日
-        point: コントリビュート数
-        ideas_num: アイデア数

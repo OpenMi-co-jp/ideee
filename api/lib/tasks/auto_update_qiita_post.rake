@@ -35,7 +35,7 @@ namespace :auto_update_qiita_post do
             "よろしければLGTMなどで応援よろしくお願いします🙇‍♂️\n" \
             "```\n\n" \
             "## 自己紹介\n" \
-            "なる　　Twitter: [@1026NT](https://twitter.com/1026NT)\n" \
+            "なる　　X: [@1026NT](https://x.com/1026NT)\n" \
             "個人開発で発信中！フォローください！👏\n" \
             "<img src=\"https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/3db40e7d-3213-be1f-8650-c6ad5dff69c9.jpeg\" width=\"250px\">\n"
 
@@ -73,7 +73,7 @@ namespace :auto_update_qiita_post do
       body += "#{item.user.name}さん　　"
 
       twitter_id = item.user.twitter_id
-      body += "Twitter: [@#{twitter_id}](https://twitter.com/#{twitter_id})" if twitter_id.present?
+      body += "X: [@#{twitter_id}](https://x.com/#{twitter_id})" if twitter_id.present?
       body += "\n"
       num += 1
     end

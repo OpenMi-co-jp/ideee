@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { showSuccess, showError } from '@/components/showNotification'
 import Cookies from 'js-cookie'
-import { SpeechBubble } from '@/components/SpeechBubble/SpeechBubble'
+import { LastLoginSuggest } from '@/components/LastLoginSuggest/LastLoginSuggest'
 
 type SignInFormValues = {
   email: string
@@ -76,7 +76,7 @@ export const SignInForm: CustomNextPage = () => {
         <OmniAuth deviceProvider={deviceProvider} />
         {deviceProvider === 'mail' && (
           <Box mb={'0.5rem'}>
-            <SpeechBubble />
+            <LastLoginSuggest lastLoginMethod={'メール'} />
           </Box>
         )}
         <TextForm form={form} name="email" label="メールアドレス" required />

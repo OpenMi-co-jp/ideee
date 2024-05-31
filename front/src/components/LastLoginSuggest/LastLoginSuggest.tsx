@@ -1,6 +1,12 @@
 import { Box } from '@mantine/core'
 
-export const SpeechBubble = () => {
+type LastLoginSuggestProps = {
+  lastLoginMethod: string
+}
+
+export const LastLoginSuggest = ({
+  lastLoginMethod,
+}: LastLoginSuggestProps) => {
   return (
     <Box
       style={{
@@ -11,13 +17,13 @@ export const SpeechBubble = () => {
         color: 'white',
         borderRadius: '15px',
         height: '45px',
-        width: '60%',
+        width: '65%',
         margin: 'auto',
         position: 'relative',
         fontWeight: 'bold',
       }}
     >
-      前回のログイン方法
+      前回は{lastLoginMethod}でログイン
       <Box
         style={{
           position: 'absolute',

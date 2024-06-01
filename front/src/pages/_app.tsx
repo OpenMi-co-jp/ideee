@@ -13,6 +13,8 @@ import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
 import { LOGIN_URL, SIGNUP_URL } from '@/utils/constant'
 import { useEffect } from 'react'
 
+const currentUser = localStorage.getItem('currentUser')
+
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const router = useRouter()
 
@@ -21,7 +23,6 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
       gtag.pageview(url)
 
       // ログイン後に元のいた場所にリダイレクトされる設定
-      const currentUser = localStorage.getItem('currentUser')
       if (!currentUser && url !== LOGIN_URL && url !== SIGNUP_URL) {
         sessionStorage.setItem('previousPage', url || '/')
       }
@@ -42,7 +43,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
   return (
     <>
       {!isCustomOgpPage && <HeadBlock />}
-      <GoogleAnalytics/>
+      <GoogleAnalytics />
       <CurrentUserProvider>
         <ApolloBaseProvider>
           <CustomMantineProvider>

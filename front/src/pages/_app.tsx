@@ -9,6 +9,7 @@ import { HeadBlock } from '@/pages-layout/Head'
 import { Analytics } from '@vercel/analytics/react'
 import { useRouter } from 'next/router'
 import * as gtag from '@/lib/analytics/gtag'
+import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
 import { LOGIN_URL, SIGNUP_URL } from '@/utils/constant'
 import { useEffect } from 'react'
 
@@ -41,6 +42,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
   return (
     <>
       {!isCustomOgpPage && <HeadBlock />}
+      <GoogleAnalytics/>
       <CurrentUserProvider>
         <ApolloBaseProvider>
           <CustomMantineProvider>

@@ -13,10 +13,9 @@ import { GoogleAnalytics } from '@/lib/analytics/GoogleAnalytics'
 import { LOGIN_URL, SIGNUP_URL } from '@/utils/constant'
 import { useEffect } from 'react'
 
-const currentUser = localStorage.getItem('currentUser')
-
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const router = useRouter()
+  const currentUser = localStorage.getItem('currentUser')
 
   useEffect(() => {
     const handleRouterChange = (url: any) => {
@@ -31,7 +30,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
     return () => {
       router.events.off('routeChangeComplete', handleRouterChange)
     }
-  }, [router.events])
+  }, [router.events, currentUser])
 
   const getLayout =
     Component.getLayout ||

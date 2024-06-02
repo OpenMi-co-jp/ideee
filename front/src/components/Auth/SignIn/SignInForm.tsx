@@ -42,7 +42,10 @@ export const SignInForm: CustomNextPage = () => {
 
   useEffect(() => {
     if (currentUser) {
-      router.push('/')
+      const previousPage = sessionStorage.getItem('previousPage') || '/'
+      router.push(previousPage).then(() => {
+        sessionStorage.removeItem('previousPage')
+      })
     }
   }, [currentUser, router])
 

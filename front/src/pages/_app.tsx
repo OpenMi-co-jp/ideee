@@ -15,7 +15,8 @@ import { useEffect } from 'react'
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const router = useRouter()
-  const currentUser = localStorage.getItem('currentUser')
+  const currentUser =
+    typeof window !== 'undefined' ? localStorage.getItem('currentUser') : null
 
   useEffect(() => {
     const handleRouterChange = (url: any) => {

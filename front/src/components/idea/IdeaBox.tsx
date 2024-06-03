@@ -27,14 +27,34 @@ export const IdeaBox: FC<IdeaBoxType> = ({
           gap="xs"
           w={{ base: 280, md: 340 }}
         >
-          <Stack gap="xs" align="flex-start" w={{ base: 220, md: 280 }}>
-            <Box w={'100%'}>
-              <Text truncate="end">{name}</Text>
-            </Box>
-            <Flex justify="flex-start" align="center" wrap="wrap">
-              {ideaTags?.map((tag) => {
-                return <Tag tagName={tag.name} key={tag.id} size="sm" />
-              })}
+          <Stack
+            gap="xs"
+            align="stretch"
+            w={{ base: 220, md: 280 }}
+            style={{
+              height: '80px',
+              overflow: 'hidden',
+            }}
+          >
+            <Text
+              lineClamp={2}
+              style={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                height: '50px',
+              }}
+            >
+              {name}
+            </Text>
+            <Flex
+              justify="flex-start"
+              align="center"
+              wrap="wrap"
+              style={{ height: '30px' }}
+            >
+              {ideaTags?.map((tag) => (
+                <Tag tagName={tag.name} key={tag.id} size="sm" />
+              ))}
             </Flex>
           </Stack>
           <Flex

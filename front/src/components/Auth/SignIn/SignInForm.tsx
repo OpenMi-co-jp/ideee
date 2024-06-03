@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { showSuccess, showError } from '@/components/showNotification'
 import Cookies from 'js-cookie'
-import { LastLoginSuggest } from '@/components/LastLoginSuggest/LastLoginSuggest'
+import { LastLoginSuggest } from '@/components/LastLoginSuggest'
 
 type SignInFormValues = {
   email: string
@@ -76,7 +76,7 @@ export const SignInForm: CustomNextPage = () => {
         <OmniAuth deviceProvider={deviceProvider} />
         {deviceProvider === 'mail' && (
           <Box mb={'0.5rem'}>
-            <LastLoginSuggest lastLoginMethod={'メール'} />
+            <LastLoginSuggest lastLoginProvider={deviceProvider} />
           </Box>
         )}
         <TextForm form={form} name="email" label="メールアドレス" required />

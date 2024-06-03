@@ -3,7 +3,7 @@ import { Button, Stack } from '@mantine/core'
 import { IconBrandGoogleFilled, IconBrandX } from '@tabler/icons-react'
 import { useCallback } from 'react'
 import { handleSignIn } from './hooks'
-import { LastLoginSuggest } from '@/components/LastLoginSuggest/LastLoginSuggest'
+import { LastLoginSuggest } from '@/components/LastLoginSuggest'
 
 type OmniAuthProps = {
   deviceProvider?: string
@@ -27,7 +27,7 @@ export const OmniAuth = ({ deviceProvider }: OmniAuthProps) => {
   return (
     <Stack my="xl" gap="lg">
       {deviceProvider === 'google' && (
-        <LastLoginSuggest lastLoginMethod={deviceProvider} />
+        <LastLoginSuggest lastLoginProvider={deviceProvider} />
       )}
       <Button
         leftSection={<IconBrandGoogleFilled />}
@@ -38,7 +38,7 @@ export const OmniAuth = ({ deviceProvider }: OmniAuthProps) => {
         Google ログイン
       </Button>
       {deviceProvider === 'twitter' && (
-        <LastLoginSuggest lastLoginMethod={deviceProvider} />
+        <LastLoginSuggest lastLoginProvider={deviceProvider} />
       )}
       <Button
         leftSection={<IconBrandX />}

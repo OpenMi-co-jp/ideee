@@ -1,12 +1,22 @@
 import { Box } from '@mantine/core'
 
 type LastLoginSuggestProps = {
-  lastLoginMethod: string
+  lastLoginProvider: string
+}
+
+const getProviderText = (provider: string) => {
+  const providerTextMap: { [key: string]: string } = {
+    google: 'Google',
+    twitter: 'X',
+    mail: 'メール',
+  }
+  return providerTextMap[provider] || provider
 }
 
 export const LastLoginSuggest = ({
-  lastLoginMethod,
+  lastLoginProvider,
 }: LastLoginSuggestProps) => {
+  const providerText = getProviderText(lastLoginProvider)
   return (
     <Box
       style={{
@@ -23,7 +33,7 @@ export const LastLoginSuggest = ({
         fontWeight: 'bold',
       }}
     >
-      前回は{lastLoginMethod}でログイン
+      前回は{providerText}でログイン
       <Box
         style={{
           position: 'absolute',

@@ -91,7 +91,7 @@ class ApplicationController < ActionController::Base
     # CsrfTokenController では、 valid_request_origin? が必ず true になり、別 origin からのリクエストしかないため
     return if (request.origin.nil? || request.origin == request.base_url) && controller_name != 'csrf_token'
     return if request.origin.in?(%w[http://localhost:3000 https://ideee.tech])
-    return if request.origin?.match?(/ideee-(.*)-narucel\.vercel\.app/)
+    return if request.origin&.match?(/ideee-(.*)-narucel\.vercel\.app/)
 
     render json: { message: "HTTP Origin header (#{request.origin}) didn't match request.base_url (#{request.base_url})" },
            status: :forbidden

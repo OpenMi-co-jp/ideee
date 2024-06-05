@@ -1,55 +1,32 @@
 # frozen_string_literal: true
 
+require 'oauth'
+require 'json'
+
 class Twitter
   def initialize
-    consumer_key = Rails.application.credentials.dig(:twitter_bot, :consumer_key)
-    consumer_secret = Rails.application.credentials.dig(:twitter_bot, :consumer_secret)
-    access_token = Rails.application.credentials.dig(:twitter_bot, :access_token)
-    access_token_secret = Rails.application.credentials.dig(:twitter_bot, :access_token_secret)
-
-    # OAuth Consumerオブジェクトを作成
-    consumer = OAuth::Consumer.new(
-      consumer_key, consumer_secret,
+    twitter_credentials = Rails.application.credentials[:twitter_bot]
+    @consumer = OAuth::Consumer.new(
+      twitter_credentials[:consumer_key],
+      twitter_credentials[:consumer_secret],
       site: 'https://api.twitter.com',
-      debug_output: false
+      debug_output: true
     )
-
-    # OAuth Access Tokenオブジェクトを作成
-    access_token = OAuth::AccessToken.new(consumer, access_token, access_token_secret)
-
-    # OAuthパラメータをまとめたハッシュを作成
-    @oauth_params = {
-      consumer:,
-      token: access_token
-    }
+    @token = OAuth::Token.new(twitter_credentials[:access_token], twitter_credentials[:access_token_secret])
   end
 
   def tweet(idea, url)
-    create_tweet_url = 'https://api.twitter.com/2/tweets'
-
     twitter_user = idea.user.twitter_id.present? ? "@#{idea.user.twitter_id} " : ''
-    hashtags = ['ideee', *idea.idea_tags&.pluck(:name)].map { "##{_1}" }.join(' ')
+    hashtags = ['ideee', *idea.idea_tags&.pluck(:name)].map { |tag| "##{tag}" }.join(' ')
+    tweet_text = "【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#{hashtags}\n#{url}"
 
-    json_payload = { "text": "【新しいアイデア投稿】\n#{idea.name}\n#{twitter_user}#{hashtags}\n#{url}" }
-
-    create_tweet(create_tweet_url, json_payload)
-  end
-
-  private
-
-  def create_tweet(url, json_payload)
-    options = {
-      method: :post,
-      headers: {
-        "User-Agent": 'v2CreateTweetRuby',
-        "content-type": 'application/json'
-      },
-      body: JSON.dump(json_payload)
-    }
-    request = Typhoeus::Request.new(url, options)
-    oauth_helper = OAuth::Client::Helper.new(request, @oauth_params.merge(request_uri: url))
-    # Signs the request
-    request.options[:headers]['Authorization'] = oauth_helper.header
-    request.run
+    @consumer.request(
+      :post,
+      'https://api.twitter.com/2/tweets',
+      @token,
+      {},
+      { text: tweet_text }.to_json,
+      'Content-Type' => 'application/json'
+    )
   end
 end

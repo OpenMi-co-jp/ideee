@@ -1,10 +1,15 @@
-import { Button, Stack } from '@mantine/core'
-import { handleSignIn } from './hooks'
-import { IconBrandX, IconBrandGoogleFilled } from '@tabler/icons-react'
 import { useFetchCsrfToken } from '@/utils/auth/useFetchCsrfToken'
+import { Button, Stack } from '@mantine/core'
+import { IconBrandGoogleFilled, IconBrandX } from '@tabler/icons-react'
 import { useCallback } from 'react'
+import { handleSignIn } from './hooks'
+import { LastLoginSuggest } from '@/components/LastLoginSuggest'
 
-export const OmniAuth = () => {
+type OmniAuthProps = {
+  deviceProvider?: string
+}
+
+export const OmniAuth = ({ deviceProvider }: OmniAuthProps) => {
   const csrfToken = useFetchCsrfToken()
 
   const onGoogleLogin = useCallback(() => {
@@ -21,6 +26,9 @@ export const OmniAuth = () => {
 
   return (
     <Stack my="xl" gap="lg">
+      {deviceProvider === 'google' && (
+        <LastLoginSuggest lastLoginProvider={deviceProvider} />
+      )}
       <Button
         leftSection={<IconBrandGoogleFilled />}
         onClick={onGoogleLogin}
@@ -29,6 +37,9 @@ export const OmniAuth = () => {
       >
         Google ログイン
       </Button>
+      {deviceProvider === 'twitter' && (
+        <LastLoginSuggest lastLoginProvider={deviceProvider} />
+      )}
       <Button
         leftSection={<IconBrandX />}
         onClick={onTwitterLogin}

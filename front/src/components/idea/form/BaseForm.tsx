@@ -27,6 +27,7 @@ import {
 import { IdeaImage } from '@/components/image'
 import { useState } from 'react'
 import { useFormState } from 'react-hook-form'
+import { useGetTagsQuery } from '@/lib/generated/client'
 
 type IdeaFormProps = {
   type: 'create' | 'update'
@@ -43,6 +44,10 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
     setIsSubmitting(false)
   }
   const { errors } = useFormState({ control: form.control })
+
+  const { loading, data } = useGetTagsQuery()
+  const tags: string[] =
+    loading || !data?.tags ? [] : data.tags.map((tag) => tag.name)
 
   return (
     <Container size="sm">
@@ -65,7 +70,13 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
               required
               my="lg"
             />
-            <TagsForm form={form} name="tagList" label="タグ" required />
+            <TagsForm
+              form={form}
+              name="tagList"
+              label="タグ"
+              suggestions={tags}
+              required
+            />
             <TextAreaForm
               form={form}
               name="background"

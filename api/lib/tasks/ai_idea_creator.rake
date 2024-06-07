@@ -8,11 +8,12 @@ namespace :ai_idea_creator do
   desc 'AIによるアイデア作成'
   task create_idea: :environment do
     # botアカウントのID
-    bot_user_id = ENV['BOT_USER_ID'] || 3375
+    bot_user_id = ENV.fetch('BOT_USER_ID', 3375)
     idea = Idea.new(user_id: bot_user_id)
     res = AIResponse.fetch_ai_response(build_prompt)
-    idea_content = JSON.parse(res)['idea']
-    tags = JSON.parse(res)['tags']
+    parsed_res = JSON.parse(res)
+    idea_content = parsed_res['idea']
+    tags = parsed_res['tags']
     assign_idea_attributes(idea, idea_content)
     idea.save!
     idea.save_with_tags!(tags)
@@ -50,7 +51,7 @@ namespace :ai_idea_creator do
     request = Net::HTTP::Get.new(api_url.request_uri)
     response = http.request(request)
 
-    response.code == '200' ? JSON.parse(response.body)['articles'] : []
+    JSON.parse(response.body)['articles']
   end
 
   def assign_idea_attributes(idea, idea_content)

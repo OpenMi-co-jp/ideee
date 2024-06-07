@@ -10,6 +10,9 @@ module AIResponse
       }
     )
     response.dig('choices', 0, 'message', 'content')
+  rescue OpenAI::OpenAIException => e
+    Sentry.capture_exception(e)
+    raise e
   end
 
   def self.fetch_openai_responses(content_batch)

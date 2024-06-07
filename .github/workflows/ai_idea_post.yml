@@ -2,7 +2,7 @@ name: AIでアイデア自動投稿
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # 毎日8時に実行 (日本時間)
+    - cron: '0 23 * * *'  # 毎日8時に実行 (日本時間 JSTはUTC+9)
 
 jobs:
   create_ai_idea:

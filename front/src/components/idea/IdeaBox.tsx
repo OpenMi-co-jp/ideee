@@ -4,6 +4,7 @@ import type { FC } from 'react'
 import { IdeaBoxType } from '@/types/idea'
 import { Tag } from '@/components/tag'
 import { NewBadge } from '@/components/idea/option/NewBadge'
+import { HotTag } from '../tag/HotTag'
 
 export const IdeaBox: FC<IdeaBoxType> = ({
   id,
@@ -53,7 +54,7 @@ export const IdeaBox: FC<IdeaBoxType> = ({
               style={{ height: '30px' }}
             >
               {ideaTags?.map((tag) => (
-                <Tag tagName={tag.name} key={tag.id} size="sm" />
+                <HotTag tagName={tag.name} key={tag.id} size="sm" />
               ))}
             </Flex>
           </Stack>

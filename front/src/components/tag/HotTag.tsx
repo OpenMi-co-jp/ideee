@@ -6,7 +6,7 @@ type TagProps = {
   size?: string
 }
 
-export const Tag = ({ tagName, size }: TagProps) => {
+export const HotTag = ({ tagName, size }: TagProps) => {
   return (
     <Link href={`/search?name_or_idea_tags_name_cont=${tagName}`}>
       <Badge
@@ -16,7 +16,11 @@ export const Tag = ({ tagName, size }: TagProps) => {
         mr="xs"
         variant="gradient"
         gradient={{ from: '#f7eac0', to: '#ebcaca' }}
-        style={{ textTransform: 'none' }}
+        style={{
+          textTransform: 'none',
+          width: 'fix-content',
+          maxWidth: '80px',
+        }}
       >
         {tagName}
       </Badge>

@@ -150,7 +150,7 @@ class Idea < ApplicationRecord
 
     return unless Rails.env.production?
 
-    idea_url = "#{Rails.application.config.frontend_url}/ideas/#{self.id}"
+    idea_url = "#{Rails.application.config.frontend_url}ideas/#{self.id}"
 
     TwitterJob::Tweet.perform_later(self, idea_url)
     Slack::SendNewJob.perform_later(self, idea_url)

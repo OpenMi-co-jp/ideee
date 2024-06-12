@@ -1,10 +1,9 @@
-import { Text, Paper, Avatar, Flex, Stack, Box } from '@mantine/core'
+import { NewBadge } from '@/components/idea/option/NewBadge'
+import { Tag } from '@/components/tag'
+import { IdeaBoxType } from '@/types/idea'
+import { Avatar, Flex, Paper, Stack, Text } from '@mantine/core'
 import Link from 'next/link'
 import type { FC } from 'react'
-import { IdeaBoxType } from '@/types/idea'
-import { Tag } from '@/components/tag'
-import { NewBadge } from '@/components/idea/option/NewBadge'
-import { HotTag } from '../tag/HotTag'
 
 export const IdeaBox: FC<IdeaBoxType> = ({
   id,
@@ -54,13 +53,18 @@ export const IdeaBox: FC<IdeaBoxType> = ({
               style={{ height: '30px' }}
             >
               {ideaTags?.map((tag) => (
-                <HotTag tagName={tag.name} key={tag.id} size="sm" />
+                <Tag
+                  tagName={tag.name}
+                  key={tag.id}
+                  isTruncated={true}
+                  size="sm"
+                />
               ))}
             </Flex>
           </Stack>
           <Flex
             justify="space-between"
-            align="flex-end"
+            align="center"
             direction="column"
             gap="md"
           >

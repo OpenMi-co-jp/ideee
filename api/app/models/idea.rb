@@ -49,6 +49,7 @@ class Idea < ApplicationRecord
   has_many :difficulty_users, through: :difficultys, source: :user
   has_many :notifications, dependent: :destroy
   has_one :team, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   counter_culture :user, column_name: 'ideas_num'
   has_rich_text :note
   mount_base64_uploader :icon, ImageUploader
@@ -85,10 +86,6 @@ class Idea < ApplicationRecord
     %w[idea_tags team]
   end
 
-  def published_time
-    published_at&.strftime('%Y.%m.%d')
-  end
-
   def created_time
     created_at.strftime('%Y.%m.%d')
   end
@@ -102,10 +99,6 @@ class Idea < ApplicationRecord
 
     self.idea_tags = tag_list.map { |name| Tag.find_or_initialize_by(name: name.strip) }
     save!
-  end
-
-  def tag_list
-    idea_tags.pluck(:name).join(',')
   end
 
   def validate_tags_num
@@ -133,10 +126,6 @@ class Idea < ApplicationRecord
   def voted_percentage(level)
     counted_num = difficultys.count { |d| d.level == level }
     "#{(counted_num.to_f / difficultys.length * 100).round(1)} %"
-  end
-
-  def enough_view?
-    view > 10
   end
 
   def icon_url

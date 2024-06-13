@@ -173,13 +173,6 @@ class User < ApplicationRecord
     difficulty_ideas.include?(idea)
   end
 
-  def create_comment(params)
-    comment_params = { idea_id: params[:idea_id], description: params[:description] }
-    return if comments.find_by(comment_params).present?
-
-    comments.create!(comment_params)
-  end
-
   # Contributionの計算
   def point_update
     idea_num = ideas.length

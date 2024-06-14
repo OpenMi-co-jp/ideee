@@ -4,7 +4,6 @@ import {
   IconBulb,
   IconHeart,
   IconMessageCircle,
-  IconUsers,
   IconPencil,
 } from '@tabler/icons-react'
 import { useCurrentUser } from '@/context/CurrentUserContext'

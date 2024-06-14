@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_17_144406) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_13_072411) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -181,6 +181,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_17_144406) do
     t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
+  create_table "reviews", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "idea_id", null: false
+    t.text "content", null: false
+    t.integer "stance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_reviews_on_idea_id"
+  end
+
   create_table "rooms", id: :string, charset: "utf8mb4", force: :cascade do |t|
     t.bigint "team_id"
     t.datetime "created_at", null: false
@@ -271,6 +280,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_17_144406) do
   add_foreign_key "difficulties", "ideas"
   add_foreign_key "difficulties", "users"
   add_foreign_key "notification_configs", "users"
+  add_foreign_key "reviews", "ideas"
   add_foreign_key "taggings", "ideas"
   add_foreign_key "taggings", "tags"
   add_foreign_key "teams", "ideas"

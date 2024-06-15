@@ -12,7 +12,7 @@ export const HiddenIdeaContent = () => {
     <>
       <IdeaContents />
       <IdeaOptions />
-      <Space h={'xs'} />
+      <Space h="xs" />
       {currentUser && <ReviewList />}
       <CommentList />
       {currentUser && <CommentCreateForm />}

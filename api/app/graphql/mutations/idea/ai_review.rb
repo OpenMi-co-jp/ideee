@@ -17,7 +17,7 @@ module Mutations
     rescue StandardError => e
       {
         success: false,
-        errors: e.record.errors.full_messages
+        errors: [e.message]
       }
     end
   end

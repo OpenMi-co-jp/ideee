@@ -8,7 +8,7 @@ module AI
 
     def perform(id)
       idea = Idea.find(id)
-      return raise ArgumentError 'レビューが既に存在しています' if idea.reviews.present?
+      raise ArgumentError 'レビューが既に存在しています' if idea.reviews.present?
 
       # AIにプロンプトを投げてレビューを取得
       prompt = build_review_prompt(idea)

@@ -3,7 +3,7 @@ import { IdeaContents } from '@/components/idea/show'
 import { IdeaOptions } from '@/components/idea/option'
 import { CommentList, CommentCreateForm } from '@/components/comment'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { ReviewList } from '@/pages/ideas/[id]/_components/review'
+import { ReviewList } from '@/components/review/RevewList'
 
 export const HiddenIdeaContent = () => {
   const { currentUser } = useCurrentUser()

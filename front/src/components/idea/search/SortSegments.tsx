@@ -9,7 +9,7 @@ export const SortSegments = () => {
 
   useEffect(() => {
     setSelectedSort(column_name ? String(column_name) : 'likes_num')
-  }, [router.query])
+  }, [column_name])
 
   const handleSortChange = (value: string) => {
     if (value !== selectedSort) {

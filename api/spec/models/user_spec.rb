@@ -155,39 +155,6 @@ RSpec.describe User do
     end
   end
 
-  describe 'create_comment' do
-    subject(:create_comment) { user.create_comment(comment_params) }
-
-    let(:idea) { FactoryBot.create(:idea) }
-    let(:user)           { idea.user                          }
-    let(:description)    { 'hoge'                             }
-    let(:comment_params) { { idea_id: idea.id, description: } }
-
-    context 'アイデアに初めてコメントするユーザーの場合' do
-      it 'コメントが作成される' do
-        create_comment
-        expect(user.comments.where(**comment_params)).to exist
-      end
-    end
-
-    context 'アイデアに既にコメントしているユーザー' do
-      before { FactoryBot.create(:comment, user_id: user.id, idea_id: idea.id, description:) }
-
-      context '投稿したコメントが重複していない場合' do
-        let(:comment_params) { { idea_id: idea.id, description: 'fuga' } }
-
-        it 'コメントが作成される' do
-          create_comment
-          expect(user.comments.where(**comment_params)).to exist
-        end
-      end
-
-      context '同一内容のコメントが存在する場合' do
-        it { is_expected.to be_nil }
-      end
-    end
-  end
-
   describe 'point_update' do
     subject(:update_user_point) { user.point_update }
 

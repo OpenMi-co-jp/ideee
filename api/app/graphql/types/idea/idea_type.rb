@@ -34,5 +34,6 @@ module Types
     field :team, Types::TeamType, null: true, description: 'チームオブジェクト'
     field :comments, [Types::CommentType], null: false, description: 'コメントリスト'
     field :likes, [Types::LikeType], null: false, description: 'いいねリスト'
+    field :reviews, [Types::ReviewType], null: false, description: 'レビューリスト'
   end
 end

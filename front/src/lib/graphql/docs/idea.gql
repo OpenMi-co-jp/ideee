@@ -42,6 +42,11 @@ query GetIdea($id: ID!) {
       id
       name
     }
+    reviews {
+      id
+      content
+      stance
+    }
   }
 }
 
@@ -170,6 +175,14 @@ mutation UpdateIdea($input: UpdateIdeaInput!) {
 mutation DestroyIdea($input: DestroyIdeaInput!) {
   destroyIdea(input: $input) {
     success
+  }
+}
+
+mutation AiReview($input: IdeaAiReviewInput!) {
+  createAiReview(input: $input) {
+    jobId
+    success
+    errors
   }
 }
 

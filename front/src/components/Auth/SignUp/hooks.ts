@@ -22,5 +22,6 @@ export const handleSignUp = async (props: SignUpFormValues) => {
       console.error('Error setting up the request.')
     }
     showError({ action: 'ユーザー作成' })
+    throw error
   }
 }

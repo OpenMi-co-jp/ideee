@@ -42,11 +42,13 @@ mutation UpdateComment($input: UpdateCommentInput!) {
       description
     }
     success
+    errors
   }
 }
 
 mutation DestroyComment($input: DestroyCommentInput!) {
   destroyComment(input: $input) {
     success
+    errors
   }
 }

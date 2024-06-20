@@ -30,21 +30,18 @@ export const useCommentAction = () => {
           ideaId: idea.id,
         },
       },
-    })
-      .then((res) => {
-        if (res.data?.createComment?.success) {
-          showSuccess({ action: 'コメント作成' })
-          refetch()
-          form.reset()
-        }
-      })
-      .catch((error) => {
-        console.log(error)
+    }).then((response) => {
+      if (response.data!.createComment!.success) {
+        showSuccess({ action: 'コメント作成' })
+        refetch()
+        form.reset()
+      } else {
         showError({
           action: 'コメント作成',
-          message: error.message as string,
+          message: String(response.data!.createComment!.errors),
         })
-      })
+      }
+    })
   }
 
   return { form, onSubmit }

@@ -19,21 +19,14 @@ export const useForgotPassword = () => {
 
   const onSubmit = async (props: ForgotPasswordFormValues) => {
     const actionName = 'パスワードリセット用メール送信'
-    try {
-      const response = await passwordForgot(props)
-      if (response.status === 200) {
-        showSuccess({
-          action: actionName,
-          message: 'メールをご確認ください',
-        })
-      } else {
-        throw new Error('Request failed with status code: ' + response.status)
-      }
-    } catch (error: any) {
-      showError({
+    const response = await passwordForgot(props)
+    if (response.status === 200) {
+      showSuccess({
         action: actionName,
-        message: error.message as string,
+        message: 'メールをご確認ください',
       })
+    } else {
+      throw new Error('Request failed with status code: ' + response.status)
     }
   }
 

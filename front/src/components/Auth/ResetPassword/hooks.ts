@@ -26,19 +26,12 @@ export const useResetPassword = () => {
 
   const router = useRouter()
   const onSubmit = async (props: ResetPasswordFormValues) => {
-    try {
-      const response = await passwordReset(props)
-      if (response.status === 200) {
-        showSuccess({ action: 'パスワードリセット' })
-        router.push('/')
-      } else {
-        throw new Error('Request failed with status code: ' + response.status)
-      }
-    } catch (error: any) {
-      showError({
-        action: 'パスワードリセット',
-        message: error.message as string,
-      })
+    const response = await passwordReset(props)
+    if (response.status === 200) {
+      showSuccess({ action: 'パスワードリセット' })
+      router.push('/')
+    } else {
+      throw new Error('Request failed with status code: ' + response.status)
     }
   }
 

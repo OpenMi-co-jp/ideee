@@ -20,42 +20,35 @@ export const UseCreateIdea = () => {
   const { refetch } = useGetIdea()
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    try {
-      const response = await createIdeaMutation({
-        variables: {
-          input: {
-            name: data.name,
-            background: data.background,
-            goal: data.goal,
-            issue: data.issue,
-            hypothesis: data.hypothesis,
-            monetize: data.monetize,
-            similar: data.similar,
-            stance: data.stance,
-            target: data.target,
-            wishFunction: data.wishFunction,
-            githubUrl: data.githubUrl,
-            productUrl: data.productUrl,
-            publish: data.publish,
-            icon: data.icon,
-            tagList: data.tagList,
-          },
+    const response = await createIdeaMutation({
+      variables: {
+        input: {
+          name: data.name,
+          background: data.background,
+          goal: data.goal,
+          issue: data.issue,
+          hypothesis: data.hypothesis,
+          monetize: data.monetize,
+          similar: data.similar,
+          stance: data.stance,
+          target: data.target,
+          wishFunction: data.wishFunction,
+          githubUrl: data.githubUrl,
+          productUrl: data.productUrl,
+          publish: data.publish,
+          icon: data.icon,
+          tagList: data.tagList,
         },
-      })
-      if (response.data?.createIdea?.success) {
-        showSuccess({ action: 'アイデアの作成' })
-        refetch()
-        router.push(`/ideas/${response.data.createIdea.idea?.id}`)
-      } else {
-        showError({
-          action: 'アイデアの作成',
-          message: String(response.data?.createIdea?.errors),
-        })
-      }
-    } catch (err: any) {
+      },
+    })
+    if (response.data!.createIdea!.success) {
+      showSuccess({ action: 'アイデアの作成' })
+      refetch()
+      router.push(`/ideas/${response.data!.createIdea!.idea!.id}`)
+    } else {
       showError({
         action: 'アイデアの作成',
-        message: err.message as string,
+        message: String(response.data!.createIdea!.errors),
       })
     }
   }

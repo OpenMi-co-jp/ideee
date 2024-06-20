@@ -26,10 +26,14 @@ export const useConfirmResend = () => {
         message: 'メールをご確認ください',
       })
     } catch (error: any) {
-      showError({
-        action: actionName,
-        message: error.response.data.message,
-      })
+      if (error.response.status === 422) {
+        showError({
+          action: actionName,
+          message: error.response.data.message,
+        })
+      } else {
+        throw new Error(error.response.data.exception)
+      }
     }
   }
 

@@ -51,18 +51,16 @@ export const useNotificationConfig = () => {
           weeklyEmail: data.weeklyEmail,
         },
       },
-    })
-      .then((res) => {
-        if (res.data?.updateNotificationConfig?.success) {
-          showSuccess({ action: '通知設定更新' })
-        }
-      })
-      .catch((error) => {
+    }).then((response) => {
+      if (response.data!.updateNotificationConfig!.success) {
+        showSuccess({ action: '通知設定更新' })
+      } else {
         showError({
           action: '通知設定更新',
-          message: error.message.toString(),
+          message: String(response.data!.updateNotificationConfig!.errors),
         })
-      })
+      }
+    })
   }
 
   return { form, onSubmit, loading, error }

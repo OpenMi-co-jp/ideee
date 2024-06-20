@@ -10,21 +10,17 @@ export const handleSignIn = async (
   props: SignInFormValues,
   storeCurrentUser: CurrentUserContextType['storeCurrentUser']
 ) => {
-  try {
-    const response = await signIn(props)
-    const token = response.headers['authorization']
-    // TODO: validateTokenメソッドを設定
-    if (token) {
-      Cookies.set('authToken', String(token), {
-        expires: 7,
-        secure: true,
-      })
-      const decodedToken = DecodeJwt(String(token))
-      storeCurrentUser(decodedToken)
-    }
-    showSuccess({ action: 'ログイン' })
-    modals.closeAll()
-  } catch (error) {
-    showError({ action: 'ログイン' })
+  const response = await signIn(props)
+  const token = response.headers['authorization']
+  // TODO: validateTokenメソッドを設定
+  if (token) {
+    Cookies.set('authToken', String(token), {
+      expires: 7,
+      secure: true,
+    })
+    const decodedToken = DecodeJwt(String(token))
+    storeCurrentUser(decodedToken)
   }
+  showSuccess({ action: 'ログイン' })
+  modals.closeAll()
 }

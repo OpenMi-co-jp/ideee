@@ -37,6 +37,7 @@ module AI
     end
 
     def idea_select_prompt(idea)
+      prompt = ""
       prompt += "アイデア名: #{idea.name}\n"
       prompt += "背景: #{idea.background}"
       prompt += "ゴール: #{idea.goal}"

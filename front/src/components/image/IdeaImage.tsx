@@ -1,4 +1,4 @@
-import { Image, Modal, Group, Button } from '@mantine/core'
+import { Image, Modal, Group } from '@mantine/core'
 import { FC, useState } from 'react'
 
 type ImageComponentProps = {

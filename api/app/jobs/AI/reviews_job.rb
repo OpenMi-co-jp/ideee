@@ -37,10 +37,10 @@ module AI
     end
 
     def idea_select_prompt(idea)
-      prompt = ""
+      prompt = ''
       prompt += "アイデア名: #{idea.name}\n"
-      prompt += "背景: #{idea.background}"
-      prompt += "ゴール: #{idea.goal}"
+      prompt += "背景: #{idea.background}\n"
+      prompt += "ゴール: #{idea.goal}\n"
       prompt += "問題点: #{idea.issue}\n" if idea.issue.present?
       prompt += "欲しい機能: #{idea.wish_function}\n" if idea.wish_function.present?
       prompt += "ターゲット: #{idea.target}\n" if idea.target.present?

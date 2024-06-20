@@ -13,7 +13,7 @@ const reviewerItems: { [key: string]: { image: string; name: string } } = {
 }
 
 export const ReviewList = () => {
-  const { reviews, userId, id } = useIdea()
+  const { reviews, userId, id, draft } = useIdea()
   const { currentUser } = useCurrentUser()
   // TODO: Jobが完了したらrefetchするように修正
   const [aiReviewLoading, setAiReviewLoading] = useState(false)
@@ -43,7 +43,7 @@ export const ReviewList = () => {
     }
   }
 
-  if (reviews?.length === 0 && currentUser?.id === userId) {
+  if (!draft && reviews?.length === 0 && currentUser?.id === userId) {
     return (
       <Center>
         <Flex gap={'lg'} align={'center'}>

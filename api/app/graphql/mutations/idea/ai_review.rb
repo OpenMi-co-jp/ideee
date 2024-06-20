@@ -9,6 +9,10 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
+      idea = Idea.find(args[:idea_id])
+      return { success: false, errors: ['アイデアが見つかりません'] } if idea.nil?
+      return { success: false, errors: ['アイデアが公開されていません'] } unless idea.draft
+
       job = AI::ReviewsJob.perform_later(args[:idea_id])
       {
         job_id: job.job_id,

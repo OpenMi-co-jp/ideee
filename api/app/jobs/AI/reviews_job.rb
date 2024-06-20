@@ -29,18 +29,24 @@ module AI
       <<~PROMPT
         あなたはプロのITサービスのアクセレーターです。
         以下のITサービスのアイデアを確認して、レビューの文章を作成してください。
-        アイデア名: #{idea.name}
-        背景: #{idea.background}
-        ゴール: #{idea.goal}
-        問題点: #{idea.issue}
-        欲しい機能: #{idea.wish_function}
-        ターゲット: #{idea.target}
-        マネタイズ方法: #{idea.monetize}
-        類似サービス: #{idea.similar}
+        #{idea_select_prompt(idea)}
         レビュー内容は、天使役と悪魔役でそれぞれキャラの口調に合わせて作成して。
         天使役は特出して良いさらに延ばすべき点を教えて。悪魔役は悪い点を出すだけでなく、どうやったら改善できるかも教えて。
         { positive_review: '天使のポジティブレビュー' ,negative_review: '悪魔のネガティブレビュー' }の型でそれぞれ具体的に150文字程度のJSON形式で返して。
       PROMPT
+    end
+
+    def idea_select_prompt(idea)
+      prompt = ""
+      prompt += "アイデア名: #{idea.name}\n"
+      prompt += "背景: #{idea.background}"
+      prompt += "ゴール: #{idea.goal}"
+      prompt += "問題点: #{idea.issue}\n" if idea.issue.present?
+      prompt += "欲しい機能: #{idea.wish_function}\n" if idea.wish_function.present?
+      prompt += "ターゲット: #{idea.target}\n" if idea.target.present?
+      prompt += "マネタイズ方法: #{idea.monetize}\n" if idea.monetize.present?
+      prompt += "類似サービス: #{idea.similar}\n" if idea.similar.present?
+      prompt
     end
   end
 end

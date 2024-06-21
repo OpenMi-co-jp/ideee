@@ -20,6 +20,4 @@ class AiLog < ApplicationRecord
   belongs_to :user
   validates :action, presence: true
   enum action: { review: 'review' }
-
-  scope :today, -> { where(created_at: Time.zone.today.all_day) }
 end

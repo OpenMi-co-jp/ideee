@@ -195,7 +195,7 @@ class User < ApplicationRecord
   end
 
   def todays_ai_log_count
-    self.ai_logs.today.count
+    ai_logs.where('created_at >= ?', Time.zone.now.beginning_of_day).count
   end
 
   private

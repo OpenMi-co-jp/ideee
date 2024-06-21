@@ -14,14 +14,17 @@ module Mutations
       return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
 
       todays_logs_count = idea.user.todays_ai_log_count
-
       return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= 3
 
-      todays_logs_count += 1 if create_ai_log(context[:current_user], 'review')
+      job_id = nil
+      ActiveRecord::Base.transaction do
+        create_ai_log(context[:current_user], 'review')
+        todays_logs_count += 1
 
-      job = AI::ReviewsJob.perform_later(args[:idea_id])
+        job_id = AI::ReviewsJob.perform_later(args[:idea_id]).job_id
+      end
       {
-        job_id: job.job_id,
+        job_id:,
         success: true,
         errors: ["本日の残りAI利用回数：#{3 - todays_logs_count} 回"]
       }

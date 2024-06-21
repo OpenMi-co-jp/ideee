@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_13_072411) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_21_062326) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -72,6 +72,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_13_072411) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email", "reset_password_token"], name: "index_admin_users_on_email_and_reset_password_token", unique: true
+  end
+
+  create_table "ai_logs", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_ai_logs_on_user_id"
   end
 
   create_table "analytics", charset: "utf8mb4", force: :cascade do |t|
@@ -275,6 +283,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_13_072411) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "ai_logs", "users"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
   add_foreign_key "difficulties", "ideas"

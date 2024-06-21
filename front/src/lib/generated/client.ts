@@ -1047,6 +1047,8 @@ export type User = {
   point?: Maybe<Scalars['Int']>
   /** サイトURL */
   siteUrl?: Maybe<Scalars['String']>
+  /** 本日のAI利用回数 */
+  todaysAiLogCount?: Maybe<Scalars['Int']>
   /** TwitterID */
   twitterId?: Maybe<Scalars['String']>
 }
@@ -1845,6 +1847,7 @@ export type GetUserQuery = {
     githubId?: string | null
     ideasNum?: number | null
     image?: string | null
+    todaysAiLogCount?: number | null
   }
 }
 
@@ -4172,6 +4175,7 @@ export const GetUserDocument = gql`
       githubId
       ideasNum
       image
+      todaysAiLogCount
     }
   }
 `

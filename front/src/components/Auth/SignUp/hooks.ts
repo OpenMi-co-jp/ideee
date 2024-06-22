@@ -6,7 +6,6 @@ import type { SignUpFormValues } from '@/types/user'
 export const handleSignUp = async (props: SignUpFormValues) => {
   try {
     const response = await signUp(props)
-    const token = response.headers['authorization']
     const { action, message } = response.data
     showSuccess({ action, message })
     modals.closeAll()

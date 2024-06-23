@@ -10,6 +10,7 @@ query GetUser($id: ID!) {
     githubId
     ideasNum
     image
+    todaysAiLogCount
   }
 }
 

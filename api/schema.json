@@ -6574,6 +6574,20 @@
               ]
             },
             {
+              "name": "todaysAiLogCount",
+              "description": "本日のAI利用回数",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "twitterId",
               "description": "TwitterID",
               "type": {

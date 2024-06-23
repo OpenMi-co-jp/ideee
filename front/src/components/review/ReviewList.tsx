@@ -31,8 +31,8 @@ export const ReviewList = () => {
 
       if (data?.createAiReview?.success) {
         showInfo({
-          title: 'AIレビューを開始しました',
-          message: '時間を置いてリロードしてください',
+          title: `AIレビューを開始 | ${String(data?.createAiReview?.errors)}`,
+          message: `時間を置いてリロードしてください`,
         })
       } else {
         showError({

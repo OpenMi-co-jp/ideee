@@ -19,22 +19,23 @@ export const useConfirmResend = () => {
 
   const onSubmit = async (props: ConfirmResendFormValues) => {
     const actionName = '確認用メール再送信'
-    try {
-      await confirmResend(props)
-      showSuccess({
-        action: actionName,
-        message: 'メールをご確認ください',
-      })
-    } catch (error: any) {
-      if (error.response.status === 422) {
-        showError({
+    confirmResend(props)
+      .then(() => {
+        showSuccess({
           action: actionName,
-          message: error.response.data.message,
+          message: 'メールをご確認ください',
         })
-      } else {
-        throw new Error(error.response.data.exception)
-      }
-    }
+      })
+      .catch((error: any) => {
+        if (error.response?.status === 422) {
+          showError({
+            action: actionName,
+            message: error.response.data.message,
+          })
+        } else {
+          throw error
+        }
+      })
   }
 
   return { form, onSubmit }

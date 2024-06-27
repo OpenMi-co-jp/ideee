@@ -6,6 +6,7 @@ import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useState } from 'react'
 import { useAiReviewMutation } from '@/lib/generated/client'
 import { showInfo, showError } from '@/components/showNotification'
+import { useRouter } from 'next/router'
 
 const reviewerItems: { [key: string]: { image: string; name: string } } = {
   positive: { image: '/img/angel.webp', name: '天使' },
@@ -13,7 +14,8 @@ const reviewerItems: { [key: string]: { image: string; name: string } } = {
 }
 
 export const ReviewList = () => {
-  const { reviews, userId, id } = useIdea()
+  const { reviews, userId, draft } = useIdea()
+  const { id } = useRouter().query
   const { currentUser } = useCurrentUser()
   // TODO: Jobが完了したらrefetchするように修正
   const [aiReviewLoading, setAiReviewLoading] = useState(false)
@@ -24,13 +26,13 @@ export const ReviewList = () => {
 
     try {
       const { data } = await aiReviewMutation({
-        variables: { input: { ideaId: id } },
+        variables: { input: { ideaId: String(id) } },
       })
 
       if (data?.createAiReview?.success) {
         showInfo({
-          title: 'AIレビューを開始しました',
-          message: '時間を置いてリロードしてください',
+          title: `AIレビューを開始 | ${String(data?.createAiReview?.errors)}`,
+          message: `時間を置いてリロードしてください`,
         })
       } else {
         showError({
@@ -43,7 +45,7 @@ export const ReviewList = () => {
     }
   }
 
-  if (reviews?.length === 0 && currentUser?.id === userId) {
+  if (!draft && reviews?.length === 0 && currentUser?.id === userId) {
     return (
       <Center>
         <Flex gap={'lg'} align={'center'}>

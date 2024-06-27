@@ -56,6 +56,7 @@ class User < ApplicationRecord
   has_many :difficulty_ideas, through: :difficultys, source: :idea
   has_many :active_notifications, -> { order(created_at: :desc) }, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, -> { order(created_at: :desc) }, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  has_many :ai_logs, -> { order(created_at: :desc) }, dependent: :destroy
 
   # settings relation
   has_one :notification_config, dependent: :destroy
@@ -191,6 +192,10 @@ class User < ApplicationRecord
   def image
     # urlメソッドを上書きしたので file.present? でファイルの有無を確認する
     self.icon.file.present? ? self.icon&.url : self.remote_url
+  end
+
+  def todays_ai_log_count
+    ai_logs.where('created_at >= ?', Time.zone.now.beginning_of_day).count
   end
 
   private

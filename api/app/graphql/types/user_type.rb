@@ -14,6 +14,7 @@ module Types
     field :github_id, String, description: 'githubID'
     field :ideas_num, Integer, description: 'アイデア数'
     field :image, String, description: 'アイコン'
+    field :todays_ai_log_count, Integer, description: '本日のAI利用回数'
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'
   end
 end

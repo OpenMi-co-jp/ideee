@@ -13,7 +13,7 @@ export const Tag = ({ tagName, size, isTruncated = false }: TagProps) => {
   const truncatedStyle = isTruncated
     ? {
         width: 'fix-content',
-        maxWidth: isSmallScreen ? '63px' : '83px',
+        maxWidth: isSmallScreen ? '86px' : '110px',
       }
     : {}
 
@@ -21,9 +21,8 @@ export const Tag = ({ tagName, size, isTruncated = false }: TagProps) => {
     <Link href={`/search?name_or_idea_tags_name_cont=${tagName}`}>
       <Badge
         c="gray"
-        size={size}
+        size={size || 'lg'}
         radius="lg"
-        mr="xs"
         variant="gradient"
         gradient={{ from: '#f7eac0', to: '#ebcaca' }}
         style={{ textTransform: 'none', ...truncatedStyle }}

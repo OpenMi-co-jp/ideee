@@ -2071,6 +2071,11 @@ type User {
   siteUrl: String
 
   """
+  本日のAI利用回数
+  """
+  todaysAiLogCount: Int
+
+  """
   TwitterID
   """
   twitterId: String

@@ -7,77 +7,72 @@ import { showInfo, showError } from '@/components/showNotification'
 import { useAiBrushUpMutation } from '@/lib/generated/client'
 
 export const AiBrushUp = () => {
-    const idea = useIdea()
-    const { currentUser } = useCurrentUser()
-    // TODO: Jobが完了したらrefetchするように修正
-    const [aiBrushUpLoading, setAiBrushUpLoading] = useState(false)
-    const [aiBrushUpMutation] = useAiBrushUpMutation({})
+  const idea = useIdea()
+  const { currentUser } = useCurrentUser()
+  // TODO: Jobが完了したらrefetchするように修正
+  const [aiBrushUpLoading, setAiBrushUpLoading] = useState(false)
+  const [aiBrushUpMutation] = useAiBrushUpMutation({})
 
-    const handleAiBrushUp = async () => {
-        setAiBrushUpLoading(true)
+  const handleAiBrushUp = async () => {
+    setAiBrushUpLoading(true)
 
-        try {
-            const { data } = await aiBrushUpMutation({
-                variables: {
-                    input: {
-                        ideaId: idea.id,
-                        name: idea.name,
-                        background: idea.background ?? '',
-                        goal: idea.goal ?? '',
-                        issue: idea.issue ?? '',
-                        wishFunction: idea.wishFunction ?? '',
-                        hypothesis: idea.hypothesis ?? '',
-                        target: idea.target ?? '',
-                        monetize: idea.monetize ?? '',
-                        similar: idea.similar ?? '',
-                    },
-                },
-            })
+    try {
+      const { data } = await aiBrushUpMutation({
+        variables: {
+          input: {
+            ideaId: idea.id,
+            name: idea.name,
+            background: idea.background ?? '',
+            goal: idea.goal ?? '',
+            issue: idea.issue ?? '',
+            wishFunction: idea.wishFunction ?? '',
+            hypothesis: idea.hypothesis ?? '',
+            target: idea.target ?? '',
+            monetize: idea.monetize ?? '',
+            similar: idea.similar ?? '',
+          },
+        },
+      })
 
-            if (data?.createAiBrushUp?.success) {
-                showInfo({
-                    title: `AIブラシアップを開始 | ${String(
-                        data?.createAiBrushUp?.errors
-                    )}`,
-                    message: '時間を置いてリロードしてください',
-                })
-            } else {
-                showError({
-                    action: 'AIブラシアップ',
-                    message: String(data?.createAiBrushUp?.errors),
-                })
-            }
-        } catch (error) {
-            showError({ action: 'AIブラシアップ', message: 'エラーが発生しました' })
-        }
-
-        setAiBrushUpLoading(false)
+      if (data?.createAiBrushUp?.success) {
+        showInfo({
+          title: `AIブラシアップを開始 | ${String(
+            data?.createAiBrushUp?.errors
+          )}`,
+          message: '時間を置いてリロードしてください',
+        })
+      } else {
+        showError({
+          action: 'AIブラシアップ',
+          message: String(data?.createAiBrushUp?.errors),
+        })
+      }
+    } catch (error) {
+      showError({ action: 'AIブラシアップ', message: 'エラーが発生しました' })
     }
 
+    setAiBrushUpLoading(false)
+  }
 
-    if (!idea.draft && currentUser?.id === idea.userId) {
-        return (
-            <Center my={30}>
-                <Button
-                    type="submit"
-                    leftSection={
-                        aiBrushUpLoading ? (
-                            <Loader size="xs" />
-                        ) : (
-                            <IconSend size={18} />
-                        )
-                    }
-                    color="orange"
-                    onClick={handleAiBrushUp}
-                    disabled={aiBrushUpLoading}
-                >
-                    {aiBrushUpLoading
-                        ? 'AIブラッシュアップ実行中...'
-                        : 'AIブラッシュアップを試す'}
-                </Button>
-            </Center>
-        )
-    }
+  if (!idea.draft && currentUser?.id === idea.userId) {
+    return (
+      <Center my={30}>
+        <Button
+          type="submit"
+          leftSection={
+            aiBrushUpLoading ? <Loader size="xs" /> : <IconSend size={18} />
+          }
+          color="orange"
+          onClick={handleAiBrushUp}
+          disabled={aiBrushUpLoading}
+        >
+          {aiBrushUpLoading
+            ? 'AIブラッシュアップ実行中...'
+            : 'AIブラッシュアップを試す'}
+        </Button>
+      </Center>
+    )
+  }
 
-    return null
+  return null
 }

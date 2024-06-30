@@ -10,11 +10,7 @@ import {
   getGradient,
   Container,
 } from '@mantine/core'
-import {
-  IconBulb,
-  IconBrandGithub,
-  IconApps,
-} from '@tabler/icons-react'
+import { IconBulb, IconBrandGithub, IconApps } from '@tabler/icons-react'
 import {
   TextForm,
   TextAreaForm,
@@ -32,7 +28,6 @@ import { IdeaImage } from '@/components/image'
 import { useState } from 'react'
 import { useFormState } from 'react-hook-form'
 import { useGetTagsQuery } from '@/lib/generated/client'
-
 
 type IdeaFormProps = {
   type: 'create' | 'update'

@@ -21,7 +21,7 @@ export const Features = () => {
             <Flex direction="column" align="center" gap="md">
               <Text c="gray">本日のAI利用回数</Text>
               <CustomDonutChart
-                label={`${todaysAiLogCount} / 3`}
+                label={`${todaysAiLogCount} / 5`}
                 data={[
                   {
                     name: '残り回数',

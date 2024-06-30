@@ -18,8 +18,7 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
-      idea = args[:idea_id] ? ::Idea.find_by(id: args[:idea_id]) : ::Idea.new(user: context[:current_user])
-
+      idea = Idea.find_by(id: args[:idea_id])
       return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
       return { success: false, errors: ['アイデアが既にブラッシュアップされています'] } if brushup_exists?(idea)
 

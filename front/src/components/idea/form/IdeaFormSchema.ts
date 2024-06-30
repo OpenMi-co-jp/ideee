@@ -1,7 +1,8 @@
 import { z } from 'zod'
 import { base64ImageValidation } from '@/utils/CustomValidation'
 
-const emojiRegex = /\p{Extended_Pictographic}/u
+const emojiRegex =
+  /(\p{Emoji}\p{Emoji_Presentation}?\p{Emoji_Modifier_Base}?\p{Emoji_Modifier}?\p{Emoji_Component}*|\p{Extended_Pictographic}|\p{Regional_Indicator})+/u
 
 export const IdeaFormSchema = z.object({
   name: z

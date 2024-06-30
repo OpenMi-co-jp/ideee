@@ -18,7 +18,7 @@ module Mutations
 
       job_id = nil
       ActiveRecord::Base.transaction do
-        create_ai_log(context[:current_user], 'review')
+        create_ai_log(context[:current_user], 'review', 'Idea', idea.id)
         todays_logs_count += 1
 
         job_id = AI::ReviewsJob.perform_later(args[:idea_id]).job_id
@@ -35,8 +35,8 @@ module Mutations
       }
     end
 
-    def create_ai_log(user, action)
-      ::AiLog.create!(user:, action:)
+    def create_ai_log(user, action, loggable_type, loggable_id)
+      ::AiLog.create!(user:, action:, loggable_type:, loggable_id:)
     end
   end
 end

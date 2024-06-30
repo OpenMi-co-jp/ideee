@@ -14,7 +14,7 @@ module Mutations
       return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
 
       todays_logs_count = idea.user.todays_ai_log_count
-      return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= 3
+      return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= 5
 
       job_id = nil
       ActiveRecord::Base.transaction do
@@ -26,7 +26,7 @@ module Mutations
       {
         job_id:,
         success: true,
-        errors: ["本日の残りAI利用回数：#{3 - todays_logs_count} 回"]
+        errors: ["本日の残りAI利用回数：#{5 - todays_logs_count} 回"]
       }
     rescue StandardError => e
       {

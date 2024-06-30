@@ -9,13 +9,11 @@ import {
   Center,
   getGradient,
   Container,
-  Loader,
 } from '@mantine/core'
 import {
   IconBulb,
   IconBrandGithub,
   IconApps,
-  IconSend,
 } from '@tabler/icons-react'
 import {
   TextForm,
@@ -31,14 +29,10 @@ import {
   SubmitHandler,
 } from 'react-hook-form'
 import { IdeaImage } from '@/components/image'
-import { showInfo, showError } from '@/components/showNotification'
-import { useIdea } from '@/context/IdeaContext'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useFormState } from 'react-hook-form'
 import { useGetTagsQuery } from '@/lib/generated/client'
-import { useAiBrushUpMutation } from '@/lib/generated/client'
-import { useRouter } from 'next/router'
-import { revalidatePath } from 'next/cache'
+
 
 type IdeaFormProps = {
   type: 'create' | 'update'
@@ -59,77 +53,6 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
   const { loading, data } = useGetTagsQuery()
   const tags: string[] =
     loading || !data?.tags ? [] : data.tags.map((tag) => tag.name)
-
-  const idea = useIdea()
-  const [aiBrushUpLoading, setAiBrushUpLoading] = useState(false)
-  const [aiBrushUpMutation] = useAiBrushUpMutation({})
-  const [isFormValid, setIsFormValid] = useState(false)
-
-  const { watch } = form
-  const router = useRouter()
-
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
-      const isNameValid = form.getValues('name')
-      const isBackgroundValid = form.getValues('background')
-      const isGoalValid = form.getValues('goal')
-      const isFormValid = isNameValid && isBackgroundValid && isGoalValid
-      setIsFormValid(isFormValid)
-    })
-    return () => subscription.unsubscribe()
-  }, [form, watch])
-
-  const handleAiBrushUp = async () => {
-    setAiBrushUpLoading(true)
-
-    try {
-      const { data } = await aiBrushUpMutation({
-        variables: {
-          input: {
-            ideaId: idea.id,
-            name: form.getValues('name'),
-            background: form.getValues('background'),
-            goal: form.getValues('goal'),
-            ...(form.getValues('issue') && { issue: form.getValues('issue') }),
-            ...(form.getValues('hypothesis') && {
-              hypothesis: form.getValues('hypothesis'),
-            }),
-            ...(form.getValues('target') && {
-              target: form.getValues('target'),
-            }),
-            ...(form.getValues('monetize') && {
-              monetize: form.getValues('monetize'),
-            }),
-            ...(form.getValues('similar') && {
-              similar: form.getValues('similar'),
-            }),
-            ...(form.getValues('wishFunction') && {
-              wishFunction: form.getValues('wishFunction'),
-            }),
-          },
-        },
-      })
-
-      if (data?.createAiBrushUp?.success) {
-        showInfo({
-          title: `AIブラッシュアップを開始 | ${String(
-            data?.createAiBrushUp?.errors
-          )}`,
-          message: 'AIブラッシュアップを開始しました',
-        })
-        router.push(`/ideas/${idea.id}`)
-      } else {
-        showError({
-          action: 'AIブラッシュアップ',
-          message: String(data?.createAiBrushUp?.errors),
-        })
-      }
-    } catch (error) {
-      showError({ action: 'AIブラッシュアップ', message: 'エラーが発生しました' })
-    }
-
-    setAiBrushUpLoading(false)
-  }
 
   return (
     <Container size="sm">
@@ -189,25 +112,6 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
                 },
               })}
             >
-              <Center my={30}>
-                <Button
-                  type="submit"
-                  leftSection={
-                    aiBrushUpLoading ? (
-                      <Loader size="xs" />
-                    ) : (
-                      <IconSend size={18} />
-                    )
-                  }
-                  color="orange"
-                  onClick={handleAiBrushUp}
-                  disabled={isSubmitting || aiBrushUpLoading || !isFormValid}
-                >
-                  {aiBrushUpLoading
-                    ? 'AIブラッシュアップ実行中...'
-                    : 'AIブラッシュアップを試す'}
-                </Button>
-              </Center>
               <Accordion.Item value="bulb">
                 <Accordion.Control icon={<IconBulb size={20} />}>
                   さらにブラッシュアップする

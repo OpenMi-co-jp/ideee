@@ -21,30 +21,14 @@ module Mutations
     def resolve(**args)
       idea = args[:idea_id] ? ::Idea.find_by(id: args[:idea_id]) : ::Idea.new(user: context[:current_user])
 
-      if idea.persisted?
-        return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
-        return { success: false, errors: ['アイデアが既にブラッシュアップされています'] } if brushup_exists?(idea)
-      else
-        idea.assign_attributes(
-          name: args[:name],
-          background: args[:background],
-          goal: args[:goal],
-          issue: args[:issue],
-          wish_function: args[:wish_function],
-          hypothesis: args[:hypothesis],
-          target: args[:target],
-          monetize: args[:monetize],
-          similar: args[:similar]
-        )
-      end
+      return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
+      return { success: false, errors: ['アイデアが既にブラッシュアップされています'] } if brushup_exists?(idea)
 
       todays_logs_count = context[:current_user].todays_ai_log_count
-      return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= 5
+      # return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= 5
 
       job_id = nil
-      idea_id = nil
       ActiveRecord::Base.transaction do
-        idea.save! if idea.new_record?
         idea_id = idea.id
         todays_logs_count += 1
 
@@ -59,21 +43,18 @@ module Mutations
           args[:target],
           args[:monetize],
           args[:similar],
-          context[:current_user].id
         ).job_id
       end
 
       {
         job_id:,
         success: true,
-        errors: ["本日の残りAI利用回数：#{5 - todays_logs_count} 回"],
-        idea_id:
+        errors: ["本日の残りAI利用回数：#{5 - todays_logs_count} 回"]
       }
     rescue StandardError => e
       {
         success: false,
-        errors: [e.message],
-        idea_id: nil
+        errors: [e.message]
       }
     end
 

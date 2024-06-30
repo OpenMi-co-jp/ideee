@@ -6,8 +6,8 @@ module AI
   class BrushupJob < ApplicationJob
     queue_as :default
 
-    def perform(idea_id, name, background, goal, issue, wish_function, hypothesis, target, monetize, similar, user_id)
-      @idea = Idea.find_or_initialize_by(id: idea_id)
+    def perform(idea_id, name, background, goal, issue, wish_function, hypothesis, target, monetize, similar)
+      @idea = Idea.find_by(id: idea_id)
       @name = name
       @background = background
       @goal = goal
@@ -17,7 +17,6 @@ module AI
       @target = target
       @monetize = monetize
       @similar = similar
-      @user_id = user_id
 
       prompt = build_prompt
       response = AIResponse.fetch_ai_response(prompt)
@@ -33,10 +32,7 @@ module AI
     private
 
     def update_idea_from_ai_response(res)
-      @idea.assign_attributes(
-        name: @name,
-        background: @background,
-        goal: @goal,
+      @idea.update!(
         issue: res['issue'],
         wish_function: res['wish_function'],
         hypothesis: res['hypothesis'],
@@ -44,8 +40,6 @@ module AI
         monetize: res['monetize'],
         similar: res['similar']
       )
-      @idea.user = User.find_by(id: @user_id) if @idea.new_record?
-      @idea.save!
       create_ai_log(@idea.user, 'brush_up', 'Idea', @idea.id)
     end
 

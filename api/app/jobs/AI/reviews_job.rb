@@ -18,6 +18,7 @@ module AI
       # レスポンスからpositiveとnegativeのレビューを作成
       idea.reviews.create!(content: res['positive_review'], stance: 'positive')
       idea.reviews.create!(content: res['negative_review'], stance: 'negative')
+      idea.update!(difficulty: res['difficulty'])
     rescue StandardError => e
       Sentry.capture_exception(e)
       raise e
@@ -28,11 +29,12 @@ module AI
     def build_review_prompt(idea)
       <<~PROMPT
         あなたはプロのITサービスのアクセレーターです。
-        以下のITサービスのアイデアを確認して、レビューの文章を作成してください。
+        以下のITサービスのアイデアを確認して、レビューの文章と開発難易度レベルを作成してください。
         #{idea_select_prompt(idea)}
         レビュー内容は、天使役と悪魔役でそれぞれキャラの口調に合わせて作成して。
         天使役は特出して良いさらに延ばすべき点を教えて。悪魔役は悪い点を出すだけでなく、どうやったら改善できるかも教えて。
-        { positive_review: '天使のポジティブレビュー' ,negative_review: '悪魔のネガティブレビュー' }の型でそれぞれ具体的に150文字程度のJSON形式で返して。
+        開発難易度レベルは、easy、middle、hardのいずれかで答えて。
+        { positive_review: '{天使のポジティブレビュー}', negative_review: '{悪魔のネガティブレビュー}', difficulty: '{開発難易度レベル}' }の型でそれぞれ具体的に150文字程度のJSON形式で返して。
       PROMPT
     end
 

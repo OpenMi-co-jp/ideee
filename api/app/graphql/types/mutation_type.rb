@@ -8,6 +8,7 @@ module Types
     field :update_idea, mutation: Mutations::Idea::Update, description: 'アイデア更新'
     field :destroy_idea, mutation: Mutations::Idea::Destroy, description: 'アイデア削除'
     field :create_ai_review, mutation: Mutations::Idea::AiReview, description: 'AIレビュー作成'
+    field :create_ai_brush_up, mutation: Mutations::Idea::AiBrushup, description: 'AIブラッシュアップ作成'
 
     field :create_user, mutation: Mutations::User::Create, description: 'ユーザー作成'
     field :update_user, mutation: Mutations::User::Update, description: 'ユーザー更新'

@@ -16,7 +16,6 @@ module Mutations
     field :job_id, String, null: true, description: 'ジョブID'
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラーリスト'
-    field :idea_id, ID, null: true, description: 'アイデアID'
 
     def resolve(**args)
       idea = args[:idea_id] ? ::Idea.find_by(id: args[:idea_id]) : ::Idea.new(user: context[:current_user])

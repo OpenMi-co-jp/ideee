@@ -2,7 +2,7 @@ module Mutations
   class Idea::AiBrushup < BaseMutation
     graphql_name 'IdeaAiBrushUp'
 
-    argument :idea_id, ID, required: false, description: 'アイデアID'
+    argument :idea_id, ID, required: true, description: 'アイデアID'
     argument :name, String, required: true, description: 'アイデア名'
     argument :background, String, required: true, description: 'アイデア背景'
     argument :goal, String, required: true, description: 'アイデアゴール'

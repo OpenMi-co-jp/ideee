@@ -1,13 +1,13 @@
-import { Paper } from '@mantine/core'
+import { Paper, Flex } from '@mantine/core'
 import { IdeaContentSet } from './IdeaContentSet'
 import { useIdea } from '@/context/IdeaContext'
-import { StanceBadge } from '@/utils/StanceBadge'
+import { StanceBadge, StanceBadgeProps } from '@/utils/StanceBadge'
 import Link from 'next/link'
-import type { StanceBadgeProps } from '@/utils/StanceBadge'
+import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 
 export const MinIdeaContents = () => {
   const idea = useIdea()
-  const { stance } = idea
+  const { stance, difficulty } = idea
   const sections = [
     { label: '背景', content: idea?.background },
     { label: 'ゴール', content: idea?.goal },
@@ -15,9 +15,13 @@ export const MinIdeaContents = () => {
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
-      <Link href={`/search?stance_eq=${stance}`}>
+      <Flex direction="column" gap="xs">
         <StanceBadge stance={stance as StanceBadgeProps['stance']} />
-      </Link>
+        <DifficultyBadge
+          difficulty={difficulty as DifficultyBadgeProps['difficulty']}
+        />
+      </Flex>
+
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}

@@ -112,20 +112,20 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
 
       if (data?.createAiBrushUp?.success) {
         showInfo({
-          title: `AIブラシアップを開始 | ${String(
+          title: `AIブラッシュアップを開始 | ${String(
             data?.createAiBrushUp?.errors
           )}`,
-          message: 'AIブラシアップを開始しました',
+          message: 'AIブラッシュアップを開始しました',
         })
         router.push(`/ideas/${idea.id}`)
       } else {
         showError({
-          action: 'AIブラシアップ',
+          action: 'AIブラッシュアップ',
           message: String(data?.createAiBrushUp?.errors),
         })
       }
     } catch (error) {
-      showError({ action: 'AIブラシアップ', message: 'エラーが発生しました' })
+      showError({ action: 'AIブラッシュアップ', message: 'エラーが発生しました' })
     }
 
     setAiBrushUpLoading(false)
@@ -204,8 +204,8 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
                   disabled={isSubmitting || aiBrushUpLoading || !isFormValid}
                 >
                   {aiBrushUpLoading
-                    ? 'AIブラシアップ実行中...'
-                    : 'AIブラシアップを試す'}
+                    ? 'AIブラッシュアップ実行中...'
+                    : 'AIブラッシュアップを試す'}
                 </Button>
               </Center>
               <Accordion.Item value="bulb">

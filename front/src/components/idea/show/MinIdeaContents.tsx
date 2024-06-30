@@ -2,7 +2,6 @@ import { Paper, Flex } from '@mantine/core'
 import { IdeaContentSet } from './IdeaContentSet'
 import { useIdea } from '@/context/IdeaContext'
 import { StanceBadge, StanceBadgeProps } from '@/utils/StanceBadge'
-import Link from 'next/link'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 
 export const MinIdeaContents = () => {
@@ -15,7 +14,7 @@ export const MinIdeaContents = () => {
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
-      <Flex direction="column" gap="xs">
+      <Flex direction="row" gap="md">
         <StanceBadge stance={stance as StanceBadgeProps['stance']} />
         <DifficultyBadge
           difficulty={difficulty as DifficultyBadgeProps['difficulty']}

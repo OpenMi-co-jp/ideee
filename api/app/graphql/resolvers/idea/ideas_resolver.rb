@@ -27,14 +27,10 @@ module Resolvers
 
     def build_ransack_params(search_condition)
       search_params = search_condition&.arguments&.keyword_arguments || {}
-      ransack_params = {}
 
+      ransack_params = search_params.except(:stance_eq, :difficulty_eq)
       ransack_params[:stance_eq] = ::Idea.stances[search_params[:stance_eq]] if search_params.key?(:stance_eq)
-      ransack_params.merge!(search_params.except(:stance_eq))
-
       ransack_params[:difficulty_eq] = ::Idea.difficulties[search_params[:difficulty_eq]] if search_params.key?(:difficulty_eq)
-      ransack_params.merge!(search_params.except(:stance_eq, :difficulty_eq))
-
       ransack_params
     end
   end

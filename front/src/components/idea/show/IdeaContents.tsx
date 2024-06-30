@@ -28,7 +28,7 @@ export const IdeaContents = () => {
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
-      <Flex direction="row" gap="xs">
+      <Flex direction="row" gap="md">
         <StanceBadge stance={stance as StanceBadgeProps['stance']} />
         <DifficultyBadge
           difficulty={difficulty as DifficultyBadgeProps['difficulty']}

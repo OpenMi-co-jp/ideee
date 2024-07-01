@@ -7,9 +7,18 @@ export const useRefetchAuthToken = () => {
 
   const refetchAuthToken = async (): Promise<boolean> => {
     return client
-      .post('/auth_token', {
-        authenticity_token: csrfToken,
-      })
+      .post(
+        '/auth_token',
+        {
+          // bodyで渡すのは不要かもしれないが一応設定している
+          authenticity_token: csrfToken,
+        },
+        {
+          headers: {
+            'X-CSRF-Token': csrfToken,
+          },
+        }
+      )
       .then((response) => {
         const token = response.headers['authorization']
         if (!token) return false

@@ -18,7 +18,7 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
-      idea = Idea.find_by(id: args[:idea_id])
+      idea = ::Idea.find_by(id: args[:idea_id])
       return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
       return { success: false, errors: ['アイデアが既にブラッシュアップされています'] } if brushup_exists?(idea)
 
@@ -31,16 +31,16 @@ module Mutations
         todays_logs_count += 1
 
         job_id = AI::BrushupJob.perform_later(
-          idea_id,
-          args[:name],
-          args[:background],
-          args[:goal],
-          args[:issue],
-          args[:wish_function],
-          args[:hypothesis],
-          args[:target],
-          args[:monetize],
-          args[:similar],
+          idea_id:,
+          name: args[:name],
+          background: args[:background],
+          goal: args[:goal],
+          issue: args[:issue],
+          wish_function: args[:wish_function],
+          hypothesis: args[:hypothesis],
+          target: args[:target],
+          monetize: args[:monetize],
+          similar: args[:similar]
         ).job_id
       end
 

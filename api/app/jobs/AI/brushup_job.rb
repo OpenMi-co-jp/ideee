@@ -6,17 +6,9 @@ module AI
   class BrushupJob < ApplicationJob
     queue_as :default
 
-    def perform(idea_id, name, background, goal, issue, wish_function, hypothesis, target, monetize, similar)
-      @idea = Idea.find_by(id: idea_id)
-      @name = name
-      @background = background
-      @goal = goal
-      @issue = issue
-      @wish_function = wish_function
-      @hypothesis = hypothesis
-      @target = target
-      @monetize = monetize
-      @similar = similar
+    def perform(attributes)
+      @attributes = attributes.symbolize_keys
+      @idea = ::Idea.find_by(id: @attributes[:idea_id])
 
       prompt = build_prompt
       response = AIResponse.fetch_ai_response(prompt)
@@ -56,19 +48,27 @@ module AI
 
     def idea_prompt_details
       details = <<~DETAILS
-        アイデア名: #{@name}
-        背景: #{@background}
-        ゴール: #{@goal}
+        アイデア名: #{@attributes[:name]}
+        背景: #{@attributes[:background]}
+        ゴール: #{@attributes[:goal]}
       DETAILS
 
-      details += "ユーザーの課題: #{@issue}\n" if @issue.present?
-      details += "メイン機能: #{@wish_function}\n" if @wish_function.present?
-      details += "数値的仮説: #{@hypothesis}\n" if @hypothesis.present?
-      details += "ターゲット: #{@target}\n" if @target.present?
-      details += "マネタイズ方法: #{@monetize}\n" if @monetize.present?
-      details += "類似サービス: #{@similar}\n" if @similar.present?
+      %i[issue wish_function hypothesis target monetize similar].each do |attr|
+        details += "#{attr_label(attr)}: #{@attributes[attr]}\n" if @attributes[attr].present?
+      end
 
       details
+    end
+
+    def attr_label(attr)
+      {
+        issue: 'ユーザーの課題',
+        wish_function: 'メイン機能',
+        hypothesis: '数値的仮説',
+        target: 'ターゲット',
+        monetize: 'マネタイズ方法',
+        similar: '類似サービス'
+      }[attr]
     end
 
     def create_ai_log(user, action, loggable_type, loggable_id)

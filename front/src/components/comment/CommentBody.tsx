@@ -5,7 +5,7 @@ import { TextWithLinks } from '@/utils/Text'
 import { ActionIcon, Flex, Paper, Text } from '@mantine/core'
 import { IconHeart } from '@tabler/icons-react'
 import { useToggleLike } from '../like/useToggleLike'
-import heartStyles from './heart.module.css'
+import heartStyle from './heart.module.css'
 
 export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   const { comment } = useComment()
@@ -17,9 +17,7 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   )
 
   const handleLike = () => {
-    if (!isCurrentUser) {
-      toggleLike()
-    }
+    toggleLike()
   }
 
   const commentCreatedAt = new Date(createdAt)
@@ -57,8 +55,8 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
           >
             <IconHeart
               fill={isLike ? 'red' : 'gray'}
-              className={`${heartStyles['heartIcon']} ${
-                isLike ? heartStyles['liked'] : ''
+              className={`${heartStyle.heartIcon} ${
+                isLike ? heartStyle.liked : ''
               }`}
             />
           </ActionIcon>

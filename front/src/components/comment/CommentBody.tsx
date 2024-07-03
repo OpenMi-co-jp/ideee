@@ -1,29 +1,26 @@
-import { Text, Paper, Flex, ActionIcon } from '@mantine/core'
-import { TextWithLinks } from '@/utils/Text'
 import { CommentAction } from '@/components/comment/CommentAction'
 import { useComment } from '@/context/CommentContext'
 import dayjs from '@/lib/format/dayjs'
+import { TextWithLinks } from '@/utils/Text'
+import { ActionIcon, Flex, Paper, Text } from '@mantine/core'
 import { IconHeart } from '@tabler/icons-react'
-import { useState } from 'react'
+import { useToggleLike } from '../like/useToggleLike'
 
 export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   const { comment } = useComment()
-  const { description, createdAt, user } = comment
+  const { description, createdAt } = comment
 
-  // TODO　コメントに対するLIKEを取得する。
-  const likes = 0
-  const [likeCount, setLikeCount] = useState(likes || 0)
-  const [liked, setLiked] = useState(false)
+  const { isLike, toggleLike, addCount } = useToggleLike(
+    Number(comment.id),
+    'Comment'
+  )
 
   const handleLike = () => {
-    if (liked) {
-      setLikeCount(likeCount - 1)
-    } else {
-      setLikeCount(likeCount + 1)
+    if (!isCurrentUser) {
+      toggleLike()
     }
-    setLiked(!liked)
-    // ここにサーバーにlike状態を送信するコードを追加
   }
+
   const commentCreatedAt = new Date(createdAt)
 
   return (
@@ -33,7 +30,7 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
         maw="30rem"
         p="md"
         mt="3px"
-        mb="15px"
+        // mb="15px"
         radius="lg"
         style={{
           wordWrap: 'break-word',
@@ -42,26 +39,25 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
       >
         <TextWithLinks>{description}</TextWithLinks>
       </Paper>
-      <Flex align="center" justify="end">
-        <ActionIcon
-          onClick={handleLike}
-          variant="default"
-          w={'40px'}
-          h={'30px'}
-          p={2}
-          c={liked ? 'red' : 'gray'}
-          style={{
-            position: 'absolute',
-            bottom: '25px',
-            right: '5px',
-          }}
-        >
-          <IconHeart fill={liked ? 'red' : 'gray'} />
-          <Text ml="5px" c={'gray'}>
-            {likeCount}
-          </Text>
-        </ActionIcon>
-      </Flex>
+      {!isCurrentUser && (
+        <Flex align="center" justify="end">
+          <ActionIcon
+            onClick={handleLike}
+            variant="default"
+            w={'40px'}
+            h={'30px'}
+            p={2}
+            c={isLike ? 'red' : 'gray'}
+            style={{
+              position: 'absolute',
+              bottom: '15px',
+              right: '5px',
+            }}
+          >
+            <IconHeart fill={isLike ? 'red' : 'gray'} />
+          </ActionIcon>
+        </Flex>
+      )}
       <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'}>
         <Text c="gray" mx="xs">
           {dayjs(commentCreatedAt).format('YYYY-MM-DD HH:mm')}

@@ -5,6 +5,7 @@ import { TextWithLinks } from '@/utils/Text'
 import { ActionIcon, Flex, Paper, Text } from '@mantine/core'
 import { IconHeart } from '@tabler/icons-react'
 import { useToggleLike } from '../like/useToggleLike'
+import heartStyles from './heart.module.css'
 
 export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   const { comment } = useComment()
@@ -27,10 +28,10 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
     <div style={{ position: 'relative' }}>
       <Paper
         bg="#FFFFFF"
+        miw="15rem"
         maw="30rem"
         p="md"
         mt="3px"
-        // mb="15px"
         radius="lg"
         style={{
           wordWrap: 'break-word',
@@ -50,11 +51,16 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
             c={isLike ? 'red' : 'gray'}
             style={{
               position: 'absolute',
-              bottom: '15px',
+              bottom: '10px',
               right: '5px',
             }}
           >
-            <IconHeart fill={isLike ? 'red' : 'gray'} />
+            <IconHeart
+              fill={isLike ? 'red' : 'gray'}
+              className={`${heartStyles['heartIcon']} ${
+                isLike ? heartStyles['liked'] : ''
+              }`}
+            />
           </ActionIcon>
         </Flex>
       )}

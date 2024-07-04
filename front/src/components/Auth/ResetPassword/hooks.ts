@@ -31,7 +31,12 @@ export const useResetPassword = () => {
       showSuccess({ action: 'パスワードリセット' })
       router.push('/')
     } else {
-      throw new Error('Request failed with status code: ' + response.status)
+      // FIXME: 本当は500エラーの可能性もあるので決め打ちでエラーメッセージを出すのはよくないが、バックエンドでちゃんとハンドリングされていないのでそちらから修正する必要がある
+      // ref. https://github.com/naru20181117/ideee/pull/1501/files#r1660331233
+      showError({
+        action: 'パスワードリセット',
+        message: 'もう一度お試しください。',
+      })
     }
   }
 

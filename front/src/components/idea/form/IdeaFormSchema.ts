@@ -1,11 +1,17 @@
 import { z } from 'zod'
 import { base64ImageValidation } from '@/utils/CustomValidation'
 
+const emojiRegex =
+  /(\p{Emoji}\p{Emoji_Presentation}?\p{Emoji_Modifier_Base}?\p{Emoji_Modifier}?\p{Emoji_Component}*|\p{Extended_Pictographic}|\p{Regional_Indicator})+/u
+
 export const IdeaFormSchema = z.object({
   name: z
     .string()
     .min(1, { message: '名前を入力してください' })
-    .max(50, { message: '名前は50文字以内で入力してください' }),
+    .max(50, { message: '名前は50文字以内で入力してください' })
+    .refine((val) => !emojiRegex.test(val), {
+      message: '使用できない絵文字を含んでいます',
+    }),
   background: z
     .string()
     .min(1, { message: '背景を入力してください' })

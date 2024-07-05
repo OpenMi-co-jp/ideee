@@ -10,17 +10,25 @@ export const handleSignUp = async (props: SignUpFormValues) => {
     showSuccess({ action, message })
     modals.closeAll()
   } catch (error: any) {
+    // FIXME: ここはどうエラーハンドリングさせたいかがよくわからなかったので、422のレスポンスが返ってきたときだけメッセージを出すようにしているが、本当は設計し直したほうがいいと思う
     if (error.response) {
       // サーバーからのレスポンスがあり、かつステータスコードが200-299以外の場合
-      console.error('Request failed with status code: ' + error.response.status)
+      if (error.response?.status === 422) {
+        console.error(
+          'Request failed with status code: ' + error.response.status
+        )
+        showError({ action: 'ユーザー作成' })
+      } else {
+        throw error
+      }
     } else if (error.request) {
       // リクエストが送られたが、レスポンスが受け取れなかった場合
       console.error('No response received.')
+      throw error
     } else {
       // 何かがリクエストの送信前にエラーを発生させた場合
       console.error('Error setting up the request.')
+      throw error
     }
-    showError({ action: 'ユーザー作成' })
-    throw error
   }
 }

@@ -10,6 +10,7 @@ export const handleSignIn = async (
   props: SignInFormValues,
   storeCurrentUser: CurrentUserContextType['storeCurrentUser']
 ) => {
+  const actionName = 'ログイン'
   signIn(props)
     .then((response) => {
       const token = response.headers['authorization']
@@ -22,16 +23,19 @@ export const handleSignIn = async (
         const decodedToken = DecodeJwt(String(token))
         storeCurrentUser(decodedToken)
       }
-      showSuccess({ action: 'ログイン' })
+      showSuccess({ action: actionName })
     })
-    .catch(() => {
-      // FIXME: 本当は500エラーの可能性もあるので決め打ちでエラーメッセージを出すのはよくないが、バックエンドでちゃんとハンドリングされていないのでそちらから修正する必要がある
-      // ref. https://github.com/naru20181117/ideee/pull/1501/files#r1660337857
-      showError({
-        action: 'ログイン',
-        message:
-          'メールアドレスかパスワードが間違っています。もう一度やり直してください。',
-      })
+    .catch((error) => {
+      // FIXME: 本当はバックエンドで適切なメッセージを設定し、それを表示させたほうがよいと思われる
+      if (error.response?.status === 401) {
+        showError({
+          action: actionName,
+          message:
+            'メールアドレスかパスワードが間違っています。もう一度やり直してください。',
+        })
+      } else {
+        throw error
+      }
     })
 
   modals.closeAll()

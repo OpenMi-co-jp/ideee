@@ -26,18 +26,24 @@ export const useResetPassword = () => {
 
   const router = useRouter()
   const onSubmit = async (props: ResetPasswordFormValues) => {
-    const response = await passwordReset(props)
-    if (response.status === 200) {
-      showSuccess({ action: 'パスワードリセット' })
-      router.push('/')
-    } else {
-      // FIXME: 本当は500エラーの可能性もあるので決め打ちでエラーメッセージを出すのはよくないが、バックエンドでちゃんとハンドリングされていないのでそちらから修正する必要がある
-      // ref. https://github.com/naru20181117/ideee/pull/1501/files#r1660331233
-      showError({
-        action: 'パスワードリセット',
-        message: 'もう一度お試しください。',
+    const actionName = 'パスワードリセット'
+    passwordReset(props)
+      .then(() => {
+        showSuccess({ action: actionName })
+        router.push('/')
       })
-    }
+      .catch((error: any) => {
+        // FIXME: 本当はバックエンドで適切なメッセージを設定し、それを表示させたほうがよいと思われる
+        if (error.response?.status === 422) {
+          showError({
+            action: actionName,
+            message:
+              '入力したパスワードに間違いがある可能性があります、もう一度お試しください。',
+          })
+        } else {
+          throw error
+        }
+      })
   }
 
   return { form, onSubmit }

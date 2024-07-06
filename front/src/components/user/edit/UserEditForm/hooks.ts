@@ -10,6 +10,14 @@ import { useGetUser } from '@/utils/hooks/useGetUser'
 import { showSuccess, showError } from '@/components/showNotification'
 import { base64ImageValidation } from '@/utils/CustomValidation'
 
+const twitterUrlRegex =
+  /^https:\/\/x\.com\/[a-zA-Z0-9]+(-?[a-zA-Z0-9]+)*(\/[a-zA-Z0-9-]*)?$/
+
+const githubUrlRegex =
+  /^https:\/\/github\.com\/[a-zA-Z0-9]+(-?[a-zA-Z0-9]+)*(\/[a-zA-Z0-9-]*)?$/
+
+const idRegex = /^[a-zA-Z0-9_]*$/
+
 const UserEditFormSchema = z.object({
   name: z.string().max(30, { message: '名前は30文字以内で入力してください' }),
   description: z
@@ -19,15 +27,35 @@ const UserEditFormSchema = z.object({
   definition: z.string({ invalid_type_error: 'タイプを選択してください' }),
   twitterId: z
     .string()
-    .regex(/^[a-zA-Z0-9_]*$/, {
-      message: '英数字またはアンダースコアで入力してください',
-    })
+    .refine(
+      (value) => {
+        if (value.startsWith('https')) {
+          return twitterUrlRegex.test(value)
+        } else {
+          return idRegex.test(value)
+        }
+      },
+      {
+        message:
+          '入力はhttps://x.comで始まるURLまたはXアカウント名である必要があります。',
+      }
+    )
     .nullish(),
   githubId: z
     .string()
-    .regex(/^[a-zA-Z0-9-]*$/, {
-      message: '英数字またはハイフンで入力してください',
-    })
+    .refine(
+      (value) => {
+        if (value.startsWith('https')) {
+          return githubUrlRegex.test(value)
+        } else {
+          return idRegex.test(value)
+        }
+      },
+      {
+        message:
+          '入力はhttps://github.comで始まるURLまたはGithubアカウント名である必要があります。',
+      }
+    )
     .nullish(),
   siteUrl: z.union([
     z.string().url({ message: 'URLの形式で入力してください' }).nullish(),

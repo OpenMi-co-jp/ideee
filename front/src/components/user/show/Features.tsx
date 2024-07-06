@@ -6,6 +6,7 @@ export const Features = () => {
   const user = useUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
   const remainingAiLogCount = 3 - todaysAiLogCount
+  const aiLimit = process.env.NEXT_PUBLIC_AI_LIMIT || 5
 
   return (
     <Grid>
@@ -21,7 +22,7 @@ export const Features = () => {
             <Flex direction="column" align="center" gap="md">
               <Text c="gray">本日のAI利用回数</Text>
               <CustomDonutChart
-                label={`${todaysAiLogCount} / 5`}
+                label={`${todaysAiLogCount} / ${aiLimit}`}
                 data={[
                   {
                     name: '残り回数',

@@ -5,8 +5,8 @@ import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
 export const Features = () => {
   const user = useUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
-  const remainingAiLogCount = 3 - todaysAiLogCount
-  const aiLimit = process.env.NEXT_PUBLIC_AI_LIMIT || 5
+  const aiLimit = Number(process.env.NEXT_PUBLIC_AI_LIMIT) || 5
+  const remainingAiLogCount = aiLimit - todaysAiLogCount
 
   return (
     <Grid>

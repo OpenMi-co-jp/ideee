@@ -7,7 +7,7 @@ import { showInfo, showError } from '@/components/showNotification'
 import { useAiBrushUpMutation } from '@/lib/generated/client'
 
 export const AiBrushUp = () => {
-  const idea = useIdea()
+  const { id } = useIdea()
   const { currentUser } = useCurrentUser()
   // TODO: Jobが完了したらrefetchするように修正
   const [aiBrushUpLoading, setAiBrushUpLoading] = useState(false)
@@ -20,7 +20,7 @@ export const AiBrushUp = () => {
       const { data } = await aiBrushUpMutation({
         variables: {
           input: {
-            ideaId: idea.id,
+            ideaId: id,
           },
         },
       })

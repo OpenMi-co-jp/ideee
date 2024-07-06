@@ -27,7 +27,7 @@ export const AiBrushUp = () => {
 
       if (data?.createAiBrushUp?.success) {
         showInfo({
-          title: `AIブラシアップを開始 | ${String(
+          title: `AIブラッシュアップを開始 | ${String(
             data?.createAiBrushUp?.errors
           )}`,
           message: '時間を置いてリロードしてください',

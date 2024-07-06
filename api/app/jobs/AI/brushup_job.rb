@@ -6,9 +6,8 @@ module AI
   class BrushupJob < ApplicationJob
     queue_as :default
 
-    def perform(attributes)
-      @attributes = attributes.symbolize_keys
-      @idea = ::Idea.find_by(id: @attributes[:idea_id])
+    def perform(id)
+      @idea = Idea.find_by(id: id)
 
       prompt = build_prompt
       response = AIResponse.fetch_ai_response(prompt)
@@ -48,13 +47,13 @@ module AI
 
     def idea_prompt_details
       details = <<~DETAILS
-        アイデア名: #{@attributes[:name]}
-        背景: #{@attributes[:background]}
-        ゴール: #{@attributes[:goal]}
+        アイデア名: #{@idea[:name]}
+        背景: #{@idea[:background]}
+        ゴール: #{@idea[:goal]}
       DETAILS
 
       %i[issue wish_function hypothesis target monetize similar].each do |attr|
-        details += "#{attr_label(attr)}: #{@attributes[attr]}\n" if @attributes[attr].present?
+        details += "#{attr_label(attr)}: #{@idea[attr]}\n" if @idea[attr].present?
       end
 
       details

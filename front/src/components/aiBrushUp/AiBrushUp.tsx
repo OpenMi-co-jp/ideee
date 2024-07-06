@@ -20,7 +20,7 @@ export const AiBrushUp = () => {
       const { data } = await aiBrushUpMutation({
         variables: {
           input: {
-            ideaId: idea.id
+            ideaId: idea.id,
           },
         },
       })

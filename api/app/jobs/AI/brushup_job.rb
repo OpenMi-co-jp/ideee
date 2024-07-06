@@ -7,7 +7,7 @@ module AI
     queue_as :default
 
     def perform(id)
-      @idea = Idea.find_by(id: id)
+      @idea = Idea.find_by(id:)
 
       prompt = build_prompt
       response = AIResponse.fetch_ai_response(prompt)

@@ -34,12 +34,12 @@ export const AiBrushUp = () => {
         })
       } else {
         showError({
-          action: 'AIブラシアップ',
+          action: 'AIブラッシュアップ',
           message: String(data?.createAiBrushUp?.errors),
         })
       }
     } catch (error) {
-      showError({ action: 'AIブラシアップ', message: 'エラーが発生しました' })
+      showError({ action: 'AIブラッシュアップ', message: 'エラーが発生しました' })
     }
 
     setAiBrushUpLoading(false)

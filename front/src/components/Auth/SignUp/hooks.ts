@@ -11,6 +11,7 @@ export const handleSignUp = async (props: SignUpFormValues) => {
     modals.closeAll()
   } catch (error: any) {
     // FIXME: ここはどうエラーハンドリングさせたいかがよくわからなかったので、422のレスポンスが返ってきたときだけメッセージを出すようにしているが、本当は設計し直したほうがいいと思う
+    //        あと、statusのコードを直接条件にするのではなく、他で使っているsuccess変数みたいにbooleanを使ったほうがよい
     if (error.response) {
       // サーバーからのレスポンスがあり、かつステータスコードが200-299以外の場合
       if (error.response?.status === 422) {

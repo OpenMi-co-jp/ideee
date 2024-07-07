@@ -34,6 +34,7 @@ export const useResetPassword = () => {
       })
       .catch((error: any) => {
         // FIXME: 本当はバックエンドで適切なメッセージを設定し、それを表示させたほうがよいと思われる
+        //        あと、statusのコードを直接条件にするのではなく、他で使っているsuccess変数みたいにbooleanを使ったほうがよい
         if (error.response?.status === 422) {
           showError({
             action,

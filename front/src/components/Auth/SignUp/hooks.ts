@@ -14,9 +14,6 @@ export const handleSignUp = async (props: SignUpFormValues) => {
     if (error.response) {
       // サーバーからのレスポンスがあり、かつステータスコードが200-299以外の場合
       if (error.response?.status === 422) {
-        console.error(
-          'Request failed with status code: ' + error.response.status
-        )
         showError({ action: 'ユーザー作成' })
       } else {
         throw error

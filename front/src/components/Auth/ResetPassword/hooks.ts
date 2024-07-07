@@ -26,17 +26,17 @@ export const useResetPassword = () => {
 
   const router = useRouter()
   const onSubmit = async (props: ResetPasswordFormValues) => {
-    const actionName = 'パスワードリセット'
+    const action = 'パスワードリセット'
     passwordReset(props)
       .then(() => {
-        showSuccess({ action: actionName })
+        showSuccess({ action })
         router.push('/')
       })
       .catch((error: any) => {
         // FIXME: 本当はバックエンドで適切なメッセージを設定し、それを表示させたほうがよいと思われる
         if (error.response?.status === 422) {
           showError({
-            action: actionName,
+            action,
             message:
               '入力したパスワードに間違いがある可能性があります、もう一度お試しください。',
           })

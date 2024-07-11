@@ -24,17 +24,17 @@ export const CommentAction = () => {
       return
     }
 
-    destroyComment()
-      .then(() => {
+    destroyComment().then((response) => {
+      if (response.data!.destroyComment!.success) {
         showSuccess({ action: 'コメント削除' })
         refetch()
-      })
-      .catch((error) => {
+      } else {
         showError({
           action: 'コメント削除',
-          message: error.message as string,
+          message: String(response.data!.destroyComment!.errors),
         })
-      })
+      }
+    })
   }
 
   return (

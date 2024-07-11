@@ -29,44 +29,37 @@ export const UseEditIdea = () => {
   }, [idea, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    try {
-      const response = await updateIdeaMutation({
-        variables: {
-          input: {
-            id: idea?.id,
-            name: data.name,
-            background: data.background,
-            goal: data.goal,
-            issue: data.issue,
-            hypothesis: data.hypothesis,
-            monetize: data.monetize,
-            similar: data.similar,
-            stance: data.stance,
-            target: data.target,
-            wishFunction: data.wishFunction,
-            githubUrl: data.githubUrl,
-            productUrl: data.productUrl,
-            publish: data.publish,
-            icon: data.icon,
-            userId: String(idea?.userId),
-            tagList: data.tagList,
-          },
+    const response = await updateIdeaMutation({
+      variables: {
+        input: {
+          id: idea?.id,
+          name: data.name,
+          background: data.background,
+          goal: data.goal,
+          issue: data.issue,
+          hypothesis: data.hypothesis,
+          monetize: data.monetize,
+          similar: data.similar,
+          stance: data.stance,
+          target: data.target,
+          wishFunction: data.wishFunction,
+          githubUrl: data.githubUrl,
+          productUrl: data.productUrl,
+          publish: data.publish,
+          icon: data.icon,
+          userId: String(idea?.userId),
+          tagList: data.tagList,
         },
-      })
-      if (response.data?.updateIdea?.success) {
-        showSuccess({ action: 'アイデアの更新' })
-        refetch()
-        router.push(`/ideas/${response.data.updateIdea.idea?.id}`)
-      } else {
-        showError({
-          action: 'アイデアの更新',
-          message: String(response.data?.updateIdea?.errors),
-        })
-      }
-    } catch (err: any) {
+      },
+    })
+    if (response.data!.updateIdea!.success) {
+      showSuccess({ action: 'アイデアの更新' })
+      refetch()
+      router.push(`/ideas/${response.data!.updateIdea!.idea!.id}`)
+    } else {
       showError({
         action: 'アイデアの更新',
-        message: err.message as string,
+        message: String(response.data!.updateIdea!.errors),
       })
     }
   }

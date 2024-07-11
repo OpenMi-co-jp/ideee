@@ -70,35 +70,28 @@ export const UpdateUser = () => {
   }, [user, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    try {
-      const response = await updateUserMutation({
-        variables: {
-          input: {
-            id: String(user?.id),
-            name: data.name,
-            description: data.description,
-            definition: data.definition,
-            twitterId: data.twitterId,
-            githubId: data.githubId,
-            siteUrl: data.siteUrl,
-            icon: data.icon,
-          },
+    const response = await updateUserMutation({
+      variables: {
+        input: {
+          id: String(user?.id),
+          name: data.name,
+          description: data.description,
+          definition: data.definition,
+          twitterId: data.twitterId,
+          githubId: data.githubId,
+          siteUrl: data.siteUrl,
+          icon: data.icon,
         },
-      })
-      if (response.data?.updateUser?.success) {
-        showSuccess({ action: 'ユーザー情報の更新' })
-        refetch()
-        router.push(`/users/${response.data.updateUser.user.id}`)
-      } else {
-        showError({
-          action: 'ユーザー情報の更新',
-          message: String(response.data?.updateUser?.errors),
-        })
-      }
-    } catch (err: any) {
+      },
+    })
+    if (response.data!.updateUser!.success) {
+      showSuccess({ action: 'ユーザー情報の更新' })
+      refetch()
+      router.push(`/users/${response.data!.updateUser!.user.id}`)
+    } else {
       showError({
         action: 'ユーザー情報の更新',
-        message: err.message as string,
+        message: String(response.data!.updateUser!.errors),
       })
     }
   }

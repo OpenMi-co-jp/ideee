@@ -19,22 +19,25 @@ export const useForgotPassword = () => {
 
   const onSubmit = async (props: ForgotPasswordFormValues) => {
     const actionName = 'パスワードリセット用メール送信'
-    try {
-      const response = await passwordForgot(props)
-      if (response.status === 200) {
+    passwordForgot(props)
+      .then(() => {
         showSuccess({
           action: actionName,
           message: 'メールをご確認ください',
         })
-      } else {
-        throw new Error('Request failed with status code: ' + response.status)
-      }
-    } catch (error: any) {
-      showError({
-        action: actionName,
-        message: error.message as string,
       })
-    }
+      .catch((error: any) => {
+        // FIXME: 本当はバックエンドで適切なメッセージを設定し、それを表示させたほうがよいと思われる
+        //        あと、statusのコードを直接条件にするのではなく、他で使っているsuccess変数みたいにbooleanを使ったほうがよい
+        if (error.response?.status === 422) {
+          showError({
+            action: actionName,
+            message: 'メールアドレスに間違いがないかご確認ください。',
+          })
+        } else {
+          throw error
+        }
+      })
   }
 
   return { form, onSubmit }

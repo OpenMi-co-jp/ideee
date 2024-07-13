@@ -1184,6 +1184,7 @@ export type GetIdeaQuery = {
     stance?: string | null
     note?: string | null
     draft?: boolean | null
+    difficulty?: string | null
     productApply?: string | null
     createdAt: any
     updatedAt: any
@@ -2274,6 +2275,7 @@ export const GetIdeaDocument = gql`
       stance
       note
       draft
+      difficulty
       productApply
       createdAt
       updatedAt

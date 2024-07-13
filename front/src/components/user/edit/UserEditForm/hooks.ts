@@ -37,7 +37,7 @@ const UserEditFormSchema = z.object({
       },
       {
         message:
-          '入力はhttps://x.comで始まるURLまたはXアカウント名である必要があります。',
+          '入力はhttps://x.comで始まるURL、またはXアカウント名である必要があります。',
       }
     )
     .nullish(),
@@ -53,7 +53,7 @@ const UserEditFormSchema = z.object({
       },
       {
         message:
-          '入力はhttps://github.comで始まるURLまたはGithubアカウント名である必要があります。',
+          '入力はhttps://github.comで始まるURL、またはGithubアカウント名である必要があります。',
       }
     )
     .nullish(),

@@ -1,11 +1,11 @@
-import { Button, Paper, Anchor } from '@mantine/core'
+import { Button, Paper, Anchor, Flex } from '@mantine/core'
 import { IconApps, IconBrandGithub } from '@tabler/icons-react'
 import { IdeaContentSet } from './IdeaContentSet'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 import { useIdea } from '@/context/IdeaContext'
 import { StanceBadge } from '@/utils/StanceBadge'
 import type { StanceBadgeProps } from '@/utils/StanceBadge'
-import Link from 'next/link'
+import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -23,14 +23,17 @@ const getSections = (idea: GetIdeaQuery['idea']) => {
 
 export const IdeaContents = () => {
   const idea = useIdea()
-  const { stance, productUrl, githubUrl } = idea
+  const { stance, difficulty, productUrl, githubUrl } = idea
   const sections = getSections(idea)
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
-      <Link href={`/search?stance_eq=${stance}`}>
+      <Flex direction="row" gap="md">
         <StanceBadge stance={stance as StanceBadgeProps['stance']} />
-      </Link>
+        <DifficultyBadge
+          difficulty={difficulty as DifficultyBadgeProps['difficulty']}
+        />
+      </Flex>
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}

@@ -1,10 +1,11 @@
 import { useUser } from '@/context/userProfileContext'
 import { Grid, Flex, Box, Text, Center } from '@mantine/core'
 import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 export const Features = () => {
   const user = useUser()
-  const currentUser = useUser()
+  const { currentUser } = useCurrentUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
   const aiLimit = Number(process.env.NEXT_PUBLIC_AI_LIMIT) || 5
   const remainingAiLogCount = aiLimit - todaysAiLogCount

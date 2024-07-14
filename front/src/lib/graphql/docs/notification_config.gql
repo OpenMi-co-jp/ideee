@@ -15,6 +15,7 @@ query GetNotificationConfig {
 mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!) {
   updateNotificationConfig(input: $input) {
     success
+    errors
     notificationConfig {
       commentEmail
       draftRemindEmail

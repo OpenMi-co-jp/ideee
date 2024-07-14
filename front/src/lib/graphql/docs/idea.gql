@@ -14,6 +14,7 @@ query GetIdea($id: ID!) {
     stance
 		note
     draft
+    difficulty
     productApply
     createdAt
     updatedAt

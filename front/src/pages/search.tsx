@@ -3,6 +3,7 @@ import {
   SearchedIdeas,
   SearchInput,
   StanceCheck,
+  DifficultyCheck,
   SortSegments,
 } from '@/components/idea'
 import { useRouter } from 'next/router'
@@ -16,6 +17,7 @@ export default function Search() {
     <>
       <SearchInput />
       <StanceCheck />
+      <DifficultyCheck />
       <SortSegments />
       {queryExist ? <SearchedIdeas /> : <PopularTags />}
     </>

@@ -18,17 +18,12 @@ export const useDestroyIdea = () => {
     },
   })
   const handleDestroyIdea = () => {
-    destroyIdea()
-      .then(() => {
+    destroyIdea().then((res) => {
+      if (res.data!.destroyIdea!.success) {
         showSuccess({ action: 'アイデア削除' })
         router.push('/')
-      })
-      .catch((error) => {
-        showError({
-          action: 'アイデア削除',
-          message: error.message as string,
-        })
-      })
+      }
+    })
   }
 
   return {

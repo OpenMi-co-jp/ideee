@@ -26,20 +26,25 @@ export const useResetPassword = () => {
 
   const router = useRouter()
   const onSubmit = async (props: ResetPasswordFormValues) => {
-    try {
-      const response = await passwordReset(props)
-      if (response.status === 200) {
-        showSuccess({ action: 'パスワードリセット' })
+    const action = 'パスワードリセット'
+    passwordReset(props)
+      .then(() => {
+        showSuccess({ action })
         router.push('/')
-      } else {
-        throw new Error('Request failed with status code: ' + response.status)
-      }
-    } catch (error: any) {
-      showError({
-        action: 'パスワードリセット',
-        message: error.message as string,
       })
-    }
+      .catch((error: any) => {
+        // FIXME: 本当はバックエンドで適切なメッセージを設定し、それを表示させたほうがよいと思われる
+        //        あと、statusのコードを直接条件にするのではなく、他で使っているsuccess変数みたいにbooleanを使ったほうがよい
+        if (error.response?.status === 422) {
+          showError({
+            action,
+            message:
+              '入力したパスワードに間違いがある可能性があります、もう一度お試しください。',
+          })
+        } else {
+          throw error
+        }
+      })
   }
 
   return { form, onSubmit }

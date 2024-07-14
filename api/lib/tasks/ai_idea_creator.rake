@@ -31,10 +31,10 @@ namespace :ai_idea_creator do
     <<~CONTENT
       ITサービスのアイデアを以下のニュースから作成してください。
       news: #{news}
-      アイデアの構成要素: { idea: { name: '名前', background: '背景', goal: '目標', issue: '問題点', wish_function: '欲しい機能', target:'ターゲット', monetize: 'マネタイズ方法', similar: '類似サービス' }, tags: ['タグ1', 'タグ2', 'タグ3'] }
-      必須項目: アイデア名、背景、ゴール、タグ
+      アイデアの構成要素: { idea: { name: '名前', background: '背景', goal: '目標', issue: '問題点', wish_function: '欲しい機能', target:'ターゲット', monetize: 'マネタイズ方法', similar: '類似サービス', difficulty: '開発難易度レベル' }, tags: ['タグ1', 'タグ2', 'タグ3'] }
+      必須項目: アイデア名、背景、ゴール、開発難易度レベル、タグ
       既存のタグ: #{existing_tags}
-      制限: アイデア名30文字以内、タグ12文字以内の3つまで、その他は255文字以内で具体的に nで改行、既存のタグも確認し近しいものがあれば利用。
+      制限: アイデア名30文字以内、タグ12文字以内の3つまで、その他は255文字以内で具体的に nで改行、既存のタグも確認し近しいものがあれば利用。開発難易度レベルは文字列でeasy、middle、hardのいずれかを選択。
       ポイント: アイデア名はわかりやすくキャッチー、その他の項目は具体的かつユーザーの目を惹けるような魅力的な文章で作成。
       JSON形式で、ideaとtagsのkeyを設定し、日本語で返してください。
     CONTENT
@@ -63,7 +63,8 @@ namespace :ai_idea_creator do
       wish_function: idea_content['wish_function'],
       target: idea_content['target'],
       monetize: idea_content['monetize'],
-      similar: idea_content['similar']
+      similar: idea_content['similar'],
+      difficulty: idea_content['difficulty']
     )
   end
 end

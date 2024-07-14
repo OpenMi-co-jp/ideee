@@ -1147,6 +1147,7 @@ export type UpdateCommentMutation = {
   updateComment?: {
     __typename?: 'UpdateCommentPayload'
     success: boolean
+    errors?: Array<string> | null
     comment?: {
       __typename?: 'Comment'
       id?: string | null
@@ -1164,6 +1165,7 @@ export type DestroyCommentMutation = {
   destroyComment?: {
     __typename?: 'DestroyCommentPayload'
     success: boolean
+    errors?: Array<string> | null
   } | null
 }
 
@@ -1209,6 +1211,7 @@ export type GetIdeaQuery = {
     stance?: string | null
     note?: string | null
     draft?: boolean | null
+    difficulty?: string | null
     productApply?: string | null
     createdAt: any
     updatedAt: any
@@ -1742,6 +1745,7 @@ export type UpdateNotificationConfigMutation = {
   updateNotificationConfig?: {
     __typename?: 'UpdateNotificationConfigPayload'
     success: boolean
+    errors?: Array<string> | null
     notificationConfig: {
       __typename?: 'NotificationConfig'
       commentEmail: boolean
@@ -2140,6 +2144,7 @@ export const UpdateCommentDocument = gql`
         description
       }
       success
+      errors
     }
   }
 `
@@ -2190,6 +2195,7 @@ export const DestroyCommentDocument = gql`
   mutation DestroyComment($input: DestroyCommentInput!) {
     destroyComment(input: $input) {
       success
+      errors
     }
   }
 `
@@ -2310,6 +2316,7 @@ export const GetIdeaDocument = gql`
       stance
       note
       draft
+      difficulty
       productApply
       createdAt
       updatedAt
@@ -3765,6 +3772,7 @@ export const UpdateNotificationConfigDocument = gql`
   mutation UpdateNotificationConfig($input: UpdateNotificationConfigInput!) {
     updateNotificationConfig(input: $input) {
       success
+      errors
       notificationConfig {
         commentEmail
         draftRemindEmail

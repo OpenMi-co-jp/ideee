@@ -1,4 +1,5 @@
 import { Badge } from '@mantine/core'
+import Link from 'next/link'
 
 export type StanceBadgeProps = {
   stance: 'free_right' | 'personal_project' | 'team_project'
@@ -31,8 +32,10 @@ export const StanceBadge = ({ stance }: StanceBadgeProps) => {
   const { gradient, text } = stanceList[stance]
 
   return (
-    <Badge variant="gradient" gradient={gradient} radius="md" size="lg">
-      {text}
-    </Badge>
+    <Link href={`/search?stance_eq=${stance}`}>
+      <Badge variant="gradient" gradient={gradient} radius="md" size="lg">
+        {text}
+      </Badge>
+    </Link>
   )
 }

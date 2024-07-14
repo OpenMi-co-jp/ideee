@@ -23,6 +23,7 @@ function AuthCallback() {
         storeCurrentUser(decodedToken)
       } catch (error) {
         console.error('Failed to decode JWT:', error)
+        throw error
       }
       const previousPage = sessionStorage.getItem('previousPage') || '/'
       router.push(previousPage).then(() => {

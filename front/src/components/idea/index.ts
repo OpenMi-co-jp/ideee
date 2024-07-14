@@ -6,5 +6,6 @@ export {
   IdeaNotFound,
   SearchInput,
   StanceCheck,
+  DifficultyCheck,
   SortSegments,
 } from './search'

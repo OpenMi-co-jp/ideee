@@ -30,22 +30,19 @@ export const useCommentAction = () => {
           description: props.description,
         },
       },
-    })
-      .then((res) => {
-        if (res.data?.updateComment?.success) {
-          setIsEditing(false)
-          showSuccess({ action: 'コメント更新' })
-          refetch()
-          form.reset()
-        }
-      })
-      .catch((error) => {
-        console.log(error)
+    }).then((response) => {
+      if (response.data!.updateComment!.success) {
+        setIsEditing(false)
+        showSuccess({ action: 'コメント更新' })
+        refetch()
+        form.reset()
+      } else {
         showError({
           action: 'コメント更新',
-          message: error.message as string,
+          message: String(response.data!.updateComment!.errors),
         })
-      })
+      }
+    })
   }
 
   return { form, onSubmit }

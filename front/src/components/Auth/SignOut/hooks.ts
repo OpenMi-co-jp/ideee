@@ -6,14 +6,9 @@ export const useSignOut = () => {
   const { clearCurrentUser } = useCurrentUser()
 
   const handleSignOut = async () => {
-    try {
-      await signOut()
-      clearCurrentUser()
-      showSuccess({ action: 'ログアウト' })
-    } catch (error: any) {
-      // TODO: error.messageをそのまま出すのはよくないので、ここ以外も含めてエラーハンドリングを考える
-      showError({ action: 'ログアウト', message: error.message })
-    }
+    await signOut()
+    clearCurrentUser()
+    showSuccess({ action: 'ログアウト' })
   }
 
   const forceSignOut = async () => {

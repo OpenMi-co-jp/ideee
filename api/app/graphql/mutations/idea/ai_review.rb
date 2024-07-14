@@ -10,6 +10,7 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーリスト'
 
     AI_LIMIT = ENV.fetch('AI_LIMIT', 5).to_i
+    private_constant :AI_LIMIT
     def resolve(**args)
       idea = ::Idea.find(args[:idea_id])
       return { success: false, errors: ['アイデアが見つかりません'] } if idea.nil?

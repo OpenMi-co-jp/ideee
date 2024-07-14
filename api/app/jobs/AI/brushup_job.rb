@@ -5,6 +5,7 @@ require Rails.root.join('lib/openai/ai_response')
 module AI
   class BrushupJob < ApplicationJob
     queue_as :default
+    include AiLoggable
 
     def perform(id)
       @idea = Idea.find_by(id:)
@@ -68,10 +69,6 @@ module AI
         monetize: 'マネタイズ方法',
         similar: '類似サービス'
       }[attr]
-    end
-
-    def create_ai_log(user, action, loggable_type, loggable_id)
-      ::AiLog.create!(user:, action:, loggable_type:, loggable_id:)
     end
   end
 end

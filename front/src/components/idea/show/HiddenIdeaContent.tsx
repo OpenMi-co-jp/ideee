@@ -4,7 +4,7 @@ import { IdeaOptions } from '@/components/idea/option'
 import { CommentList, CommentCreateForm } from '@/components/comment'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { ReviewList } from '@/components/review/ReviewList'
-import { AiBrushUp } from '@/components/aiBrushUp/AiBrushUp'
+import { AiBrushUp } from '@/components/aiBrushUp/index'
 
 export const HiddenIdeaContent = () => {
   const { currentUser } = useCurrentUser()

@@ -4,6 +4,7 @@ import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
 
 export const Features = () => {
   const user = useUser()
+  const currentUser = useUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
   const aiLimit = Number(process.env.NEXT_PUBLIC_AI_LIMIT) || 5
   const remainingAiLogCount = aiLimit - todaysAiLogCount
@@ -16,26 +17,35 @@ export const Features = () => {
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
         <UserInfoBox label="Contributions" value={String(user?.point)} />
       </Grid.Col>
-      <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
-        <Box p="md" style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}>
-          <Center>
-            <Flex direction="column" align="center" gap="md">
-              <Text c="gray">本日のAI利用回数</Text>
-              <CustomDonutChart
-                label={`${todaysAiLogCount} / ${aiLimit}`}
-                data={[
-                  {
-                    name: '残り回数',
-                    value: remainingAiLogCount,
-                    color: 'orange',
-                  },
-                  { name: '利用回数', value: todaysAiLogCount, color: 'gray' },
-                ]}
-              />
-            </Flex>
-          </Center>
-        </Box>
-      </Grid.Col>
+      {currentUser && String(currentUser.id) === user?.id && (
+        <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
+          <Box
+            p="md"
+            style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}
+          >
+            <Center>
+              <Flex direction="column" align="center" gap="md">
+                <Text c="gray">本日のAI利用回数</Text>
+                <CustomDonutChart
+                  label={`${todaysAiLogCount} / ${aiLimit}`}
+                  data={[
+                    {
+                      name: '残り回数',
+                      value: remainingAiLogCount,
+                      color: 'orange',
+                    },
+                    {
+                      name: '利用回数',
+                      value: todaysAiLogCount,
+                      color: 'gray',
+                    },
+                  ]}
+                />
+              </Flex>
+            </Center>
+          </Box>
+        </Grid.Col>
+      )}
     </Grid>
   )
 }

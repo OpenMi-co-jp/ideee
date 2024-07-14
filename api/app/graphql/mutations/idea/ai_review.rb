@@ -1,6 +1,7 @@
 module Mutations
   class Idea::AiReview < BaseMutation
     graphql_name 'IdeaAiReview'
+    include AiLoggable
 
     argument :idea_id, ID, required: true, description: 'アイデアID'
 
@@ -8,13 +9,14 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラーリスト'
 
+    AI_LIMIT = ENV.fetch('AI_LIMIT', 5).to_i
     def resolve(**args)
       idea = ::Idea.find(args[:idea_id])
       return { success: false, errors: ['アイデアが見つかりません'] } if idea.nil?
       return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
 
       todays_logs_count = idea.user.todays_ai_log_count
-      return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= 5
+      # return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= AI_LIMIT
 
       job_id = nil
       ActiveRecord::Base.transaction do
@@ -26,17 +28,13 @@ module Mutations
       {
         job_id:,
         success: true,
-        errors: ["本日の残りAI利用回数：#{5 - todays_logs_count} 回"]
+        errors: ["本日の残りAI利用回数：#{AI_LIMIT - todays_logs_count} 回"]
       }
     rescue StandardError => e
       {
         success: false,
         errors: [e.message]
       }
-    end
-
-    def create_ai_log(user, action, loggable_type, loggable_id)
-      ::AiLog.create!(user:, action:, loggable_type:, loggable_id:)
     end
   end
 end

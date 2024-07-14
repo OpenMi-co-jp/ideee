@@ -5,7 +5,7 @@ export const UserSettingsForm = () => {
   return (
     <Container size="sm">
       <Flex direction="column" gap="lg">
-        <Title ta="center">ユーザー設定</Title>
+        <Title ta="center">設定</Title>
         <Accordion variant="separated">
           <Accordion.Item value="reset-password">
             <Accordion.Control>メール設定</Accordion.Control>

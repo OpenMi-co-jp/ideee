@@ -8,7 +8,7 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラーリスト'
 
-    AI_LIMIT = ::AI_LIMIT
+    AI_LIMIT = Rails.application.config.ai_limit
     private_constant :AI_LIMIT
     def resolve(**args)
       idea = ::Idea.find_by(id: args[:idea_id])
@@ -16,7 +16,7 @@ module Mutations
       return { success: false, errors: ['アイデアが既にブラッシュアップされています'] } if brushup_exists?(idea)
 
       todays_logs_count = context[:current_user].todays_ai_log_count
-      # return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= AI_LIMIT
+      return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= AI_LIMIT
 
       job_id = nil
       ActiveRecord::Base.transaction do

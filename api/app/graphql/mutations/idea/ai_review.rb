@@ -9,7 +9,7 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラーリスト'
 
-    AI_LIMIT = ENV.fetch('AI_LIMIT', 5).to_i
+    AI_LIMIT = ::AI_LIMIT
     private_constant :AI_LIMIT
     def resolve(**args)
       idea = ::Idea.find(args[:idea_id])

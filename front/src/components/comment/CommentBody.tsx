@@ -4,8 +4,8 @@ import dayjs from '@/lib/format/dayjs'
 import { TextWithLinks } from '@/utils/Text'
 import { ActionIcon, Flex, Paper, Text } from '@mantine/core'
 import { IconHeart } from '@tabler/icons-react'
-import { useToggleLike } from '../like/useToggleLike'
-import heartStyle from './heart.module.css'
+import { useToggleLike } from '@/components/like/useToggleLike'
+import heartStyle from '@/components/styles/heart.module.css'
 
 export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   const { comment } = useComment()

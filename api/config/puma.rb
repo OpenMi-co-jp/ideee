@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-workers ENV.fetch('RAILS_WORKERS', 1)
+workers ENV.fetch('RAILS_WORKERS', 1).to_i
 threads 4, 8
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.

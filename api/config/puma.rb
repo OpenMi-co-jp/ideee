@@ -47,7 +47,7 @@ x = nil
 on_worker_boot do
   x = Sidekiq.configure_embed do |config|
     # config.logger.level = Logger::DEBUG
-    config.queues = %w[default low high]
+    config.queues = %w[high default low]
     config.concurrency = 5
   end
   x.run

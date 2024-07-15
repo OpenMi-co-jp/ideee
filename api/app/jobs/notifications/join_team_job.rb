@@ -2,7 +2,7 @@
 
 module Notifications
   class JoinTeamJob < ApplicationJob
-    queue_as :default
+    queue_as :high
 
     def perform(current_user, idea)
       SendEmail.new.join_team(current_user, idea) if idea.user.team_join_email && Rails.env.production?

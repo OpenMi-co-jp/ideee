@@ -4,10 +4,10 @@
 #
 #  id            :bigint           not null, primary key
 #  action        :string(255)      not null
-#  loggable_type :string(255)      not null
+#  loggable_type :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  loggable_id   :bigint           not null
+#  loggable_id   :bigint
 #  user_id       :bigint           not null
 #
 # Indexes

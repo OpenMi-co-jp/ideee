@@ -4,7 +4,7 @@ require Rails.root.join('lib/openai/ai_response')
 
 module AI
   class BrushupJob < ApplicationJob
-    queue_as :default
+    queue_as :high
     include AiLoggable
 
     def perform(id)

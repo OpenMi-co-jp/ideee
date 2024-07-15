@@ -2,7 +2,7 @@
 
 module Notifications
   class SendHeartMail < ApplicationJob
-    queue_as :default
+    queue_as :high
 
     def perform(user_id, notification_ids)
       email_to = User.find(user_id)&.email

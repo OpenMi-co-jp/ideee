@@ -34,6 +34,8 @@ module Ideee
 
     config.api_only = true
 
+    config.ai_limit = ENV.fetch('AI_LIMIT', 5).to_i
+
     # OmniAuthのエラーに対処
     if Rails.env.production?
       config.session_store :cookie_store,

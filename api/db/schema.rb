@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_21_062326) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_29_052241) do
   create_table "action_text_rich_texts", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -74,11 +74,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_21_062326) do
     t.index ["email", "reset_password_token"], name: "index_admin_users_on_email_and_reset_password_token", unique: true
   end
 
-  create_table "ai_logs", charset: "utf8mb4", force: :cascade do |t|
+  create_table "ai_logs", charset: "utf8mb4", comment: "AIログ", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "action", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "loggable_type", null: false
+    t.bigint "loggable_id", null: false
+    t.index ["loggable_type", "loggable_id"], name: "index_ai_logs_on_loggable"
     t.index ["user_id"], name: "index_ai_logs_on_user_id"
   end
 
@@ -189,7 +192,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_21_062326) do
     t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
-  create_table "reviews", charset: "utf8mb4", force: :cascade do |t|
+  create_table "reviews", charset: "utf8mb4", comment: "レビュー", force: :cascade do |t|
     t.bigint "idea_id", null: false
     t.text "content", null: false
     t.integer "stance"

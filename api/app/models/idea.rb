@@ -50,6 +50,7 @@ class Idea < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_one :team, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :ai_logs, as: :loggable, dependent: :destroy
   counter_culture :user, column_name: 'ideas_num'
   has_rich_text :note
   mount_base64_uploader :icon, ImageUploader

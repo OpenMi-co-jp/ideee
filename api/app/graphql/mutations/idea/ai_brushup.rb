@@ -1,7 +1,6 @@
 module Mutations
-  class Idea::AiReview < BaseMutation
-    graphql_name 'IdeaAiReview'
-    include AiLoggable
+  class Idea::AiBrushup < BaseMutation
+    graphql_name 'IdeaAiBrushUp'
 
     argument :idea_id, ID, required: true, description: 'アイデアID'
 
@@ -12,20 +11,20 @@ module Mutations
     AI_LIMIT = Rails.application.config.ai_limit
     private_constant :AI_LIMIT
     def resolve(**args)
-      idea = ::Idea.find(args[:idea_id])
-      return { success: false, errors: ['アイデアが見つかりません'] } if idea.nil?
+      idea = ::Idea.find_by(id: args[:idea_id])
       return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
+      return { success: false, errors: ['アイデアが既にブラッシュアップされています'] } if brushup_exists?(idea)
 
-      todays_logs_count = idea.user.todays_ai_log_count
+      todays_logs_count = context[:current_user].todays_ai_log_count
       return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= AI_LIMIT
 
       job_id = nil
       ActiveRecord::Base.transaction do
-        create_ai_log(context[:current_user], 'review', 'Idea', idea.id)
         todays_logs_count += 1
 
-        job_id = AI::ReviewsJob.perform_later(args[:idea_id]).job_id
+        job_id = AI::BrushupJob.perform_later(args[:idea_id]).job_id
       end
+
       {
         job_id:,
         success: true,
@@ -36,6 +35,12 @@ module Mutations
         success: false,
         errors: [e.message]
       }
+    end
+
+    private
+
+    def brushup_exists?(idea)
+      AiLog.exists?(loggable: idea, action: 'brush_up')
     end
   end
 end

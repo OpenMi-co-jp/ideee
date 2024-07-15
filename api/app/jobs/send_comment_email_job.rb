@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SendCommentEmailJob < ApplicationJob
-  queue_as :default
+  queue_as :high
 
   def perform(current_user, idea, description)
     return unless Rails.env.production?

@@ -67,34 +67,66 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
             ImageComponent={IdeaImage}
           />
           <Paper bg="#FCFCFC" radius="md" p="lg">
-            <TextForm
-              form={form}
-              name="name"
-              label="アイデア名"
-              required
-              my="lg"
-            />
-            <TagsForm
-              form={form}
-              name="tagList"
-              label="タグ"
-              suggestions={tags}
-              required
-            />
-            <TextAreaForm
-              form={form}
-              name="background"
-              label="背景"
-              required
-              my="lg"
-            />
-            <TextAreaForm
-              form={form}
-              name="goal"
-              label="ゴール"
-              required
-              my="lg"
-            />
+            {publishStatus ? (
+              <TextForm
+                form={form}
+                name="name"
+                label="アイデア名"
+                required
+                isValidation
+                my="lg"
+              />
+            ) : (
+              <TextForm form={form} name="name" label="アイデア名" my="lg" />
+            )}
+
+            {publishStatus ? (
+              <TagsForm
+                form={form}
+                name="tagList"
+                label="タグ"
+                suggestions={tags}
+                required
+                isValidation
+              />
+            ) : (
+              <TagsForm
+                form={form}
+                name="tagList"
+                label="タグ"
+                suggestions={tags}
+              />
+            )}
+
+            {publishStatus ? (
+              <TextAreaForm
+                form={form}
+                name="background"
+                label="背景"
+                required
+                isValidation
+                my="lg"
+              />
+            ) : (
+              <TextAreaForm
+                form={form}
+                name="background"
+                label="背景"
+                my="lg"
+              />
+            )}
+            {publishStatus ? (
+              <TextAreaForm
+                form={form}
+                name="goal"
+                label="ゴール"
+                required
+                isValidation
+                my="lg"
+              />
+            ) : (
+              <TextAreaForm form={form} name="goal" label="ゴール" my="lg" />
+            )}
             <Accordion
               variant="separated"
               chevronPosition="left"

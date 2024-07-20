@@ -10,9 +10,10 @@ module PublishMail
     ]
     @article_url = 'https://qiita.com/naruqiita/items/10eb825268bb065aa6a6'
 
+    subject = '無料でAI活用！ideeeの新機能で個人開発を盛り上げる'
     mail(
       to: @user.email,
-      subject: '無料でAI活用！ideeeの新機能で個人開発を盛り上げる',
+      subject:,
       template_path: 'devise/mailer',
       template_name: 'ai_feature_announcement'
     )

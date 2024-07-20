@@ -10,6 +10,7 @@ type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   form: UseFormReturn<T>
   style?: CSSProperties
   required?: boolean
+  isValidation?: boolean
   disabled?: boolean
   minRows?: number
 }
@@ -18,8 +19,17 @@ type InputTextProps<T extends FieldValues> = MantineStyleProps & {
 export const TextAreaForm = <T extends FieldValues>(
   props: InputTextProps<T>
 ) => {
-  const { disabled, form, label, name, required, minRows, style, ...rest } =
-    props
+  const {
+    disabled,
+    form,
+    label,
+    name,
+    required,
+    isValidation,
+    minRows,
+    style,
+    ...rest
+  } = props
   return (
     <Controller
       name={name}
@@ -30,7 +40,11 @@ export const TextAreaForm = <T extends FieldValues>(
             {...field}
             {...rest}
             {...{ style, label, disabled }}
-            error={form.formState.errors[name]?.message as string | undefined}
+            error={
+              isValidation
+                ? (form.formState.errors[name]?.message as string)
+                : undefined
+            }
             withAsterisk={required}
             autosize
             minRows={minRows ? minRows : 2}

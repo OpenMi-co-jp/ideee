@@ -23,6 +23,7 @@ import {
   Controller,
   FieldValues,
   SubmitHandler,
+  useWatch,
 } from 'react-hook-form'
 import { IdeaImage } from '@/components/image'
 import { useState } from 'react'
@@ -48,7 +49,10 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
   const { loading, data } = useGetTagsQuery()
   const tags: string[] =
     loading || !data?.tags ? [] : data.tags.map((tag) => tag.name)
-
+  const publishStatus = useWatch({
+    control: form.control,
+    name: 'publish',
+  })
   return (
     <Container size="sm">
       <Paper py={rem(40)}>

@@ -1,5 +1,5 @@
 import { useUser } from '@/context/userProfileContext'
-import { Grid, Flex, Box, Text, Center } from '@mantine/core'
+import { Grid, Flex, Box, Text, Center, SimpleGrid } from '@mantine/core'
 import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
@@ -9,11 +9,17 @@ export const Features = () => {
   const todaysAiLogCount = user?.todaysAiLogCount || 0
   const aiLimit = Number(process.env.NEXT_PUBLIC_AI_LIMIT) || 5
   const remainingAiLogCount = aiLimit - todaysAiLogCount
+  const userType =
+    user?.definition === 'engineer'
+      ? 'エンジニア'
+      : user?.definition === 'idea_engineer'
+        ? 'アイディアマン'
+        : ''
 
   return (
     <Grid>
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
-        <UserInfoBox label="タイプ" value={user?.definition || ''} />
+        <UserInfoBox label="タイプ" value={userType} />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
         <UserInfoBox label="Contributions" value={String(user?.point)} />

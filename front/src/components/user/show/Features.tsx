@@ -4,31 +4,51 @@ import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { GetUserQuery } from '@/lib/generated/client'
 
+type UserField = 'name' | 'description' | 'definition' | 'image'
+type UserType = 'エンジニア' | 'アイディアマン' | ''
+
+const ratePerField = 25
+const userFields: UserField[] = ['name', 'description', 'definition', 'image']
+const aiLimit = Number(process.env.NEXT_PUBLIC_aiLimit) || 5
+
 const calculateCompletionRate = (
   user: GetUserQuery['user'] | undefined
 ): number => {
-  const ratePerField = 25
-  const fields = ['name', 'description', 'definition', 'image'] as const
-  return fields.reduce(
+  return userFields.reduce(
     (acc, field) => (user?.[field] ? acc + ratePerField : acc),
     0
   )
 }
 
+const getUserType = (definition: string | undefined): UserType => {
+  switch (definition) {
+    case 'engineer':
+      return 'エンジニア'
+    case 'idea_engineer':
+      return 'アイディアマン'
+    default:
+      return ''
+  }
+}
+
+const UserInfoBox = ({ label, value }: { label: string; value: string }) => (
+  <Box p="md" style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}>
+    <Center>
+      <Flex direction="column" align="center" gap="md">
+        <Text c="gray">{label}</Text>
+        <Text fz="1.4rem">{value}</Text>
+      </Flex>
+    </Center>
+  </Box>
+)
+
 export const Features = () => {
   const user = useUser()
   const { currentUser } = useCurrentUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
-  const aiLimit = Number(process.env.NEXT_PUBLIC_AI_LIMIT) || 5
   const remainingAiLogCount = aiLimit - todaysAiLogCount
-  const userType =
-    user?.definition === 'engineer'
-      ? 'エンジニア'
-      : user?.definition === 'idea_engineer'
-        ? 'アイディアマン'
-        : ''
-
-  const completionRateForUser = calculateCompletionRate(user)
+  const userType = getUserType(user?.definition!)
+  const completionRate = calculateCompletionRate(user)
 
   return (
     <Grid mb={20}>
@@ -41,30 +61,31 @@ export const Features = () => {
           <Title c="gray" fz="1.2rem" mb={15}>
             ユーザー情報入力完了率
             <Text span c="orange" fz="2rem" pl={5} inherit>
-              {completionRateForUser}%
+              {completionRate}%
             </Text>
           </Title>
         </Flex>
-        <Progress.Root size={20} mb={20}>
-          {user?.name && (
-            <Progress.Section value={25} color="cyan">
-              <Progress.Label>ユーザー名</Progress.Label>
-            </Progress.Section>
-          )}
-          {user?.description && (
-            <Progress.Section value={25} color="pink">
-              <Progress.Label>自己紹介文</Progress.Label>
-            </Progress.Section>
-          )}
-          {user?.image && (
-            <Progress.Section value={25} color="lime">
-              <Progress.Label>プロフィール画像</Progress.Label>
-            </Progress.Section>
-          )}
-          {user?.definition && (
-            <Progress.Section value={25} color="orange">
-              <Progress.Label>ユーザータイプ</Progress.Label>
-            </Progress.Section>
+        <Progress.Root size={20} mb={20} radius="lg">
+          {userFields.map(
+            (field, index) =>
+              user?.[field] && (
+                <Progress.Section
+                  key={field}
+                  value={ratePerField}
+                  color={['cyan', 'pink', 'lime', 'orange'][index]}
+                >
+                  <Progress.Label style={{ fontSize: '12px' }}>
+                    {
+                      [
+                        'ユーザー名',
+                        '自己紹介文',
+                        'プロフィール画像',
+                        'タイプ',
+                      ][index]
+                    }
+                  </Progress.Label>
+                </Progress.Section>
+              )
           )}
         </Progress.Root>
       </Grid.Col>
@@ -106,14 +127,3 @@ export const Features = () => {
     </Grid>
   )
 }
-
-const UserInfoBox = ({ label, value }: { label: string; value: string }) => (
-  <Box p="md" style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}>
-    <Center>
-      <Flex direction="column" align="center" gap="md">
-        <Text c="gray">{label}</Text>
-        <Text fz="1.4rem">{value}</Text>
-      </Flex>
-    </Center>
-  </Box>
-)

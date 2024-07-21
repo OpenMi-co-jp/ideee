@@ -8,7 +8,6 @@ module Resolvers
 
     def resolve
       cached_data = Rails.cache.read('daily_idea_titles') || {}
-      puts cached_data
       titles = cached_data['titles'] || []
       titles
     end

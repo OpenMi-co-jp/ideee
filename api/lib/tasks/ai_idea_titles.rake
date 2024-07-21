@@ -21,7 +21,6 @@ namespace :ai_idea_titles do
   private
 
   def build_titles
-    # use for each to loop through the categories and titles
     titles = news_contents.pluck('title').to_json
     <<~CONTENT
       ニュースとカテゴリからITサービスのアイデアタイトルを15種類作成してください。

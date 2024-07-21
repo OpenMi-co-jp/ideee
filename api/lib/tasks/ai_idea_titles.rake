@@ -10,7 +10,6 @@ namespace :ai_idea_titles do
 
   res = AIResponse.fetch_ai_response(build_titles)
   parsed_res = JSON.parse(res)
-  puts parsed_res
   Rails.cache.write('daily_idea_titles', parsed_res, expires_in: 24.hours)
 
   rescue StandardError => e
@@ -40,8 +39,7 @@ namespace :ai_idea_titles do
 
     request = Net::HTTP::Get.new(api_url.request_uri)
     response = http.request(request)
-    puts response.body
 
-    JSON.parse(response.body)['articles']['title']
+    JSON.parse(response.body)['articles']
   end
 end

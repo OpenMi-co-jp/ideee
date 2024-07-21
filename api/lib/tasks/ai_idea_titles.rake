@@ -4,34 +4,14 @@ require_relative '../openai/ai_response'
 require 'net/http'
 require 'json'
 
-namespace :ai_idea_categories do
+namespace :ai_idea_titles do
   desc 'AIによるアイデアタイトル作成'
-  task create_idea_categories: :environment do
+  task create_idea_titles: :environment do
 
-    # res = AIResponse.fetch_ai_response(build_titles)
-    # parsed_res = JSON.parse(res)
-    # puts parsed_res
-    # Rails.cache.write('daily_idea_categories', parsed_res, expires_in: 24.hours)
-
-    puts "Starting task..."
-  
-    puts "Fetching news..."
-    news = news_contents
-    puts "Fetched #{news.length} news items"
-    
-    puts "Building prompt..."
-    prompt = build_titles
-    puts "Prompt built: #{prompt}"
-    
-    puts "Fetching AI response..."
-    res = AIResponse.fetch_ai_response(prompt)
-    puts "AI response received"
-    
-    parsed_res = JSON.parse(res)
-    puts "Parsed response: #{JSON.pretty_generate(parsed_res)}"
-    
-    Rails.cache.write('daily_idea_categories', parsed_res, expires_in: 24.hours)
-    puts "Response cached"
+  res = AIResponse.fetch_ai_response(build_titles)
+  parsed_res = JSON.parse(res)
+  puts parsed_res
+  Rails.cache.write('daily_idea_titles', parsed_res, expires_in: 24.hours)
 
   rescue StandardError => e
     Sentry.capture_exception(e)
@@ -63,6 +43,6 @@ namespace :ai_idea_categories do
     response = http.request(request)
     puts response.body
 
-    JSON.parse(response.body)['articles']
+    JSON.parse(response.body)['articles']['title']
   end
 end

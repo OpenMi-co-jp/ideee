@@ -47,7 +47,7 @@ export const Features = () => {
   const { currentUser } = useCurrentUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
   const remainingAiLogCount = aiLimit - todaysAiLogCount
-  const userType = getUserType(user?.definition!)
+  const userType = getUserType(user?.definition ?? '')
   const completionRate = calculateCompletionRate(user)
 
   return (
@@ -67,27 +67,26 @@ export const Features = () => {
             </Title>
           </Flex>
           <Progress.Root size={20} mb={20} radius="lg">
-            {userFields.map(
-              (field, index) =>
-                user?.[field] && (
-                  <Progress.Section
-                    key={field}
-                    value={ratePerField}
-                    color={['cyan', 'pink', 'lime', 'orange'][index]}
-                  >
-                    <Progress.Label style={{ fontSize: '12px' }}>
-                      {
-                        [
-                          'ユーザー名',
-                          '自己紹介文',
-                          'プロフィール画像',
-                          'タイプ',
-                        ][index]
-                      }
-                    </Progress.Label>
-                  </Progress.Section>
-                )
-            )}
+            {userFields
+              .filter((field) => user?.[field])
+              .map((field, index) => (
+                <Progress.Section
+                  key={field}
+                  value={ratePerField}
+                  color={['cyan', 'pink', 'lime', 'orange'][index]}
+                >
+                  <Progress.Label style={{ fontSize: '12px' }}>
+                    {
+                      [
+                        'ユーザー名',
+                        '自己紹介文',
+                        'プロフィール画像',
+                        'タイプ',
+                      ][index]
+                    }
+                  </Progress.Label>
+                </Progress.Section>
+              ))}
           </Progress.Root>
         </Grid.Col>
       )}

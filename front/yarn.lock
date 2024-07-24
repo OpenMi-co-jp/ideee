@@ -1358,12 +1358,12 @@
   resolved "https://registry.npmjs.org/@kamilkisiela/fast-url-parser/-/fast-url-parser-1.1.4.tgz"
   integrity sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==
 
-"@mantine/charts@^7.11.2":
+"@mantine/charts@^7.10.2":
   version "7.11.2"
   resolved "https://registry.npmjs.org/@mantine/charts/-/charts-7.11.2.tgz"
   integrity sha512-iCmE2pTkUYsha/EWQoa9RZongmCGREaPOZqcqX47JBidgOdveyDYC+wMXsODc+buIofLUSfA6cLnjxPNgJzQGA==
 
-"@mantine/core@^7.11.2", "@mantine/core@7.11.2":
+"@mantine/core@^7.9.1", "@mantine/core@7.11.2":
   version "7.11.2"
   resolved "https://registry.npmjs.org/@mantine/core/-/core-7.11.2.tgz"
   integrity sha512-T64RjdgY8UPAv249miW1lQyPPot1JbCcKKsAZMNQHgcttcxLhrFpKVvglc4/48hdSoxI4LYJPNvqp7zciZmucQ==
@@ -1375,24 +1375,24 @@
     react-textarea-autosize "8.5.3"
     type-fest "^4.12.0"
 
-"@mantine/dropzone@^7.11.2":
+"@mantine/dropzone@^7.4.2":
   version "7.11.2"
   resolved "https://registry.npmjs.org/@mantine/dropzone/-/dropzone-7.11.2.tgz"
   integrity sha512-/X29ym1uM1ca7ZMLVSSxm9KBbDNIpXBwZbzNIpopH0hxjbo2bSpPTbNUVB3EjRAVWDx9RGlyNxQV2jkhCos7QQ==
   dependencies:
     react-dropzone-esm "15.0.1"
 
-"@mantine/hooks@^7.11.2", "@mantine/hooks@7.11.2":
+"@mantine/hooks@^7.9.1", "@mantine/hooks@7.11.2":
   version "7.11.2"
   resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-7.11.2.tgz"
   integrity sha512-jhyVe/sbDEG2U8rr2lMecUPgQxcfr5hh9HazqGfkS7ZRIMDO7uJ947yAcTMGGkp5Lxtt5TBFt1Cb6tiB2/1agg==
 
-"@mantine/modals@^7.11.2":
+"@mantine/modals@^7.1.2":
   version "7.11.2"
   resolved "https://registry.npmjs.org/@mantine/modals/-/modals-7.11.2.tgz"
   integrity sha512-AsVyGP5+F9jkQdQ9J0qzaK8q7n9bPcpswAjScpzIgEfUBC4RCvf63bmh9Yp1OEgxl1xkNdzGUYGVau0SQqHasA==
 
-"@mantine/notifications@^7.11.2":
+"@mantine/notifications@^7.1.2":
   version "7.11.2"
   resolved "https://registry.npmjs.org/@mantine/notifications/-/notifications-7.11.2.tgz"
   integrity sha512-KB/6mp3mU3LvcFlfMc5zK5mWcrAO+zAGeiBb1oUjNFXBECCn9xizqqUeT0YbWBHL7wysq9IThDJxLwUBnQt+8Q==

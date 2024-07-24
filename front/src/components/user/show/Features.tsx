@@ -52,43 +52,45 @@ export const Features = () => {
 
   return (
     <Grid mb={20}>
-      <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 12 }}>
-        <Flex
-          justify={{ base: 'center', md: 'flex-end' }}
-          align="center"
-          wrap="wrap"
-        >
-          <Title c="gray" fz="1.2rem" mb={15}>
-            ユーザー情報入力完了率
-            <Text span c="orange" fz="2rem" pl={5} inherit>
-              {completionRate}%
-            </Text>
-          </Title>
-        </Flex>
-        <Progress.Root size={20} mb={20} radius="lg">
-          {userFields.map(
-            (field, index) =>
-              user?.[field] && (
-                <Progress.Section
-                  key={field}
-                  value={ratePerField}
-                  color={['cyan', 'pink', 'lime', 'orange'][index]}
-                >
-                  <Progress.Label style={{ fontSize: '12px' }}>
-                    {
-                      [
-                        'ユーザー名',
-                        '自己紹介文',
-                        'プロフィール画像',
-                        'タイプ',
-                      ][index]
-                    }
-                  </Progress.Label>
-                </Progress.Section>
-              )
-          )}
-        </Progress.Root>
-      </Grid.Col>
+      {currentUser && String(currentUser?.id) === user?.id && (
+        <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 12 }}>
+          <Flex
+            justify={{ base: 'center', md: 'flex-end' }}
+            align="center"
+            wrap="wrap"
+          >
+            <Title c="gray" fz="1.2rem" mb={15}>
+              ユーザー情報入力完了率
+              <Text span c="orange" fz="2rem" pl={5} inherit>
+                {completionRate}%
+              </Text>
+            </Title>
+          </Flex>
+          <Progress.Root size={20} mb={20} radius="lg">
+            {userFields.map(
+              (field, index) =>
+                user?.[field] && (
+                  <Progress.Section
+                    key={field}
+                    value={ratePerField}
+                    color={['cyan', 'pink', 'lime', 'orange'][index]}
+                  >
+                    <Progress.Label style={{ fontSize: '12px' }}>
+                      {
+                        [
+                          'ユーザー名',
+                          '自己紹介文',
+                          'プロフィール画像',
+                          'タイプ',
+                        ][index]
+                      }
+                    </Progress.Label>
+                  </Progress.Section>
+                )
+            )}
+          </Progress.Root>
+        </Grid.Col>
+      )}
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
         <UserInfoBox label="タイプ" value={userType} />
       </Grid.Col>

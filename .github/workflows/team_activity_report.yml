@@ -1,0 +1,33 @@
+name: Team Activity Report
+on:
+  schedule:
+    - cron: '0 11 * * 4'  # 毎週木曜日のUTC 11時 (日本時間20時) に実行
+  workflow_dispatch:  # 手動実行用
+
+jobs:
+  generate-report:
+    name: Generate and Send Team Activity Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RAILS_ENV: test
+      GITHUB_TOKEN: ${{ secrets.TEAM_REPORT_TOKEN }}
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.2
+        bundler-cache: true
+
+    - name: Install dependencies
+      working-directory: ./backend
+      run: bundle install
+
+    - name: Generate and send report
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      working-directory: ./backend
+      run: bundle exec rails runner "::SlackNotifier.new.send_team_activity_report"

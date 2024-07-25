@@ -23,11 +23,11 @@ jobs:
         bundler-cache: true
 
     - name: Install dependencies
-      working-directory: ./backend
+      working-directory: ./api
       run: bundle install
 
     - name: Generate and send report
       env:
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      working-directory: ./backend
+      working-directory: ./api
       run: bundle exec rails runner "::SlackNotifier.new.send_team_activity_report"

@@ -74,7 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_29_052241) do
     t.index ["email", "reset_password_token"], name: "index_admin_users_on_email_and_reset_password_token", unique: true
   end
 
-  create_table "ai_logs", charset: "utf8mb4", force: :cascade do |t|
+  create_table "ai_logs", charset: "utf8mb4", comment: "AIログ", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "action", null: false
     t.datetime "created_at", null: false
@@ -192,7 +192,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_29_052241) do
     t.index ["notificatable_id", "notificatable_type"], name: "index_notifications_on_notificatable_id_and_notificatable_type"
   end
 
-  create_table "reviews", charset: "utf8mb4", force: :cascade do |t|
+  create_table "reviews", charset: "utf8mb4", comment: "レビュー", force: :cascade do |t|
     t.bigint "idea_id", null: false
     t.text "content", null: false
     t.integer "stance"

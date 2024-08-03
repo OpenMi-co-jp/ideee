@@ -45,3 +45,7 @@ export type IdeasType = {
     totalPages?: number | null
   } | null
 }
+
+export type aiIdeaTitleType = {
+  title: string | null
+}

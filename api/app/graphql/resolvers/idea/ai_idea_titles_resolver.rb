@@ -7,9 +7,9 @@ module Resolvers
     type [Types::Idea::AiIdeaTitlesType], null: false
 
     def resolve
-      cached_data = Rails.cache.read('daily_idea_titles') || {}
-      titles = cached_data['titles'] || []
-      titles
+      Rails.cache.fetch('daily_idea_titles', expires_in: 1.day) do
+        AI::IdeaTitlesJob.perform_now
+      end
     end
   end
 end

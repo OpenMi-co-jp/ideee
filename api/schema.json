@@ -10,6 +10,37 @@
       "subscriptionType": null,
       "types": [
         {
+          "kind": "OBJECT",
+          "name": "AiIdeaTitles",
+          "description": null,
+          "interfaces": [
+
+          ],
+          "possibleTypes": null,
+          "fields": [
+            {
+              "name": "title",
+              "description": "AIアイデアタイトル",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            }
+          ],
+          "inputFields": null,
+          "enumValues": null
+        },
+        {
           "kind": "SCALAR",
           "name": "Boolean",
           "description": "Represents `true` or `false` values.",
@@ -2854,7 +2885,7 @@
             },
             {
               "name": "createAiBrushUp",
-              "description": "AIブラッシュアップ作成",
+              "description": "AIブラッシュアップ",
               "type": {
                 "kind": "OBJECT",
                 "name": "IdeaAiBrushUpPayload",
@@ -3986,6 +4017,32 @@
               ]
             },
             {
+              "name": "aiIdeaTitles",
+              "description": "AIによるアイデアタイトル一覧",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "AiIdeaTitles",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "comment",
               "description": "コメントオブジェクト",
               "type": {
@@ -4283,7 +4340,7 @@
                 },
                 {
                   "name": "searchCondition",
-                  "description": "アイデア検索条件",
+                  "description": "アイデア検索条件",
                   "type": {
                     "kind": "INPUT_OBJECT",
                     "name": "SearchCondition",

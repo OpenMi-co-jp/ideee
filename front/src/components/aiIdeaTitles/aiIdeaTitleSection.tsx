@@ -1,4 +1,4 @@
-import { Paper, Flex, Title } from '@mantine/core'
+import { Paper, Flex, Text, Title } from '@mantine/core'
 import { IconBulb } from '@tabler/icons-react'
 import { AiIdeaTitleList } from './aiIdeaTitleList'
 
@@ -15,9 +15,14 @@ export const AiIdeaTitleSection: React.FC = () => {
         <Paper shadow="sm" radius="md" p="sm">
           <IconBulb size={30} stroke={1.5} />
         </Paper>
-        <Title order={2} mx="md" my="md" c="red">
-          アイデアのヒント
-        </Title>
+        <div>
+          <Title order={2} mx="md" c="red">
+            今日のアイデアヒント
+          </Title>
+          <Text mx="md">
+            下記ヒントから三つをクリックし、アイデアが作成できます！
+          </Text>
+        </div>
       </Flex>
       <AiIdeaTitleList />
     </Paper>

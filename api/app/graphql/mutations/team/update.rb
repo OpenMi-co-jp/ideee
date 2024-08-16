@@ -12,8 +12,13 @@ module Mutations
 
     field :team, Types::TeamType, null: false, description: 'チームオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
+      if context[:current_user].id != args[:owner_id].to_i
+        return { success: false, errors: ['ユーザーの権限がありません'] }
+      end
+
       team = ::Team.find(args[:id])
       team.update!(
         owner_id: args[:owner_id],

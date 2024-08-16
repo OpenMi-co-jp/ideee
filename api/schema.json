@@ -1089,6 +1089,28 @@
               ]
             },
             {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "success",
               "description": "成功フラグ",
               "type": {
@@ -1629,6 +1651,28 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -2854,7 +2898,7 @@
             },
             {
               "name": "createAiBrushUp",
-              "description": "AIブラッシュアップ作成",
+              "description": "AIブラッシュアップ",
               "type": {
                 "kind": "OBJECT",
                 "name": "IdeaAiBrushUpPayload",
@@ -4283,7 +4327,7 @@
                 },
                 {
                   "name": "searchCondition",
-                  "description": "アイデア検索条件",
+                  "description": "アイデア検索条件",
                   "type": {
                     "kind": "INPUT_OBJECT",
                     "name": "SearchCondition",
@@ -6258,6 +6302,28 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null,

@@ -198,6 +198,8 @@ export type CreateTeamPayload = {
   __typename?: 'CreateTeamPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** 成功フラグ */
   success: Scalars['Boolean']
   /** チームオブジェクト */
@@ -297,6 +299,8 @@ export type DestroyTeamPayload = {
   __typename?: 'DestroyTeamPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** 成功フラグ */
   success: Scalars['Boolean']
 }
@@ -470,7 +474,7 @@ export type Mutation = {
   __typename?: 'Mutation'
   /** 通知確認 */
   checkNotifications?: Maybe<CheckNotificationsPayload>
-  /** AIブラッシュアップ作成 */
+  /** AIブラッシュアップ */
   createAiBrushUp?: Maybe<IdeaAiBrushUpPayload>
   /** AIレビュー作成 */
   createAiReview?: Maybe<IdeaAiReviewPayload>
@@ -1005,6 +1009,8 @@ export type UpdateTeamPayload = {
   __typename?: 'UpdateTeamPayload'
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>
+  /** エラーリスト */
+  errors?: Maybe<Array<Scalars['String']>>
   /** 成功フラグ */
   success: Scalars['Boolean']
   /** チームオブジェクト */

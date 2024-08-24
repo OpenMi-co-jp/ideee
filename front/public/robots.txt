@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ideee.tech
+
+# Sitemaps
+Sitemap: https://ideee.tech/sitemap.xml

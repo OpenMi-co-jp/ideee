@@ -1,4 +1,4 @@
-import { getServerSideSitemapIndex } from 'next-sitemap'
+import { getServerSideSitemapIndexLegacy } from 'next-sitemap'
 import { GetServerSideProps } from 'next'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
@@ -28,20 +28,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     priority: 0.7,
   }));
 
-  paths.push({
-    loc: '/ideas',
-    changefreq: 'weekly',
-    priority: 0.7,
-  });
-  const sitemapIndex = await getServerSideSitemapIndex(paths);
-
-  ctx.res.setHeader('Content-Type', 'application/xml');
-  ctx.res.write(sitemapIndex);
-  ctx.res.end();
-
-  return {
-    props: {},
-  }
+  return getServerSideSitemapIndexLegacy(ctx, paths.map(
+    (item: { loc: string }) => process.env.NEXT_PUBLIC_FRONT_URL + item.loc
+  ));
 }
 
 export default function SitemapIndex() {}

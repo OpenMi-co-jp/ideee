@@ -1,6 +1,7 @@
 name: Qiita自動投稿
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 15 * * *'  # 日本時間に調整
 

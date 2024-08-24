@@ -1,6 +1,7 @@
 name: send weekly mail at Monday 12 AM
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 3 * * 1' # 日本時間に調整
 

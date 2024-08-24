@@ -1,4 +1,4 @@
-import generateIdeasIds from './src/lib/generateIdeasIds'
+const { generateIdeasIds } = require('./src/utils/sitemap');
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
@@ -8,11 +8,11 @@ module.exports = {
   exclude: ['/mypage/*', '/ideas/new', '/user/*'],
   // 動的ルーティングの設定
   additionalPaths: async (config) => {
-    const ideaPaths = await generateIdeasIds()
+    const ideaPaths = await generateIdeasIds();
     return ideaPaths.map((id) => ({
       loc: `/ideas/${id}`,
       changefreq: 'weekly',
       priority: 0.7,
     }));
   },
-}
+};

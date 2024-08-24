@@ -14,6 +14,7 @@ module Types
     field :published_ideas, resolver: Resolvers::User::Idea::PublishedIdeasResolver, description: '公開アイデア一覧'
     field :commented_ideas, resolver: Resolvers::User::Idea::CommentedIdeasResolver, description: 'コメントアイデア一覧'
     field :liked_ideas, resolver: Resolvers::User::Idea::LikedIdeasResolver, description: 'いいねしたアイデア一覧'
+    field :idea_ids, resolver: Resolvers::Idea::IdeaIdsResolver, description: 'ユーザーのアイデアID一覧'
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
     field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'

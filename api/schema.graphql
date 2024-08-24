@@ -854,6 +854,13 @@ type IdeaAiReviewPayload {
   success: Boolean!
 }
 
+type IdeaIds {
+  """
+  アイデアIDリスト
+  """
+  ids: [Int!]!
+}
+
 type Ideas {
   """
   アイデアオブジェクト
@@ -910,7 +917,7 @@ type Mutation {
   ): CheckNotificationsPayload
 
   """
-  AIブラッシュアップ作成
+  AIブラッシュアップ
   """
   createAiBrushUp(
     """
@@ -1340,6 +1347,11 @@ type Query {
   ): Idea!
 
   """
+  ユーザーのアイデアID一覧
+  """
+  ideaIds: IdeaIds!
+
+  """
   アイデア一覧
   """
   ideas(
@@ -1354,7 +1366,7 @@ type Query {
     per: Int = 30
 
     """
-    アイデア検索条件
+    アイデア検索条件
     """
     searchCondition: SearchCondition
 

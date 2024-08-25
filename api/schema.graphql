@@ -1,8 +1,23 @@
-type AiIdeaTitles {
+type AiIdeas {
   """
-  AIアイデアタイトル
+  背景
   """
-  title: String!
+  background: String
+
+  """
+  ゴール
+  """
+  goal: String
+
+  """
+  タグオブジェクト
+  """
+  ideaTags: [Tag!]
+
+  """
+  AIアイデア名
+  """
+  name: String!
 }
 
 """
@@ -1272,9 +1287,9 @@ type Query {
   activeTeamIdeas: [Idea!]!
 
   """
-  AIによるアイデアタイトル一覧
+  AIによるアイデア一覧
   """
-  aiIdeaTitles: [AiIdeaTitles!]!
+  aiIdeas: [AiIdeas!]!
 
   """
   コメントオブジェクト

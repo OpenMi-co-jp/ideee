@@ -63,9 +63,9 @@ class Idea < ApplicationRecord
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
-  enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
-  enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
-  enum stance: { free_right: 0, personal_project: 1, team_project: 2 }
+  enum :difficulty, { not_yet: 0, easy: 1, middle: 2, hard: 3 }
+  enum :product_apply, { no_apply: 0, applying: 1, approved: 2 }
+  enum :stance, { free_right: 0, personal_project: 1, team_project: 2 }
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }

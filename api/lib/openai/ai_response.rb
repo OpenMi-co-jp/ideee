@@ -1,3 +1,4 @@
+require 'openai'
 module AIResponse
   def self.fetch_ai_response(content, heavy: false)
     client = OpenAI::Client.new

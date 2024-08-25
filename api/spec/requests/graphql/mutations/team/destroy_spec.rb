@@ -45,7 +45,7 @@ RSpec.describe Mutations::Team::Destroy do
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
         graphql_post
-        res =  response.parsed_body
+        res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type DestroyTeamInput! was provided invalid value for id (Expected value to not be null)')
       end
     end

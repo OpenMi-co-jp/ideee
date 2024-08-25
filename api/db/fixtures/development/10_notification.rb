@@ -3,14 +3,14 @@
 100.times do |n|
   num = n + 1
   visitor = User.all.sample
-  visited = User.all.where.not(id: visitor.id).sample
+  visited = User.where.not(id: visitor.id).sample
   Notification.seed(
     :id,
     { id: num, visitor:, visited:, idea: Idea.all.sample, notificatable: Like.all.sample }
   )
   # ハートを送るユーザーとコメントするユーザーを分けるため
   visitor = User.all.sample
-  visited = User.all.where.not(id: visitor.id).sample
+  visited = User.where.not(id: visitor.id).sample
   Notification.seed(
     :id,
     { id: num + 100, visitor:, visited:, idea: Idea.all.sample, notificatable: Comment.all.sample }

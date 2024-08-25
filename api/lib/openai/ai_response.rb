@@ -12,7 +12,7 @@ module AIResponse
       }
     )
     response.dig('choices', 0, 'message', 'content')
-  rescue OpenAI::OpenAIException => e
+  rescue OpenAI::Error => e
     Sentry.capture_exception(e)
     raise e
   end

@@ -11,7 +11,7 @@
       "types": [
         {
           "kind": "OBJECT",
-          "name": "AiIdeaTitles",
+          "name": "AiIdeas",
           "description": null,
           "interfaces": [
 
@@ -19,8 +19,58 @@
           "possibleTypes": null,
           "fields": [
             {
-              "name": "title",
-              "description": "AIアイデアタイトル",
+              "name": "background",
+              "description": "背景",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "goal",
+              "description": "ゴール",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "ideaTags",
+              "description": "タグオブジェクト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Tag",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "name",
+              "description": "AIアイデア名",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -4017,8 +4067,8 @@
               ]
             },
             {
-              "name": "aiIdeaTitles",
-              "description": "AIによるアイデアタイトル一覧",
+              "name": "aiIdeas",
+              "description": "AIによるアイデア一覧",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -4030,7 +4080,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "AiIdeaTitles",
+                      "name": "AiIdeas",
                       "ofType": null
                     }
                   }

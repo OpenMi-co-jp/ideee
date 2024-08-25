@@ -23,7 +23,7 @@ namespace :ai_commit do
   desc 'AIによるgoal,background更新'
   task update_nil_content: :environment do
     batch_size = 10
-    ideas = Idea.where(goal: '_', background: '_').filter_map { |idea| idea if idea.note.present? }
+    ideas = Idea.where(goal: '_', background: '_').select { |idea| idea.note.present? }
     ideas.each_slice(batch_size) do |idea_batch|
       Rails.logger.info idea_batch.pluck(:id, :name)
       content_batch = idea_batch.map { |idea| build_nil_content(idea) }
@@ -60,7 +60,7 @@ namespace :ai_commit do
 
   def existing_tags
     Rails.cache.fetch('existing_tags', expires_in: 1.hour) do
-      Tag.all.pluck(:name)
+      Tag.pluck(:name)
     end
   end
 

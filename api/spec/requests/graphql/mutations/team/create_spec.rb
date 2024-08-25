@@ -85,7 +85,7 @@ RSpec.describe Mutations::Team::Create do
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
         graphql_post
-        res =  response.parsed_body
+        res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateTeamInput! was provided invalid value for ideaId')
       end
     end
@@ -97,7 +97,7 @@ RSpec.describe Mutations::Team::Create do
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
         graphql_post
-        res =  response.parsed_body
+        res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateTeamInput! was provided invalid value for ownerId')
       end
     end

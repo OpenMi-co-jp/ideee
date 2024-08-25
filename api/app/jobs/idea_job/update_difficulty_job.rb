@@ -9,7 +9,7 @@ module IdeaJob
       # difficultyが一つしかなければ現在の値を代入
       level =
         if idea.difficultys.size == 1
-          idea.difficultys[0].level
+          idea.difficultys.first.level
         else
           # 2つ以上であればgroup化して計算開始
           levels_hash = idea.difficultys.group(:level).size
@@ -18,7 +18,7 @@ module IdeaJob
             'middle'
           else
             # 最も多く使われる値が１つしかない場合
-            levels_hash.max_by { |x| x[1] }[0]
+            levels_hash.max_by { |x| x[1] }.first
           end
         end
       # ideaを出力されたlevelでupdate

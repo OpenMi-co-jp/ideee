@@ -23,5 +23,5 @@ class AiLog < ApplicationRecord
   belongs_to :user
   belongs_to :loggable, polymorphic: true
   validates :action, presence: true
-  enum action: { review: 'review', brush_up: 'brush_up' }
+  enum :action, { review: 'review', brush_up: 'brush_up' }
 end

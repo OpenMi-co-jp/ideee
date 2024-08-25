@@ -38,7 +38,7 @@ class Team < ApplicationRecord
   has_many :members, through: :team_users, source: :user
   has_one :room, dependent: :destroy
 
-  enum status: { active: 0, stop: 1, finished: 2 }, _prefix: true
+  enum :status, { active: 0, stop: 1, finished: 2 }, prefix: true
   alias user owner # owner?メソッドを使うために設定
 
   def self.ransackable_attributes(_auth_object = nil)

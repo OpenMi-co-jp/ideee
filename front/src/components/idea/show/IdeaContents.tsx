@@ -6,14 +6,18 @@ import {
   IconXboxX,
 } from '@tabler/icons-react'
 import { IdeaContentSet } from './IdeaContentSet'
-import type { GetIdeaQuery } from '@/lib/generated/client'
+import {
+  useGetTeamQuery,
+  useGetTeamsQuery,
+  type GetIdeaQuery,
+} from '@/lib/generated/client'
 import { useIdea } from '@/context/IdeaContext'
 import { StanceBadge } from '@/utils/StanceBadge'
 import type { StanceBadgeProps } from '@/utils/StanceBadge'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 import { useDisclosure } from '@mantine/hooks'
 import CreateTeamModal from '@/components/idea/show/form/CreateTeamModal'
-import { useCreateTeam } from './form/hook'
+import { useCreateTeam } from '@/components/idea/show/form/hook'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -35,6 +39,17 @@ export const IdeaContents = () => {
   const sections = getSections(idea)
   const [opened, { open, close }] = useDisclosure(false)
   const { form, onSubmit } = useCreateTeam()
+
+  // このIDですでに発足しているチームがないかを確認。
+  // const { data, loading, error } = useGetTeamQuery({
+  //   variables: {
+  //     ownerId: idea.userId,
+  //     ideaId: idea.id,
+  //   },
+  // })
+
+  // const { data } = useGetTeamsQuery()
+  // console.log(data)
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
@@ -76,6 +91,7 @@ export const IdeaContents = () => {
           </Button>
         </Anchor>
       )}
+      {/* 下記の条件に加えて、すでにチーム開発が発足されている場合は、チームのホーム画面に遷移させる。 */}
       {stance === 'team_project' && (
         <Button
           variant="gradient"

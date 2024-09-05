@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import { TeamFormSchema } from './TeamFormSchema'
+import { TeamFormSchema } from '@/components/idea/show/form/TeamFormSchema'
 import { useCreateTeamMutation } from '@/lib/generated/client'
 import { useRouter } from 'next/navigation'
 import { showError, showSuccess } from '@/components/showNotification'
@@ -20,6 +20,9 @@ export const useCreateTeam = () => {
   const { data, loading, error } = useGetIdea()
 
   const onSubmit: SubmitHandler<FieldValues> = async (FormData) => {
+    console.log('処理が開始されました。')
+
+    // すでにアイディアに対してのチームが発足されていればエラーとする
     const response = await createTeamMutation({
       variables: {
         input: {
@@ -37,8 +40,9 @@ export const useCreateTeam = () => {
       router.push(`/teams/${response.data!.createTeam!.team.id}`)
     } else {
       showError({
-        action: 'アイデアの作成',
-        // message: String(response.data!.createTeam!.),
+        action: 'アイデアの作成に失敗しました。',
+        // ERRORがない。
+        message: String(response.data!.createTeam!.success),
       })
     }
   }

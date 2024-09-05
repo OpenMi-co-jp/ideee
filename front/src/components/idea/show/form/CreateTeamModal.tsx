@@ -1,6 +1,5 @@
 import { TextForm } from '@/components/ReactFormSet'
-import { Button, Flex, Modal, Paper, Text } from '@mantine/core'
-import { IconXboxX } from '@tabler/icons-react'
+import { Button, Flex, Modal, Text } from '@mantine/core'
 import {
   FieldValues,
   SubmitHandler,
@@ -21,7 +20,15 @@ export default function CreateTeamModal({
   form,
   onSubmit,
 }: CreateTeamModalProps) {
+  // const [isSubmitting, setIsSubmitting] = useState(false)
   const { errors } = useFormState({ control: form.control })
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    // setIsSubmitting(true)
+    await form.handleSubmit(onSubmit)(event)
+    // setIsSubmitting(false)
+  }
 
   return (
     <Modal.Root opened={opened} onClose={onClose} size="xl" centered>
@@ -36,15 +43,30 @@ export default function CreateTeamModal({
           <Modal.CloseButton />
         </Modal.Header>
         <Modal.Body>
-          <Paper p="lg">input</Paper>
-          <Flex align="center" justify="center" gap="6">
-            <Button color="gray.6" onClick={onClose}>
-              戻る
-            </Button>
-            <Button color="orange.6" onClick={onSubmit}>
-              作成
-            </Button>
-          </Flex>
+          <form onSubmit={handleSubmit} role="form">
+            <TextForm
+              form={form}
+              name="offer"
+              label="得られるもの"
+              required
+              mb="lg"
+            />
+            <TextForm
+              form={form}
+              name="requirement"
+              label="お願いすること"
+              required
+              mb="lg"
+            />
+            <Flex align="center" justify="center" gap="xl">
+              <Button color="gray.6" onClick={onClose}>
+                戻る
+              </Button>
+              <Button color="orange.6" type="submit">
+                作成
+              </Button>
+            </Flex>
+          </form>
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>

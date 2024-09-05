@@ -1,4 +1,3 @@
-import { TextForm } from '@/components/ReactFormSet'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamsQuery } from '@/lib/generated/client'
 import { Button, Container, Flex, Paper, Text } from '@mantine/core'
@@ -8,7 +7,6 @@ import Link from 'next/link'
 export default function CreateTeam() {
   const { currentUser } = useCurrentUser()
   const { data, loading, error } = useGetTeamsQuery({})
-  const handleTeamCreate = () => {}
 
   return (
     <Container>
@@ -23,20 +21,21 @@ export default function CreateTeam() {
           チーム開発
         </Text>
       </Flex>
-      <form onSubmit={handleTeamCreate} role="form">
-        <Paper shadow="sm" radius="lg" p="xl" withBorder>
-          <Text>オーナー情報の表示、タイプ、アバター</Text>
-          <Text>紐づくアイディアを選択</Text>
-          <Text>得られること</Text>
-          <Text>お願いしたいこと。</Text>
-        </Paper>
-        <Flex justify="center" align="center" gap="xl" mt="md">
-          <Link href={'/'}>
-            <Button color="gray.6">戻る</Button>
-          </Link>
-          <Button color="orange.6">登録</Button>
-        </Flex>
-      </form>
+
+      <Paper shadow="sm" radius="lg" p="xl" withBorder>
+        <Text>オーナー情報の表示、タイプ、アバター</Text>
+        <Text>{currentUser?.name}</Text>
+        <Text>{currentUser?.defined}</Text>
+        <Text>紐づくアイディアを選択</Text>
+        <Text>得られること</Text>
+        <Text>お願いしたいこと。</Text>
+      </Paper>
+      <Flex justify="center" align="center" gap="xl" mt="md">
+        <Link href={'/'}>
+          <Button color="gray.6">戻る</Button>
+        </Link>
+        <Button color="orange.6">登録</Button>
+      </Flex>
     </Container>
   )
 }

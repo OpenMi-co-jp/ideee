@@ -1,8 +1,7 @@
+import { Flex, Text } from '@mantine/core'
+import Link from 'next/link'
 import { UserIcon } from '@/components/user'
 import { useIdea } from '@/context/IdeaContext'
-import { Button, Flex, Text } from '@mantine/core'
-import { IconBrandTeams } from '@tabler/icons-react'
-import Link from 'next/link'
 
 export const UserSection = () => {
   const idea = useIdea()
@@ -19,16 +18,6 @@ export const UserSection = () => {
           </Flex>
         </Link>
       </div>
-      <Link href={`/teams/new`}>
-        <Button
-          variant="gradient"
-          gradient={{ from: 'orange', to: 'yellow' }}
-          leftSection={<IconBrandTeams size={20} />}
-          radius="xl"
-        >
-          チーム開発
-        </Button>
-      </Link>
     </Flex>
   )
 }

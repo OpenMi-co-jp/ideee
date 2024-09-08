@@ -23,7 +23,6 @@ query GetIdea($id: ID!) {
     likesNum
     productUrl
     githubUrl
-    teamStatus
     user {
       id
       name
@@ -48,6 +47,11 @@ query GetIdea($id: ID!) {
       id
       content
       stance
+    }
+    team {
+      id
+      status
+      membersNum
     }
   }
 }

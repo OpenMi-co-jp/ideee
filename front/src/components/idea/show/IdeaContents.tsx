@@ -40,17 +40,6 @@ export const IdeaContents = () => {
   const [opened, { open, close }] = useDisclosure(false)
   const { form, onSubmit } = useCreateTeam()
 
-  // このIDですでに発足しているチームがないかを確認。
-  // const { data, loading, error } = useGetTeamQuery({
-  //   variables: {
-  //     ownerId: idea.userId,
-  //     ideaId: idea.id,
-  //   },
-  // })
-
-  // const { data } = useGetTeamsQuery()
-  // console.log(data)
-
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
       <Flex direction="row" gap="md">
@@ -62,6 +51,27 @@ export const IdeaContents = () => {
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}
+      {/* 下記の条件に加えて、すでにチーム開発が発足されている場合は、チームのホーム画面に遷移させる。 booleanで判定を行う。*/}
+      {stance === 'team_project' && (
+        <Button
+          variant="gradient"
+          gradient={{ from: 'orange', to: 'yellow' }}
+          radius="xl"
+          size="md"
+          mr="md"
+          leftSection={<IconUsers />}
+          mt="xl"
+          onClick={open}
+        >
+          チーム開発を確認
+        </Button>
+      )}
+      <CreateTeamModal
+        opened={opened}
+        onClose={close}
+        form={form}
+        onSubmit={onSubmit}
+      />
       {productUrl && (
         <Anchor href={productUrl} target="_blank">
           <Button
@@ -91,26 +101,6 @@ export const IdeaContents = () => {
           </Button>
         </Anchor>
       )}
-      {/* 下記の条件に加えて、すでにチーム開発が発足されている場合は、チームのホーム画面に遷移させる。 */}
-      {stance === 'team_project' && (
-        <Button
-          variant="gradient"
-          gradient={{ from: 'orange', to: 'yellow' }}
-          radius="xl"
-          size="md"
-          leftSection={<IconUsers />}
-          mt="xl"
-          onClick={open}
-        >
-          チーム開発を確認
-        </Button>
-      )}
-      <CreateTeamModal
-        opened={opened}
-        onClose={close}
-        form={form}
-        onSubmit={onSubmit}
-      />
     </Paper>
   )
 }

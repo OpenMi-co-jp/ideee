@@ -20,29 +20,25 @@ export const useCreateTeam = () => {
   const { data, loading, error } = useGetIdea()
 
   const onSubmit: SubmitHandler<FieldValues> = async (FormData) => {
-    console.log('処理が開始されました。')
-
-    // すでにアイディアに対してのチームが発足されていればエラーとする
+    // すでにアイディアに対してのチームが発足されていればエラーとする→ボタンの制御で対応
     const response = await createTeamMutation({
       variables: {
         input: {
           ideaId: String(data?.idea.id),
-          membersNum: 0,
           offer: FormData.offer,
           ownerId: String(currentUser?.id),
           requirement: FormData.offer,
-          status: 0,
         },
       },
     })
     if (response.data!.createTeam!.success) {
-      showSuccess({ action: 'アイデアの作成' })
+      showSuccess({ action: 'チームの作成' })
       router.push(`/teams/${response.data!.createTeam!.team.id}`)
     } else {
       showError({
         action: 'アイデアの作成に失敗しました。',
         // ERRORがない。
-        message: String(response.data!.createTeam!.success),
+        message: String(response.data!.createTeam?.errors),
       })
     }
   }

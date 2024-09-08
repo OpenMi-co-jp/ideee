@@ -1,3 +1,5 @@
-export default function TeamsDetail() {
-  return <div></div>
+import TeamDetailContent from '@/components/teams/TeamDetailContent'
+
+export default function TeamDetail() {
+  return <TeamDetailContent />
 }

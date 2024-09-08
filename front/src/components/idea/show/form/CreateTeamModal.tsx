@@ -1,5 +1,5 @@
-import { TextForm } from '@/components/ReactFormSet'
-import { Button, Flex, Modal, Text } from '@mantine/core'
+import { TextAreaForm, TextForm } from '@/components/ReactFormSet'
+import { Button, Flex, Modal, Text, Textarea } from '@mantine/core'
 import {
   FieldValues,
   SubmitHandler,
@@ -44,14 +44,14 @@ export default function CreateTeamModal({
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit} role="form">
-            <TextForm
+            <TextAreaForm
               form={form}
               name="offer"
               label="得られるもの"
               required
               mb="lg"
             />
-            <TextForm
+            <TextAreaForm
               form={form}
               name="requirement"
               label="お願いすること"

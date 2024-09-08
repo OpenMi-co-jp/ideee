@@ -33,6 +33,7 @@ mutation createTeam($input: CreateTeamInput!) {
       membersNum
     }
     success
+    errors
   }
 }
 
@@ -47,6 +48,7 @@ mutation updateTeam($input: UpdateTeamInput!) {
       membersNum
     }
     success
+    errors
   }
 }
 

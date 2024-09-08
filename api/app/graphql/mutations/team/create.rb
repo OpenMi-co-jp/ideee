@@ -19,10 +19,8 @@ module Mutations
       team = ::Team.new(
         owner_id: args[:owner_id],
         idea_id: args[:idea_id],
-        status: args[:status],
         requirement: args[:requirement],
-        offer: args[:offer],
-        members_num: args[:members_num]
+        offer: args[:offer]
       )
       team.save!
       {

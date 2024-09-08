@@ -5,6 +5,7 @@ module Mutations
     argument :id, ID, required: true, description: 'チームID'
     argument :owner_id, ID, required: true, description: '【必須】オーナーID'
     argument :idea_id, ID, required: true, description: '【必須】アイデアID'
+    argument :status, Integer, required: false, description: 'チームステータス'
     argument :requirement, String, required: false, description: 'お願いすること'
     argument :offer, String, required: false, description: '(メンバーが)得られるもの'
 
@@ -23,8 +24,7 @@ module Mutations
         idea_id: args[:idea_id],
         status: args[:status],
         requirement: args[:requirement],
-        offer: args[:offer],
-        members_num: args[:members_num]
+        offer: args[:offer]
       )
       {
         team:,

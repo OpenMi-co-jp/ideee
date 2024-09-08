@@ -16,14 +16,14 @@ export default function Home() {
     <>
       {!currentUser && <TopVision />}
       {!currentUser && <Space h="5rem" />}
-      {currentUser && <AiIdeaTitleSection />}
-      <Space h="lg" />
       <HotIdeas />
-      <Space h="lg" />
+      <Space h="xs" />
+      {currentUser && <AiIdeaTitleSection />}
+      <Space h="xs" />
       <PopularTags />
-      <Space h="lg" />
+      <Space h="xs" />
       <ActiveTeamIdeas />
-      <Space h="lg" />
+      <Space h="xs" />
       <DeployedIdeas />
       {!currentUser && <Philosophy />}
     </>

@@ -6,7 +6,7 @@ import { Grid } from '@mantine/core'
 import { GetAiIdeasQuery } from '@/lib/generated/client'
 import Link from 'next/link'
 
-export const AiIdeaTitleList: React.FC = () => {
+export const AiIdeaTitleList = () => {
   const { loading, data, error } = useGetAiIdeasQuery()
   if (loading) return <LoaderBox />
   if (error) return <AlertError />

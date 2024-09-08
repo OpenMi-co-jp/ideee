@@ -1,5 +1,4 @@
 import { useMantineColorScheme, Box, Group, Portal, rem } from '@mantine/core'
-import type { FC } from 'react'
 import { useHeadroom } from '@mantine/hooks'
 import {
   UserToggle,
@@ -13,7 +12,7 @@ import { CreateSpButton } from '@/components/idea/createSpButton'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 
-export const Header: FC = () => {
+export const Header = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
   const { colorScheme } = useMantineColorScheme()
   const { isMobile } = useBreakPoint()

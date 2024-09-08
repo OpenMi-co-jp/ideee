@@ -308,8 +308,11 @@ query GetSuggestIdeas($ideaId: ID!) {
   }
 }
 
-query GetAiIdeaTitles {
-  aiIdeaTitles {
-    title
+query GetAiIdeas {
+  aiIdeas {
+    name
+    background
+    goal
+    ideaTags
   }
 }

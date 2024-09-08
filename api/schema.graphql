@@ -12,7 +12,7 @@ type AiIdeas {
   """
   タグオブジェクト
   """
-  ideaTags: [Tag!]
+  ideaTags: [String!]
 
   """
   AIアイデア名
@@ -632,7 +632,7 @@ type Difficulty {
 """
 An ISO 8601-encoded datetime
 """
-scalar ISO8601DateTime
+scalar ISO8601DateTime @specifiedBy(url: "https://tools.ietf.org/html/rfc3339")
 
 type Idea {
   """

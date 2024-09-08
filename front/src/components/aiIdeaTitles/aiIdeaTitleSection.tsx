@@ -7,8 +7,8 @@ export const AiIdeaTitleSection: React.FC = () => {
     <Paper
       shadow="xs"
       radius="lg"
-      py="xl"
-      my="xl"
+      py="lg"
+      my="lg"
       style={{ border: 'thick double #FFCCCB' }}
     >
       <Flex justify="left" align="center" direction="row" wrap="nowrap" mx="xl">
@@ -20,7 +20,7 @@ export const AiIdeaTitleSection: React.FC = () => {
             今日のアイデアヒント
           </Title>
           <Text mx="md">
-            下記ヒントから三つをクリックし、アイデアが作成できます！
+            下のアイデアをクリックし、アイデア作成をスタートできます！
           </Text>
         </div>
       </Flex>

@@ -17,8 +17,12 @@ export default function Home() {
       {!currentUser && <TopVision />}
       {!currentUser && <Space h="5rem" />}
       <HotIdeas />
-      <Space h="xs" />
-      {currentUser && <AiIdeaTitleSection />}
+      {currentUser && (
+        <>
+          <Space h="xs" />
+          <AiIdeaTitleSection />
+        </>
+      )}
       <Space h="xs" />
       <PopularTags />
       <Space h="xs" />

@@ -20,8 +20,8 @@ export const SuggestIdeas = () => {
     <Paper
       shadow="xs"
       radius="lg"
-      py="xl"
-      my="xl"
+      pt="lg"
+      my="lg"
       style={{ border: 'thick double #FFECCC' }}
     >
       <Flex justify="left" align="center" direction="row" wrap="nowrap" mx="xl">

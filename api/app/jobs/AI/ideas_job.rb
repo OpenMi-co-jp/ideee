@@ -33,16 +33,18 @@ module AI
     end
 
     def news_contents
-      api_key = Rails.application.credentials.dig(:gnews, :api_key)
-      api_url = URI("https://gnews.io/api/v4/top-headlines?country=jp&max=10&apikey=#{api_key}")
+      Rails.cache.fetch('daily_news', expires_in: 1.day) do
+        api_key = Rails.application.credentials.dig(:gnews, :api_key)
+        api_url = URI("https://gnews.io/api/v4/top-headlines?country=jp&max=10&apikey=#{api_key}")
 
-      http = Net::HTTP.new(api_url.host, api_url.port)
-      http.use_ssl = true
+        http = Net::HTTP.new(api_url.host, api_url.port)
+        http.use_ssl = true
 
-      request = Net::HTTP::Get.new(api_url.request_uri)
-      response = http.request(request)
+        request = Net::HTTP::Get.new(api_url.request_uri)
+        response = http.request(request)
 
-      JSON.parse(response.body)['articles']
+        JSON.parse(response.body)['articles']
+      end
     end
   end
 end

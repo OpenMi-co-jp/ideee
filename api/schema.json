@@ -1030,22 +1030,6 @@
               "deprecationReason": null
             },
             {
-              "name": "status",
-              "description": "【必須】チームステータス",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "requirement",
               "description": "【必須】お願いすること",
               "type": {
@@ -1070,22 +1054,6 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "membersNum",
-              "description": "メンバー数",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
                   "ofType": null
                 }
               },
@@ -6293,18 +6261,6 @@
               "deprecationReason": null
             },
             {
-              "name": "status",
-              "description": "チームステータス",
-              "type": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "requirement",
               "description": "お願いすること",
               "type": {
@@ -6322,18 +6278,6 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "membersNum",
-              "description": "メンバー数",
-              "type": {
-                "kind": "SCALAR",
-                "name": "Int",
                 "ofType": null
               },
               "defaultValue": null,

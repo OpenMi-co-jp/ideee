@@ -5,10 +5,8 @@ module Mutations
     argument :id, ID, required: true, description: 'チームID'
     argument :owner_id, ID, required: true, description: '【必須】オーナーID'
     argument :idea_id, ID, required: true, description: '【必須】アイデアID'
-    argument :status, Integer, required: false, description: 'チームステータス'
     argument :requirement, String, required: false, description: 'お願いすること'
     argument :offer, String, required: false, description: '(メンバーが)得られるもの'
-    argument :members_num, Integer, required: false, description: 'メンバー数'
 
     field :team, Types::TeamType, null: false, description: 'チームオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'

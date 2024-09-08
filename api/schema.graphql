@@ -332,11 +332,6 @@ input CreateTeamInput {
   ideaId: ID!
 
   """
-  メンバー数
-  """
-  membersNum: Int!
-
-  """
   【必須】(メンバーが)得られるもの
   """
   offer: String!
@@ -350,11 +345,6 @@ input CreateTeamInput {
   【必須】お願いすること
   """
   requirement: String!
-
-  """
-  【必須】チームステータス
-  """
-  status: Int!
 }
 
 """
@@ -1956,11 +1946,6 @@ input UpdateTeamInput {
   ideaId: ID!
 
   """
-  メンバー数
-  """
-  membersNum: Int
-
-  """
   (メンバーが)得られるもの
   """
   offer: String
@@ -1974,11 +1959,6 @@ input UpdateTeamInput {
   お願いすること
   """
   requirement: String
-
-  """
-  チームステータス
-  """
-  status: Int
 }
 
 """

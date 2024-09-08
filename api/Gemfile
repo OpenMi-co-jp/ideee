@@ -62,8 +62,8 @@ gem 'sidekiq'
 gem 'oauth'
 gem 'typhoeus'
 
-# エラー関係
-gem 'rack-timeout'
+# タイムアウト設定
+gem 'rack-timeout', require: 'rack/timeout/base'
 
 # 検索メソッド
 gem 'ransack', '>= 4.0.0'

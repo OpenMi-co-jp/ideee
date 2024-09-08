@@ -8,6 +8,8 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
+  config.cache_store = :memory_store, { size: 64.megabytes }
+
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -90,4 +92,6 @@ Rails.application.configure do
   config.action_dispatch.cookies_same_site_protection = lambda do |request|
     :none if request.origin == 'https://ideee.tech'
   end
+
+  config.middleware.insert_before Rack::Runtime, Rack::Timeout, service_timeout: 120
 end

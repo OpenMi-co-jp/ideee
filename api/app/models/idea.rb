@@ -79,6 +79,8 @@ class Idea < ApplicationRecord
   scope :others_ideas, ->(user_id) { preload(:idea_tags).where.not(user_id:).uniq }
   scope :team_active, -> { eager_load(:team).where(team: { status: :active }) }
 
+  delegate :status, to: :team, prefix: :team, allow_nil: true
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[id name published_at stance difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
   end

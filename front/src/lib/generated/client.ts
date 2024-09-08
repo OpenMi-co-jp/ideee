@@ -400,6 +400,8 @@ export type Idea = {
   target?: Maybe<Scalars['String']>
   /** チームオブジェクト */
   team?: Maybe<Team>
+  /** チームステータス */
+  teamStatus?: Maybe<Scalars['String']>
   /** 更新日 */
   updatedAt: Scalars['ISO8601DateTime']
   /** ユーザーオブジェクト */
@@ -1232,6 +1234,7 @@ export type GetIdeaQuery = {
     likesNum?: number | null
     productUrl?: string | null
     githubUrl?: string | null
+    teamStatus?: string | null
     user: {
       __typename?: 'User'
       id: string
@@ -2352,6 +2355,7 @@ export const GetIdeaDocument = gql`
       likesNum
       productUrl
       githubUrl
+      teamStatus
       user {
         id
         name

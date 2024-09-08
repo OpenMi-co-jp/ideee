@@ -10,7 +10,6 @@ namespace :ai_idea_titles do
     res = AIResponse.fetch_ai_response(build_titles)
     parsed_res = JSON.parse(res)
     Rails.cache.write('daily_idea_titles', parsed_res, expires_in: 24.hours)
-
   rescue StandardError => e
     Sentry.capture_exception(e)
     raise e

@@ -29,6 +29,8 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false, description: '更新日'
     field :published_at, GraphQL::Types::ISO8601DateTime, description: '公開日'
 
+    field :team_status, String, null: true, description: 'チームステータス'
+
     field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
     field :idea_tags, [Types::TagType], null: true, description: 'タグオブジェクト'
     field :team, Types::TeamType, null: true, description: 'チームオブジェクト'

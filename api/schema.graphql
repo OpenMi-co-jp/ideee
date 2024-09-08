@@ -771,6 +771,11 @@ type Idea {
   team: Team
 
   """
+  チームステータス
+  """
+  teamStatus: String
+
+  """
   更新日
   """
   updatedAt: ISO8601DateTime!

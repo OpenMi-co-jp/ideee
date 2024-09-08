@@ -7,6 +7,7 @@ import {
 } from '@/components/idea/list'
 import { PopularTags } from '@/components/tag'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { AiIdeaTitleSection } from '@/components/aiIdeaTitles'
 
 export default function Home() {
   const { currentUser } = useCurrentUser()
@@ -16,11 +17,17 @@ export default function Home() {
       {!currentUser && <TopVision />}
       {!currentUser && <Space h="5rem" />}
       <HotIdeas />
-      <Space h="lg" />
+      {currentUser && (
+        <>
+          <Space h="xs" />
+          <AiIdeaTitleSection />
+        </>
+      )}
+      <Space h="xs" />
       <PopularTags />
-      <Space h="lg" />
+      <Space h="xs" />
       <ActiveTeamIdeas />
-      <Space h="lg" />
+      <Space h="xs" />
       <DeployedIdeas />
       {!currentUser && <Philosophy />}
     </>

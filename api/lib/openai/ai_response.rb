@@ -1,3 +1,4 @@
+require 'openai'
 module AIResponse
   def self.fetch_ai_response(content, heavy: false)
     client = OpenAI::Client.new
@@ -11,7 +12,7 @@ module AIResponse
       }
     )
     response.dig('choices', 0, 'message', 'content')
-  rescue OpenAI::OpenAIException => e
+  rescue OpenAI::Error => e
     Sentry.capture_exception(e)
     raise e
   end

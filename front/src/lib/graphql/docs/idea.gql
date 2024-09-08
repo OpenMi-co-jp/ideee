@@ -307,3 +307,12 @@ query GetSuggestIdeas($ideaId: ID!) {
     title
   }
 }
+
+query GetAiIdeas {
+  aiIdeas {
+    name
+    background
+    goal
+    ideaTags
+  }
+}

@@ -203,10 +203,6 @@ Lint/ConstantResolution:
 Style/MissingElse:
   Enabled: false
 
-# FactoryBotの省略をさせない
-RSpec/FactoryBot/SyntaxMethods:
-  Enabled: false
-
 # ファイルの先頭に文字列をfreezeするかの指摘を必要としない
 Style/FrozenStringLiteralComment:
   Enabled: false

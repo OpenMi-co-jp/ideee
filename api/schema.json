@@ -10,6 +10,87 @@
       "subscriptionType": null,
       "types": [
         {
+          "kind": "OBJECT",
+          "name": "AiIdeas",
+          "description": null,
+          "interfaces": [
+
+          ],
+          "possibleTypes": null,
+          "fields": [
+            {
+              "name": "background",
+              "description": "背景",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "goal",
+              "description": "ゴール",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "ideaTags",
+              "description": "タグオブジェクト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "name",
+              "description": "AIアイデア名",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            }
+          ],
+          "inputFields": null,
+          "enumValues": null
+        },
+        {
           "kind": "SCALAR",
           "name": "Boolean",
           "description": "Represents `true` or `false` values.",
@@ -2854,7 +2935,7 @@
             },
             {
               "name": "createAiBrushUp",
-              "description": "AIブラッシュアップ作成",
+              "description": "AIブラッシュアップ",
               "type": {
                 "kind": "OBJECT",
                 "name": "IdeaAiBrushUpPayload",
@@ -3986,6 +4067,32 @@
               ]
             },
             {
+              "name": "aiIdeas",
+              "description": "AIによるアイデア一覧",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "AiIdeas",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "comment",
               "description": "コメントオブジェクト",
               "type": {
@@ -4283,7 +4390,7 @@
                 },
                 {
                   "name": "searchCondition",
-                  "description": "アイデア検索条件",
+                  "description": "アイデア検索条件",
                   "type": {
                     "kind": "INPUT_OBJECT",
                     "name": "SearchCondition",
@@ -7808,6 +7915,30 @@
       ],
       "directives": [
         {
+          "name": "deprecated",
+          "description": "Marks an element of a GraphQL schema as no longer supported.",
+          "locations": [
+            "FIELD_DEFINITION",
+            "ENUM_VALUE",
+            "ARGUMENT_DEFINITION",
+            "INPUT_FIELD_DEFINITION"
+          ],
+          "args": [
+            {
+              "name": "reason",
+              "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted in [Markdown](https://daringfireball.net/projects/markdown/).",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": "\"No longer supported\"",
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ]
+        },
+        {
           "name": "include",
           "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
           "locations": [
@@ -7832,6 +7963,16 @@
               "isDeprecated": false,
               "deprecationReason": null
             }
+          ]
+        },
+        {
+          "name": "oneOf",
+          "description": "Requires that exactly one field must be supplied and that field must not be `null`.",
+          "locations": [
+            "INPUT_OBJECT"
+          ],
+          "args": [
+
           ]
         },
         {
@@ -7862,37 +8003,28 @@
           ]
         },
         {
-          "name": "deprecated",
-          "description": "Marks an element of a GraphQL schema as no longer supported.",
+          "name": "specifiedBy",
+          "description": "Exposes a URL that specifies the behavior of this scalar.",
           "locations": [
-            "FIELD_DEFINITION",
-            "ENUM_VALUE",
-            "ARGUMENT_DEFINITION",
-            "INPUT_FIELD_DEFINITION"
+            "SCALAR"
           ],
           "args": [
             {
-              "name": "reason",
-              "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted in [Markdown](https://daringfireball.net/projects/markdown/).",
+              "name": "url",
+              "description": "The URL that specifies the behavior of this scalar.",
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
-              "defaultValue": "\"No longer supported\"",
+              "defaultValue": null,
               "isDeprecated": false,
               "deprecationReason": null
             }
-          ]
-        },
-        {
-          "name": "oneOf",
-          "description": "Requires that exactly one field must be supplied and that field must not be `null`.",
-          "locations": [
-            "INPUT_OBJECT"
-          ],
-          "args": [
-
           ]
         }
       ]

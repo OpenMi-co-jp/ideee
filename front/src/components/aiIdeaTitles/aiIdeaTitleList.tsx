@@ -4,6 +4,7 @@ import { AlertError } from '../alert'
 import { AiIdeaTitle } from './aiIdeaTitle'
 import { Grid } from '@mantine/core'
 import { GetAiIdeasQuery } from '@/lib/generated/client'
+import Link from 'next/link'
 
 export const AiIdeaTitleList: React.FC = () => {
   const { loading, data, error } = useGetAiIdeasQuery()
@@ -16,7 +17,9 @@ export const AiIdeaTitleList: React.FC = () => {
     <Grid my="xl" style={{ width: '90%', margin: 'auto' }}>
       {ideas.map((idea, index: number) => (
         <Grid.Col key={index} span={4}>
-          <AiIdeaTitle title={idea.name} />
+          <Link href={`/ideas/new?name=${idea.name}`}>
+            <AiIdeaTitle title={idea.name} />
+          </Link>
         </Grid.Col>
       ))}
     </Grid>

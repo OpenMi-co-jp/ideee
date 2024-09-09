@@ -9,7 +9,7 @@ module AI
 
     def perform
       res = AIResponse.fetch_ai_response(build_prompt)
-      JSON.parse(res)
+      JSON.parse(res)['ideas']
     rescue StandardError => e
       Sentry.capture_exception(e)
       raise e
@@ -23,7 +23,7 @@ module AI
       <<~CONTENT
         ITサービスのアイデアを以下のニュースから作成してください。
         news: #{news}
-        アイデアの構成要素: { ideas: [{ name: '名前', ideaTags: ['タグ1', 'タグ2', 'タグ3'], background: '背景', goal: '目標' }] }
+        アイデアの構成要素: { ideas: [{ name: '名前', idea_tags: ['タグ1', 'タグ2', 'タグ3'], background: '背景', goal: '目標' }] }
         必須項目: アイデア名、タグ、背景、ゴール
         既存のタグ: #{existing_tags}
         制限: アイデア名30文字以内、タグ12文字以内の3つまで、その他は255文字以内で具体的に nで改行、既存のタグも確認し近しいものがあれば利用。

@@ -21,16 +21,19 @@ export async function generateIdeasIds() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const ideaPaths = await generateIdeasIds();
+  const ideaPaths = await generateIdeasIds()
   const paths = ideaPaths.map((id: string) => ({
     loc: `/ideas/${id}`,
     changefreq: 'weekly',
     priority: 0.7,
-  }));
+  }))
 
-  return getServerSideSitemapIndexLegacy(ctx, paths.map(
-    (item: { loc: string }) => process.env.NEXT_PUBLIC_FRONT_URL + item.loc
-  ));
+  return getServerSideSitemapIndexLegacy(
+    ctx,
+    paths.map(
+      (item: { loc: string }) => process.env.NEXT_PUBLIC_FRONT_URL + item.loc
+    )
+  )
 }
 
 export default function SitemapIndex() {}

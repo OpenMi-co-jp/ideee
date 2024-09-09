@@ -308,6 +308,12 @@ query GetSuggestIdeas($ideaId: ID!) {
   }
 }
 
+query GetAiIdeaTitles {
+  aiIdeaTitles {
+    title
+  }
+}
+
 query GetIdeaIds {
   ideaIds {
     ids

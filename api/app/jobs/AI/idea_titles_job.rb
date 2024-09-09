@@ -6,16 +6,11 @@ require 'net/http'
 module AI
   class IdeaTitlesJob < ApplicationJob
     queue_as :high
+    include AiLoggable
 
     def perform
       res = AIResponse.fetch_ai_response(build_titles)
-      parsed_res = JSON.parse(res)
-      # レスポンスの形の修正
-      if parsed_res.is_a?(Hash) && parsed_res['ideas'].is_a?(Array)
-        parsed_res['ideas']
-      else
-        parsed_res
-      end
+      JSON.parse(res)
     rescue StandardError => e
       Sentry.capture_exception(e)
       raise e
@@ -42,7 +37,6 @@ module AI
 
       request = Net::HTTP::Get.new(api_url.request_uri)
       response = http.request(request)
-      Rails.logger.info "Response body: #{response.inspect}"
 
       JSON.parse(response.body)['articles']
     end

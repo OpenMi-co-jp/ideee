@@ -7,3 +7,4 @@ Host: https://ideee.tech
 
 # Sitemaps
 Sitemap: https://ideee.tech/sitemap.xml
+Sitemap: https://ideee.tech/server-sitemap-index.xml

@@ -876,6 +876,13 @@ type IdeaAiReviewPayload {
   success: Boolean!
 }
 
+type IdeaIds {
+  """
+  アイデアIDリスト
+  """
+  ids: [Int!]!
+}
+
 type Ideas {
   """
   アイデアオブジェクト
@@ -1365,6 +1372,11 @@ type Query {
     """
     id: ID!
   ): Idea!
+
+  """
+  ユーザーのアイデアID一覧
+  """
+  ideaIds: IdeaIds!
 
   """
   アイデア一覧

@@ -17,10 +17,9 @@ export const useCreateTeam = () => {
   const router = useRouter()
 
   const { currentUser } = useCurrentUser()
-  const { data, loading, error } = useGetIdea()
+  const { data } = useGetIdea()
 
   const onSubmit: SubmitHandler<FieldValues> = async (FormData) => {
-    // すでにアイディアに対してのチームが発足されていればエラーとする→ボタンの制御で対応
     const response = await createTeamMutation({
       variables: {
         input: {

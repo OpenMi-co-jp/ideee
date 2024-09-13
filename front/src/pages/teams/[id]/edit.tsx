@@ -43,7 +43,6 @@ export default function TeamsEdit() {
           p={10}
           style={{
             borderLeft: '5px solid #FD7E13',
-            padding: '',
           }}
         >
           お願いしたいこと
@@ -58,7 +57,7 @@ export default function TeamsEdit() {
 
       <Flex justify="center" align="center" gap="xl" mt="xl">
         <Button color="orange.6" radius="xl">
-          更新
+          保存
         </Button>
       </Flex>
     </Container>

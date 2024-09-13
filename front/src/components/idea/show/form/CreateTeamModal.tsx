@@ -9,12 +9,12 @@ interface CreateTeamModalProps {
   onSubmit: SubmitHandler<FieldValues>
 }
 
-export default function CreateTeamModal({
+export const CreateTeamModal = ({
   opened,
   onClose,
   form,
   onSubmit,
-}: CreateTeamModalProps) {
+}: CreateTeamModalProps) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     await form.handleSubmit(onSubmit)(event)

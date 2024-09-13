@@ -57,12 +57,6 @@ export default function TeamsEdit() {
       </Box>
 
       <Flex justify="center" align="center" gap="xl" mt="xl">
-        <Link href={`/teams/`}>
-          <Button color="gray.6" radius="xl">
-            戻る
-          </Button>
-        </Link>
-
         <Button color="orange.6" radius="xl">
           更新
         </Button>

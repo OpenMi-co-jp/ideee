@@ -128,14 +128,6 @@ export default function TeamDetailContent() {
       <Text>
         ログイン中のユーザーとこのチームの発足者の場合は、本画面上で編集画面ボタンを設ける。編集画面情報で削除機能をつける。
       </Text> */}
-
-      <Flex justify="end" align="center" gap="xl" mt="xl">
-        <Link href={`/ideas/${idea?.idea.id}`}>
-          <Button color="gray.6" radius="xl">
-            戻る
-          </Button>
-        </Link>
-      </Flex>
     </Container>
   )
 }

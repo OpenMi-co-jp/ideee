@@ -7,9 +7,10 @@ import { StanceBadge } from '@/utils/StanceBadge'
 import type { StanceBadgeProps } from '@/utils/StanceBadge'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 import { useDisclosure } from '@mantine/hooks'
-import CreateTeamModal from '@/components/idea/show/form/CreateTeamModal'
 import { useCreateTeam } from '@/components/idea/show/form/hook'
 import Link from 'next/link'
+import { useEffect } from 'react'
+import { CreateTeamModal } from '@/components/idea/show/form/CreateTeamModal'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -32,7 +33,11 @@ export const IdeaContents = () => {
   const [opened, { open, close }] = useDisclosure(false)
   const { form, onSubmit } = useCreateTeam()
 
-  console.log(idea)
+  useEffect(() => {
+    if (stance === 'team_project' && idea.team === null) {
+      open()
+    }
+  }, [idea.team, stance, open])
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
@@ -45,20 +50,6 @@ export const IdeaContents = () => {
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}
-      {stance === 'team_project' && idea.team === null && (
-        <Button
-          variant="gradient"
-          gradient={{ from: 'orange', to: 'yellow' }}
-          radius="xl"
-          size="md"
-          mr="md"
-          leftSection={<IconUsers />}
-          mt="xl"
-          onClick={open}
-        >
-          チーム開発始動
-        </Button>
-      )}
       {idea.team?.status === 'active' && (
         // リファクタリング対応
         <Link href={`/teams/${idea.team?.id}`}>

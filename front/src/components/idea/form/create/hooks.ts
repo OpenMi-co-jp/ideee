@@ -38,7 +38,7 @@ export const UseCreateIdea = () => {
         form.reset(resetData)
       })
     }
-  }, [name, form])
+  }, [name, form, getAiIdeas])
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const response = await createIdeaMutation({

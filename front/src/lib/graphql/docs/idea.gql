@@ -321,3 +321,9 @@ query GetAiIdeas {
     ideaTags
   }
 }
+
+query GetIdeaIds {
+  ideaIds {
+    ids
+  }
+}

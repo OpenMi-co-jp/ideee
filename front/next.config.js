@@ -18,6 +18,9 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
     emotion: true,
   },
+  babel: {
+    presets: ["next/babel"],
+  },
 };
 
 module.exports = nextConfig

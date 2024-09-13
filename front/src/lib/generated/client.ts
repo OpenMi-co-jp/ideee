@@ -454,6 +454,12 @@ export type IdeaAiReviewPayload = {
   success: Scalars['Boolean']
 }
 
+export type IdeaIds = {
+  __typename?: 'IdeaIds'
+  /** アイデアIDリスト */
+  ids: Array<Scalars['Int']>
+}
+
 export type Ideas = {
   __typename?: 'Ideas'
   /** アイデアオブジェクト */
@@ -696,6 +702,8 @@ export type Query = {
   hotIdeas: Array<Idea>
   /** アイデアオブジェクト */
   idea: Idea
+  /** ユーザーのアイデアID一覧 */
+  ideaIds: IdeaIds
   /** アイデア一覧 */
   ideas: Ideas
   /** 最新の5件の通知一覧 */
@@ -1638,6 +1646,13 @@ export type GetAiIdeasQuery = {
     goal?: string | null
     ideaTags?: Array<string> | null
   }>
+}
+
+export type GetIdeaIdsQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetIdeaIdsQuery = {
+  __typename?: 'Query'
+  ideaIds: { __typename?: 'IdeaIds'; ids: Array<number> }
 }
 
 export type GetLikesQueryVariables = Exact<{ [key: string]: never }>
@@ -3440,6 +3455,61 @@ export type GetAiIdeasLazyQueryHookResult = ReturnType<
 export type GetAiIdeasQueryResult = Apollo.QueryResult<
   GetAiIdeasQuery,
   GetAiIdeasQueryVariables
+>
+export const GetIdeaIdsDocument = gql`
+  query GetIdeaIds {
+    ideaIds {
+      ids
+    }
+  }
+`
+
+/**
+ * __useGetIdeaIdsQuery__
+ *
+ * To run a query within a React component, call `useGetIdeaIdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetIdeaIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetIdeaIdsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetIdeaIdsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetIdeaIdsQuery,
+    GetIdeaIdsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetIdeaIdsQuery, GetIdeaIdsQueryVariables>(
+    GetIdeaIdsDocument,
+    options
+  )
+}
+export function useGetIdeaIdsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetIdeaIdsQuery,
+    GetIdeaIdsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetIdeaIdsQuery, GetIdeaIdsQueryVariables>(
+    GetIdeaIdsDocument,
+    options
+  )
+}
+export type GetIdeaIdsQueryHookResult = ReturnType<typeof useGetIdeaIdsQuery>
+export type GetIdeaIdsLazyQueryHookResult = ReturnType<
+  typeof useGetIdeaIdsLazyQuery
+>
+export type GetIdeaIdsQueryResult = Apollo.QueryResult<
+  GetIdeaIdsQuery,
+  GetIdeaIdsQueryVariables
 >
 export const GetLikesDocument = gql`
   query GetLikes {

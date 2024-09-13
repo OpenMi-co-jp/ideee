@@ -32,6 +32,8 @@ export const IdeaContents = () => {
   const [opened, { open, close }] = useDisclosure(false)
   const { form, onSubmit } = useCreateTeam()
 
+  console.log(idea)
+
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
       <Flex direction="row" gap="md">
@@ -43,7 +45,7 @@ export const IdeaContents = () => {
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}
-      {stance === 'team_project' && idea.team?.status === null && (
+      {stance === 'team_project' && idea.team === null && (
         <Button
           variant="gradient"
           gradient={{ from: 'orange', to: 'yellow' }}
@@ -57,8 +59,7 @@ export const IdeaContents = () => {
           チーム開発始動
         </Button>
       )}
-      {((idea.team && idea.team?.status === 'active') ||
-        stance === 'team_project') && (
+      {idea.team?.status === 'active' && (
         // リファクタリング対応
         <Link href={`/teams/${idea.team?.id}`}>
           <Button

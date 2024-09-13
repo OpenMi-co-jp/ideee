@@ -1,16 +1,7 @@
-import { Button, Paper, Anchor, Flex, Modal } from '@mantine/core'
-import {
-  IconApps,
-  IconBrandGithub,
-  IconUsers,
-  IconXboxX,
-} from '@tabler/icons-react'
+import { Button, Paper, Anchor, Flex } from '@mantine/core'
+import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
 import { IdeaContentSet } from './IdeaContentSet'
-import {
-  useGetTeamQuery,
-  useGetTeamsQuery,
-  type GetIdeaQuery,
-} from '@/lib/generated/client'
+import { type GetIdeaQuery } from '@/lib/generated/client'
 import { useIdea } from '@/context/IdeaContext'
 import { StanceBadge } from '@/utils/StanceBadge'
 import type { StanceBadgeProps } from '@/utils/StanceBadge'
@@ -66,19 +57,20 @@ export const IdeaContents = () => {
           チーム開発始動
         </Button>
       )}
-      {stance === 'team_project' && idea.team?.status === 'active' && (
+      {((idea.team && idea.team?.status === 'active') ||
+        stance === 'team_project') && (
         // リファクタリング対応
-        <Link href={`/teams/${idea.team.id}`}>
+        <Link href={`/teams/${idea.team?.id}`}>
           <Button
             variant="gradient"
             gradient={{ from: 'orange', to: 'yellow' }}
             radius="xl"
-            size="md"
+            size="sm"
             mr="md"
             leftSection={<IconUsers />}
             mt="xl"
           >
-            チーム開発を確認
+            チーム開発をチェック
           </Button>
         </Link>
       )}
@@ -94,7 +86,7 @@ export const IdeaContents = () => {
             variant="gradient"
             gradient={{ from: 'green', to: 'blue' }}
             radius="xl"
-            size="md"
+            size="sm"
             mr="md"
             leftSection={<IconApps />}
             mt="xl"
@@ -108,7 +100,7 @@ export const IdeaContents = () => {
           <Button
             color="dark"
             radius="xl"
-            size="md"
+            size="sm"
             leftSection={<IconBrandGithub />}
             mt="xl"
             mr="md"

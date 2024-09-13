@@ -1,11 +1,6 @@
-import { TextAreaForm, TextForm } from '@/components/ReactFormSet'
-import { Button, Flex, Modal, Text, Textarea } from '@mantine/core'
-import {
-  FieldValues,
-  SubmitHandler,
-  UseFormReturn,
-  useFormState,
-} from 'react-hook-form'
+import { TextAreaForm } from '@/components/ReactFormSet'
+import { Button, Flex, Modal, Text } from '@mantine/core'
+import { FieldValues, SubmitHandler, UseFormReturn } from 'react-hook-form'
 
 interface CreateTeamModalProps {
   opened: boolean
@@ -20,14 +15,9 @@ export default function CreateTeamModal({
   form,
   onSubmit,
 }: CreateTeamModalProps) {
-  // const [isSubmitting, setIsSubmitting] = useState(false)
-  const { errors } = useFormState({ control: form.control })
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // setIsSubmitting(true)
     await form.handleSubmit(onSubmit)(event)
-    // setIsSubmitting(false)
   }
 
   return (
@@ -37,7 +27,7 @@ export default function CreateTeamModal({
         <Modal.Header>
           <Modal.Title>
             <Text fw={700} size="xl" ta="center">
-              チーム開発を開始
+              チーム開発をスタート
             </Text>
           </Modal.Title>
           <Modal.CloseButton />
@@ -63,7 +53,7 @@ export default function CreateTeamModal({
                 戻る
               </Button>
               <Button color="orange.6" type="submit">
-                作成
+                保存
               </Button>
             </Flex>
           </form>

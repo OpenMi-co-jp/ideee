@@ -18,6 +18,7 @@ import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 import { useDisclosure } from '@mantine/hooks'
 import CreateTeamModal from '@/components/idea/show/form/CreateTeamModal'
 import { useCreateTeam } from '@/components/idea/show/form/hook'
+import Link from 'next/link'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -51,8 +52,7 @@ export const IdeaContents = () => {
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}
-      {/* 下記の条件に加えて、すでにチーム開発が発足されている場合は、チームのホーム画面に遷移させる。 booleanで判定を行う。*/}
-      {stance === 'team_project' && (
+      {stance === 'team_project' && idea.team?.status === null && (
         <Button
           variant="gradient"
           gradient={{ from: 'orange', to: 'yellow' }}
@@ -63,8 +63,24 @@ export const IdeaContents = () => {
           mt="xl"
           onClick={open}
         >
-          チーム開発を確認
+          チーム開発始動
         </Button>
+      )}
+      {stance === 'team_project' && idea.team?.status === 'active' && (
+        // リファクタリング対応
+        <Link href={`/teams/${idea.team.id}`}>
+          <Button
+            variant="gradient"
+            gradient={{ from: 'orange', to: 'yellow' }}
+            radius="xl"
+            size="md"
+            mr="md"
+            leftSection={<IconUsers />}
+            mt="xl"
+          >
+            チーム開発を確認
+          </Button>
+        </Link>
       )}
       <CreateTeamModal
         opened={opened}

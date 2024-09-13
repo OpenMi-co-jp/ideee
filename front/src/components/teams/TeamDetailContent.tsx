@@ -1,17 +1,27 @@
+import { useCurrentUser } from '@/context/CurrentUserContext'
 import {
   useGetIdeaQuery,
   useGetTeamQuery,
   useGetUserQuery,
 } from '@/lib/generated/client'
-import { Button, Container, Flex, Image, Paper, Text } from '@mantine/core'
-import { IconBrandTeams, IconUsers } from '@tabler/icons-react'
-
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Group,
+  Image,
+  Text,
+  Title,
+} from '@mantine/core'
+import { IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 export default function TeamDetailContent() {
   const params = useParams()
   const teamID = params?.id as string
+  const { currentUser } = useCurrentUser()
 
   // Team情報の取得
   const { data: team } = useGetTeamQuery({
@@ -34,24 +44,27 @@ export default function TeamDetailContent() {
     },
   })
 
-  console.log(idea, user)
-
+  console.log(currentUser, team?.team.ownerId)
   return (
     <Container>
-      <Flex justify="left" align="center" m="md" gap="xs">
-        <IconUsers size={30} stroke={1.5} color="orange" />
-        <Text
-          size="xl"
-          fw={900}
-          variant="gradient"
-          gradient={{ from: 'orange', to: 'yellow' }}
-        >
-          チーム開発
-        </Text>
-      </Flex>
+      <Box>
+        <Group align="center" mb="xl">
+          <IconUsers size={30} stroke={2} color="orange" />
+          <Title order={2}>
+            <Text
+              fw={900}
+              variant="gradient"
+              gradient={{ from: 'orange', to: 'yellow' }}
+              inherit
+            >
+              チーム開発
+            </Text>
+          </Title>
+        </Group>
+      </Box>
 
-      <Paper shadow="sm" radius="lg" p="xl" withBorder>
-        <Flex align="center" gap="sm">
+      <Flex align="center" justify="space-between">
+        <Flex align="center" gap="md" mb="xl">
           {idea?.idea?.user.image && (
             <Image
               src={idea.idea.user.image}
@@ -63,22 +76,65 @@ export default function TeamDetailContent() {
             />
           )}
           <Flex direction="column">
-            <Text size="xl">{idea?.idea?.user.name}</Text>
+            <Text size="xl" fw={'600'}>
+              {user?.user.name}
+            </Text>
             <Text size="sm" c="gray">
-              Description
+              {user?.user.description}
             </Text>
           </Flex>
         </Flex>
 
-        {/* <Text>紐づくアイディアを選択</Text>
-        <Text>得られること</Text>
-        <Text>お願いしたいこと。</Text> */}
-      </Paper>
-      <Flex justify="center" align="center" gap="xl" mt="md">
-        <Link href={'/'}>
-          <Button color="gray.6">戻る</Button>
+        {/* TODO 編集画面 オーナーだけ操作可能なように修正 現在のユーザーとチームのオーナーが一致している場合は、表示する。*/}
+        {currentUser?.id === team?.team.ownerId && (
+          <Link href={`/teams/${teamID}/edit`}>
+            <Button color="orange.6" radius="xl">
+              チーム編集
+            </Button>
+          </Link>
+        )}
+      </Flex>
+
+      <Box mx="sm">
+        <Title
+          size="h4"
+          fw={600}
+          p={10}
+          style={{
+            borderLeft: '5px solid #FD7E13',
+          }}
+        >
+          得られること
+        </Title>
+        <Text p={6} mb="xl">
+          {team?.team.offer}
+        </Text>
+        <Title
+          size="h4"
+          fw={600}
+          p={10}
+          style={{
+            borderLeft: '5px solid #FD7E13',
+            padding: '',
+          }}
+        >
+          お願いしたいこと
+        </Title>
+        <Text p={6} mb="xl">
+          {team?.team.requirement}
+        </Text>
+      </Box>
+      {/* <Text>チームに参加する機能</Text>
+      <Text>
+        ログイン中のユーザーとこのチームの発足者の場合は、本画面上で編集画面ボタンを設ける。編集画面情報で削除機能をつける。
+      </Text> */}
+
+      <Flex justify="end" align="center" gap="xl" mt="xl">
+        <Link href={`/ideas/${idea?.idea.id}`}>
+          <Button color="gray.6" radius="xl">
+            戻る
+          </Button>
         </Link>
-        <Button color="orange.6">登録</Button>
       </Flex>
     </Container>
   )

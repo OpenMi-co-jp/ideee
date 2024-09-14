@@ -3,21 +3,9 @@ import { Grid, Box, Text, Center, Flex } from '@mantine/core'
 import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { ProgressBar } from '@/components/user/show/ProgressBar'
-
-type UserType = 'エンジニア' | 'アイディアマン' | ''
+import { getUserType } from '@/utils/getUserType'
 
 const aiLimit = Number(process.env.NEXT_PUBLIC_aiLimit) || 5
-
-const getUserType = (definition: string | undefined): UserType => {
-  switch (definition) {
-    case 'engineer':
-      return 'エンジニア'
-    case 'idea_engineer':
-      return 'アイディアマン'
-    default:
-      return ''
-  }
-}
 
 const UserInfoBox = ({ label, value }: { label: string; value: string }) => (
   <Box p="md" style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}>

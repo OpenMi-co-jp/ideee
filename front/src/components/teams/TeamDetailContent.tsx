@@ -1,9 +1,5 @@
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import {
-  useGetIdeaQuery,
-  useGetTeamQuery,
-  useGetUserQuery,
-} from '@/lib/generated/client'
+import { useGetTeamQuery } from '@/lib/generated/client'
 import {
   Box,
   Button,
@@ -17,34 +13,19 @@ import {
 import { IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import { getUserType } from '@/utils/getUserType'
 
 export default function TeamDetailContent() {
-  const params = useParams()
-  const teamID = params?.id as string
+  const id = useParams()?.id as string
   const { currentUser } = useCurrentUser()
-
-  // Team情報の取得
-  const { data: team } = useGetTeamQuery({
+  const { data } = useGetTeamQuery({
     variables: {
-      id: teamID,
+      id,
     },
   })
+  const { team } = data || {}
+  const userType = getUserType(team?.owner.definition!)
 
-  // Idea情報の取得
-  const { data: idea } = useGetIdeaQuery({
-    variables: {
-      id: String(team?.team.ideaId),
-    },
-  })
-
-  // userの詳細情報を取得
-  const { data: user } = useGetUserQuery({
-    variables: {
-      id: String(idea?.idea.userId),
-    },
-  })
-
-  console.log(currentUser, team?.team.ownerId)
   return (
     <Container>
       <Box>
@@ -65,9 +46,9 @@ export default function TeamDetailContent() {
 
       <Flex align="center" justify="space-between">
         <Flex align="center" gap="md" mb="xl">
-          {idea?.idea?.user.image && (
+          {team?.owner.image && (
             <Image
-              src={idea.idea.user.image}
+              src={team?.owner.image}
               alt="プロフィール画像"
               className=""
               width={70}
@@ -77,22 +58,22 @@ export default function TeamDetailContent() {
           )}
           <Flex direction="column">
             <Text size="xl" fw={'600'}>
-              {user?.user.name}
+              {team?.owner.name}
             </Text>
             <Text size="sm" c="gray">
-              {user?.user.description}
+              {userType}
             </Text>
           </Flex>
         </Flex>
 
-        {/* TODO 編集画面 オーナーだけ操作可能なように修正 現在のユーザーとチームのオーナーが一致している場合は、表示する。*/}
-        {currentUser?.id === team?.team.ownerId && (
-          <Link href={`/teams/${teamID}/edit`}>
+        {/* TODO 編集画面設定*/}
+        {/* {currentUser?.id === team?.ownerId && (
+          <Link href={`/teams/${id}/edit`}>
             <Button color="orange.6" radius="xl">
               チーム編集
             </Button>
           </Link>
-        )}
+        )} */}
       </Flex>
 
       <Box mx="sm">
@@ -107,7 +88,7 @@ export default function TeamDetailContent() {
           得られること
         </Title>
         <Text p={6} mb="xl">
-          {team?.team.offer}
+          {team?.offer}
         </Text>
         <Title
           size="h4"
@@ -121,7 +102,7 @@ export default function TeamDetailContent() {
           お願いしたいこと
         </Title>
         <Text p={6} mb="xl">
-          {team?.team.requirement}
+          {team?.requirement}
         </Text>
       </Box>
       {/* <Text>チームに参加する機能</Text>

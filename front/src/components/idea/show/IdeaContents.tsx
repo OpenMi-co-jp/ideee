@@ -11,6 +11,7 @@ import { useCreateTeam } from '@/components/idea/show/form/hook'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { CreateTeamModal } from '@/components/idea/show/form/CreateTeamModal'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -32,12 +33,17 @@ export const IdeaContents = () => {
   const sections = getSections(idea)
   const [opened, { open, close }] = useDisclosure(false)
   const { form, onSubmit } = useCreateTeam()
+  const { currentUser } = useCurrentUser()
 
   useEffect(() => {
-    if (stance === 'team_project' && idea.team === null) {
+    if (
+      stance === 'team_project' &&
+      idea.team === null &&
+      idea.userId == currentUser?.id
+    ) {
       open()
     }
-  }, [idea.team, stance, open])
+  }, [idea.team, stance, currentUser])
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">

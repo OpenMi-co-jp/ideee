@@ -40,6 +40,7 @@ export const CreateTeamModal = ({
               label="得られるもの"
               required
               mb="lg"
+              tooltipTitle="参加したメンバーがチーム開発で得られるものを記入してください"
             />
             <TextAreaForm
               form={form}
@@ -47,6 +48,7 @@ export const CreateTeamModal = ({
               label="お願いすること"
               required
               mb="lg"
+              tooltipTitle="チーム開発でメンバーにお願いしたいことを記入してください"
             />
             <Flex align="center" justify="center" gap="xl">
               <Button color="gray.6" onClick={onClose}>

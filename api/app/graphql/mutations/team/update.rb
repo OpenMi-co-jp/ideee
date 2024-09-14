@@ -4,7 +4,6 @@ module Mutations
 
     argument :id, ID, required: true, description: 'チームID'
     argument :owner_id, ID, required: true, description: '【必須】オーナーID'
-    argument :idea_id, ID, required: true, description: '【必須】アイデアID'
     argument :status, Integer, required: false, description: 'チームステータス'
     argument :requirement, String, required: false, description: 'お願いすること'
     argument :offer, String, required: false, description: '(メンバーが)得られるもの'
@@ -20,8 +19,6 @@ module Mutations
 
       team = ::Team.find(args[:id])
       team.update!(
-        owner_id: args[:owner_id],
-        idea_id: args[:idea_id],
         status: args[:status],
         requirement: args[:requirement],
         offer: args[:offer]
@@ -29,6 +26,11 @@ module Mutations
       {
         team:,
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

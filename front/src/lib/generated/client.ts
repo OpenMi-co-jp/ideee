@@ -1012,8 +1012,6 @@ export type UpdateTeamInput = {
   clientMutationId?: InputMaybe<Scalars['String']>
   /** チームID */
   id: Scalars['ID']
-  /** 【必須】アイデアID */
-  ideaId: Scalars['ID']
   /** (メンバーが)得られるもの */
   offer?: InputMaybe<Scalars['String']>
   /** 【必須】オーナーID */

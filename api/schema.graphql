@@ -1978,11 +1978,6 @@ input UpdateTeamInput {
   id: ID!
 
   """
-  【必須】アイデアID
-  """
-  ideaId: ID!
-
-  """
   (メンバーが)得られるもの
   """
   offer: String

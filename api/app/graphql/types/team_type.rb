@@ -10,5 +10,8 @@ module Types
     field :offer, String, null: false, description: '(メンバーが)得られるもの'
     field :members_num, Integer, description: 'メンバー数'
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'
+
+    field :owner, Types::UserType, null: false, description: 'オーナー'
+    field :idea, Types::Idea::IdeaType, null: false, description: 'アイデア'
   end
 end

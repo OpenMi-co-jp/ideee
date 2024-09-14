@@ -1,19 +1,23 @@
-import { Group, Text } from '@mantine/core'
+import { Flex, Text } from '@mantine/core'
+import Link from 'next/link'
 import { UserIcon } from '@/components/user'
 import { useIdea } from '@/context/IdeaContext'
-import Link from 'next/link'
 
 export const UserSection = () => {
   const idea = useIdea()
 
   return (
-    <Group py="lg" pl="xl">
-      <Link href={`/users/${idea.userId}`} passHref>
-        <UserIcon
-          userIcon={idea.user?.image ? String(idea.user.image) : undefined}
-        />
-        <Text size="xl">{idea.user?.name}</Text>
-      </Link>
-    </Group>
+    <Flex py="lg" pl="xl" justify="space-between" align="center">
+      <div>
+        <Link href={`/users/${idea.userId}`} passHref>
+          <Flex align="center" gap="xs">
+            <UserIcon
+              userIcon={idea.user?.image ? String(idea.user.image) : undefined}
+            />
+            <Text size="xl">{idea.user?.name}</Text>
+          </Flex>
+        </Link>
+      </div>
+    </Flex>
   )
 }

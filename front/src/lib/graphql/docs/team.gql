@@ -7,6 +7,15 @@ query GetTeam($id: ID!) {
     requirement
     offer
     membersNum
+    idea {
+      id
+      name
+    }
+    owner {
+      name
+      definition
+      image
+    }
   }
 }
 
@@ -33,6 +42,7 @@ mutation createTeam($input: CreateTeamInput!) {
       membersNum
     }
     success
+    errors
   }
 }
 
@@ -47,6 +57,7 @@ mutation updateTeam($input: UpdateTeamInput!) {
       membersNum
     }
     success
+    errors
   }
 }
 

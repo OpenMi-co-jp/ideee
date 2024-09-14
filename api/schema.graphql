@@ -347,11 +347,6 @@ input CreateTeamInput {
   ideaId: ID!
 
   """
-  メンバー数
-  """
-  membersNum: Int!
-
-  """
   【必須】(メンバーが)得られるもの
   """
   offer: String!
@@ -365,11 +360,6 @@ input CreateTeamInput {
   【必須】お願いすること
   """
   requirement: String!
-
-  """
-  【必須】チームステータス
-  """
-  status: Int!
 }
 
 """
@@ -380,6 +370,11 @@ type CreateTeamPayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
+
+  """
+  エラーリスト
+  """
+  errors: [String!]
 
   """
   成功フラグ
@@ -565,6 +560,11 @@ type DestroyTeamPayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
+
+  """
+  エラーリスト
+  """
+  errors: [String!]
 
   """
   成功フラグ
@@ -1683,6 +1683,11 @@ type Team {
   id: ID!
 
   """
+  アイデア
+  """
+  idea: Idea!
+
+  """
   アイデアID
   """
   ideaId: Int!
@@ -1696,6 +1701,11 @@ type Team {
   (メンバーが)得られるもの
   """
   offer: String!
+
+  """
+  オーナー
+  """
+  owner: User!
 
   """
   オーナーID
@@ -1968,16 +1978,6 @@ input UpdateTeamInput {
   id: ID!
 
   """
-  【必須】アイデアID
-  """
-  ideaId: ID!
-
-  """
-  メンバー数
-  """
-  membersNum: Int
-
-  """
   (メンバーが)得られるもの
   """
   offer: String
@@ -2006,6 +2006,11 @@ type UpdateTeamPayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
+
+  """
+  エラーリスト
+  """
+  errors: [String!]
 
   """
   成功フラグ

@@ -33,11 +33,9 @@ RSpec.describe Mutations::Team::Update do
         input: {
           id: team.id,
           ownerId: owner.id,
-          ideaId: idea.id,
           status: 0,
           requirement: 'updated hoge',
-          offer: 'updated fuga',
-          membersNum: 5
+          offer: 'updated fuga'
         }
       }
     end

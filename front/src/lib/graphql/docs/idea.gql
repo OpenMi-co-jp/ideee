@@ -48,6 +48,11 @@ query GetIdea($id: ID!) {
       content
       stance
     }
+    team {
+      id
+      status
+      membersNum
+    }
   }
 }
 

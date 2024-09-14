@@ -1080,22 +1080,6 @@
               "deprecationReason": null
             },
             {
-              "name": "status",
-              "description": "【必須】チームステータス",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "requirement",
               "description": "【必須】お願いすること",
               "type": {
@@ -1126,22 +1110,6 @@
               "defaultValue": null,
               "isDeprecated": false,
               "deprecationReason": null
-            },
-            {
-              "name": "membersNum",
-              "description": "メンバー数",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
             }
           ],
           "enumValues": null
@@ -1162,6 +1130,28 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -1710,6 +1700,28 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -5460,6 +5472,24 @@
               ]
             },
             {
+              "name": "idea",
+              "description": "アイデア",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Idea",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "ideaId",
               "description": "アイデアID",
               "type": {
@@ -5500,6 +5530,24 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "owner",
+              "description": "オーナー",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "User",
                   "ofType": null
                 }
               },
@@ -6340,22 +6388,6 @@
               "deprecationReason": null
             },
             {
-              "name": "ideaId",
-              "description": "【必須】アイデアID",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "status",
               "description": "チームステータス",
               "type": {
@@ -6390,18 +6422,6 @@
               "defaultValue": null,
               "isDeprecated": false,
               "deprecationReason": null
-            },
-            {
-              "name": "membersNum",
-              "description": "メンバー数",
-              "type": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              },
-              "defaultValue": null,
-              "isDeprecated": false,
-              "deprecationReason": null
             }
           ],
           "enumValues": null
@@ -6422,6 +6442,28 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "errors",
+              "description": "エラーリスト",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null,

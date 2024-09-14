@@ -7,6 +7,15 @@ query GetTeam($id: ID!) {
     requirement
     offer
     membersNum
+    idea {
+      id
+      name
+    }
+    owner {
+      name
+      definition
+      image
+    }
   }
 }
 

@@ -877,12 +877,16 @@ export type Team = {
   createdAt: Scalars['ISO8601DateTime']
   /** チームID */
   id: Scalars['ID']
+  /** アイデア */
+  idea: Idea
   /** アイデアID */
   ideaId: Scalars['Int']
   /** メンバー数 */
   membersNum?: Maybe<Scalars['Int']>
   /** (メンバーが)得られるもの */
   offer: Scalars['String']
+  /** オーナー */
+  owner: User
   /** オーナーID */
   ownerId: Scalars['Int']
   /** お願いすること */
@@ -1852,6 +1856,13 @@ export type GetTeamQuery = {
     requirement: string
     offer: string
     membersNum?: number | null
+    idea: { __typename?: 'Idea'; id: string; name: string }
+    owner: {
+      __typename?: 'User'
+      name: string
+      definition?: string | null
+      image?: string | null
+    }
   }
 }
 
@@ -4164,6 +4175,15 @@ export const GetTeamDocument = gql`
       requirement
       offer
       membersNum
+      idea {
+        id
+        name
+      }
+      owner {
+        name
+        definition
+        image
+      }
     }
   }
 `

@@ -35,8 +35,7 @@ export const useCreateTeam = () => {
       router.push(`/teams/${response.data!.createTeam!.team.id}`)
     } else {
       showError({
-        action: 'アイデアの作成に失敗しました。',
-        // ERRORがない。
+        action: 'チームの作成に失敗しました。',
         message: String(response.data!.createTeam?.errors),
       })
     }

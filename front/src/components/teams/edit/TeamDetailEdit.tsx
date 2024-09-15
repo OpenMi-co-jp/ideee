@@ -1,21 +1,13 @@
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Group,
-  Image,
-  Text,
-  Title,
-} from '@mantine/core'
-import { IconUsers } from '@tabler/icons-react'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
 import { getUserType } from '@/utils/getUserType'
+import { Box, Button, Container, Flex, Group, Text, Title } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { IconUsers } from '@tabler/icons-react'
+import { useParams } from 'next/navigation'
+import TeamDeleteModal from './TeamDeleteModal'
 
-export default function TeamDetailContent() {
+const TeamDetailEdit = () => {
   const id = useParams()?.id as string
   const { currentUser } = useCurrentUser()
   const { data } = useGetTeamQuery({
@@ -25,6 +17,7 @@ export default function TeamDetailContent() {
   })
   const { team } = data || {}
   const userType = getUserType(team?.owner.definition!)
+  const [opened, { open, close }] = useDisclosure(false)
 
   return (
     <Container>
@@ -38,42 +31,19 @@ export default function TeamDetailContent() {
               gradient={{ from: 'orange', to: 'yellow' }}
               inherit
             >
-              チーム開発
+              チーム編集
             </Text>
           </Title>
         </Group>
       </Box>
-
-      <Flex align="center" justify="space-between">
-        <Flex align="center" gap="md" mb="xl">
-          {team?.owner.image && (
-            <Image
-              src={team?.owner.image}
-              alt="プロフィール画像"
-              className=""
-              width={70}
-              height={70}
-              radius="50%"
-            />
-          )}
-          <Flex direction="column">
-            <Text size="xl" fw={'600'}>
-              {team?.owner.name}
-            </Text>
-            <Text size="sm" c="gray">
-              {userType}
-            </Text>
-          </Flex>
-        </Flex>
-
+      <Flex align="cener" justify="end">
         {currentUser?.id === team?.ownerId && (
-          <Link href={`/teams/${id}/edit`}>
-            <Button color="orange.6" radius="xl">
-              チーム編集
-            </Button>
-          </Link>
+          <Button color="orange.6" radius="xl" onClick={open}>
+            チーム削除
+          </Button>
         )}
       </Flex>
+      <TeamDeleteModal opened={opened} onClose={close} />
 
       <Box mx="sm">
         <Title
@@ -87,7 +57,10 @@ export default function TeamDetailContent() {
           得られること
         </Title>
         <Text p={6} mb="xl">
-          {team?.offer}
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
+          explicabo, vitae, expedita iusto soluta molestias saepe error
+          assumenda ut quidem, quis autem id doloremque. Perspiciatis aspernatur
+          magni officia quasi culpa.
         </Text>
         <Title
           size="h4"
@@ -95,19 +68,25 @@ export default function TeamDetailContent() {
           p={10}
           style={{
             borderLeft: '5px solid #FD7E13',
-            padding: '',
           }}
         >
           お願いしたいこと
         </Title>
         <Text p={6} mb="xl">
-          {team?.requirement}
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum,
+          velit! Cum nam, atque blanditiis rem fugiat asperiores sed sit
+          voluptatem, excepturi quod quaerat? Doloribus, dolore. Consectetur
+          autem nemo aliquam labore.
         </Text>
       </Box>
-      {/* <Text>チームに参加する機能</Text>
-      <Text>
-        ログイン中のユーザーとこのチームの発足者の場合は、本画面上で編集画面ボタンを設ける。編集画面情報で削除機能をつける。
-      </Text> */}
+
+      <Flex justify="center" align="center" gap="xl" mt="xl">
+        <Button color="orange.6" radius="xl">
+          保存
+        </Button>
+      </Flex>
     </Container>
   )
 }
+
+export default TeamDetailEdit

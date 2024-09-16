@@ -1983,11 +1983,6 @@ input UpdateTeamInput {
   offer: String
 
   """
-  【必須】オーナーID
-  """
-  ownerId: ID!
-
-  """
   お願いすること
   """
   requirement: String
@@ -2020,7 +2015,7 @@ type UpdateTeamPayload {
   """
   チームオブジェクト
   """
-  team: Team!
+  team: Team
 }
 
 """

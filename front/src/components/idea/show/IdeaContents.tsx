@@ -7,10 +7,10 @@ import { StanceBadge } from '@/utils/StanceBadge'
 import type { StanceBadgeProps } from '@/utils/StanceBadge'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 import { useDisclosure } from '@mantine/hooks'
-import { useTeamMutation } from '@/components/idea/show/form/hook'
+import { useTeamMutation } from '@/components/teams/hook'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import { CreateTeamModal } from '@/components/idea/show/form/CreateTeamModal'
+import { CreateTeamModal } from '@/components/teams/create/CreateTeamModal'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {

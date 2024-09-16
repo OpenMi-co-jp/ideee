@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import { TeamFormSchema } from '@/components/idea/show/form/TeamFormSchema'
+import { TeamFormSchema } from '@/components/teams/create/TeamFormSchema'
 import {
   useCreateTeamMutation,
   useGetTeamQuery,

@@ -7,7 +7,7 @@ import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
 import TeamDeleteModal from './TeamDeleteModal'
 import { TextAreaForm } from '@/components/ReactFormSet'
-import { useTeamMutation } from '@/components/idea/show/form/hook'
+import { useTeamMutation } from '@/components/teams/hook'
 
 const TeamDetailEdit = () => {
   const id = useParams()?.id as string

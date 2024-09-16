@@ -6,6 +6,8 @@ import { useDisclosure } from '@mantine/hooks'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
 import TeamDeleteModal from './TeamDeleteModal'
+import { TextAreaForm } from '@/components/ReactFormSet'
+import { useTeamMutation } from '@/components/idea/show/form/hook'
 
 const TeamDetailEdit = () => {
   const id = useParams()?.id as string
@@ -18,6 +20,11 @@ const TeamDetailEdit = () => {
   const { team } = data || {}
   const userType = getUserType(team?.owner.definition!)
   const [opened, { open, close }] = useDisclosure(false)
+  const { form, onSubmit } = useTeamMutation()
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    await form.handleSubmit(onSubmit)(event)
+  }
 
   return (
     <Container>
@@ -44,47 +51,43 @@ const TeamDetailEdit = () => {
         )}
       </Flex>
       <TeamDeleteModal opened={opened} onClose={close} />
-
       <Box mx="sm">
-        <Title
-          size="h4"
-          fw={600}
-          p={10}
-          style={{
-            borderLeft: '5px solid #FD7E13',
-          }}
-        >
-          得られること
-        </Title>
-        <Text p={6} mb="xl">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-          explicabo, vitae, expedita iusto soluta molestias saepe error
-          assumenda ut quidem, quis autem id doloremque. Perspiciatis aspernatur
-          magni officia quasi culpa.
-        </Text>
-        <Title
-          size="h4"
-          fw={600}
-          p={10}
-          style={{
-            borderLeft: '5px solid #FD7E13',
-          }}
-        >
-          お願いしたいこと
-        </Title>
-        <Text p={6} mb="xl">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum,
-          velit! Cum nam, atque blanditiis rem fugiat asperiores sed sit
-          voluptatem, excepturi quod quaerat? Doloribus, dolore. Consectetur
-          autem nemo aliquam labore.
-        </Text>
+        <form onSubmit={handleSubmit} role="form">
+          <Title
+            size="h4"
+            fw={600}
+            p={10}
+            style={{
+              borderLeft: '5px solid #FD7E13',
+            }}
+          >
+            得られること
+          </Title>
+          <TextAreaForm form={form} name="offer" required mb="lg" mt="md" />
+          <Title
+            size="h4"
+            fw={600}
+            p={10}
+            style={{
+              borderLeft: '5px solid #FD7E13',
+            }}
+          >
+            お願いしたいこと
+          </Title>
+          <TextAreaForm
+            form={form}
+            name="requirement"
+            required
+            mb="lg"
+            mt="md"
+          />
+          <Flex justify="center" align="center" gap="xl" mt="xl">
+            <Button color="orange.6" radius="xl" type="submit">
+              保存
+            </Button>
+          </Flex>
+        </form>
       </Box>
-
-      <Flex justify="center" align="center" gap="xl" mt="xl">
-        <Button color="orange.6" radius="xl">
-          保存
-        </Button>
-      </Flex>
     </Container>
   )
 }

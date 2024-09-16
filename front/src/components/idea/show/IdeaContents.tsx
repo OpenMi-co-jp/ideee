@@ -7,7 +7,7 @@ import { StanceBadge } from '@/utils/StanceBadge'
 import type { StanceBadgeProps } from '@/utils/StanceBadge'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 import { useDisclosure } from '@mantine/hooks'
-import { useCreateTeam } from '@/components/idea/show/form/hook'
+import { useTeamMutation } from '@/components/idea/show/form/hook'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { CreateTeamModal } from '@/components/idea/show/form/CreateTeamModal'
@@ -32,7 +32,7 @@ export const IdeaContents = () => {
   const { stance, difficulty, productUrl, githubUrl } = idea
   const sections = getSections(idea)
   const [opened, { open, close }] = useDisclosure(false)
-  const { form, onSubmit } = useCreateTeam()
+  const { form, onSubmit } = useTeamMutation()
   const { currentUser } = useCurrentUser()
 
   useEffect(() => {

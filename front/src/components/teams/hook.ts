@@ -57,7 +57,7 @@ export const useTeamMutation = () => {
         router.push(`/teams/${response.data!.createTeam!.team.id}`)
       } else {
         showError({
-          action: 'チームの作成に失敗しました。',
+          action: 'チームの作成',
           message: String(response.data!.createTeam?.errors),
         })
       }
@@ -66,9 +66,9 @@ export const useTeamMutation = () => {
         variables: {
           input: {
             id: team?.team?.id as string,
-            ownerId: String(team?.team.ownerId),
             offer: FormData.offer,
             requirement: FormData.requirement,
+            status: 0,
           },
         },
       })
@@ -76,8 +76,9 @@ export const useTeamMutation = () => {
         showSuccess({ action: 'チームの更新' })
         router.push(`/teams/${response.data!.updateTeam!.team!.id}`)
       } else {
+        console.table(response.data!.updateTeam?.errors)
         showError({
-          action: 'チームの更新に失敗しました。',
+          action: 'チームの更新',
           message: String(response.data!.updateTeam?.errors),
         })
       }

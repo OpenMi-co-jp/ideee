@@ -57,7 +57,6 @@ export const IdeaContents = () => {
         <IdeaContentSet key={index} {...section} />
       ))}
       {idea.team?.status === 'active' && (
-        // リファクタリング対応
         <Link href={`/teams/${idea.team?.id}`}>
           <Button
             variant="gradient"

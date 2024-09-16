@@ -1,13 +1,12 @@
+import { TextAreaForm } from '@/components/ReactFormSet'
+import { useTeamMutation } from '@/components/teams/hook'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
-import { getUserType } from '@/utils/getUserType'
 import { Box, Button, Container, Flex, Group, Text, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
 import TeamDeleteModal from './TeamDeleteModal'
-import { TextAreaForm } from '@/components/ReactFormSet'
-import { useTeamMutation } from '@/components/teams/hook'
 
 const TeamDetailEdit = () => {
   const id = useParams()?.id as string
@@ -18,7 +17,6 @@ const TeamDetailEdit = () => {
     },
   })
   const { team } = data || {}
-  const userType = getUserType(team?.owner.definition!)
   const [opened, { open, close }] = useDisclosure(false)
   const { form, onSubmit } = useTeamMutation()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -43,14 +41,6 @@ const TeamDetailEdit = () => {
           </Title>
         </Group>
       </Box>
-      <Flex align="cener" justify="end">
-        {currentUser?.id === team?.ownerId && (
-          <Button color="orange.6" radius="xl" onClick={open}>
-            チーム削除
-          </Button>
-        )}
-      </Flex>
-      <TeamDeleteModal opened={opened} onClose={close} />
       <Box mx="sm">
         <form onSubmit={handleSubmit} role="form">
           <Title
@@ -88,6 +78,14 @@ const TeamDetailEdit = () => {
           </Flex>
         </form>
       </Box>
+      <Flex align="cener" justify="end">
+        {currentUser?.id === team?.ownerId && (
+          <Button color="red.6" radius="xl" onClick={open}>
+            チーム開発削除
+          </Button>
+        )}
+      </Flex>
+      <TeamDeleteModal opened={opened} onClose={close} />
     </Container>
   )
 }

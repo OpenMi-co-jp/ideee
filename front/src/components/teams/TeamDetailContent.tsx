@@ -104,10 +104,6 @@ export default function TeamDetailContent() {
           {team?.requirement}
         </Text>
       </Box>
-      {/* <Text>チームに参加する機能</Text>
-      <Text>
-        ログイン中のユーザーとこのチームの発足者の場合は、本画面上で編集画面ボタンを設ける。編集画面情報で削除機能をつける。
-      </Text> */}
     </Container>
   )
 }

@@ -14,13 +14,13 @@ const TeamDeleteModal = ({ opened, onClose }: CreateTeamModalProps) => {
         <Modal.Header>
           <Modal.Title>
             <Text size="xl" fw="600">
-              チーム開発を削除
+              チーム削除
             </Text>
           </Modal.Title>
           <Modal.CloseButton />
         </Modal.Header>
         <Modal.Body>
-          <p>チーム開発を削除を実行します。よろしいですか？</p>
+          <Text>チームを削除します。よろしいですか？</Text>
         </Modal.Body>
         <Flex align="center" justify="center" m="sm" gap="md">
           <Button radius="lg" bg="gray.6" onClick={onClose}>

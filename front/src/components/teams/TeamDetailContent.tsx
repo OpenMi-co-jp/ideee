@@ -44,8 +44,8 @@ export default function TeamDetailContent() {
         </Group>
       </Box>
 
-      <Flex align="center" justify="space-between">
-        <Flex align="center" gap="md" mb="xl">
+      <Flex align="center" justify="space-between" mb="xl">
+        <Flex align="center" gap="md">
           {team?.owner.image && (
             <Image
               src={team?.owner.image}
@@ -56,16 +56,15 @@ export default function TeamDetailContent() {
               radius="50%"
             />
           )}
-          <Flex direction="column">
+          <Box>
             <Text size="xl" fw={'600'}>
               {team?.owner.name}
             </Text>
             <Text size="sm" c="gray">
               {userType}
             </Text>
-          </Flex>
+          </Box>
         </Flex>
-
         {currentUser?.id === team?.ownerId && (
           <Link href={`/teams/${id}/edit`}>
             <Button color="orange.6" radius="xl">
@@ -95,7 +94,6 @@ export default function TeamDetailContent() {
           p={10}
           style={{
             borderLeft: '5px solid #FD7E13',
-            padding: '',
           }}
         >
           お願いしたいこと

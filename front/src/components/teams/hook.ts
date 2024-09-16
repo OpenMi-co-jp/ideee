@@ -6,38 +6,41 @@ import {
   useGetTeamQuery,
   useUpdateTeamMutation,
 } from '@/lib/generated/client'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { showError, showSuccess } from '@/components/showNotification'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
 import { useEffect } from 'react'
 
 export const useTeamMutation = () => {
+  const [createTeamMutation] = useCreateTeamMutation()
+  const [updateTeamMutation] = useUpdateTeamMutation()
+
+  const router = useRouter()
+  const { currentUser } = useCurrentUser()
+
+  // 無駄な関数が走るので、createとupdateは分けるべきか、
+  const { data } = useGetIdea()
+
+  const id = useParams()?.id as string
+  const { data: team } = useGetTeamQuery({
+    variables: {
+      id,
+    },
+  })
+
   const form = useForm({
     resolver: zodResolver(TeamFormSchema),
     mode: 'onChange',
   })
 
-  const [createTeamMutation] = useCreateTeamMutation()
-  const [updateTeamMutation] = useUpdateTeamMutation()
-
-  const router = useRouter()
-
-  const { currentUser } = useCurrentUser()
-  const { data } = useGetIdea()
-  const { data: team } = useGetTeamQuery({
-    variables: {
-      id: data?.idea?.team?.id as string,
-    },
-  })
-
   useEffect(() => {
-    if (data?.idea.team !== null && team?.team) {
+    if (team) {
       form.reset({
         ...team.team,
       })
     }
-  }, [data?.idea.team, team?.team, form])
+  }, [team, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (FormData) => {
     if (data?.idea.team === null) {

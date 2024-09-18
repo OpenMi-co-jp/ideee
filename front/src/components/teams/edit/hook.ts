@@ -46,7 +46,6 @@ export const useUpdateTeam = () => {
       showSuccess({ action: 'チームの更新' })
       router.push(`/teams/${response.data!.updateTeam!.team!.id}`)
     } else {
-      console.table(response.data!.updateTeam?.errors)
       showError({
         action: 'チームの更新',
         message: String(response.data!.updateTeam?.errors),

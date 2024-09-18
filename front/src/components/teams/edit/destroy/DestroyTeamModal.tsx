@@ -29,7 +29,14 @@ export const DestroyTeamModal = ({
           <Button radius="lg" bg="gray.6" onClick={onClose}>
             戻る
           </Button>
-          <Button radius="lg" bg="orange.6" onClick={handleDestroyTeam}>
+          <Button
+            radius="lg"
+            bg="orange.6"
+            onClick={() => {
+              handleDestroyTeam()
+              onClose()
+            }}
+          >
             削除
           </Button>
         </Flex>

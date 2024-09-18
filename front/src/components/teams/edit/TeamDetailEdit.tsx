@@ -78,7 +78,7 @@ const TeamDetailEdit = () => {
           </Flex>
         </form>
       </Box>
-      <Flex align="cener" justify="end">
+      <Flex align="center" justify="end">
         {currentUser?.id === team?.ownerId && (
           <Button color="red.6" radius="xl" onClick={open}>
             チーム開発削除

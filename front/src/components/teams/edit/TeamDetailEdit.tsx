@@ -1,12 +1,12 @@
 import { TextAreaForm } from '@/components/ReactFormSet'
-import { useTeamMutation } from '@/components/teams/hook'
+import { useUpdateTeam } from '@/components/teams/edit/hook'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { Box, Button, Container, Flex, Group, Text, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
-import TeamDeleteModal from './TeamDeleteModal'
+import { DestroyTeamModal } from '@/components/teams/edit/destroy/DestroyTeamModal'
 
 const TeamDetailEdit = () => {
   const id = useParams()?.id as string
@@ -18,7 +18,7 @@ const TeamDetailEdit = () => {
   })
   const { team } = data || {}
   const [opened, { open, close }] = useDisclosure(false)
-  const { form, onSubmit } = useTeamMutation()
+  const { form, onSubmit } = useUpdateTeam()
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     await form.handleSubmit(onSubmit)(event)
@@ -85,7 +85,7 @@ const TeamDetailEdit = () => {
           </Button>
         )}
       </Flex>
-      <TeamDeleteModal opened={opened} onClose={close} />
+      <DestroyTeamModal opened={opened} onClose={close} />
     </Container>
   )
 }

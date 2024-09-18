@@ -1,11 +1,14 @@
 import { Button, Flex, Modal, Text } from '@mantine/core'
-import { useDestroyTeam } from './useDestroyTeam'
+import { useDestroyTeam } from '@/components/teams/edit/destroy/useDestroyTeam'
 
-interface CreateTeamModalProps {
+interface DestroyTeamModalProps {
   opened: boolean
   onClose: () => void
 }
-const TeamDeleteModal = ({ opened, onClose }: CreateTeamModalProps) => {
+export const DestroyTeamModal = ({
+  opened,
+  onClose,
+}: DestroyTeamModalProps) => {
   const { handleDestroyTeam } = useDestroyTeam()
   return (
     <Modal.Root opened={opened} onClose={onClose} size="md" centered>
@@ -34,5 +37,3 @@ const TeamDeleteModal = ({ opened, onClose }: CreateTeamModalProps) => {
     </Modal.Root>
   )
 }
-
-export default TeamDeleteModal

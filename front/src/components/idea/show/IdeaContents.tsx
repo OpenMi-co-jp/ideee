@@ -1,17 +1,17 @@
-import { Button, Paper, Anchor, Flex } from '@mantine/core'
-import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
-import { IdeaContentSet } from './IdeaContentSet'
-import { type GetIdeaQuery } from '@/lib/generated/client'
-import { useIdea } from '@/context/IdeaContext'
-import { StanceBadge } from '@/utils/StanceBadge'
-import type { StanceBadgeProps } from '@/utils/StanceBadge'
-import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
-import { useDisclosure } from '@mantine/hooks'
-import { useTeamMutation } from '@/components/teams/hook'
-import Link from 'next/link'
-import { useEffect } from 'react'
 import { CreateTeamModal } from '@/components/teams/create/CreateTeamModal'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useIdea } from '@/context/IdeaContext'
+import { type GetIdeaQuery } from '@/lib/generated/client'
+import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
+import type { StanceBadgeProps } from '@/utils/StanceBadge'
+import { StanceBadge } from '@/utils/StanceBadge'
+import { Anchor, Button, Flex, Paper } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
+import Link from 'next/link'
+import { useEffect } from 'react'
+import { IdeaContentSet } from './IdeaContentSet'
+import { useCreateTeam } from '@/components/teams/create/hook'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -32,7 +32,7 @@ export const IdeaContents = () => {
   const { stance, difficulty, productUrl, githubUrl } = idea
   const sections = getSections(idea)
   const [opened, { open, close }] = useDisclosure(false)
-  const { form, onSubmit } = useTeamMutation()
+  const { form, onSubmit } = useCreateTeam()
   const { currentUser } = useCurrentUser()
 
   useEffect(() => {

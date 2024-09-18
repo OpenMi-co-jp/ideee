@@ -1,7 +1,7 @@
-import { showError, showSuccess } from '@/components/showNotification'
-import { useDestroyTeamMutation, useGetTeamQuery } from '@/lib/generated/client'
+import { showSuccess } from '@/components/showNotification'
+import { useDestroyTeamMutation } from '@/lib/generated/client'
 import { useParams } from 'next/navigation'
-import router, { useRouter } from 'next/router'
+import router from 'next/router'
 
 export const useDestroyTeam = () => {
   const id = useParams()?.id as string

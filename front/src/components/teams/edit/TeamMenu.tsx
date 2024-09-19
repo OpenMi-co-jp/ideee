@@ -11,7 +11,7 @@ export const TeamMenu = ({ teamID, open }: TeamMenuProps) => {
   return (
     <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
-        <IconDots />
+        <IconDots style={{ margin: '10px' }} />
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Label>チーム管理</Menu.Label>

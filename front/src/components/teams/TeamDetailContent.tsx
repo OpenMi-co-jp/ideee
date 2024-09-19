@@ -1,8 +1,17 @@
 import { IdeaImage } from '@/components/image/IdeaImage'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { useGetIdeaQuery, useGetTeamQuery } from '@/lib/generated/client'
+import { useGetTeamQuery } from '@/lib/generated/client'
 import { getUserType } from '@/utils/getUserType'
-import { Box, Container, Flex, Group, Image, Text, Title } from '@mantine/core'
+import {
+  Box,
+  Paper,
+  Container,
+  Flex,
+  Group,
+  Image,
+  Text,
+  Title,
+} from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
@@ -21,13 +30,6 @@ export default function TeamDetailContent() {
   const userType = getUserType(team?.owner.definition!)
   const [opened, { open, close }] = useDisclosure(false)
 
-  // 無駄な取得が入るので、オブジェクトに含めてもらう必要あり。
-  const { data: idea } = useGetIdeaQuery({
-    variables: {
-      id: String(team?.ideaId),
-    },
-  })
-
   return (
     <Container>
       <Flex
@@ -39,7 +41,7 @@ export default function TeamDetailContent() {
         mb="xl"
       >
         <Title order={1}>{team?.idea.name}</Title>
-        {idea?.idea.iconUrl && <IdeaImage src={idea?.idea.iconUrl} />}
+        {team?.idea.iconUrl && <IdeaImage src={team.idea.iconUrl} />}
       </Flex>
       <Box>
         <Group align="center" mb="xl">
@@ -80,7 +82,7 @@ export default function TeamDetailContent() {
         </Flex>
       </Flex>
 
-      <Box mx="sm">
+      <Paper bg="#FCFCFC" radius="md" px="xl" pt="lg" pb={1}>
         <Title
           size="h4"
           fw={600}
@@ -107,7 +109,7 @@ export default function TeamDetailContent() {
         <Text p={6} mb="xl">
           {team?.requirement}
         </Text>
-      </Box>
+      </Paper>
       {currentUser?.id === team?.ownerId && (
         <div>
           <TeamMenu teamID={team?.id as string} open={open} />

@@ -1852,7 +1852,12 @@ export type GetTeamQuery = {
     requirement: string
     offer: string
     membersNum?: number | null
-    idea: { __typename?: 'Idea'; id: string; name: string }
+    idea: {
+      __typename?: 'Idea'
+      id: string
+      name: string
+      iconUrl?: string | null
+    }
     owner: {
       __typename?: 'User'
       name: string
@@ -4174,6 +4179,7 @@ export const GetTeamDocument = gql`
       idea {
         id
         name
+        iconUrl
       }
       owner {
         name

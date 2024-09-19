@@ -18,7 +18,7 @@ export const useDestroyTeam = (onClose: () => void) => {
       if (res.data?.destroyTeam?.success) {
         onClose()
         showSuccess({ action: 'チーム削除' })
-        router.push(`/`)
+        router.push('/')
       }
     })
   }

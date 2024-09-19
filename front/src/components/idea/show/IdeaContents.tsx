@@ -43,7 +43,7 @@ export const IdeaContents = () => {
     ) {
       open()
     }
-  }, [idea.team, stance, currentUser])
+  }, [idea.team, stance, currentUser, idea.userId, open])
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">

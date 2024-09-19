@@ -12,7 +12,7 @@ export const useUpdateTeam = () => {
   const router = useRouter()
 
   const id = useParams()?.id as string
-  const { data: team } = useGetTeamQuery({
+  const { data } = useGetTeamQuery({
     variables: {
       id,
     },
@@ -24,18 +24,18 @@ export const useUpdateTeam = () => {
   })
 
   useEffect(() => {
-    if (team) {
+    if (data) {
       form.reset({
-        ...team.team,
+        ...data.team,
       })
     }
-  }, [team, form])
+  }, [data, form])
 
   const onSubmit: SubmitHandler<FieldValues> = async (FormData) => {
     const response = await updateTeamMutation({
       variables: {
         input: {
-          id: team?.team?.id as string,
+          id: data?.team?.id as string,
           offer: FormData.offer,
           requirement: FormData.requirement,
           status: 0,

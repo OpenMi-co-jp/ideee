@@ -1,21 +1,20 @@
 import { IdeaImage } from '@/components/image/IdeaImage'
+import { TeamMenu } from '@/components/teams/edit/TeamMenu'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { getUserType } from '@/utils/getUserType'
 import {
   Box,
-  Paper,
   Container,
   Flex,
   Group,
   Image,
+  Paper,
   Text,
   Title,
 } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
-import { TeamMenu } from '@/components/teams/edit/TeamMenu'
 
 export default function TeamDetailContent() {
   const id = useParams()?.id as string

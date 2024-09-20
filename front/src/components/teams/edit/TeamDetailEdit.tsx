@@ -1,12 +1,10 @@
 import { TextAreaForm } from '@/components/ReactFormSet'
 import { useUpdateTeam } from '@/components/teams/edit/hook'
-import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { Box, Button, Container, Flex, Group, Text, Title } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
 import { IconUsers } from '@tabler/icons-react'
-import { useParams } from 'next/navigation'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
 const TeamDetailEdit = () => {
   const id = useParams()?.id as string

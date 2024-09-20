@@ -1,13 +1,14 @@
-import { useCurrentUser } from '@/context/CurrentUserContext'
 import { Menu } from '@mantine/core'
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import Link from 'next/link'
+import { DestroyTeamModal } from '@/components/teams/destroy/DestroyTeamModal'
+import { useDisclosure } from '@mantine/hooks'
 
 type TeamMenuProps = {
   teamID: string
-  open: () => void
 }
-export const TeamMenu = ({ teamID, open }: TeamMenuProps) => {
+export const TeamMenu = ({ teamID }: TeamMenuProps) => {
+  const [opened, { open, close }] = useDisclosure(false)
   return (
     <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
@@ -29,6 +30,7 @@ export const TeamMenu = ({ teamID, open }: TeamMenuProps) => {
           チーム削除
         </Menu.Item>
       </Menu.Dropdown>
+      <DestroyTeamModal opened={opened} onClose={close} />
     </Menu>
   )
 }

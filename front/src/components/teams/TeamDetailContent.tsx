@@ -15,7 +15,6 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
-import { DestroyTeamModal } from '@/components/teams/destroy/DestroyTeamModal'
 import { TeamMenu } from '@/components/teams/edit/TeamMenu'
 
 export default function TeamDetailContent() {
@@ -28,7 +27,6 @@ export default function TeamDetailContent() {
   })
   const { team } = data || {}
   const userType = getUserType(team?.owner.definition!)
-  const [opened, { open, close }] = useDisclosure(false)
 
   return (
     <Container>
@@ -111,10 +109,7 @@ export default function TeamDetailContent() {
         </Text>
       </Paper>
       {currentUser?.id === team?.ownerId && (
-        <div>
-          <TeamMenu teamID={team?.id as string} open={open} />
-          <DestroyTeamModal opened={opened} onClose={close} />
-        </div>
+        <TeamMenu teamID={team?.id as string} />
       )}
     </Container>
   )

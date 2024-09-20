@@ -34,7 +34,6 @@ export const DestroyTeamModal = ({
             bg="gray.6"
             onClick={() => {
               handleDestroyTeam()
-              onClose()
             }}
           >
             削除

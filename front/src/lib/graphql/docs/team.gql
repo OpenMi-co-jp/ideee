@@ -10,6 +10,7 @@ query GetTeam($id: ID!) {
     idea {
       id
       name
+      iconUrl
     }
     owner {
       name

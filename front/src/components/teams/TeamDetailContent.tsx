@@ -1,19 +1,20 @@
+import { IdeaImage } from '@/components/image/IdeaImage'
+import { TeamMenu } from '@/components/teams/edit/TeamMenu'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
+import { getUserType } from '@/utils/getUserType'
 import {
   Box,
-  Button,
   Container,
   Flex,
   Group,
   Image,
+  Paper,
   Text,
   Title,
 } from '@mantine/core'
 import { IconUsers } from '@tabler/icons-react'
-import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getUserType } from '@/utils/getUserType'
 
 export default function TeamDetailContent() {
   const id = useParams()?.id as string
@@ -28,6 +29,17 @@ export default function TeamDetailContent() {
 
   return (
     <Container>
+      <Flex
+        gap="md"
+        justify="center"
+        align="center"
+        direction="column"
+        wrap="wrap"
+        mb="xl"
+      >
+        <Title order={1}>{team?.idea.name}</Title>
+        {team?.idea.iconUrl && <IdeaImage src={team.idea.iconUrl} />}
+      </Flex>
       <Box>
         <Group align="center" mb="xl">
           <IconUsers size={30} stroke={2} color="orange" />
@@ -44,8 +56,8 @@ export default function TeamDetailContent() {
         </Group>
       </Box>
 
-      <Flex align="center" justify="space-between">
-        <Flex align="center" gap="md" mb="xl">
+      <Flex align="center" justify="space-between" mb="xl">
+        <Flex align="center" gap="md">
           {team?.owner.image && (
             <Image
               src={team?.owner.image}
@@ -56,27 +68,18 @@ export default function TeamDetailContent() {
               radius="50%"
             />
           )}
-          <Flex direction="column">
+          <Box>
             <Text size="xl" fw={'600'}>
               {team?.owner.name}
             </Text>
             <Text size="sm" c="gray">
               {userType}
             </Text>
-          </Flex>
+          </Box>
         </Flex>
-
-        {/* TODO 編集画面設定*/}
-        {/* {currentUser?.id === team?.ownerId && (
-          <Link href={`/teams/${id}/edit`}>
-            <Button color="orange.6" radius="xl">
-              チーム編集
-            </Button>
-          </Link>
-        )} */}
       </Flex>
 
-      <Box mx="sm">
+      <Paper bg="#FCFCFC" radius="md" px="xl" pt="lg" pb={1}>
         <Title
           size="h4"
           fw={600}
@@ -96,7 +99,6 @@ export default function TeamDetailContent() {
           p={10}
           style={{
             borderLeft: '5px solid #FD7E13',
-            padding: '',
           }}
         >
           お願いしたいこと
@@ -104,11 +106,10 @@ export default function TeamDetailContent() {
         <Text p={6} mb="xl">
           {team?.requirement}
         </Text>
-      </Box>
-      {/* <Text>チームに参加する機能</Text>
-      <Text>
-        ログイン中のユーザーとこのチームの発足者の場合は、本画面上で編集画面ボタンを設ける。編集画面情報で削除機能をつける。
-      </Text> */}
+      </Paper>
+      {currentUser?.id === team?.ownerId && (
+        <TeamMenu teamID={team?.id as string} />
+      )}
     </Container>
   )
 }

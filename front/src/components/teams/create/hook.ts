@@ -1,23 +1,23 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
-import { TeamFormSchema } from '@/components/idea/show/form/TeamFormSchema'
-import { useCreateTeamMutation } from '@/lib/generated/client'
-import { useRouter } from 'next/navigation'
 import { showError, showSuccess } from '@/components/showNotification'
+import { TeamFormSchema } from '@/components/teams/TeamFormSchema'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useCreateTeamMutation } from '@/lib/generated/client'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 
 export const useCreateTeam = () => {
+  const [createTeamMutation] = useCreateTeamMutation()
+
+  const router = useRouter()
+  const { currentUser } = useCurrentUser()
+  const { data } = useGetIdea()
+
   const form = useForm({
     resolver: zodResolver(TeamFormSchema),
     mode: 'onChange',
   })
-
-  const [createTeamMutation] = useCreateTeamMutation()
-  const router = useRouter()
-
-  const { currentUser } = useCurrentUser()
-  const { data } = useGetIdea()
 
   const onSubmit: SubmitHandler<FieldValues> = async (FormData) => {
     const response = await createTeamMutation({
@@ -26,17 +26,17 @@ export const useCreateTeam = () => {
           ideaId: String(data?.idea.id),
           offer: FormData.offer,
           ownerId: String(currentUser?.id),
-          requirement: FormData.offer,
+          requirement: FormData.requirement,
         },
       },
     })
+
     if (response.data!.createTeam!.success) {
       showSuccess({ action: 'チームの作成' })
       router.push(`/teams/${response.data!.createTeam!.team.id}`)
     } else {
       showError({
-        action: 'アイデアの作成に失敗しました。',
-        // ERRORがない。
+        action: 'チームの作成',
         message: String(response.data!.createTeam?.errors),
       })
     }

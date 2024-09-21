@@ -1,17 +1,17 @@
-import { Button, Paper, Anchor, Flex } from '@mantine/core'
-import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
-import { IdeaContentSet } from './IdeaContentSet'
-import { type GetIdeaQuery } from '@/lib/generated/client'
+import { CreateTeamModal } from '@/components/teams/create/CreateTeamModal'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useIdea } from '@/context/IdeaContext'
-import { StanceBadge } from '@/utils/StanceBadge'
-import type { StanceBadgeProps } from '@/utils/StanceBadge'
+import { type GetIdeaQuery } from '@/lib/generated/client'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
+import type { StanceBadgeProps } from '@/utils/StanceBadge'
+import { StanceBadge } from '@/utils/StanceBadge'
+import { Anchor, Button, Flex, Paper } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { useCreateTeam } from '@/components/idea/show/form/hook'
+import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import { CreateTeamModal } from '@/components/idea/show/form/CreateTeamModal'
-import { useCurrentUser } from '@/context/CurrentUserContext'
+import { IdeaContentSet } from './IdeaContentSet'
+import { useCreateTeam } from '@/components/teams/create/hook'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -43,7 +43,7 @@ export const IdeaContents = () => {
     ) {
       open()
     }
-  }, [idea.team, stance, currentUser])
+  }, [idea.team, stance, currentUser, idea.userId, open])
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
@@ -57,7 +57,6 @@ export const IdeaContents = () => {
         <IdeaContentSet key={index} {...section} />
       ))}
       {idea.team?.status === 'active' && (
-        // リファクタリング対応
         <Link href={`/teams/${idea.team?.id}`}>
           <Button
             variant="gradient"

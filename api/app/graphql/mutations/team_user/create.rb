@@ -14,16 +14,16 @@ module Mutations
         team_id: args[:team_id],
         user_id: args[:user_id]
       )
-      team_user.save
+      team_user.save!
       {
         team_user:,
-        success: true,
+        success: true
       }
     rescue ActiveRecord::RecordInvalid => e
-        {
-          success: false,
-          errors: e.record.errors.full_messages
-        }
+      {
+        success: false,
+        errors: e.record.errors.full_messages
+      }
     end
   end
 end

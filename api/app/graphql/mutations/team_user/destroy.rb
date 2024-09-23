@@ -22,11 +22,6 @@ module Mutations
         success: true,
         errors: []
       }
-    rescue ActiveRecord::RecordInvalid => e
-      {
-        success: false,
-        errors: e.record.errors.full_messages
-      }
     end
   end
 end

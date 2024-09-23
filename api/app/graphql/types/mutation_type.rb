@@ -26,5 +26,7 @@ module Types
     field :update_notification_config, mutation: Mutations::NotificationConfig::Update, description: '通知設定更新'
 
     field :check_notifications, mutation: Mutations::Notification::Update, description: '通知確認'
+
+    field :join_team, mutation: Mutations::TeamUser::Create, description: 'チームに参加する'
   end
 end

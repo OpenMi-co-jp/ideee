@@ -67,3 +67,21 @@ mutation DestroyTeam($input: DestroyTeamInput!) {
     success
   }
 }
+
+mutation JoinTeam($input: JoinTeamInput!) {
+  joinTeam(input: $input) {
+    teamUser {
+      teamId
+      userId
+    }
+    success
+    errors
+  }
+}
+
+mutation LeaveTeam($input: LeaveTeamInput!) {
+  leaveTeam(input: $input) {
+    success
+    errors
+  }
+}

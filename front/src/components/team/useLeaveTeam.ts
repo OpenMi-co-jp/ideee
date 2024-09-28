@@ -16,7 +16,7 @@ export const useLeaveTeam = () => {
     // },
   })
 
-  const handleJoinTeam = () => {
+  const handleLeaveTeam = () => {
     leaveTeam().then((res) => {
       if (res.data?.leaveTeam?.success) {
         showSuccess({ action: 'チーム脱退' })
@@ -24,6 +24,6 @@ export const useLeaveTeam = () => {
     })
   }
   return {
-    handleJoinTeam,
+    handleLeaveTeam,
   }
 }

@@ -1,4 +1,4 @@
-import TeamDetailContent from '@/components/teams/TeamDetailContent'
+import TeamDetailContent from '@/components/team/TeamDetailContent'
 
 export default function TeamDetail() {
   return <TeamDetailContent />

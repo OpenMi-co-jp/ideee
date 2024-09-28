@@ -1,7 +1,7 @@
 import { Menu } from '@mantine/core'
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import Link from 'next/link'
-import { DestroyTeamModal } from '@/components/teams/destroy/DestroyTeamModal'
+import { DestroyTeamModal } from '@/components/team/destroy/DestroyTeamModal'
 import { useDisclosure } from '@mantine/hooks'
 
 type TeamMenuProps = {

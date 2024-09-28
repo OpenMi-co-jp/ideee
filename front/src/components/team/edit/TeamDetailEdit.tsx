@@ -1,5 +1,5 @@
 import { TextAreaForm } from '@/components/ReactFormSet'
-import { useUpdateTeam } from '@/components/teams/edit/hook'
+import { useUpdateTeam } from '@/components/team/edit/hook'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { Box, Button, Container, Flex, Group, Text, Title } from '@mantine/core'
 import { IconUsers } from '@tabler/icons-react'

@@ -1,5 +1,5 @@
 import { Button, Flex, Modal, Text } from '@mantine/core'
-import { useDestroyTeam } from '@/components/teams/destroy/useDestroyTeam'
+import { useDestroyTeam } from '@/components/team/destroy/useDestroyTeam'
 
 interface DestroyTeamModalProps {
   opened: boolean

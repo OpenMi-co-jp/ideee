@@ -1,4 +1,4 @@
-import { CreateTeamModal } from '@/components/teams/create/CreateTeamModal'
+import { CreateTeamModal } from '@/components/team/create/CreateTeamModal'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useIdea } from '@/context/IdeaContext'
 import { type GetIdeaQuery } from '@/lib/generated/client'
@@ -11,7 +11,7 @@ import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { IdeaContentSet } from './IdeaContentSet'
-import { useCreateTeam } from '@/components/teams/create/hook'
+import { useCreateTeam } from '@/components/team/create/hook'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [

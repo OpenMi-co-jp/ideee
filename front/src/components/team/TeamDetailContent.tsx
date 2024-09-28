@@ -1,5 +1,5 @@
 import { IdeaImage } from '@/components/image/IdeaImage'
-import { TeamMenu } from '@/components/teams/edit/TeamMenu'
+import { TeamMenu } from '@/components/team/edit/TeamMenu'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { getUserType } from '@/utils/getUserType'
@@ -18,7 +18,7 @@ import {
 } from '@mantine/core'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
-import { useJoinTeam } from '@/components/teams/useJoinTeam'
+import { useJoinTeam } from '@/components/team/useJoinTeam'
 
 export default function TeamDetailContent() {
   const id = useParams()?.id as string

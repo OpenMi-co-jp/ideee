@@ -1,5 +1,5 @@
 import { showError, showSuccess } from '@/components/showNotification'
-import { TeamFormSchema } from '@/components/teams/TeamFormSchema'
+import { TeamFormSchema } from '@/components/team/TeamFormSchema'
 import { useGetTeamQuery, useUpdateTeamMutation } from '@/lib/generated/client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useParams, useRouter } from 'next/navigation'

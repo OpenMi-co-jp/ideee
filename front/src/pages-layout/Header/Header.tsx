@@ -11,6 +11,7 @@ import { IdeaCreateButton } from '@/components/idea/createButton'
 import { CreateSpButton } from '@/components/idea/createSpButton'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
+import { CampaignBox } from './headerComponents/CampaignBox'
 
 export const Header = () => {
   const pinned = useHeadroom({ fixedAt: 120 })
@@ -48,6 +49,7 @@ export const Header = () => {
           </Group>
         </Group>
       </Box>
+      <CampaignBox pinned={pinned} />
     </Portal>
   )
 }

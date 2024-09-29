@@ -4,7 +4,8 @@ class SendAnnouncementJob < ApplicationJob
   def perform(user_ids)
     user_ids.each do |user_id|
       user = User.find_by(id: user_id)
-      ::UserMailer.send_ai_feature_announcement(user).deliver_later if user
+      # ::UserMailer.send_ai_feature_announcement(user).deliver_later if user
+      ::UserMailer.send_sentry_event(user).deliver_later if user
     end
   end
 end

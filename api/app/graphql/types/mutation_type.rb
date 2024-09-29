@@ -27,7 +27,7 @@ module Types
 
     field :check_notifications, mutation: Mutations::Notification::Update, description: '通知確認'
 
-    field :join_team, mutation: Mutations::TeamUser::Create, description: 'チームに参加する'
-    field :leave_team, mutation: Mutations::TeamUser::Destroy, description: 'チームから脱離する'
+    field :join_team, mutation: Mutations::TeamUser::Create, description: 'チーム参加'
+    field :leave_team, mutation: Mutations::TeamUser::Destroy, description: 'チーム脱離'
   end
 end

@@ -9,19 +9,30 @@ module Mutations
     field :errors, [String], null: false, description: 'エラーメッセージ'
 
     def resolve(**args)
-      team = ::TeamUser.find_by(team_id: args[:team_id], user_id: args[:user_id])
+      team = ::Team.find_by(id: args[:team_id])
+      team_user = ::TeamUser.find_by(team_id: args[:team_id], user_id: args[:user_id])
       if context[:current_user].id != args[:user_id].to_i
         return {
           success: false,
           errors: ['ユーザーの権限がありません']
         }
       end
+      return { success: false, errors: ['該当するチームが存在しません'] } unless team
 
-      team.destroy!
-      {
-        success: true,
-        errors: []
-      }
+      return unless team_user
+
+      begin
+        team_user.destroy!
+        {
+          success: true,
+          errors: []
+        }
+      rescue ActiveRecord::RecordInvalid => e
+        {
+          success: false,
+          errors: e.record.errors.full_messages
+        }
+      end
     end
   end
 end

@@ -42,7 +42,7 @@ RSpec.describe Mutations::TeamUser::Destroy do
       end
     end
 
-    context '更新対象のidが存在していないとき' do
+    context '更新対象のチームidが存在していないとき' do
       before do
         variables[:input][:teamId] = nil
       end
@@ -51,6 +51,18 @@ RSpec.describe Mutations::TeamUser::Destroy do
         graphql_post
         res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type LeaveTeamInput! was provided invalid value for teamId (Expected value to not be null)')
+      end
+    end
+
+    context '更新対象のユーザidが存在していないとき' do
+      before do
+        variables[:input][:userId] = nil
+      end
+
+      it '作成に失敗しレスポンスにエラー内容が含まれること' do
+        graphql_post
+        res = response.parsed_body
+        expect(res['errors'][0]['message']).to include('Variable $input of type LeaveTeamInput! was provided invalid value for userId (Expected value to not be null)')
       end
     end
   end

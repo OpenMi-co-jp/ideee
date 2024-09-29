@@ -1,5 +1,6 @@
 import { IdeaImage } from '@/components/image/IdeaImage'
 import { TeamMenu } from '@/components/team/edit/TeamMenu'
+import { useJoinTeam } from '@/components/team/useJoinTeam'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { getUserType } from '@/utils/getUserType'
@@ -18,7 +19,8 @@ import {
 } from '@mantine/core'
 import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
-import { useJoinTeam } from '@/components/team/useJoinTeam'
+import { SignPath } from '@/components/Auth/SignPath'
+import { useLeaveTeam } from '@/components/team/useLeaveTeam'
 
 export default function TeamDetailContent() {
   const id = useParams()?.id as string
@@ -31,6 +33,12 @@ export default function TeamDetailContent() {
   const { team } = data || {}
   const userType = getUserType(team?.owner.definition!)
   const { handleJoinTeam } = useJoinTeam()
+  const { handleLeaveTeam } = useLeaveTeam()
+
+  const isOwner = team?.ownerId === currentUser?.id
+  // const isAlreadyJoined = team.joinUser.some(
+  //   (user) => user.userId === currentUser.id
+  // )
 
   return (
     <Container>
@@ -82,29 +90,27 @@ export default function TeamDetailContent() {
             </Text>
           </Box>
         </Flex>
-
-        {/* チーム開発に入る前にチェックか押下後にチェックを入れる、 */}
-        {team?.ownerId !== currentUser?.id && (
+        {isOwner && (
           <Box>
             <Button bg="orange.6" radius="xl" onClick={handleJoinTeam}>
               + 参加
             </Button>
-            {/* <Button bg="gray.4" radius="xl">
+            {/* <Button bg="gray.4" radius="xl"  onClick={handleLeaveTeam}>
               参加中
             </Button> */}
           </Box>
         )}
       </Flex>
 
-      {/* 参加者がいる場合のみ表示する制御が必要 */}
-      <Box mb="md">
-        <Badge bg="orange.6">参加中のメンバー</Badge>
-        <Flex align="center" gap="md" mt="md">
-          <Avatar />
-          <Avatar />
-          <Avatar />
-        </Flex>
-      </Box>
+      {/* 参加者がいる場合のみ表示する制御が必要 backendで追加いただいたら正常に動く想定*/}
+      {/* {team?.joinUser.userId === currentUser?.id && (
+        <Avatar.Group mb="md">
+          <Avatar src="image.png" />
+          <Avatar src="image.png" />
+          <Avatar src="image.png" />
+          <Avatar>{team.joinUser.length()}</Avatar>
+        </Avatar.Group>
+      )} */}
 
       <Paper bg="#FCFCFC" radius="md" px="md" pt="lg" pb={1}>
         <Title
@@ -137,6 +143,12 @@ export default function TeamDetailContent() {
       {currentUser?.id === team?.ownerId && (
         <TeamMenu teamID={team?.id as string} />
       )}
+
+      {(() => {
+        if (!currentUser) {
+          return <SignPath />
+        }
+      })()}
     </Container>
   )
 }

@@ -1,7 +1,7 @@
-import { useJoinTeamMutation } from '@/lib/generated/client'
-import { useParams } from 'next/navigation'
 import { showSuccess } from '@/components/showNotification'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { useJoinTeamMutation } from '@/lib/generated/client'
+import { useParams } from 'next/navigation'
 
 export const useJoinTeam = () => {
   const id = useParams()?.id as string

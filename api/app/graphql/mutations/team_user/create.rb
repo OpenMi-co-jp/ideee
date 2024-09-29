@@ -30,7 +30,7 @@ module Mutations
         user_id: args[:user_id]
       )
       begin
-        team_user.save
+        team_user.save!
         {
           team_user:,
           success: true

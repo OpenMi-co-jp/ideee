@@ -83,6 +83,7 @@ export default function TeamDetailContent() {
           </Box>
         </Flex>
 
+        {/* チーム開発に入る前にチェックか押下後にチェックを入れる、 */}
         {team?.ownerId !== currentUser?.id && (
           <Box>
             <Button bg="orange.6" radius="xl" onClick={handleJoinTeam}>

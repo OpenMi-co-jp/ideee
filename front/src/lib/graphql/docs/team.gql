@@ -65,6 +65,7 @@ mutation updateTeam($input: UpdateTeamInput!) {
 mutation DestroyTeam($input: DestroyTeamInput!) {
   destroyTeam(input: $input) {
     success
+    errors
   }
 }
 

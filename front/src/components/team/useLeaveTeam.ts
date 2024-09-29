@@ -5,15 +5,14 @@ import { showSuccess } from '../showNotification'
 
 export const useLeaveTeam = () => {
   const id = useParams()?.id as string
-  const { currentUser } = useCurrentUser()
 
   const [leaveTeam] = useLeaveTeamMutation({
-    // variables: {
-    //   input: {
-    //     userId: String(currentUser?.id),
-    //     teamId: id,
-    //   },
-    // },
+    // backend修正後に対応
+    variables: {
+      input: {
+        teamId: id,
+      },
+    },
   })
 
   const handleLeaveTeam = () => {

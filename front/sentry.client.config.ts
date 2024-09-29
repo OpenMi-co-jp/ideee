@@ -29,7 +29,6 @@ Sentry.init({
       maskAllText: true,
       blockAllMedia: true,
     }),
-    new Sentry.BrowserProfilingIntegration(),
     Sentry.feedbackIntegration({
       colorScheme: "system",
       isEmailRequired: true,

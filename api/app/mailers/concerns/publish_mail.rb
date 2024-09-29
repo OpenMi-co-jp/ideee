@@ -14,8 +14,21 @@ module PublishMail
     mail(
       to: @user.email,
       subject:,
-      template_path: 'devise/mailer',
+      template_path: 'campaign',
       template_name: 'ai_feature_announcement'
+    )
+  end
+
+  def send_sentry_event(user)
+    @user = user
+    @campaign_url = 'https://ideee.tech/campaign/sentry'
+
+    subject = 'Sentry Japanとのコラボでアマチケがもらえるキャンペーン中🚀'
+    mail(
+      to: @user.email,
+      subject:,
+      template_path: 'campaign',
+      template_name: 'sentry_event'
     )
   end
 end

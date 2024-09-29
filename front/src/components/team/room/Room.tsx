@@ -62,50 +62,43 @@ export const Room = () => {
               wrap={isCurrentUser ? 'wrap' : 'wrap-reverse'}
             >
               <Flex justify={isCurrentUser ? 'flex-end' : 'flex-start'} mt="md">
-                <Flex direction="column">
-                  <div style={{ position: 'relative' }}>
-                    <Paper
-                      miw="15rem"
-                      maw="30rem"
-                      p="xs"
-                      mt="3px"
-                      radius="lg"
-                      style={{
-                        wordWrap: 'break-word',
-                        wordBreak: 'break-word',
-                        borderColor: '#FD7E13',
-                        borderWidth: '2px',
-                        borderStyle: 'solid',
-                      }}
+                <Paper
+                  miw="15rem"
+                  maw="30rem"
+                  p="xs"
+                  radius="lg"
+                  style={{
+                    wordWrap: 'break-word',
+                    wordBreak: 'break-word',
+                    borderColor: '#FD7E13',
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                  }}
+                >
+                  <Link href={`/users/${1}`} passHref>
+                    <Group
+                      justify={isCurrentUser ? 'flex-end' : 'flex-start'}
+                      gap="xs"
+                      mb="xs"
                     >
-                      <Link href={`/users/${1}`} passHref>
-                        <Group
-                          justify={isCurrentUser ? 'flex-end' : 'flex-start'}
-                          gap="xs"
-                          mb="xs"
-                        >
-                          {isCurrentUser
-                            ? userContents.reverse()
-                            : userContents}
-                        </Group>
-                      </Link>
-                      <TextWithLinks>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Eaque impedit est ipsa reprehenderit aliquam corrupti
-                      </TextWithLinks>
-                      <Flex
-                        justify={isCurrentUser ? 'flex-end' : 'flex-start'}
-                        mt="xs"
-                      >
-                        {/* <Text c="gray" mx="xs">
-                          {dayjs(commentCreatedAt).format('YYYY-MM-DD HH:mm')}
-                        </Text>
-                        {isCurrentUser && <CommentAction />} */}
-                        2024/09/29
-                      </Flex>
-                    </Paper>
-                  </div>
-                </Flex>
+                      {isCurrentUser
+                        ? [...userContents].reverse()
+                        : userContents}
+                    </Group>
+                  </Link>
+                  <TextWithLinks>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Quam, corrupti. Culpa optio atque eaque, facilis quae
+                  </TextWithLinks>
+                  <Flex
+                    justify={isCurrentUser ? 'flex-end' : 'flex-start'}
+                    mt="xs"
+                  >
+                    <Text c="gray" size="sm">
+                      2024年9月29日
+                    </Text>
+                  </Flex>
+                </Paper>
               </Flex>
             </Flex>
           </ScrollArea>

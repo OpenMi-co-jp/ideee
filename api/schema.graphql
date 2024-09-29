@@ -937,7 +937,7 @@ type JoinTeamPayload {
   """
   チームユーザーオブジェクト
   """
-  teamUser: TeamUser!
+  teamUser: TeamUser
 }
 
 """
@@ -1154,7 +1154,7 @@ type Mutation {
   ): DestroyUserPayload
 
   """
-  チームに参加する
+  チーム参加
   """
   joinTeam(
     """
@@ -1164,7 +1164,7 @@ type Mutation {
   ): JoinTeamPayload
 
   """
-  チームから脱離する
+  チーム脱離
   """
   leaveTeam(
     """
@@ -1781,6 +1781,11 @@ type Team {
   作成日
   """
   createdAt: ISO8601DateTime!
+
+  """
+  メンバー
+  """
+  currentMember: [User!]
 
   """
   チームID

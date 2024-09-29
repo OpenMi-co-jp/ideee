@@ -2951,13 +2951,9 @@
               "name": "teamUser",
               "description": "チームユーザーオブジェクト",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "TeamUser",
-                  "ofType": null
-                }
+                "kind": "OBJECT",
+                "name": "TeamUser",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null,
@@ -3629,7 +3625,7 @@
             },
             {
               "name": "joinTeam",
-              "description": "チームに参加する",
+              "description": "チーム参加",
               "type": {
                 "kind": "OBJECT",
                 "name": "JoinTeamPayload",
@@ -3658,7 +3654,7 @@
             },
             {
               "name": "leaveTeam",
-              "description": "チームから脱離する",
+              "description": "チーム脱離",
               "type": {
                 "kind": "OBJECT",
                 "name": "LeaveTeamPayload",
@@ -5769,6 +5765,28 @@
                   "kind": "SCALAR",
                   "name": "ISO8601DateTime",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
+              "name": "currentMember",
+              "description": "メンバー",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "User",
+                    "ofType": null
+                  }
                 }
               },
               "isDeprecated": false,

@@ -46,7 +46,7 @@ RSpec.describe Mutations::TeamUser::Create do
         variables[:input][:teamId] = 0
       end
 
-      it 'raise errror ActiveRecord::RecordInvalidとなること' do
+      it '作成に失敗すること' do
         graphql_post
         res = response.parsed_body
         expect(res['data']['joinTeam']['success']).to be false

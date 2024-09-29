@@ -47,11 +47,10 @@ RSpec.describe Mutations::TeamUser::Create do
       end
 
       it 'raise errror ActiveRecord::RecordInvalidとなること' do
-        request_result = expect do
-          graphql_post
-        end
-
-        request_result.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: Teamを入力してください')
+        graphql_post
+        res = response.parsed_body
+        expect(res['data']['joinTeam']['success']).to be false
+        expect(res['data']['joinTeam']['teamUser']).to be_nil
       end
     end
 

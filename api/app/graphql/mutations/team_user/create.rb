@@ -10,6 +10,12 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
+      team = ::Team.find_by(id: args[:team_id])
+      user = ::User.find_by(id: args[:user_id])
+
+      return { success: false, errors: ['存在しないチームID'], team_user: nil } unless team
+      return { success: false, errors: ['存在しないユーザーID'], team_user: nil } unless user
+
       team_user = ::TeamUser.find_by(team_id: args[:team_id], user_id: args[:user_id])
 
       if team_user.present?
@@ -23,11 +29,15 @@ module Mutations
         team_id: args[:team_id],
         user_id: args[:user_id]
       )
-      team_user.save!
-      {
-        team_user:,
-        success: true
-      }
+      begin
+        team_user.save
+        {
+          team_user:,
+          success: true
+        }
+      rescue ActiveRecord::RecordInvalid => e
+        { team_user: nil, success: false, errors: e.record.errors.full_messages }
+      end
     end
   end
 end

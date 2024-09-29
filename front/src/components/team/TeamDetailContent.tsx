@@ -21,6 +21,7 @@ import { IconUsers } from '@tabler/icons-react'
 import { useParams } from 'next/navigation'
 import { SignPath } from '@/components/Auth/SignPath'
 import { useLeaveTeam } from '@/components/team/useLeaveTeam'
+import { Room } from './room/Room'
 
 export default function TeamDetailContent() {
   const id = useParams()?.id as string
@@ -90,7 +91,7 @@ export default function TeamDetailContent() {
             </Text>
           </Box>
         </Flex>
-        {isOwner && (
+        {!isOwner && (
           <Box>
             <Button bg="orange.6" radius="xl" onClick={handleJoinTeam}>
               + 参加
@@ -140,9 +141,8 @@ export default function TeamDetailContent() {
           {team?.requirement}
         </Text>
       </Paper>
-      {currentUser?.id === team?.ownerId && (
-        <TeamMenu teamID={team?.id as string} />
-      )}
+      {isOwner && <TeamMenu teamID={team?.id as string} />}
+      <Room />
 
       {(() => {
         if (!currentUser) {

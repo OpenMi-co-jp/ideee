@@ -78,7 +78,9 @@ export default function Sentry() {
             <Accordion.Control>キャンペーンの詳細</Accordion.Control>
             <Accordion.Panel>
               <Flex direction="column" gap="lg">
-                <Text fw={600}>💡ideeeイベント ハロウィンキャンペーン🎃</Text>
+                <Text fw={600}>
+                  💡ideee ✖️ SentryJapanとのコラボキャンペーン🎃
+                </Text>
                 <Text>
                   Amazonギフトコード5000円~1000分をプレゼント（合計10000円分）
                 </Text>
@@ -141,8 +143,7 @@ export default function Sentry() {
                 <Text>↓↓↓このポストをリポスト</Text>
                 <Center>
                   <Box style={{ width: '600px' }}>
-                    {/* TODO: ポストを変更 */}
-                    <Tweet id="1816034394299326471" />
+                    <Tweet id="1840889368292311500" />
                   </Box>
                 </Center>
                 {!currentUser ? (

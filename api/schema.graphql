@@ -908,11 +908,6 @@ input JoinTeamInput {
   【必須】チームID
   """
   teamId: ID!
-
-  """
-  【必須】ユーザーID
-  """
-  userId: ID!
 }
 
 """
@@ -953,11 +948,6 @@ input LeaveTeamInput {
   チームID
   """
   teamId: ID!
-
-  """
-  ユーザID
-  """
-  userId: ID!
 }
 
 """

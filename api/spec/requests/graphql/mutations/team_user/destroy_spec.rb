@@ -22,8 +22,7 @@ RSpec.describe Mutations::TeamUser::Destroy do
     let(:variables) do
       {
         input: {
-          teamId: team.id.to_s,
-          userId: user.id.to_s
+          teamId: team.id.to_s
         }
       }
     end
@@ -36,7 +35,7 @@ RSpec.describe Mutations::TeamUser::Destroy do
       it '削除に成功すること' do
         graphql_post
         res = response.parsed_body
-        reloaded_team_user = TeamUser.find_by(team_id: team.id, user_id: user.id)
+        reloaded_team_user = TeamUser.find_by(team_id: team.id)
         expect(res['data']['leaveTeam']['success']).to be_truthy
         expect(reloaded_team_user).to be_nil
       end
@@ -51,18 +50,6 @@ RSpec.describe Mutations::TeamUser::Destroy do
         graphql_post
         res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type LeaveTeamInput! was provided invalid value for teamId (Expected value to not be null)')
-      end
-    end
-
-    context '更新対象のユーザidが存在していないとき' do
-      before do
-        variables[:input][:userId] = nil
-      end
-
-      it '作成に失敗しレスポンスにエラー内容が含まれること' do
-        graphql_post
-        res = response.parsed_body
-        expect(res['errors'][0]['message']).to include('Variable $input of type LeaveTeamInput! was provided invalid value for userId (Expected value to not be null)')
       end
     end
   end

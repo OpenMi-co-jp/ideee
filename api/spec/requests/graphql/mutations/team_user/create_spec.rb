@@ -25,8 +25,7 @@ RSpec.describe Mutations::TeamUser::Create do
     let(:variables) do
       {
         input: {
-          teamId: team.id.to_s,
-          userId: user.id.to_s
+          teamId: team.id.to_s
         }
       }
     end
@@ -76,18 +75,6 @@ RSpec.describe Mutations::TeamUser::Create do
         graphql_post
         res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type JoinTeamInput! was provided invalid value for teamId (Expected value to not be null)')
-      end
-    end
-
-    context 'userIdを指定していないとき' do
-      before do
-        variables[:input][:userId] = nil
-      end
-
-      it '作成に失敗しレスポンスにエラー内容が含まれること' do
-        graphql_post
-        res = response.parsed_body
-        expect(res['errors'][0]['message']).to include('Variable $input of type JoinTeamInput! was provided invalid value for userId (Expected value to not be null)')
       end
     end
   end

@@ -8,8 +8,8 @@ import {
   Center,
   Button,
 } from '@mantine/core'
-import { TwitterTimeline } from './_components/TwitterTimeline'
-import { Tweet } from './_components/Tweet'
+import { TwitterTimeline } from '@/lib/twitter/TwitterTimeline'
+import { Tweet } from '@/lib/twitter/Tweet'
 import Link from 'next/link'
 import { handleSignIn } from '@/components/Auth/OmniAuth/hooks'
 import { useCallback } from 'react'

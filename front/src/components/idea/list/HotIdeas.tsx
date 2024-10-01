@@ -20,7 +20,11 @@ export const HotIdeas = () => {
       my="lg"
       style={{ border: 'thick double #FFD6AF' }}
     >
-      <Flex justify="space-between" align="center">
+      <Flex
+        justify="space-between"
+        align="center"
+        direction={{ base: 'column', sm: 'row' }}
+      >
         <Flex
           justify="left"
           align="center"

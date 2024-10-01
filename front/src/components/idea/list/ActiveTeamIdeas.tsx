@@ -20,7 +20,11 @@ export const ActiveTeamIdeas = () => {
       my="lg"
       style={{ border: 'thick double #FFECCC' }}
     >
-      <Flex justify="space-between" align="center">
+      <Flex
+        justify="space-between"
+        align="center"
+        direction={{ base: 'column', sm: 'row' }}
+      >
         <Flex
           justify="left"
           align="center"

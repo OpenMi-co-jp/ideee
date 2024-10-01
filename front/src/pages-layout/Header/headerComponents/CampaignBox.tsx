@@ -18,7 +18,7 @@ export const CampaignBox = ({ pinned }: { pinned: boolean }) => {
         top: '64px',
         left: 0,
         right: 0,
-        height: '32px',
+        minHeight: '32px',
         backgroundColor: 'purple',
         display: 'flex',
         justifyContent: 'center',

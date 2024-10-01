@@ -2,7 +2,7 @@ import {
   useGetLatestNotificationsQuery,
   useCheckNotificationsMutation,
 } from '@/lib/generated/client'
-import { Divider, Menu, Text, Loader, Indicator } from '@mantine/core'
+import { Divider, Menu, Text, Loader, Indicator, Flex } from '@mantine/core'
 import { IconBell } from '@tabler/icons-react'
 import { NotificationItem } from '@/components/notification/Item'
 import Link from 'next/link'
@@ -11,6 +11,7 @@ import type {
   GetLatestNotificationsQuery,
 } from '@/lib/generated/client'
 import { useState, useEffect } from 'react'
+import { IconChevronRight } from '@tabler/icons-react'
 
 export const LatestNotifications = () => {
   const { data, loading, error } = useGetLatestNotificationsQuery()
@@ -74,9 +75,12 @@ export const LatestNotifications = () => {
           </Menu.Item>
         )}
         <Divider />
-        <Menu.Item style={{ textAlign: 'center' }}>
+        <Menu.Item>
           <Link href="/notifications">
-            <Text size="sm">通知一覧を見る</Text>
+            <Flex justify="center" align="center">
+              <Text size="sm">通知一覧を見る</Text>
+              <IconChevronRight />
+            </Flex>
           </Link>
         </Menu.Item>
       </Menu.Dropdown>

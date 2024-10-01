@@ -18,7 +18,7 @@ export default function Home() {
       {!currentUser && <TopVision />}
       {!currentUser && <Space h="5rem" />}
       <Grid>
-        <Grid.Col span={{ base: 12, md: 2, lg: 9 }}>
+        <Grid.Col span={{ base: 12, md: 9, lg: 9 }}>
           <HotIdeas />
           {currentUser && (
             <>
@@ -33,7 +33,7 @@ export default function Home() {
           <Space h="xs" />
           <DeployedIdeas />
         </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 2, lg: 3 }}>
+        <Grid.Col span={{ base: 12, md: 3, lg: 3 }}>
           <AdBox />
         </Grid.Col>
       </Grid>

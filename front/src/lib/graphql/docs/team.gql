@@ -17,6 +17,10 @@ query GetTeam($id: ID!) {
       definition
       image
     }
+    currentMember {
+      id
+      image
+    }
   }
 }
 

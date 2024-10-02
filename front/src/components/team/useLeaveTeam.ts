@@ -1,13 +1,13 @@
-import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useLeaveTeamMutation } from '@/lib/generated/client'
+import { useApolloClient } from '@apollo/client'
 import { useParams } from 'next/navigation'
 import { showSuccess } from '../showNotification'
 
 export const useLeaveTeam = () => {
   const id = useParams()?.id as string
+  const client = useApolloClient()
 
   const [leaveTeam] = useLeaveTeamMutation({
-    // backend修正後に対応
     variables: {
       input: {
         teamId: id,
@@ -15,11 +15,12 @@ export const useLeaveTeam = () => {
     },
   })
 
-  const handleLeaveTeam = () => {
-    leaveTeam().then((res) => {
+  const handleLeaveTeam = async () => {
+    leaveTeam().then(async (res) => {
       if (res.data?.leaveTeam?.success) {
         showSuccess({ action: 'チーム脱退' })
       }
+      await client.resetStore()
     })
   }
   return {

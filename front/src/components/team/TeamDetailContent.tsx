@@ -1,14 +1,12 @@
+import { SignPath } from '@/components/Auth/SignPath'
 import { IdeaImage } from '@/components/image/IdeaImage'
 import { TeamMenu } from '@/components/team/edit/TeamMenu'
-import { useJoinTeam } from '@/components/team/useJoinTeam'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { getUserType } from '@/utils/getUserType'
 import {
   Avatar,
-  Badge,
   Box,
-  Button,
   Container,
   Flex,
   Group,
@@ -18,28 +16,25 @@ import {
   Title,
 } from '@mantine/core'
 import { IconUsers } from '@tabler/icons-react'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { SignPath } from '@/components/Auth/SignPath'
-import { useLeaveTeam } from '@/components/team/useLeaveTeam'
+import { JoinButton } from './joinButton'
 import { Room } from './room/Room'
+import { TeamContent } from './TeamContent'
 
 export default function TeamDetailContent() {
   const id = useParams()?.id as string
   const { currentUser } = useCurrentUser()
-  const { data } = useGetTeamQuery({
-    variables: {
-      id,
-    },
-  })
+  const { data } = useGetTeamQuery({ variables: { id } })
+
   const { team } = data || {}
   const userType = getUserType(team?.owner.definition!)
-  const { handleJoinTeam } = useJoinTeam()
-  const { handleLeaveTeam } = useLeaveTeam()
-
   const isOwner = team?.ownerId === currentUser?.id
-  // const isAlreadyJoined = team.joinUser.some(
-  //   (user) => user.userId === currentUser.id
-  // )
+  const isAlreadyJoined =
+    team?.currentMember?.some(
+      (user) =>
+        user?.id !== undefined && String(user.id) === String(currentUser?.id)
+    ) ?? false
 
   return (
     <Container>
@@ -54,6 +49,7 @@ export default function TeamDetailContent() {
         <Title order={1}>{team?.idea.name}</Title>
         {team?.idea.iconUrl && <IdeaImage src={team.idea.iconUrl} />}
       </Flex>
+
       <Box>
         <Group align="center" mb="xl">
           <IconUsers size={30} stroke={2} color="orange" />
@@ -73,14 +69,16 @@ export default function TeamDetailContent() {
       <Flex align="center" justify="space-between" mb="xl">
         <Flex align="center" gap="md">
           {team?.owner.image && (
-            <Image
-              src={team?.owner.image}
-              alt="プロフィール画像"
-              className=""
-              width={70}
-              height={70}
-              radius="50%"
-            />
+            <Link href={`/users/${team?.ownerId}`}>
+              <Image
+                src={team?.owner.image}
+                alt="プロフィール画像"
+                className=""
+                width={70}
+                height={70}
+                radius="50%"
+              />
+            </Link>
           )}
           <Box>
             <Text size="xl" fw={'600'}>
@@ -91,58 +89,29 @@ export default function TeamDetailContent() {
             </Text>
           </Box>
         </Flex>
-        {!isOwner && (
-          <Box>
-            <Button bg="orange.6" radius="xl" onClick={handleJoinTeam}>
-              + 参加
-            </Button>
-            {/* <Button bg="gray.4" radius="xl"  onClick={handleLeaveTeam}>
-              参加中
-            </Button> */}
-          </Box>
-        )}
+        <Box>
+          <JoinButton isOwner={isOwner} isAlreadyJoined={isAlreadyJoined} />
+        </Box>
       </Flex>
 
-      {/* 参加者がいる場合のみ表示する制御が必要 backendで追加いただいたら正常に動く想定*/}
-      {/* {team?.joinUser.userId === currentUser?.id && (
+      {isAlreadyJoined && (
         <Avatar.Group mb="md">
-          <Avatar src="image.png" />
-          <Avatar src="image.png" />
-          <Avatar src="image.png" />
-          <Avatar>{team.joinUser.length()}</Avatar>
+          {team?.currentMember?.map((joinUser) => (
+            <Link href={`/users/${joinUser.id}`}>
+              <Avatar src={joinUser?.image} key={joinUser.id} />
+            </Link>
+          ))}
+          <Avatar>{team?.currentMember?.length}</Avatar>
         </Avatar.Group>
-      )} */}
+      )}
 
       <Paper bg="#FCFCFC" radius="md" px="md" pt="lg" pb={1}>
-        <Title
-          size="h4"
-          fw={600}
-          p={10}
-          style={{
-            borderLeft: '5px solid #FD7E13',
-          }}
-        >
-          得られること
-        </Title>
-        <Text p={6} mb="xl">
-          {team?.offer}
-        </Text>
-        <Title
-          size="h4"
-          fw={600}
-          p={10}
-          style={{
-            borderLeft: '5px solid #FD7E13',
-          }}
-        >
-          お願いしたいこと
-        </Title>
-        <Text p={6} mb="xl">
-          {team?.requirement}
-        </Text>
+        <TeamContent title="得られること" content={team?.offer!} />
+        <TeamContent title="お願いしたいこと" content={team?.requirement!} />
       </Paper>
+
       {isOwner && <TeamMenu teamID={team?.id as string} />}
-      <Room />
+      {(isOwner || isAlreadyJoined) && <Room />}
 
       {(() => {
         if (!currentUser) {

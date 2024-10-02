@@ -4,23 +4,15 @@ import { TextWithLinks } from '@/utils/Text'
 import {
   ActionIcon,
   Box,
-  Button,
-  Divider,
   Flex,
   Group,
   Paper,
   ScrollArea,
+  Tabs,
   Text,
   Title,
 } from '@mantine/core'
-import { Tabs, rem } from '@mantine/core'
-import {
-  IconPhoto,
-  IconMessageCircle,
-  IconSettings,
-  IconHeart,
-  IconPlus,
-} from '@tabler/icons-react'
+import { IconPlus } from '@tabler/icons-react'
 import Link from 'next/link'
 
 export const Room = () => {

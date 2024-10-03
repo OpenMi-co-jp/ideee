@@ -1,6 +1,9 @@
 import { SignPath } from '@/components/Auth/SignPath'
 import { IdeaImage } from '@/components/image/IdeaImage'
 import { TeamMenu } from '@/components/team/edit/TeamMenu'
+import { JoinButton } from '@/components/team/joinButton'
+import { Room } from '@/components/team/room/Room'
+import { TeamContent } from '@/components/team/TeamContent'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useGetTeamQuery } from '@/lib/generated/client'
 import { getUserType } from '@/utils/getUserType'
@@ -18,9 +21,6 @@ import {
 import { IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { JoinButton } from './joinButton'
-import { Room } from './room/Room'
-import { TeamContent } from './TeamContent'
 
 export default function TeamDetailContent() {
   const id = useParams()?.id as string
@@ -69,7 +69,7 @@ export default function TeamDetailContent() {
       <Flex align="center" justify="space-between" mb="xl">
         <Flex align="center" gap="md">
           {team?.owner.image && (
-            <Link href={`/users/${team?.ownerId}`}>
+            <Link href={`/users/${team?.ownerId}`} key={team.ownerId}>
               <Image
                 src={team?.owner.image}
                 alt="プロフィール画像"
@@ -97,8 +97,8 @@ export default function TeamDetailContent() {
       {isAlreadyJoined && (
         <Avatar.Group mb="md">
           {team?.currentMember?.map((joinUser) => (
-            <Link href={`/users/${joinUser.id}`}>
-              <Avatar src={joinUser?.image} key={joinUser.id} />
+            <Link href={`/users/${joinUser.id}`} key={joinUser.id}>
+              <Avatar src={joinUser?.image} />
             </Link>
           ))}
           <Avatar>{team?.currentMember?.length}</Avatar>

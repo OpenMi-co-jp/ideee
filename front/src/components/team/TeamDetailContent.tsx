@@ -1,9 +1,8 @@
 import { SignPath } from '@/components/Auth/SignPath'
 import { IdeaImage } from '@/components/image/IdeaImage'
 import { TeamMenu } from '@/components/team/edit/TeamMenu'
-import { TeamJoinButton } from '@/components/team/TeamJoinButton'
-import { Room } from '@/components/team/room/Room'
 import { TeamContent } from '@/components/team/TeamContent'
+import { TeamJoinButton } from '@/components/team/TeamJoinButton'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { getUserType } from '@/utils/getUserType'
 import {
@@ -24,7 +23,6 @@ import { useGetTeam } from '@/utils/hooks/useGetTeam'
 export default function TeamDetailContent() {
   const { currentUser } = useCurrentUser()
   const { data } = useGetTeam()
-
   const { team } = data || {}
   const userType = getUserType(team?.owner.definition!)
   const isOwner = team?.ownerId === currentUser?.id
@@ -109,7 +107,8 @@ export default function TeamDetailContent() {
       </Paper>
 
       {isOwner && <TeamMenu teamID={team?.id as string} />}
-      {(isOwner || isAlreadyJoined) && <Room />}
+      {/* ルーム機能 */}
+      {/* {(isOwner || isAlreadyJoined) && <Room />} */}
 
       {(() => {
         if (!currentUser) {

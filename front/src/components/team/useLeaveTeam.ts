@@ -1,9 +1,9 @@
 import { useLeaveTeamMutation } from '@/lib/generated/client'
 import { useParams } from 'next/navigation'
-import { showSuccess } from '../showNotification'
 import { useGetTeam } from '@/utils/hooks/useGetTeam'
+import { showSuccess } from '@/components/showNotification'
 
-export const useLeaveTeam = () => {
+export const useLeaveTeam = (onClose: () => void) => {
   const id = useParams()?.id as string
   const { refetch } = useGetTeam()
 
@@ -18,6 +18,7 @@ export const useLeaveTeam = () => {
   const handleLeaveTeam = async () => {
     leaveTeam().then(async (res) => {
       if (res.data?.leaveTeam?.success) {
+        onClose()
         showSuccess({ action: 'チーム脱退' })
         refetch()
       }

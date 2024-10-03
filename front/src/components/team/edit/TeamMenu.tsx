@@ -1,14 +1,16 @@
+import { useDestroyTeam } from '@/components/team/destroy/useDestroyTeam'
+import { TeamModal } from '@/components/team/TeamModal'
 import { Menu } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
 import Link from 'next/link'
-import { DestroyTeamModal } from '@/components/team/destroy/DestroyTeamModal'
-import { useDisclosure } from '@mantine/hooks'
 
 type TeamMenuProps = {
   teamID: string
 }
 export const TeamMenu = ({ teamID }: TeamMenuProps) => {
   const [opened, { open, close }] = useDisclosure(false)
+  const { handleDestroyTeam } = useDestroyTeam(close)
   return (
     <Menu shadow="md" width={200} offset={5}>
       <Menu.Target>
@@ -30,7 +32,13 @@ export const TeamMenu = ({ teamID }: TeamMenuProps) => {
           チーム削除
         </Menu.Item>
       </Menu.Dropdown>
-      <DestroyTeamModal opened={opened} onClose={close} />
+      <TeamModal
+        opened={opened}
+        onClose={close}
+        action={handleDestroyTeam}
+        confirmText="チームを削除します。よろしいですか？"
+        actionName="削除"
+      />
     </Menu>
   )
 }

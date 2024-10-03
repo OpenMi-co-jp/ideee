@@ -1,11 +1,11 @@
 import { useLeaveTeamMutation } from '@/lib/generated/client'
-import { useApolloClient } from '@apollo/client'
 import { useParams } from 'next/navigation'
 import { showSuccess } from '../showNotification'
+import { useGetTeam } from '@/utils/hooks/useGetTeam'
 
 export const useLeaveTeam = () => {
   const id = useParams()?.id as string
-  const client = useApolloClient()
+  const { refetch } = useGetTeam()
 
   const [leaveTeam] = useLeaveTeamMutation({
     variables: {
@@ -19,8 +19,8 @@ export const useLeaveTeam = () => {
     leaveTeam().then(async (res) => {
       if (res.data?.leaveTeam?.success) {
         showSuccess({ action: 'チーム脱退' })
+        refetch()
       }
-      await client.resetStore()
     })
   }
   return {

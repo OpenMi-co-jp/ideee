@@ -1,11 +1,11 @@
 import { showSuccess } from '@/components/showNotification'
 import { useJoinTeamMutation } from '@/lib/generated/client'
-import { useApolloClient } from '@apollo/client'
 import { useParams } from 'next/navigation'
+import { useGetTeam } from '@/utils/hooks/useGetTeam'
 
 export const useJoinTeam = () => {
   const id = useParams()?.id as string
-  const client = useApolloClient()
+  const { refetch } = useGetTeam()
 
   const [joinTeam] = useJoinTeamMutation({
     variables: {
@@ -19,8 +19,8 @@ export const useJoinTeam = () => {
     joinTeam().then(async (res) => {
       if (res.data?.joinTeam?.success) {
         showSuccess({ action: 'チーム参加' })
+        refetch()
       }
-      await client.resetStore()
     })
   }
   return {

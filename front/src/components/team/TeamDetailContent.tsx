@@ -5,7 +5,6 @@ import { TeamJoinButton } from '@/components/team/TeamJoinButton'
 import { Room } from '@/components/team/room/Room'
 import { TeamContent } from '@/components/team/TeamContent'
 import { useCurrentUser } from '@/context/CurrentUserContext'
-import { useGetTeamQuery } from '@/lib/generated/client'
 import { getUserType } from '@/utils/getUserType'
 import {
   Avatar,
@@ -20,12 +19,11 @@ import {
 } from '@mantine/core'
 import { IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useGetTeam } from '@/utils/hooks/useGetTeam'
 
 export default function TeamDetailContent() {
-  const id = useParams()?.id as string
   const { currentUser } = useCurrentUser()
-  const { data } = useGetTeamQuery({ variables: { id } })
+  const { data } = useGetTeam()
 
   const { team } = data || {}
   const userType = getUserType(team?.owner.definition!)

@@ -1,19 +1,11 @@
 import { TextAreaForm } from '@/components/ReactFormSet'
 import { useUpdateTeam } from '@/components/team/edit/hook'
-import { useGetTeamQuery } from '@/lib/generated/client'
 import { Box, Button, Container, Flex, Group, Text, Title } from '@mantine/core'
 import { IconUsers } from '@tabler/icons-react'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const TeamDetailEdit = () => {
-  const id = useParams()?.id as string
-  const { data } = useGetTeamQuery({
-    variables: {
-      id,
-    },
-  })
-  const { team } = data || {}
+  const router = useRouter()
   const { form, onSubmit } = useUpdateTeam()
 
   return (
@@ -64,11 +56,9 @@ const TeamDetailEdit = () => {
             mt="md"
           />
           <Flex justify="center" align="center" gap="xl" mt="xl">
-            <Link href={`/teams/${team?.id}`}>
-              <Button color="gray.6" radius="xl">
-                戻る
-              </Button>
-            </Link>
+            <Button color="gray.6" radius="xl" onClick={() => router.back()}>
+              戻る
+            </Button>
             <Button color="orange.6" radius="xl" type="submit">
               保存
             </Button>

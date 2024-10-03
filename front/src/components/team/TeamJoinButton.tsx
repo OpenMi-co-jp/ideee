@@ -2,11 +2,14 @@ import { useJoinTeam } from '@/components/team/useJoinTeam'
 import { useLeaveTeam } from '@/components/team/useLeaveTeam'
 import { Button } from '@mantine/core'
 
-type JoinButtonProps = {
+type TeamJoinButtonProps = {
   isOwner: boolean
   isAlreadyJoined: boolean
 }
-export const JoinButton = ({ isOwner, isAlreadyJoined }: JoinButtonProps) => {
+export const TeamJoinButton = ({
+  isOwner,
+  isAlreadyJoined,
+}: TeamJoinButtonProps) => {
   const { handleJoinTeam } = useJoinTeam()
   const { handleLeaveTeam } = useLeaveTeam()
 

@@ -1,7 +1,7 @@
 import { SignPath } from '@/components/Auth/SignPath'
 import { IdeaImage } from '@/components/image/IdeaImage'
 import { TeamMenu } from '@/components/team/edit/TeamMenu'
-import { JoinButton } from '@/components/team/joinButton'
+import { TeamJoinButton } from '@/components/team/TeamJoinButton'
 import { Room } from '@/components/team/room/Room'
 import { TeamContent } from '@/components/team/TeamContent'
 import { useCurrentUser } from '@/context/CurrentUserContext'
@@ -90,7 +90,7 @@ export default function TeamDetailContent() {
           </Box>
         </Flex>
         <Box>
-          <JoinButton isOwner={isOwner} isAlreadyJoined={isAlreadyJoined} />
+          <TeamJoinButton isOwner={isOwner} isAlreadyJoined={isAlreadyJoined} />
         </Box>
       </Flex>
 

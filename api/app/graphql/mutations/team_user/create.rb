@@ -16,6 +16,8 @@ module Mutations
 
       return { success: false, errors: ['既に参加済み'] } if team_user.persisted?
 
+      Notifications::JoinTeamJob.perform_later(context[:current_user], team)
+
       begin
         team_user.save!
         {

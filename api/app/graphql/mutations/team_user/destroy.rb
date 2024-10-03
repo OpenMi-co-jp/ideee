@@ -14,6 +14,8 @@ module Mutations
       team_user = ::TeamUser.find_by(team_id: args[:team_id], user_id: context[:current_user].id)
       return { success: false, errors: ['チームに参加していません'] } unless team_user
 
+      Notifications::LeaveTeamJob.perform_now(context[:current_user], team)
+
       begin
         team_user.destroy!
         {

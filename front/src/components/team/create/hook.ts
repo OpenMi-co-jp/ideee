@@ -1,5 +1,5 @@
 import { showError, showSuccess } from '@/components/showNotification'
-import { TeamFormSchema } from '@/components/teams/TeamFormSchema'
+import { TeamFormSchema } from '@/components/team/TeamFormSchema'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useCreateTeamMutation } from '@/lib/generated/client'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'

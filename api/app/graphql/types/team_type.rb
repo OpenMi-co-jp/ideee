@@ -13,5 +13,6 @@ module Types
 
     field :owner, Types::UserType, null: false, description: 'オーナー'
     field :idea, Types::Idea::IdeaType, null: false, description: 'アイデア'
+    field :current_member, [Types::UserType], null: true, description: 'メンバー'
   end
 end

@@ -1,15 +1,19 @@
 import { Button, Flex, Modal, Text } from '@mantine/core'
-import { useDestroyTeam } from '@/components/teams/destroy/useDestroyTeam'
 
-interface DestroyTeamModalProps {
+interface TeamModalProps {
   opened: boolean
   onClose: () => void
+  action: () => void
+  confirmText: string
+  actionName: string
 }
-export const DestroyTeamModal = ({
+export const TeamModal = ({
   opened,
   onClose,
-}: DestroyTeamModalProps) => {
-  const { handleDestroyTeam } = useDestroyTeam(onClose)
+  action,
+  confirmText,
+  actionName,
+}: TeamModalProps) => {
   return (
     <Modal.Root opened={opened} onClose={onClose} size="md" centered>
       <Modal.Overlay />
@@ -17,13 +21,13 @@ export const DestroyTeamModal = ({
         <Modal.Header>
           <Modal.Title>
             <Text size="xl" fw="600">
-              チーム削除
+              {`チーム${actionName}`}
             </Text>
           </Modal.Title>
           <Modal.CloseButton />
         </Modal.Header>
         <Modal.Body>
-          <Text>チームを削除します。よろしいですか？</Text>
+          <Text>{confirmText}</Text>
         </Modal.Body>
         <Flex align="center" justify="center" m="sm" gap="md">
           <Button radius="lg" bg="orange.6" onClick={onClose}>
@@ -33,10 +37,10 @@ export const DestroyTeamModal = ({
             radius="lg"
             bg="gray.6"
             onClick={() => {
-              handleDestroyTeam()
+              action()
             }}
           >
-            削除
+            {actionName}
           </Button>
         </Flex>
       </Modal.Content>

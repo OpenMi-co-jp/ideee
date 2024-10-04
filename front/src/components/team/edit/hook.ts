@@ -1,22 +1,17 @@
 import { showError, showSuccess } from '@/components/showNotification'
-import { TeamFormSchema } from '@/components/teams/TeamFormSchema'
-import { useGetTeamQuery, useUpdateTeamMutation } from '@/lib/generated/client'
+import { TeamFormSchema } from '@/components/team/TeamFormSchema'
+import { useUpdateTeamMutation } from '@/lib/generated/client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { useGetTeam } from '@/utils/hooks/useGetTeam'
 
 export const useUpdateTeam = () => {
   const [updateTeamMutation] = useUpdateTeamMutation()
 
   const router = useRouter()
-
-  const id = useParams()?.id as string
-  const { data } = useGetTeamQuery({
-    variables: {
-      id,
-    },
-  })
+  const { data } = useGetTeam()
 
   const form = useForm({
     resolver: zodResolver(TeamFormSchema),

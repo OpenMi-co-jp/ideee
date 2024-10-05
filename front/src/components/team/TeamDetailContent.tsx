@@ -19,6 +19,7 @@ import {
 import { IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useGetTeam } from '@/utils/hooks/useGetTeam'
+import { Room } from '@/components/team/room/Room'
 
 export default function TeamDetailContent() {
   const { currentUser } = useCurrentUser()
@@ -107,8 +108,8 @@ export default function TeamDetailContent() {
       </Paper>
 
       {isOwner && <TeamMenu teamID={team?.id as string} />}
-      {/* ルーム機能 */}
-      {/* {(isOwner || isAlreadyJoined) && <Room />} */}
+
+      {(isOwner || isAlreadyJoined) && <Room />}
 
       {(() => {
         if (!currentUser) {

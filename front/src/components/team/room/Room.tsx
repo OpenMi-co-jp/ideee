@@ -1,9 +1,7 @@
-import { CommentCreateForm } from '@/components/comment'
-import { Comment } from '@/components/comment/Comment'
 import { useCommentsInstance } from '@/components/comment/CommentList/useCommentsInstance'
-import { CommentProvider } from '@/context/CommentContext'
 import { Divider, Paper, Title } from '@mantine/core'
-import React from 'react'
+import { RoomComment } from '@/components/team/room/comment/RoomComment'
+import { RoomCommentCreate } from '@/components/team/room/comment/create/RoomCommentCreate'
 
 export const Room = () => {
   const { data } = useCommentsInstance()
@@ -22,8 +20,10 @@ export const Room = () => {
             </CommentProvider>
           </React.Fragment>
         ))} */}
+
+        <RoomComment />
       </Paper>
-      {/* <CommentCreateForm /> */}
+      <RoomCommentCreate />
     </>
   )
 }

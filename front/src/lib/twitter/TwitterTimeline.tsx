@@ -18,12 +18,7 @@ export const TwitterTimeline: React.FC<TwitterTimelineProps> = ({ href }) => {
   }, [])
 
   return (
-    <a
-      className="twitter-timeline"
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a className="twitter-timeline" href={href} target="_blank" rel="noopener">
       Tweets
     </a>
   )

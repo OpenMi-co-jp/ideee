@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-export const Tweet: React.FC<{ id: string }> = ({ id }) => {
+export const Tweet = ({ id }: { id: string }) => {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

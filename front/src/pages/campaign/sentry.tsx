@@ -96,7 +96,14 @@ export default function Sentry() {
                   </Link>
                   をフォロー
                   <br />
-                  【２】対象のキャンペーン投稿をリポスト
+                  【２】
+                  <Link
+                    href="https://x.com/SentryJapan/status/1843143664241189212"
+                    style={linkStyle}
+                  >
+                    対象のキャンペーン投稿
+                  </Link>
+                  をリポスト
                   <br />
                 </Text>
                 <Text>
@@ -132,18 +139,13 @@ export default function Sentry() {
                   >
                     Follow @SentryJapan
                   </a>
-                  <script
-                    async
-                    src="https://platform.twitter.com/widgets.js"
-                    char-set="utf-8"
-                  ></script>
                   して
                 </Flex>
 
                 <Text>↓↓↓このポストをリポスト</Text>
                 <Center>
                   <Box style={{ width: '600px' }}>
-                    <Tweet id="1840889368292311500" />
+                    <Tweet id="1843143664241189212" />
                   </Box>
                 </Center>
                 {!currentUser ? (

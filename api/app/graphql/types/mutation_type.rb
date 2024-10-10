@@ -29,5 +29,9 @@ module Types
 
     field :join_team, mutation: Mutations::TeamUser::Create, description: 'チーム参加'
     field :leave_team, mutation: Mutations::TeamUser::Destroy, description: 'チーム脱離'
+
+    field :create_message, mutation: Mutations::Message::Create, description: 'メッセージ作成'
+    field :update_message, mutation: Mutations::Message::Update, description: 'メッセージ更新'
+    field :destroy_message, mutation: Mutations::Message::Destroy, description: 'メッセージ削除'
   end
 end

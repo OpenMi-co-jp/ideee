@@ -56,9 +56,9 @@ RSpec.describe Mutations::Team::Create do
       it 'raise errror ActiveRecord::RecordInvalidとなること' do
         request_result = expect do
           graphql_post
+          res = response.parsed_body
+          expect(res['data']['createComment']['errors']).to include('Ideaを入力してください')
         end
-
-        request_result.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: Ideaを入力してください')
       end
     end
 

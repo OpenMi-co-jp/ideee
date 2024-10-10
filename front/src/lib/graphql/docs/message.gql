@@ -1,0 +1,41 @@
+query GetMessages($teamId: ID!) {
+  messages(teamId: $teamId) {
+    id
+    content
+    createdAt
+    user {
+      id
+      name
+      image
+    }
+  }
+}
+
+mutation CreateMessage($input: CreateMessageInput!) {
+  createMessage(input: $input) {
+    message {
+      id
+      content
+    }
+    success
+    errors
+  }
+}
+
+mutation UpdateMessage($input: UpdateMessageInput!) {
+  updateMessage(input: $input) {
+    message {
+      id
+      content
+    }
+    success
+    errors
+  }
+}
+
+mutation DestroyMessage($input: DestroyMessageInput!) {
+  destroyMessage(input: $input) {
+    success
+    errors
+  }
+}

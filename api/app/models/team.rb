@@ -26,6 +26,8 @@
 #  fk_rails_...  (owner_id => users.id)
 #
 class Team < ApplicationRecord
+  after_create :create_room
+
   validates :offer, presence: true
   validates :requirement, presence: true
   validates :status, presence: true
@@ -55,5 +57,11 @@ class Team < ApplicationRecord
 
   def joined?(user)
     member?(user) || user.own?(self)
+  end
+
+  private
+
+  def create_room
+    ::Room.create!(team: self)
   end
 end

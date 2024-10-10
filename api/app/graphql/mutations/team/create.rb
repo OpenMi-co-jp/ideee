@@ -27,6 +27,11 @@ module Mutations
         team:,
         success: true
       }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
+      }
     end
   end
 end

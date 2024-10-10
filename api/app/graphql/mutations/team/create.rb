@@ -7,7 +7,7 @@ module Mutations
     argument :requirement, String, required: true, description: '【必須】お願いすること'
     argument :offer, String, required: true, description: '【必須】(メンバーが)得られるもの'
 
-    field :team, Types::TeamType, null: false, description: 'チームオブジェクト'
+    field :team, Types::TeamType, null: true, description: 'チームオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラーリスト'
 

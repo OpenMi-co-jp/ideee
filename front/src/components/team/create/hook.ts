@@ -33,7 +33,7 @@ export const useCreateTeam = () => {
 
     if (response.data!.createTeam!.success) {
       showSuccess({ action: 'チームの作成' })
-      router.push(`/teams/${response.data!.createTeam!.team.id}`)
+      router.push(`/teams/${response.data!.createTeam!.team!.id}`)
     } else {
       showError({
         action: 'チームの作成',

@@ -1,10 +1,10 @@
-import { useCommentsInstance } from '@/components/comment/CommentList/useCommentsInstance'
+import { RoomMessage } from '@/components/team/room/message/RoomMessage'
+import { useGetRoomMessages } from '@/utils/hooks/useGetRoomMessages'
 import { Divider, Paper, Title } from '@mantine/core'
-import { RoomComment } from '@/components/team/room/comment/RoomComment'
-import { RoomCommentCreate } from '@/components/team/room/comment/create/RoomCommentCreate'
+import { RoomMessageCreate } from './message/create/RoomMessageCreate'
 
 export const Room = () => {
-  const { data } = useCommentsInstance()
+  const { data } = useGetRoomMessages()
 
   return (
     <>
@@ -13,17 +13,9 @@ export const Room = () => {
           トークルーム
         </Title>
         <Divider size="sm" my="xs" color="gray" />
-        {/* {data?.comments.map((comment) => (
-          <React.Fragment key={comment.id}>
-            <CommentProvider comment={comment}>
-              <Comment />
-            </CommentProvider>
-          </React.Fragment>
-        ))} */}
-
-        <RoomComment />
+        {data?.messages.map((message) => <RoomMessage key={message.id} />)}
       </Paper>
-      <RoomCommentCreate />
+      <RoomMessageCreate />
     </>
   )
 }

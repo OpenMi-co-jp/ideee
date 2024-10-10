@@ -1,10 +1,9 @@
-import { TextAreaForm } from '@/components/ReactFormSet'
 import { Button, Center } from '@mantine/core'
 import { IconSend } from '@tabler/icons-react'
 
-export const RoomCommentCreate = () => {
-  // const { form, onSubmit } = useCommentAction()
-  // const description = form.watch('description')
+export const RoomMessageCreate = () => {
+  // const { form, onSubmit } = useMessageAction()
+  // const content = form.watch('content')
   // const [isSubmitting, setIsSubmitting] = useState(false)
 
   // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +15,7 @@ export const RoomCommentCreate = () => {
 
   return (
     <form>
-      {/* <TextAreaForm form={form} name="description" label="コメント" /> */}
+      {/* <TextAreaForm form={form} name=content" label="メッセージ" /> */}
 
       <Center mt="lg">
         <Button
@@ -24,7 +23,7 @@ export const RoomCommentCreate = () => {
           variant="light"
           size="lg"
           color="orange"
-          // disabled={isSubmitting || !description}
+          // disabled={isSubmitting || !roomMessage}
           leftSection={<IconSend />}
         >
           保存

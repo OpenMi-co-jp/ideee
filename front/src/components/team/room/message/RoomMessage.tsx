@@ -3,7 +3,7 @@ import { useCurrentUser } from '@/context/CurrentUserContext'
 import { Flex, Group, Text } from '@mantine/core'
 import Link from 'next/link'
 
-export const RoomComment = () => {
+export const RoomMessage = () => {
   const { currentUser } = useCurrentUser()
   // ルームのコメントのContextでコメント内容を取得
   // const userContents = [

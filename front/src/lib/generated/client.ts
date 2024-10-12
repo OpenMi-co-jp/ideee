@@ -1878,6 +1878,9 @@ export type GetMessagesQuery = {
     id: string
     content?: string | null
     createdAt: any
+    roomId: string
+    updatedAt: any
+    userId: number
     user: {
       __typename?: 'User'
       id: string
@@ -3970,6 +3973,9 @@ export const GetMessagesDocument = gql`
       id
       content
       createdAt
+      roomId
+      updatedAt
+      userId
       user {
         id
         name

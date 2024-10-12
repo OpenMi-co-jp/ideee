@@ -1,4 +1,4 @@
-import { TeamModal } from '@/components/team/TeamModal'
+import { DestroyModal } from '@/components/team/DestroyModal'
 import { useJoinTeam } from '@/components/team/useJoinTeam'
 import { useLeaveTeam } from '@/components/team/useLeaveTeam'
 import { Button } from '@mantine/core'
@@ -23,12 +23,12 @@ export const TeamJoinButton = ({
       <Button bg="gray.4" radius="xl" onClick={open}>
         参加中
       </Button>
-      <TeamModal
+      <DestroyModal
         opened={opened}
         onClose={close}
         action={handleLeaveTeam}
         confirmText="チームから離脱します。よろしいですか？"
-        actionName="離脱"
+        actionName="チーム離脱"
       />
     </>
   ) : (

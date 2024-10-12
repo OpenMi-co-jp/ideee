@@ -3,6 +3,9 @@ query GetMessages($teamId: ID!) {
     id
     content
     createdAt
+    roomId
+    updatedAt
+    userId
     user {
       id
       name

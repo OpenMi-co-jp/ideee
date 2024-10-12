@@ -1,47 +1,51 @@
 import { showError, showSuccess } from '@/components/showNotification'
 import {
-  CreateMessageInput,
-  useCreateMessageMutation,
+  UpdateMessageInput,
+  useUpdateMessageMutation,
 } from '@/lib/generated/client'
 import { useGetRoomMessages } from '@/utils/hooks/useGetRoomMessages'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-export const useMessagesCreate = () => {
-  const id = useParams()?.id as string
+export const useMessageEdit = (
+  initialContent = '',
+  messageId = '',
+  cancelEditing: () => void
+) => {
   const { refetch } = useGetRoomMessages()
 
   const RoomMessageSchema = z.object({
     content: z.string().min(1, { message: 'メッセージを入力してください' }),
   })
 
-  const form = useForm<CreateMessageInput>({
-    defaultValues: { content: '' },
+  const form = useForm<UpdateMessageInput>({
+    defaultValues: { content: initialContent },
     resolver: zodResolver(RoomMessageSchema),
     mode: 'onChange',
   })
 
-  const [createMessageMutation] = useCreateMessageMutation()
+  const [updateMessageMutation] = useUpdateMessageMutation()
 
-  const onSubmit = (formData: CreateMessageInput) => {
-    createMessageMutation({
+  const onSubmit = (formData: UpdateMessageInput) => {
+    updateMessageMutation({
       variables: {
         input: {
-          teamId: id,
+          messageId: messageId,
           content: formData.content,
         },
       },
     }).then((response) => {
-      if (response.data?.createMessage?.success) {
-        showSuccess({ action: 'メッセージ作成' })
+      if (response.data?.updateMessage?.success) {
+        cancelEditing()
+        showSuccess({ action: 'メッセージ編集' })
         refetch()
         form.reset()
       } else {
+        console.log(response)
         showError({
-          action: 'メッセージ作成',
-          message: String(response.data!.createMessage!.errors),
+          action: 'メッセージ編集',
+          message: String(response.data!.updateMessage!.errors),
         })
       }
     })

@@ -1,7 +1,8 @@
 import { RoomMessage } from '@/components/team/room/message/RoomMessage'
 import { useGetRoomMessages } from '@/utils/hooks/useGetRoomMessages'
-import { Divider, Paper, Title } from '@mantine/core'
+import { Divider, Paper, ScrollArea, Title } from '@mantine/core'
 import { RoomMessageCreate } from './message/create/RoomMessageCreate'
+import { useEffect, useRef } from 'react'
 
 export const Room = () => {
   const { data } = useGetRoomMessages()
@@ -13,7 +14,11 @@ export const Room = () => {
           トークルーム
         </Title>
         <Divider size="sm" my="xs" color="gray" />
-        {data?.messages.map((message) => <RoomMessage key={message.id} />)}
+        <ScrollArea h={600}>
+          {data?.messages.map((message) => (
+            <RoomMessage key={message.id} message={message} />
+          ))}
+        </ScrollArea>
       </Paper>
       <RoomMessageCreate />
     </>

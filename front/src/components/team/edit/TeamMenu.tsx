@@ -1,5 +1,5 @@
 import { useDestroyTeam } from '@/components/team/destroy/useDestroyTeam'
-import { TeamModal } from '@/components/team/TeamModal'
+import { DestroyModal } from '@/components/team/DestroyModal'
 import { Menu } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react'
@@ -32,12 +32,12 @@ export const TeamMenu = ({ teamID }: TeamMenuProps) => {
           チーム削除
         </Menu.Item>
       </Menu.Dropdown>
-      <TeamModal
+      <DestroyModal
         opened={opened}
         onClose={close}
         action={handleDestroyTeam}
         confirmText="チームを削除します。よろしいですか？"
-        actionName="削除"
+        actionName="チーム削除"
       />
     </Menu>
   )

@@ -1,19 +1,19 @@
 import { Button, Flex, Modal, Text } from '@mantine/core'
 
-interface TeamModalProps {
+interface DestroyModalProps {
   opened: boolean
   onClose: () => void
   action: () => void
   confirmText: string
   actionName: string
 }
-export const TeamModal = ({
+export const DestroyModal = ({
   opened,
   onClose,
   action,
   confirmText,
   actionName,
-}: TeamModalProps) => {
+}: DestroyModalProps) => {
   return (
     <Modal.Root opened={opened} onClose={onClose} size="md" centered>
       <Modal.Overlay />
@@ -21,7 +21,7 @@ export const TeamModal = ({
         <Modal.Header>
           <Modal.Title>
             <Text size="xl" fw="600">
-              {`チーム${actionName}`}
+              {`${actionName}`}
             </Text>
           </Modal.Title>
           <Modal.CloseButton />

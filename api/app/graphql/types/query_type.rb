@@ -31,6 +31,7 @@ module Types
     field :comments, resolver: Resolvers::Comment::CommentsResolver, description: 'コメント一覧'
 
     field :room, resolver: Resolvers::Room::RoomResolver, description: 'ルームオブジェクト'
+    field :messages, resolver: Resolvers::Message::MessagesResolver, description: 'メッセージ一覧'
 
     field :tags, resolver: Resolvers::Tag::TagsResolver, description: 'タグ一覧'
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'

@@ -6,6 +6,16 @@ import { useEffect, useRef } from 'react'
 
 export const Room = () => {
   const { data } = useGetRoomMessages()
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTo({
+        top: scrollAreaRef.current.scrollHeight,
+        behavior: 'smooth',
+      })
+    }
+  }, [data])
 
   return (
     <>
@@ -14,7 +24,7 @@ export const Room = () => {
           トークルーム
         </Title>
         <Divider size="sm" my="xs" color="gray" />
-        <ScrollArea h={600}>
+        <ScrollArea h={400} viewportRef={scrollAreaRef}>
           {data?.messages.map((message) => (
             <RoomMessage key={message.id} message={message} />
           ))}

@@ -20,7 +20,7 @@ export const RoomAction = ({ messageId, startEditing }: RoomActionProps) => {
           <IconDots style={{ margin: '10px' }} />
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Label>トークルーム管理</Menu.Label>
+          <Menu.Label>メッセージ管理</Menu.Label>
           <Menu.Item
             leftSection={<IconPencil size={14} />}
             onClick={startEditing}

@@ -1246,7 +1246,7 @@ export type UpdateUserPayload = {
 export type User = {
   __typename?: 'User'
   /** 作成日 */
-  createdAt: Scalars['ISO8601DateTime']
+  createdAt?: Scalars['ISO8601DateTime']
   /** 設定完了フラグ */
   defined?: Maybe<Scalars['Boolean']>
   /** タイプ */

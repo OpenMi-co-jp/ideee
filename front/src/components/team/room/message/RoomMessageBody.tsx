@@ -10,6 +10,7 @@ type RoomMessageBodyProps = {
   isCurrentUser: boolean
   startEditing: () => void
 }
+
 export const RoomMessageBody = ({
   messageId,
   content,

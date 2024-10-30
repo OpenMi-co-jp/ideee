@@ -10,6 +10,7 @@ query GetMessages($teamId: ID!) {
       id
       name
       image
+      createdAt
     }
   }
 }

@@ -9,7 +9,6 @@ type TagsInputProps<T extends FieldValues> = {
   form: UseFormReturn<T>
   style?: CSSProperties
   required?: boolean
-  isValidation?: boolean
   disabled?: boolean
   placeholder?: string
   suggestions?: string[]
@@ -23,7 +22,6 @@ export const TagsForm = <T extends FieldValues>(props: TagsInputProps<T>) => {
     label,
     name,
     required,
-    isValidation,
     placeholder,
     style,
     suggestions,
@@ -42,11 +40,7 @@ export const TagsForm = <T extends FieldValues>(props: TagsInputProps<T>) => {
             {...field}
             {...rest}
             {...{ style, label, disabled, placeholder }}
-            error={
-              isValidation
-                ? (form.formState.errors[name]?.message as string)
-                : undefined
-            }
+            error={form.formState.errors[name]?.message as string}
             withAsterisk={required}
             value={field.value || []}
             onChange={(tags) => field.onChange(tags)}

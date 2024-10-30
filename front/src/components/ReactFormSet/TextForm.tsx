@@ -11,7 +11,6 @@ type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   form: UseFormReturn<T>
   style?: CSSProperties
   required?: boolean
-  isValidation?: boolean
   disabled?: boolean
   searchIcon?: boolean
   leftSection?: React.ReactNode
@@ -26,7 +25,6 @@ export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
     label,
     name,
     required,
-    isValidation,
     searchIcon,
     leftSection,
     placeholder,
@@ -46,11 +44,7 @@ export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
             {...rest}
             {...{ style, label, disabled }}
             withAsterisk={required}
-            error={
-              isValidation
-                ? (form.formState.errors[name]?.message as string)
-                : undefined
-            }
+            error={form.formState.errors[name]?.message as string}
           />
         )
       }}

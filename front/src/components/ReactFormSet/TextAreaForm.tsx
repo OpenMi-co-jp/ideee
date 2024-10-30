@@ -11,7 +11,6 @@ type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   form: UseFormReturn<T>
   style?: CSSProperties
   required?: boolean
-  isValidation?: boolean
   disabled?: boolean
   minRows?: number
   tooltipTitle?: string
@@ -27,7 +26,6 @@ export const TextAreaForm = <T extends FieldValues>(
     label,
     name,
     required,
-    isValidation,
     minRows,
     tooltipTitle,
     style,
@@ -43,11 +41,7 @@ export const TextAreaForm = <T extends FieldValues>(
             {...field}
             {...rest}
             {...{ style, label, disabled }}
-            error={
-              isValidation
-                ? (form.formState.errors[name]?.message as string)
-                : undefined
-            }
+            error={form.formState.errors[name]?.message as string}
             withAsterisk={required}
             autosize
             minRows={minRows ? minRows : 2}

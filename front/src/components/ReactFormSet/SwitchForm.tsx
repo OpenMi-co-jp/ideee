@@ -21,20 +21,29 @@ export const SwitchForm = <T extends FieldValues>(props: SwitchProps<T>) => {
       name={name}
       control={form.control}
       render={({ field: { onChange, onBlur, value, ref } }) => (
-        <MantineSwitch
-          {...rest}
-          checked={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          ref={ref}
-          label={<span style={{ fontSize: 'small' }}>{label}</span>}
-          labelPosition="left"
-          disabled={disabled}
-          size="xl"
-          onLabel={onLabel || 'オン'}
-          offLabel={offLabel || 'オフ'}
-          error={form.formState.errors[name]?.message as string | undefined}
-        />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            minWidth: '18rem',
+          }}
+        >
+          <span style={{ fontSize: 'small' }}>{label}</span>
+          <MantineSwitch
+            {...rest}
+            checked={value}
+            onChange={onChange}
+            onBlur={onBlur}
+            ref={ref}
+            disabled={disabled}
+            size="xl"
+            onLabel={onLabel || 'オン'}
+            offLabel={offLabel || 'オフ'}
+            error={form.formState.errors[name]?.message as string | undefined}
+          />
+        </div>
       )}
     />
   )

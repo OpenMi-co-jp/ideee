@@ -5,17 +5,15 @@ addReviewers: true
 addAssignees: author
 
 # A list of reviewers to be added to pull requests (GitHub user name)
-reviewers:
-  - naru20181117
-  - Yuki-Maeda-valour
-  - rdhdchloe
-  - taisei593
+# チーム開発が終了したのでコメントアウト
+# reviewers:
+#   - naru20181117
 
-# A list of keywords to be skipped the process that add reviewers if pull requests include it 
+# A list of keywords to be skipped the process that add reviewers if pull requests include it
 skipKeywords:
   - wip
   - deploy
 
 # A number of reviewers added to the pull request
 # Set 0 to add all the reviewers (default: 0)
-numberOfReviewers: 5
+numberOfReviewers: 0

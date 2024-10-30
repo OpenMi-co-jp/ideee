@@ -18,7 +18,7 @@ module Types
     field :idea_ids, resolver: Resolvers::Idea::IdeaIdsResolver, description: 'ユーザーのアイデアID一覧'
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
-    field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'
+    field :user_ranking, resolver: Resolvers::User::RankingResolver, description: 'ユーザーランキング'
     field :user_count, resolver: Resolvers::User::UserCountResolver, description: 'ユーザー数'
 
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'

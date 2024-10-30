@@ -5726,8 +5726,8 @@
               ]
             },
             {
-              "name": "users",
-              "description": "ユーザー一覧",
+              "name": "userRanking",
+              "description": "ユーザーランキング",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,

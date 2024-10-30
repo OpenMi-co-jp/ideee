@@ -866,8 +866,8 @@ export type Query = {
   user: User
   /** ユーザー数 */
   userCount: Scalars['Int']
-  /** ユーザー一覧 */
-  users: Array<User>
+  /** ユーザーランキング */
+  userRanking: Array<User>
 }
 
 export type QueryCommentArgs = {
@@ -1246,7 +1246,7 @@ export type UpdateUserPayload = {
 export type User = {
   __typename?: 'User'
   /** 作成日 */
-  createdAt?: Scalars['ISO8601DateTime']
+  createdAt: Scalars['ISO8601DateTime']
   /** 設定完了フラグ */
   defined?: Maybe<Scalars['Boolean']>
   /** タイプ */
@@ -2243,16 +2243,16 @@ export type GetUserQuery = {
   }
 }
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never }>
+export type GetUserRankingQueryVariables = Exact<{ [key: string]: never }>
 
-export type GetUsersQuery = {
+export type GetUserRankingQuery = {
   __typename?: 'Query'
-  users: Array<{
+  userRanking: Array<{
     __typename?: 'User'
     id: string
     name: string
-    description?: string | null
-    definition?: string | null
+    image?: string | null
+    point?: number | null
   }>
 }
 
@@ -5131,60 +5131,65 @@ export type GetUserQueryResult = Apollo.QueryResult<
   GetUserQuery,
   GetUserQueryVariables
 >
-export const GetUsersDocument = gql`
-  query GetUsers {
-    users {
+export const GetUserRankingDocument = gql`
+  query GetUserRanking {
+    userRanking {
       id
       name
-      description
-      definition
+      image
+      point
     }
   }
 `
 
 /**
- * __useGetUsersQuery__
+ * __useGetUserRankingQuery__
  *
- * To run a query within a React component, call `useGetUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUserRankingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserRankingQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetUsersQuery({
+ * const { data, loading, error } = useGetUserRankingQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetUsersQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<GetUsersQuery, GetUsersQueryVariables>(
-    GetUsersDocument,
-    options
-  )
-}
-export function useGetUsersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetUsersQuery,
-    GetUsersQueryVariables
+export function useGetUserRankingQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetUserRankingQuery,
+    GetUserRankingQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(
-    GetUsersDocument,
+  return Apollo.useQuery<GetUserRankingQuery, GetUserRankingQueryVariables>(
+    GetUserRankingDocument,
     options
   )
 }
-export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>
-export type GetUsersLazyQueryHookResult = ReturnType<
-  typeof useGetUsersLazyQuery
+export function useGetUserRankingLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetUserRankingQuery,
+    GetUserRankingQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetUserRankingQuery, GetUserRankingQueryVariables>(
+    GetUserRankingDocument,
+    options
+  )
+}
+export type GetUserRankingQueryHookResult = ReturnType<
+  typeof useGetUserRankingQuery
 >
-export type GetUsersQueryResult = Apollo.QueryResult<
-  GetUsersQuery,
-  GetUsersQueryVariables
+export type GetUserRankingLazyQueryHookResult = ReturnType<
+  typeof useGetUserRankingLazyQuery
+>
+export type GetUserRankingQueryResult = Apollo.QueryResult<
+  GetUserRankingQuery,
+  GetUserRankingQueryVariables
 >
 export const GetUserCountDocument = gql`
   query GetUserCount {

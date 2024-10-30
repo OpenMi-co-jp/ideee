@@ -14,12 +14,12 @@ query GetUser($id: ID!) {
   }
 }
 
-query GetUsers {
-  users {
+query GetUserRanking {
+  userRanking {
     id
     name
-    description
-    definition
+    image
+    point
   }
 }
 

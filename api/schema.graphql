@@ -1786,9 +1786,9 @@ type Query {
   userCount: Int!
 
   """
-  ユーザー一覧
+  ユーザーランキング
   """
-  users: [User!]!
+  userRanking: [User!]!
 }
 
 type Review {

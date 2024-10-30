@@ -15,6 +15,7 @@ module Mutations
         likable_id: args[:likable_id]
       )
       like.save!
+      UserJob::UpdatePointJob.perform_later(context[:current_user])
       notify_user(like)
       {
         like:,

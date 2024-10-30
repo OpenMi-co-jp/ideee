@@ -1,4 +1,4 @@
-import { Avatar, Text, Box, Paper, Flex, Title } from '@mantine/core'
+import { Avatar, Text, Box, Paper, Flex, Title, Center } from '@mantine/core'
 import { useGetUserRankingQuery } from '@/lib/generated/client'
 import Link from 'next/link'
 import { IconTrophy } from '@tabler/icons-react'
@@ -30,7 +30,9 @@ export const RankList = () => {
     <Paper shadow="md" radius="md" p="lg" my="md">
       <Flex justify="left" align="center" direction="row" mb="md" wrap="nowrap">
         <Paper shadow="sm" radius="md" p="xs">
-          <IconTrophy size={24} stroke={1.5} />
+          <Center>
+            <IconTrophy size={24} stroke={1.5} />
+          </Center>
         </Paper>
         <Title order={5} m="sm" c="#3F3F3F">
           月間ユーザーランキング

@@ -28,14 +28,13 @@ export default function Home() {
             </>
           )}
           <Space h="xs" />
-          <PopularTags />
-          <Space h="xs" />
           <ActiveTeamIdeas />
           <Space h="xs" />
           <DeployedIdeas />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 3, lg: 3 }}>
           <AdBox />
+          <PopularTags />
           <RankList />
         </Grid.Col>
       </Grid>

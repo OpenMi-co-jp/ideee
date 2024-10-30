@@ -20,7 +20,7 @@ export const Tag = ({ tagName, size, isTruncated = false }: TagProps) => {
   return (
     <Link href={`/search?name_or_idea_tags_name_cont=${tagName}`}>
       <Badge
-        c="gray"
+        c="gray.7"
         size={size || 'lg'}
         radius="lg"
         variant="gradient"

@@ -1886,6 +1886,7 @@ export type GetMessagesQuery = {
       id: string
       name: string
       image?: string | null
+      createdAt: any
     }
   }>
 }
@@ -3980,6 +3981,7 @@ export const GetMessagesDocument = gql`
         id
         name
         image
+        createdAt
       }
     }
   }

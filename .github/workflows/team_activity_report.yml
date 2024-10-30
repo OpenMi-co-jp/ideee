@@ -1,7 +1,8 @@
 name: Team Activity Report
 on:
-  schedule:
-    - cron: '0 11 * * 4'  # 毎週木曜日のUTC 11時 (日本時間20時) に実行
+  # チーム開発が終了したのでコメントアウト
+  # schedule:
+  #   - cron: '0 11 * * 4'  # 毎週木曜日のUTC 11時 (日本時間20時) に実行
   workflow_dispatch:  # 手動実行用
 
 jobs:

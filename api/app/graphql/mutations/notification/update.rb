@@ -6,11 +6,11 @@ module Mutations
     field :errors, [String], null: true, description: 'エラー'
 
     def resolve
-      if context[:current_user].blank?
-        return { success: false, errors: ['ログインしてください'] }
-      end
+      return { success: false, errors: ['ログインしてください'] } if context[:current_user].blank?
 
-      notifications = context[:current_user].passive_notifications.where(checked: false)
+      notifications = context[:current_user].passive_notifications&.where(checked: false)
+      return { success: false, errors: ['通知がありません'] } if notifications.blank?
+
       notifications.update!(checked: true)
       { success: true }
     rescue ActiveRecord::RecordInvalid => e

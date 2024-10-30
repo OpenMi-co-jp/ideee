@@ -10,7 +10,7 @@ module Mutations
         return { success: false, errors: ['ログインしてください'] }
       end
 
-      notifications = context[:current_user].passive_notifications.where(checked: false)
+      notifications = context[:current_user].passive_notifications&.where(checked: false)
       notifications.update!(checked: true)
       { success: true }
     rescue ActiveRecord::RecordInvalid => e

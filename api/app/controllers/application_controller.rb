@@ -61,10 +61,6 @@ class ApplicationController < ActionController::Base
   #   current_user&.defined
   # end
 
-  def update_user_point
-    UserJob::UpdatePointJob.perform_later(current_user) # Contributionの計算/更新
-  end
-
   # NOTE: CSRF 対策
   #       ログイン時は JWT で対策ができているが、未ログイン時は対策できていないので対応
   #       フロントで固有の HTTP ヘッダを付与することで、以下のように対策する (もっといいやり方があれば変更してください)

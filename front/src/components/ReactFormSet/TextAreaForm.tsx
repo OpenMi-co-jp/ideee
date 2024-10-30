@@ -41,7 +41,7 @@ export const TextAreaForm = <T extends FieldValues>(
             {...field}
             {...rest}
             {...{ style, label, disabled }}
-            error={form.formState.errors[name]?.message as string | undefined}
+            error={form.formState.errors[name]?.message as string}
             withAsterisk={required}
             autosize
             minRows={minRows ? minRows : 2}

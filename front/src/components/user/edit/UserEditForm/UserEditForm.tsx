@@ -5,7 +5,6 @@ import {
   Grid,
   Text,
   Checkbox,
-  rem,
   Center,
 } from '@mantine/core'
 import { TextForm, TextAreaForm, DropzoneForm } from '@/components/ReactFormSet'

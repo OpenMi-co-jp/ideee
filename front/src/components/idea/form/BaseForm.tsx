@@ -23,6 +23,7 @@ import {
   Controller,
   FieldValues,
   SubmitHandler,
+  useWatch,
 } from 'react-hook-form'
 import { IdeaImage } from '@/components/image'
 import { useState } from 'react'
@@ -43,12 +44,15 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
     await form.handleSubmit(onSubmit)(event)
     setIsSubmitting(false)
   }
-  const { errors } = useFormState({ control: form.control })
+  const { isValid } = useFormState({ control: form.control })
+  const isPublish = useWatch({
+    control: form.control,
+    name: 'publish',
+  })
 
   const { loading, data } = useGetTagsQuery()
   const tags: string[] =
     loading || !data?.tags ? [] : data.tags.map((tag) => tag.name)
-
   return (
     <Container size="sm">
       <Paper py={rem(40)}>
@@ -70,6 +74,7 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
               required
               my="lg"
             />
+
             <TagsForm
               form={form}
               name="tagList"
@@ -77,6 +82,7 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
               suggestions={tags}
               required
             />
+
             <TextAreaForm
               form={form}
               name="background"
@@ -204,9 +210,9 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
               size="lg"
               variant="gradient"
               gradient={{ from: 'yellow', to: 'orange' }}
-              disabled={isSubmitting || Object.keys(errors).length > 0}
+              disabled={isSubmitting || !isValid}
             >
-              保存
+              {isPublish ? '作成' : '下書き保存'}
             </Button>
           </Center>
         </form>

@@ -43,8 +43,8 @@ export const TextForm = <T extends FieldValues>(props: InputTextProps<T>) => {
             {...field}
             {...rest}
             {...{ style, label, disabled }}
-            error={form.formState.errors[name]?.message as string | undefined}
             withAsterisk={required}
+            error={form.formState.errors[name]?.message as string}
           />
         )
       }}

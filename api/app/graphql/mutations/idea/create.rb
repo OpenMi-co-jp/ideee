@@ -42,7 +42,10 @@ module Mutations
       )
       idea.transaction do
         idea.save_with_tags!(args[:tag_list])
-        idea.publish! unless idea.draft
+        unless idea.draft
+          idea.publish!
+          UserJob::UpdatePointJob.perform_later(context[:current_user])
+        end
       end
       {
         idea:,

@@ -49,7 +49,10 @@ module Mutations
         user_id: context[:current_user].id
       )
       idea.save_with_tags!(args[:tag_list])
-      idea.publish! if from_draft && !idea.draft
+      if from_draft && !idea.draft
+        idea.publish!
+        UserJob::UpdatePointJob.perform_later(context[:current_user])
+      end
       {
         idea:,
         success: true

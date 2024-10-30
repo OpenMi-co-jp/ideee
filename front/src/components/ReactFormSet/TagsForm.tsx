@@ -40,7 +40,7 @@ export const TagsForm = <T extends FieldValues>(props: TagsInputProps<T>) => {
             {...field}
             {...rest}
             {...{ style, label, disabled, placeholder }}
-            error={form.formState.errors[name]?.message as string | undefined}
+            error={form.formState.errors[name]?.message as string}
             withAsterisk={required}
             value={field.value || []}
             onChange={(tags) => field.onChange(tags)}

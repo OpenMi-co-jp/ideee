@@ -65,7 +65,7 @@ class User < ApplicationRecord
   after_create :create_notification_config
   after_create :update_access_token!
 
-  enum definition: {
+  enum :definition, {
     idea_man: 0, engineer: 1, idea_engineer: 2
   }
   mount_base64_uploader :icon, ImageUploader
@@ -195,7 +195,7 @@ class User < ApplicationRecord
   end
 
   def todays_ai_log_count
-    ai_logs.where('created_at >= ?', Time.zone.now.beginning_of_day).count
+    ai_logs.where(created_at: Time.zone.now.beginning_of_day..).count
   end
 
   private

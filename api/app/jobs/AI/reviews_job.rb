@@ -4,7 +4,7 @@ require Rails.root.join('lib/openai/ai_response')
 
 module AI
   class ReviewsJob < ApplicationJob
-    queue_as :default
+    queue_as :high
 
     def perform(id)
       idea = Idea.find(id)

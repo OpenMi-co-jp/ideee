@@ -14,8 +14,8 @@ export const DeployedIdeas = () => {
     <Paper
       shadow="xs"
       radius="lg"
-      py="xl"
-      my="xl"
+      pt="lg"
+      my="lg"
       style={{ border: 'thick double #FBD4D6' }}
     >
       <Flex justify="left" align="center" direction="row" wrap="nowrap" mx="xl">

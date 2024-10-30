@@ -11,9 +11,11 @@ module Types
     field :active_team_ideas, resolver: Resolvers::Idea::ActiveTeamIdeasResolver, description: 'チーム開発募集中のアイデア一覧'
     field :draft_ideas, resolver: Resolvers::Idea::DraftIdeasResolver, description: '下書きアイデア一覧'
     field :suggest_ideas, resolver: Resolvers::Idea::SuggestIdeasResolver, description: 'サジェストアイデア一覧'
+    field :ai_ideas, resolver: Resolvers::Idea::AiIdeasResolver, description: 'AIによるアイデア一覧'
     field :published_ideas, resolver: Resolvers::User::Idea::PublishedIdeasResolver, description: '公開アイデア一覧'
     field :commented_ideas, resolver: Resolvers::User::Idea::CommentedIdeasResolver, description: 'コメントアイデア一覧'
     field :liked_ideas, resolver: Resolvers::User::Idea::LikedIdeasResolver, description: 'いいねしたアイデア一覧'
+    field :idea_ids, resolver: Resolvers::Idea::IdeaIdsResolver, description: 'ユーザーのアイデアID一覧'
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
     field :users, resolver: Resolvers::User::UsersResolver, description: 'ユーザー一覧'
@@ -29,6 +31,7 @@ module Types
     field :comments, resolver: Resolvers::Comment::CommentsResolver, description: 'コメント一覧'
 
     field :room, resolver: Resolvers::Room::RoomResolver, description: 'ルームオブジェクト'
+    field :messages, resolver: Resolvers::Message::MessagesResolver, description: 'メッセージ一覧'
 
     field :tags, resolver: Resolvers::Tag::TagsResolver, description: 'タグ一覧'
     field :popular_tags, resolver: Resolvers::Tag::PopularTagsResolver, description: '人気のタグ一覧'

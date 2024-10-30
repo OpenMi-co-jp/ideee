@@ -2,7 +2,7 @@
 
 module TwitterJob
   class Tweet < ApplicationJob
-    queue_as :default
+    queue_as :high
 
     def perform(idea, url)
       return unless Rails.env.production?

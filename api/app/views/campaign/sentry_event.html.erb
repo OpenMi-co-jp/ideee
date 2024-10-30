@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ideee✖️SentryJapanとのコラボキャンペーン🎃</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      color: #FF862E;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #FF862E;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    img {
+      max-width: 70%;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+    <h1 class="header">💡ideee ✖️ SentryJapanとのコラボキャンペーン🎃</h1>
+
+    <img src='https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/d3493d6d-0c76-4130-cae3-87ba2f31c17d.png' alt='キャンペーン画像'>
+
+    <p>こんにちは、<%= @user.name %>さん。</p>
+
+    <p>ideeeでは、Sentry Japanさんとのコラボを10月から開始しました🎊</p>
+    <p>それを記念して！Amazonギフトコード5000円分~1000円分をプレゼントするキャンペーンを開催しています🙇‍♂️</p>
+
+    <h2>キャンペーンの詳細</h2>
+    <ul>
+        <li><strong>応募方法</strong>
+            <ol>
+                <li>Sentry Japan（@SentryJapan）をフォロー</li>
+                <li>対象のキャンペーン投稿をリポスト</li>
+            </ol>
+        </li>
+        <li><strong>当選確率アップポイント</strong>
+            <ol>
+                <li>アプリ(ideee)に登録されている方</li>
+                <li>アイデアを投稿された方</li>
+                <li>アイデアにハートを送信された方</li>
+            </ol>
+        </li>
+        <li><strong>キャンペーン期間</strong>: 2024年10月1日(火) ～ 10月31日(木)</li>
+    </ul>
+
+    <h3>Sentryの日本語テックブログ</h3>
+
+    <p>Sentryは無料プランもあり、個人開発者の間でも愛されているサービスです。</p>
+    <p>Sentryの詳細は以下のテックブログをチェック！</p>
+    <a href='https://ichizoku.io/category/sentry/' target='_blank'>
+      <img src='https://ichizoku.io/wp-content/uploads/2023/06/logo-main.svg' alt='ichizoku株式会社画像'>
+    </a>
+
+    <p>この機会をお見逃しなく、ぜひご参加ください！</p>
+
+    <p>詳細は以下のリンクからご確認いただけます。</p>
+    <%= link_to "キャンペーンの詳細を見る", @campaign_url, class: "cta-button" %>
+
+    <p>皆様のご参加をお待ちしております。</p>
+
+    <p>ideeeチーム一同</p>
+</body>
+</html>

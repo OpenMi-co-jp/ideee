@@ -19,7 +19,7 @@
 #
 class Review < ApplicationRecord
   belongs_to :idea
-  enum stance: { negative: 0, positive: 1 }
+  enum :stance, { negative: 0, positive: 1 }
 
   validates :content, presence: true
 end

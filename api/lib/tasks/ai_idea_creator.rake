@@ -10,7 +10,7 @@ namespace :ai_idea_creator do
     # botアカウントのID
     bot_user_id = ENV.fetch('BOT_USER_ID', 3375)
     idea = Idea.new(user_id: bot_user_id)
-    res = AIResponse.fetch_ai_response(build_prompt)
+    res = AIResponse.fetch_ai_response(build_prompt, heavy: true)
     parsed_res = JSON.parse(res)
     idea_content = parsed_res['idea']
     tags = parsed_res['tags']
@@ -34,7 +34,8 @@ namespace :ai_idea_creator do
       アイデアの構成要素: { idea: { name: '名前', background: '背景', goal: '目標', issue: '問題点', wish_function: '欲しい機能', target:'ターゲット', monetize: 'マネタイズ方法', similar: '類似サービス', difficulty: '開発難易度レベル' }, tags: ['タグ1', 'タグ2', 'タグ3'] }
       必須項目: アイデア名、背景、ゴール、開発難易度レベル、タグ
       既存のタグ: #{existing_tags}
-      制限: アイデア名30文字以内、タグ12文字以内の3つまで、その他は255文字以内で具体的に nで改行、既存のタグも確認し近しいものがあれば利用。開発難易度レベルは文字列でeasy、middle、hardのいずれかを選択。
+      制限: アイデア名30文字以内、タグ12文字以内の3つまで、その他は255文字以内で具体的に nで改行、既存のタグも確認し近しいものがあれば利用。
+      開発難易度レベルは、easy、middle、hardのいずれかで答えて。
       ポイント: アイデア名はわかりやすくキャッチー、その他の項目は具体的かつユーザーの目を惹けるような魅力的な文章で作成。
       JSON形式で、ideaとtagsのkeyを設定し、日本語で返してください。
     CONTENT

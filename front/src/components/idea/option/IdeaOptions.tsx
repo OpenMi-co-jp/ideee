@@ -11,7 +11,7 @@ export const IdeaOptions = () => {
   const idea = useIdea()
   const { currentUser } = useCurrentUser()
 
-  const createdAt = new Date(idea?.createdAt)
+  const ideaTime = new Date(idea?.publishedAt || idea?.createdAt)
 
   return (
     <Flex py="lg" mr="lg" align="apart" justify="space-between">
@@ -22,7 +22,7 @@ export const IdeaOptions = () => {
         {currentUser?.id === idea?.userId && <IdeaMenu />}
       </Group>
       <Text size="md" c="gray">
-        {dayjs(createdAt).format('YYYY-MM-DD HH:mm')}
+        {dayjs(ideaTime).format('YYYY-MM-DD HH:mm')}
       </Text>
     </Flex>
   )

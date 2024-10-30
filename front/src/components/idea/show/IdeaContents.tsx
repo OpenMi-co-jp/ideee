@@ -1,11 +1,17 @@
-import { Button, Paper, Anchor, Flex } from '@mantine/core'
-import { IconApps, IconBrandGithub } from '@tabler/icons-react'
-import { IdeaContentSet } from './IdeaContentSet'
-import type { GetIdeaQuery } from '@/lib/generated/client'
+import { CreateTeamModal } from '@/components/team/create/CreateTeamModal'
+import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useIdea } from '@/context/IdeaContext'
-import { StanceBadge } from '@/utils/StanceBadge'
-import type { StanceBadgeProps } from '@/utils/StanceBadge'
+import { type GetIdeaQuery } from '@/lib/generated/client'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
+import type { StanceBadgeProps } from '@/utils/StanceBadge'
+import { StanceBadge } from '@/utils/StanceBadge'
+import { Anchor, Button, Flex, Paper } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
+import Link from 'next/link'
+import { useEffect } from 'react'
+import { IdeaContentSet } from './IdeaContentSet'
+import { useCreateTeam } from '@/components/team/create/hook'
 
 const getSections = (idea: GetIdeaQuery['idea']) => {
   return [
@@ -25,6 +31,19 @@ export const IdeaContents = () => {
   const idea = useIdea()
   const { stance, difficulty, productUrl, githubUrl } = idea
   const sections = getSections(idea)
+  const [opened, { open, close }] = useDisclosure(false)
+  const { form, onSubmit } = useCreateTeam()
+  const { currentUser } = useCurrentUser()
+
+  useEffect(() => {
+    if (
+      stance === 'team_project' &&
+      idea.team === null &&
+      idea.userId == currentUser?.id
+    ) {
+      open()
+    }
+  }, [idea.team, stance, currentUser, idea.userId, open])
 
   return (
     <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
@@ -37,13 +56,34 @@ export const IdeaContents = () => {
       {sections.map((section, index) => (
         <IdeaContentSet key={index} {...section} />
       ))}
+      {idea.team?.status === 'active' && (
+        <Link href={`/teams/${idea.team?.id}`}>
+          <Button
+            variant="gradient"
+            gradient={{ from: 'orange', to: 'yellow' }}
+            radius="xl"
+            size="sm"
+            mr="md"
+            leftSection={<IconUsers />}
+            mt="xl"
+          >
+            チーム開発をチェック
+          </Button>
+        </Link>
+      )}
+      <CreateTeamModal
+        opened={opened}
+        onClose={close}
+        form={form}
+        onSubmit={onSubmit}
+      />
       {productUrl && (
         <Anchor href={productUrl} target="_blank">
           <Button
             variant="gradient"
             gradient={{ from: 'green', to: 'blue' }}
             radius="xl"
-            size="md"
+            size="sm"
             mr="md"
             leftSection={<IconApps />}
             mt="xl"
@@ -57,9 +97,10 @@ export const IdeaContents = () => {
           <Button
             color="dark"
             radius="xl"
-            size="md"
+            size="sm"
             leftSection={<IconBrandGithub />}
             mt="xl"
+            mr="md"
           >
             GitHubを確認
           </Button>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-workers 0
-threads 1, 2
+workers ENV.fetch('RAILS_WORKERS', 1).to_i
+threads 4, 8
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -47,8 +47,8 @@ x = nil
 on_worker_boot do
   x = Sidekiq.configure_embed do |config|
     # config.logger.level = Logger::DEBUG
-    config.queues = %w[default low]
-    config.concurrency = 2
+    config.queues = %w[high default low]
+    config.concurrency = 5
   end
   x.run
 end

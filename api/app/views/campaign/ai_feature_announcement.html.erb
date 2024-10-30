@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ideeeに革新的なAI機能が追加されました！</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        text-align: center;
+        color: #FF862E;
+      }
+      .cta-button {
+        display: inline-block;
+        background-color: #FF862E;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      img {
+        max-width: 70%;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+</head>
+<body>
+    <h1 class="header">ideeeがAIパワーアップ！🚀</h1>
+
+    <p>
+      こんにちは、<%= @user.name.present? ? "#{@user.name}さん" : "" %>。
+    </p>
+
+    <p>個人開発をもっと楽しく、もっと効果的にするため、ideeeに革新的なAI機能を追加しました！</p>
+
+    <h2>新しいAI機能の紹介：</h2>
+    <ul>
+        <% @ai_features.each do |feature| %>
+            <li><strong><%= feature[:name] %>：</strong> <%= feature[:description] %></li>
+        <% end %>
+    </ul>
+
+    <img src="https://camo.qiitausercontent.com/b9fa59d08bd8a783309232bce4f17c877bb90c68/68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3439383730312f33313933663936312d636564352d353635312d353239372d3439656235666339663663382e706e67" alt="AI機能紹介画像">
+
+    <p>そして嬉しいお知らせ。これらの新機能は全て<strong>無料</strong>でご利用いただけます！（1日5回まで）</p>
+
+    <p>ideeeは、エンジニアの皆様がアイデアの着想から開発、そしてマーケティングまでの全プロセスをスムーズに進められるよう、サポートを強化しています。AI機能の追加により、アイデアの質の向上、開発スピードの加速、そして「困った」の解決がより簡単になります。</p>
+
+    <p>詳細は以下の記事をご覧ください：</p>
+    <%= link_to "AI機能の詳細を見る", @article_url, class: "cta-button" %>
+
+    <p>未来のキラーアプリは、あなたの才能から生まれるかもしれません。ideeeと共に、その可能性を探求しましょう！</p>
+
+    <p>新機能について、ご質問やフィードバックがございましたら、お気軽にお問い合わせください。</p>
+
+    <p>今後ともideeeをよろしくお願いいたします。</p>
+
+    <p>ideeeチーム一同</p>
+</body>
+</html>

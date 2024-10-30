@@ -7,6 +7,20 @@ query GetTeam($id: ID!) {
     requirement
     offer
     membersNum
+    idea {
+      id
+      name
+      iconUrl
+    }
+    owner {
+      name
+      definition
+      image
+    }
+    currentMember {
+      id
+      image
+    }
   }
 }
 
@@ -33,6 +47,7 @@ mutation createTeam($input: CreateTeamInput!) {
       membersNum
     }
     success
+    errors
   }
 }
 
@@ -47,11 +62,31 @@ mutation updateTeam($input: UpdateTeamInput!) {
       membersNum
     }
     success
+    errors
   }
 }
 
 mutation DestroyTeam($input: DestroyTeamInput!) {
   destroyTeam(input: $input) {
     success
+    errors
+  }
+}
+
+mutation JoinTeam($input: JoinTeamInput!) {
+  joinTeam(input: $input) {
+    teamUser {
+      teamId
+      userId
+    }
+    success
+    errors
+  }
+}
+
+mutation LeaveTeam($input: LeaveTeamInput!) {
+  leaveTeam(input: $input) {
+    success
+    errors
   }
 }

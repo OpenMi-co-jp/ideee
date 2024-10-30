@@ -32,12 +32,9 @@ RSpec.describe Mutations::Team::Update do
       {
         input: {
           id: team.id,
-          ownerId: owner.id,
-          ideaId: idea.id,
           status: 0,
           requirement: 'updated hoge',
-          offer: 'updated fuga',
-          membersNum: 5
+          offer: 'updated fuga'
         }
       }
     end
@@ -68,7 +65,7 @@ RSpec.describe Mutations::Team::Update do
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
         graphql_post
-        res =  response.parsed_body
+        res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type UpdateTeamInput! was provided invalid value for id (Expected value to not be null)')
       end
     end

@@ -55,17 +55,17 @@ const IdeaDetail = () => {
           <UserSection />
           <IdeaTagList />
           {!viewable && <MinIdeaContents />}
-        </Container>
 
-        {(() => {
-          if (viewable) {
-            return <HiddenIdeaContent />
-          } else {
-            return <SignPath />
-          }
-        })()}
-        {/* 公開しているアイデアのみサジェストを表示 */}
-        {data?.idea && !data?.idea?.draft && <SuggestIdeas />}
+          {(() => {
+            if (viewable) {
+              return <HiddenIdeaContent />
+            } else {
+              return <SignPath />
+            }
+          })()}
+          {/* 公開しているアイデアのみサジェストを表示 */}
+          {data?.idea && !data?.idea?.draft && <SuggestIdeas />}
+        </Container>
       </IdeaProvider>
     </>
   )

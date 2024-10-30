@@ -1,24 +1,46 @@
 import { useUser } from '@/context/userProfileContext'
-import { Grid, Flex, Box, Text, Center } from '@mantine/core'
+import { Grid, Box, Text, Center, Flex } from '@mantine/core'
 import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
 import { useCurrentUser } from '@/context/CurrentUserContext'
+import { ProgressBar } from '@/components/user/show/ProgressBar'
+import { getUserType } from '@/utils/getUserType'
+
+const aiLimit = Number(process.env.NEXT_PUBLIC_aiLimit) || 5
+
+const UserInfoBox = ({ label, value }: { label: string; value: string }) => (
+  <Box p="md" style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}>
+    <Center>
+      <Flex direction="column" align="center" gap="md">
+        <Text c="gray">{label}</Text>
+        <Text fz="1.4rem">{value}</Text>
+      </Flex>
+    </Center>
+  </Box>
+)
 
 export const Features = () => {
   const user = useUser()
   const { currentUser } = useCurrentUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
-  const remainingAiLogCount = 3 - todaysAiLogCount
+  const remainingAiLogCount = aiLimit - todaysAiLogCount
+  const userType = getUserType(user?.definition!)
+  const owner = currentUser && String(currentUser?.id) === user?.id
 
   return (
-    <Grid>
+    <Grid mb={20}>
+      {owner && (
+        <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 12 }}>
+          <ProgressBar user={user} />
+        </Grid.Col>
+      )}
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
-        <UserInfoBox label="タイプ" value={user?.definition || ''} />
+        <UserInfoBox label="タイプ" value={userType} />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
         <UserInfoBox label="Contributions" value={String(user?.point)} />
       </Grid.Col>
-      {currentUser && String(currentUser.id) === user?.id && (
-        <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
+      {owner && (
+        <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 4 }}>
           <Box
             p="md"
             style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}
@@ -27,7 +49,8 @@ export const Features = () => {
               <Flex direction="column" align="center" gap="md">
                 <Text c="gray">本日のAI利用回数</Text>
                 <CustomDonutChart
-                  label={`${todaysAiLogCount} / 3`}
+                  label={`${todaysAiLogCount} / ${aiLimit}`}
+                  size={120}
                   data={[
                     {
                       name: '残り回数',
@@ -49,14 +72,3 @@ export const Features = () => {
     </Grid>
   )
 }
-
-const UserInfoBox = ({ label, value }: { label: string; value: string }) => (
-  <Box p="md" style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}>
-    <Center>
-      <Flex direction="column" align="center" gap="md">
-        <Text c="gray">{label}</Text>
-        <Text fz="1.4rem">{value}</Text>
-      </Flex>
-    </Center>
-  </Box>
-)

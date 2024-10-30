@@ -48,6 +48,11 @@ query GetIdea($id: ID!) {
       content
       stance
     }
+    team {
+      id
+      status
+      membersNum
+    }
   }
 }
 
@@ -187,6 +192,14 @@ mutation AiReview($input: IdeaAiReviewInput!) {
   }
 }
 
+mutation AiBrushUp($input: IdeaAiBrushUpInput!) {
+  createAiBrushUp(input: $input) {
+    jobId
+    success
+    errors
+  }
+}
+
 query GetDraftIdeas($page: Int, $per: Int) {
   draftIdeas(page: $page, per: $per) {
     nodes {
@@ -297,5 +310,20 @@ query GetSuggestIdeas($ideaId: ID!) {
       }
     }
     title
+  }
+}
+
+query GetAiIdeas {
+  aiIdeas {
+    name
+    background
+    goal
+    ideaTags
+  }
+}
+
+query GetIdeaIds {
+  ideaIds {
+    ids
   }
 }

@@ -9,7 +9,7 @@ module Resolvers
 
     def resolve(**args)
       current_user = context[:current_user]
-      notification_list = current_user.passive_notifications.eager_load(%i[visitor idea])
+      notification_list = current_user.passive_notifications&.eager_load(%i[visitor idea])
       to_paged_result(Kaminari.paginate_array(notification_list).page(args[:page]).per(args[:per]))
     end
   end

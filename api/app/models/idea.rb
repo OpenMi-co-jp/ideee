@@ -50,6 +50,7 @@ class Idea < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_one :team, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :ai_logs, as: :loggable, dependent: :destroy
   counter_culture :user, column_name: 'ideas_num'
   has_rich_text :note
   mount_base64_uploader :icon, ImageUploader
@@ -62,15 +63,15 @@ class Idea < ApplicationRecord
   validates :product_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates :github_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
 
-  enum difficulty: { not_yet: 0, easy: 1, middle: 2, hard: 3 }
-  enum product_apply: { no_apply: 0, applying: 1, approved: 2 }
-  enum stance: { free_right: 0, personal_project: 1, team_project: 2 }
+  enum :difficulty, { not_yet: 0, easy: 1, middle: 2, hard: 3 }
+  enum :product_apply, { no_apply: 0, applying: 1, approved: 2 }
+  enum :stance, { free_right: 0, personal_project: 1, team_project: 2 }
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
   scope :most_liked, -> { preload(:idea_tags).order(likes_num: 'DESC') }
   scope :most_commented, -> { preload(:idea_tags).order(comments_num: 'DESC') }
-  scope :recent_select, -> { where(published_at: 3.months.ago..Time.zone.now) }
+  scope :recent_select, -> { where(published_at: 6.months.ago..Time.zone.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }
   scope :deployed, -> { where product_apply: :approved }
   scope :tag_name_like, ->(tag_name) { joins(:idea_tags).where('tags.name like?', "%#{tag_name}%") }

@@ -62,8 +62,8 @@ gem 'sidekiq'
 gem 'oauth'
 gem 'typhoeus'
 
-# エラー関係
-gem 'rack-timeout'
+# タイムアウト設定
+gem 'rack-timeout', require: 'rack/timeout/base'
 
 # 検索メソッド
 gem 'ransack', '>= 4.0.0'
@@ -103,6 +103,7 @@ group :development, :test do
 
   # rubocop
   gem 'rubocop', require: false
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-graphql', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false

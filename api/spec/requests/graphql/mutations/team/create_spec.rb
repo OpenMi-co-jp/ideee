@@ -31,10 +31,8 @@ RSpec.describe Mutations::Team::Create do
         input: {
           ownerId: owner.id,
           ideaId: idea.id,
-          status: 0,
           requirement: 'hoge',
-          offer: 'fuga',
-          membersNum: 3
+          offer: 'fuga'
         }
       }
     end
@@ -44,7 +42,7 @@ RSpec.describe Mutations::Team::Create do
         graphql_post
         res = response.parsed_body
         expect(res['data']['createTeam']['success']).to be_truthy
-        expect(res['data']['createTeam']['team']['status']).to eq(Team.statuses.key(variables[:input][:status]))
+        expect(res['data']['createTeam']['team']['status']).to eq('active')
         expect(res['data']['createTeam']['team']['offer']).to eq(variables[:input][:offer])
         expect(res['data']['createTeam']['team']['member_num']).to eq(variables[:input][:member_num])
       end
@@ -56,25 +54,10 @@ RSpec.describe Mutations::Team::Create do
       end
 
       it 'raise errror ActiveRecord::RecordInvalidとなること' do
-        request_result = expect do
-          graphql_post
-        end
-
-        request_result.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: Ideaを入力してください')
-      end
-    end
-
-    context '存在しないownerIdが指定されたとき' do
-      before do
-        variables[:input][:ownerId] = 0
-      end
-
-      it 'raise errror ActiveRecord::RecordInvalidとなること' do
-        request_result = expect do
-          graphql_post
-        end
-
-        request_result.to raise_error(ActiveRecord::RecordInvalid, 'バリデーションに失敗しました: Ownerを入力してください')
+        graphql_post
+        res = response.parsed_body
+        expect(res['data']['createTeam']['success']).to be false
+        expect(res['data']['createTeam']['team']).to be_nil
       end
     end
 
@@ -85,7 +68,7 @@ RSpec.describe Mutations::Team::Create do
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
         graphql_post
-        res =  response.parsed_body
+        res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateTeamInput! was provided invalid value for ideaId')
       end
     end
@@ -97,7 +80,7 @@ RSpec.describe Mutations::Team::Create do
 
       it '作成に失敗しレスポンスにエラー内容が含まれること' do
         graphql_post
-        res =  response.parsed_body
+        res = response.parsed_body
         expect(res['errors'][0]['message']).to include('Variable $input of type CreateTeamInput! was provided invalid value for ownerId')
       end
     end

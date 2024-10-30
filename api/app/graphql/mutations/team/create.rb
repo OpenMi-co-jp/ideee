@@ -4,27 +4,33 @@ module Mutations
 
     argument :owner_id, ID, required: true, description: '【必須】オーナーID'
     argument :idea_id, ID, required: true, description: '【必須】アイデアID'
-    argument :status, Integer, required: true, description: '【必須】チームステータス'
     argument :requirement, String, required: true, description: '【必須】お願いすること'
     argument :offer, String, required: true, description: '【必須】(メンバーが)得られるもの'
-    argument :members_num, Integer, required: true, description: 'メンバー数'
 
-    field :team, Types::TeamType, null: false, description: 'チームオブジェクト'
+    field :team, Types::TeamType, null: true, description: 'チームオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
+    field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
+      if context[:current_user].id != args[:owner_id].to_i
+        return { success: false, errors: ['ユーザーの権限がありません'] }
+      end
+
       team = ::Team.new(
         owner_id: args[:owner_id],
         idea_id: args[:idea_id],
-        status: args[:status],
         requirement: args[:requirement],
-        offer: args[:offer],
-        members_num: args[:members_num]
+        offer: args[:offer]
       )
       team.save!
       {
         team:,
         success: true
+      }
+    rescue ActiveRecord::RecordInvalid => e
+      {
+        success: false,
+        errors: e.record.errors.full_messages
       }
     end
   end

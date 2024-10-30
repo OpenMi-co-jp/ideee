@@ -3,6 +3,7 @@ import { Textarea as MantineTextarea } from '@mantine/core'
 import type { CSSProperties } from 'react'
 import type { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { Controller } from 'react-hook-form'
+import { InfoTooltip } from '@/lib/mantine/InfoTooltip'
 
 type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   label?: string
@@ -13,6 +14,7 @@ type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   isValidation?: boolean
   disabled?: boolean
   minRows?: number
+  tooltipTitle?: string
 }
 
 // react-hook-form対応済みのMantineのInputText
@@ -27,6 +29,7 @@ export const TextAreaForm = <T extends FieldValues>(
     required,
     isValidation,
     minRows,
+    tooltipTitle,
     style,
     ...rest
   } = props
@@ -48,6 +51,16 @@ export const TextAreaForm = <T extends FieldValues>(
             withAsterisk={required}
             autosize
             minRows={minRows ? minRows : 2}
+            label={
+              tooltipTitle ? (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {label}
+                  {tooltipTitle && <InfoTooltip title={tooltipTitle} />}
+                </div>
+              ) : (
+                label
+              )
+            }
           />
         )
       }}

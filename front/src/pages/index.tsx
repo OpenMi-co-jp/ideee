@@ -10,6 +10,7 @@ import { useCurrentUser } from '@/context/CurrentUserContext'
 import { AiIdeaTitleSection } from '@/components/aiIdeaTitles'
 import { AdBox } from '@/components/advertisement/AdBox'
 import { RankList } from '@/components/user/ranking/RankList'
+import { AffiliateBox } from '@/components/advertisement/AffiliateBox'
 
 export default function Home() {
   const { currentUser } = useCurrentUser()
@@ -36,6 +37,7 @@ export default function Home() {
           <AdBox />
           <PopularTags />
           <RankList />
+          <AffiliateBox />
         </Grid.Col>
       </Grid>
       {!currentUser && <Philosophy />}

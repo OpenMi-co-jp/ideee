@@ -1,12 +1,12 @@
-type UserType = 'エンジニア' | 'アイディアマン' | ''
+type UserType = 'エンジニア' | 'アイデアマン' | 'アイデアマン兼エンジニア'
 
 export const getUserType = (definition: string | undefined): UserType => {
   switch (definition) {
     case 'engineer':
       return 'エンジニア'
-    case 'idea_engineer':
-      return 'アイディアマン'
+    case 'idea_man':
+      return 'アイデアマン'
     default:
-      return ''
+      return 'アイデアマン兼エンジニア'
   }
 }

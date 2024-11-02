@@ -11,6 +11,7 @@ import { AiIdeaTitleSection } from '@/components/aiIdeaTitles'
 import { AdBox } from '@/components/advertisement/AdBox'
 import { RankList } from '@/components/user/ranking/RankList'
 import { AffiliateBox } from '@/components/advertisement/AffiliateBox'
+import { IdeaStats } from '@/components/features/IdeaStats'
 
 export default function Home() {
   const { currentUser } = useCurrentUser()
@@ -34,6 +35,7 @@ export default function Home() {
           <DeployedIdeas />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 3, lg: 3 }}>
+          <IdeaStats />
           <AdBox />
           <PopularTags />
           <RankList />

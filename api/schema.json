@@ -5149,6 +5149,24 @@
               ]
             },
             {
+              "name": "ideaCount",
+              "description": "アイデア総数",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "ideaIds",
               "description": "ユーザーのアイデアID一覧",
               "type": {
@@ -5709,7 +5727,7 @@
             },
             {
               "name": "userCount",
-              "description": "ユーザー数",
+              "description": "ユーザー総数",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,

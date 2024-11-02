@@ -7,7 +7,9 @@ module Resolvers
     type Integer, null: false
 
     def resolve
-      ::User.count
+      Rails.cache.fetch('user_count', expires_in: 1.day) do
+        ::User.count
+      end
     end
   end
 end

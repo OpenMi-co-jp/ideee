@@ -327,3 +327,7 @@ query GetIdeaIds {
     ids
   }
 }
+
+query GetIdeaCount {
+  ideaCount
+}

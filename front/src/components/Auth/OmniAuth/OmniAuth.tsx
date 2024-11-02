@@ -7,22 +7,26 @@ import { LastLoginSuggest } from '@/components/LastLoginSuggest'
 
 type OmniAuthProps = {
   deviceProvider?: string
+  termsAccepted?: boolean
 }
 
-export const OmniAuth = ({ deviceProvider }: OmniAuthProps) => {
+export const OmniAuth = ({
+  deviceProvider,
+  termsAccepted = true,
+}: OmniAuthProps) => {
   const csrfToken = useFetchCsrfToken()
 
   const onGoogleLogin = useCallback(() => {
-    if (csrfToken) {
+    if (csrfToken && termsAccepted) {
       handleSignIn({ provider: 'google_oauth2', authenticity_token: csrfToken })
     }
-  }, [csrfToken])
+  }, [csrfToken, termsAccepted])
 
   const onTwitterLogin = useCallback(() => {
-    if (csrfToken) {
+    if (csrfToken && termsAccepted) {
       handleSignIn({ provider: 'twitter', authenticity_token: csrfToken })
     }
-  }, [csrfToken])
+  }, [csrfToken, termsAccepted])
 
   return (
     <Stack my="xl" gap="lg">
@@ -34,6 +38,7 @@ export const OmniAuth = ({ deviceProvider }: OmniAuthProps) => {
         onClick={onGoogleLogin}
         variant="gradient"
         gradient={{ from: '#4285f4', to: '#34a853', deg: 90 }}
+        disabled={!termsAccepted}
       >
         Google ログイン
       </Button>
@@ -44,6 +49,7 @@ export const OmniAuth = ({ deviceProvider }: OmniAuthProps) => {
         leftSection={<IconBrandX />}
         onClick={onTwitterLogin}
         style={{ backgroundColor: '#0f1419' }}
+        disabled={!termsAccepted}
       >
         X ログイン
       </Button>

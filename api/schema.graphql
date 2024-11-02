@@ -1616,6 +1616,11 @@ type Query {
   ): Idea!
 
   """
+  アイデア総数
+  """
+  ideaCount: Int!
+
+  """
   ユーザーのアイデアID一覧
   """
   ideaIds: IdeaIds!
@@ -1781,7 +1786,7 @@ type Query {
   ): User!
 
   """
-  ユーザー数
+  ユーザー総数
   """
   userCount: Int!
 

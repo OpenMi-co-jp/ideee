@@ -1,4 +1,4 @@
-import { Box, Button, Title, Grid } from '@mantine/core'
+import { Box, Button, Title, Grid, Checkbox, Text } from '@mantine/core'
 import { useForm } from 'react-hook-form'
 import { PasswordForm, TextForm } from '../../ReactFormSet'
 import { handleSignUp } from './hooks'
@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 type SignUpFormValues = {
   email: string
@@ -44,6 +45,7 @@ export const SignUpForm: CustomNextPage = () => {
     mode: 'onChange',
   })
 
+  const [termsAccepted, setTermsAccepted] = useState(false)
   const router = useRouter()
   const { currentUser } = useCurrentUser()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -66,7 +68,32 @@ export const SignUpForm: CustomNextPage = () => {
         <Title order={2} mb={30}>
           ユーザー登録
         </Title>
-        <OmniAuth />
+        <Checkbox
+          mt="md"
+          label={
+            <Text size="sm">
+              <Link
+                href="/terms_of_service"
+                style={{ textDecoration: 'underline' }}
+                target="_blank"
+              >
+                利用規約
+              </Link>
+              と
+              <Link
+                href="/privacy_policy"
+                style={{ textDecoration: 'underline' }}
+                target="_blank"
+              >
+                プライバシーポリシー
+              </Link>
+              に同意する
+            </Text>
+          }
+          checked={termsAccepted}
+          onChange={(event) => setTermsAccepted(event.currentTarget.checked)}
+        />
+        <OmniAuth termsAccepted={termsAccepted} />
         <TextForm form={form} name="email" label="メールアドレス" required />
         <PasswordForm form={form} name="password" label="パスワード" required />
         <PasswordForm
@@ -75,8 +102,14 @@ export const SignUpForm: CustomNextPage = () => {
           label="確認用パスワード"
           required
         />
+
         <Grid style={{ marginTop: '1rem' }}>
-          <Button type="submit" fullWidth m={10} disabled={isSubmitting}>
+          <Button
+            type="submit"
+            fullWidth
+            m={10}
+            disabled={isSubmitting || !termsAccepted}
+          >
             無料ユーザー作成
           </Button>
         </Grid>

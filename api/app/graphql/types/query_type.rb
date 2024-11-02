@@ -16,10 +16,11 @@ module Types
     field :commented_ideas, resolver: Resolvers::User::Idea::CommentedIdeasResolver, description: 'コメントアイデア一覧'
     field :liked_ideas, resolver: Resolvers::User::Idea::LikedIdeasResolver, description: 'いいねしたアイデア一覧'
     field :idea_ids, resolver: Resolvers::Idea::IdeaIdsResolver, description: 'ユーザーのアイデアID一覧'
+    field :idea_count, resolver: Resolvers::Idea::IdeaCountResolver, description: 'アイデア総数'
 
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
     field :user_ranking, resolver: Resolvers::User::RankingResolver, description: 'ユーザーランキング'
-    field :user_count, resolver: Resolvers::User::UserCountResolver, description: 'ユーザー数'
+    field :user_count, resolver: Resolvers::User::UserCountResolver, description: 'ユーザー総数'
 
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'
     field :latest_notifications, resolver: Resolvers::Notification::LatestNotificationsResolver, description: '最新の5件の通知一覧'

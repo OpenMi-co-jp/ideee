@@ -22,6 +22,8 @@ const getNotificationMessage = (type?: string | null) => {
       return 'のチーム開発に参加しました'
     case 'leave_team_user':
       return 'のチーム開発から脱退しました'
+    case 'PolicyUpdate':
+      return '全ユーザーへのお知らせ：利用規約とプライバシーポリシーが更新されました'
     default:
       return ''
   }

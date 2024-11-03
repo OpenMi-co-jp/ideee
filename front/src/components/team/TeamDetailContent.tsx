@@ -30,7 +30,8 @@ export default function TeamDetailContent() {
   const isAlreadyJoined =
     team?.currentMember?.some(
       (user) =>
-        user?.id !== undefined && String(user.id) === String(currentUser?.id)
+        user?.id !== undefined &&
+        (String(user.id) === String(currentUser?.id) || isOwner)
     ) ?? false
 
   return (

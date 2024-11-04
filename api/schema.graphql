@@ -72,6 +72,11 @@ type Comment {
   ideaId: Int
 
   """
+  コメントいいね数
+  """
+  likesCount: Int!
+
+  """
   更新日
   """
   updatedAt: ISO8601DateTime

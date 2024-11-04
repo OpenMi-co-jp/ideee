@@ -260,6 +260,24 @@
               ]
             },
             {
+              "name": "likesCount",
+              "description": "コメントいいね数",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null,
+              "args": [
+
+              ]
+            },
+            {
               "name": "updatedAt",
               "description": "更新日",
               "type": {

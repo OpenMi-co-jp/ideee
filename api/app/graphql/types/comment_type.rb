@@ -12,7 +12,7 @@ module Types
     field :likes_count, Integer, null: false, description: 'コメントいいね数'
 
     def likes_count
-      object.likes.size
+      Comment.joins(:likes).count
     end
   end
 end

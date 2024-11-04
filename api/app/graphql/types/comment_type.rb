@@ -9,5 +9,10 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: true, description: '作成日'
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: true, description: '更新日'
     field :user, Types::UserType, null: true, description: 'ユーザーオブジェクト'
+    field :likes_count, Integer, null: false, description: 'コメントいいね数'
+
+    def likes_count
+      object.likes.size
+    end
   end
 end

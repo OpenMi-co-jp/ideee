@@ -6,15 +6,25 @@ import { ActionIcon, Flex, Group, Paper, Text } from '@mantine/core'
 import { IconHeart } from '@tabler/icons-react'
 import { useToggleLike } from '@/components/like/useToggleLike'
 import heartStyle from '@/components/styles/heart.module.css'
+import { useEffect, useState } from 'react'
 
 export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   const { comment } = useComment()
   const { description, createdAt } = comment
+  const [likesCountState, setLikesCountState] = useState(0)
 
   const { isLike, toggleLike, addCount } = useToggleLike(
     Number(comment.id),
     'Comment'
   )
+
+  useEffect(() => {
+    setLikesCountState(comment.likesCount || 0)
+  }, [comment.likesCount])
+
+  useEffect(() => {
+    setLikesCountState((prev) => prev + addCount)
+  }, [addCount])
 
   const handleLike = () => {
     toggleLike()
@@ -43,8 +53,9 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
       {isCurrentUser ? (
         <Flex align="center" justify="start">
           <Group
-            p={2}
+            p={3}
             c={hasLikes ? 'red' : 'gray'}
+            gap="xs"
             style={{
               position: 'absolute',
               bottom: '5px',
@@ -54,12 +65,7 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
               border: '1px solid #ced4da',
             }}
           >
-            <IconHeart
-              fill={hasLikes ? 'red' : 'gray'}
-              className={`${heartStyle.heartIcon} ${
-                hasLikes ? heartStyle.liked : ''
-              }`}
-            />
+            <IconHeart fill={hasLikes ? 'red' : 'gray'} />
             <Text c="gray">{comment.likesCount}</Text>
           </Group>
         </Flex>
@@ -68,7 +74,7 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
           <ActionIcon
             onClick={handleLike}
             variant="default"
-            w={'40px'}
+            w={'50px'}
             h={'30px'}
             p={2}
             c={isLike ? 'red' : 'gray'}
@@ -84,6 +90,12 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
                 isLike ? heartStyle.liked : ''
               }`}
             />
+            {/* <Text ml={5} c="gray">{comment.likesCount}</Text> */}
+            {likesCountState > 0 && (
+              <Text c="gray" ml={5}>
+                {likesCountState}
+              </Text>
+            )}
           </ActionIcon>
         </Flex>
       )}

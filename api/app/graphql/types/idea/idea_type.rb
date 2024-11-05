@@ -13,7 +13,7 @@ module Types
     field :hypothesis, String, description: '仮説'
     field :icon_url, String, description: 'アイコンURL'
     field :issue, String, description: '課題・困っていること'
-    field :likes_num, Integer, description: 'ハート数'
+    field :likes_count, Integer, description: 'ハート数'
     field :monetize, String, description: 'マネタイズ方法'
     field :name, String, null: false, description: 'アイデア名'
     field :note, String, description: '補足'

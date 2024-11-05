@@ -16,6 +16,6 @@ ActiveAdmin.register Idea do
   filter :name
   filter :published_at
   filter :difficulty
-  filter :likes_num
+  filter :likes_count
   filter :comments_num
 end

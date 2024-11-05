@@ -15,7 +15,7 @@
 #  hypothesis                                               :string(255)
 #  icon                                                     :string(255)
 #  issue                                                    :string(255)
-#  likes_num                                                :integer          default(0)
+#  likes_num(いいねの数)                                    :integer          default(0), not null
 #  monetize                                                 :string(255)
 #  name                                                     :string(255)
 #  note                                                     :text(65535)
@@ -69,7 +69,7 @@ class Idea < ApplicationRecord
 
   scope :published, -> { where draft: false }
   scope :drafts, -> { where draft: true }
-  scope :most_liked, -> { preload(:idea_tags).order(likes_num: 'DESC') }
+  scope :most_liked, -> { preload(:idea_tags).order(likes_count: 'DESC') }
   scope :most_commented, -> { preload(:idea_tags).order(comments_num: 'DESC') }
   scope :recent_select, -> { where(published_at: 6.months.ago..Time.zone.now) }
   scope :not_emailed, -> { where(emailed_at: nil) }
@@ -80,7 +80,7 @@ class Idea < ApplicationRecord
   scope :team_active, -> { eager_load(:team).where(team: { status: :active }) }
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[id name published_at stance difficulty comments_num likes_num updated_at].map(&:to_s) + _ransackers.keys
+    %w[id name published_at stance difficulty comments_num likes_count updated_at].map(&:to_s) + _ransackers.keys
   end
 
   def self.ransackable_associations(_auth_object = nil)
@@ -89,10 +89,6 @@ class Idea < ApplicationRecord
 
   def created_time
     created_at.strftime('%Y.%m.%d')
-  end
-
-  def count_likes
-    update_column(:likes_num, likes.size)
   end
 
   def save_with_tags!(tag_list)

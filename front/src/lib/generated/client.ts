@@ -61,6 +61,8 @@ export type Comment = {
   id?: Maybe<Scalars['ID']>
   /** アイデアID */
   ideaId?: Maybe<Scalars['Int']>
+  /** コメントいいね数 */
+  likesCount: Scalars['Int']
   /** 更新日 */
   updatedAt?: Maybe<Scalars['ISO8601DateTime']>
   /** ユーザーオブジェクト */
@@ -419,7 +421,7 @@ export type Idea = {
   /** いいねリスト */
   likes: Array<Like>
   /** ハート数 */
-  likesNum?: Maybe<Scalars['Int']>
+  likesCount?: Maybe<Scalars['Int']>
   /** マネタイズ方法 */
   monetize?: Maybe<Scalars['String']>
   /** アイデア名 */
@@ -1288,6 +1290,7 @@ export type GetCommentQuery = {
     id?: string | null
     description: string
     createdAt?: any | null
+    likesCount: number
     user?: {
       __typename?: 'User'
       id: string
@@ -1308,6 +1311,7 @@ export type GetCommentsQuery = {
     id?: string | null
     description: string
     createdAt?: any | null
+    likesCount: number
     user?: {
       __typename?: 'User'
       id: string
@@ -1414,7 +1418,7 @@ export type GetIdeaQuery = {
     updatedAt: any
     publishedAt?: any | null
     userId: number
-    likesNum?: number | null
+    likesCount?: number | null
     productUrl?: string | null
     githubUrl?: string | null
     user: {
@@ -1469,7 +1473,7 @@ export type GetIdeasQuery = {
       name: string
       commentsNum?: number | null
       difficulty?: string | null
-      likesNum?: number | null
+      likesCount?: number | null
       view?: number | null
       updatedAt: any
       publishedAt?: any | null
@@ -2320,6 +2324,7 @@ export const GetCommentDocument = gql`
         name
         image
       }
+      likesCount
     }
   }
 `
@@ -2383,6 +2388,7 @@ export const GetCommentsDocument = gql`
         name
         image
       }
+      likesCount
     }
   }
 `
@@ -2676,7 +2682,7 @@ export const GetIdeaDocument = gql`
       updatedAt
       publishedAt
       userId
-      likesNum
+      likesCount
       productUrl
       githubUrl
       user {
@@ -2771,7 +2777,7 @@ export const GetIdeasDocument = gql`
         name
         commentsNum
         difficulty
-        likesNum
+        likesCount
         view
         updatedAt
         publishedAt

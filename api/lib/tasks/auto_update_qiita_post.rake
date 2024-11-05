@@ -64,7 +64,7 @@ namespace :auto_update_qiita_post do
     body = ''
     items.map do |item|
       body += "### #{rank ? rank(num) : num}. [#{item.name}](#{analytics_url(item.id)})\n"
-      body += "**💛 : #{item.likes_num}　　💬 : #{item.comments_num}**　　📮 : #{item.published_at.strftime('%Y / %m / %d')}\n"
+      body += "**💛 : #{item.likes_count}　　💬 : #{item.comments_num}**　　📮 : #{item.published_at.strftime('%Y / %m / %d')}\n"
 
       if item.idea_tags.length.positive?
         item.idea_tags.map { |a| body += "`#{a.name}` " }

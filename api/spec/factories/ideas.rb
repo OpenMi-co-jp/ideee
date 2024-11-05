@@ -15,7 +15,7 @@
 #  hypothesis                                               :string(255)
 #  icon                                                     :string(255)
 #  issue                                                    :string(255)
-#  likes_num                                                :integer          default(0)
+#  likes_num(いいねの数)                                    :integer          default(0), not null
 #  monetize                                                 :string(255)
 #  name                                                     :string(255)
 #  note                                                     :text(65535)

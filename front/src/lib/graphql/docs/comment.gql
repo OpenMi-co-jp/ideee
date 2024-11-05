@@ -8,6 +8,7 @@ query GetComment($id: ID!) {
       name
       image
     }
+    likesCount
   }
 }
 
@@ -21,6 +22,7 @@ query GetComments($ideaId: ID!) {
       name
       image
     }
+    likesCount
   }
 }
 

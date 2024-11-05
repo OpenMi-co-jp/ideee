@@ -6,7 +6,7 @@ module Resolvers
     include Resolvers::Concerns::Pagination
 
     argument :search_condition, Types::Idea::SearchConditionType, required: false, description: 'アイデア検索条件'
-    argument :sort, Types::SortConditionType, required: false, default_value: { column_name: 'likes_num' }, description: 'ソート順'
+    argument :sort, Types::SortConditionType, required: false, default_value: { column_name: 'likes_count' }, description: 'ソート順'
 
     type Types::Idea::IdeasType, null: false
 

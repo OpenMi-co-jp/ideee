@@ -20,7 +20,7 @@ query GetIdea($id: ID!) {
     updatedAt
     publishedAt
     userId
-    likesNum
+    likesCount
     productUrl
     githubUrl
     user {
@@ -63,7 +63,7 @@ query GetIdeas($searchCondition: SearchCondition, $sort: SortCondition, $page: I
       name
       commentsNum
       difficulty
-      likesNum
+      likesCount
       view
       updatedAt
       publishedAt

@@ -12,27 +12,27 @@ import { useEffect, useState } from 'react'
  * @returns Button, IconHeartFilled, IconHeart
  */
 export const Like = () => {
-  const { likesNum, userId } = useIdea()
+  const { likesCount, userId } = useIdea()
   const router = useRouter()
   const { id } = router.query
   const { isLike, toggleLike, addCount } = useToggleLike(Number(id), 'Idea')
   const { currentUser } = useCurrentUser()
   const isOwnUser = userId == currentUser?.id
-  const [likesNumState, setLikesNumState] = useState(0)
+  const [likesCountState, setLikesCountState] = useState(0)
 
   useEffect(() => {
-    setLikesNumState(likesNum || 0)
-  }, [likesNum])
+    setLikesCountState(likesCount || 0)
+  }, [likesCount])
 
   useEffect(() => {
-    setLikesNumState((prev) => prev + addCount)
+    setLikesCountState((prev) => prev + addCount)
   }, [addCount])
 
   if (isOwnUser)
     return (
       <>
         <IconHeart style={{ color: 'black' }} />
-        <Text c="gray">{likesNum}</Text>
+        <Text c="gray">{likesCount}</Text>
       </>
     )
 
@@ -70,7 +70,7 @@ export const Like = () => {
             </div>
           )}
         </Transition>
-        {likesNumState > 0 && <Text c="gray">{likesNumState}</Text>}
+        {likesCountState > 0 && <Text c="gray">{likesCountState}</Text>}
       </Flex>
     </Button>
   )

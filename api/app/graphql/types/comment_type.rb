@@ -10,9 +10,5 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: true, description: '更新日'
     field :user, Types::UserType, null: true, description: 'ユーザーオブジェクト'
     field :likes_count, Integer, null: false, description: 'コメントいいね数'
-
-    def likes_count
-      Comment.joins(:likes).count
-    end
   end
 end

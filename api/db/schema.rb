@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_05_031311) do
     t.bigint "idea_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "likes_count", default: 0, null: false
+    t.integer "likes_count", default: 0, null: false, comment: "いいねの数"
     t.index ["idea_id"], name: "index_comments_on_idea_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -137,7 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_05_031311) do
     t.string "github_url"
     t.string "monetize"
     t.integer "stance", default: 0
-    t.integer "likes_count", default: 0, null: false
+    t.integer "likes_count", default: 0, null: false, comment: "いいねの数"
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

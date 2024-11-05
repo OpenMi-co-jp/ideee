@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
   const { comment } = useComment()
   const { description, createdAt } = comment
-  const [likesCountState, setLikesCountState] = useState(0)
+  const [likesCountState, setLikesCountState] = useState(comment.likesCount)
 
   const { isLike, toggleLike, addCount } = useToggleLike(
     Number(comment.id),
@@ -20,7 +20,7 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
 
   useEffect(() => {
     setLikesCountState(comment.likesCount || 0)
-  }, [comment.likesCount])
+  }, [comment])
 
   useEffect(() => {
     setLikesCountState((prev) => prev + addCount)
@@ -51,24 +51,28 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
         <TextWithLinks>{description}</TextWithLinks>
       </Paper>
       {isCurrentUser ? (
-        <Flex align="center" justify="start">
-          <Group
-            p={3}
-            c={hasLikes ? 'red' : 'gray'}
-            gap="xs"
-            style={{
-              position: 'absolute',
-              bottom: '5px',
-              left: '5px',
-              background: 'white',
-              borderRadius: '5px',
-              border: '1px solid #ced4da',
-            }}
-          >
-            <IconHeart fill={hasLikes ? 'red' : 'gray'} />
-            <Text c="gray">{comment.likesCount}</Text>
-          </Group>
-        </Flex>
+        likesCountState > 0 && (
+          <Flex align="center" justify="start">
+            <Group
+              p={3}
+              c={hasLikes ? 'red' : 'gray'}
+              gap="xs"
+              style={{
+                position: 'absolute',
+                bottom: '5px',
+                left: '5px',
+                background: 'white',
+                borderRadius: '5px',
+                border: '1px solid #ced4da',
+              }}
+            >
+              <IconHeart fill={hasLikes ? 'red' : 'gray'} />
+              <Text c="gray" ml={5}>
+                {comment.likesCount}
+              </Text>
+            </Group>
+          </Flex>
+        )
       ) : (
         <Flex align="center" justify="end">
           <ActionIcon
@@ -90,7 +94,6 @@ export const CommentBody = ({ isCurrentUser }: { isCurrentUser: boolean }) => {
                 isLike ? heartStyle.liked : ''
               }`}
             />
-            {/* <Text ml={5} c="gray">{comment.likesCount}</Text> */}
             {likesCountState > 0 && (
               <Text c="gray" ml={5}>
                 {likesCountState}

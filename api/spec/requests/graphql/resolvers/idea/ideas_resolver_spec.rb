@@ -13,7 +13,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
               name
               commentsNum
               stance
-              likesNum
+              likesCount
               view
               updatedAt
               publishedAt
@@ -138,7 +138,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
       let!(:poor_idea) do
         create(
           :idea,
-          likes_num: 1,
+          likes_count: 1,
           comments_num: 1,
           view: 1,
           published_at: 5.days.ago,
@@ -148,7 +148,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
       let!(:oldest_idea) do
         create(
           :idea,
-          likes_num: 2,
+          likes_count: 2,
           comments_num: 2,
           view: 2,
           published_at: 10.days.ago,
@@ -158,7 +158,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
       let!(:popular_idea) do
         create(
           :idea,
-          likes_num: 3,
+          likes_count: 3,
           comments_num: 3,
           view: 3,
           published_at: 3.days.ago,
@@ -172,18 +172,18 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
         create(:team, idea: popular_idea, owner: popular_idea.user, members_num: 3)
       end
 
-      context 'デフォルトのlikes_num descでソートする場合' do
+      context 'デフォルトのlikes_count descでソートする場合' do
         let(:variables) do
           {
             searchCondition: {}
           }
         end
 
-        it 'likes_numを降順に並び替えること' do
+        it 'likes_countを降順に並び替えること' do
           expect(graphql_post).to eq 200
           res_json = response.parsed_body
           expect(res_json['data']['ideas']['nodes'].length).to eq 3
-          expect(res_json['data']['ideas']['nodes'].first['likesNum']).to eq popular_idea.likes_num
+          expect(res_json['data']['ideas']['nodes'].first['likesCount']).to eq popular_idea.likes_count
         end
       end
 

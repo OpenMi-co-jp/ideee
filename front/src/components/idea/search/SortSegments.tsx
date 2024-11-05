@@ -8,7 +8,7 @@ export const SortSegments = () => {
   const [selectedSort, setSelectedSort] = useState<string>('')
 
   useEffect(() => {
-    setSelectedSort(column_name ? String(column_name) : 'likes_num')
+    setSelectedSort(column_name ? String(column_name) : 'likes_count')
   }, [column_name])
 
   const handleSortChange = (value: string) => {
@@ -29,7 +29,7 @@ export const SortSegments = () => {
         radius="xl"
         color="yellow"
         data={[
-          { value: 'likes_num', label: 'いいね数' },
+          { value: 'likes_count', label: 'いいね数' },
           { value: 'comments_num', label: 'コメント数' },
           { value: 'published_at', label: '公開時間' },
         ]}

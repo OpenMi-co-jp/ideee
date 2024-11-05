@@ -798,7 +798,7 @@ type Idea {
   """
   ハート数
   """
-  likesNum: Int
+  likesCount: Int
 
   """
   マネタイズ方法
@@ -1652,7 +1652,7 @@ type Query {
     """
     ソート順
     """
-    sort: SortCondition = {columnName: "likes_num"}
+    sort: SortCondition = {columnName: "likes_count"}
   ): Ideas!
 
   """

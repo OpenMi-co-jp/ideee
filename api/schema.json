@@ -2474,7 +2474,7 @@
               ]
             },
             {
-              "name": "likesNum",
+              "name": "likesCount",
               "description": "ハート数",
               "type": {
                 "kind": "SCALAR",
@@ -5261,7 +5261,7 @@
                     "name": "SortCondition",
                     "ofType": null
                   },
-                  "defaultValue": "{columnName: \"likes_num\"}",
+                  "defaultValue": "{columnName: \"likes_count\"}",
                   "isDeprecated": false,
                   "deprecationReason": null
                 }

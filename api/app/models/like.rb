@@ -20,18 +20,8 @@ class Like < ApplicationRecord
   belongs_to :user
   belongs_to :likable, polymorphic: true, optional: true
 
-  after_create :count_likes
-
   has_many :notifications, dependent: :destroy, as: :notificatable
+  counter_culture :likable
 
   scope :type_idea_ids, -> { where(likable_type: 'Idea').pluck(:likable_id) }
-
-  private
-
-  def count_likes
-    return unless likable_type == 'Idea'
-
-    idea = ::Idea.find(likable_id)
-    idea.count_likes
-  end
 end

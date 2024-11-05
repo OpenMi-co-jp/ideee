@@ -421,7 +421,7 @@ export type Idea = {
   /** いいねリスト */
   likes: Array<Like>
   /** ハート数 */
-  likesNum?: Maybe<Scalars['Int']>
+  likesCount?: Maybe<Scalars['Int']>
   /** マネタイズ方法 */
   monetize?: Maybe<Scalars['String']>
   /** アイデア名 */
@@ -1418,7 +1418,7 @@ export type GetIdeaQuery = {
     updatedAt: any
     publishedAt?: any | null
     userId: number
-    likesNum?: number | null
+    likesCount?: number | null
     productUrl?: string | null
     githubUrl?: string | null
     user: {
@@ -1473,7 +1473,7 @@ export type GetIdeasQuery = {
       name: string
       commentsNum?: number | null
       difficulty?: string | null
-      likesNum?: number | null
+      likesCount?: number | null
       view?: number | null
       updatedAt: any
       publishedAt?: any | null
@@ -2682,7 +2682,7 @@ export const GetIdeaDocument = gql`
       updatedAt
       publishedAt
       userId
-      likesNum
+      likesCount
       productUrl
       githubUrl
       user {
@@ -2777,7 +2777,7 @@ export const GetIdeasDocument = gql`
         name
         commentsNum
         difficulty
-        likesNum
+        likesCount
         view
         updatedAt
         publishedAt

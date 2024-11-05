@@ -86,7 +86,7 @@ module ReservedEmail
     "
       <div style='background-color: white; margin: 3px 0; padding: 5px;'>
         <div style='display: inline;'>
-          💛 #{idea.likes_num} 💬 #{idea.comments_num} #{analytics_url("ideas/#{idea.id}", 'ranking', idea.name)}
+          💛 #{idea.likes_count} 💬 #{idea.comments_num} #{analytics_url("ideas/#{idea.id}", 'ranking', idea.name)}
         </div>
       </div>
     "

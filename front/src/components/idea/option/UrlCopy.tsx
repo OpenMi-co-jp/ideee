@@ -9,7 +9,7 @@ export const UrlCopy = () => {
   const currentUrl = process.env.NEXT_PUBLIC_FRONT_URL + router.asPath
 
   return (
-    <BaseTooltip label="URLをコピー" position="top">
+    <BaseTooltip label="URLをコピー">
       <div>
         <CopyButton value={currentUrl} timeout={2000}>
           {({ copied, copy }) => (

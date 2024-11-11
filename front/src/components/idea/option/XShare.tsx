@@ -2,6 +2,7 @@ import { IconBrandX } from '@tabler/icons-react'
 import { Anchor } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { useIdea } from '@/context/IdeaContext'
+import { BaseTooltip } from '@/lib/mantine/BaseTooltip'
 
 export const XShare = () => {
   const idea = useIdea()
@@ -12,8 +13,10 @@ export const XShare = () => {
   const twitterShareUrl = `https://twitter.com/intent/tweet?text=${idea?.name}&hashtags=ideee,${hashtags}${viaUser}&related=ideee_tech&url=${currentUrl}`
 
   return (
-    <Anchor c="black" target="_blank" pt="0.4rem" href={twitterShareUrl}>
-      <IconBrandX />
-    </Anchor>
+    <BaseTooltip label="Xへシェア">
+      <Anchor c="black" target="_blank" pt="0.4rem" href={twitterShareUrl}>
+        <IconBrandX />
+      </Anchor>
+    </BaseTooltip>
   )
 }

@@ -1,11 +1,12 @@
 import { IconHeartFilled, IconHeart } from '@tabler/icons-react'
-import { Button, Transition, Text, Flex, Tooltip } from '@mantine/core'
+import { Button, Transition, Text, Flex } from '@mantine/core'
 import { useToggleLike } from '@/components/like/useToggleLike'
 import { useRouter } from 'next/router'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { showError } from '@/components/showNotification'
 import { useIdea } from '@/context/IdeaContext'
 import { useEffect, useState } from 'react'
+import { BaseTooltip } from '@/lib/mantine/BaseTooltip'
 
 /**
  * Likeコンポーネントは、アイデアに対する「いいね」の切り替え機能を提供します。
@@ -62,11 +63,11 @@ export const Like = () => {
         <Transition mounted={!isLike} duration={300} transition="fade-right">
           {(styles) => (
             <div style={styles}>
-              <Tooltip label="ほしい!" withArrow>
+              <BaseTooltip label="ほしい!">
                 <div>
                   <IconHeart style={{ color: 'black' }} />
                 </div>
-              </Tooltip>
+              </BaseTooltip>
             </div>
           )}
         </Transition>

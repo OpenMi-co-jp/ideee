@@ -23,6 +23,7 @@ query GetIdea($id: ID!) {
     likesCount
     productUrl
     githubUrl
+    isOptionColumnsFilled
     user {
       id
       name

@@ -73,6 +73,7 @@ export const Form = () => {
               name="description"
               label="自己紹介"
               my="lg"
+              placeholder="自己紹介を入力してください"
             />
           </Grid.Col>
         </Grid>

@@ -14,6 +14,7 @@ type InputTextProps<T extends FieldValues> = MantineStyleProps & {
   disabled?: boolean
   minRows?: number
   tooltipTitle?: string
+  placeholder?: string
 }
 
 // react-hook-form対応済みのMantineのInputText
@@ -28,6 +29,7 @@ export const TextAreaForm = <T extends FieldValues>(
     required,
     minRows,
     tooltipTitle,
+    placeholder,
     style,
     ...rest
   } = props
@@ -43,6 +45,7 @@ export const TextAreaForm = <T extends FieldValues>(
             {...{ style, label, disabled }}
             error={form.formState.errors[name]?.message as string}
             withAsterisk={required}
+            placeholder={placeholder}
             autosize
             minRows={minRows ? minRows : 2}
             label={

@@ -35,7 +35,7 @@ export const HotIdeas = () => {
           <Paper shadow="sm" radius="md" p="sm">
             <IconConfetti size={30} stroke={1.5} />
           </Paper>
-          <Title order={2} mx="md" my="md" c="orange">
+          <Title order={2} ml="md" my="md" c="orange">
             ホットなアイデア
           </Title>
         </Flex>

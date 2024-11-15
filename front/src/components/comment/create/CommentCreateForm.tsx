@@ -1,4 +1,4 @@
-import { Button, Center } from '@mantine/core'
+import { Button, Center, Flex } from '@mantine/core'
 import { TextAreaForm } from '@/components/ReactFormSet'
 import { useCommentAction } from './create'
 import { IconSend } from '@tabler/icons-react'
@@ -18,20 +18,30 @@ export const CommentCreateForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextAreaForm form={form} name="description" label="コメント" />
+      <Flex direction="row" gap="md" px={{ xs: 'none', sm: 'md' }}>
+        <TextAreaForm
+          form={form}
+          name="description"
+          label="コメント"
+          placeholder="コメントを入力してください"
+          style={{ width: '100%' }}
+        />
 
-      <Center mt="lg">
-        <Button
-          type="submit"
-          variant="light"
-          size="lg"
-          color="orange"
-          disabled={isSubmitting || !description}
-          leftSection={<IconSend />}
-        >
-          保存
-        </Button>
-      </Center>
+        {description?.trim() && (
+          <Center mt="lg">
+            <Button
+              type="submit"
+              variant="light"
+              size="lg"
+              color="orange"
+              disabled={isSubmitting || !description}
+              leftSection={<IconSend />}
+            >
+              保存
+            </Button>
+          </Center>
+        )}
+      </Flex>
     </form>
   )
 }

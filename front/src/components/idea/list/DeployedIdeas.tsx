@@ -22,7 +22,7 @@ export const DeployedIdeas = () => {
         <Paper shadow="sm" radius="md" p="sm">
           <IconCircleCheck size={30} stroke={1.5} />
         </Paper>
-        <Title order={2} mx="xl" my="md" c="#9B6565">
+        <Title order={2} ml="xl" my="md" c="#9B6565">
           実現したアイデア
         </Title>
       </Flex>

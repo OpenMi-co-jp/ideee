@@ -12,7 +12,6 @@ export const IdeaContentSet = ({
 
   return (
     <Stack gap="xs">
-      <Space h="xl" />
       <Title order={4} size="lg" c="gray" ml="md">
         {label}
       </Title>

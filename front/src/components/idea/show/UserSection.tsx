@@ -7,7 +7,7 @@ export const UserSection = () => {
   const idea = useIdea()
 
   return (
-    <Flex py="lg" pl="xl" justify="space-between" align="center">
+    <Flex py="lg" pl="md" justify="space-between" align="center">
       <div>
         <Link href={`/users/${idea.userId}`} passHref>
           <Flex align="center" gap="xs">

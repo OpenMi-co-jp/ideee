@@ -416,6 +416,8 @@ export type Idea = {
   id: Scalars['ID']
   /** タグオブジェクト */
   ideaTags?: Maybe<Array<Tag>>
+  /** アイデアのカラムが埋まっているか */
+  isOptionColumnsFilled?: Maybe<Scalars['Boolean']>
   /** 課題・困っていること */
   issue?: Maybe<Scalars['String']>
   /** いいねリスト */
@@ -1421,6 +1423,7 @@ export type GetIdeaQuery = {
     likesCount?: number | null
     productUrl?: string | null
     githubUrl?: string | null
+    isOptionColumnsFilled?: boolean | null
     user: {
       __typename?: 'User'
       id: string
@@ -2685,6 +2688,7 @@ export const GetIdeaDocument = gql`
       likesCount
       productUrl
       githubUrl
+      isOptionColumnsFilled
       user {
         id
         name

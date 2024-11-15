@@ -8,7 +8,7 @@ export const CommentList = () => {
   const { data } = useCommentsInstance()
 
   return (
-    <Paper bg="#fef6eb" radius="md" p="xs" m="lg">
+    <Paper bg="#fef6eb" radius="md" p="xs" my="md">
       <Title order={3} size="xl" p="sm" c="gray">
         コメント
       </Title>

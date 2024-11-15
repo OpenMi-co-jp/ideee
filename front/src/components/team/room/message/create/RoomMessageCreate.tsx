@@ -18,7 +18,12 @@ export const RoomMessageCreate = () => {
 
   return (
     <form onSubmit={handleSubmit} role="form">
-      <TextAreaForm form={form} name="content" label="メッセージ" />
+      <TextAreaForm
+        form={form}
+        name="content"
+        label="メッセージ"
+        placeholder="メッセージを入力してください"
+      />
       <Center mt="lg">
         <Button
           type="submit"

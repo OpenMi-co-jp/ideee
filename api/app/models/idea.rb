@@ -142,4 +142,9 @@ class Idea < ApplicationRecord
     Slack::SendNewJob.perform_later(self, idea_url)
     Slack::SendApplyJob.perform_later(self, idea_url)
   end
+
+  def is_option_columns_filled
+    required_columns = %w[hypothesis issue target monetize similar stance wish_function]
+    required_columns.all? { |column| self[column].present? }
+  end
 end

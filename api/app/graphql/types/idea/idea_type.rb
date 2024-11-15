@@ -28,6 +28,7 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false, description: '更新日'
     field :published_at, GraphQL::Types::ISO8601DateTime, description: '公開日'
+    field :is_option_columns_filled, Boolean, description: 'アイデアのカラムが埋まっているか'
 
     field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
     field :idea_tags, [Types::TagType], null: true, description: 'タグオブジェクト'

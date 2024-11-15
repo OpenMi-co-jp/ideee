@@ -786,6 +786,11 @@ type Idea {
   ideaTags: [Tag!]
 
   """
+  アイデアのカラムが埋まっているか
+  """
+  isOptionColumnsFilled: Boolean
+
+  """
   課題・困っていること
   """
   issue: String

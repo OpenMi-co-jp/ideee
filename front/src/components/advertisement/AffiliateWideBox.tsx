@@ -6,12 +6,8 @@ import { AdList } from '@/utils/adLinks'
 export const AffiliateWideBox = () => {
   const { isMobile } = useBreakPoint()
   const displayItems = AdList
-  const item = isMobile
-    ? [displayItems[Math.floor(Math.random() * displayItems.length)]]
-    : Array.from(
-        { length: 2 },
-        () => displayItems[Math.floor(Math.random() * displayItems.length)]
-      )
+  const shuffledItems = [...displayItems].sort(() => 0.5 - Math.random())
+  const item = isMobile ? shuffledItems.slice(0, 1) : shuffledItems.slice(0, 2)
 
   return (
     <Flex maw={700} mx="auto" direction={isMobile ? 'column' : 'row'} gap="xl">

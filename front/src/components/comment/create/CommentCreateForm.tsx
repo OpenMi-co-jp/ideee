@@ -27,7 +27,7 @@ export const CommentCreateForm = () => {
           style={{ width: '100%' }}
         />
 
-        {description && (
+        {description?.trim() && (
           <Center mt="lg">
             <Button
               type="submit"

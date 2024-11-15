@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { Button, Modal, Affix } from '@mantine/core'
 import { IconMessageForward } from '@tabler/icons-react'
+import { useBreakPoint } from '@/utils/hooks/useBreakPoint'
 
 export const ErrorReport = () => {
+  const { isMobile } = useBreakPoint()
   const [opened, setOpened] = useState(false)
 
   const handleOpen = () => setOpened(true)
   const handleClose = () => setOpened(false)
+  if (isMobile) return null
 
   return (
     <>

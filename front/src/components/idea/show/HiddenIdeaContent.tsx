@@ -1,4 +1,3 @@
-import { Space } from '@mantine/core'
 import { IdeaContents } from '@/components/idea/show'
 import { IdeaOptions } from '@/components/idea/option'
 import { CommentList, CommentCreateForm } from '@/components/comment'
@@ -9,13 +8,12 @@ import { useIdea } from '@/context/IdeaContext'
 
 export const HiddenIdeaContent = () => {
   const { currentUser } = useCurrentUser()
-  const { id, draft, userId } = useIdea()
+  const { userId } = useIdea()
 
   return (
     <>
       <IdeaContents />
       <IdeaOptions />
-      <Space h="xs" />
       {currentUser && <ReviewList />}
       {currentUser && currentUser?.id === userId && <AiBrushUp />}
       <CommentList />

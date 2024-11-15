@@ -14,6 +14,7 @@ import { HeadBlock } from '@/pages-layout/Head'
 import { truncateText } from '@/utils/truncateText'
 import { SuggestIdeas } from '@/components/idea/list'
 import { getOgpImageUrl } from '@/lib/cloudinary/ogpImage'
+import { AffiliateWideBox } from '@/components/advertisement/AffiliateWideBox'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
@@ -64,6 +65,7 @@ const IdeaDetail = () => {
               return <SignPath />
             }
           })()}
+          <AffiliateWideBox />
           {/* 公開しているアイデアのみサジェストを表示 */}
           {data?.idea && !data?.idea?.draft && <SuggestIdeas />}
         </Container>

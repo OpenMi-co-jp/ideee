@@ -7,7 +7,7 @@ import { showInfo, showError } from '@/components/showNotification'
 import { useAiBrushUpMutation } from '@/lib/generated/client'
 
 export const AiBrushUp = () => {
-  const { id, draft, userId } = useIdea()
+  const { id, draft, userId, isOptionColumnsFilled } = useIdea()
   const { currentUser } = useCurrentUser()
   // TODO: Jobが完了したらrefetchするように修正
   const [aiBrushUpLoading, setAiBrushUpLoading] = useState(false)
@@ -48,7 +48,7 @@ export const AiBrushUp = () => {
     setAiBrushUpLoading(false)
   }
 
-  if (!draft && currentUser?.id === userId) {
+  if (!draft && !isOptionColumnsFilled) {
     return (
       <Center my={30}>
         <Button

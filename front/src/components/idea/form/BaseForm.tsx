@@ -9,6 +9,7 @@ import {
   Center,
   getGradient,
   Container,
+  Stack,
 } from '@mantine/core'
 import { IconBulb, IconBrandGithub, IconApps } from '@tabler/icons-react'
 import {
@@ -67,141 +68,126 @@ export const IdeaBaseForm = ({ type, form, onSubmit }: IdeaFormProps) => {
             ImageComponent={IdeaImage}
           />
           <Paper bg="#FCFCFC" radius="md" p="lg">
-            <TextForm
-              form={form}
-              name="name"
-              label="アイデア名"
-              required
-              my="lg"
-            />
+            <Stack gap="lg">
+              <TextForm form={form} name="name" label="アイデア名" required />
 
-            <TagsForm
-              form={form}
-              name="tagList"
-              label="タグ"
-              suggestions={tags}
-              required
-            />
-
-            <TextAreaForm
-              form={form}
-              name="background"
-              label="背景"
-              required
-              my="lg"
-            />
-            <TextAreaForm
-              form={form}
-              name="goal"
-              label="ゴール"
-              required
-              my="lg"
-            />
-            <Accordion
-              variant="separated"
-              chevronPosition="left"
-              styles={(theme) => ({
-                control: {
-                  background: getGradient(
-                    {
-                      deg: 45,
-                      from: theme.colors.orange[1],
-                      to: theme.colors.yellow[1],
-                    },
-                    theme
-                  ),
-                },
-              })}
-            >
-              <Accordion.Item value="bulb">
-                <Accordion.Control icon={<IconBulb size={20} />}>
-                  さらにブラッシュアップする
-                </Accordion.Control>
-                <Accordion.Panel my="md">
-                  <TextAreaForm
-                    form={form}
-                    name="issue"
-                    label="ユーザーの課題"
-                    my="lg"
-                  />
-                  <TextAreaForm
-                    form={form}
-                    name="wishFunction"
-                    label="メイン機能"
-                    my="lg"
-                  />
-                  <TextAreaForm
-                    form={form}
-                    name="hypothesis"
-                    label="数値的仮説"
-                    my="lg"
-                  />
-                  <TextAreaForm
-                    form={form}
-                    name="target"
-                    label="ターゲット（ペルソナ）"
-                    my="lg"
-                  />
-                  <TextAreaForm
-                    form={form}
-                    name="monetize"
-                    label="収益化方法"
-                    my="lg"
-                  />
-                  <TextAreaForm
-                    form={form}
-                    name="similar"
-                    label="類似サービス"
-                    my="lg"
-                  />
-                  <TextForm
-                    form={form}
-                    name="githubUrl"
-                    label="GitHubのURL"
-                    my="lg"
-                    leftSection={<IconBrandGithub />}
-                  />
-                </Accordion.Panel>
-              </Accordion.Item>
-            </Accordion>
-            <TextForm
-              form={form}
-              name="productUrl"
-              label="サービスのURL"
-              my="lg"
-              leftSection={<IconApps />}
-            />
-            <Controller
-              name={'stance'}
-              control={form.control}
-              render={({ field }) => {
-                return (
-                  <Radio.Group
-                    label="スタンス"
-                    description="チーム開発の場合、アイデアがより注目されます"
-                    {...field}
-                    error={form.formState.errors['stance']?.message as string}
-                    withAsterisk
-                  >
-                    <Group mt="xs">
-                      <Radio value="free_right" label="アイデア権フリー" />
-                      <Radio value="personal_project" label="個人開発中" />
-                      <Radio value="team_project" label="チーム開発募集" />
-                    </Group>
-                  </Radio.Group>
-                )
-              }}
-            />
-            {(type === 'create' || !form.getValues('publish')) && (
-              <SwitchForm
+              <TagsForm
                 form={form}
-                name="publish"
-                label="公開ステータス"
-                mt="xl"
-                onLabel="公開"
-                offLabel="下書き"
+                name="tagList"
+                label="タグ"
+                suggestions={tags}
+                required
               />
-            )}
+
+              <TextAreaForm
+                form={form}
+                name="background"
+                label="背景"
+                required
+              />
+              <TextAreaForm form={form} name="goal" label="ゴール" required />
+
+              <Accordion
+                variant="separated"
+                chevronPosition="left"
+                styles={(theme) => ({
+                  control: {
+                    background: getGradient(
+                      {
+                        deg: 45,
+                        from: theme.colors.orange[1],
+                        to: theme.colors.yellow[1],
+                      },
+                      theme
+                    ),
+                  },
+                })}
+              >
+                <Accordion.Item value="bulb">
+                  <Accordion.Control icon={<IconBulb size={20} />}>
+                    さらにブラッシュアップする
+                  </Accordion.Control>
+                  <Accordion.Panel my="md">
+                    <Stack>
+                      <TextAreaForm
+                        form={form}
+                        name="issue"
+                        label="ユーザーの課題"
+                      />
+                      <TextAreaForm
+                        form={form}
+                        name="wishFunction"
+                        label="メイン機能"
+                      />
+                      <TextAreaForm
+                        form={form}
+                        name="hypothesis"
+                        label="数値的仮説"
+                      />
+                      <TextAreaForm
+                        form={form}
+                        name="target"
+                        label="ターゲット（ペルソナ）"
+                      />
+                      <TextAreaForm
+                        form={form}
+                        name="monetize"
+                        label="収益化方法"
+                      />
+                      <TextAreaForm
+                        form={form}
+                        name="similar"
+                        label="類似サービス"
+                      />
+                      <TextForm
+                        form={form}
+                        name="githubUrl"
+                        label="GitHubのURL"
+                        leftSection={<IconBrandGithub />}
+                      />
+                    </Stack>
+                  </Accordion.Panel>
+                </Accordion.Item>
+              </Accordion>
+              <TextForm
+                form={form}
+                name="productUrl"
+                label="サービスのURL"
+                leftSection={<IconApps />}
+              />
+
+              <Controller
+                name={'stance'}
+                control={form.control}
+                render={({ field }) => {
+                  return (
+                    <Radio.Group
+                      label="スタンス"
+                      description="チーム開発の場合、アイデアがより注目されます"
+                      {...field}
+                      error={form.formState.errors['stance']?.message as string}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio value="free_right" label="アイデア権フリー" />
+                        <Radio value="personal_project" label="個人開発中" />
+                        <Radio value="team_project" label="チーム開発募集" />
+                      </Group>
+                    </Radio.Group>
+                  )
+                }}
+              />
+              {(type === 'create' || !form.getValues('publish')) && (
+                <SwitchForm
+                  form={form}
+                  name="publish"
+                  label="公開ステータス"
+                  mt="xl"
+                  onLabel="公開"
+                  offLabel="下書き"
+                />
+              )}
+            </Stack>
           </Paper>
           <Center>
             <Button

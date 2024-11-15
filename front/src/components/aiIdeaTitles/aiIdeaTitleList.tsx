@@ -16,7 +16,7 @@ export const AiIdeaTitleList = () => {
   return (
     <Grid my="xl" style={{ width: '90%', margin: 'auto' }}>
       {ideas.map((idea, index: number) => (
-        <Grid.Col key={index} span={4}>
+        <Grid.Col key={index} span={{ base: 12, md: 4, lg: 4 }}>
           <Link href={`/ideas/new?name=${idea.name}`}>
             <AiIdeaTitle title={idea.name} />
           </Link>

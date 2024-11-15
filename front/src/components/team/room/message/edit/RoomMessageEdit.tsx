@@ -33,7 +33,12 @@ export const RoomMessageEdit = ({
         radius="lg"
         style={{ wordWrap: 'break-word', wordBreak: 'break-word' }}
       >
-        <TextAreaForm form={form} name="content" label="メッセージ" />
+        <TextAreaForm
+          form={form}
+          name="content"
+          label="メッセージ"
+          placeholder="メッセージを入力してください"
+        />
       </Paper>
 
       <Group justify="flex-end" gap="sm" mt="md">

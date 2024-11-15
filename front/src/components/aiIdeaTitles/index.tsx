@@ -11,7 +11,7 @@ export const AiIdeaTitleSection = () => {
       my="lg"
       style={{ border: 'thick double #FFCCCB' }}
     >
-      <Flex justify="left" align="center" direction="row" wrap="nowrap" mx="xl">
+      <Flex justify="left" align="center" direction="row" wrap="nowrap" ml="xl">
         <Paper shadow="sm" radius="md" p="sm">
           <IconBulb size={30} stroke={1.5} />
         </Paper>

@@ -5,7 +5,7 @@ import { type GetIdeaQuery } from '@/lib/generated/client'
 import { DifficultyBadge, DifficultyBadgeProps } from '@/utils/DifficultyBadge'
 import type { StanceBadgeProps } from '@/utils/StanceBadge'
 import { StanceBadge } from '@/utils/StanceBadge'
-import { Anchor, Button, Flex, Paper } from '@mantine/core'
+import { Anchor, Button, Flex, Paper, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconApps, IconBrandGithub, IconUsers } from '@tabler/icons-react'
 import Link from 'next/link'
@@ -46,16 +46,18 @@ export const IdeaContents = () => {
   }, [idea.team, stance, currentUser, idea.userId, open])
 
   return (
-    <Paper bg="#FCFCFC" radius="md" px="xl" py="md">
+    <Paper bg="#FCFCFC" radius="md" px={{ base: 'xs', sm: 'xl' }} py="md">
       <Flex direction="row" gap="md">
         <StanceBadge stance={stance as StanceBadgeProps['stance']} />
         <DifficultyBadge
           difficulty={difficulty as DifficultyBadgeProps['difficulty']}
         />
       </Flex>
-      {sections.map((section, index) => (
-        <IdeaContentSet key={index} {...section} />
-      ))}
+      <Stack gap="xl" my="lg">
+        {sections.map((section, index) => (
+          <IdeaContentSet key={index} {...section} />
+        ))}
+      </Stack>
       {idea.team?.status === 'active' && (
         <Link href={`/teams/${idea.team?.id}`}>
           <Button

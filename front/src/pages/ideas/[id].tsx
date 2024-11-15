@@ -49,6 +49,7 @@ const IdeaDetail = () => {
 
       <IdeaProvider idea={idea as GetIdeaQuery['idea']}>
         <Container
+          size="md"
           className={viewable ? classes.container : `${classes.maskImage}`}
         >
           <IdeaTitle />

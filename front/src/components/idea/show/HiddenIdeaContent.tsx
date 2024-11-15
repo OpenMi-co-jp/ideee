@@ -5,9 +5,11 @@ import { CommentList, CommentCreateForm } from '@/components/comment'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { ReviewList } from '@/components/review/ReviewList'
 import { AiBrushUp } from '@/components/aiBrushUp/index'
+import { useIdea } from '@/context/IdeaContext'
 
 export const HiddenIdeaContent = () => {
   const { currentUser } = useCurrentUser()
+  const { id, draft, userId } = useIdea()
 
   return (
     <>
@@ -15,7 +17,7 @@ export const HiddenIdeaContent = () => {
       <IdeaOptions />
       <Space h="xs" />
       {currentUser && <ReviewList />}
-      {currentUser && <AiBrushUp />}
+      {currentUser && currentUser?.id === userId && <AiBrushUp />}
       <CommentList />
       {currentUser && <CommentCreateForm />}
     </>

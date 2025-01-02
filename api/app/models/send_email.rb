@@ -157,7 +157,7 @@ class SendEmail
             </div>
             <b>メッセージ内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{message.content.body}
+              #{message.content}
             </div>
             <p>メッセージページに飛ぶ: #{analytics_url(
               "rooms/#{message.room_id}", 'notification_message',

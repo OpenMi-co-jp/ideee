@@ -10,7 +10,7 @@
     "jquery": "^3.6.0",
     "mysql": "^2.18.1",
     "mysql-server": "^1.0.5",
-    "trix": "^2.1.9",
+    "trix": "^2.1.12",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

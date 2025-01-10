@@ -31,7 +31,6 @@ const SignUpFormSchema = z.object({
 })
 
 const confirmSuccessUrl = process.env.NEXT_PUBLIC_FRONT_URL
-const onSubmit = (data: SignUpFormValues) => handleSignUp(data)
 
 export const SignUpForm: CustomNextPage = () => {
   const form = useForm<SignUpFormValues>({
@@ -44,9 +43,12 @@ export const SignUpForm: CustomNextPage = () => {
     },
     mode: 'onChange',
   })
+  const router = useRouter()
+  const onSubmit = (formValues: SignUpFormValues) => {
+    handleSignUp(formValues, router)
+  }
 
   const [termsAccepted, setTermsAccepted] = useState(false)
-  const router = useRouter()
   const { currentUser } = useCurrentUser()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     resource = build_resource(sign_up_params)
-    if resource.save
+    if resource.save!
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
         response.set_header('Authorization', resource.generate_jwt_token)
@@ -37,6 +37,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     user_url = "#{Rails.application.config.frontend_url}/users/#{resource.id}"
     Slack::SendNewJob.perform_later(resource, user_url)
+  rescue StandardError => e
+    Sentry.capture_exception(e)
+    render json: { success: false, error: 'An error occurred while creating the user.' }, status: :internal_server_error
   end
 
   # GET /resource/edit

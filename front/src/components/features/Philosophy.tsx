@@ -41,19 +41,19 @@ export const Philosophy = () => {
             margin: '0 auto',
           }}
         >
-          <Text fz={{ base: 12, md: 14 }} fw={700}>
+          <Text size="xl" fz={{ base: 16, md: 22 }} fw={700}>
             <span style={{ color: '#FDB221' }}>I</span>dea
           </Text>
-          <Text fz={{ base: 12, md: 14 }} fw={700}>
+          <Text size="xl" fz={{ base: 16, md: 22 }} fw={700}>
             <span style={{ color: '#FDB221' }}>D</span>esign
           </Text>
-          <Text fz={{ base: 12, md: 14 }} fw={700}>
+          <Text size="xl" fz={{ base: 16, md: 22 }} fw={700}>
             <span style={{ color: '#FDB221' }}>E</span>ngineer
           </Text>
-          <Text fz={{ base: 12, md: 14 }} fw={700}>
+          <Text size="xl" fz={{ base: 16, md: 22 }} fw={700}>
             <span style={{ color: '#FDB221' }}>E</span>ncounter
           </Text>
-          <Text fz={{ base: 12, md: 14 }} fw={700}>
+          <Text size="xl" fz={{ base: 16, md: 22 }} fw={700}>
             <span style={{ color: '#FDB221' }}>E</span>ncourage
           </Text>
         </Flex>

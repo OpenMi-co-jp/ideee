@@ -67,7 +67,7 @@ export const IdeaBox: FC<IdeaBoxType> = ({
             gap="xs"
           >
             {ideaTags?.map((tag) => (
-              <Tag tagName={tag.name} key={tag.id} isTruncated size="sm" />
+              <Tag tagName={tag.name} key={tag.id} isTruncated size="md" />
             ))}
           </Flex>
         </Flex>

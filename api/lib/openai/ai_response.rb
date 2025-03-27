@@ -1,4 +1,5 @@
 require 'openai'
+
 module AIResponse
   def self.fetch_ai_response(content, heavy: false)
     client = OpenAI::Client.new
@@ -12,8 +13,15 @@ module AIResponse
       }
     )
     response.dig('choices', 0, 'message', 'content')
-  rescue OpenAI::Error => e
-    Sentry.capture_exception(e)
+  rescue OpenAI::Error, Faraday::TooManyRequestsError => e
+    # APIエラー発生時は詳細なエラー情報をSentryに送信
+    Sentry.capture_exception(
+      e, extra: {
+        error_type: e.class.name,
+      error_message: e.message,
+      api_status: e.respond_to?(:response) ? e.response&.status : nil
+      }
+    )
     raise e
   end
 

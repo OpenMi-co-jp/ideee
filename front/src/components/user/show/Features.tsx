@@ -3,16 +3,22 @@ import { Grid, Box, Text, Center, Flex } from '@mantine/core'
 import { CustomDonutChart } from '@/lib/mantine/CustomDonutChart'
 import { useCurrentUser } from '@/context/CurrentUserContext'
 import { ProgressBar } from '@/components/user/show/ProgressBar'
-import { getUserType } from '@/utils/getUserType'
+import { UserTypeBadge } from '@/utils/getUserType'
 
 const aiLimit = Number(process.env.NEXT_PUBLIC_aiLimit) || 5
 
-const UserInfoBox = ({ label, value }: { label: string; value: string }) => (
+const UserInfoBox = ({
+  label,
+  value,
+}: {
+  label: string
+  value: React.ReactNode
+}) => (
   <Box p="md" style={{ borderRadius: '5%', border: '1px solid #dcdcdc' }}>
     <Center>
       <Flex direction="column" align="center" gap="md">
         <Text c="gray">{label}</Text>
-        <Text fz="1.4rem">{value}</Text>
+        {typeof value === 'string' ? <Text fz="1.4rem">{value}</Text> : value}
       </Flex>
     </Center>
   </Box>
@@ -23,8 +29,13 @@ export const Features = () => {
   const { currentUser } = useCurrentUser()
   const todaysAiLogCount = user?.todaysAiLogCount || 0
   const remainingAiLogCount = aiLimit - todaysAiLogCount
-  const userType = getUserType(user?.definition!)
   const owner = currentUser && String(currentUser?.id) === user?.id
+  // nullや不正な値の場合でも安全に型を渡せるようにする
+  const userDefinition =
+    user?.definition &&
+    ['engineer', 'idea_man', 'idea_man_and_engineer'].includes(user.definition)
+      ? (user.definition as string)
+      : undefined
 
   return (
     <Grid mb={20}>
@@ -34,7 +45,10 @@ export const Features = () => {
         </Grid.Col>
       )}
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
-        <UserInfoBox label="タイプ" value={userType} />
+        <UserInfoBox
+          label="タイプ"
+          value={<UserTypeBadge userType={userDefinition} size="md" />}
+        />
       </Grid.Col>
       <Grid.Col span={{ base: 12, xs: 6, sm: 6, md: 4 }}>
         <UserInfoBox label="Contributions" value={String(user?.point)} />

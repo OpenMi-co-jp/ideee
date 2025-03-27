@@ -21,9 +21,14 @@ jobs:
         ruby-version: 3.1.3
         bundler-cache: true
 
-    - name: Install Heroku CLI
-      run: |
-        curl https://cli-assets.heroku.com/install.sh | sh
+    # Heroku公式のGitHub Actionsを使用
+    - name: Login to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.14
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "ideee-tech"
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        justlogin: true
 
     # Run the Heroku command
     - name: Run post qiita article on Heroku

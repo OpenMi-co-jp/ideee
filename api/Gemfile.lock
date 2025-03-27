@@ -263,7 +263,7 @@ GEM
       signet (>= 0.16, < 2.a)
     graphiql-rails (1.10.1)
       railties
-    graphql (2.3.14)
+    graphql (2.3.21)
       base64
       fiber-storage
     has_scope (0.8.2)

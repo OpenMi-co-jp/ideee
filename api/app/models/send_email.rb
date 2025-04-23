@@ -160,8 +160,8 @@ class SendEmail
               #{message.content}
             </div>
             <p>メッセージページに飛ぶ: #{analytics_url(
-              "rooms/#{message.room_id}", 'notification_message',
-              "https://www.ideee.tech/rooms/#{message.room_id}"
+              "teams/#{message.room.team_id}", 'notification_message',
+              "https://www.ideee.tech/teams/#{message.room.team_id}"
             )}</p>
           "
 

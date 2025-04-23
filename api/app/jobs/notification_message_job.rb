@@ -4,8 +4,9 @@ class NotificationMessageJob < ApplicationJob
   queue_as :high
 
   def perform(message)
-    return unless Rails.env.production?
+    # return unless Rails.env.production?
 
+    puts '--------------test'
     team = message.room.team
     return if team.current_member.nil?
 

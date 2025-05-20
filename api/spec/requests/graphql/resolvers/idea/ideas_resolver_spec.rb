@@ -81,7 +81,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
           }
         end
 
-        it '指定したスタンスのアイデアを取得すること' do
+          it '指定したステータスのアイデアを取得すること' do
           expect(graphql_post).to eq 200
           res_json = response.parsed_body
           expect(res_json['data']['ideas']['nodes'].length).to eq 1
@@ -104,7 +104,7 @@ RSpec.describe Resolvers::Idea::IdeasResolver do
           }
         end
 
-        it '指定したスタンスのアイデアを取得すること' do
+        it '指定したステータスのアイデアを取得すること' do
           expect(graphql_post).to eq 200
           res_json = response.parsed_body
           expect(res_json['data']['ideas']['nodes'].length).to eq 1

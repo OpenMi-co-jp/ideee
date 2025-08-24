@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Mutations::Comment::Create do
-  subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens }
+  subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens, as: :json }
 
   let(:current_user)     { create(:user) }
   let(:tokens)           { sign_in(current_user) }

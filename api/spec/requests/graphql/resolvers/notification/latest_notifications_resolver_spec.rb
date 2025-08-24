@@ -18,7 +18,7 @@ RSpec.describe Resolvers::Notification::LatestNotificationsResolver do
 
     before do
       create_list(:notification, 10, visited_id: user.id, created_at: rand(1..5).days.ago + rand(1..24).hours)
-      post graphql_path, params: { query: }, headers: tokens
+      post graphql_path, params: { query: }, headers: tokens, as: :json
     end
 
     it '5件の通知が表示される' do

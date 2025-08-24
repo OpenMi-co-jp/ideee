@@ -15,7 +15,7 @@ RSpec.describe Resolvers::User::UserCountResolver do
     end
 
     it '現在のユーザー数を取得する' do
-      post graphql_path, params: { query: }
+      post graphql_path, params: { query: }, as: :json
       res_json = response.parsed_body
       result = res_json['data']['userCount']
 

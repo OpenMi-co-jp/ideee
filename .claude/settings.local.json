@@ -28,8 +28,7 @@
       "Bash(ruby:*)",
       "Bash(bundle exec:*)",
       "Bash(git add:*)",
-      "Bash(git fetch:*)",
-      "Bash(git commit -m \"$(cat <<'EOF'\nfeat: HerokuからSidekiqスケジューリングに移行\n\n- sidekiq-schedulerを追加してスケジューリング機能を有効化\n- QiitaPostJobとAiIdeaPostJobクラスを作成\n- config/schedule.ymlでcron設定を定義\n- GitHub Actionsワークフローを無効化（手動実行のみ残す）\n\n移行内容:\n- Qiita自動投稿: 毎日15時JST実行\n- AIアイデア自動投稿: 3日に1回23時JST実行\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git fetch:*)"
     ],
     "deny": []
   }

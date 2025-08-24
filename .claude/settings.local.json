@@ -27,7 +27,8 @@
       "Bash(docker volume prune:*)",
       "Bash(ruby:*)",
       "Bash(bundle exec:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git fetch:*)"
     ],
     "deny": []
   }

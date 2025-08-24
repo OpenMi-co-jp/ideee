@@ -57,6 +57,7 @@ gem 'activeadmin' # 管理画面
 # gem 'stripe'
 
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 # twitterV2用設定
 gem 'oauth'

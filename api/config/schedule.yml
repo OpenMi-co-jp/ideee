@@ -1,0 +1,11 @@
+# Qiita記事の自動投稿（毎日15時JST）
+QiitaPostJob:
+  cron: "0 15 * * *"
+  class: "QiitaPostJob"
+  description: "Qiita記事の自動投稿を実行"
+
+# AIアイデアの自動投稿（3日に1回、23時JST）
+AiIdeaPostJob:
+  cron: "0 23 */3 * *"
+  class: "AiIdeaPostJob"
+  description: "AIによるアイデアの自動作成と投稿"

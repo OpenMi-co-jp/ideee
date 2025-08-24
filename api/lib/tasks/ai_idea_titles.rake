@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../openai/ai_response'
 require 'net/http'
 require 'json'
 
 namespace :ai_idea_titles do
   desc 'AIによるアイデアタイトル作成'
   task create_idea_titles: :environment do
-    res = AIResponse.fetch_ai_response(build_titles)
+    res = ::AiResponseService.fetch_ai_response(build_titles)
     parsed_res = JSON.parse(res)
     Rails.cache.write('daily_idea_titles', parsed_res, expires_in: 24.hours)
   rescue StandardError => e

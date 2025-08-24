@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require Rails.root.join('lib/openai/ai_response')
-
 module AI
   class ReviewsJob < ApplicationJob
     queue_as :high
@@ -12,7 +10,7 @@ module AI
 
       # AIにプロンプトを投げてレビューを取得
       prompt = build_review_prompt(idea)
-      response = AIResponse.fetch_ai_response(prompt)
+      response = AiResponseService.fetch_ai_response(prompt)
 
       res = JSON.parse(response)
       # レスポンスからpositiveとnegativeのレビューを作成

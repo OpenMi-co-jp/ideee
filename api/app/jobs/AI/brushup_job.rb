@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require Rails.root.join('lib/openai/ai_response')
-
 module AI
   class BrushupJob < ApplicationJob
     queue_as :high
@@ -11,7 +9,7 @@ module AI
       @idea = Idea.find_by(id:)
 
       prompt = build_prompt
-      response = AIResponse.fetch_ai_response(prompt)
+      response = AiResponseService.fetch_ai_response(prompt)
 
       res = JSON.parse(response)
 

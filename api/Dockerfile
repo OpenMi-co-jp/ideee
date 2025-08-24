@@ -19,9 +19,9 @@ WORKDIR $APP_ROOT
 COPY ./Gemfile $APP_ROOT/Gemfile
 COPY ./Gemfile.lock $APP_ROOT/Gemfile.lock
 
-RUN gem install bundler
+RUN gem install bundler:2.6.9
+RUN bundle install --jobs 4 --retry 3
 COPY . $APP_ROOT
-RUN bundle install
 
 RUN wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list

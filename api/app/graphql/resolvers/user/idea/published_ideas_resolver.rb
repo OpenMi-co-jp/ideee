@@ -2,6 +2,7 @@ module Resolvers
   class User::Idea::PublishedIdeasResolver < BaseResolver
     graphql_name 'GetPublishedIdeas'
     include Resolvers::Concerns::Pagination
+
     type Types::Idea::IdeasType, null: false
 
     argument :user_id, ID, required: true, description: 'ユーザーID'

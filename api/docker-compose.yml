@@ -1,4 +1,3 @@
-version: '3'
 services:
   db:
     platform: linux/x86_64
@@ -10,7 +9,7 @@ services:
       - "4306:3306"
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle && bundle exec rails s -p 3010 -b '0.0.0.0'"
+    command: bash -c "sleep 20 && rm -f tmp/pids/server.pid && bundle exec rails s -p 3010 -b '0.0.0.0'"
     volumes:
       - .:/ideee
       - bundle_data:/usr/local/bundle
@@ -22,12 +21,6 @@ services:
       - web-variables.env
     environment:
       REDIS_URL: redis://redis:6379
-    entrypoint:
-      - dockerize
-      - -timeout
-      - 60s
-      - -wait
-      - tcp://db:3306
   redis:
     image: redis:latest
     volumes:

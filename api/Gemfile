@@ -101,6 +101,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
+  gem 'stackprof' # プロファイリングツール
 
   # rubocop
   gem 'rubocop', require: false

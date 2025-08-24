@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'team_activity_reporter'
 require 'net/http'
 require 'uri'
 require 'json'

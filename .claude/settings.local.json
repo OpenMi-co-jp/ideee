@@ -17,7 +17,17 @@
       "Bash(git pull:*)",
       "Bash(bundle exec rubocop:*)",
       "Bash(bundle exec brakeman:*)",
-      "Bash(bundle:*)"
+      "Bash(bundle:*)",
+      "Bash(git checkout:*)",
+      "Bash(git checkout:*)",
+      "Bash(bundle update:*)",
+      "Bash(rbenv list:*)",
+      "Bash(rbenv versions:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker volume prune:*)",
+      "Bash(ruby:*)",
+      "Bash(bundle exec:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

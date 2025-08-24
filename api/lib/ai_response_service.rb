@@ -2,7 +2,7 @@
 
 require 'openai'
 
-class AiResponseService
+module AiResponseService
   def self.fetch_ai_response(content, heavy: false)
     client = OpenAI::Client.new
     model = heavy ? OPENAI_HEAVY_MODEL : OPENAI_MODEL

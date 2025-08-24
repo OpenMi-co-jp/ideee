@@ -16,12 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Clean up Docker
-      shell: bash
-      run: |
-        cd api
-        docker compose down --volumes --remove-orphans || true
-        docker system prune -f || true
     - name: Setup docker and run tests
       shell: bash
       run: |

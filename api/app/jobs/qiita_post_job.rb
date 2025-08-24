@@ -64,7 +64,7 @@ class QiitaPostJob < ApplicationJob
   def popular_tags_content(tags)
     popular_tags = tags.limit(10)
     tag_list = popular_tags.map do |tag|
-      ideas_count = tag.ideas.published.count
+      ideas_count = tag.tagged_ideas.published.count
       "- [#{tag.name}](https://ideee.me/search?tag=#{tag.name}) (#{ideas_count}個)"
     end
     tag_list.join("\n")

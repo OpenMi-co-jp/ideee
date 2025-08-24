@@ -14,6 +14,8 @@ module Mutations
         likable_type: args[:likable_type],
         likable_id: args[:likable_id]
       )
+      raise StandardError, 'Like not found' if like.nil?
+
       like.destroy!
       {
         success: true

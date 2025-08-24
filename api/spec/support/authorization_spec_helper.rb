@@ -2,7 +2,7 @@
 
 module AuthorizationSpecHelper
   def sign_in(user)
-    token = user.generate_access_token
+    token = user.generate_jwt_token
     { 'Authorization' => token }
   end
 end

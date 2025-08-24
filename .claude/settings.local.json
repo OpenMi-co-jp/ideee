@@ -14,7 +14,10 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(gh pr create:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(bundle exec rubocop:*)",
+      "Bash(bundle exec brakeman:*)",
+      "Bash(bundle:*)"
     ],
     "deny": []
   }

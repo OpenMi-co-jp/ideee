@@ -32,7 +32,7 @@ class QiitaPostJob < ApplicationJob
     ideas = Idea.published.order(created_at: :desc)
     tags = Tag.joins(:ideas).merge(Idea.published).group(:id).order('COUNT(ideas.id) DESC')
 
-    body = <<~CONTENT
+    <<~CONTENT
       # #{Time.zone.now.strftime('%Y年%-m月%-d日')}時点でのアイデア総数：#{ideas.count}個
 
       ## 🔥 人気のアイデア（いいね順）
@@ -45,35 +45,36 @@ class QiitaPostJob < ApplicationJob
       #{latest_ideas_content(ideas)}
 
       ---
-      
+
       **このアイデア集について**
       - 毎日自動更新されています
       - 個人開発のアイデア出しにお役立てください
       - [アイデア投稿サイト](https://ideee.me/)で新しいアイデアも投稿できます
     CONTENT
-
-    body
   end
 
   def popular_ideas_content(ideas)
     popular_ideas = ideas.order(likes_count: :desc).limit(5)
-    popular_ideas.map.with_index(1) do |idea, index|
+    idea_list = popular_ideas.map.with_index(1) do |idea, index|
       "#{index}. [#{idea.name}](https://ideee.me/ideas/#{idea.id}) (#{idea.likes_count}いいね)"
-    end.join("\n")
+    end
+    idea_list.join("\n")
   end
 
   def popular_tags_content(tags)
     popular_tags = tags.limit(10)
-    popular_tags.map do |tag|
+    tag_list = popular_tags.map do |tag|
       ideas_count = tag.ideas.published.count
       "- [#{tag.name}](https://ideee.me/search?tag=#{tag.name}) (#{ideas_count}個)"
-    end.join("\n")
+    end
+    tag_list.join("\n")
   end
 
   def latest_ideas_content(ideas)
     latest_ideas = ideas.limit(10)
-    latest_ideas.map do |idea|
+    idea_list = latest_ideas.map do |idea|
       "- [#{idea.name}](https://ideee.me/ideas/#{idea.id}) - #{idea.background&.truncate(50)}"
-    end.join("\n")
+    end
+    idea_list.join("\n")
   end
 end

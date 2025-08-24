@@ -30,7 +30,7 @@ class QiitaPostJob < ApplicationJob
 
   def make_body
     ideas = Idea.published.order(created_at: :desc)
-    tags = Tag.joins(:ideas).merge(Idea.published).group(:id).order('COUNT(ideas.id) DESC')
+    tags = Tag.joins(:tagged_ideas).merge(Idea.published).group(:id).order('COUNT(ideas.id) DESC')
 
     <<~CONTENT
       # #{Time.zone.now.strftime('%Y年%-m月%-d日')}時点でのアイデア総数：#{ideas.count}個

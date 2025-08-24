@@ -77,7 +77,7 @@ gem 'net-smtp', require: false
 gem 'psych'
 
 # js-compile用のSprocketのために設定
-gem 'uglifier'
+gem 'terser'
 
 # カウントのキャッシュ設定
 gem 'counter_culture'

@@ -157,6 +157,8 @@ class User < ApplicationRecord
     "Bearer #{token}"
   end
 
+  alias_method :generate_access_token, :generate_jwt_token
+
   # cookieを使ってログインを保持
   def remember_me?
     true

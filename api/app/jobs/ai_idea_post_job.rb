@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../lib/openai/ai_response'
 require 'net/http'
 require 'json'
 
@@ -10,7 +9,7 @@ class AiIdeaPostJob < ApplicationJob
   def perform
     bot_user_id = Rails.application.config.bot_user_id || 3375
     idea = Idea.new(user_id: bot_user_id)
-    res = AIResponse.fetch_ai_response(build_prompt, heavy: true)
+    res = ::AIResponse.fetch_ai_response(build_prompt, heavy: true)
     parsed_res = JSON.parse(res)
     idea_content = parsed_res['idea']
     tags = parsed_res['tags']

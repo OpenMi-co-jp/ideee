@@ -15,16 +15,22 @@ jobs:
     name: Run rspec
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup docker
+    - uses: actions/checkout@v4
+    - name: Clean up Docker
       shell: bash
       run: |
         cd api
-        docker compose build
-        docker compose run web bundle install
-        docker compose run web bundle exec rails db:create
-        docker compose run web bundle exec rails db:migrate
-        docker compose run web bundle exec rspec
+        docker compose down --volumes --remove-orphans || true
+        docker system prune -f || true
+    - name: Setup docker and run tests
+      shell: bash
+      run: |
+        cd api
+        docker compose build --no-cache
+        docker compose run --rm web bundle install
+        docker compose run --rm web bundle exec rails db:create
+        docker compose run --rm web bundle exec rails db:migrate
+        docker compose run --rm web bundle exec rspec
       env:
         RAILS_ENV: test
         MYSQL_HOST: db

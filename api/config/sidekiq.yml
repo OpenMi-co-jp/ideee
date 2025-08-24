@@ -7,3 +7,7 @@
   - active_storage_analysis
   - active_storage_purge
 :daemon: true
+:scheduler:
+  :dynamic: true
+  :dynamic_every: 5s
+  :enabled: true

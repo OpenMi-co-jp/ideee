@@ -10,7 +10,8 @@ class AiIdeaPostJob < ApplicationJob
     bot_user_id = 3375
     idea = Idea.new(user_id: bot_user_id)
     res = AiResponseService.fetch_ai_response(build_prompt, heavy: true)
-    parsed_res = JSON.parse(res)
+    cleaned_res = res.gsub(/```json\s*/, '').gsub(/```\s*$/, '').strip
+    parsed_res = JSON.parse(cleaned_res)
     idea_content = parsed_res['idea']
     tags = parsed_res['tags']
     assign_idea_attributes(idea, idea_content)

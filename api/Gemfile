@@ -10,7 +10,7 @@ gem 'rails', '~> 7.2.0'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 6.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6' # NOTE: active_admin.scss に必要
 # Use Redis adapter to run Action Cable in production

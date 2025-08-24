@@ -28,7 +28,14 @@
       "Bash(ruby:*)",
       "Bash(bundle exec:*)",
       "Bash(git add:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "Bash(gh pr create:*)",
+      "Bash(rails -v)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }

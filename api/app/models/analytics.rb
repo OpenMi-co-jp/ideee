@@ -13,7 +13,12 @@ class Analytics
     date_range = @analytics::DateRange.new(start_date: '2021-07-01', end_date: 'today') # ideeeを作ってから本日までの期日範囲
     data = analytics_data(date_range, demention)
     res_data = data&.rows.find { |i| i.dimensions == ["/ideas/#{idea_id}"] }
-    res_data&.metrics&.first&.values&.first
+    return unless res_data&.metrics&.first
+
+    values = res_data.metrics.first.values
+    return unless values
+
+    values.first
   end
 
   def daily_total_count(demention)

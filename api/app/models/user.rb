@@ -158,7 +158,7 @@ class User < ApplicationRecord
   end
 
   # cookieを使ってログインを保持
-  def remember_me
+  def remember_me?
     true
   end
 

@@ -4,22 +4,26 @@ module AIResponse
   def self.fetch_ai_response(content, heavy: false)
     client = OpenAI::Client.new
     model = heavy ? OPENAI_HEAVY_MODEL : OPENAI_MODEL
-    response = client.chat(
-      parameters: {
-        model:,
-        messages: [{ role: 'system', content: }],
-        response_format: { type: 'json_object' },
-        temperature: OPENAI_TEMPERATURE
-      }
-    )
+
+    parameters = {
+      model:,
+      messages: [{ role: 'system', content: }],
+      temperature: OPENAI_TEMPERATURE
+    }
+
+    # gpt-4以上のモデルのみjson_objectをサポート
+    if model.start_with?('gpt-4') && model.exclude?('mini')
+      parameters[:response_format] = { type: 'json_object' }
+    end
+
+    response = client.chat(parameters:)
     response.dig('choices', 0, 'message', 'content')
   rescue OpenAI::Error, Faraday::TooManyRequestsError => e
-    # APIエラー発生時は詳細なエラー情報をSentryに送信
     Sentry.capture_exception(
       e, extra: {
         error_type: e.class.name,
-      error_message: e.message,
-      api_status: e.respond_to?(:response) ? e.response&.status : nil
+        error_message: e.message,
+        api_status: e.respond_to?(:response) ? e.response&.status : nil
       }
     )
     raise e

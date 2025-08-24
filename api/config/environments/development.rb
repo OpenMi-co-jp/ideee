@@ -81,11 +81,13 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   # config.assets.quiet = true - Ruby 3.3.6との互換性のために無効化
-  
+
   # dartsass-railsの設定
-  config.dartsass.builds = {
-    "application.scss" => "application.css"
-  } if defined?(config.dartsass)
+  if defined?(config.dartsass)
+    config.dartsass.builds = {
+      'application.scss' => 'application.css'
+    }
+  end
 
   config.hosts = 'localhost'
 

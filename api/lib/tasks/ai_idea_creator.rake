@@ -7,7 +7,6 @@ require 'json'
 namespace :ai_idea_creator do
   desc 'AIによるアイデア作成'
   task create_idea: :environment do
-    # botアカウントのID
     bot_user_id = ENV.fetch('BOT_USER_ID', 3375)
     idea = Idea.new(user_id: bot_user_id)
     res = AIResponse.fetch_ai_response(build_prompt, heavy: true)
@@ -20,7 +19,7 @@ namespace :ai_idea_creator do
     idea.publish!
   rescue StandardError => e
     Sentry.capture_exception(e)
-    raise e
+    SlackNotifier.new.send_error_report('AI アイデア自動作成', e)
   end
 
   private

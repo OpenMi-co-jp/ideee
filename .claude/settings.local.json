@@ -1,7 +1,33 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(docker-compose build:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker-compose:*)",
+      "Bash(docker exec:*)",
+      "Bash(grep:*)",
+      "Bash(bundle lock:*)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(git pull:*)",
+      "Bash(bundle exec rubocop:*)",
+      "Bash(bundle exec brakeman:*)",
+      "Bash(bundle:*)",
+      "Bash(git checkout:*)",
+      "Bash(git checkout:*)",
+      "Bash(bundle update:*)",
+      "Bash(rbenv list:*)",
+      "Bash(rbenv versions:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker volume prune:*)",
+      "Bash(ruby:*)",
+      "Bash(bundle exec:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

@@ -91,19 +91,17 @@ namespace :auto_update_qiita_post do
     header = {
       'Authorization' => "Bearer #{Rails.application.credentials.dig(:qiita, :access_token)}",
       'Content-Type' => 'application/json'
-    } # 例) ヘッダーに"Bearer xxxxx"を付与
+    }
     body = {
       body: make_body,
       title:
     }.to_json
+
     client = HTTPClient.new
     begin
-      response = client.patch(url, header:, body:) # headerとqueryを指定
-      # HTTPステータスコードを表示
-      Rails.logger.info "Get stocks Status code #{response.code.to_i}"
+      response = client.patch(url, header:, body:)
       SlackNotifier.new.send_error_report('Qiita自動投稿', response.http_header.reason_phrase) if response.code.to_i != 200
     rescue StandardError => e
-      Rails.logger.error "============rescue error #{e}========"
       SlackNotifier.new.send_error_report('Qiita自動投稿', e)
     end
   end

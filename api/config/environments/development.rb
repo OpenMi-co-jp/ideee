@@ -80,7 +80,12 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  # config.assets.quiet = true - Ruby 3.3.6との互換性のために無効化
+  
+  # dartsass-railsの設定
+  config.dartsass.builds = {
+    "application.scss" => "application.css"
+  } if defined?(config.dartsass)
 
   config.hosts = 'localhost'
 

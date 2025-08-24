@@ -37,7 +37,9 @@
       "Bash(rails -v)",
       "Bash(grep:*)",
       "Bash(bundle install:*)",
-      "Bash(rails runner:*)"
+      "Bash(rails runner:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr edit:*)"
     ],
     "deny": []
   }

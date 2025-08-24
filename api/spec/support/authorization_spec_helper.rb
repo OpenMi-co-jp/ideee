@@ -2,13 +2,7 @@
 
 module AuthorizationSpecHelper
   def sign_in(user)
-    post user_session_path,
-         params: {
-           email: user.email,
-           password: user.password
-         },
-         xhr: true
-
-    response.headers.slice('client', 'access-token', 'uid', 'authorization')
+    token = user.generate_jwt_token
+    { 'Authorization' => token }
   end
 end

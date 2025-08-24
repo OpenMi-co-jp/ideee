@@ -35,7 +35,9 @@
       "Bash(git restore:*)",
       "Bash(gh pr create:*)",
       "Bash(rails -v)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(bundle install:*)",
+      "Bash(rails runner:*)"
     ],
     "deny": []
   }

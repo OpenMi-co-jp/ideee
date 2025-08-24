@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Resolvers::Idea::IdeasResolver do
   describe 'GetIdeas' do
-    subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json } }
+    subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, as: :json }
 
     let(:query) do
       <<-GRAPHQL

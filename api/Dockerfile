@@ -19,7 +19,7 @@ WORKDIR $APP_ROOT
 COPY ./Gemfile $APP_ROOT/Gemfile
 COPY ./Gemfile.lock $APP_ROOT/Gemfile.lock
 
-RUN gem install bundler:2.6.9
+RUN gem install bundler
 RUN bundle install --jobs 4 --retry 3
 COPY . $APP_ROOT
 

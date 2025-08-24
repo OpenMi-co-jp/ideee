@@ -3,6 +3,8 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-performance
   - rubocop-rails
+
+plugins:
   - rubocop-rspec
   - rubocop-graphql
 

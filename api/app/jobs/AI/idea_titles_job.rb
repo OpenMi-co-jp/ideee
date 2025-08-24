@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require Rails.root.join('lib/openai/ai_response')
 require 'net/http'
 
 module AI
@@ -9,7 +8,7 @@ module AI
     include AiLoggable
 
     def perform
-      res = AIResponse.fetch_ai_response(build_titles)
+      res = AiResponseService.fetch_ai_response(build_titles)
       JSON.parse(res)
     rescue StandardError => e
       Sentry.capture_exception(e)

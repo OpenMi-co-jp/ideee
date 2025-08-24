@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../openai/ai_response'
-
 namespace :ai_commit do
   desc 'AIによるタグ作成'
   task set_tags: :environment do
@@ -9,9 +7,9 @@ namespace :ai_commit do
     ideas = Idea.includes(:idea_tags).where(idea_tags: { id: nil })
     ideas.each_slice(batch_size) do |idea_batch|
       content_batch = idea_batch.map { |idea| build_content(idea) }
-      response_batch = AIResponse.fetch_openai_responses(content_batch)
+      response_batch = ::AiResponseService.fetch_openai_responses(content_batch)
       idea_batch.zip(response_batch).each do |idea, response|
-        proposed_keys = AIResponse.parse_response(response)
+        proposed_keys = ::AiResponseService.parse_response(response)
         idea.save_with_tags!(proposed_keys)
       end
     rescue StandardError => e
@@ -27,7 +25,7 @@ namespace :ai_commit do
     ideas.each_slice(batch_size) do |idea_batch|
       Rails.logger.info idea_batch.pluck(:id, :name)
       content_batch = idea_batch.map { |idea| build_nil_content(idea) }
-      response_batch = AIResponse.fetch_openai_responses(content_batch)
+      response_batch = ::AiResponseService.fetch_openai_responses(content_batch)
       idea_batch.zip(response_batch).each do |idea, response|
         proposed_keys = JSON.parse(response)
         idea.update!(

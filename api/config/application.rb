@@ -11,7 +11,7 @@ Bundler.require(*Rails.groups)
 module Ideee
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
+    config.load_defaults 7.1
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -22,6 +22,7 @@ module Ideee
     config.active_record.default_timezone = :local
 
     # config.eager_load_paths << Rails.root.join("extras")
+    config.autoload_paths += %W[#{config.root}/lib]
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 

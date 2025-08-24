@@ -61,42 +61,4 @@ class SlackNotifier
     Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
     Slack::IdeaSendJob.set(wait: 5.minutes).perform_later
   end
-
-  def send_team_activity_report
-    activity = TeamActivityReporter.new(Time.zone.today - 7).report
-
-    # ボットの活動内容を除外
-    activity.reject! { |member, _| member.include?('bot') }
-
-    # 活動データをマージされたPRの数でソート
-    ranked_activity = activity.sort_by { |_member, stats| -stats[:merged_prs] }
-
-    text = "🏆週間チーム活動レポート\n\n"
-    ranked_activity.each do |(member, stats)|
-      merged_prs = stats[:merged_prs]
-      reviews = stats[:reviews]
-
-      text += ":star2: *#{member}* :star2:\n"
-      text += "✨ マージされたPR: #{merged_prs} #{'🚀' * merged_prs}\n" if merged_prs.positive?
-      text += "👀 レビュー数: #{reviews} #{'📝' * reviews}\n" if reviews.positive?
-      text += "\n"
-    end
-
-    blocks = [
-      {
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text:
-        }
-      }
-    ]
-
-    dev_notifier = Slack::Notifier.new(WEBHOOK_URL) do
-      defaults(channel: DEV_CHANNEL)
-      middleware format_message: { formats: [:html] }
-    end
-
-    dev_notifier.post(blocks:)
-  end
 end

@@ -88,6 +88,8 @@ gem 'rack-cors'
 
 gem 'ruby-openai'
 
+gem 'stackprof' # プロファイリングツール
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -101,7 +103,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
-  gem 'stackprof' # プロファイリングツール
 
   # rubocop
   gem 'rubocop', require: false
@@ -145,8 +146,6 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :production do
-  # stackprof: プロファイリングツール
-  gem 'stackprof'
   # sentry-ruby: SentryのRuby用ライブラリ
   gem 'sentry-ruby'
   # sentry-rails: SentryのRails用ライブラリ

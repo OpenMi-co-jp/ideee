@@ -51,7 +51,10 @@ RSpec.describe Mutations::Like::Destroy do
       end
 
       it 'リクエストが失敗すること' do
-        expect { graphql_post }.to raise_error(StandardError)
+        graphql_post
+        res = response.parsed_body
+        expect(res['errors']).not_to be_nil
+        expect(res['errors'].first['message']).to eq('Like not found')
       end
     end
   end

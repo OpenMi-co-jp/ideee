@@ -7,7 +7,7 @@ class AiIdeaPostJob < ApplicationJob
   queue_as :default
 
   def perform
-    bot_user_id = Rails.application.config.bot_user_id || 3375
+    bot_user_id = 3375
     idea = Idea.new(user_id: bot_user_id)
     res = AiResponseService.fetch_ai_response(build_prompt, heavy: true)
     parsed_res = JSON.parse(res)

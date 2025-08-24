@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../lib/openai/ai_response'
 require 'net/http'
 require 'json'
 

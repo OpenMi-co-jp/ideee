@@ -44,6 +44,7 @@
 #
 class User < ApplicationRecord
   extend Devise::Models
+
   # エラー対処のため二重記述
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable,

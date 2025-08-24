@@ -29,52 +29,83 @@ class QiitaPostJob < ApplicationJob
   private
 
   def make_body
-    ideas = Idea.published.order(created_at: :desc)
-    tags = Tag.joins(:tagged_ideas).merge(Idea.published).group(:id).order('COUNT(ideas.id) DESC')
+    body = "## 今月の個人開発に使えるアイデアを人気順に抽出！\n" \
+           "## 🎯 ターゲット\n" \
+           "- 個人開発のアイデアが欲しい人\n" \
+           "- 自分のプロダクトを改善していきたい人人\n" \
+           "- シンプルに他人のアイデアが気になる人\n\n" \
+           "```\n" \
+           "アイデアとエンジニアのマッチングアプリ ideeeの最新アイデアを投稿中！\n" \
+           "```\n" \
+           "https://www.ideee.tech/about?utm_source=qiita&utm_medium=post&utm_id=auto_post\n\n" \
+           "## 🏆 ランキング（コメント）\n" \
+           "`直近１ヶ月でコメントが盛り上がったアイデアをランキング化`\n"
 
-    <<~CONTENT
-      # #{Time.zone.now.strftime('%Y年%-m月%-d日')}時点でのアイデア総数：#{ideas.count}個
+    # アイデア一括取得
+    ideas = Idea.published
+    # コメントランキングの作成
+    selected_items = ideas.recent_select.most_commented.first(10)
+    body += idea_columns(selected_items, rank: true)
 
-      ## 🔥 人気のアイデア（いいね順）
-      #{popular_ideas_content(ideas)}
+    body += "## 🚀 新しいアイデア\n" \
+            "`最近投稿されたアイデアをピックアップ🐥`\n"
 
-      ## 📊 人気のタグ
-      #{popular_tags_content(tags)}
+    new_items = ideas.recent_select.order(published_at: 'DESC').first(10)
+    body += idea_columns(new_items)
 
-      ## 📝 最新のアイデア
-      #{latest_ideas_content(ideas)}
+    body += "## 👬 チーム開発募集中のアイデア\n" \
+            "`最近更新されたチーム開発を募集しているアイデア`\n"
+    team_active_ids = Team.where(status: :active).order(updated_at: 'DESC').first(5).pluck(:idea_id)
+    team_items = Idea.where(id: team_active_ids).includes(:user, :idea_tags)
+    body += idea_columns(team_items)
 
-      ---
+    body += "\n```\n" \
+            "ideeeはサービス開発の「もったいない」を無くすために努力していきます。\n" \
+            "よろしければLGTMなどで応援よろしくお願いします🙇‍♂️\n" \
+            "```\n\n" \
+            "## 自己紹介\n" \
+            "なる　　X: [@1026NT](https://x.com/1026NT)\n" \
+            "個人開発で発信中！フォローください！👏\n" \
+            "<img src=\"https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/498701/3db40e7d-3213-be1f-8650-c6ad5dff69c9.jpeg\" width=\"250px\">\n"
 
-      **このアイデア集について**
-      - 毎日自動更新されています
-      - 個人開発のアイデア出しにお役立てください
-      - [アイデア投稿サイト](https://ideee.me/)で新しいアイデアも投稿できます
-    CONTENT
+    body
   end
 
-  def popular_ideas_content(ideas)
-    popular_ideas = ideas.order(likes_count: :desc).limit(5)
-    idea_list = popular_ideas.map.with_index(1) do |idea, index|
-      "#{index}. [#{idea.name}](https://ideee.me/ideas/#{idea.id}) (#{idea.likes_count}いいね)"
+  def rank(num)
+    case num
+    when 1
+      '🥇 1'
+    when 2
+      '🥈 2'
+    when 3
+      '🥉 3'
+    else
+      num
     end
-    idea_list.join("\n")
   end
 
-  def popular_tags_content(tags)
-    popular_tags = tags.limit(10)
-    tag_list = popular_tags.map do |tag|
-      ideas_count = tag.tagged_ideas.published.count
-      "- [#{tag.name}](https://ideee.me/search?tag=#{tag.name}) (#{ideas_count}個)"
-    end
-    tag_list.join("\n")
+  def analytics_url(id)
+    "https://www.ideee.tech/ideas/#{id}?utm_source=qiita_auto_post&utm_medium=post&utm_id=#{id}"
   end
 
-  def latest_ideas_content(ideas)
-    latest_ideas = ideas.limit(10)
-    idea_list = latest_ideas.map do |idea|
-      "- [#{idea.name}](https://ideee.me/ideas/#{idea.id}) - #{idea.background&.truncate(50)}"
+  def idea_columns(items, rank: false)
+    num = 1
+    body = ''
+    items.map do |item|
+      body += "### #{rank ? rank(num) : num}. [#{item.name}](#{analytics_url(item.id)})\n"
+      body += "**💛 : #{item.likes_count}　　💬 : #{item.comments_num}**　　📮 : #{item.published_at.strftime('%Y / %m / %d')}\n"
+
+      if item.idea_tags.length.positive?
+        item.idea_tags.map { |a| body += "`#{a.name}` " }
+        body += "\n"
+      end
+      body += "#{item.user.name}さん　　"
+
+      twitter_id = item.user.twitter_id
+      body += "X: [@#{twitter_id}](https://x.com/#{twitter_id})" if twitter_id.present?
+      body += "\n"
+      num += 1
     end
-    idea_list.join("\n")
+    body
   end
 end

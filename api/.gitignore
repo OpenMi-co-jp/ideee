@@ -45,3 +45,6 @@ dump.rdb
 
 # graphqlで作成される.keepを除外
 app/graphql/**/.keep
+
+# Google Analytics authentication file
+analytics-auth.json

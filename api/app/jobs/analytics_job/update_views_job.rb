@@ -5,8 +5,9 @@ module AnalyticsJob
     queue_as :default
 
     def perform(id)
-      idea_view = Analytics.new.idea_report('pageviews', id)
-      Idea.find(id).update_column(:view, idea_view.to_i)
+      # Analytics functionality has been removed
+      # View counting is no longer available
+      Rails.logger.warn "UpdateViewsJob called for idea #{id} but analytics functionality has been removed"
     end
   end
 end

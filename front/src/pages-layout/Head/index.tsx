@@ -2,6 +2,7 @@ import { FC } from 'react'
 import Head from 'next/head'
 import { ColorSchemeScript } from '@mantine/core'
 import { defaultOgp } from '@/lib/cloudinary/ogpImage'
+import type { JsonLdData } from '@/lib/seo/jsonLd'
 
 interface MetaData {
   pageTitle?: string
@@ -9,6 +10,7 @@ interface MetaData {
   pagePath?: string
   pageImg?: string
   pageKeywords?: string
+  jsonLd?: JsonLdData
 }
 
 export const HeadBlock: FC<MetaData> = ({
@@ -17,6 +19,7 @@ export const HeadBlock: FC<MetaData> = ({
   pagePath,
   pageImg,
   pageKeywords,
+  jsonLd,
 }) => {
   const title = `${pageTitle || 'アイディー'} | ideee`
   const description =
@@ -44,6 +47,12 @@ export const HeadBlock: FC<MetaData> = ({
       <meta name="twitter:site" content="@ideee_tech" />
       <link rel="icon" href="/favicon.ico" />
       <ColorSchemeScript />
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
     </Head>
   )
 }

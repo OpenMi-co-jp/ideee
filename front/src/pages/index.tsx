@@ -11,12 +11,22 @@ import { AiIdeaTitleSection } from '@/components/aiIdeaTitles'
 import { RankList } from '@/components/user/ranking/RankList'
 import { AffiliateBox } from '@/components/advertisement/AffiliateBox'
 import { IdeaStats } from '@/components/features/IdeaStats'
+import { HeadBlock } from '@/pages-layout/Head'
+import { generateWebSiteJsonLd } from '@/lib/seo/jsonLd'
 
 export default function Home() {
   const { currentUser } = useCurrentUser()
+  const websiteJsonLd = generateWebSiteJsonLd()
 
   return (
     <>
+      <HeadBlock
+        pageTitle="ホーム"
+        pageDescription="ideeeはエンジニアとアイデアをつなぐマッチングプラットフォーム。あなたのアイデアを形にするエンジニアと出会えます。"
+        pagePath="https://ideee.tech"
+        pageKeywords="ideee,アイデア,エンジニア,マッチング,個人開発,チーム開発"
+        jsonLd={websiteJsonLd}
+      />
       {!currentUser && <TopVision />}
       {!currentUser && <Space h="5rem" />}
       <Grid gutter="lg">

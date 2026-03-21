@@ -15,6 +15,7 @@ import {
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
 import Link from 'next/link'
 import { FC, ReactNode } from 'react'
+import { HeadBlock } from '@/pages-layout/Head'
 
 // TODO: 画像をS3にアップロードしてファイルとして持たない
 const HowToFindIdea = () => {
@@ -34,10 +35,17 @@ const HowToFindIdea = () => {
   )
 
   return (
-    <Container my="6rem">
-      <Title order={1} fw="revert" mb="xl">
-        アイデアの探し方💡
-      </Title>
+    <>
+      <HeadBlock
+        pageTitle="アイデアの探し方"
+        pageDescription="個人開発のアイデアを見つけるヒントをご紹介。何を作れば良いか分からない方へのガイドです。"
+        pagePath="https://ideee.tech/how_to_find_idea"
+        pageKeywords="アイデア,探し方,個人開発,プロダクト,ヒント,見つけ方"
+      />
+      <Container my="6rem">
+        <Title order={1} fw="revert" mb="xl">
+          アイデアの探し方💡
+        </Title>
       <Text>
         趣味で個人開発をしたい、自分でプロダクトを開発してリリースしたい。
         <br />
@@ -529,7 +537,8 @@ const HowToFindIdea = () => {
         </Link>
       </Center>
       <ColorsComponent />
-    </Container>
+      </Container>
+    </>
   )
 }
 export default HowToFindIdea

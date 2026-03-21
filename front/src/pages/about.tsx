@@ -7,12 +7,20 @@ import {
   SignInInvitation,
 } from '@/components/about'
 import { ColorsComponent } from '@/components/footDesignComponent/colorsComponent'
+import { HeadBlock } from '@/pages-layout/Head'
 
 function AboutPage() {
   const { currentUser } = useCurrentUser()
 
   return (
-    <Container my="6rem">
+    <>
+      <HeadBlock
+        pageTitle="ideeeとは"
+        pageDescription="ideeeはエンジニアとアイデアをつなぐマッチングプラットフォームです。あなたのアイデアを形にするエンジニアと出会えます。"
+        pagePath="https://ideee.tech/about"
+        pageKeywords="ideee,アイデア,エンジニア,マッチング,プラットフォーム,サービス紹介"
+      />
+      <Container my="6rem">
       <Introduction />
       <Space my="4rem" />
       <Merits />
@@ -21,7 +29,8 @@ function AboutPage() {
       {!currentUser && <SignInInvitation />}
 
       <ColorsComponent />
-    </Container>
+      </Container>
+    </>
   )
 }
 

@@ -20,16 +20,25 @@ import {
   IconDoorExit,
 } from '@tabler/icons-react'
 import Link from 'next/link'
+import { HeadBlock } from '@/pages-layout/Head'
+
 const FrequentQuestions = () => {
   const theme = useMantineTheme()
   const { colorScheme } = useMantineColorScheme()
   const getColor = (color: string) =>
     theme.colors[color][colorScheme === 'dark' ? 4 : 8]
   return (
-    <Container>
-      <Title order={1} m="lg">
-        よくある質問
-      </Title>
+    <>
+      <HeadBlock
+        pageTitle="よくある質問"
+        pageDescription="ideeeについてよくある質問と回答をまとめました。サービスの使い方やアイデアの探し方など。"
+        pagePath="https://ideee.tech/frequent_questions"
+        pageKeywords="ideee,よくある質問,FAQ,使い方,ヘルプ"
+      />
+      <Container>
+        <Title order={1} m="lg">
+          よくある質問
+        </Title>
 
       <Accordion variant="separated">
         <Accordion.Item value="bulb">
@@ -193,7 +202,8 @@ const FrequentQuestions = () => {
           読み込んでいます…
         </iframe>
       </Paper>
-    </Container>
+      </Container>
+    </>
   )
 }
 

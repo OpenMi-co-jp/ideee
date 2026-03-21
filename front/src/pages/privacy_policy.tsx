@@ -1,8 +1,16 @@
 import { Container, Paper, Text, Title, List } from '@mantine/core'
+import { HeadBlock } from '@/pages-layout/Head'
 
 export default function PrivacyPolicy() {
   return (
-    <Container>
+    <>
+      <HeadBlock
+        pageTitle="プライバシーポリシー"
+        pageDescription="ideeeのプライバシーポリシーです。個人情報の取り扱いについてご確認ください。"
+        pagePath="https://ideee.tech/privacy_policy"
+        pageKeywords="ideee,プライバシーポリシー,個人情報,プライバシー"
+      />
+      <Container>
       <Paper shadow="xs" p="xl">
         <Title order={1} mt="xl">
           プライバシーポリシー
@@ -151,6 +159,7 @@ export default function PrivacyPolicy() {
           </Text>
         </Paper>
       </Paper>
-    </Container>
+      </Container>
+    </>
   )
 }

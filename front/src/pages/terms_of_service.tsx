@@ -1,8 +1,16 @@
 import { Container, Paper, Text, Title, List } from '@mantine/core'
+import { HeadBlock } from '@/pages-layout/Head'
 
 export default function TermsOfService() {
   return (
-    <Container>
+    <>
+      <HeadBlock
+        pageTitle="利用規約"
+        pageDescription="ideeeの利用規約です。本サービスをご利用いただく前に、必ずお読みください。"
+        pagePath="https://ideee.tech/terms_of_service"
+        pageKeywords="ideee,利用規約,規約,サービス利用条件"
+      />
+      <Container>
       <Paper shadow="xs" p="xl">
         <Text>
           本利用規約（以下「本規約」といいます。）は、本ウェブサイト上で提供するエンジニアとアイデアをつなぐプラットフォームのWebアプリ（以下「本サービス」といいます。）の利用条件を定めるものです。本サービスの利用者（以下「利用者」といいます。）は、本規約に同意の上で、本サービスをご利用ください。
@@ -262,6 +270,7 @@ export default function TermsOfService() {
           </List>
         </Paper>
       </Paper>
-    </Container>
+      </Container>
+    </>
   )
 }

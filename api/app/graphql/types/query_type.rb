@@ -21,6 +21,7 @@ module Types
     field :user, resolver: Resolvers::User::UserResolver, description: 'ユーザーオブジェクト'
     field :user_ranking, resolver: Resolvers::User::RankingResolver, description: 'ユーザーランキング'
     field :user_count, resolver: Resolvers::User::UserCountResolver, description: 'ユーザー総数'
+    field :user_ids, resolver: Resolvers::User::UserIdsResolver, description: 'ユーザーID一覧'
 
     field :notifications, resolver: Resolvers::Notification::NotificationsResolver, description: '通知一覧'
     field :latest_notifications, resolver: Resolvers::Notification::LatestNotificationsResolver, description: '最新の5件の通知一覧'

@@ -8,13 +8,20 @@ module AI
 
     def perform
       res = AiResponseService.fetch_ai_response(build_prompt)
-      JSON.parse(res)['ideas']
+      json_str = strip_markdown_code_block(res)
+      JSON.parse(json_str)['ideas']
     rescue StandardError => e
       Sentry.capture_exception(e)
       raise e
     end
 
     private
+
+    def strip_markdown_code_block(str)
+      return str if str.nil?
+
+      str.gsub(/\A```(?:json)?\s*/, '').gsub(/\s*```\z/, '').strip
+    end
 
     def build_prompt
       news = news_contents.pluck('title').to_json

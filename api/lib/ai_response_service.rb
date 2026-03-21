@@ -10,13 +10,9 @@ module AiResponseService
     parameters = {
       model:,
       messages: [{ role: 'system', content: }],
-      temperature: OPENAI_TEMPERATURE
+      temperature: OPENAI_TEMPERATURE,
+      response_format: { type: 'json_object' }
     }
-
-    # gpt-4以上のモデルのみjson_objectをサポート
-    if model.start_with?('gpt-4') && model.exclude?('mini')
-      parameters[:response_format] = { type: 'json_object' }
-    end
 
     response = client.chat(parameters:)
     response.dig('choices', 0, 'message', 'content')

@@ -1,4 +1,5 @@
-import { Flex, Title, Text, Progress } from '@mantine/core'
+import { Box, Flex, Text, Progress, ThemeIcon, Group } from '@mantine/core'
+import { IconCheck, IconCircle } from '@tabler/icons-react'
 import { GetUserQuery } from '@/lib/generated/client'
 
 type UserField = 'name' | 'description' | 'definition' | 'image'
@@ -9,12 +10,12 @@ interface ProgressBarProps {
 }
 
 const USER_FIELDS: UserField[] = ['name', 'description', 'definition', 'image']
-const USER_FIELD_LABELS = [
-  'ユーザー名',
-  '自己紹介文',
-  'プロフィール画像',
-  'タイプ',
-]
+const USER_FIELD_LABELS: Record<UserField, string> = {
+  name: 'ユーザー名',
+  description: '自己紹介文',
+  definition: 'タイプ',
+  image: 'プロフィール画像',
+}
 
 const calculateCompletionRate = (
   user: GetUserQuery['user'] | undefined
@@ -30,37 +31,86 @@ export const ProgressBar = ({ user }: ProgressBarProps) => {
   const isCompleted = completionRate === 100
 
   return (
-    <>
+    <Box
+      p={{ base: 'md', sm: 'lg' }}
+      style={{
+        background: isCompleted
+          ? 'linear-gradient(135deg, #d3f9d8 0%, #b2f2bb 100%)'
+          : 'linear-gradient(135deg, #fff9db 0%, #ffec99 100%)',
+        borderRadius: '12px',
+        border: isCompleted ? '1px solid #69db7c' : '1px solid #fcc419',
+      }}
+    >
+      {/* ヘッダー：完了率表示 */}
       <Flex
-        justify={{ base: 'center', md: 'flex-end' }}
+        justify="space-between"
         align="center"
-        wrap="wrap"
+        mb="sm"
+        direction={{ base: 'column', xs: 'row' }}
+        gap="xs"
       >
-        <Title c="gray" fz={isCompleted ? '0.8rem' : '1.1rem'} mb={15}>
-          {!isCompleted ? 'ユーザー情報入力完了率' : 'ユーザー情報コンプリート'}
-          {!isCompleted && (
-            <Text span c="orange" fz="1.5rem" pl={5} inherit>
-              {completionRate}%
-            </Text>
-          )}
-        </Title>
+        <Text
+          fw={600}
+          fz={{ base: 'sm', sm: 'md' }}
+          c={isCompleted ? 'green.8' : 'dark.6'}
+        >
+          {isCompleted ? 'プロフィール完成!' : 'プロフィール入力状況'}
+        </Text>
+        <Text
+          fw={700}
+          fz={{ base: 'xl', sm: '1.5rem' }}
+          c={isCompleted ? 'green.7' : 'orange.6'}
+        >
+          {completionRate}%
+        </Text>
       </Flex>
-      <Progress.Root size={isCompleted ? 10 : 20} mb={20} radius="lg">
-        {USER_FIELDS.map(
-          (field, index) =>
-            user?.[field] && (
-              <Progress.Section
-                key={field}
-                value={ratePerField}
-                color={['yellow.6', 'orange.5', 'orange.6', 'orange.7'][index]}
+
+      {/* プログレスバー */}
+      <Progress
+        value={completionRate}
+        size={{ base: 8, sm: 10 }}
+        radius="xl"
+        color={isCompleted ? 'green.6' : 'orange.5'}
+        mb="md"
+        styles={{
+          root: {
+            backgroundColor: isCompleted
+              ? 'rgba(255,255,255,0.6)'
+              : 'rgba(255,255,255,0.7)',
+          },
+        }}
+      />
+
+      {/* 項目チェックリスト */}
+      <Group gap={{ base: 'xs', sm: 'md' }} justify="center" wrap="wrap">
+        {USER_FIELDS.map((field) => {
+          const isFieldCompleted = !!user?.[field]
+          return (
+            <Flex
+              key={field}
+              align="center"
+              gap={4}
+              style={{ opacity: isFieldCompleted ? 1 : 0.5 }}
+            >
+              <ThemeIcon
+                size={18}
+                radius="xl"
+                color={isFieldCompleted ? 'green' : 'gray'}
+                variant={isFieldCompleted ? 'filled' : 'light'}
               >
-                <Progress.Label style={{ fontSize: '12px' }}>
-                  {USER_FIELD_LABELS[index]}
-                </Progress.Label>
-              </Progress.Section>
-            )
-        )}
-      </Progress.Root>
-    </>
+                {isFieldCompleted ? (
+                  <IconCheck size={12} stroke={3} />
+                ) : (
+                  <IconCircle size={12} />
+                )}
+              </ThemeIcon>
+              <Text fz={{ base: 'xs', sm: 'sm' }} c={isFieldCompleted ? 'dark.6' : 'gray.6'}>
+                {USER_FIELD_LABELS[field]}
+              </Text>
+            </Flex>
+          )
+        })}
+      </Group>
+    </Box>
   )
 }

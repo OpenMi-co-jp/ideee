@@ -761,7 +761,7 @@ DEPENDENCIES
   carrierwave-base64
   counter_culture
   danger
-  devise
+  devise (~> 4.9)
   devise-i18n
   dotenv-rails
   enum_help

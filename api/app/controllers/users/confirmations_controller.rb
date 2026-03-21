@@ -30,7 +30,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       #       - 未登録の場合:         Eメールは見つかりませんでした。
       #       - 登録済かつ確認済の場合: メールは既に登録済みです。ログインしてください。
       #       ref. https://github.com/naru20181117/ideee/pull/1264#discussion_r1457285509
-      render json: { message: '送信できませんでした。既に確認済み、もしくはメールアドレスに誤りがあります。' }, status: :unprocessable_entity
+      render json: { message: '送信できませんでした。既に確認済み、もしくはメールアドレスに誤りがあります。' }, status: :unprocessable_content
     end
   end
 

@@ -20,19 +20,32 @@ export async function generateIdeasIds() {
   return data.ideaIds.ids
 }
 
+export async function generateUserIds() {
+  const { data } = await client.query({
+    query: gql`
+      query GetUserIds {
+        userIds {
+          ids
+        }
+      }
+    `,
+  })
+  return data.userIds.ids
+}
+
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const ideaPaths = await generateIdeasIds()
-  const paths = ideaPaths.map((id: string) => ({
-    loc: `/ideas/${id}`,
-    changefreq: 'weekly',
-    priority: 0.7,
-  }))
+  const [ideaIds, userIds] = await Promise.all([
+    generateIdeasIds(),
+    generateUserIds(),
+  ])
+
+  const ideaPaths = ideaIds.map((id: string) => `/ideas/${id}`)
+  const userPaths = userIds.map((id: string) => `/users/${id}`)
+  const allPaths = [...ideaPaths, ...userPaths]
 
   return getServerSideSitemapIndexLegacy(
     ctx,
-    paths.map(
-      (item: { loc: string }) => process.env.NEXT_PUBLIC_FRONT_URL + item.loc
-    )
+    allPaths.map((loc: string) => process.env.NEXT_PUBLIC_FRONT_URL + loc)
   )
 }
 

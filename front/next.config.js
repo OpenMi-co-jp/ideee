@@ -3,6 +3,7 @@ const nextConfig = {
   swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
+  trailingSlash: false,
   eslint: { dirs: ["./src"] },
   // nextでimageの最適化を行わない時はtrue
   // https://nextjs.org/docs/api-reference/next/image

@@ -16,7 +16,7 @@ gem 'sass-rails', '>= 6' # NOTE: active_admin.scss に必要
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.6'
 
-gem 'devise'
+gem 'devise', '~> 4.9'
 gem 'jwt'
 
 # Use Active Storage variant

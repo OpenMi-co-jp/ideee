@@ -16,7 +16,7 @@ class Users::PasswordsController < Devise::PasswordsController
       user.send_reset_password_instructions
       render json: { action: 'パスワードリセット用メール送信', message: 'メールをご確認ください' }, status: :ok
     else
-      render json: { message: '送信できませんでした。' }, status: :unprocessable_entity
+      render json: { message: '送信できませんでした。' }, status: :unprocessable_content
     end
   end
 
@@ -27,7 +27,7 @@ class Users::PasswordsController < Devise::PasswordsController
     if resource.errors.empty?
       render json: { action: 'パスワードリセット', message: 'ログインしてください' }, status: :ok
     else
-      render json: { action: 'パスワードリセット', message: 'やり直してください' }, status: :unprocessable_entity
+      render json: { action: 'パスワードリセット', message: 'やり直してください' }, status: :unprocessable_content
     end
   end
 

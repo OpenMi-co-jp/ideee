@@ -30,7 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords(resource)
       set_minimum_password_length
-      render json: { success: false, errors: resource.errors.full_messages }, status: :unprocessable_entity
+      render json: { success: false, errors: resource.errors.full_messages }, status: :unprocessable_content
     end
 
     return unless Rails.env.production? && resource.present?

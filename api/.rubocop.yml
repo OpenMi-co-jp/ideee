@@ -250,3 +250,7 @@ RSpec/MultipleExpectations:
 # describe, context ブロックなど）内での let または let! の使用回数を制限しない
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+# Rails.env の使用を許可（標準的なRailsパターンのため）
+Rails/Env:
+  Enabled: false

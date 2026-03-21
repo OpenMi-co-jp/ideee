@@ -6,7 +6,7 @@ import { IdeaProvider } from '@/context/IdeaContext'
 import { useGetIdea } from '@/utils/hooks/useGetIdea'
 import type { GetIdeaQuery } from '@/lib/generated/client'
 import { Container, Loader } from '@mantine/core'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import classes from '@/styles/mask.module.css'
 import { showError } from '@/components/showNotification'
 import { useRouter } from 'next/router'
@@ -15,6 +15,7 @@ import { truncateText } from '@/utils/truncateText'
 import { SuggestIdeas } from '@/components/idea/list'
 import { getOgpImageUrl } from '@/lib/cloudinary/ogpImage'
 import { AffiliateWideBox } from '@/components/advertisement/AffiliateWideBox'
+import { generateIdeaJsonLd } from '@/lib/seo/jsonLd'
 
 const IdeaDetail = () => {
   const { currentUser } = useCurrentUser()
@@ -35,6 +36,20 @@ const IdeaDetail = () => {
     }
   }, [data, error, router])
 
+  const ideaJsonLd = useMemo(() => {
+    if (!data?.idea) return undefined
+    return generateIdeaJsonLd({
+      id: data.idea.id,
+      name: data.idea.name,
+      goal: data.idea.goal || '',
+      imageUrl: getOgpImageUrl({ title: data.idea.name }),
+      authorName: data.idea.user?.name,
+      authorId: data.idea.user?.id,
+      createdAt: data.idea.createdAt,
+      tags: data.idea.ideaTags?.map((tag) => tag.name),
+    })
+  }, [data?.idea])
+
   if (loading) return <Loader color="yellow" />
   const tags = data?.idea?.ideaTags?.map((tag) => tag.name).join(',') || ''
   const imageUrl = getOgpImageUrl({ title: data?.idea.name as string })
@@ -46,6 +61,7 @@ const IdeaDetail = () => {
         pageDescription={truncateText(data?.idea?.goal as string)}
         pagePath={process.env.NEXT_PUBLIC_FRONT_URL + router.asPath}
         pageKeywords={tags}
+        jsonLd={ideaJsonLd}
       />
 
       <IdeaProvider idea={idea as GetIdeaQuery['idea']}>

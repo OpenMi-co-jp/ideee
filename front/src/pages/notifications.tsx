@@ -6,6 +6,7 @@ import type {
   GetNotificationsQuery,
 } from '@/lib/generated/client'
 import { useState } from 'react'
+import { HeadBlock } from '@/pages-layout/Head'
 
 function Notifications() {
   const { data, loading, error, refetch } = useGetNotificationsQuery({
@@ -26,6 +27,12 @@ function Notifications() {
 
   return (
     <>
+      <HeadBlock
+        pageTitle="通知一覧"
+        pageDescription="ideeeからの通知を確認できます。"
+        pagePath="https://ideee.tech/notifications"
+        pageKeywords="ideee,通知,お知らせ"
+      />
       <Center mb="lg">
         <Title order={1} size="h2">
           通知一覧

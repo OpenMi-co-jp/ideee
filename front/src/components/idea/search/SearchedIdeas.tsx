@@ -80,7 +80,7 @@ export const SearchedIdeas = () => {
           </Paper>
           <Center my="xl">
             {totalPages && totalPages > 1 && (
-              <Pagination total={totalPages} onChange={handlePageChange} />
+              <Pagination total={totalPages} value={page} onChange={handlePageChange} />
             )}
           </Center>
         </>

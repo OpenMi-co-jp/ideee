@@ -70,8 +70,7 @@ class GraphqlController < ApplicationController
   end
 
   def decode_token(token)
-    secret_key = Rails.application.credentials.secret_key_base || Rails.application.secret_key_base
-    JWT.decode(token, secret_key, true, { algorithm: 'HS256' }).first
+    JWT.decode(token, Rails.application.secret_key_base, true, { algorithm: 'HS256' }).first
   end
 
   def render_authentication_error

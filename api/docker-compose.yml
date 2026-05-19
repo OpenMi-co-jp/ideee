@@ -17,6 +17,7 @@ services:
       - "3010:3010"
     depends_on:
       - db
+      - redis
     env_file:
       - web-variables.env
     environment:

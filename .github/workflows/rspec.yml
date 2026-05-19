@@ -21,10 +21,10 @@ jobs:
       run: |
         cd api
         docker compose build --no-cache
-        docker compose run --rm web bundle install
-        docker compose run --rm web bundle exec rails db:create
-        docker compose run --rm web bundle exec rails db:migrate
-        docker compose run --rm web bundle exec rspec
+        docker compose run --rm -e RAILS_ENV=test -e SECRET_KEY_BASE=test_secret_key_base_for_ci web bundle install
+        docker compose run --rm -e RAILS_ENV=test -e SECRET_KEY_BASE=test_secret_key_base_for_ci web bundle exec rails db:create
+        docker compose run --rm -e RAILS_ENV=test -e SECRET_KEY_BASE=test_secret_key_base_for_ci web bundle exec rails db:migrate
+        docker compose run --rm -e RAILS_ENV=test -e SECRET_KEY_BASE=test_secret_key_base_for_ci web bundle exec rspec
       env:
         RAILS_ENV: test
         MYSQL_HOST: db

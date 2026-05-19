@@ -42,7 +42,8 @@
       "Bash(gh pr edit:*)",
       "Bash(gh pr checks:*)",
       "Bash(gh run view:*)",
-      "Bash(gh pr close:*)"
+      "Bash(gh pr close:*)",
+      "Bash(gh api:*)"
     ],
     "deny": []
   }

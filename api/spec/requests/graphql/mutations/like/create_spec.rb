@@ -39,6 +39,11 @@ RSpec.describe Mutations::Like::Create do
         graphql_post
         res = response.parsed_body
 
+        # Debug output
+        warn "DEBUG secret_key_base: #{Rails.application.secret_key_base[0..20]}..."
+        warn "DEBUG response.status: #{response.status}"
+        warn "DEBUG response.body: #{response.body[0..500]}"
+
         expect(res['data']['createLike']['success']).to be_truthy
         expect(res['data']['createLike']['like']['likableType']).to eq(likable_type)
         expect(res['data']['createLike']['like']['likableId']).to eq(likable_id)

@@ -66,5 +66,5 @@ Rails.application.configure do
   config.host = 'http://localhost:3010/'
 
   # テスト用の秘密鍵を設定（JWT認証に必要）
-  config.secret_key_base = 'test_secret_key_base_for_rspec_' + ('a' * 100)
+  config.secret_key_base = "test_secret_key_base_for_rspec_#{'a' * 100}"
 end

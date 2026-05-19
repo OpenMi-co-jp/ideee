@@ -37,9 +37,6 @@ RSpec.describe Mutations::Like::Create do
 
       it 'リクエストが成功すること' do
         graphql_post
-        puts "DEBUG: Response status: #{response.status}"
-        puts "DEBUG: Response body: #{response.body[0..500]}"
-        puts "DEBUG: Authorization header: #{tokens.inspect}"
         res = response.parsed_body
 
         expect(res['data']['createLike']['success']).to be_truthy

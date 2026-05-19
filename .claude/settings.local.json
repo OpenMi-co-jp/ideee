@@ -39,7 +39,10 @@
       "Bash(bundle install:*)",
       "Bash(rails runner:*)",
       "Bash(gh pr view:*)",
-      "Bash(gh pr edit:*)"
+      "Bash(gh pr edit:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh pr close:*)"
     ],
     "deny": []
   }

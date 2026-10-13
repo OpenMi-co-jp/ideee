@@ -1,16 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
   trailingSlash: false,
   eslint: { dirs: ["./src"] },
   // nextでimageの最適化を行わない時はtrue
   // https://nextjs.org/docs/api-reference/next/image
-  experimental: {
-    images: {
-      unoptimized: false,
-    },
+  images: {
+    unoptimized: false,
   },
 
   // consoleを削除する
@@ -18,9 +15,6 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
     emotion: true,
-  },
-  babel: {
-    presets: ["next/babel"],
   },
 };
 

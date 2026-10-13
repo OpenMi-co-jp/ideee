@@ -9,12 +9,11 @@
     "clipboard": "^2.0.10",
     "jquery": "^3.6.0",
     "mysql": "^2.18.1",
-    "mysql-server": "^1.0.5",
     "trix": "^2.1.18",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "engines": {
-    "node": "16.x"
+    "node": "22.x"
   }
 }

@@ -47,12 +47,12 @@ export interface IdeaJsonLd {
 }
 
 export interface GenerateIdeaJsonLdParams {
-  id: number
+  id: string | number
   name: string
   goal: string
   imageUrl?: string
   authorName?: string
-  authorId?: number
+  authorId?: string | number
   createdAt?: string
   tags?: string[]
 }
@@ -96,7 +96,7 @@ export interface UserJsonLd {
 }
 
 export interface GenerateUserJsonLdParams {
-  id: number
+  id: string | number
   name: string
   description?: string
   imageUrl?: string

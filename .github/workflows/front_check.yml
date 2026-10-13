@@ -16,14 +16,14 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         env:
           cache-name: cache-yarn
         with:
@@ -42,14 +42,14 @@ jobs:
       - setup
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         env:
           cache-name: cache-yarn
         with:
@@ -68,14 +68,14 @@ jobs:
       - setup
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         env:
           cache-name: cache-yarn
         with:
@@ -94,14 +94,14 @@ jobs:
       - setup
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         env:
           cache-name: cache-yarn
         with:

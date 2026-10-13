@@ -12,8 +12,12 @@ export default function TeamDetail() {
   return (
     <>
       <HeadBlock
-        pageTitle={team?.idea?.name ? `${team.idea.name} - チーム開発` : 'チーム開発'}
-        pageDescription={truncateText(team?.offer || 'ideeeでチーム開発に参加しよう')}
+        pageTitle={
+          team?.idea?.name ? `${team.idea.name} - チーム開発` : 'チーム開発'
+        }
+        pageDescription={truncateText(
+          team?.offer || 'ideeeでチーム開発に参加しよう'
+        )}
         pagePath={process.env.NEXT_PUBLIC_FRONT_URL + router.asPath}
         pageKeywords="ideee,チーム開発,エンジニア,コラボレーション"
       />

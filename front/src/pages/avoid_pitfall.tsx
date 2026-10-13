@@ -18,21 +18,21 @@ function AvoidPitfall() {
         pageKeywords="個人開発,落とし穴,失敗,回避,ヒント,注意点"
       />
       <Container>
-      <Paper p="xl" shadow="xl">
-        <Container
-          className={currentUser ? classes.container : `${classes.maskImage}`}
-        >
-          <PreviewContent />
-        </Container>
+        <Paper p="xl" shadow="xl">
+          <Container
+            className={currentUser ? classes.container : `${classes.maskImage}`}
+          >
+            <PreviewContent />
+          </Container>
 
-        {(() => {
-          if (currentUser) {
-            return <HiddenContent />
-          } else {
-            return <SignPath />
-          }
-        })()}
-      </Paper>
+          {(() => {
+            if (currentUser) {
+              return <HiddenContent />
+            } else {
+              return <SignPath />
+            }
+          })()}
+        </Paper>
       </Container>
     </>
   )

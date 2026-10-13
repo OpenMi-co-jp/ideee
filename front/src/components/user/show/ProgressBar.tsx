@@ -1,4 +1,5 @@
 import { Box, Flex, Text, Progress, ThemeIcon, Group } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 import { IconCheck, IconCircle } from '@tabler/icons-react'
 import { GetUserQuery } from '@/lib/generated/client'
 
@@ -29,6 +30,9 @@ const calculateCompletionRate = (
 export const ProgressBar = ({ user }: ProgressBarProps) => {
   const completionRate = calculateCompletionRate(user)
   const isCompleted = completionRate === 100
+  // Progress の size と Group の gap はスタイルプロップではなくレスポンシブ
+  // オブジェクトを受け取れないため、ブレークポイントで値を切り替える
+  const isSmUp = useMediaQuery('(min-width: 48em)', true)
 
   return (
     <Box
@@ -68,7 +72,7 @@ export const ProgressBar = ({ user }: ProgressBarProps) => {
       {/* プログレスバー */}
       <Progress
         value={completionRate}
-        size={{ base: 8, sm: 10 }}
+        size={isSmUp ? 10 : 8}
         radius="xl"
         color={isCompleted ? 'green.6' : 'orange.5'}
         mb="md"
@@ -82,7 +86,7 @@ export const ProgressBar = ({ user }: ProgressBarProps) => {
       />
 
       {/* 項目チェックリスト */}
-      <Group gap={{ base: 'xs', sm: 'md' }} justify="center" wrap="wrap">
+      <Group gap={isSmUp ? 'md' : 'xs'} justify="center" wrap="wrap">
         {USER_FIELDS.map((field) => {
           const isFieldCompleted = !!user?.[field]
           return (
@@ -104,7 +108,10 @@ export const ProgressBar = ({ user }: ProgressBarProps) => {
                   <IconCircle size={12} />
                 )}
               </ThemeIcon>
-              <Text fz={{ base: 'xs', sm: 'sm' }} c={isFieldCompleted ? 'dark.6' : 'gray.6'}>
+              <Text
+                fz={{ base: 'xs', sm: 'sm' }}
+                c={isFieldCompleted ? 'dark.6' : 'gray.6'}
+              >
                 {USER_FIELD_LABELS[field]}
               </Text>
             </Flex>

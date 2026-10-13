@@ -21,14 +21,14 @@ function AboutPage() {
         pageKeywords="ideee,アイデア,エンジニア,マッチング,プラットフォーム,サービス紹介"
       />
       <Container my="6rem">
-      <Introduction />
-      <Space my="4rem" />
-      <Merits />
-      <Description />
+        <Introduction />
+        <Space my="4rem" />
+        <Merits />
+        <Description />
 
-      {!currentUser && <SignInInvitation />}
+        {!currentUser && <SignInInvitation />}
 
-      <ColorsComponent />
+        <ColorsComponent />
       </Container>
     </>
   )

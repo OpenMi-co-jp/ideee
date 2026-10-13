@@ -45,7 +45,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def sign_in_params
-    params.require(:session).permit(:email, :password)
+    params.expect(session: %i[email password])
   end
 
   def respond_with(resource, _opts = {})

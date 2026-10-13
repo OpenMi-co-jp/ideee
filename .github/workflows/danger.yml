@@ -1,8 +1,8 @@
 name: danger
 
 on:
-  workflow_dispatch:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
     paths-ignore:
       - 'front/**'
 
@@ -10,30 +10,52 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   PR_check:
     name: Run danger
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    env:
-      RAILS_ENV: test
-
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+    - uses: actions/github-script@v7
       with:
-        fetch-depth: 0
-
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.2.2
-        bundler-cache: true
-        working-directory: ./api
-
-    - name: Run Danger
-      run:  |
-        cd api
-        bundle exec danger
-      env:
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+        script: |
+          const { owner, repo } = context.repo;
+          const pr = context.payload.pull_request;
+          const files = await github.paginate(github.rest.pulls.listFiles, {
+            owner, repo, pull_number: pr.number, per_page: 100
+          });
+          const warnings = [];
+          const errors = [];
+          const changed = files.filter(file => file.status !== 'removed');
+          const paths = changed.map(file => file.filename);
+          if (pr.title.includes('WIP')) warnings.push('PRはWIPでまだ作業中のようです');
+          if (pr.additions + pr.deletions > 500) warnings.push('コードライン数が500を超えてます。PRの分割を考えましょう');
+          if (pr.commits > 15) warnings.push('コミットが15を超えてます。PRの分割を検討ください');
+          if (Date.now() - Date.parse(pr.created_at) > 3 * 24 * 60 * 60 * 1000) warnings.push('このPRはすでに3日以上開かれています');
+          if (paths.includes('api/db/schema.rb')) warnings.push('このPRはデータベーススキーマを変更しています。マイグレーションをお忘れなく');
+          if (paths.includes('api/Gemfile')) warnings.push('Gemfileが変更されました。bundle installをお忘れなく');
+          if (paths.some(path => /^api\/app\/(graphql|models)\//.test(path)) && !paths.some(path => path.startsWith('api/spec/'))) {
+            warnings.push('ロジックに変更があるようですが、テストが書かれていません');
+          }
+          for (const file of changed.filter(file => file.filename.startsWith('api/'))) {
+            // Fail when GitHub omits a large patch instead of silently skipping inspection.
+            if (file.changes > 0 && !file.patch) {
+              errors.push(`${file.filename}: 差分を取得できず検査できませんでした`);
+              continue;
+            }
+            const additions = (file.patch || '').split('\n').filter(line => line.startsWith('+') && !line.startsWith('+++'));
+            for (const token of ['binding.pry', 'puts']) {
+              if (additions.some(line => line.includes(token))) errors.push(`${file.filename}: ${token}がコードの変更部分で検出されました。`);
+            }
+          }
+          for (const warning of warnings) core.warning(warning);
+          for (const error of errors) core.error(error);
+          await core.summary.addHeading('PRチェック').addList([
+            ...warnings, ...errors,
+            ...(warnings.length + errors.length === 0 ? ['指摘なし'] : [])
+          ]).write();
+          if (errors.length) core.setFailed('PRチェックで修正が必要な項目が見つかりました');

@@ -90,7 +90,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # Updateメソッドでストロングパラメーターを設定
   def update_params
-    params.require(:user).permit(:name, :email, :icon, :description, :definition)
+    params.expect(user: %i[name email icon description definition])
   end
 
   def update_resource(resource, params)
@@ -102,7 +102,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:registration).permit(:email, :password, :password_confirmation)
+    params.expect(registration: %i[email password password_confirmation])
   end
 
   def underscore_params!

@@ -3,6 +3,7 @@
 module Resolvers
   class Notification::NotificationsResolver < BaseResolver
     graphql_name 'GetNotifications'
+    login_required
     include Resolvers::Concerns::Pagination
 
     type Types::Notification::NotificationsType, null: false

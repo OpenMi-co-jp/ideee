@@ -4,7 +4,7 @@ RSpec.describe Mutations::Team::Create do
   subject(:graphql_post) { post graphql_path, params: { query:, variables: variables.to_json }, headers: tokens, as: :json }
 
   let(:owner)  { create(:user) }
-  let(:idea)   { FactoryBot.create(:idea) }
+  let(:idea)   { FactoryBot.create(:idea, user: owner) }
   let(:tokens) { sign_in(owner) }
 
   let(:query) do
@@ -45,6 +45,19 @@ RSpec.describe Mutations::Team::Create do
         expect(res['data']['createTeam']['team']['status']).to eq('active')
         expect(res['data']['createTeam']['team']['offer']).to eq(variables[:input][:offer])
         expect(res['data']['createTeam']['team']['member_num']).to eq(variables[:input][:member_num])
+      end
+    end
+
+    context '他人のアイデアが指定されたとき' do
+      before do
+        variables[:input][:ideaId] = create(:idea).id
+      end
+
+      it '作成に失敗すること' do
+        expect { graphql_post }.not_to change(Team, :count)
+        res = response.parsed_body
+        expect(res['data']['createTeam']['success']).to be false
+        expect(res['data']['createTeam']['team']).to be_nil
       end
     end
 

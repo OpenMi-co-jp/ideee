@@ -10,7 +10,8 @@ module Resolvers
 
     def resolve(team_id:)
       team = ::Team.find_by(id: team_id)
-      return [] unless team
+      user = context[:current_user]
+      return [] unless team && user && team.joined?(user)
 
       team.room&.messages || []
     end

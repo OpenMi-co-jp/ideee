@@ -9,8 +9,7 @@ class Twitter
     @consumer = OAuth::Consumer.new(
       twitter_credentials[:consumer_key],
       twitter_credentials[:consumer_secret],
-      site: 'https://api.twitter.com',
-      debug_output: true
+      site: 'https://api.twitter.com'
     )
     @token = OAuth::Token.new(twitter_credentials[:access_token], twitter_credentials[:access_token_secret])
   end

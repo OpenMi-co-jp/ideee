@@ -53,6 +53,23 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w[jpg jpeg png webp]
   end
 
+  def content_type_allowlist
+    %r{\Aimage/(jpeg|png|webp)\z}
+  end
+
+  # 巨大なファイルや画素数の多い画像でメモリ・CPUを使い切られないようにする（フロントの上限は3MB）
+  def size_range
+    (1.byte)..(5.megabytes)
+  end
+
+  def width_range
+    1..8000
+  end
+
+  def height_range
+    1..8000
+  end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename

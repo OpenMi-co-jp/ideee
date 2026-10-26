@@ -24,7 +24,7 @@ const UserEditFormSchema = z.object({
     .string()
     .max(200, { message: '自己紹介は200文字以内で入力してください' })
     .nullish(),
-  definition: z.string({ invalid_type_error: 'タイプを選択してください' }),
+  definition: z.string({ error: 'タイプを選択してください' }),
   twitterId: z
     .string()
     .refine(

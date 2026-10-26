@@ -1,4 +1,4 @@
-FROM ruby:3.4.11-bookworm
+FROM ruby:3.4.12-bookworm
 
 RUN apt-get update -qq && \
     apt-get install -y build-essential \

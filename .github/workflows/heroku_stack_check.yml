@@ -1,0 +1,100 @@
+name: heroku stack check
+
+# 本番 Heroku (ideee-tech) と同じスタックのイメージ上で、本番用の gem が
+# ビルド・ロードできるかを確認する。
+# スタックを切り替えるとビルドキャッシュがクリアされ、ネイティブ拡張
+# (mysql2 / sassc など) は必ず再コンパイルされるため、Ruby や gem を上げた
+# タイミングでここで失敗を検知する。
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'api/Gemfile'
+      - 'api/Gemfile.lock'
+      - 'api/.ruby-version'
+      - 'api/package.json'
+      - '.github/workflows/heroku_stack_check.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  bundle_install:
+    name: bundle install on heroku-26
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    container:
+      image: heroku/heroku:26-build
+
+    env:
+      # Heroku のスタックを変えたらこの 2 つを合わせて更新する
+      HEROKU_STACK: heroku-26
+      RUBY_BINARY_PATH: heroku-26/amd64
+      BUNDLE_WITHOUT: 'development:test'
+      BUNDLE_PATH: vendor/bundle
+      BUNDLE_FROZEN: 'true'
+
+    defaults:
+      run:
+        working-directory: api
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ruby built for ${{ env.HEROKU_STACK }}
+        run: |
+          set -euo pipefail
+          ruby_version="$(cat .ruby-version)"
+          # Heroku の Ruby ビルドパックが実際に取得するバイナリと同じものを使う
+          url="https://heroku-buildpack-ruby.s3.us-east-1.amazonaws.com/${RUBY_BINARY_PATH}/ruby-${ruby_version}.tgz"
+          echo "downloading ${url}"
+          mkdir -p /app/ruby
+          curl -fsS "${url}" | tar -xz -C /app/ruby
+          echo '/app/ruby/bin' >> "$GITHUB_PATH"
+
+      - name: Install bundler pinned by Gemfile.lock
+        run: |
+          set -euo pipefail
+          ruby -v
+          bundler_version="$(awk '/^BUNDLED WITH$/{getline; gsub(/[[:space:]]/,""); print}' Gemfile.lock)"
+          gem install bundler --no-document -v "${bundler_version}"
+          bundle --version
+
+      - name: bundle install (production groups only)
+        run: bundle install --jobs 4 --retry 3
+
+      - name: Load native extensions
+        run: |
+          bundle exec ruby -e '
+            %w[mysql2 sassc bootsnap bcrypt nokogiri msgpack psych json].each do |lib|
+              require lib
+              puts "loaded: #{lib}"
+            end
+            # 本番は sprockets が実行時に SCSS をコンパイルする (assets.compile = true)
+            puts SassC::Engine.new("a{b:c}").render
+          '
+
+      - name: Check image processing on this stack
+        run: |
+          set -euo pipefail
+          # heroku-26 の ImageMagick は 7 系で、入口が `convert` から `magick` に変わる。
+          # CarrierWave (ImageUploader) と Active Storage はどちらも mini_magick 経由で呼ぶ。
+          im=$(command -v magick || command -v convert)
+          "$im" -version
+          echo '--- 対応フォーマット (webp / jpeg があるか) ---'
+          "$im" -version | grep -i delegates || true
+          "$im" -size 1200x900 xc:'#cccccc' /tmp/sample.png
+          bundle exec ruby -e '
+            require "image_processing/mini_magick"
+            puts "imagemagick7: #{MiniMagick.imagemagick7?}"
+            out = ImageProcessing::MiniMagick
+                    .source("/tmp/sample.png")
+                    .convert("jpg")
+                    .resize_to_fit(500, 600)
+                    .call
+            dimensions = MiniMagick::Image.new(out.path).dimensions
+            raise "想定外のリサイズ結果: #{dimensions.inspect}" unless dimensions == [500, 375]
+            puts "resized: #{dimensions.inspect}"
+          '

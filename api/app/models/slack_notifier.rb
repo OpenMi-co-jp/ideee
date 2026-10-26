@@ -23,7 +23,7 @@ class SlackNotifier
       type = object&.provider.nil? ? 'メール' : object&.provider
       article = "🙋‍♂️ #{type}でユーザー登録！\nURL: #{url}\n現在のユーザー数：#{User.all.length} 人 🙋‍♀️"
     else # アイデアが増加するとき
-      article = "💡 新アイデアの投稿！ by #{object.user.name}\nタイトル: #{object.name}\nURL: #{url}\n" \
+      article = "💡 新アイデアの投稿！ by #{escape(object.user.name)}\nタイトル: #{escape(object.name)}\nURL: #{url}\n" \
                 "現在のアイデア🚀\n投稿数：#{Idea.published.length} 下書き数：#{Idea.drafts.length}"
     end
 
@@ -32,7 +32,7 @@ class SlackNotifier
 
   def apply_send(object, url)
     article = "🎉 アイデアが完成したようです！🎉\nURL: #{url}\nプロダクトのあるアイデア数: #{Idea.deployed.length}\n" \
-              "承認待ちURL: #{object.product_url}\n承認する時のコマンド：\n```heroku run rake product_apply:send_approve[#{object.id}]```"
+              "承認待ちURL: #{escape(object.product_url)}\n承認する時のコマンド：\n```heroku run rake product_apply:send_approve[#{object.id}]```"
     channel = '#ideee_user_apply'
     Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
     object.update!(product_apply: :applying)
@@ -60,5 +60,12 @@ class SlackNotifier
     article = '==================テストデータ================'
     Slack::Notifier.new(WEBHOOK_URL, channel:).ping(article)
     Slack::IdeaSendJob.set(wait: 5.minutes).perform_later
+  end
+
+  private
+
+  # Slack のメンション（<!channel>）やリンク記法（<url|text>）を差し込まれないようにする
+  def escape(text)
+    text.to_s.gsub('&', '&amp;').gsub('<', '&lt;').gsub('>', '&gt;')
   end
 end

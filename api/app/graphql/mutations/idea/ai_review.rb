@@ -10,21 +10,25 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーリスト'
 
     AI_LIMIT = Rails.application.config.ai_limit
-    private_constant :AI_LIMIT
+    LOCK_TTL = 10.minutes
+    private_constant :AI_LIMIT, :LOCK_TTL
     def resolve(**args)
-      idea = ::Idea.find(args[:idea_id])
+      idea = context[:current_user].ideas.find_by(id: args[:idea_id])
       return { success: false, errors: ['アイデアが見つかりません'] } if idea.nil?
       return { success: false, errors: ['アイデアが公開されていません'] } if idea.draft
+      return { success: false, errors: ['レビューが既に存在しています'] } if idea.reviews.exists?
 
-      todays_logs_count = idea.user.todays_ai_log_count
+      todays_logs_count = context[:current_user].todays_ai_log_count
       return { success: false, errors: ['本日のAI利用制限を超えています'] } if todays_logs_count >= AI_LIMIT
+      # 同じアイデアへの多重実行（エイリアスでの連打など）を防ぐ
+      return { success: false, errors: ['レビューを作成中です'] } unless acquire_lock(idea)
 
       job_id = nil
       ActiveRecord::Base.transaction do
         create_ai_log(context[:current_user], 'review', 'Idea', idea.id)
         todays_logs_count += 1
 
-        job_id = AI::ReviewsJob.perform_later(args[:idea_id]).job_id
+        job_id = AI::ReviewsJob.perform_later(idea.id).job_id
       end
       {
         job_id:,
@@ -32,10 +36,17 @@ module Mutations
         errors: ["本日の残りAI利用回数：#{AI_LIMIT - todays_logs_count} 回"]
       }
     rescue StandardError => e
+      Sentry.capture_exception(e)
       {
         success: false,
-        errors: [e.message]
+        errors: ['AIレビューの開始に失敗しました']
       }
+    end
+
+    private
+
+    def acquire_lock(idea)
+      Rails.cache.write("ai_review:idea:#{idea.id}", true, unless_exist: true, expires_in: LOCK_TTL)
     end
   end
 end

@@ -70,6 +70,7 @@
     "lodash": "^4.18.1",
     "postcss": "^8.5.30",
     "ws": "^8.22.0",
+    "zod": "^4.6.6",
     "@ardatan/relay-compiler": "^13.0.0"
   }
 }

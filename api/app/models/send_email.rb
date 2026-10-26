@@ -235,16 +235,4 @@ class SendEmail
 
     "<img src='#{h(url)}' loading='lazy' width='60' height='60' alt='#{h(user.name)}のアイコン'>"
   end
-
-  def xss_support(text)
-    return if text.nil?
-
-    text.gsub(/\R/, '<br>')
-        .gsub('&', '&amp;')
-        .gsub('<', '&lt;')
-        .gsub('>', '&gt;')
-        .gsub('"', '&quot;')
-        .gsub("'", '&#39;')
-        .gsub('&lt;br&gt;', '<br>') # 改行だけは反映されるように設定
-  end
 end

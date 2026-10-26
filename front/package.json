@@ -20,7 +20,7 @@
     "@graphql-codegen/typescript": "^5.0.9",
     "@graphql-codegen/typescript-operations": "^5.0.9",
     "@graphql-codegen/typescript-react-apollo": "^4.4.1",
-    "@hookform/resolvers": "^3.3.2",
+    "@hookform/resolvers": "^5.2.2",
     "@mantine/charts": "^7.10.2",
     "@mantine/core": "^7.13.1",
     "@mantine/dropzone": "^7.4.2",
@@ -50,7 +50,7 @@
     "react-string-replace": "^1.1.1",
     "recharts": "2",
     "typescript": "5.1.6",
-    "zod": "^3.22.4"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.1",

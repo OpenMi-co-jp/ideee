@@ -10,6 +10,8 @@ class SendEmail
   # 時間指定されたメールを待避
   include ReservedEmail
 
+  include EmailEscapable
+
   def initialize
     @from = Email.new(email: 'ideee.info@gmail.com') # SendGridの管理画面でSenderに登録したアドレス
     @sg = SendGrid::API.new(api_key: Rails.application.credentials.dig(:sendgrid, :api_key))
@@ -232,11 +234,6 @@ class SendEmail
     return if url.nil?
 
     "<img src='#{h(url)}' loading='lazy' width='60' height='60' alt='#{h(user.name)}のアイコン'>"
-  end
-
-  # メール本文に埋め込むユーザー入力は必ずエスケープする
-  def h(text)
-    ERB::Util.html_escape(text.to_s)
   end
 
   def xss_support(text)

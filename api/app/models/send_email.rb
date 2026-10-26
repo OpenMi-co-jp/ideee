@@ -23,7 +23,7 @@ class SendEmail
             <hr>
             <b>コメンター名:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{analytics_url("users/#{commenter.id}", 'comment', commenter.name)}
+              #{analytics_url("users/#{commenter.id}", 'comment', h(commenter.name))}
             </div>
             <b>コメント内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
@@ -50,7 +50,7 @@ class SendEmail
             <hr>
             <b>応募者情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              名前: #{user.name}<br>
+              名前: #{h(user.name)}<br>
               URL: #{analytics_url(
                 "users/#{user.id}", 'join_team',
                 "https://www.ideee.tech/users/#{user.id}"
@@ -75,7 +75,7 @@ class SendEmail
             <hr>
             <b>ユーザー情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              名前: #{user.name}<br>
+              名前: #{h(user.name)}<br>
               URL: #{analytics_url(
                 "users/#{user.id}", 'leave_team',
                                    "https://www.ideee.tech/users/#{user.id}"
@@ -101,8 +101,8 @@ class SendEmail
             <hr>
             <b>アイデア情報</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              アイデア名: #{idea.name}<br>
-              承認待ちURL: #{idea.product_url}
+              アイデア名: #{h(idea.name)}<br>
+              承認待ちURL: #{h(idea.product_url)}
             </div>
             <p>アイデアページに飛ぶ: #{analytics_url(
               "ideas/#{idea.id}", 'confirm_apply',
@@ -125,7 +125,7 @@ class SendEmail
               せっかくなので編集・公開してみませんか？
             </p>
             <b>あなたの下書き💡</b>
-            <p>名前: #{idea.name}</p>
+            <p>名前: #{h(idea.name)}</p>
             <p>作成日: #{idea.created_time}</p>
             <p>
               URL: #{analytics_url(
@@ -153,11 +153,11 @@ class SendEmail
             <hr>
             <b>メッセージ送信者:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px; margin-bottom: 20px'>
-              #{analytics_url("users/#{sender.id}", 'notification_message', sender.name)}
+              #{analytics_url("users/#{sender.id}", 'notification_message', h(sender.name))}
             </div>
             <b>メッセージ内容:</b>
             <div style='background-color: #F5F5F5; padding: 10px 5px;'>
-              #{message.content}
+              #{xss_support(message.content)}
             </div>
             <p>メッセージページに飛ぶ: #{analytics_url(
               "teams/#{message.room.team_id}", 'notification_message',
@@ -218,7 +218,7 @@ class SendEmail
         </a>
         <div style='margin: 0 10px;'>
           <a href='https://www.ideee.tech/users/#{user.id}?utm_source=notification_like&utm_medium=mail&utm_id=user_#{user.id}', target: '_blank'>
-            <b>#{user.name}</b>
+            <b>#{h(user.name)}</b>
           </a>
           <div>#{xss_support(user.description)}</div>
         </div>
@@ -231,7 +231,12 @@ class SendEmail
     url = user.icon.file.present? ? user.icon.url : user.remote_url
     return if url.nil?
 
-    "<img src='#{url}' loading='lazy' width='60' height='60' alt='#{user.name}のアイコン'>"
+    "<img src='#{h(url)}' loading='lazy' width='60' height='60' alt='#{h(user.name)}のアイコン'>"
+  end
+
+  # メール本文に埋め込むユーザー入力は必ずエスケープする
+  def h(text)
+    ERB::Util.html_escape(text.to_s)
   end
 
   def xss_support(text)

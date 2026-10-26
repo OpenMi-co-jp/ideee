@@ -1,6 +1,12 @@
 class GraphqlController < ApplicationController
   protect_from_forgery with: :null_session
 
+  # base64 の画像を含めても十分な上限。巨大なリクエストボディでのメモリ枯渇を防ぐ
+  MAX_REQUEST_BYTES = 8.megabytes
+  private_constant :MAX_REQUEST_BYTES
+
+  before_action :reject_large_request, only: :execute
+
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
@@ -18,6 +24,12 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def reject_large_request
+    return if request.content_length.to_i <= MAX_REQUEST_BYTES
+
+    render json: { errors: [{ message: 'リクエストが大きすぎます' }] }, status: :content_too_large
+  end
 
   # Handle variables in form data, JSON body, or a blank value
   def prepare_variables(variables_param)

@@ -7,7 +7,9 @@ module Mutations
     field :success, Boolean, null: false, description: '成功フラグ'
 
     def resolve(**args)
-      user = ::User.find(args[:id])
+      user = context[:current_user]
+      raise GraphQL::ExecutionError, 'ユーザーの権限がありません' if user.id != args[:id].to_i
+
       user.destroy!
       {
         success: true

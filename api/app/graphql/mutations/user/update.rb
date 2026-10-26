@@ -12,13 +12,15 @@ module Mutations
     argument :github_id, String, required: false, description: 'githubID'
     argument :icon, String, required: false, description: 'アイデアアイコン'
 
-    field :user, Types::UserType, null: false, description: 'ユーザーオブジェクト'
+    field :user, Types::UserType, null: true, description: 'ユーザーオブジェクト'
     field :success, Boolean, null: false, description: '成功フラグ'
     field :errors, [String], null: true, description: 'エラーリスト'
 
     def resolve(**args)
-      user = ::User.find(args[:id])
-      user.update!(**args)
+      user = context[:current_user]
+      return { success: false, errors: ['ユーザーの権限がありません'] } if user.id != args[:id].to_i
+
+      user.update!(**args.except(:id))
       {
         user:,
         success: true

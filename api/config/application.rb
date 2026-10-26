@@ -38,6 +38,7 @@ module Ideee
     config.ai_limit = ENV.fetch('AI_LIMIT', 5).to_i
 
     config.github_token = ENV.fetch('GITHUB_TOKEN', nil)
+    config.allow_vercel_preview_origins = ENV.fetch('ALLOW_VERCEL_PREVIEW_ORIGINS', nil) == 'true'
 
     # OmniAuthのエラーに対処
     if Rails.env.production?

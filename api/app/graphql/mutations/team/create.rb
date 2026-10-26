@@ -16,6 +16,10 @@ module Mutations
         return { success: false, errors: ['ユーザーの権限がありません'] }
       end
 
+      unless context[:current_user].ideas.published.exists?(id: args[:idea_id])
+        return { success: false, errors: ['アイデアが見つかりません'] }
+      end
+
       team = ::Team.new(
         owner_id: args[:owner_id],
         idea_id: args[:idea_id],

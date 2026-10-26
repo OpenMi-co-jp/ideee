@@ -62,7 +62,7 @@ class User < ApplicationRecord
   # settings relation
   has_one :notification_config, dependent: :destroy
 
-  before_save :fix_ids
+  before_validation :fix_ids
   after_create :create_notification_config
   after_create :update_access_token!
 
@@ -74,6 +74,10 @@ class User < ApplicationRecord
   validates :name, length: { maximum: 30 }
   validates :description, length: { maximum: 200 }
   validates :site_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
+  # 既存データの保存を妨げないよう、変更されたときだけ検証する
+  validates :remote_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true, if: :remote_url_changed?
+  validates :twitter_id, format: /\A[A-Za-z0-9_]{1,15}\z/, allow_blank: true, if: :twitter_id_changed?
+  validates :github_id, format: /\A[A-Za-z0-9_-]{1,39}\z/, allow_blank: true, if: :github_id_changed?
 
   scope :defined_user, -> { where defined: true }
 
@@ -184,8 +188,9 @@ class User < ApplicationRecord
   end
 
   def fix_ids
-    self.twitter_id = twitter_id.gsub(%r{https://twitter.com/|@}, '') if twitter_id.present?
-    self.github_id = github_id.gsub(%r{https://github.com/}, '') if github_id.present?
+    # URL で入力された場合もユーザー名だけを保存する（https://x.com/name/ など）
+    self.twitter_id = twitter_id.sub(%r{\Ahttps://(twitter|x)\.com/}, '').delete('@').split('/').first if twitter_id.present?
+    self.github_id = github_id.delete_prefix('https://github.com/').split('/').first if github_id.present?
   end
 
   def image

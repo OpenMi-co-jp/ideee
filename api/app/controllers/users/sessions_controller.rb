@@ -4,6 +4,9 @@ class Users::SessionsController < Devise::SessionsController
   # CSRF 対策
   skip_before_action :verify_authenticity_token, only: %i[create destroy]
   prepend_before_action :verify_xhr_for_csrf_protection
+  include AuthRateLimitable
+
+  limit_auth_requests only: :create, to: 20, within: 5.minutes, per_email: 10
 
   prepend_before_action :verify_signed_out_user, only: :destroy
   before_action :underscore_params!, only: %i[create]
@@ -23,7 +26,8 @@ class Users::SessionsController < Devise::SessionsController
       invalid_password
     end
   rescue StandardError => e
-    render json: { action: 'ログイン', message: e.message }, status: :unauthorized
+    Sentry.capture_exception(e)
+    render json: { action: 'ログイン', message: 'ログインに失敗しました' }, status: :unauthorized
   end
 
   # DELETE /resource/sign_out

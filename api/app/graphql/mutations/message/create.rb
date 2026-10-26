@@ -12,6 +12,7 @@ module Mutations
     def resolve(**args)
       team = ::Team.find_by(id: args[:team_id])
       raise GraphQL::ExecutionError, 'チームが見つかりません' if team.nil?
+      raise GraphQL::ExecutionError, 'チームに参加していません' unless team.joined?(context[:current_user])
 
       message = team.room.messages.create!(
         user_id: context[:current_user].id,

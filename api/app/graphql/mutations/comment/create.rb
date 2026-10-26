@@ -10,6 +10,9 @@ module Mutations
     field :errors, [String], null: true, description: 'エラーメッセージのリスト'
 
     def resolve(**args)
+      # 下書きのアイデアにはコメントさせない（存在しないIDはモデルのバリデーションに任せる）
+      return { success: false, errors: ['アイデアが見つかりません'] } if ::Idea.exists?(id: args[:idea_id], draft: true)
+
       comment = ::Comment.new(
         user_id: context[:current_user].id,
         description: args[:description],

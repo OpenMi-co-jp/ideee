@@ -350,3 +350,8 @@ ActiveAdmin.setup do |config|
   #
   # config.use_webpacker = true
 end
+
+# 管理画面ログインの総当たり対策
+Rails.application.config.to_prepare do
+  ActiveAdmin::Devise::SessionsController.rate_limit to: 10, within: 5.minutes, only: :create
+end

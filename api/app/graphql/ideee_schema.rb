@@ -5,6 +5,14 @@ class IdeeeSchema < GraphQL::Schema
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
+  # 深いネストやエイリアスの大量展開による負荷を防ぐ（フロントの実クエリは深さ4・複雑度50程度）
+  max_depth 10
+  max_complexity 300
+  max_query_string_tokens 5000
+
+  # 本番ではスキーマの列挙を許可しない（codegen はローカルの API を参照する）
+  disable_introspection_entry_points if Rails.env.production?
+
   # GraphQL-Ruby calls this when something goes wrong while running a query:
   def self.type_error(err, context)
     # if err.is_a?(GraphQL::InvalidNullError)

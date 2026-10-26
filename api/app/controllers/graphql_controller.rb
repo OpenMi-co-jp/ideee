@@ -1,5 +1,8 @@
 class GraphqlController < ApplicationController
   protect_from_forgery with: :null_session
+  # 1IPあたりの上限（通常の閲覧では届かない値。大量リクエストによる負荷を防ぐ）
+  rate_limit to: 300, within: 1.minute, only: :execute,
+             with: -> { render json: { errors: [{ message: 'Too many requests' }] }, status: :too_many_requests }
 
   # base64 の画像を含めても十分な上限。巨大なリクエストボディでのメモリ枯渇を防ぐ
   MAX_REQUEST_BYTES = 8.megabytes

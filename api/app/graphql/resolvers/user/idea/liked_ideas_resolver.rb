@@ -10,7 +10,7 @@ module Resolvers
     def resolve(**args)
       user = ::User.find(args[:user_id])
       liked_idea_ids = user.likes.type_idea_ids
-      liked_ideas = ::Idea.where(id: liked_idea_ids).eager_load(:idea_tags).preload(:user).order(published_at: :desc)
+      liked_ideas = ::Idea.published.where(id: liked_idea_ids).eager_load(:idea_tags).preload(:user).order(published_at: :desc)
       to_paged_result(Kaminari.paginate_array(liked_ideas).page(args[:page]).per(args[:per]))
     end
   end

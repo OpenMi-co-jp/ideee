@@ -16,5 +16,19 @@ module Types
     field :image, String, description: 'アイコン'
     field :todays_ai_log_count, Integer, description: '本日のAI利用回数'
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日'
+
+    def email
+      object.email if own?
+    end
+
+    def todays_ai_log_count
+      object.todays_ai_log_count if own?
+    end
+
+    private
+
+    def own?
+      context[:current_user]&.id == object.id
+    end
   end
 end

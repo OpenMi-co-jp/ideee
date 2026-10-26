@@ -3,6 +3,7 @@
 module Resolvers
   class Idea::DraftIdeasResolver < BaseResolver
     graphql_name 'GetDraftIdeas'
+    login_required
     include Resolvers::Concerns::Pagination
 
     type Types::Idea::IdeasType, null: false

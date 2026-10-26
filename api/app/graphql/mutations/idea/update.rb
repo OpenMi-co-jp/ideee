@@ -29,7 +29,9 @@ module Mutations
         return { success: false, errors: ['ユーザーの権限がありません'] }
       end
 
-      idea = ::Idea.find(args[:id])
+      idea = context[:current_user].ideas.find_by(id: args[:id])
+      return { success: false, errors: ['アイデアが見つかりません'] } if idea.nil?
+
       from_draft = idea.draft?
       idea.assign_attributes(
         icon: args[:icon],
@@ -45,8 +47,7 @@ module Mutations
         github_url: args[:github_url],
         stance: args[:stance],
         product_url: args[:product_url],
-        draft: !args[:publish],
-        user_id: context[:current_user].id
+        draft: !args[:publish]
       )
       idea.save_with_tags!(args[:tag_list])
       if from_draft && !idea.draft

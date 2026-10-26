@@ -2,6 +2,7 @@ module Resolvers
   module NotificationConfig
     class NotificationConfigResolver < BaseResolver
       graphql_name 'GetNotificationConfig'
+      login_required
 
       type Types::NotificationConfigType, null: false
 

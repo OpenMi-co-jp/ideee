@@ -4,6 +4,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # CSRF 対策
   skip_before_action :verify_authenticity_token, only: %i[create update]
   prepend_before_action :verify_xhr_for_csrf_protection
+  include AuthRateLimitable
+
+  limit_auth_requests only: :create, to: 10, within: 10.minutes, per_email: 3
 
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]

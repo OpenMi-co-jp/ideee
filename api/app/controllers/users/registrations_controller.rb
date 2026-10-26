@@ -79,7 +79,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit(
       :account_update,
-      keys: %i[name email icon description definition twitter_id github_id site_url]
+      keys: %i[name email current_password icon description definition twitter_id github_id site_url]
     )
   end
 
@@ -93,8 +93,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     params.expect(user: %i[name email icon description definition])
   end
 
+  # メールアドレスの変更はアカウント乗っ取りにつながるため、現在のパスワードを必須にする
   def update_resource(resource, params)
-    resource.update_without_password(params)
+    if params[:email].present? && params[:email] != resource.email
+      resource.update_with_password(params)
+    else
+      resource.update_without_password(params.except(:current_password))
+    end
   end
 
   def after_update_path_for(_resource)

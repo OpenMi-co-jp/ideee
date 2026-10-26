@@ -3,3 +3,13 @@
 
 # OS files
 .DS_Store
+
+# Secrets（誤コミット防止）
+.env
+.env.*
+!.env.example
+!.env.development
+**/config/master.key
+**/config/credentials/*.key
+*.pem
+*-auth.json

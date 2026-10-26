@@ -50,7 +50,10 @@ export const HeadBlock: FC<MetaData> = ({
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            // `</script>` での抜け出しを防ぐため `<` をエスケープする
+            __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          }}
         />
       )}
     </Head>

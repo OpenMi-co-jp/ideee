@@ -34,8 +34,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if user.persisted?
       sign_in user, event: :authentication
       cookies[:devise_provider] = provider
-      access_token = user.generate_jwt_token
-      redirect_to "#{Rails.application.config.frontend_url}/user/auth_callback?token=#{access_token}", allow_other_host: true
+      # トークンは URL に載せず、フロントがこのセッションを使って /auth_token から取得する
+      redirect_to "#{Rails.application.config.frontend_url}/user/auth_callback", allow_other_host: true
     else
       if (data = request.env['omniauth.auth']['extra']['raw_info'])
         session['devise.omniauth_data'] = {

@@ -3,7 +3,6 @@
 module AI
   class BrushupJob < ApplicationJob
     queue_as :high
-    include AiLoggable
 
     def perform(id)
       @idea = Idea.find_by(id:)
@@ -30,7 +29,6 @@ module AI
         monetize: res['monetize'],
         similar: res['similar']
       )
-      create_ai_log(@idea.user, 'brush_up', 'Idea', @idea.id)
     end
 
     def build_prompt

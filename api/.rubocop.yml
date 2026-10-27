@@ -254,3 +254,9 @@ RSpec/MultipleMemoizedHelpers:
 # Rails.env の使用を許可（標準的なRailsパターンのため）
 Rails/Env:
   Enabled: false
+
+# prepare をメソッド名で渡すと解決時に親オブジェクトを要求し、
+# Query 直下のフィールドでは Resolver のインスタンスメソッドを引けないため lambda を許可する
+GraphQL/PrepareMethod:
+  Exclude:
+    - 'app/graphql/resolvers/concerns/pagination.rb'

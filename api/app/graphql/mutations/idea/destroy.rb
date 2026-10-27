@@ -8,6 +8,8 @@ module Mutations
 
     def resolve(**args)
       idea = ::Idea.find_by(id: args[:id], user_id: context[:current_user].id)
+      raise GraphQL::ExecutionError, 'アイデアが見つかりません' if idea.nil?
+
       idea.destroy!
       {
         success: true

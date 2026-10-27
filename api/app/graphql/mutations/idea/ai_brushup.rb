@@ -1,6 +1,7 @@
 module Mutations
   class Idea::AiBrushup < BaseMutation
     graphql_name 'IdeaAiBrushUp'
+    include AiLoggable
 
     argument :idea_id, ID, required: true, description: 'アイデアID'
 
@@ -22,8 +23,15 @@ module Mutations
       # 同じアイデアへの多重実行（エイリアスでの連打など）を防ぐ
       return { success: false, errors: ['ブラッシュアップを実行中です'] } unless acquire_lock(idea)
 
-      job_id = AI::BrushupJob.perform_later(idea.id).job_id
-      todays_logs_count += 1
+      # 利用枠はジョブの完了ではなく受付時に消費する。
+      # ジョブ側で記録すると、複数アイデアへ同時にリクエストして上限チェックをすり抜けられるため
+      job_id = nil
+      ActiveRecord::Base.transaction do
+        create_ai_log(context[:current_user], 'brush_up', 'Idea', idea.id)
+        todays_logs_count += 1
+
+        job_id = AI::BrushupJob.perform_later(idea.id).job_id
+      end
 
       {
         job_id:,
